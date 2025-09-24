@@ -1,8 +1,11 @@
+import dataclasses
 import typing
 import json
 
 import requests
 import bs4
+
+from . import cached_request
 
 AUTODESK_HELP_BASE_URL = "https://help.autodesk.com/cloudhelp"
 AUTODESK_MAYA_API_NAMESPACE_PATH = "/ENU/MAYA-API-REF/py_ref"
@@ -30,27 +33,44 @@ class IndexVariable(typing.NamedTuple):
     default: str | None = None
 
 
-class Index(typing.NamedTuple):
+@dataclasses.dataclass
+class Index:
     classes: list[IndexClass]
     functions: list[IndexFunction]
     variables: list[IndexVariable]
+
+    def get_class_by_name(self, name: str) -> IndexClass | None:
+        for cls in self.classes:
+            if cls.name == name:
+                return cls
+        return None
+
+    def get_function_by_name(self, name: str) -> IndexFunction | None:
+        for func in self.functions:
+            if func.name == name:
+                return func
+        return None
+
+    def get_variable_by_name(self, name: str) -> IndexVariable | None:
+        for var in self.variables:
+            if var.name == name:
+                return var
+        return None
 
 
 def get_base_url(version: int):
     return f"{AUTODESK_HELP_BASE_URL}/{version}{AUTODESK_MAYA_API_NAMESPACE_PATH}"
 
 
-def get_namespaces(version: int):
+def get_namespaces(version: int, use_cache: bool) -> list[Namespace]:
     base_url = get_base_url(version)
     url = f"{base_url}/namespaces.js"
-    response = requests.get(url)
-    response.raise_for_status()
-    response_text = response.text
+    js_raw = cached_request.request(url, use_cache=use_cache)
 
-    response_text = response_text.replace(
+    js_parsable = js_raw.replace(
         "var namespaces =", "").strip().rstrip(";")
 
-    namespace_content: list = json.loads(response_text)
+    namespace_content: list = json.loads(js_parsable)
 
     return [Namespace(version, x[0], f"{base_url}/{x[1]}") for x in namespace_content]
 
@@ -126,11 +146,10 @@ def parse_table_variables(table: bs4.element.Tag) -> typing.Generator[IndexVaria
             yield IndexVariable(name, type_col, default)
 
 
-def get_namespace_content(namespace: Namespace):
-    response = requests.get(namespace.url)
-    response.raise_for_status()
+def get_namespace_index(namespace: Namespace, use_cache: bool) -> Index:
+    html = cached_request.request(namespace.url, use_cache=use_cache)
 
-    soup = bs4.BeautifulSoup(response.text, 'html.parser')
+    soup = bs4.BeautifulSoup(html, 'html.parser')
 
     contents_div = soup.find('div', class_='contents')
 
@@ -145,11 +164,13 @@ def get_namespace_content(namespace: Namespace):
     functions = []
     variables = []
 
+    base_url = namespace.url.rpartition('/')[0]
+
     if table_classes := find_table_by_heading(member_tables, "Classes"):
-        classes = list(parse_table_url(table_classes, namespace.url))
+        classes = list(parse_table_url(table_classes, base_url))
 
     if table_functions := find_table_by_heading(member_tables, "Functions"):
-        functions = list(parse_table_functions(table_functions, namespace.url))
+        functions = list(parse_table_functions(table_functions, base_url))
 
     if table_variables := find_table_by_heading(member_tables, "Variables"):
         variables = list(parse_table_variables(table_variables))

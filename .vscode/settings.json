@@ -1,5 +1,7 @@
 {
     "files.exclude": {
         "LICENSE": true,
-    }
+        "**/__pycache__": true,
+    },
+    "python.analysis.typeCheckingMode": "standard",
 }
