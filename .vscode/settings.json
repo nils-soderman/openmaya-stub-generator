@@ -4,4 +4,8 @@
         "**/__pycache__": true,
     },
     "python.analysis.typeCheckingMode": "standard",
+
+    "python.analysis.extraPaths": [
+        "./generated-stubs/2026"
+    ]
 }
