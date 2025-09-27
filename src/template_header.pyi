@@ -8,7 +8,6 @@ from warnings import deprecated
 from typing import (
     TypeVar,
     TypeAlias,
-    Union,
     Sequence,
     Callable,
     Literal,

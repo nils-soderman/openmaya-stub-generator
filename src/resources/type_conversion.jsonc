@@ -1,4 +1,5 @@
 {
     "string": "str",
-    "dictionary": "dict"
+    "dictionary": "dict",
+    "value": "float" // This may be incorrect?
 }

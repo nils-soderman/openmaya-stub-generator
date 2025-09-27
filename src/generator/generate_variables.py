@@ -2,7 +2,7 @@ from . import stub_types, utils
 from .. import maya_info, documentation, resources
 
 def generate_variables(module: str, doc_index: documentation.index.Index | None) -> list[stub_types.Variable]:
-    variable_names = maya_info.get_variables(module)
+    variable_names = maya_info.get_variable_names(module)
     if not variable_names:
         return []
 

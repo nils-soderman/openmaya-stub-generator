@@ -30,6 +30,18 @@ class Page:
     member_data: list[MemItem]
     properties: list[MemItem]
 
+    def find_member_by_name(self, name: str) -> MemItem | None:
+        for member in self.member_data:
+            if member.identifier == name:
+                return member
+        return None
+    
+    def find_property_by_name(self, name: str) -> MemItem | None:
+        for prop in self.properties:
+            if prop.identifier == name:
+                return prop
+        return None
+
 
 def get_memitems(soup: bs4.BeautifulSoup, header_text: str):
     # find the header
@@ -108,6 +120,7 @@ def parse_memitem(memitem: bs4.element.Tag):
 
     data: list[dict] = []
     for table in div_memdoc.find_all("table", recursive=False):
+        table_data = {}
         if not isinstance(table, bs4.element.Tag):
             continue
 
@@ -124,9 +137,10 @@ def parse_memitem(memitem: bs4.element.Tag):
                 raise ValueError(f"Expected 2 td elements in tr, got {len(tds)}", div_memproto)
 
             key = tds[0].get_text(strip=True).rstrip(':').lower()
-            value = tds[1].get_text(strip=True)
-            data.append({"key": key, "value": value})
+            value = tds[1].get_text(strip=True, separator=" ")
+            table_data[key] = value
 
+        data.append(table_data)
     return MemItem(title, identifier, bool(span_mlabel), docstring, data)
 
 

@@ -53,3 +53,6 @@ def generate_stubs(out_dir: str, flags: Flags = Flags.NONE) -> None:
     for module in maya_info.get_api_modules():
         out_filepath = os.path.join(out_dir, f"{module}.pyi")
         generate_file(module, out_filepath, flags=flags)
+
+        if module == "OpenMaya":  # TEMP DEV
+            break
