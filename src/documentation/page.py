@@ -41,6 +41,12 @@ class Page:
             if prop.identifier == name:
                 return prop
         return None
+    
+    def find_function_by_name(self, name: str) -> MemItem | None:
+        for func in self.functions:
+            if func.identifier == name:
+                return func
+        return None
 
 
 def get_memitems(soup: bs4.BeautifulSoup, header_text: str):
@@ -103,7 +109,7 @@ def parse_memitem(memitem: bs4.element.Tag):
         raise ValueError("Expected to find td with class 'memname'")
 
     title = td_name.get_text(strip=True)
-    identifier = title.partition('=')[0].rpartition('.')[-1].strip()
+    identifier = title.partition('=')[0].rpartition('.')[-1].strip().strip('()')
 
     if span_mlabel := div_memproto.find("span", class_="mlabel"):
         mlabel = span_mlabel.get_text(strip=True)

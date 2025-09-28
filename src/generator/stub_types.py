@@ -44,26 +44,43 @@ class Function:
     return_type: str | None = None
     parameters: list[Parameter] = field(default_factory=list)
     docstring: str | None = None
-    bStatic: bool = False
+
+    def get_params_str(self) -> str:
+        return ",".join(str(param) for param in self.parameters)
 
     def __str__(self) -> str:
         func_str = ""
 
-        if self.bStatic:
-            func_str += "@staticmethod\n"
-
-        params_str = ",".join(str(param) for param in self.parameters)
+        params_str = self.get_params_str()
         return_type = self.return_type or "Any"
 
         func_str += f"def {self.name}({params_str})->{return_type}:"
 
         if self.docstring:
-            func_str += f'\n\t"""{self.docstring}"""'
+            func_str += "\n" + indent(f'"""{self.docstring}"""', 1)
         else:
             func_str += "..."
 
         return func_str
 
+@dataclass
+class Method(Function):
+    static: bool = False
+
+    def get_params_str(self) -> str:
+        if self.static:
+            return super().get_params_str()
+        else:
+            self_name = "cls" if self.name == "__new__" else "self"
+            params = [Parameter(self_name)] + self.parameters
+            return ",".join(str(param) for param in params)
+
+    def __str__(self) -> str:
+        method_str = ""
+        if self.static:
+            method_str += "@staticmethod\n"
+        method_str += super().__str__()
+        return method_str
 
 @dataclass
 class Property:
@@ -106,7 +123,7 @@ class Class:
     name: str
     base_class_names: list[str]
     properties: list[Property]
-    methods: list[Function]
+    methods: list[Method]
     docstring: str | None = None
 
     def __str__(self) -> str:

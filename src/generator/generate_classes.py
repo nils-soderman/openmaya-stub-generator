@@ -1,4 +1,5 @@
 
+import logging
 import inspect
 import typing
 import re
@@ -9,6 +10,8 @@ from .. import maya_info, documentation, resources
 PROPERTY_TYPES = resources.load("property_types.jsonc")
 
 BUILTIN_TYPES = (int, float, str, bool, tuple, list, dict)
+
+logger = logging.getLogger(__name__)
 
 
 def generate_property(name: str, prop_type: typing.Any, doc: documentation.page.Page | None) -> stub_types.Property:
@@ -78,6 +81,61 @@ def generate_getsetter(name: str, doc: documentation.page.Page | None, custom_ty
                                      can_set=can_set)
 
 
+def is_static_method(cls: type, attr_name: str) -> bool:
+    val = inspect.getattr_static(cls, attr_name)
+    return isinstance(val, staticmethod)
+
+
+def generate_init_method(name: str, class_ref: type, method_ref: typing.Callable, doc: documentation.page.Page | None) -> list[stub_types.Method]:
+    return []
+
+
+def generate_method(name: str, class_ref: type, method_ref: typing.Callable, doc: documentation.page.Page | None) -> list[stub_types.Method]:
+    if name == "__init__":
+        return generate_init_method(name, class_ref, method_ref, doc)
+
+    parameters = []
+    docstring = None
+    return_type = "Any"
+
+    static = is_static_method(class_ref, name)
+
+    methods = []
+    if doc:
+        if doc_member := doc.find_function_by_name(name):
+            if doc_member.data:
+                override = len(doc_member.data) > 1
+                for item in doc_member.data:
+                    docstring = item.get('description', '')
+
+                    methods.append(
+                        stub_types.Method(
+                            name=name,
+                            docstring=docstring,
+                            parameters=[],
+                            return_type=None,
+                            static=static
+                        )
+                    )
+            else:
+                docstring = doc_member.docstring
+                methods.append(
+                    stub_types.Method(
+                        name=name,
+                        docstring=docstring,
+                        parameters=[],
+                        return_type=None,
+                        static=static
+                    )
+                )
+
+    if not methods:
+        logger.warning(f"No documentation found for method {class_ref.__name__}.{name}")
+        methods.append(stub_types.Method(name=name, docstring=docstring, parameters=parameters, return_type=return_type, static=static))
+
+    return methods
+
+
 def generate_class(class_ref: type, doc: documentation.page.Page | None) -> stub_types.Class:
     name = class_ref.__name__
 
@@ -91,8 +149,11 @@ def generate_class(class_ref: type, doc: documentation.page.Page | None) -> stub
     methods = []
     properties = []
     for member_name, member in class_ref.__dict__.items():
-        if member_name in {'__class__', '__doc__', '__module__', '__weakref__'}:
+        if member_name in {'__class__', '__doc__', '__module__', '__weakref__', '__dict__', '__repr__', '__str__', '__new__'}:
             continue
+
+        if member_name.startswith('__') and member_name.endswith('__'):
+            continue # TODO: Temp, let's start by fixing the other functions first
 
         if (
             inspect.isfunction(member)
@@ -100,7 +161,9 @@ def generate_class(class_ref: type, doc: documentation.page.Page | None) -> stub
             or inspect.ismethoddescriptor(member)
             or inspect.isbuiltin(member)
         ):
-            ...
+            methods.extend(
+                generate_method(member_name, class_ref, member, doc)
+            )
         elif inspect.isgetsetdescriptor(member):
             custom_type = custom_property_type_annotations.get(member_name, {})
             properties.append(
