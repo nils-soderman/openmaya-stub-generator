@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 
 RANDOM_UUID = str(uuid.uuid4())
 
+
 class MemItem(typing.NamedTuple):
     title: str
     identifier: str
@@ -36,13 +37,13 @@ class Page:
             if member.identifier == name:
                 return member
         return None
-    
+
     def find_property_by_name(self, name: str) -> MemItem | None:
         for prop in self.properties:
             if prop.identifier == name:
                 return prop
         return None
-    
+
     def find_function_by_name(self, name: str) -> MemItem | None:
         for func in self.functions:
             if func.identifier == name:
@@ -144,16 +145,16 @@ def parse_memitem(memitem: bs4.element.Tag):
                 raise ValueError(f"Expected 2 td elements in tr, got {len(tds)}", div_memproto)
 
             key = tds[0].get_text(strip=True).rstrip(':').lower()
-            
+
             value_tag = tds[1]
-            
+
             if key == "parameters":
                 if isinstance(value_tag, bs4.element.Tag):
                     for br in value_tag.find_all("br"):
                         br.replace_with(RANDOM_UUID)
 
             value = value_tag.get_text(strip=True, separator=" ")
-            
+
             if key == "parameters":
                 value = [x.replace("<br>", "").strip() for x in value.split(RANDOM_UUID)]
                 value = [x for x in value if x]
@@ -162,6 +163,7 @@ def parse_memitem(memitem: bs4.element.Tag):
 
         data.append(table_data)
     return MemItem(title, identifier, bool(span_mlabel), docstring, data)
+
 
 
 def parse_memitems(soup: bs4.BeautifulSoup, header_text: str):

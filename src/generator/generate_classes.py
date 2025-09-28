@@ -1,4 +1,3 @@
-
 import logging
 import inspect
 import typing
@@ -117,7 +116,11 @@ def get_method_signature(method_ref: typing.Callable, doc_member: documentation.
 
             parameters = []
             if signature := item.get('signature'):
-                ...
+                signature_params = documentation.post.parse_signature_params(signature)
+                for param in signature_params:
+                    parameters.append(
+                        stub_types.Parameter(name=param.name, default=param.default)
+                    )
 
             # for param in item.get('parameters', []):
             #     param_parts = param.split(" - ", 1)
