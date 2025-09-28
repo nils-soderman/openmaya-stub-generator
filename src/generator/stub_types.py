@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from collections import defaultdict
 
 
 def indent(code: str, num: int) -> str:
@@ -63,6 +64,7 @@ class Function:
 
         return func_str
 
+
 @dataclass
 class Method(Function):
     static: bool = False
@@ -81,6 +83,7 @@ class Method(Function):
             method_str += "@staticmethod\n"
         method_str += super().__str__()
         return method_str
+
 
 @dataclass
 class Property:
@@ -126,6 +129,12 @@ class Class:
     methods: list[Method]
     docstring: str | None = None
 
+    def get_grouped_methods(self) -> dict[str, list[Method]]:
+        grouped_methods = defaultdict(list)
+        for method in self.methods:
+            grouped_methods[method.name].append(method)
+        return grouped_methods
+
     def __str__(self) -> str:
         bases_str = f"({','.join(self.base_class_names)})" if self.base_class_names else ""
 
@@ -139,8 +148,15 @@ class Class:
             class_str += f"\n{indent(props_str, 1)}"
 
         if self.methods:
-            funcs_str = "\n".join(str(func) for func in self.methods)
-            class_str += f"\n{indent(funcs_str, 1)}"
+            function_str = ""
+            for methods in self.get_grouped_methods().values():
+                if len(methods) > 1:
+                    for method in methods:
+                        function_str += f"@overload\n{str(method)}\n"
+                else:
+                    function_str += str(methods[0]) + "\n"
+
+            class_str += f"\n{indent(function_str.strip(), 1)}"
 
         if "\n" not in class_str:
             class_str += "..."
