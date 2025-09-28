@@ -12,5 +12,6 @@ from typing import (
     Callable,
     Literal,
     Any,
-    overload
+    overload,
+    Self
 )

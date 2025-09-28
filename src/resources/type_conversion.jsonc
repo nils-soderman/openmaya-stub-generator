@@ -1,5 +1,6 @@
 {
     "string": "str",
     "dictionary": "dict",
-    "value": "float" // This may be incorrect?
+    "value": "float", // This may be incorrect?
+    "long": "int"
 }

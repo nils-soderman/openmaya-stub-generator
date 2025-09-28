@@ -14,6 +14,12 @@ BUILTIN_TYPES = (int, float, str, bool, tuple, list, dict)
 logger = logging.getLogger(__name__)
 
 
+class MethodSignature(typing.NamedTuple):
+    docstring: str | None
+    return_type: str | None = "Any"
+    parameters: list[stub_types.Parameter] = []
+
+
 def generate_property(name: str, prop_type: typing.Any, doc: documentation.page.Page | None) -> stub_types.Property:
     docstring = ""
     if doc:
@@ -46,6 +52,11 @@ def get_property_type_from_descriptor(desc: str) -> str:
         return "|".join(get_property_type_from_descriptor(t) for t in types)
 
     desc_processed = desc.strip()
+    if desc_processed.lower().endswith("."):
+        desc_processed = desc_processed[:-1].strip()
+
+    if desc_processed.lower().startswith("the new "):
+        desc_processed = desc_processed[len("the new "):].strip()
 
     if desc_processed.lower().endswith(" constant"):
         return "int"  # This is an "enum" type
@@ -55,6 +66,15 @@ def get_property_type_from_descriptor(desc: str) -> str:
         inner_type = inner_type.removesuffix("s")
         inner_type_name = get_property_type_from_descriptor(inner_type)
         return f"tuple[{inner_type_name}, ...]"
+
+    if desc_processed.lower().startswith("list of "):
+        inner_type = desc_processed[len("list of "):].strip()
+        inner_type = inner_type.removesuffix("s")
+        inner_type_name = get_property_type_from_descriptor(inner_type)
+        return f"list[{inner_type_name}]"
+
+    if desc_processed.lower().endswith("reference to self"):
+        return "Self"
 
     type_name = utils.convert_type(desc_processed)
     return type_name
@@ -90,48 +110,77 @@ def generate_init_method(name: str, class_ref: type, method_ref: typing.Callable
     return []
 
 
+def get_method_signature(method_ref: typing.Callable, doc_member: documentation.page.MemItem):
+    if doc_member.data:
+        for item in doc_member.data:
+            docstring = item.get('description', '')
+
+            parameters = []
+            if signature := item.get('signature'):
+                ...
+
+            # for param in item.get('parameters', []):
+            #     param_parts = param.split(" - ", 1)
+            #     param_name = param_parts[0].strip()
+            #     param_type = param_parts[1].strip()
+
+            #     param_type = get_property_type_from_descriptor(param_type)
+
+            #     parameters.append(
+            #         stub_types.Parameter(name=param_name, type=param_type)
+                # )
+
+            if return_type := item.get('returns'):
+                return_type = get_property_type_from_descriptor(return_type)
+            else:
+                return_type = "Any"
+
+            yield MethodSignature(
+                docstring=docstring,
+                parameters=parameters,
+                return_type=return_type
+            )
+
+    else:
+        yield MethodSignature(
+            docstring=doc_member.docstring,
+        )
+
+
 def generate_method(name: str, class_ref: type, method_ref: typing.Callable, doc: documentation.page.Page | None) -> list[stub_types.Method]:
     if name == "__init__":
         return generate_init_method(name, class_ref, method_ref, doc)
-
-    parameters = []
-    docstring = None
-    return_type = "Any"
 
     static = is_static_method(class_ref, name)
 
     methods = []
     if doc:
         if doc_member := doc.find_function_by_name(name):
-            if doc_member.data:
-                override = len(doc_member.data) > 1
-                for item in doc_member.data:
-                    docstring = item.get('description', '')
-
-                    methods.append(
-                        stub_types.Method(
-                            name=name,
-                            docstring=docstring,
-                            parameters=[],
-                            return_type=None,
-                            static=static
-                        )
-                    )
-            else:
-                docstring = doc_member.docstring
+            for signature in get_method_signature(method_ref, doc_member):
                 methods.append(
                     stub_types.Method(
                         name=name,
-                        docstring=docstring,
-                        parameters=[],
-                        return_type=None,
+                        docstring=signature.docstring,
+                        parameters=signature.parameters,
+                        return_type=signature.return_type,
                         static=static
                     )
                 )
 
     if not methods:
         logger.warning(f"No documentation found for method {class_ref.__name__}.{name}")
-        methods.append(stub_types.Method(name=name, docstring=docstring, parameters=parameters, return_type=return_type, static=static))
+        methods.append(
+            stub_types.Method(
+                name=name,
+                docstring=None,
+                parameters=[
+                    stub_types.Parameter(name="*args", type=None),
+                    stub_types.Parameter(name="**kwargs", type=None)
+                ],
+                return_type="Any",
+                static=static
+            )
+        )
 
     return methods
 
@@ -153,7 +202,7 @@ def generate_class(class_ref: type, doc: documentation.page.Page | None) -> stub
             continue
 
         if member_name.startswith('__') and member_name.endswith('__'):
-            continue # TODO: Temp, let's start by fixing the other functions first
+            continue  # TODO: Temp, let's start by fixing the other functions first
 
         if (
             inspect.isfunction(member)

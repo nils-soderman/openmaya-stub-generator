@@ -1,14 +1,15 @@
-import typing
-
 import dataclasses
 import requests
 import logging
+import typing
+import uuid
 import bs4
 
 from . import cached_request
 
 logger = logging.getLogger(__name__)
 
+RANDOM_UUID = str(uuid.uuid4())
 
 class MemItem(typing.NamedTuple):
     title: str
@@ -143,7 +144,20 @@ def parse_memitem(memitem: bs4.element.Tag):
                 raise ValueError(f"Expected 2 td elements in tr, got {len(tds)}", div_memproto)
 
             key = tds[0].get_text(strip=True).rstrip(':').lower()
-            value = tds[1].get_text(strip=True, separator=" ")
+            
+            value_tag = tds[1]
+            
+            if key == "parameters":
+                if isinstance(value_tag, bs4.element.Tag):
+                    for br in value_tag.find_all("br"):
+                        br.replace_with(RANDOM_UUID)
+
+            value = value_tag.get_text(strip=True, separator=" ")
+            
+            if key == "parameters":
+                value = [x.replace("<br>", "").strip() for x in value.split(RANDOM_UUID)]
+                value = [x for x in value if x]
+
             table_data[key] = value
 
         data.append(table_data)
