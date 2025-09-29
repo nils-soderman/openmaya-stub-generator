@@ -46,9 +46,28 @@ def generate_property(name: str, prop_type: typing.Any, doc: documentation.page.
 
 
 def get_property_type_from_descriptor(desc: str) -> str:
-    if " or " in desc or "," in desc:
-        types = re.split(r"\s*or\s*|,\s*", desc)
+    desc = re.sub(r'<[^>]+>', '', desc)  # Remove HTML tags that may be left if the online docs html is broken
+    desc = desc.strip()
+
+    bracket_list_pattern = r'(?<!list)\[([^\[\]]+)\]'
+    if re.search(bracket_list_pattern, desc):
+        def __replace_bracket_list(match):
+            inner_content = match.group(1)
+            types = {t.strip() for t in inner_content.split(',')}
+            converted_types = [get_property_type_from_descriptor(t) for t in types if t != "..."]
+            return f"list[{'|'.join(converted_types)}]"
+
+        # Replace all bracket lists with their converted form
+        desc = re.sub(bracket_list_pattern, __replace_bracket_list, desc)
+
+    if " or " in desc:
+        types = re.split(r"\sor\s|,\s*", desc)
         return "|".join(get_property_type_from_descriptor(t) for t in types)
+
+    if desc.startswith("(") and desc.endswith(")"):
+        types = desc[1:-1].split(",")
+        all_types = ",".join(get_property_type_from_descriptor(t) for t in types)
+        return f"tuple[{all_types}]"
 
     desc_processed = desc.strip()
     if desc_processed.lower().endswith("."):
