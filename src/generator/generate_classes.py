@@ -53,15 +53,25 @@ def get_property_type_from_descriptor(desc: str) -> str:
     if re.search(bracket_list_pattern, desc):
         def __replace_bracket_list(match):
             inner_content = match.group(1)
-            types = {t.strip() for t in inner_content.split(',')}
-            converted_types = [get_property_type_from_descriptor(t) for t in types if t != "..."]
-            return f"list[{'|'.join(converted_types)}]"
+            types = []
+            for x in inner_content.split(','):
+                if x.strip() == "...":
+                    continue
+                converted_type = get_property_type_from_descriptor(x)
+                if converted_type not in types:
+                    types.append(converted_type)
+
+            return f"list[{'|'.join(types)}]"
 
         # Replace all bracket lists with their converted form
         desc = re.sub(bracket_list_pattern, __replace_bracket_list, desc)
 
     if " or " in desc:
         types = re.split(r"\sor\s|,\s*", desc)
+        return "|".join(get_property_type_from_descriptor(t) for t in types)
+    
+    if "/" in desc:
+        types = desc.split("/")
         return "|".join(get_property_type_from_descriptor(t) for t in types)
 
     if desc.startswith("(") and desc.endswith(")"):
@@ -128,6 +138,13 @@ def generate_init_method(name: str, class_ref: type, method_ref: typing.Callable
     return []
 
 
+def patch_default(value: str) -> str:
+    if value == "none":
+        return "None"
+
+    return value
+
+
 def get_method_signature(method_ref: typing.Callable, doc_member: documentation.page.MemItem):
     if doc_member.data:
         for item in doc_member.data:
@@ -135,10 +152,14 @@ def get_method_signature(method_ref: typing.Callable, doc_member: documentation.
 
             parameters = []
             if signature := item.get('signature'):
-                signature_params = documentation.post.parse_signature_params(signature)
+                signature_params, sig_return_type = documentation.post.parse_signature(signature)
                 for param in signature_params:
+                    default = param.default
+                    if default:
+                        default = patch_default(default)
+
                     parameters.append(
-                        stub_types.Parameter(name=param.name, default=param.default)
+                        stub_types.Parameter(name=param.name, default=default)
                     )
 
             # for param in item.get('parameters', []):
@@ -164,9 +185,47 @@ def get_method_signature(method_ref: typing.Callable, doc_member: documentation.
             )
 
     else:
-        yield MethodSignature(
-            docstring=doc_member.docstring,
-        )
+        # First line of the docstring should be the signature
+        signatures = documentation.post.extract_signature_from_docstring(doc_member.docstring, doc_member.identifier)
+        if signatures:
+            for signature in signatures:
+                signature_params, sig_return_type = documentation.post.parse_signature(signature)
+
+                parameters = []
+                for param in signature_params:
+                    default = param.default
+                    if default:
+                        default = patch_default(default)
+
+                    param_type = None
+                    if param.param_type:
+                        param_type = get_property_type_from_descriptor(param.param_type)
+                    else:
+                        # Try to get the type from the docstring
+                        if param_type := documentation.post.extract_parameter_types_from_docstring(param.name, doc_member.docstring):
+                            param_type = get_property_type_from_descriptor(param_type)
+
+                    parameters.append(
+                        stub_types.Parameter(name=param.name, type=param_type, default=default)
+                    )
+
+                return_type = get_property_type_from_descriptor(sig_return_type) if sig_return_type else "Any"
+
+                yield MethodSignature(
+                    docstring=doc_member.docstring,
+                    parameters=parameters,
+                    return_type=return_type
+                )
+        else:
+            logger.warning(f"Method {doc_member.identifier} has no signature in the documentation!")
+
+            yield MethodSignature(
+                docstring=doc_member.docstring,
+                parameters=[
+                    stub_types.Parameter(name="*args", type=None),
+                    stub_types.Parameter(name="**kwargs", type=None)
+                ]
+            )
 
 
 def generate_method(name: str, class_ref: type, method_ref: typing.Callable, doc: documentation.page.Page | None) -> list[stub_types.Method]:
