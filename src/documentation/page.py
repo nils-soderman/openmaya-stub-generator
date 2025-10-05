@@ -20,6 +20,12 @@ class MemItem(typing.NamedTuple):
     data: list[dict]
 
 
+class Parameter(typing.NamedTuple):
+    name: str
+    type: str
+    description: str = ""
+
+
 class DetailedDescription(typing.NamedTuple):
     description: str
 
@@ -147,23 +153,58 @@ def parse_memitem(memitem: bs4.element.Tag):
             key = tds[0].get_text(strip=True).rstrip(':').lower()
 
             value_tag = tds[1]
+            if not isinstance(value_tag, bs4.element.Tag):
+                raise ValueError("Expected td to be a Tag")
 
             if key == "parameters":
-                if isinstance(value_tag, bs4.element.Tag):
-                    for br in value_tag.find_all("br"):
-                        br.replace_with(RANDOM_UUID)
-
-            value = value_tag.get_text(strip=True, separator=" ")
-
-            if key == "parameters":
-                value = [x.replace("<br>", "").strip() for x in value.split(RANDOM_UUID)]
-                value = [x for x in value if x]
+                value = parse_memitem_value_parameters(value_tag)
+            else:
+                value = value_tag.get_text(strip=True, separator=" ")
 
             table_data[key] = value
 
         data.append(table_data)
     return MemItem(title, identifier, bool(span_mlabel), docstring, data)
 
+
+def parse_memitem_value_parameters(td: bs4.element.Tag) -> list[Parameter]:
+    if td.find("th"):  # Parameters in a table layout
+        parms = []
+        for tr in td.find_all("tr")[1:]:
+            if not isinstance(tr, bs4.element.Tag):
+                raise ValueError("Expected tr to be a Tag")
+                
+            tds = tr.find_all("td")
+            if len(tds) < 3:
+                print(td)
+                raise ValueError(f"Expected at least 3 td elements in tr, got {len(tds)}")
+
+            name = tds[0].get_text(strip=True)
+            type_ = tds[1].get_text(strip=True)
+            description = tds[2].get_text(strip=True)
+
+            parms.append(Parameter(name=name, type=type_, description=description))
+
+        return parms
+    
+    else:  # Parameters in a single tag split by <br> tags
+        for br in td.find_all("br"):
+            br.replace_with(RANDOM_UUID)
+
+        value = td.get_text(strip=True, separator=" ")
+
+        value = [x.replace("<br>", "").strip() for x in value.split(RANDOM_UUID)]
+        value = [x for x in value if x]
+
+        parms = []
+        for param_str in value:
+            if '-' in param_str:
+                name, _, type_ = param_str.partition('-')
+                parms.append(Parameter(name=name.strip(), type=type_.strip()))
+            else:
+                parms.append(Parameter(name=param_str.strip(), type=""))
+
+        return parms
 
 
 def parse_memitems(soup: bs4.BeautifulSoup, header_text: str):

@@ -150,28 +150,27 @@ def get_method_signature(method_ref: typing.Callable, doc_member: documentation.
         for item in doc_member.data:
             docstring = item.get('description', '')
 
-            parameters = []
-            if signature := item.get('signature'):
+            parameters: list[stub_types.Parameter] = []
+            
+            doc_params: list[documentation.page.Parameter] = item.get('parameters', [])
+            signature = item.get('signature') or item.get('name')
+            if signature:
                 signature_params, sig_return_type = documentation.post.parse_signature(signature)
-                for param in signature_params:
-                    default = param.default
+                for signature_param in signature_params:
+                    default = signature_param.default
                     if default:
                         default = patch_default(default)
 
+                    type_ = None
+                    if x := next((x for x in doc_params if x.name == signature_param.name), None):
+                        if x.type:
+                            type_ = get_property_type_from_descriptor(x.type)
+                    if not type_ and signature_param.param_type:
+                        type_ = get_property_type_from_descriptor(signature_param.param_type)
+
                     parameters.append(
-                        stub_types.Parameter(name=param.name, default=default)
+                        stub_types.Parameter(name=signature_param.name, type=type_, default=default)
                     )
-
-            # for param in item.get('parameters', []):
-            #     param_parts = param.split(" - ", 1)
-            #     param_name = param_parts[0].strip()
-            #     param_type = param_parts[1].strip()
-
-            #     param_type = get_property_type_from_descriptor(param_type)
-
-            #     parameters.append(
-            #         stub_types.Parameter(name=param_name, type=param_type)
-                # )
 
             if return_type := item.get('returns'):
                 return_type = get_property_type_from_descriptor(return_type)
