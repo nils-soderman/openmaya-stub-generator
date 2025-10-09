@@ -1,0 +1,10 @@
+{
+    "MColor": {
+        "getColor": {
+            "model": "int"
+        },
+        "setColor": {
+            "components": "Sequence[float]"
+        }
+    }
+}

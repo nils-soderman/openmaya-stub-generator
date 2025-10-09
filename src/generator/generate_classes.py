@@ -4,6 +4,7 @@ import typing
 import re
 
 from . import stub_types, utils
+from . import utils
 from .. import maya_info, documentation, resources
 
 PROPERTY_TYPES = resources.load("property_types.jsonc")
@@ -17,6 +18,7 @@ class MethodSignature(typing.NamedTuple):
     docstring: str | None
     return_type: str | None = "Any"
     parameters: list[stub_types.Parameter] = []
+    deprecated: bool = False
 
 
 def generate_property(name: str, prop_type: typing.Any, doc: documentation.page.Page | None) -> stub_types.Property:
@@ -47,9 +49,10 @@ def generate_property(name: str, prop_type: typing.Any, doc: documentation.page.
 
 def get_property_type_from_descriptor(desc: str) -> str:
     desc = re.sub(r'<[^>]+>', '', desc)  # Remove HTML tags that may be left if the online docs html is broken
+    desc = desc.replace('*', '')
     desc = desc.strip()
 
-    bracket_list_pattern = r'(?<!list)\[([^\[\]]+)\]'
+    bracket_list_pattern = r'(?<!list)\[(?!,)([^\[\]]+)\]'
     if re.search(bracket_list_pattern, desc):
         def __replace_bracket_list(match):
             inner_content = match.group(1)
@@ -63,7 +66,6 @@ def get_property_type_from_descriptor(desc: str) -> str:
 
             return f"list[{'|'.join(types)}]"
 
-        # Replace all bracket lists with their converted form
         desc = re.sub(bracket_list_pattern, __replace_bracket_list, desc)
 
     if " or " in desc:
@@ -72,15 +74,47 @@ def get_property_type_from_descriptor(desc: str) -> str:
     
     if "/" in desc:
         types = desc.split("/")
-        return "|".join(get_property_type_from_descriptor(t) for t in types)
+        return_type = "|".join(get_property_type_from_descriptor(t) for t in types)
+        if return_type == "True|False":
+            return "bool"
+        return return_type
 
     if desc.startswith("(") and desc.endswith(")"):
-        types = desc[1:-1].split(",")
-        all_types = ",".join(get_property_type_from_descriptor(t) for t in types)
-        return f"tuple[{all_types}]"
+        # Only split on commas that are not inside parentheses
+        # [, x]
+        
+        # types = desc[1:-1].split(",")
+        types = documentation.post.split_on_commas_outside_parentheses(desc[1:-1], '(', ')')
+        
+        all_types: list[str] = []
+        optionals_indices = []
+        for x in types:
+            t = x.removesuffix("[")
+            if t.endswith("]") and "[" not in t:
+                t = t[:-1]
+                optionals_indices.append(len(all_types))
+
+            t = get_property_type_from_descriptor(t)
+
+            all_types.append(t)
+
+        if all_types and all_types[-1] == "...":
+            types = set(all_types)
+            types.discard("...")
+
+            all_types = list(types)
+            types_str = "|".join(all_types) + ',...'
+        elif optionals_indices:
+            types_str = ",".join(all_types)
+            other_version = ",".join(x for i, x in enumerate(all_types) if i not in optionals_indices)
+            return f"tuple[{types_str}]|tuple[{other_version}]"
+        else:
+            types_str = ",".join(all_types)
+
+        return f"tuple[{types_str}]"
 
     desc_processed = desc.strip()
-    if desc_processed.lower().endswith("."):
+    if desc_processed.endswith(".") and not desc_processed.endswith("..."):
         desc_processed = desc_processed[:-1].strip()
 
     if desc_processed.lower().startswith("the new "):
@@ -89,10 +123,13 @@ def get_property_type_from_descriptor(desc: str) -> str:
     if desc_processed.lower().endswith(" constant"):
         return "int"  # This is an "enum" type
 
-    if desc_processed.lower().startswith("tuple of "):
-        inner_type = desc_processed[len("tuple of "):].strip()
+    tuple_pattern = r'^(?:tuple of |tuples containing )(.+)$'
+    if match := re.match(tuple_pattern, desc_processed.lower()):
+        inner_type = match.group(1).strip()
         inner_type = inner_type.removesuffix("s")
         inner_type_name = get_property_type_from_descriptor(inner_type)
+        if inner_type_name.startswith("tuple[") and inner_type_name.endswith("]"):
+            return inner_type_name
         return f"tuple[{inner_type_name}, ...]"
 
     if desc_processed.lower().startswith("list of "):
@@ -100,11 +137,30 @@ def get_property_type_from_descriptor(desc: str) -> str:
         inner_type = inner_type.removesuffix("s")
         inner_type_name = get_property_type_from_descriptor(inner_type)
         return f"list[{inner_type_name}]"
-
+    
+    if desc_processed.lower().startswith("sequence of ") or desc_processed.lower().startswith("seq of "):
+        inner_type = desc_processed.partition(" of ")[2].strip()
+        inner_type = inner_type.removesuffix("s").removesuffix("'").strip()
+        inner_type_name = get_property_type_from_descriptor(inner_type)
+        return f"Sequence[{inner_type_name}]"
+    
     if desc_processed.lower().endswith("reference to self"):
         return "Self"
 
     type_name = utils.convert_type(desc_processed)
+
+    if any(x in type_name for x in {" ", "::"}):
+        return "Any"
+
+    if re.match(r'^([a-z]Index|index[A-Z])$', type_name):
+        return "int"
+
+    if re.match(r'^num[A-Z]$', type_name):
+        return "int"
+    
+    if desc_processed.lower().endswith("name"):
+        return "str"
+
     return type_name
 
 
@@ -144,6 +200,38 @@ def patch_default(value: str) -> str:
 
     return value
 
+def get_safe_arg_name(name: str, taken_names: set[str]) -> tuple[str, str | None]:
+    """ 
+    Returns the safe argument name and a possible an assumed type hint based on the name
+    """
+    conversion_map = {
+        "short": "int"
+    }
+
+    _type = None
+    if name in {"int", "float", "str", "bool"}:
+        _type = name
+        name = 'arg'
+
+    # Forbidden names in Python
+    if name in {"in", "for", "if", "else", "from", "class", "def", "return", "global", "nonlocal", "lambda", "try", "except", "with", "as", "is", "and", "or", "not", "pass", "break", "continue", "yield", "raise", "import"}:
+        name += '_'
+
+    elif name in conversion_map:
+        _type = conversion_map[name]
+        name = 'arg'
+
+    if any(char in name for char in " ,[]()"):
+        name = 'arg'
+
+    if name in taken_names:
+        for i in range(2, 20):
+            if f"{name}{i}" not in taken_names:
+                name = f"{name}{i}"
+                break
+
+    return name, _type
+
 
 def get_method_signature(method_ref: typing.Callable, doc_member: documentation.page.MemItem):
     if doc_member.data:
@@ -154,22 +242,29 @@ def get_method_signature(method_ref: typing.Callable, doc_member: documentation.
             
             doc_params: list[documentation.page.Parameter] = item.get('parameters', [])
             signature = item.get('signature') or item.get('name')
+            deprecated = False
             if signature:
-                signature_params, sig_return_type = documentation.post.parse_signature(signature)
-                for signature_param in signature_params:
+                parsed_signature = documentation.post.parse_signature(signature)
+                deprecated = parsed_signature.is_obsolete
+
+                for signature_param in parsed_signature.parameters:
                     default = signature_param.default
                     if default:
                         default = patch_default(default)
 
+                    param_name, assumed_type = get_safe_arg_name(signature_param.name, {p.name for p in parameters})
+                    
                     type_ = None
                     if x := next((x for x in doc_params if x.name == signature_param.name), None):
                         if x.type:
                             type_ = get_property_type_from_descriptor(x.type)
+                    if not type_ and assumed_type:
+                        type_ = assumed_type
                     if not type_ and signature_param.param_type:
                         type_ = get_property_type_from_descriptor(signature_param.param_type)
 
                     parameters.append(
-                        stub_types.Parameter(name=signature_param.name, type=type_, default=default)
+                        stub_types.Parameter(name=param_name, type=type_, default=default)
                     )
 
             if return_type := item.get('returns'):
@@ -180,7 +275,8 @@ def get_method_signature(method_ref: typing.Callable, doc_member: documentation.
             yield MethodSignature(
                 docstring=docstring,
                 parameters=parameters,
-                return_type=return_type
+                return_type=return_type,
+                deprecated=deprecated
             )
 
     else:
@@ -188,13 +284,15 @@ def get_method_signature(method_ref: typing.Callable, doc_member: documentation.
         signatures = documentation.post.extract_signature_from_docstring(doc_member.docstring, doc_member.identifier)
         if signatures:
             for signature in signatures:
-                signature_params, sig_return_type = documentation.post.parse_signature(signature)
+                parsed_signature = documentation.post.parse_signature(signature)
 
                 parameters = []
-                for param in signature_params:
+                for param in parsed_signature.parameters:
                     default = param.default
                     if default:
                         default = patch_default(default)
+
+                    param_name, assumed_type = get_safe_arg_name(param.name, {p.name for p in parameters})
 
                     param_type = None
                     if param.param_type:
@@ -203,20 +301,25 @@ def get_method_signature(method_ref: typing.Callable, doc_member: documentation.
                         # Try to get the type from the docstring
                         if param_type := documentation.post.extract_parameter_types_from_docstring(param.name, doc_member.docstring):
                             param_type = get_property_type_from_descriptor(param_type)
+                        elif assumed_type:
+                            param_type = assumed_type
 
                     parameters.append(
-                        stub_types.Parameter(name=param.name, type=param_type, default=default)
+                        stub_types.Parameter(name=param_name, type=param_type, default=default)
                     )
 
-                return_type = get_property_type_from_descriptor(sig_return_type) if sig_return_type else "Any"
+                return_type = "Any"
+                if parsed_signature.return_type:
+                    return_type = get_property_type_from_descriptor(parsed_signature.return_type)
 
                 yield MethodSignature(
                     docstring=doc_member.docstring,
                     parameters=parameters,
-                    return_type=return_type
+                    return_type=return_type,
+                    deprecated=parsed_signature.is_obsolete
                 )
         else:
-            logger.warning(f"Method {doc_member.identifier} has no signature in the documentation!")
+            # logger.warning(f"Method {doc_member.identifier} has no signature in the documentation!")
 
             yield MethodSignature(
                 docstring=doc_member.docstring,
@@ -243,7 +346,8 @@ def generate_method(name: str, class_ref: type, method_ref: typing.Callable, doc
                         docstring=signature.docstring,
                         parameters=signature.parameters,
                         return_type=signature.return_type,
-                        static=static
+                        deprecated=signature.deprecated,
+                        static=static,
                     )
                 )
 

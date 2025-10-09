@@ -10,6 +10,13 @@ def indent(code: str, num: int) -> str:
     ).lstrip()
 
 
+def safe_docstring(docstring: str):
+    if docstring.endswith('"'):
+        docstring = docstring[:-1] + '\\"'
+
+    return docstring.replace('"""', '\\"\\"\\"')
+
+
 @dataclass
 class Variable:
     name: str
@@ -34,6 +41,8 @@ class Parameter:
         param_str = self.name
         if self.type:
             param_str += f":{self.type}"
+            if self.default == "None" and "None" not in self.type:
+                param_str += "|None"
         if self.default:
             param_str += f"={self.default}"
         return param_str
@@ -45,6 +54,7 @@ class Function:
     return_type: str | None = None
     parameters: list[Parameter] = field(default_factory=list)
     docstring: str | None = None
+    deprecated: bool = False
 
     def get_params_str(self) -> str:
         return ",".join(str(param) for param in self.parameters)
@@ -58,7 +68,7 @@ class Function:
         func_str += f"def {self.name}({params_str})->{return_type}:"
 
         if self.docstring:
-            func_str += "\n" + indent(f'"""{self.docstring}"""', 1)
+            func_str += "\n" + indent(f'"""{safe_docstring(self.docstring)}"""', 1)
         else:
             func_str += "..."
 
@@ -97,7 +107,7 @@ class Property:
         if self.default:
             prop_str += f"={self.default}"
         if self.docstring:
-            prop_str += f'\n"""{self.docstring}"""'
+            prop_str += f'\n"""{safe_docstring(self.docstring)}"""'
         return prop_str
 
 
@@ -110,7 +120,7 @@ class PropertyGetSet(Property):
         prop_str = "@property"
         prop_str += f"\ndef {self.name}(self)->{self.type}:"
         if self.docstring:
-            prop_str += "\n" + indent(f'"""{self.docstring}"""', 1)
+            prop_str += "\n" + indent(f'"""{safe_docstring(self.docstring)}"""', 1)
         else:
             prop_str += "..."
 
@@ -141,7 +151,7 @@ class Class:
         class_str = f"class {self.name}{bases_str}:"
 
         if self.docstring:
-            class_str += "\n" + indent(f'"""{self.docstring}"""', 1)
+            class_str += "\n" + indent(f'"""{safe_docstring(self.docstring)}"""', 1)
 
         if self.properties:
             props_str = "\n".join(str(prop) for prop in self.properties)
@@ -162,3 +172,13 @@ class Class:
             class_str += "..."
 
         return class_str
+
+    def __lt__(self, other: object) -> bool:
+        if not isinstance(other, Class):
+            return NotImplemented
+
+        # Check if this class has dependencies on the other class
+        if other.name in self.base_class_names:
+            return False
+
+        return True

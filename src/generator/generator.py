@@ -5,6 +5,8 @@ from . import generate_classes, generate_functions, generate_variables
 
 from .. import maya_info, documentation
 
+from .patch import ALL_CLASS_PATCHES
+
 
 class Flags(enum.Flag):
     NONE = 0
@@ -31,6 +33,9 @@ def generate_string(module: str, flags: Flags) -> str:
         out_str += "\n\n"
         out_str += "\n".join(str(var) for var in variables)
     if classes := generate_classes.generate_classes(module, doc_index, use_cache=use_cache):
+        for patch in ALL_CLASS_PATCHES:
+            patch.apply(classes)
+
         out_str += "\n\n"
         out_str += "\n".join(str(cls) for cls in classes)
     if functions := generate_functions.generate_functions(module, doc_index):

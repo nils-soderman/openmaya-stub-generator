@@ -4,6 +4,8 @@ https://github.com/nils-soderman/openmaya-stub-generator
 """
 from __future__ import annotations
 
+import sys
+
 from warnings import deprecated
 from typing import (
     TypeVar,

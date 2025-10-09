@@ -180,8 +180,8 @@ def parse_memitem_value_parameters(td: bs4.element.Tag) -> list[Parameter]:
                 raise ValueError(f"Expected at least 3 td elements in tr, got {len(tds)}")
 
             name = tds[0].get_text(strip=True)
-            type_ = tds[1].get_text(strip=True)
-            description = tds[2].get_text(strip=True)
+            type_ = tds[1].get_text(strip=True, separator=" ")
+            description = tds[2].get_text(strip=True, separator=" ")
 
             parms.append(Parameter(name=name, type=type_, description=description))
 
