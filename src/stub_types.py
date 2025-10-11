@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from collections import defaultdict
+import typing
 
 
 def indent(code: str, num: int) -> str:
@@ -50,13 +51,17 @@ class Parameter:
 
 @dataclass
 class Function:
+    ref: typing.Callable
     name: str
     return_type: str | None = None
-    parameters: list[Parameter] = field(default_factory=list)
+    parameters: list[Parameter] | None = None
     docstring: str | None = None
     deprecated: bool = False
 
     def get_params_str(self) -> str:
+        if not self.parameters:
+            return "*args,**kwargs"
+
         return ",".join(str(param) for param in self.parameters)
 
     def __str__(self) -> str:
@@ -84,8 +89,7 @@ class Method(Function):
             return super().get_params_str()
         else:
             self_name = "cls" if self.name == "__new__" else "self"
-            params = [Parameter(self_name)] + self.parameters
-            return ",".join(str(param) for param in params)
+            return f"{self_name},{super().get_params_str()}"
 
     def __str__(self) -> str:
         method_str = ""
@@ -133,6 +137,7 @@ class PropertyGetSet(Property):
 
 @dataclass
 class Class:
+    ref: type
     name: str
     base_class_names: list[str]
     properties: list[Property]
