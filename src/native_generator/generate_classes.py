@@ -327,8 +327,6 @@ def generate_class(class_ref: type) -> stub_types.Class:
     base_classes = [x for x in class_ref.__bases__ if x is not object]
     base_classes_names = [x.__name__ for x in base_classes]
 
-    docstring = class_ref.__doc__ or ""
-
     methods = []
     properties = []
     for member_name, member in class_ref.__dict__.items():
@@ -341,21 +339,31 @@ def generate_class(class_ref: type) -> stub_types.Class:
             or inspect.ismethoddescriptor(member)
             or inspect.isbuiltin(member)
         ):
+            static = isinstance(member, staticmethod)
+            if static:
+                docstring = inspect.getdoc(member.__func__)
+            else:
+                docstring = inspect.getdoc(member)
+
             methods.append(
                 stub_types.Method(
                     ref=member,
                     name=member_name,
                     return_type="Any",
-                    docstring=member.__doc__,
-                    parameters=None
+                    docstring=docstring,  # Updated to handle staticmethod
+                    parameters=None,
+                    static=static
                 )
             )
+
         elif inspect.isgetsetdescriptor(member):
-            stub_types.PropertyGetSet(
-                name,
-                type="Any",
-                docstring=docstring,
-                can_set=True
+            properties.append(
+                stub_types.PropertyGetSet(
+                    member_name,
+                    type="Any",
+                    docstring=member.__doc__,
+                    can_set=True
+                )
             )
 
         # check if it's a static type
@@ -371,7 +379,7 @@ def generate_class(class_ref: type) -> stub_types.Class:
     return stub_types.Class(ref=class_ref,
                             name=name,
                             base_class_names=base_classes_names,
-                            docstring=docstring,
+                            docstring=class_ref.__doc__,
                             methods=methods,
                             properties=properties)
 

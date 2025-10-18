@@ -11,9 +11,6 @@ DISSALLOWED_CHARS = set("!@#$%^&()-+=[]{}|;:'\",.<>?/\\`~ ")
 
 
 class Patch_SafeParameterName(PatchBase):
-    def desc(self) -> str:
-        return "Make sure parameter names are sanitized and safe for use in Python code"
-
     def patch_method(self, class_, method):
         taken_names = set()
         if method.parameters:
@@ -22,7 +19,7 @@ class Patch_SafeParameterName(PatchBase):
                     parameter.name += "_"
 
                 if "*" in parameter.name and parameter.name not in {"*args", "**kwargs"}:
-                    parameter.name = f"arg"
+                    parameter.name = "arg"
 
                 if any(char in DISSALLOWED_CHARS for char in parameter.name):
                     parameter.name = "arg"
@@ -33,7 +30,7 @@ class Patch_SafeParameterName(PatchBase):
                     new_name = parameter.name
                     while new_name in taken_names:
                         i += 1
-                        new_name = f"{parameter.name}{i}"
+                        new_name = parameter.name + str(i)
                     parameter.name = new_name
 
                 taken_names.add(parameter.name)

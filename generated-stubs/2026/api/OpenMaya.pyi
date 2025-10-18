@@ -19,142 +19,66 @@ from typing import (
 )
 
 
-key:Any=...
-maya:Any=...
-ourdict:Any=...
-py2dict:Any=...
-val:Any=...
-
 class MAngle:
 	"""Manipulate angular data."""
+	@property
+	def unit(self)->int:
+		"""Angular units used by the angle."""
+	@unit.setter
+	def unit(self,value:int)->None:...
+	@property
+	def value(self)->float:
+		"""Value of the angle."""
+	@value.setter
+	def value(self,value:float)->None:...
 	kInvalid:int=0
 	kRadians:int=1
 	kDegrees:int=2
 	kAngMinutes:int=3
 	kAngSeconds:int=4
 	kLast:int=5
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def asUnits(self,*args,**kwargs)->Any:
+	def asUnits(self,*args)->Any:
 		"""Returns the angular value, converted to the specified units."""
-	def asRadians(self,*args,**kwargs)->Any:
+	def asRadians(self,*args)->Any:
 		"""Returns the angular value, converted to radians."""
-	def asDegrees(self,*args,**kwargs)->Any:
+	def asDegrees(self,*args)->Any:
 		"""Returns the angular value, converted to degrees."""
-	def asAngMinutes(self,*args,**kwargs)->Any:
+	def asAngMinutes(self,*args)->Any:
 		"""Returns the angular value, converted to minutes of arc."""
-	def asAngSeconds(self,*args,**kwargs)->Any:
+	def asAngSeconds(self,*args)->Any:
 		"""Returns the angular value, converted to seconds of arc."""
-	def uiUnit(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setUIUnit(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def internalUnit(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def internalToUI(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def uiToInternal(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+	@staticmethod
+	def uiUnit(*args)->Any:
+		"""Returns the units used to display angles in Maya's UI."""
+	@staticmethod
+	def setUIUnit(*args)->Any:
+		"""Sets the angular unit used in Maya's UI."""
+	@staticmethod
+	def internalUnit(*args)->Any:
+		"""Returns the angular unit used internally by Maya."""
+	@staticmethod
+	def internalToUI(*args)->Any:
+		"""Converts a value from Maya's internal units to the units used in the UI."""
+	@staticmethod
+	def uiToInternal(*args)->Any:
+		"""Converts a value from the units used in the UI to Maya's internal units."""
 class MArgDatabase(MArgParser):
 	"""Command argument list parser which extends MArgParser with the
 	ability to return arguments and objects as MSelectionLists"""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def commandArgumentMSelectionList(self,*args,**kwargs)->Any:
+	def commandArgumentMSelectionList(self,*args)->Any:
 		"""commandArgumentMSelectionList(argIndex) -> MSelectionList
 
 		Returns the specified command argument as an MSelectionList."""
-	def flagArgumentMSelectionList(self,*args,**kwargs)->Any:
+	def flagArgumentMSelectionList(self,*args)->Any:
 		"""flagArgumentMSelectionList(flagName, argIndex) -> MSelectionList
 
 		Returns the specified argument of the specified single-use flag as
 		an MSelectionList."""
-	def getObjectList(self,*args,**kwargs)->Any:
+	def getObjectList(self,*args)->Any:
 		"""getObjectList() -> MSelectionList
 
 		If the command's MSyntax has set the object format to kSelectionList
@@ -164,188 +88,196 @@ class MArgDatabase(MArgParser):
 class MArgList:
 	"""Argument list for passing to commands."""
 	kInvalidArgIndex:int=-1
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def addArg(self,*args,**kwargs)->Any:
+	def addArg(self,*args)->Any:
 		"""addArg(arg) -> self , 'arg' is a numeric value, MAngle, MDistance,
-		MTime, MPoint or	MVector.
+		MTime, MPoint or        MVector.
 
 		Add an argument to the end of the arg list."""
-	def asAngle(self,*args,**kwargs)->Any:
+	def asAngle(self,*args)->Any:
 		"""asAngle(index) -> MAngle
 
 		Return an argument as an MAngle."""
-	def asBool(self,*args,**kwargs)->Any:
+	def asBool(self,*args)->Any:
 		"""asBool(index) -> bool
 
 		Return an argument as a boolean."""
-	def asDistance(self,*args,**kwargs)->Any:
+	def asDistance(self,*args)->Any:
 		"""asDistance(index) -> MDistance
 
 		Return an argument as an MDistance."""
-	def asDouble(self,*args,**kwargs)->Any:
+	def asDouble(self,*args)->Any:
 		"""asDouble(index) -> float
 
 		Alias for asFloat()."""
-	def asDoubleArray(self,*args,**kwargs)->Any:
+	def asDoubleArray(self,*args)->Any:
 		"""asDoubleArray(index) -> MDoubleArray
 
 		Return a sequence of arguments as an MDoubleArray."""
-	def asFloat(self,*args,**kwargs)->Any:
+	def asFloat(self,*args)->Any:
 		"""asFloat(index) -> float
 
 		Return an argument as a float."""
-	def asInt(self,*args,**kwargs)->Any:
+	def asInt(self,*args)->Any:
 		"""asInt(index) -> int
 
 		Return an argument as an integer."""
-	def asIntArray(self,*args,**kwargs)->Any:
+	def asIntArray(self,*args)->Any:
 		"""asIntArray(index) -> MIntArray
 
 		Return a sequence of arguments as an MIntArray."""
-	def asMatrix(self,*args,**kwargs)->Any:
+	def asMatrix(self,*args)->Any:
 		"""asMatrix(index) -> MMatrix
 
 		Return a sequence of arguments as an MMatrix."""
-	def asPoint(self,*args,**kwargs)->Any:
+	def asPoint(self,*args)->Any:
 		"""asPoint(index) -> MPoint
 
 		Return a sequence of arguments as an MPoint."""
-	def asString(self,*args,**kwargs)->Any:
+	def asString(self,*args)->Any:
 		"""asString(index) -> string
 
 		Return an argument as a string."""
-	def asStringArray(self,*args,**kwargs)->Any:
+	def asStringArray(self,*args)->Any:
 		"""asStringArray(index) -> list of strings
 
 		Return a sequence of arguments as a list of strings."""
-	def asTime(self,*args,**kwargs)->Any:
+	def asTime(self,*args)->Any:
 		"""asTime(index) -> MTime
 
 		Return an argument as an MTime."""
-	def asVector(self,*args,**kwargs)->Any:
+	def asVector(self,*args)->Any:
 		"""asVector(index) -> MVector
 
 		Return a sequence of arguments as an MVector."""
-	def flagIndex(self,*args,**kwargs)->Any:
+	def flagIndex(self,*args)->Any:
 		"""flagIndex(shortFlag, longFlag=None) -> int
 
 		Return index of first occurrence of specified flag."""
-	def lastArgUsed(self,*args,**kwargs)->Any:
+	def lastArgUsed(self,*args)->Any:
 		"""lastArgUsed() -> int
 
 		Return index of last argument used by the most recent as*() method."""
 class MArgParser:
 	"""Command argument list parser."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def isEdit(self)->bool:
+		"""True if the edit flag is present."""
+	@property
+	def isQuery(self)->bool:
+		"""True if the query flag is present."""
+	@property
+	def numberOfFlagsUsed(self)->int:
+		"""Number of different flags used on the command line. If the same flag appears multiple times it is only counted once."""
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def commandArgumentBool(self,*args,**kwargs)->Any:
+	def commandArgumentBool(self,*args)->Any:
 		"""commandArgumentBool(argIndex) -> bool
 
 		Returns the specified command argument as a bool."""
-	def commandArgumentDouble(self,*args,**kwargs)->Any:
+	def commandArgumentDouble(self,*args)->Any:
 		"""Alias for commandArgumentFloat()."""
-	def commandArgumentFloat(self,*args,**kwargs)->Any:
+	def commandArgumentFloat(self,*args)->Any:
 		"""commandArgumentFloat(argIndex) -> float
 
 		Returns the specified command argument as a float."""
-	def commandArgumentInt(self,*args,**kwargs)->Any:
+	def commandArgumentInt(self,*args)->Any:
 		"""commandArgumentInt(argIndex) -> int
 
 		Returns the specified command argument as an int."""
-	def commandArgumentMAngle(self,*args,**kwargs)->Any:
+	def commandArgumentMAngle(self,*args)->Any:
 		"""commandArgumentMAngle(argIndex) -> MAngle
 
 		Returns the specified command argument as an MAngle."""
-	def commandArgumentMDistance(self,*args,**kwargs)->Any:
+	def commandArgumentMDistance(self,*args)->Any:
 		"""commandArgumentMDistance(argIndex) -> MDistance
 
 		Returns the specified command argument as an MDistance."""
-	def commandArgumentMTime(self,*args,**kwargs)->Any:
+	def commandArgumentMTime(self,*args)->Any:
 		"""commandArgumentMTime(argIndex) -> MTime
 
 		Returns the specified command argument as an MTime."""
-	def commandArgumentString(self,*args,**kwargs)->Any:
+	def commandArgumentString(self,*args)->Any:
 		"""commandArgumentString(argIndex) -> unicode string
 
 		Returns the specified command argument as a string."""
-	def flagArgumentBool(self,*args,**kwargs)->Any:
+	def flagArgumentBool(self,*args)->Any:
 		"""flagArgumentBool(flagName, argIndex) -> bool
 
 		Returns the specified argument of the specified single-use flag as
 		a bool."""
-	def flagArgumentDouble(self,*args,**kwargs)->Any:
+	def flagArgumentDouble(self,*args)->Any:
 		"""flagArgumentDouble(flagName, argIndex) -> float
 
 		Alias for flagArgumentFloat()."""
-	def flagArgumentFloat(self,*args,**kwargs)->Any:
+	def flagArgumentFloat(self,*args)->Any:
 		"""flagArgumentFloat(flagName, argIndex) -> float
 
 		Returns the specified argument of the specified single-use flag as
 		a float."""
-	def flagArgumentInt(self,*args,**kwargs)->Any:
+	def flagArgumentInt(self,*args)->Any:
 		"""flagArgumentInt(flagName, argIndex) -> int
 
 		Returns the specified argument of the specified single-use flag as
 		an int."""
-	def flagArgumentMAngle(self,*args,**kwargs)->Any:
+	def flagArgumentMAngle(self,*args)->Any:
 		"""flagArgumentMAngle(flagName, argIndex) -> MAngle
 
 		Returns the specified argument of the specified single-use flag as
 		an MAngle."""
-	def flagArgumentMDistance(self,*args,**kwargs)->Any:
+	def flagArgumentMDistance(self,*args)->Any:
 		"""flagArgumentMDistance(flagName, argIndex) -> MDistance
 
 		Returns the specified argument of the specified single-use flag as
 		an MDistance."""
-	def flagArgumentMTime(self,*args,**kwargs)->Any:
+	def flagArgumentMTime(self,*args)->Any:
 		"""flagArgumentMTime(flagName, argIndex) -> MTime
 
 		Returns the specified argument of the specified single-use flag as
 		an MTime."""
-	def flagArgumentString(self,*args,**kwargs)->Any:
+	def flagArgumentString(self,*args)->Any:
 		"""flagArgumentString(flagName, argIndex) -> string
 
 		Returns the specified argument of the specified single-use flag as
 		a string."""
-	def getFlagArgumentList(self,*args,**kwargs)->Any:
+	def getFlagArgumentList(self,*args)->Any:
 		"""getFlagArgumentList(flagName, occurrence) -> MArgList
 
 		Returns the arguments for the specified occurrence of the given
 		multi-use flag as an MArgList. Raises RuntimeError if the flag has
 		not been enabled for multi-use. Raises IndexError if occurrence is
 		out of range."""
-	def getFlagArgumentPosition(self,*args,**kwargs)->Any:
+	def getFlagArgumentPosition(self,*args)->Any:
 		"""getFlagArgumentPosition(flagName, occurrence) -> int
 
 		Returns the position in the argument list of the specified occurrence
 		of the given flag. Raises IndexError if occurrence is out of range."""
-	def getObjectStrings(self,*args,**kwargs)->Any:
+	def getObjectStrings(self,*args)->Any:
 		"""getObjectStrings() -> tuple of unicode strings
 
 		If the command's MSyntax has set the object format to kStringObjects
 		then this method will return the objects passed to the command as a
 		tuple of strings. If any other object format is set then an empty
 		tuple will be returned."""
-	def isFlagSet(self,*args,**kwargs)->Any:
+	def isFlagSet(self,*args)->Any:
 		"""isFlagSet(flagName) -> bool
 
-		Returns True if the given flag appears on the command line.
-		"""
-	def numberOfFlagUses(self,*args,**kwargs)->Any:
+		Returns True if the given flag appears on the command line."""
+	def numberOfFlagUses(self,*args)->Any:
 		"""numberOfFlagUses(flagName) -> int
 
 		Returns the number of times that the flag appears on the command
 		line."""
 class MArrayDataBuilder:
 	"""Array builder for arrays in data blocks."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def addElement(self,*args,**kwargs)->Any:
+	def addElement(self,*args)->Any:
 		"""addElement(index) -> MDataHandle
 
 		Adds a new element to the array at the given index.
@@ -353,7 +285,7 @@ class MArrayDataBuilder:
 		* index (int) - the index at which we wish to add the new element
 
 		Returns The handle for the new element"""
-	def addElementArray(self,*args,**kwargs)->Any:
+	def addElementArray(self,*args)->Any:
 		"""addElementArray(index) -> MArrayDataHandle
 
 		Adds a new element to the array at the given index.  The added element is also an array.
@@ -361,37 +293,37 @@ class MArrayDataBuilder:
 		* index (int) - the index at which we wish to add the new element
 
 		Returns The handle for the new array element"""
-	def addLast(self,*args,**kwargs)->Any:
+	def addLast(self,*args)->Any:
 		"""addLast() -> MDataHandle
 
 		Adds a new element to the end of the array.  The index of the element will be the current highest index + 1.
 
 		Returns The handle for the new element"""
-	def addLastArray(self,*args,**kwargs)->Any:
+	def addLastArray(self,*args)->Any:
 		"""addLastArray() -> MArrayDataHandle
 
 		Adds a new element to the end of the array.  The added element is also an array.  The index of the element will the current highest index + 1.
 
 		Returns The handle for the new array element"""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source) -> self
 
 		Copy data from source builder.
 
 		* source (MArrayDataBuilder) - The source object to copy from"""
-	def growArray(self,*args,**kwargs)->Any:
+	def growArray(self,*args)->Any:
 		"""growArray(amount) -> self
 
 		Grows the array storage by the given amount.
 
 		* amount (int) - the amount to grow the array by"""
-	def removeElement(self,*args,**kwargs)->Any:
+	def removeElement(self,*args)->Any:
 		"""removeElement(index) -> self
 
 		Removes the specified element from the array
 
 		* index (int) - the element of the array to remove"""
-	def setGrowSize(self,*args,**kwargs)->Any:
+	def setGrowSize(self,*args)->Any:
 		"""setGrowSize(size) -> self
 
 		Sets the grow size of the array.  As elements are added to the array, the builder will allocate memory in chunks.  This method tells the builder how many elements to allocate each time it grows the array.
@@ -399,11 +331,11 @@ class MArrayDataBuilder:
 		* size (int) - the number of elements to allocate when growing the array"""
 class MArrayDataHandle:
 	"""Data block handle for array data."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def builder(self,*args,**kwargs)->Any:
+	def builder(self,*args)->Any:
 		"""builder() -> MArrayDataBuilder
 
 		Returns a builder for this handle's array so that it can be expanded.
@@ -411,42 +343,42 @@ class MArrayDataHandle:
 		This method will raise an exception if the current array does not support array data builders. This can be changed in a node's initialize routine using the usesArrayDataBuilder attribute in MFnAttribute.
 
 		Do not use with an MArrayDataHandle which was returned by MPlug.asMDataHandle()."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source) -> self
 
 		Copy data from source array.
 
 		* source (MArrayDataHandle) - The source object to copy from"""
-	def elementLogicalIndex(self,*args,**kwargs)->Any:
+	def elementLogicalIndex(self,*args)->Any:
 		"""elementLogicalIndex() -> int
 
 		Returns the index that we are currently at in the array.  It is possible for the index to be invalid, in which case the return status will report an error.  These may be sparse arrays so the element index returned will be a logical index.
 
 		Raises an exception if there is no current element (e.g. if there are no elements)."""
-	def inputArrayValue(self,*args,**kwargs)->Any:
+	def inputArrayValue(self,*args)->Any:
 		"""inputArrayValue() -> MArrayDataHandle
 
 		Gets a handle into this data block for the current array element.  This method should be used when the array elements are also arrays.  The data represented by the handle will be valid.  If the data is from an dirty connection, then the connection will be evaluated.
 
 		Do not use with an MArrayDataHandle which was returned by MPlug.asMDataHandle()."""
-	def inputValue(self,*args,**kwargs)->Any:
+	def inputValue(self,*args)->Any:
 		"""inputValue() -> MDataHandle
 
 		Gets a handle into this data block for the current array element.  The data represented by the handle will be valid.  If the data is from an dirty connection, then the connection will be evaluated.
 
 		Do not use with an MArrayDataHandle which was returned by MPlug.asMDataHandle()."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> bool
 
 		Specifies whether or not there are more elements to iterate over."""
-	def jumpToPhysicalElement(self,*args,**kwargs)->Any:
+	def jumpToPhysicalElement(self,*args)->Any:
 		"""jumpToPhysicalElement(position) -> self
 
 		Jump to a specific physical element in the array.
 		Since physical elements are contiguous no search is required.
 
 		* position (int) - the array position to jump to"""
-	def jumpToLogicalElement(self,*args,**kwargs)->Any:
+	def jumpToLogicalElement(self,*args)->Any:
 		"""jumpToLogicalElement(index) -> self
 
 		Jump to a specific logical element in the array.
@@ -454,24 +386,24 @@ class MArrayDataHandle:
 		Thus when iterating through the elements of the array it is much faster to do so using physical indices.
 
 		* index (int) - the logical index to jump to"""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> bool
 
 		Advance to the next element in the array.
 		Return True if there was a next element and False if there wasn't."""
-	def outputArrayValue(self,*args,**kwargs)->Any:
+	def outputArrayValue(self,*args)->Any:
 		"""outputArrayValue() -> MArrayDataHandle
 
 		Gets a handle into this data block for the current array element.  This method should be used when the array elements are also arrays. The array's elements are not evaluated and may no longer be valid. Therefore, this handle should only be used for writing over the data.
 
 		Do not use with an MArrayDataHandle which was returned by MPlug.asMDataHandle()."""
-	def outputValue(self,*args,**kwargs)->Any:
+	def outputValue(self,*args)->Any:
 		"""outputValue() -> MDataHandle
 
 		Gets a handle into this data block for the current array element. The element is not evaluated so its data may not be valid. Therefore, this handle should only be used for writing over the data.
 
 		This method can also be used to retrieve handles to individual elements of  non-datablock array handles, such as those returned by MPlug.getValue() and MPlug.asMDataHandle()."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""set(builder) -> self
 
 		Sets the data for this array from the data in the builder object
@@ -479,13 +411,13 @@ class MArrayDataHandle:
 		Do not use with an MArrayDataHandle which was returned by MPlug.asMDataHandle().
 
 		* builder (MArrayDataBuilder) - the builder object"""
-	def setAllClean(self,*args,**kwargs)->Any:
+	def setAllClean(self,*args)->Any:
 		"""setAllClean() -> self
 
 		Marks every element of the array attribute represented by the handle as clean.  This method should be used if a compute function is asked to compute a single element of a multi, but instead calculates all the elements.  Calling <i>setAllClean</i> in this situation will prevent further calls to the node's compute method for the other elements of the multi.
 
 		Do not use with an MArrayDataHandle which was returned by MPlug.asMDataHandle()"""
-	def setClean(self,*args,**kwargs)->Any:
+	def setClean(self,*args)->Any:
 		"""setClean() -> self
 
 		Marks the data that is represented by this handle as being clean.  This should be done after recalculating the data from the inputs.
@@ -496,181 +428,143 @@ class MAttributeIndex:
 	__hash__:None=None
 	kInteger:int=0
 	kFloat:int=1
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source) -> self
 
 		Copy data from source index.
 
 		* source (MAttributeIndex) - The source index to copy from"""
-	def getLower(self,*args,**kwargs)->Any:
+	def getLower(self,*args)->Any:
 		"""getLower() -> int/float
 
 		Returns the lower bound of the index."""
-	def getUpper(self,*args,**kwargs)->Any:
+	def getUpper(self,*args)->Any:
 		"""getUpper() -> int/float
 
 		Returns the upper bound of the index."""
-	def getValue(self,*args,**kwargs)->Any:
+	def getValue(self,*args)->Any:
 		"""getValue() -> int/float
 
 		Returns the current value of the index.
 		Raises an exception if the index is a range."""
-	def hasLowerBound(self,*args,**kwargs)->Any:
+	def hasLowerBound(self,*args)->Any:
 		"""hasLowerBound() -> bool
 
 		Returns True if a lower bound is specified."""
-	def hasRange(self,*args,**kwargs)->Any:
+	def hasRange(self,*args)->Any:
 		"""hasRange() -> bool
 
 		Returns True if a range was specified."""
-	def hasUpperBound(self,*args,**kwargs)->Any:
+	def hasUpperBound(self,*args)->Any:
 		"""hasUpperBound() -> bool
 
 		Returns True if an upper bound is specified."""
-	def hasValidRange(self,*args,**kwargs)->Any:
+	def hasValidRange(self,*args)->Any:
 		"""hasValidRange() -> bool
 
 		Returns True if upper bound is greater than lower bound."""
-	def isBounded(self,*args,**kwargs)->Any:
+	def isBounded(self,*args)->Any:
 		"""isBounded() -> bool
 
 		Returns True if the index is bounded."""
-	def setLower(self,*args,**kwargs)->Any:
+	def setLower(self,*args)->Any:
 		"""setLower(value) -> self
 
 		Sets the lower bound of the index."""
-	def setType(self,*args,**kwargs)->Any:
+	def setType(self,*args)->Any:
 		"""setType(type) -> self
 
 		Sets the type of attribute index.
 		See type() for a list of valid index types.
 
 		* type (int) - the index type to set"""
-	def setUpper(self,*args,**kwargs)->Any:
+	def setUpper(self,*args)->Any:
 		"""setUpper(value) -> self
 
 		Sets the upper bound of the index."""
-	def setValue(self,*args,**kwargs)->Any:
+	def setValue(self,*args)->Any:
 		"""setValue(value) -> self
 
 		Sets the value of the index.
 
 		Remark: calling this method with an integer value will change its type to kInteger, and subsequently calling with a float value will change it to kFloat."""
-	def type(self,*args,**kwargs)->Any:
+	def type(self,*args)->Any:
 		"""type() -> int
 
 		Returns the type of attribute index.
 
 		Valid index types:
-		  kInteger	Integer index (e.g. mesh.cp[5])
-		  kFloat		Floating-poing index (e.g. curve.u[1.3])"""
+		  kInteger      Integer index (e.g. mesh.cp[5])
+		  kFloat                Floating-poing index (e.g. curve.u[1.3])"""
 class MAttributePattern:
 	"""Manipulate attribute structure patterns."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def name(self,*args,**kwargs)->Any:
+	def name(self,*args)->Any:
 		"""Return the name of the attribute pattern."""
-	def rootAttrCount(self,*args,**kwargs)->Any:
+	def rootAttrCount(self,*args)->Any:
 		"""Return the number of root attributes in this pattern."""
-	def rootAttr(self,*args,**kwargs)->Any:
+	def rootAttr(self,*args)->Any:
 		"""Return the nth root attribute in this pattern."""
-	def removeRootAttr(self,*args,**kwargs)->Any:
+	def removeRootAttr(self,*args)->Any:
 		"""Return the nth or passed-in root attribute from this pattern."""
-	def addRootAttr(self,*args,**kwargs)->Any:
+	def addRootAttr(self,*args)->Any:
 		"""Add the given root attribute to this pattern."""
-	def attrPatternCount(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def attrPattern(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def findPattern(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+	@staticmethod
+	def attrPatternCount(*args)->Any:
+		"""Return the global number of patterns created."""
+	@staticmethod
+	def attrPattern(*args)->Any:
+		"""Return the specified pattern indexed from the global list."""
+	@staticmethod
+	def findPattern(*args)->Any:
+		"""Return a pattern with the given name, None if not found."""
 class MAttributeSpec:
 	"""Class that encapsulates component/attribute information for generating selection items."""
+	@property
+	def name(self)->Any:
+		"""The name of the attribute specification."""
+	@name.setter
+	def name(self,value:Any)->None:...
+	@property
+	def dimensions(self)->Any:
+		"""The dimensions of the attribute specification."""
+	@dimensions.setter
+	def dimensions(self,value:Any)->None:...
 	__hash__:None=None
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source) -> self
 
 		Copy data from source specification.
@@ -678,61 +572,84 @@ class MAttributeSpec:
 		* source (MAttributeSpec) - The source specification to copy from"""
 class MAttributeSpecArray:
 	"""Array of MAttributeSpec values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MBoundingBox:
 	"""3D axis-aligned bounding box."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def min(self)->MPoint:
+		"""Minimum corner point"""
+	@property
+	def max(self)->MPoint:
+		"""Maximum corner point"""
+	@property
+	def center(self)->MPoint:
+		"""Center point"""
+	@property
+	def width(self)->float:
+		"""Size in X"""
+	@property
+	def height(self)->float:
+		"""Size in Y"""
+	@property
+	def depth(self)->float:
+		"""Size in Z"""
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Empties the bounding box, setting its corners to (0, 0, 0)."""
-	def transformUsing(self,*args,**kwargs)->Any:
+	def transformUsing(self,*args)->Any:
 		"""Multiplies the bounding box's corners by a matrix."""
-	def expand(self,*args,**kwargs)->Any:
+	def expand(self,*args)->Any:
 		"""Expands the bounding box to include a point or other bounding box."""
-	def contains(self,*args,**kwargs)->Any:
+	def contains(self,*args)->Any:
 		"""Returns True if a point lies within the bounding box."""
-	def intersects(self,*args,**kwargs)->Any:
+	def intersects(self,*args)->Any:
 		"""Returns True if any part of a given bounding box lies within this one."""
 class MCacheSchema:
 	"""Defines a node's cached data when participant in EM Cached Playback.
 	Can be used to query or modify the attributes being cached.
 	"""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def add(self,*args,**kwargs)->Any:
+	def add(self,*args)->Any:
 		"""add(attribute) -> self
 
 		Force the attribute to be cached
@@ -740,88 +657,97 @@ class MCacheSchema:
 		this method allows you to cache input attributes or other animatedattributes that are not fully understood by EM
 
 		* attribute (MObject) - Attribute to cache"""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset()
 
 		Reset this schema to the minimal."""
 class MCallbackIdArray:
 	"""Array of MCallbackId values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MCameraMessage(MMessage):
 	"""Class used to register callbacks for Camera Manipulation Begin and End related messages."""
-	def addBeginManipulationCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addBeginManipulationCallback(*args)->Any:
+		"""addBeginManipulationCallback(node, function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		Registers callbacks for camera manipulation beginning messages.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * node (MObject) - The node to register the callback for.
+		 * function (MMessage::MNodeFunction) - the callback function
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addEndManipulationCallback(*args)->Any:
+		"""addEndManipulationCallback(node, function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		Registers callbacks for camera manipulation ending messages.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addEndManipulationCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * node (MObject) - The node to register the callback for.
+		 * function (MMessage::MNodeFunction) - the callback function
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MColor:
 	"""Manipulate color data."""
+	@property
+	def r(self)->float:
+		"""red component"""
+	@r.setter
+	def r(self,value:float)->None:...
+	@property
+	def g(self)->float:
+		"""green component"""
+	@g.setter
+	def g(self,value:float)->None:...
+	@property
+	def b(self)->float:
+		"""blue component"""
+	@b.setter
+	def b(self,value:float)->None:...
+	@property
+	def a(self)->float:
+		"""alpha component"""
+	@a.setter
+	def a(self,value:float)->None:...
 	__hash__:None=None
 	kRGB:int=0
 	kHSV:int=1
@@ -831,85 +757,90 @@ class MColor:
 	kByte:int=1
 	kShort:int=2
 	kOpaqueBlack:MColor
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __radd__(self,*args,**kwargs)->Any:
+	def __radd__(self,*args)->Any:
 		"""Return value+self."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Return self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Return self*=value."""
-	def __truediv__(self,*args,**kwargs)->Any:
+	def __truediv__(self,other)->Any:
 		"""Return self/value."""
-	def __rtruediv__(self,*args,**kwargs)->Any:
+	def __rtruediv__(self,other)->Any:
 		"""Return value/self."""
-	def __itruediv__(self,*args,**kwargs)->Any:
+	def __itruediv__(self,other)->Any:
 		"""Return self/=value."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def getColor(self,*args,**kwargs)->Any:
+	def getColor(self,*args)->Any:
 		"""Returns a list containing the color's components, in the specified color model."""
-	def setColor(self,*args,**kwargs)->Any:
+	def setColor(self,*args)->Any:
 		"""Sets the color's components and color model."""
 class MColorArray:
 	"""Array of MColor values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MCommandMessage(MMessage):
 	"""Class used to register callbacks for command related messages.
@@ -932,424 +863,382 @@ class MCommandMessage(MMessage):
 	kStackTrace:int=6
 	kMELProc:int=0
 	kMELCommand:int=1
-	def addCommandCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addCommandCallback(*args)->Any:
+		"""addCommandCallback(function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback for command messages that are
+		issued every time a MEL command is executed. It is only called
+		when actual commands are executed and not when scripts are
+		executed.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		NOTE: Setting up a callback using this method will
+		degrade the performance of Maya since the installed callback will be
+		invoked repeatedly as MEL operations are processed.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * function - callable which will be passed a string containing the
+		   MEL command being executed, and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addProcCallback(*args)->Any:
+		"""addProcCallback(function, clientData=None) -> id
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addProcCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		This method registers a callback that is executed every time a MEL
+		procedure is run. The callback will be executed once when the procedure
+		is about to be executed, and again when it has exited. If a non-existent
+		procedure is called the callback will be called once for entry but there
+		will be no call on exit.
 
-		Convert a function to be a static method.
+		The callback cannot be registered multiple times. To register a new
+		callback function for this, please de-register the original callback first
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		NOTE: Setting up a callback using this method can potentially degrade the
+		performance of Maya since the installed callback will be invoked
+		repeatedly as MEL procedures are executed.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * function - callable which will be passed a string containing the name
+		   of the procedure being invoked, an integer indicating the ID for the
+		   procedure's invocation, a bool set to True if the procedure is being entered,
+		   false otherwise, a ProcType constant (see below for a list) indicating the
+		   type of call this is (MEL proc or MEL command), and the clientData object
+		   ProcType constant can take the folowing values:
+		     kMELProc
+		     kMELCommand
+		 * clientData - User defined data passed to the callback function
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addCommandOutputCallback(*args)->Any:
+		"""addCommandOutputCallback(function, clientData=None) -> id
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addCommandOutputCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		This method registers a callback for whenever commands generate
+		output such as that which is printed into the command window.
 
-		Convert a function to be a static method.
+		 * function - callable which will be passed a string containing the
+		   MEL command being executed, a MessageType constant (see class docs
+		   for a list) indicating the message type and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addCommandOutputFilterCallback(*args)->Any:
+		"""addCommandOutputFilterCallback(function, clientData=None) -> id
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		This method registers a callback for whenever commands generate
+		output such as that which is printed into the command window.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		Returning True in the callback will filter the output from the
+		script editor and command line., returning False will keep the output.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addCommandOutputFilterCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * function - callable which will be passed a string containing the
+		   MEL command being executed, a MessageType constant (see class docs
+		   for a list) indicating the message type and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MConditionMessage(MMessage):
 	"""Class used to register callbacks for condition related messages."""
-	def addConditionCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addConditionCallback(*args)->Any:
+		"""addConditionCallback(conditionName, function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback for condition changed messages.
+		The callback function will be passed the new state of the
+		condition and any client data that the user wishes to pass in.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * conditionName (string) - the condition to register the
+		callback for
+		 * function - callable which will be passed a bool indicating
+		   the new state of the condition, and the clientData object.
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def getConditionNames(*args)->Any:
+		"""getConditionNames() -> (string, string, ...)
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This method returns the list of available condition names.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getConditionNames(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * return: tuple of available condition names."""
+	@staticmethod
+	def getConditionState(*args)->Any:
+		"""getConditionState(name) -> bool
 
-		Convert a function to be a static method.
+		This method returns the current state of a condition.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * name (string) - the name of the condition.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getConditionState(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: The current state of the condition."""
 class MContainerMessage(MMessage):
 	"""Class used to register callbacks for container related messages."""
-	def addPublishAttrCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addPublishAttrCallback(*args)->Any:
+		"""addPublishAttrCallback(function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback that is called whenever an attribute
+		is published or unpublished from a container.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * function - callable which will be passed a Node (the container)
+		   ,a string indicating the name of the published attr, and
+		   the clientData object.
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addBoundAttrCallback(*args)->Any:
+		"""addBoundAttrCallback(function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This method registers a callback that is called whenever an attribute
+		is bound or unbound on a container.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addBoundAttrCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * function - callable which will be passed a Node (the container)
+		   ,a string indicating the name of the bound attr, and
+		   the clientData object.
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MDAGDrawOverrideInfo:
 	"""A data structure to store the per path draw override information."""
+	@property
+	def overrideEnabled(self)->Any:
+		"""Draw override enabled or not"""
+	@overrideEnabled.setter
+	def overrideEnabled(self,value:Any)->None:...
+	@property
+	def displayType(self)->Any:
+		"""Display type (kDisplayTypeNormal, kDisplayTypeReference or kDisplayTypeTemplate)"""
+	@displayType.setter
+	def displayType(self,value:Any)->None:...
+	@property
+	def lod(self)->Any:
+		"""Level of detail (kLODFull or kLODBoundingBox)"""
+	@lod.setter
+	def lod(self,value:Any)->None:...
+	@property
+	def enableShading(self)->Any:
+		"""Whether allow to draw shaded item"""
+	@enableShading.setter
+	def enableShading(self,value:Any)->None:...
+	@property
+	def enableTexturing(self)->Any:
+		"""Whether allow to draw textured item"""
+	@enableTexturing.setter
+	def enableTexturing(self,value:Any)->None:...
+	@property
+	def enableVisible(self)->Any:
+		"""Whether the whole geometry is visible"""
+	@enableVisible.setter
+	def enableVisible(self,value:Any)->None:...
+	@property
+	def playbackVisible(self)->Any:
+		"""Whether the object is visible during playback"""
+	@playbackVisible.setter
+	def playbackVisible(self,value:Any)->None:...
 	kDisplayTypeNormal:int=0
 	kDisplayTypeReference:int=1
 	kDisplayTypeTemplate:int=2
 	kLODFull:int=0
 	kLODBoundingBox:int=1
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 class MDGContext:
 	"""Dependency graph context."""
 	kNormal:MDGContext
 	kTimed:MDGContext
 	kManaged:MDGContext
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source) -> self
 
 		Copy data from source context.
 
 		* source (MDGContext) - The source object to copy from"""
-	def getTime(self,*args,**kwargs)->Any:
+	def getTime(self,*args)->Any:
 		"""Returns the time at which this context is set to evaluate."""
-	def isCurrent(self,*args,**kwargs)->Any:
+	def isCurrent(self,*args)->Any:
 		"""Returns True if the context is currently being used for evaluation. Returns False if some other context is being used for evaluation."""
-	def isNormal(self,*args,**kwargs)->Any:
+	def isNormal(self,*args)->Any:
 		"""Returns True if the context is set to evaluate normally. Returns False if the context is set to evaluate at a specific time."""
-	def isTimed(self,*args,**kwargs)->Any:
+	def isTimed(self,*args)->Any:
 		"""Returns True if the context is used for evaluating at a time that is different than the current time."""
-	def isManaged(self,*args,**kwargs)->Any:
+	def isManaged(self,*args)->Any:
 		"""Returns True if the context is for cached playback background evaluation."""
-	def current(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def makeCurrent(self,*args,**kwargs)->Any:
+	@staticmethod
+	def current(*args)->Any:
+		"""Returns the current context being used for evaluation."""
+	def makeCurrent(self,*args)->Any:
 		"""Makes this context the new current one being used for evaluation. Returns the previous evaluation context."""
 class MDGMessage(MMessage):
 	"""Class used to register callbacks for Dependency Graph related messages."""
-	def addTimeChangeCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addTimeChangeCallback(*args)->Any:
+		"""addTimeChangeCallback(function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback that is called whenever the time
+		changes in the dependency graph.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * function - callable which will be passed a MTime object indicating
+		   the new time and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addDelayedTimeChangeCallback(*args)->Any:
+		"""addDelayedTimeChangeCallback(function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This method registers a callback that is called whenever the time
+		changes in the dependency graph, but after the time changed callback.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addDelayedTimeChangeCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * function - callable which will be passed a MTime object indicating
+		   the new time and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addDelayedTimeChangeRunupCallback(*args)->Any:
+		"""addDelayedTimeChangeRunupCallback(function, clientData=None) -> id
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		This method registers a callback that is called whenever the time
+		changes in the dependency graph, but after the other time changed callbacks
+		which can be used to invoke a dynamics solve or runup if needed
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * function - callable which will be passed a MTime object indicating
+		   the new time and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addForceUpdateCallback(*args)->Any:
+		"""addForceUpdateCallback(function, clientData=None) -> id
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addDelayedTimeChangeRunupCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		This method registers a callback that is called after the time
+		changes and after all nodes have been evaluated in the
+		dependency graph.
 
-		Convert a function to be a static method.
+		 * function - callable which will be passed a MTime object indicating
+		   the new time and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNodeAddedCallback(*args)->Any:
+		"""addNodeAddedCallback(function, nodeType, clientData=None) -> id
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		This method registers a callback that is called whenever a new node
+		is added to the dependency graph.
+		The nodeType argument allows you to specify the type of nodes that
+		will trigger the callback. The default node type is "dependNode" which
+		matches all nodes.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * function - callable which will be passed a MObject indicating
+		   the new node and the clientData object
+		 * nodeType (MString) - type of node that will trigger the callback
+		 * clientData - User defined data passed to the callback function
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addForceUpdateCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNodeRemovedCallback(*args)->Any:
+		"""addNodeRemovedCallback(function, nodeType, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback that is called whenever a new node
+		is removed from the dependency graph.
+		The nodeType argument allows you to specify the type of nodes that
+		will trigger the callback. The default node type is "dependNode" which
+		matches all nodes.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * function - callable which will be passed a MObject indicating
+		   the node being removed and the clientData object
+		 * nodeType (MString) - type of node that will trigger the callback
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addPreConnectionCallback(*args)->Any:
+		"""addPreConnectionCallback(function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This method registers a callback that is called whenever any connection
+		is made or broken in the dependency graph. This callback is triggered before
+		the given connection has been made or broken, unlike the addConnectionCallback
+		which is triggered after the operation.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNodeAddedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * function - callable which will be passed a MPlug indicating the source
+		   plug of the connection, a MPlug indicating the destination plug of the
+		   connection, a boolean set to True if a new connection will be made,
+		   False if it will be broken and the clientData object.
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addConnectionCallback(*args)->Any:
+		"""addConnectionCallback(function, clientData=None) -> id
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		This method registers a callback that is called whenever a connection
+		is made or broken in the dependency graph. This callback is triggered
+		after the given connection has been made or broken, unlike the addPreConnectionCallback
+		which is triggered before the operation.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * function - callable which will be passed a MPlug indicating the source
+		   plug of the connection, a MPlug indicating the destination plug of the
+		   connection, a boolean set to True if a new connection will be made,
+		   False if it will be broken and the clientData object.
+		 * clientData - User defined data passed to the callback function
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNodeChangeUuidCheckCallback(*args)->Any:
+		"""addNodeChangeUuidCheckCallback(function, clientData=None) -> id
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNodeRemovedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		This method registers a callback that is called whenever a node
+		may have its UUID changed. Possible causes include the 'rename' command,
+		and the UUID for a node being read from a file during file I/O.
 
-		Convert a function to be a static method.
+		Note that nodes are assigned a UUID when they are created; this does
+		not invoke this callback. During file I/O the stored UUID is applied as
+		a separate step after creation (which does invoke this callback).
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		Depending on the situation Maya may or may not use the new UUID by default.
+		For example, when importing a file, Maya reads the UUID from the file
+		but does not use it. The boolean argument to the callback function lets
+		the callback know whether Maya is intending to use the UUID or not.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		The callback returns a MMessage.Action constant:
+		        * kDefaultAction - The callback does not want to change whether the
+		          UUID is used or not.
+		        * kDoNotDoAction - Do not use the new UUID.
+		        * kDoAction - Use the new UUID.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		In any case, the callback may leave the new uuid as is, or may provide
+		a new uuid of its own choosing to be used instead.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addPreConnectionCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * function - callable which will be passed a boolean indicating whether
+		   the UUID will be applied, a MObject indicating the node whose UUID may
+		   be changed, the MUuid that may be applied to the node (typically the one
+		   read from the file, during file I/O) - the callback may provide its own
+		   uuid to be applied by changing this parameter - and the clientData object.
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addConnectionCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNodeChangeUuidCheckCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MDGModifier:
 	"""Used to change the structure of the dependency graph."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addAttribute(self,*args,**kwargs)->Any:
+	def addAttribute(self,*args)->Any:
 		"""addAttribute(MObject node, MObject attribute) -> self
 
 		Adds an operation to the modifier to add a new dynamic attribute to the
 		given dependency node. If the attribute is a compound its children will
 		be added as well, so only the parent needs to be added using this method."""
-	def addExtensionAttribute(self,*args,**kwargs)->Any:
+	def addExtensionAttribute(self,*args)->Any:
 		"""addExtensionAttribute(MNodeClass nodeClass, MObject attribute) -> self
 
 		Adds an operation to the modifier to add a new extension attribute to
 		the given node class. If the attribute is a compound its children will be
 		added as well, so only the parent needs to be added using this method."""
-	def commandToExecute(self,*args,**kwargs)->Any:
+	def commandToExecute(self,*args)->Any:
 		"""commandToExecute(command) -> self
 
 		Adds an operation to the modifier to execute a MEL command. The command
@@ -1360,7 +1249,7 @@ class MDGModifier:
 		commands into a single call to commandToExecute(). They will still be
 		undone together, as a single undo action by the user, but Maya will
 		better be able to recover if one of the commands fails."""
-	def connect(self,*args,**kwargs)->Any:
+	def connect(self,*args)->Any:
 		"""connect(MPlug source, MPlug dest) -> self
 		connect(MObject sourceNode, MObject sourceAttr,
 		        MObject destNode,   MObject destAttr) -> self
@@ -1372,7 +1261,7 @@ class MDGModifier:
 		also be a nurbs surface.
 		Plugs can either be specified with node and attribute MObjects or with
 		MPlugs."""
-	def createNode(self,*args,**kwargs)->Any:
+	def createNode(self,*args)->Any:
 		"""createNode(typeName) -> MObject
 		createNode(MTypeId typeId) -> MObject
 
@@ -1381,7 +1270,7 @@ class MDGModifier:
 		Dependency Graph until the modifier's doIt() method is called. Raises
 		TypeError if the named node type does not exist or if it is a DAG node
 		type."""
-	def deleteNode(self,*args,**kwargs)->Any:
+	def deleteNode(self,*args)->Any:
 		"""deleteNode(MObject node) -> selfdeleteNode(MObject node, bool includeParents) -> self
 
 		Adds an operation to the modifier which deletes the specified node from
@@ -1398,7 +1287,7 @@ class MDGModifier:
 		The default behaviour when deleting a DAG node is to also include empty
 		parents of the DAG node in the delete operation. If you do not want this
 		behaviour set the includeParents argument to False."""
-	def disconnect(self,*args,**kwargs)->Any:
+	def disconnect(self,*args)->Any:
 		"""disconnect(MPlug source, MPlug dest) -> self
 		disconnect(MObject sourceNode, MObject sourceAttr,
 		           MObject destNode,   MObject destAttr) -> self
@@ -1407,7 +1296,7 @@ class MDGModifier:
 		plugs in the dependency graph.
 		Plugs can either be specified with node and attribute MObjects or with
 		MPlugs."""
-	def doIt(self,*args,**kwargs)->Any:
+	def doIt(self,*args)->Any:
 		"""doIt() -> self
 
 		Executes the modifier's operations. If doIt() is called multiple times
@@ -1415,7 +1304,7 @@ class MDGModifier:
 		operations which were added since the previous doIt() call will be
 		executed. If undoIt() has been called then the next call to doIt() will
 		do all operations."""
-	def linkExtensionAttributeToPlugin(self,*args,**kwargs)->Any:
+	def linkExtensionAttributeToPlugin(self,*args)->Any:
 		"""linkExtensionAttributeToPlugin(MObject plugin, MObject attribute) -> self
 
 		The plugin can call this method to indicate that the extension attribute
@@ -1427,57 +1316,57 @@ class MDGModifier:
 		recursively. Thus it's not possible to link a child attribute to a
 		plugin by itself. Note that the link is established immediately and is
 		not affected by the modifier's doIt() or undoIt() methods."""
-	def newPlugValue(self,*args,**kwargs)->Any:
+	def newPlugValue(self,*args)->Any:
 		"""newPlugValue(MPlug plug, MObject value) -> self
 
 		Adds an operation to the modifier to set the value of a plug, where
 		value is an MObject data wrapper, such as created by the various
 		MFn*Data classes."""
-	def newPlugValueBool(self,*args,**kwargs)->Any:
+	def newPlugValueBool(self,*args)->Any:
 		"""newPlugValueBool(MPlug plug, bool value) -> self
 
 		Adds an operation to the modifier to set a value onto a bool plug."""
-	def newPlugValueChar(self,*args,**kwargs)->Any:
+	def newPlugValueChar(self,*args)->Any:
 		"""newPlugValueChar(MPlug plug, int value) -> self
 
 		Adds an operation to the modifier to set a value onto a char (single
 		byte signed integer) plug."""
-	def newPlugValueDouble(self,*args,**kwargs)->Any:
+	def newPlugValueDouble(self,*args)->Any:
 		"""newPlugValueDouble(MPlug plug, float value) -> self
 
 		Adds an operation to the modifier to set a value onto a double-precision
 		float plug."""
-	def newPlugValueFloat(self,*args,**kwargs)->Any:
+	def newPlugValueFloat(self,*args)->Any:
 		"""newPlugValueFloat(MPlug plug, float value) -> self
 
 		Adds an operation to the modifier to set a value onto a single-precision
 		float plug."""
-	def newPlugValueInt(self,*args,**kwargs)->Any:
+	def newPlugValueInt(self,*args)->Any:
 		"""newPlugValueInt(MPlug plug, int value) -> self
 
 		Adds an operation to the modifier to set a value onto an int plug."""
-	def newPlugValueMAngle(self,*args,**kwargs)->Any:
+	def newPlugValueMAngle(self,*args)->Any:
 		"""newPlugValueMAngle(MPlug plug, MAngle value) -> self
 
 		Adds an operation to the modifier to set a value onto an angle plug."""
-	def newPlugValueMDistance(self,*args,**kwargs)->Any:
+	def newPlugValueMDistance(self,*args)->Any:
 		"""newPlugValueMDistance(MPlug plug, MDistance value) -> self
 
 		Adds an operation to the modifier to set a value onto a distance plug."""
-	def newPlugValueMTime(self,*args,**kwargs)->Any:
+	def newPlugValueMTime(self,*args)->Any:
 		"""newPlugValueMTime(MPlug plug, MTime value) -> self
 
 		Adds an operation to the modifier to set a value onto a time plug."""
-	def newPlugValueShort(self,*args,**kwargs)->Any:
+	def newPlugValueShort(self,*args)->Any:
 		"""newPlugValueShort(MPlug plug, int value) -> self
 
 		Adds an operation to the modifier to set a value onto a short
 		integer plug."""
-	def newPlugValueString(self,*args,**kwargs)->Any:
+	def newPlugValueString(self,*args)->Any:
 		"""newPlugValueString(MPlug plug, string value) -> self
 
 		Adds an operation to the modifier to set a value onto a string plug."""
-	def pythonCommandToExecute(self,*args,**kwargs)->Any:
+	def pythonCommandToExecute(self,*args)->Any:
 		"""pythonCommandToExecute(callable) -> selfpythonCommandToExecute(commandString) -> self
 
 		Adds an operation to the modifier to execute a Python command, which
@@ -1490,7 +1379,7 @@ class MDGModifier:
 		pythonCommandToExecute(). They will still be undone together, as a
 		single undo action by the user, but Maya will better be able to
 		recover if one of the commands fails."""
-	def removeAttribute(self,*args,**kwargs)->Any:
+	def removeAttribute(self,*args)->Any:
 		"""removeAttribute(MObject node, MObject attribute) -> self
 
 		Adds an operation to the modifier to remove a dynamic attribute from the
@@ -1499,7 +1388,7 @@ class MDGModifier:
 		method. The attribute MObject passed in will be set to kNullObj. There
 		should be no function sets attached to the attribute at the time of the
 		call as their behaviour may become unpredictable."""
-	def removeExtensionAttribute(self,*args,**kwargs)->Any:
+	def removeExtensionAttribute(self,*args)->Any:
 		"""removeExtensionAttribute(MNodeClass nodeClass, MObject attribute) -> self
 
 		Adds an operation to the modifier to remove an extension attribute from
@@ -1508,7 +1397,7 @@ class MDGModifier:
 		method. The attribute MObject passed in will be set to kNullObj. There
 		should be no function sets attached to the attribute at the time of the
 		call as their behaviour may become unpredictable."""
-	def removeExtensionAttributeIfUnset(self,*args,**kwargs)->Any:
+	def removeExtensionAttributeIfUnset(self,*args)->Any:
 		"""removeExtensionAttributeIfUnset(MNodeClass nodeClass,
 		                                MObject attribute) -> self
 
@@ -1519,30 +1408,30 @@ class MDGModifier:
 		removed using this method. The attribute MObject passed in will be set
 		to kNullObj. There should be no function sets attached to the attribute
 		at the time of the call as their behaviour may become unpredictable."""
-	def removeMultiInstance(self,*args,**kwargs)->Any:
+	def removeMultiInstance(self,*args)->Any:
 		"""removeMultiInstance(MPlug plug, bool breakConnections) -> self
 
 		Adds an operation to the modifier to remove an element of a multi (array) plug."""
-	def renameAttribute(self,*args,**kwargs)->Any:
+	def renameAttribute(self,*args)->Any:
 		"""renameAttribute(MObject node, MObject attribute,
 		string newShortName, string newShortName) -> self
 
 		Adds an operation to the modifer that renames a dynamic attribute on the given dependency node."""
-	def renameNode(self,*args,**kwargs)->Any:
+	def renameNode(self,*args)->Any:
 		"""renameNode(MObject node, string newName) -> self
 
 		Adds an operation to the modifer to rename a node."""
-	def setNodeLockState(self,*args,**kwargs)->Any:
+	def setNodeLockState(self,*args)->Any:
 		"""setNodeLockState(MObject node, bool newState) -> self
 
 		Adds an operation to the modifier to set the lockState of a node."""
-	def undoIt(self,*args,**kwargs)->Any:
+	def undoIt(self,*args)->Any:
 		"""undoIt() -> self
 
 		Undoes all of the operations that have been given to this modifier. It
 		is only valid to call this method after the doIt() method has been
 		called."""
-	def unlinkExtensionAttributeFromPlugin(self,*args,**kwargs)->Any:
+	def unlinkExtensionAttributeFromPlugin(self,*args)->Any:
 		"""unlinkExtensionAttributeFromPlugin(MObject plugin,
 		                                   MObject attribute) -> self
 
@@ -1615,391 +1504,343 @@ class MDagMessage(MMessage):
 	kScalePivotTrans:int=1835008
 	kRotatePivotTrans:int=14680064
 	kRotateOrient:int=117440512
-	def addParentAddedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addParentAddedDagPathCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addParentRemovedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addParentRemovedDagPathCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addChildAddedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addChildAddedDagPathCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addChildRemovedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addChildRemovedDagPathCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addChildReorderedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addChildReorderedDagPathCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addDagCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addDagDagPathCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addAllDagChangesCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addAllDagChangesDagPathCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addInstanceAddedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addInstanceAddedDagPathCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addInstanceRemovedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addInstanceRemovedDagPathCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addWorldMatrixModifiedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addMatrixModifiedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+	@staticmethod
+	def addParentAddedCallback(*args)->Any:
+		"""addParentAddedCallback(function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a parent is
+		added in the DAG.
+
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addParentAddedDagPathCallback(*args)->Any:
+		"""addParentAddedDagPathCallback(node, function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a parent is
+		added to the specified DAG node.
+
+		 * node (MDagPath) - the DAG node to register the callback for
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addParentRemovedCallback(*args)->Any:
+		"""addParentRemovedCallback(function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a parent is
+		removed in the DAG.
+
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addParentRemovedDagPathCallback(*args)->Any:
+		"""addParentRemovedDagPathCallback(node, function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a parent is
+		removed from the specified DAG node.
+
+		 * node (MDagPath) - the DAG node to register the callback for
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addChildAddedCallback(*args)->Any:
+		"""addChildAddedCallback(function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a child is
+		added in the DAG.
+
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addChildAddedDagPathCallback(*args)->Any:
+		"""addChildAddedDagPathCallback(node, function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a child is
+		added to the specified DAG node.
+
+		 * node (MDagPath) - the DAG node to register the callback for
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addChildRemovedCallback(*args)->Any:
+		"""addChildRemovedCallback(function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a child is
+		removed in the DAG.
+
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addChildRemovedDagPathCallback(*args)->Any:
+		"""addChildRemovedDagPathCallback(node, function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a child is
+		removed from the specified DAG node.
+
+		 * node (MDagPath) - the DAG node to register the callback for
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addChildReorderedCallback(*args)->Any:
+		"""addChildReorderedCallback(function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a child is
+		reordered in the DAG.
+
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addChildReorderedDagPathCallback(*args)->Any:
+		"""addChildReorderedDagPathCallback(node, function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a child of
+		the specified DAG node is reordered
+
+		 * node (MDagPath) - the DAG node to register the callback for
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addDagCallback(*args)->Any:
+		"""addDagCallback(msgType, function, clientData=None) -> id
+
+		This method registers a callback that is called for specified
+		DAG changes on all nodes. The callback will also receive the
+		DagMessage
+
+		 * msgType (DagMessage) - The type of DAG change to trigger the callback
+		 * function - callable which will be passed a DagMessage constant
+		   indicating the operation which triggered the callback (see class
+		          docs for a list), a MDagPath to the parent, a MDagPath to the child
+		   ,and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addDagDagPathCallback(*args)->Any:
+		"""addDagDagPathCallback(node, msgType, function, clientData=None) -> id
+
+		This method registers a callback that is called for specified a DAG
+		change is made to the specified DAG path. The callback receives the
+		DagMessage as well.
+
+		 * node (MDagPath) - the DAG node to register the callback for
+		 * msgType (DagMessage) - The type of DAG change to trigger the callback
+		  (see class docs for a list)
+		 * function - callable which will be passed a DagMessage constant
+		   indicating the operation which triggered the callback, a MDagPath
+		   to the parent, a MDagPath to the child
+		   ,and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addAllDagChangesCallback(*args)->Any:
+		"""addAllDagChangesCallback(function, clientData=None) -> id
+
+		This method registers a callback that is called whenever any
+		DAG change is made to any DAG node.
+
+		 * function - callable which will be passed a DagMessage constant
+		   indicating the operation which triggered the callback (see class
+		          docs for a list), a MDagPath to the parent, a MDagPath to the child
+		   ,and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addAllDagChangesDagPathCallback(*args)->Any:
+		"""addAllDagChangesDagPathCallback(node, function, clientData=None) -> id
+
+		This method registers a callback that is called whenever a DAG
+		change is made to the specified DAG path.
+
+		 * node (MDagPath) - the DAG node to register the callback for
+		 * function - callable which will be passed a DagMessage constant
+		   indicating the operation which triggered the callback (see class
+		          docs for a list), a MDagPath to the parent, a MDagPath to the child
+		   ,and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addInstanceAddedCallback(*args)->Any:
+		"""addInstanceAddedCallback(function, clientData=None) -> id
+
+		This method registers a callback that is called whenever any node in the DAG
+		is instanced.
+
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addInstanceAddedDagPathCallback(*args)->Any:
+		"""addInstanceAddedDagPathCallback(node, function, clientData=None) -> id
+
+		This method registers a callback that is called whenever the specified node
+		is instanced
+
+		 * node (MDagPath) - the DAG node to register the callback for
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addInstanceRemovedCallback(*args)->Any:
+		"""addInstanceRemovedCallback(function, clientData=None) -> id
+
+		This method registers a callback that is called whenever an instance of any DAG
+		node is removed or deleted.
+
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addInstanceRemovedDagPathCallback(*args)->Any:
+		"""addInstanceRemovedDagPathCallback(node, function, clientData=None) -> id
+
+		This method registers a callback that is called whenever an instance of the specified
+		node is removed.
+
+		 * node (MDagPath) - the DAG node to register the callback for
+		 * function - callable which will be passed a MDagPath to the parent,
+		   a MDagPath to the child, and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addWorldMatrixModifiedCallback(*args)->Any:
+		"""addWorldMatrixModifiedCallback(node, function, clientData=None) -> id
+
+		This method registers a callback that is called when a parent matrix of the
+		specified DAG node changes.
+
+		Since a node's worldMatrix is affected by the transforms of its ancestors in
+		the DAG, it's possible for there to be two different nodes involved: the
+		"trigger" node, whose transform has changed, and the "affected" node, whose
+		worldMatrix is affected by the change to the trigger.
+
+		The callback is placed on the affected node, but it is the trigger node which
+		is passed to the callback.
+
+		If the trigger node's transformation is already dirty (i.e. it has not been
+		evaluated since it was last changed) then the callback will not be triggered.
+		So if the trigger node's transformation is modified multiple times between
+		evaluations, only the first one will result in the callback being called.
+
+		 * affectedNode (MDagPath) - the DAG node to register the callback for
+		 * function - callable which will be passed a MObject indicating the node
+		   whose transformation has changed, a MatrixModifiedFlags constant showing
+		   what has changed (see below for complete list) and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		Available MatrixModifiedFlags constants:
+		Individual flags:
+		  kScaleX               kScaleY                 kScaleZ
+		  kShearXY              kShearXZ                kShearYZ
+		  kRotateX              kRotateY                kRotateZ
+		  kTranslateX   kTranslateY             kTranslateZ
+		  kScalePivotX  kScalePivotY    kScalePivotZ
+		  kRotatePivotX kRotatePivotY   kRotatePivotZ
+		  kScaleTransX  kScaleTransY    kScaleTransZ
+		  kRotateTransX kRotateTransY   kRotateTransZ
+		  kRotateOrientX        kRotateOrientY  kRotateOrientZ
+		  kRotateOrder
+		Composite flags
+		  kAll
+		  kScale                = kScaleX        | kScaleY        | kScaleZ
+		  kShear                = kShearXY       | kShearXZ       | kShearYZ
+		  kRotation             = kRotateX       | kRotateY       | kRotateZ
+		  kTranslation          = kTranslateX    | kTranslateY    | kTranslateZ
+		  kScalePivot           = kScalePivotX   | kScalePivotY   | kScalePivotZ
+		  kRotatePivot          = kRotatePivotX  | kRotatePivotY  | kRotatePivotZ
+		  kScalePivotTrans      = kScaleTransX   | kScaleTransY   | kScaleTransZ
+		  kRotatePivotTrans     = kRotateTransX  | kRotateTransY  | kRotateTransZ
+		  kRotateOrient         = kRotateOrientX | kRotateOrientY | kRotateOrientZ
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addMatrixModifiedCallback(*args)->Any:
+		"""addMatrixModifiedCallback(node, function, clientData=None) -> id
+
+		This method registers a callback that is called when the local matrix
+		on the specified DAG node changes.
+
+		If the node's transformation is already dirty (i.e. it has not been
+		evaluated since it was last changed) then the callback will not be triggered.
+		So if the node's transformation is modified multiple times between
+		evaluations, only the first one will result in the callback being called.
+
+		 * affectedNode (MDagPath) - the DAG node to register the callback for
+		 * function - callable which will be passed a MObject indicating the node
+		   whose transformation has changed, a MatrixModifiedFlags constant showing
+		   what has changed (see below for complete list) and the clientData object
+		 * clientData - User defined data passed to the callback function
+
+		Available MatrixModifiedFlags constants:
+		Individual flags:
+		  kScaleX               kScaleY                 kScaleZ
+		  kShearXY              kShearXZ                kShearYZ
+		  kRotateX              kRotateY                kRotateZ
+		  kTranslateX   kTranslateY             kTranslateZ
+		  kScalePivotX  kScalePivotY    kScalePivotZ
+		  kRotatePivotX kRotatePivotY   kRotatePivotZ
+		  kScaleTransX  kScaleTransY    kScaleTransZ
+		  kRotateTransX kRotateTransY   kRotateTransZ
+		  kRotateOrientX        kRotateOrientY  kRotateOrientZ
+		  kRotateOrder
+		Composite flags
+		  kAll
+		  kScale                = kScaleX        | kScaleY        | kScaleZ
+		  kShear                = kShearXY       | kShearXZ       | kShearYZ
+		  kRotation             = kRotateX       | kRotateY       | kRotateZ
+		  kTranslation          = kTranslateX    | kTranslateY    | kTranslateZ
+		  kScalePivot           = kScalePivotX   | kScalePivotY   | kScalePivotZ
+		  kRotatePivot          = kRotatePivotX  | kRotatePivotY  | kRotatePivotZ
+		  kScalePivotTrans      = kScaleTransX   | kScaleTransY   | kScaleTransZ
+		  kRotatePivotTrans     = kRotateTransX  | kRotateTransY  | kRotateTransZ
+		  kRotateOrient         = kRotateOrientX | kRotateOrientY | kRotateOrientZ
+
+		 * return: Identifier used for removing the callback."""
 class MDagModifier(MDGModifier):
 	"""Used to change the structure of the DAG"""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def createNode(self,*args,**kwargs)->Any:
+	def createNode(self,*args)->Any:
 		"""createNode(typeName, parent=MObject.kNullObj) -> new DAG node MObject
 		createNode(typeId,   parent=MObject.kNullObj) -> new DAG node MObject
 
@@ -2015,7 +1856,7 @@ class MDagModifier(MDGModifier):
 
 		None of the newly created nodes will be added to the DAG until the
 		modifier's doIt() method is called."""
-	def reparentNode(self,*args,**kwargs)->Any:
+	def reparentNode(self,*args)->Any:
 		"""reparentNode(MObject node, newParent=MObject.kNullObj) -> self
 
 		Adds an operation to the modifier to reparent a DAG node under a
@@ -2027,195 +1868,136 @@ class MDagModifier(MDGModifier):
 class MDagPath:
 	"""Path to a DAG node from the top of the DAG."""
 	__hash__:None=None
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def getAllPathsTo(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getAPathTo(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def matchTransform(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def matchLocalMatrix(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def apiType(self,*args,**kwargs)->Any:
+	@staticmethod
+	def getAllPathsTo(*args)->Any:
+		"""Returns all paths to the given node."""
+	@staticmethod
+	def getAPathTo(*args)->Any:
+		"""Returns the first path found to the given node."""
+	@staticmethod
+	def matchTransform(*args)->Any:
+		"""Returns the transformationMatrix which, when applied to the source object, will bring the source object to the location of the target object."""
+	@staticmethod
+	def matchLocalMatrix(*args)->Any:
+		"""Returns the transformationMatrix which, when applied to the source object, will have the source object match the local matrix."""
+	def apiType(self,*args)->Any:
 		"""Returns the type of the object at the end of the path."""
-	def child(self,*args,**kwargs)->Any:
+	def child(self,*args)->Any:
 		"""Returns the specified child of the object at the end of the path."""
-	def childCount(self,*args,**kwargs)->Any:
+	def childCount(self,*args)->Any:
 		"""Returns the number of objects parented directly beneath the object at the end of the path."""
-	def exclusiveMatrix(self,*args,**kwargs)->Any:
+	def exclusiveMatrix(self,*args)->Any:
 		"""Returns the matrix for all transforms in the path, excluding the end object."""
-	def exclusiveMatrixInverse(self,*args,**kwargs)->Any:
+	def exclusiveMatrixInverse(self,*args)->Any:
 		"""Returns the inverse of exclusiveMatrix()."""
-	def extendToShape(self,*args,**kwargs)->Any:
+	def extendToShape(self,*args)->Any:
 		"""Extends the path to the specified shape node parented directly beneath the transform at the current end of the path."""
-	def fullPathName(self,*args,**kwargs)->Any:
+	def fullPathName(self,*args)->Any:
 		"""Returns a string representation of the path from the DAG root to the path's last node."""
-	def getDisplayStatus(self,*args,**kwargs)->Any:
+	def getDisplayStatus(self,*args)->Any:
 		"""Returns the display status for this path."""
-	def getDrawOverrideInfo(self,*args,**kwargs)->Any:
+	def getDrawOverrideInfo(self,*args)->Any:
 		"""Returns the draw override information for this path."""
-	def getPath(self,*args,**kwargs)->Any:
+	def getPath(self,*args)->Any:
 		"""Returns the specified sub-path of this path."""
-	def hasFn(self,*args,**kwargs)->Any:
+	def hasFn(self,*args)->Any:
 		"""Returns True if the object at the end of the path supports the given function set."""
-	def inclusiveMatrix(self,*args,**kwargs)->Any:
+	def inclusiveMatrix(self,*args)->Any:
 		"""Returns the matrix for all transforms in the path, including the end object, if it is a transform."""
-	def inclusiveMatrixInverse(self,*args,**kwargs)->Any:
+	def inclusiveMatrixInverse(self,*args)->Any:
 		"""Returns the inverse of inclusiveMatrix()."""
-	def instanceNumber(self,*args,**kwargs)->Any:
+	def instanceNumber(self,*args)->Any:
 		"""Returns the instance number of this path to the object at the end."""
-	def isInstanced(self,*args,**kwargs)->Any:
+	def isInstanced(self,*args)->Any:
 		"""Returns True if the object at the end of the path can be reached by more than one path."""
-	def isTemplated(self,*args,**kwargs)->Any:
+	def isTemplated(self,*args)->Any:
 		"""Returns true if the DAG Node at the end of the path is templated."""
-	def isValid(self,*args,**kwargs)->Any:
+	def isValid(self,*args)->Any:
 		"""Returns True if this is a valid path."""
-	def isVisible(self,*args,**kwargs)->Any:
+	def isVisible(self,*args)->Any:
 		"""Returns true if the DAG Node at the end of the path is visible."""
-	def length(self,*args,**kwargs)->Any:
+	def length(self,*args)->Any:
 		"""Returns the number of nodes on the path, not including the DAG's root node."""
-	def node(self,*args,**kwargs)->Any:
+	def node(self,*args)->Any:
 		"""Returns the DAG node at the end of the path."""
-	def numberOfShapesDirectlyBelow(self,*args,**kwargs)->Any:
+	def numberOfShapesDirectlyBelow(self,*args)->Any:
 		"""Returns the number of shape nodes parented directly beneath the transform at the end of the path."""
-	def partialPathName(self,*args,**kwargs)->Any:
+	def partialPathName(self,*args)->Any:
 		"""Returns the minimum string representation which will uniquely identify the path."""
-	def pathCount(self,*args,**kwargs)->Any:
+	def pathCount(self,*args)->Any:
 		"""Returns the number of sub-paths which make up this path."""
-	def pop(self,*args,**kwargs)->Any:
+	def pop(self,*args)->Any:
 		"""Removes objects from the end of the path."""
-	def push(self,*args,**kwargs)->Any:
+	def push(self,*args)->Any:
 		"""Extends the path to the specified child object, which must be parented directly beneath the object currently at the end of the path."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""Replaces the current path held by this object with another."""
-	def transform(self,*args,**kwargs)->Any:
+	def transform(self,*args)->Any:
 		"""Returns the last transform node on the path."""
 class MDagPathArray:
 	"""Array of MDagPath values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MDataBlock:
 	"""Dependency node data block."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def context(self,*args,**kwargs)->Any:
+	def context(self,*args)->Any:
 		"""context() -> MDGContext
 
 		Returns a copy of the dependecy graph context for which this data block was created. The context is used to specify how a dependency node is going to be evaluated."""
-	def inputArrayValue(self,*args,**kwargs)->Any:
+	def inputArrayValue(self,*args)->Any:
 		"""inputArrayValue(plug) -> MArrayDataHandle
 		inputArrayValue(attribute) -> MArrayDataHandle
 
@@ -2224,7 +2006,7 @@ class MDataBlock:
 		* plug (MPlug) - the plug whose data you wish to access
 		 OR
 		* attribute (MObject) - the attribute whose data you wish to access"""
-	def inputValue(self,*args,**kwargs)->Any:
+	def inputValue(self,*args)->Any:
 		"""inputValue(plug) -> MDataHandle
 		inputValue(attribute) -> MDataHandle
 
@@ -2233,7 +2015,7 @@ class MDataBlock:
 		* plug (MPlug) - the plug whose data you wish to access
 		 OR
 		* attribute (MObject) - the attribute of the node that you want to access"""
-	def isClean(self,*args,**kwargs)->Any:
+	def isClean(self,*args)->Any:
 		"""isClean(plug) -> bool
 		isClean(attribute) -> bool
 
@@ -2242,7 +2024,7 @@ class MDataBlock:
 		* plug (MPlug) - the plug that is to be query
 		 OR
 		* attribute (MObject) - the attribute that is to be query."""
-	def outputArrayValue(self,*args,**kwargs)->Any:
+	def outputArrayValue(self,*args)->Any:
 		"""outputArrayValue(plug) -> MArrayDataHandle
 		outputArrayValue(attribute) -> MArrayDataHandle
 
@@ -2253,7 +2035,7 @@ class MDataBlock:
 		* plug (MPlug) - the plug whose data you wish to access
 		 OR
 		* attribute (MObject) - the attribute whose data you wish to access"""
-	def outputValue(self,*args,**kwargs)->Any:
+	def outputValue(self,*args)->Any:
 		"""outputValue(plug) -> MDataHandle
 		outputValue(attribute) -> MDataHandle
 
@@ -2262,7 +2044,7 @@ class MDataBlock:
 		* plug (MPlug) - the plug whose data you wish to access
 		 OR
 		* attribute (MObject) - the attribute of the node that you want to access"""
-	def setClean(self,*args,**kwargs)->Any:
+	def setClean(self,*args)->Any:
 		"""setClean(plug) -> self
 		setClean(attribute) -> self
 
@@ -2271,7 +2053,7 @@ class MDataBlock:
 		* plug (MPlug) - the plug that is to be marked clean
 		 OR
 		* attribute (MObject) - the attribute that is to be marked clean"""
-	def setContext(self,*args,**kwargs)->Any:
+	def setContext(self,*args)->Any:
 		"""setContext(ctx) -> self
 
 		Set the dependency graph context for this data block. The context is used to specify how a dependency node is going to be evaluated, thus replacing the context for the given datablock. This does not modify the dirty state of the datablock so that they apply to the new context.
@@ -2281,109 +2063,109 @@ class MDataBlock:
 		* ctx (MDGContext) - the dependency graph context"""
 class MDataHandle:
 	"""Data handle for information contained in a data block."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def acceptedTypeIds(self,*args,**kwargs)->Any:
+	def acceptedTypeIds(self,*args)->Any:
 		"""acceptedTypeIds() -> array of MTypeIds
 
 		This method returns an array of MTypeIds."""
-	def asAddr(self,*args,**kwargs)->Any:
+	def asAddr(self,*args)->Any:
 		"""asAddr() -> long
 
 		Returns the data represented by this handle in the data block."""
-	def asAngle(self,*args,**kwargs)->Any:
+	def asAngle(self,*args)->Any:
 		"""asAngle() -> MAngle
 
 		Returns the data represented by this handle in the data block."""
-	def asBool(self,*args,**kwargs)->Any:
+	def asBool(self,*args)->Any:
 		"""asBool() -> bool
 
 		Returns the data represented by this handle in the data block."""
-	def asChar(self,*args,**kwargs)->Any:
+	def asChar(self,*args)->Any:
 		"""asChar() -> int
 
 		Returns the data represented by this handle in the data block."""
-	def asDistance(self,*args,**kwargs)->Any:
+	def asDistance(self,*args)->Any:
 		"""asDistance() -> MDistance
 
 		Returns the data represented by this handle in the data block."""
-	def asDouble(self,*args,**kwargs)->Any:
+	def asDouble(self,*args)->Any:
 		"""asDouble() -> float
 
 		Returns the data represented by this handle in the data block."""
-	def asDouble2(self,*args,**kwargs)->Any:
+	def asDouble2(self,*args)->Any:
 		"""asDouble2() -> [float, float]
 
 		Returns the data represented by this handle in the data block."""
-	def asDouble3(self,*args,**kwargs)->Any:
+	def asDouble3(self,*args)->Any:
 		"""asDouble3() -> [float, float, float]
 
 		Returns the data represented by this handle in the data block."""
-	def asDouble4(self,*args,**kwargs)->Any:
+	def asDouble4(self,*args)->Any:
 		"""asDouble4() -> [float, float, float, float]
 
 		Returns the data represented by this handle in the data block."""
-	def asFloat(self,*args,**kwargs)->Any:
+	def asFloat(self,*args)->Any:
 		"""asFloat() -> float
 
 		Returns the data represented by this handle in the data block."""
-	def asFloat2(self,*args,**kwargs)->Any:
+	def asFloat2(self,*args)->Any:
 		"""asFloat2() -> [float, float]
 
 		Returns the data represented by this handle in the data block."""
-	def asFloat3(self,*args,**kwargs)->Any:
+	def asFloat3(self,*args)->Any:
 		"""asFloat3() -> [float, float, float]
 
 		Returns the data represented by this handle in the data block."""
-	def asFloatMatrix(self,*args,**kwargs)->Any:
+	def asFloatMatrix(self,*args)->Any:
 		"""asFloatMatrix() -> MFloatMatrix
 
 		Returns the data represented by this handle in the data block."""
-	def asFloatVector(self,*args,**kwargs)->Any:
+	def asFloatVector(self,*args)->Any:
 		"""asFloatVector() -> MFloatVector
 
 		Returns the data represented by this handle in the data block."""
-	def asGenericBool(self,*args,**kwargs)->Any:
+	def asGenericBool(self,*args)->Any:
 		"""asGenericBool() -> bool
 
 		Returns the generic data represented by this handle in the data block."""
-	def asGenericChar(self,*args,**kwargs)->Any:
+	def asGenericChar(self,*args)->Any:
 		"""asGenericChar() -> int
 
 		Returns the generic data represented by this handle in the data block."""
-	def asGenericDouble(self,*args,**kwargs)->Any:
+	def asGenericDouble(self,*args)->Any:
 		"""asGenericDouble() -> float
 
 		Returns the generic data represented by this handle in the data block."""
-	def asGenericFloat(self,*args,**kwargs)->Any:
+	def asGenericFloat(self,*args)->Any:
 		"""asGenericFloat() -> float
 
 		Returns the generic data represented by this handle in the data block."""
-	def asGenericInt(self,*args,**kwargs)->Any:
+	def asGenericInt(self,*args)->Any:
 		"""asGenericInt() -> int
 
 		Returns the generic data represented by this handle in the data block."""
-	def asGenericShort(self,*args,**kwargs)->Any:
+	def asGenericShort(self,*args)->Any:
 		"""asGenericShort() -> int
 
 		Returns the generic data represented by this handle in the data block."""
-	def asInt(self,*args,**kwargs)->Any:
+	def asInt(self,*args)->Any:
 		"""asInt() -> int
 
 		Returns the data represented by this handle in the data block."""
-	def asInt2(self,*args,**kwargs)->Any:
+	def asInt2(self,*args)->Any:
 		"""asInt2() -> [int, int]
 
 		Returns the data represented by this handle in the data block."""
-	def asInt3(self,*args,**kwargs)->Any:
+	def asInt3(self,*args)->Any:
 		"""asInt3() -> [int, int, int]
 
 		Returns the data represented by this handle in the data block."""
-	def asMatrix(self,*args,**kwargs)->Any:
+	def asMatrix(self,*args)->Any:
 		"""asMatrix() -> MMatrix
 
 		Returns the data represented by this handle in the data block.This method is only valid for attributes created using the MFnMatrixAttribute function set."""
-	def asMesh(self,*args,**kwargs)->Any:
+	def asMesh(self,*args)->Any:
 		"""asMesh() -> MObject
 
 		Returns the data represented by this handle in the data block.  The object returned by this call may be used directly with the mesh function set and iterators.  Even though this method does not return a reference to an MObject, modifications to the MObject instance will update the contents of the handle in the data block.  The method MDataHandle.setClean() should be called after the data block has been modified.
@@ -2391,7 +2173,7 @@ class MDataHandle:
 		The surface returned by this method will be in local space even if the connection is supplying world space geometry.  This occurs mostly for efficiency reasons.  In the case of a world space geometry connection, the MObject returned by this method will also contain the world space transformation matrix. This means that world space operations may be performed on this object using the mesh function set and iterators.
 
 		It is possible to get the matrix that defines the local to world transformation for this geometry using the MDataHandle.geometryTransformMatrix() method."""
-	def asMeshTransformed(self,*args,**kwargs)->Any:
+	def asMeshTransformed(self,*args)->Any:
 		"""asMeshTransformed() -> MObject
 
 		Returns the data represented by this handle in the data block.  The object returned by this call may be used directly with the mesh function set (MFnMesh) or any of the mesh iterators.
@@ -2399,7 +2181,7 @@ class MDataHandle:
 		If the incoming mesh comes with world space transformation data, then it will be applied to the data that is returned.  In other words, the mesh that is returned will be the mesh as it exists in world space.
 
 		The mesh that is returned from this method should not be modified.  This method is only provided to make it easier to take world space geometry as input."""
-	def asNurbsCurve(self,*args,**kwargs)->Any:
+	def asNurbsCurve(self,*args)->Any:
 		"""asNurbsCurve() -> MObject
 
 		Returns the data represented by this handle in the data block.  The object returned by this call may be used directly with the nurbs curve function set and iterator.  Even though this method does not return a reference to an MObject, modifications to the MObject instance will update the contents of the handle in the data block.  The method MDataHandle.setClean() should be called after the data block has been modified.
@@ -2407,7 +2189,7 @@ class MDataHandle:
 		The curve returned by this method will be in local space even if the connection is supplying world space geometry.  This occurs mostly for efficiency reasons.  In the case of a world space geometry connection, the MObject returned by this method will also contain the world space transformation matrix. This means that world space operations may be performed on this object using the nurbs curve function set and iterator.
 
 		It is possible to get the matrix that defines the local to world transformation for this geometry using the MDataHandle.geometryTransformMatrix() method."""
-	def asNurbsCurveTransformed(self,*args,**kwargs)->Any:
+	def asNurbsCurveTransformed(self,*args)->Any:
 		"""asNurbsCurveTransformed() -> MObject
 
 		Returns the data represented by this handle in the data block.  The object returned by this call may be used directly with the nurbs curve function set (MFnNurbsCurve) or the nurbs curve CV iterator (MItCurveCV).
@@ -2415,7 +2197,7 @@ class MDataHandle:
 		If the incoming curve comes with world space transformation data, then it will be applied to the data that is returned.  In other words, the curve that is returned will be the curve as it exists in world space.
 
 		The curve that is returned from this method should not be modified.  This method is only provided to make it easier to take world space geometry as input."""
-	def asNurbsSurface(self,*args,**kwargs)->Any:
+	def asNurbsSurface(self,*args)->Any:
 		"""asNurbsSurface() -> MObject
 
 		Returns the data represented by this handle in the data block.  The object returned by this call may be used directly with the nurbs surface function set and iterator.  Even though this method does not return a reference to an MObject, modifications to the MObject instance will update the contents of the handle in the data block.  The method MDataHandle.setClean() should be called after the data block has been modified.
@@ -2423,7 +2205,7 @@ class MDataHandle:
 		The surface returned by this method will be in local space even if the connection is supplying world space geometry.  This occurs mostly for efficiency reasons.  In the case of a world space geometry connection, the MObject returned by this method will also contain the world space transformation matrix.  This means that world space operations may be performed on this object using the nurbs surface function set and iterator.
 
 		It is possible to get the matrix that defines the local to world transformation for this geometry using the MDataHandle.geometryTransformMatrix() method."""
-	def asNurbsSurfaceTransformed(self,*args,**kwargs)->Any:
+	def asNurbsSurfaceTransformed(self,*args)->Any:
 		"""asNurbsSurfaceTransformed() -> MObject
 
 		Returns the data represented by this handle in the data block.  The object returned by this call may be used directly with the nurbs surface function set (MFnNurbsSurface) or the nurbs surface CV iterator (MItSurfaceCV).
@@ -2431,35 +2213,35 @@ class MDataHandle:
 		If the incoming surface comes with world space transformation data, then it will be applied to the data that is returned.  In other words, the surface that is returned will be the surface as it exists in world space.
 
 		The surface that is returned from this method should not be modified.  This method is only provided to make it easier to take world space geometry as input."""
-	def asPluginData(self,*args,**kwargs)->Any:
+	def asPluginData(self,*args)->Any:
 		"""asPluginData() -> MPxData
 
 		Returns the data represented by this handle in the data block.  The object is returned as plugin data.  This should be used to access data types defined by plugins."""
-	def asShort(self,*args,**kwargs)->Any:
+	def asShort(self,*args)->Any:
 		"""asShort() -> int
 
 		Returns the data represented by this handle in the data block."""
-	def asShort2(self,*args,**kwargs)->Any:
+	def asShort2(self,*args)->Any:
 		"""asShort2() -> [int, int]
 
 		Returns the data represented by this handle in the data block."""
-	def asShort3(self,*args,**kwargs)->Any:
+	def asShort3(self,*args)->Any:
 		"""asShort3() -> [int, int, int]
 
 		Returns the data represented by this handle in the data block."""
-	def asString(self,*args,**kwargs)->Any:
+	def asString(self,*args)->Any:
 		"""asString() -> MString
 
 		Returns the data represented by this handle in the data block."""
-	def asSubdSurface(self,*args,**kwargs)->Any:
+	def asSubdSurface(self,*args)->Any:
 		"""asSubdSurface() -> MObject
 
 		Returns the data represented by this handle in the data block.  The object returned by this call may be used directly with the subdivision surface function set and iterator.  Even though this method does not return a reference to an MObject, modifications to the MObject instance will update the contents of the handle in the data block.  The method MDataHandle.setClean() should be called after the data block has been modified.
 
-		The subdivision surface returned by this method will be in local space even if the connection is supplying world space geometry.  This occurs mostly for efficiency reasons.  In the case of a world space geometry connection, the MObject returned by this method will also contain the world space	transformation matrix. This means that world space operations may be performed on this object using the subdivision surface function set and iterator.
+		The subdivision surface returned by this method will be in local space even if the connection is supplying world space geometry.  This occurs mostly for efficiency reasons.  In the case of a world space geometry connection, the MObject returned by this method will also contain the world space   transformation matrix. This means that world space operations may be performed on this object using the subdivision surface function set and iterator.
 
 		It is possible to get the matrix that defines the local to world transformation for this geometry using the MDataHandle.geometryTransformMatrix() method."""
-	def asSubdSurfaceTransformed(self,*args,**kwargs)->Any:
+	def asSubdSurfaceTransformed(self,*args)->Any:
 		"""asSubdSurfaceTransformed() -> MObject
 
 		Returns the data represented by this handle in the data block.  The object returned by this call may be used directly with the subdivision surface function set (MFnSubdSurface) or the subdivision surface iterators (MItSubdVertex, MItSubdFace, MItSubdEdge).
@@ -2467,204 +2249,214 @@ class MDataHandle:
 		If the incoming surface comes with world space transformation data, then it will be applied to the data that is returned.  In other words, the surface that is returned will be the surface as it exists in world space.
 
 		The surface that is returned from this method should not be modified.  This method is only provided to make it easier to take world space geometry as input."""
-	def asTime(self,*args,**kwargs)->Any:
+	def asTime(self,*args)->Any:
 		"""asTime() -> MTime
 
 		Returns the data represented by this handle in the data block."""
-	def asUChar(self,*args,**kwargs)->Any:
+	def asUChar(self,*args)->Any:
 		"""asUChar() -> int
 
 		Returns the data represented by this handle in the data block."""
-	def asVector(self,*args,**kwargs)->Any:
+	def asVector(self,*args)->Any:
 		"""asVector() -> MVector
 
 		Returns the data represented by this handle in the data block."""
-	def child(self,*args,**kwargs)->Any:
+	def child(self,*args)->Any:
 		"""child(MPlug) -> MDataHandle
 		child(MObject) -> MDataHandle
 
 		Get a handle to a child of this handle.  This is used if you have a handle to a compound attribute."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(src) -> self
 
 		Copies the attribute from the src attribute to the attribute referenced by this handle.  This is the only method which can completely copy a compound attribute from one handle to another.  The construct outputHandle.set (inputHandle.data()) will not work for compound or multi attributes.
 
 		* src (MDataHandle) - the handle to the attribute to copy."""
-	def copyWritable(self,*args,**kwargs)->Any:
+	def copyWritable(self,*args)->Any:
 		"""copyWritable(src) -> self
 
 		Copies the attribute from the <i>src</i> attribute to the attribute referenced by this handle.  When the copy is made it ensures that the data in this handle is writable. That is, if the src handle has a writable copy of the data then it will be duplicated, otherwise this handle will claim the writer status for the data.
 
 		* src (MDataHandle) - the handle to the attribute to copy."""
-	def data(self,*args,**kwargs)->Any:
+	def data(self,*args)->Any:
 		"""data() -> MObject
 
 		Returns the data object from this handle.  The object returned should be used with the appropriate data function set.  This method is not valid for simple numeric types."""
-	def geometryTransformMatrix(self,*args,**kwargs)->Any:
+	def geometryTransformMatrix(self,*args)->Any:
 		"""geometryTransformMatrix() -> MMatrix
 
 		This method returns a reference to the local-to-world transformation matrix that can accompany a geometry data object.  Only use this method on handles to geometry data (curves, surfaces, and meshes).
 
 		If no local-to-world transformation information has been provided then this will be an identity matrix."""
-	def isGeneric(self,*args,**kwargs)->Any:
+	def isGeneric(self,*args)->Any:
 		"""isGeneric() -> [bool, isNumeric, isNull]
 
 		Returns True if this handle is for generic data.  There are 2 forms of generic data.  The first is for simple data and is used if the isNumeric parameter returns True.  In this case, the asGeneric*() and setGeneric*() methods of this class are used to query and set values.
 		The second form of generic data is for more complex attribute types.  As a result the type of the object must be checked and an appropriate attribute function set initialized with the object.Returns isNumeric True if this handle is for simple generic numeric data.
 		Returns isNull True if this handle is not set."""
-	def isNumeric(self,*args,**kwargs)->Any:
+	def isNumeric(self,*args)->Any:
 		"""isNumeric() -> bool
 
 		Returns True if this handle is for simple numeric data. That means that the numeric data is directly accessible through the non-generic as*() and set*() methods of this handle. For example, depending on handle initialization, the asBool() may be called but the asGenericBool() should not be called."""
-	def numericType(self,*args,**kwargs)->Any:
+	def numericType(self,*args)->Any:
 		"""numericType() -> int
 
 		Returns the type of data represented by this handle.  This method is only valid for data handles of simple numeric types."""
-	def set2Double(self,*args,**kwargs)->Any:
+	def set2Double(self,*args)->Any:
 		"""set2Double(float, float) -> self
 
 		Set the data that this handle represents in the data block."""
-	def set2Float(self,*args,**kwargs)->Any:
+	def set2Float(self,*args)->Any:
 		"""set2Float(float, float) -> self
 
 		Set the data that this handle represents in the data block."""
-	def set2Int(self,*args,**kwargs)->Any:
+	def set2Int(self,*args)->Any:
 		"""set2Int(int, int) -> self
 
 		Set the data that this handle represents in the data block."""
-	def set2Short(self,*args,**kwargs)->Any:
+	def set2Short(self,*args)->Any:
 		"""set2Short(int, int) -> self
 
 		Set the data that this handle represents in the data block."""
-	def set3Double(self,*args,**kwargs)->Any:
+	def set3Double(self,*args)->Any:
 		"""set3Double(float, float, float) -> self
 
 		Set the data that this handle represents in the data block."""
-	def set4Double(self,*args,**kwargs)->Any:
+	def set4Double(self,*args)->Any:
 		"""set4Double(float, float, float, float) -> self
 
 		Set the data that this handle represents in the data block."""
-	def set3Float(self,*args,**kwargs)->Any:
+	def set3Float(self,*args)->Any:
 		"""set3Float(float, float, float) -> self
 
 		Set the data that this handle represents in the data block."""
-	def set3Int(self,*args,**kwargs)->Any:
+	def set3Int(self,*args)->Any:
 		"""set3Int(int, int, int) -> self
 
 		Set the data that this handle represents in the data block."""
-	def set3Short(self,*args,**kwargs)->Any:
+	def set3Short(self,*args)->Any:
 		"""set3Short(int, int, int) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setBool(self,*args,**kwargs)->Any:
+	def setBool(self,*args)->Any:
 		"""setBool(bool) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setChar(self,*args,**kwargs)->Any:
+	def setChar(self,*args)->Any:
 		"""setChar(int) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setClean(self,*args,**kwargs)->Any:
+	def setClean(self,*args)->Any:
 		"""setClean() -> self
 
 		Marks the data that is represented by this handle as being clean.  This should be done after recalculating the data from the inputs."""
-	def setDouble(self,*args,**kwargs)->Any:
+	def setDouble(self,*args)->Any:
 		"""setDouble(float) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setFloat(self,*args,**kwargs)->Any:
+	def setFloat(self,*args)->Any:
 		"""setFloat(float) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setGenericBool(self,*args,**kwargs)->Any:
+	def setGenericBool(self,*args)->Any:
 		"""setGenericBool(bool, force) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setGenericChar(self,*args,**kwargs)->Any:
+	def setGenericChar(self,*args)->Any:
 		"""setGenericChar(int, force) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setGenericDouble(self,*args,**kwargs)->Any:
+	def setGenericDouble(self,*args)->Any:
 		"""setGenericDouble(float, force) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setGenericFloat(self,*args,**kwargs)->Any:
+	def setGenericFloat(self,*args)->Any:
 		"""setGenericFloat(float, force) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setGenericInt(self,*args,**kwargs)->Any:
+	def setGenericInt(self,*args)->Any:
 		"""setGenericInt(int, force) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setGenericShort(self,*args,**kwargs)->Any:
+	def setGenericShort(self,*args)->Any:
 		"""setGenericShort(int, force) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setInt(self,*args,**kwargs)->Any:
+	def setInt(self,*args)->Any:
 		"""setInt(int) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMAngle(self,*args,**kwargs)->Any:
+	def setMAngle(self,*args)->Any:
 		"""setMAngle(MAngle) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMDistance(self,*args,**kwargs)->Any:
+	def setMDistance(self,*args)->Any:
 		"""setMDistance(MDistance) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMFloatMatrix(self,*args,**kwargs)->Any:
+	def setMFloatMatrix(self,*args)->Any:
 		"""setMFloatMatrix(MFloatMatrix) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMFloatVector(self,*args,**kwargs)->Any:
+	def setMFloatVector(self,*args)->Any:
 		"""setMFloatVector(MFloatVector) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMMatrix(self,*args,**kwargs)->Any:
+	def setMMatrix(self,*args)->Any:
 		"""setMMatrix(MMatrix) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMObject(self,*args,**kwargs)->Any:
+	def setMObject(self,*args)->Any:
 		"""setMObject(MObject) -> self
 
 		Set the data that this handle represents in the data block.  This method assumes that the MObject is a dependency graph data object.  These objects can be created using the appropriate MFn..Data function set.
 		Note that this method cannot be used to copy compound or multi attributes from one handle to another via the construct outputHandle.set (inputHandle.data()).
 		To copy these user defined attributes, the method MDataHandle.copy() must be used."""
-	def setMPxData(self,*args,**kwargs)->Any:
+	def setMPxData(self,*args)->Any:
 		"""setMPxData(MPxData) -> self
 
 		Set the data that this handle represents in the data block.  This method takes a pointer to a user defined data object.  The data block will become the new owner of the data object that you pass in.  Do not delete it."""
-	def setMTime(self,*args,**kwargs)->Any:
+	def setMTime(self,*args)->Any:
 		"""setMTime(MTime) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMVector(self,*args,**kwargs)->Any:
+	def setMVector(self,*args)->Any:
 		"""setMVector(MVector) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setShort(self,*args,**kwargs)->Any:
+	def setShort(self,*args)->Any:
 		"""setShort(int) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setString(self,*args,**kwargs)->Any:
+	def setString(self,*args)->Any:
 		"""setString(string) -> self
 
 		Set the data that this handle represents in the data block."""
-	def type(self,*args,**kwargs)->Any:
+	def type(self,*args)->Any:
 		"""type() -> int
 
 		Returns the type of data represented by this handle."""
-	def typeId(self,*args,**kwargs)->Any:
+	def typeId(self,*args)->Any:
 		"""typeId() -> MTypeId
 
 		Returns the type of data represented by this handle as a type id.  A type id is a four character code that is used to identify the data type.
 		If no data exists for this handle, the type id will be 0x0."""
-	def datablock(self,*args,**kwargs)->Any:
+	def datablock(self,*args)->Any:
 		"""datablock() -> MDataBlock
 
 		Returns a reference to the datablock assigned to this data handle."""
 class MDistance:
 	"""Manipulate distance data."""
+	@property
+	def unit(self)->int:
+		"""Distance units currently in use."""
+	@unit.setter
+	def unit(self,value:int)->None:...
+	@property
+	def value(self)->float:
+		"""Value of the distance in the current units."""
+	@value.setter
+	def value(self,value:float)->None:...
 	kInvalid:int=0
 	kInches:int=1
 	kFeet:int=2
@@ -2675,159 +2467,104 @@ class MDistance:
 	kKilometers:int=7
 	kMeters:int=8
 	kLast:int=9
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def uiUnit(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setUIUnit(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def internalUnit(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def internalToUI(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def uiToInternal(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def asUnits(self,*args,**kwargs)->Any:
+	@staticmethod
+	def uiUnit(*args)->Any:
+		"""Return the units used to display distances in Maya's UI."""
+	@staticmethod
+	def setUIUnit(*args)->Any:
+		"""Change the units used to display distances in Maya's UI."""
+	@staticmethod
+	def internalUnit(*args)->Any:
+		"""Return the distance unit used internally by Maya."""
+	@staticmethod
+	def internalToUI(*args)->Any:
+		"""Convert a value from Maya's internal units to the units used in the UI."""
+	@staticmethod
+	def uiToInternal(*args)->Any:
+		"""Convert a value from the units used in the UI to Maya's internal units."""
+	def asUnits(self,*args)->Any:
 		"""Return the distance value, converted to the specified units."""
-	def asInches(self,*args,**kwargs)->Any:
+	def asInches(self,*args)->Any:
 		"""Return the distance value, converted to inches."""
-	def asFeet(self,*args,**kwargs)->Any:
+	def asFeet(self,*args)->Any:
 		"""Return the distance value, converted to feet."""
-	def asYards(self,*args,**kwargs)->Any:
+	def asYards(self,*args)->Any:
 		"""Return the distance value, converted to yards."""
-	def asMiles(self,*args,**kwargs)->Any:
+	def asMiles(self,*args)->Any:
 		"""Return the distance value, converted to miles."""
-	def asMillimeters(self,*args,**kwargs)->Any:
+	def asMillimeters(self,*args)->Any:
 		"""Return the distance value, converted to millimeters."""
-	def asCentimeters(self,*args,**kwargs)->Any:
+	def asCentimeters(self,*args)->Any:
 		"""Return the distance value, converted to centimeters."""
-	def asKilometers(self,*args,**kwargs)->Any:
+	def asKilometers(self,*args)->Any:
 		"""Return the distance value, converted to kilometers."""
-	def asMeters(self,*args,**kwargs)->Any:
+	def asMeters(self,*args)->Any:
 		"""Return the distance value, converted to meters."""
 class MDoubleArray:
 	"""Array of double values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MEulerRotation:
 	"""X, Y and Z rotations, applied in a specified order."""
+	@property
+	def x(self)->float:
+		"""X rotation in radians"""
+	@x.setter
+	def x(self,value:float)->None:...
+	@property
+	def y(self)->float:
+		"""Y rotation in radians"""
+	@y.setter
+	def y(self,value:float)->None:...
+	@property
+	def z(self)->float:
+		"""Z rotation in radians"""
+	@z.setter
+	def z(self,value:float)->None:...
+	@property
+	def order(self)->int:
+		"""Rotation order"""
+	@order.setter
+	def order(self,value:int)->None:...
 	__hash__:None=None
 	kIdentity:MEulerRotation
 	kTolerance:float=1e-10
@@ -2837,206 +2574,126 @@ class MEulerRotation:
 	kXZY:int=3
 	kYXZ:int=4
 	kZYX:int=5
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __radd__(self,*args,**kwargs)->Any:
+	def __radd__(self,*args)->Any:
 		"""Return value+self."""
-	def __sub__(self,*args,**kwargs)->Any:
+	def __sub__(self,other)->Any:
 		"""Return self-value."""
-	def __rsub__(self,*args,**kwargs)->Any:
+	def __rsub__(self,*args)->Any:
 		"""Return value-self."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __neg__(self,*args,**kwargs)->Any:
+	def __neg__(self,*args)->Any:
 		"""-self"""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Return self+=value."""
-	def __isub__(self,*args,**kwargs)->Any:
+	def __isub__(self,*args)->Any:
 		"""Return self-=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Return self*=value."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def computeAlternateSolution(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def computeBound(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def computeClosestCut(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def computeClosestSolution(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def decompose(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def alternateSolution(self,*args,**kwargs)->Any:
+	@staticmethod
+	def computeAlternateSolution(*args)->Any:
 		"""Returns an equivalent rotation which is not simply a multiple."""
-	def asMatrix(self,*args,**kwargs)->Any:
-		"""Returns the rotation as an equivalent matrix."""
-	def asQuaternion(self,*args,**kwargs)->Any:
-		"""Returns the rotation as an equivalent quaternion."""
-	def asVector(self,*args,**kwargs)->Any:
-		"""Returns the X, Y and Z rotations as a vector."""
-	def bound(self,*args,**kwargs)->Any:
-		"""Returns a new MEulerRotation having this rotation, but with each rotation component bound within +/- PI."""
-	def boundIt(self,*args,**kwargs)->Any:
-		"""In-place bounding of each rotation component to lie wthin +/- PI."""
-	def closestCut(self,*args,**kwargs)->Any:
-		"""Returns the rotation which is full spin multiples of this one and comes closest to target."""
-	def closestSolution(self,*args,**kwargs)->Any:
+	@staticmethod
+	def computeBound(*args)->Any:
+		"""Returns an equivalent rotation with each rotation component bound within +/- PI."""
+	@staticmethod
+	def computeClosestCut(*args)->Any:
+		"""Returns the rotation which is full spin multiples of the src and comes closest to target."""
+	@staticmethod
+	def computeClosestSolution(*args)->Any:
 		"""Returns the equivalent rotation which comes closest to a target."""
-	def incrementalRotateBy(self,*args,**kwargs)->Any:
+	@staticmethod
+	def decompose(*args)->Any:
+		"""Extracts a rotation from a matrix."""
+	def alternateSolution(self,*args)->Any:
+		"""Returns an equivalent rotation which is not simply a multiple."""
+	def asMatrix(self,*args)->Any:
+		"""Returns the rotation as an equivalent matrix."""
+	def asQuaternion(self,*args)->Any:
+		"""Returns the rotation as an equivalent quaternion."""
+	def asVector(self,*args)->Any:
+		"""Returns the X, Y and Z rotations as a vector."""
+	def bound(self,*args)->Any:
+		"""Returns a new MEulerRotation having this rotation, but with each rotation component bound within +/- PI."""
+	def boundIt(self,*args)->Any:
+		"""In-place bounding of each rotation component to lie wthin +/- PI."""
+	def closestCut(self,*args)->Any:
+		"""Returns the rotation which is full spin multiples of this one and comes closest to target."""
+	def closestSolution(self,*args)->Any:
+		"""Returns the equivalent rotation which comes closest to a target."""
+	def incrementalRotateBy(self,*args)->Any:
 		"""Increase this rotation by a given angle around the specified axis. The update is done in series of small increments to avoid flipping."""
-	def inverse(self,*args,**kwargs)->Any:
+	def inverse(self,*args)->Any:
 		"""Returns a new MEulerRotation containing the inverse rotation of this one and reversed rotation order."""
-	def invertIt(self,*args,**kwargs)->Any:
+	def invertIt(self,*args)->Any:
 		"""In-place inversion of the rotation. Rotation order is also reversed."""
-	def isEquivalent(self,*args,**kwargs)->Any:
+	def isEquivalent(self,*args)->Any:
 		"""Returns true if this rotation has the same order as another and their X, Y and Z components are within a tolerance of each other."""
-	def isZero(self,*args,**kwargs)->Any:
+	def isZero(self,*args)->Any:
 		"""Returns true if the X, Y and Z components are each within a tolerance of 0.0."""
-	def reorder(self,*args,**kwargs)->Any:
+	def reorder(self,*args)->Any:
 		"""Returns a new MEulerRotation having this rotation, reordered to use the given rotation order."""
-	def reorderIt(self,*args,**kwargs)->Any:
+	def reorderIt(self,*args)->Any:
 		"""In-place reordering to use the given rotation order."""
-	def setToAlternateSolution(self,*args,**kwargs)->Any:
+	def setToAlternateSolution(self,*args)->Any:
 		"""Replace this rotation with an alternate solution."""
-	def setToClosestCut(self,*args,**kwargs)->Any:
+	def setToClosestCut(self,*args)->Any:
 		"""Replace this rotation with the closest cut to a target."""
-	def setToClosestSolution(self,*args,**kwargs)->Any:
+	def setToClosestSolution(self,*args)->Any:
 		"""Replace this rotation with the closest solution to a target."""
-	def setValue(self,*args,**kwargs)->Any:
+	def setValue(self,*args)->Any:
 		"""Set the rotation."""
 class MEvaluationNode:
 	"""A class providing access to Evaluation Manager node information."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iterator(self,*args,**kwargs)->Any:
+	def iterator(self,*args)->Any:
 		"""Returns an iterator at the beginning of the dirty plug list."""
-	def dirtyPlugExists(self,*args,**kwargs)->Any:
+	def dirtyPlugExists(self,*args)->Any:
 		"""Returns true if the specified attribute has a dirty plug. This call should be made from MPxNode::preEvaluation() and MPxNode::postEvaluation() to verify which plugs are going to be dirty and computed."""
-	def dirtyPlug(self,*args,**kwargs)->Any:
+	def dirtyPlug(self,*args)->Any:
 		"""Returns the top-most plug for the specified attribute if the attribute has dirty plugs. This call should be made from MPxNode::preEvaluation() and MPxNode::postEvaluation() to access a networked plug which is going to be dirty and computed."""
-	def dependencyNode(self,*args,**kwargs)->Any:
+	def dependencyNode(self,*args)->Any:
 		"""Returns the dependency node this evaluation node represents."""
-	def datablock(self,*args,**kwargs)->Any:
+	def datablock(self,*args)->Any:
 		"""Returns the datablock for this node."""
 class MEvaluationNodeIterator:
 	"""A class providing access to the Evaluation Manager node dirty plug list."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def plug(self,*args,**kwargs)->Any:
+	def plug(self,*args)->Any:
 		"""Returns the dirty plug at the current iterator position. Returns an empty plug if the iterator is illegal."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""Checks to see if the iterator has reached the end of the iteration."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""Advances the iterator to the next position in the dirty plug list."""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""Resets the iterator to the first position in the dirty plug list."""
 class MEventMessage(MMessage):
 	"""Class used to register callbacks for event related messages.
@@ -3060,53 +2717,36 @@ class MEventMessage(MMessage):
 	prevent idleVeryLow event callbacks from running - which are required
 	for Maya to function properly.
 	"""
-	def addEventCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addEventCallback(*args)->Any:
+		"""addEventCallback(eventName, function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback for event occurred messages.
+		The callback function will be passed the any client data that
+		was provided when the callback was registered.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * eventName (string) - the event to register the
+		callback for
+		 * function - callable which will be passed the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def getEventNames(*args)->Any:
+		"""getEventNames() -> (string, string, ...)
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This method returns the list of available event names.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getEventNames(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: tuple of available event names."""
 class MExternalContentInfoTable:
 	"""This is a table of all the external content for a given node."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def addResolvedEntry(self,*args,**kwargs)->Any:
+	def addResolvedEntry(self,*args)->Any:
 		"""addResolvedEntry(key, unresolvedLocation, resolvedLocation, contextNodeFullName, roles) -> self
 
 		Add an entry in the table.
@@ -3115,8 +2755,8 @@ class MExternalContentInfoTable:
 		* unresolvedLocation (string) - Path as stored in the node (i.e. without any token replacement performed).
 		* resolvedLocation (string) - Full path to the content if it exists at the time of creation of this object.
 		* contextNodeFullName (string) - The fullname of the URI owner (node) if it applies, an empty string otherwise.
-		* roles (list of strings) - An enumeration of all roles this content plays in the context of the node. The actual strings are not rigidly defined as of this writing. This is mostly for offline browsing of the content info: to assist in sorting content by role.  A better content type system may be introduced later on to	formalize this."""
-	def addUnresolvedEntry(self,*args,**kwargs)->Any:
+		* roles (list of strings) - An enumeration of all roles this content plays in the context of the node. The actual strings are not rigidly defined as of this writing. This is mostly for offline browsing of the content info: to assist in sorting content by role.  A better content type system may be introduced later on to        formalize this."""
+	def addUnresolvedEntry(self,*args)->Any:
 		"""addUnresolvedEntry(key, unresolvedLocation, contextNodeFullName, roles=None) -> self
 
 		Add an entry in the table. The resolved location will be inferred from the application's built-in file resolving for the specified file type. This will automatically add entries into the roles vector that correspond to the search rules for this file type.
@@ -3125,13 +2765,13 @@ class MExternalContentInfoTable:
 		* unresolvedLocation (string) - See documentation of MExternalContentInfoTable.addResolvedEntry().
 		* contextNodeFullName (string) - See documentation of MExternalContentInfoTable.addResolvedEntry().
 		* roles (list of strings) - See documentation of MExternalContentInfoTable.addResolvedEntry()."""
-	def getEntry(self,*args,**kwargs)->Any:
+	def getEntry(self,*args)->Any:
 		"""getEntry(index) -> [key, unresolvedLocation, resolvedLocation, contextNodeFullName, roles]
 
 		Retrieves external content entry based on its position in the table.
 
 		* index (unsigned int) - Position of the entry to retrieve information from."""
-	def getInfo(self,*args,**kwargs)->Any:
+	def getInfo(self,*args)->Any:
 		"""getInfo(key) -> [unresolvedLocation, resolvedLocation, contextNodeFullName, roles]
 
 		Retrieves external content information based on its key.
@@ -3139,25 +2779,25 @@ class MExternalContentInfoTable:
 		* key (string) - See documentation of MExternalContentInfoTable.addResolvedEntry()."""
 class MExternalContentLocationTable:
 	"""This is a table of the all the external content locations for a given node."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def addEntry(self,*args,**kwargs)->Any:
+	def addEntry(self,*args)->Any:
 		"""addEntry(key, location) -> self
 
 		Adds an external content location and its key to the table.
 
 		* key (string) - An arbitrary string defined by the node. This will typically be an attribute name for situations where the content location is stored verbatim in a plug's value.* location (string) - Full path to the content referenced by the key."""
-	def getEntry(self,*args,**kwargs)->Any:
+	def getEntry(self,*args)->Any:
 		"""getEntry(index) -> [key, location]
 
 		Retrieves external content entry based on its position in the table.
 
 		* index (unsigned int) - Position of the entry to retrieve information from."""
-	def getLocation(self,*args,**kwargs)->Any:
+	def getLocation(self,*args)->Any:
 		"""getLocation(key) -> string
 
 		Retrieves an entry's location based on the associated key.
@@ -3165,6 +2805,11 @@ class MExternalContentLocationTable:
 		* key (string) - See documentation of MExternalContentLocationTable.addEntry()."""
 class MFileObject:
 	"""Manipulate filenames and search paths."""
+	@property
+	def resolveMethod(self)->Any:
+		"""The file-path resolution steps this file object will use."""
+	@resolveMethod.setter
+	def resolveMethod(self,value:Any)->None:...
 	kNone:int=1
 	kExact:int=2
 	kDirMap:int=4
@@ -3174,103 +2819,99 @@ class MFileObject:
 	kInputFile:int=54
 	kInputReference:int=62
 	kStrict:int=6
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source) -> self
 
 		Copy data from source file object.
 
 		* source (MFileObject) - The source file object to copy from"""
-	def exists(self,*args,**kwargs)->Any:
+	def exists(self,*args)->Any:
 		"""exists(index=None) -> bool
 
 		Checks to see if the file exists and is readable.
 		If index is None tests for the fullName file, else tests the file constructed from the indicated portion of the path element and filename element.
 
 		* index (int) - Index of the path element to be used in searching for the file."""
-	def expandedFullName(self,*args,**kwargs)->Any:
+	def expandedFullName(self,*args)->Any:
 		"""expandedFullName() -> string
 
 		Returns the pathname of a file constructed from the unresolved file object values. The file name will consist of the the expanded raw path and raw name elements.
 		All variables in the path element are expanded, and the first path (the part before the first separator (':') in the path) is prepended to the filename element to construct the fullName.
 
 		After expanding environment variables Maya may perform additional modifications to the full file name in order to resolve it to a valid location on disk. This resolved full file name can be accessed through resolvedFullName()."""
-	def expandedPath(self,*args,**kwargs)->Any:
+	def expandedPath(self,*args)->Any:
 		"""expandedPath() -> string
 
 		Returns the raw path element of the unresolved file object with all environment variables expanded. In the case that the path expands to multiple paths, the first expanded path will be returned.
 
 		After expanding environment variables Maya may perform additional modifications to the path in order to resolve it to a valid location on disk. This resolved path can be accessed through resolvedPath()."""
-	def fullName(self,*args,**kwargs)->Any:
+	def fullName(self,*args)->Any:
 		"""fullName(index) -> string
 
 		Returns the pathname of a file constructed from the indicated portion of the path element and filename element.
 		All variables in the path element are expanded, and the indicated path portion is prepended to the filename element to construct the fullName.
 
 		* index (int) - the index of the desired path portion."""
-	def getResolvedFullName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def getResolvedFullName(*args)->Any:
+		"""getResolvedFullName(rawFullName) -> string
 
-		Convert a function to be a static method.
+		Returns the full path to the resolved file, or an empty string if the resolution was unsuccessful.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		* rawFullName (string) - The fully specified unresolved path."""
+	@staticmethod
+	def getResolvedFullNameAndExistsStatus(*args)->Any:
+		"""getResolvedFullNameAndExistsStatus(rawFullName, method=kNone) -> (string, bool)
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		Returns the full path to the resolved file, or an empty string if the resolution was unsuccessful, and a boolean that indicate if the resolved path exists or not.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		* rawFullName (string) - The fully specified unresolved path
+		* resolveMethod (int) - To resolve method to use, default is kNone.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getResolvedFullNameAndExistsStatus(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		Valid resolve methods:
+		  kNone                    The resolved path is simply the resulting path after converting
+		                           the raw value to its expanded form. If the path contains environment variables,
+		                           the resolved value will be the first path returned from their expansion.
+		                           Relative paths will be considered to be relative to root of the current project.
+		                           The resolution algorithm will not check if this file actually exists - the
+		                           resolution will be considered successful whether it exists or not.
+		                           With this mode, the resolver will not continue on to attempt to resolve
+		                           using any other resolve method.
+		                           The user must explicitly check MFileObject.exists() to determine if it is an
+		                           existing path.
+		  kExact                   Checks if expanded paths exist. If paths are relative, assume it's relative to
+		                           the current workspace (so check workspace current directory, file-rule directory and
+		                           root directory).
+		  kDirMap                  Checks path against mappings defined with the dirmap command. Only for absolute paths
+		  kReferenceMappings       Check path against any previously re-mapped reference locations. If kRelative/kBaseName
+		                           are set, then even if we have an absolute path, convert to relative and/or baseName and
+		                           look for them in directories provided to the missing reference dialog.
+		  kRelative                Strips away the project directory, and treats path as relative. Relative to the current
+		                           workspace, that is. So look in the workspace current directory, file-rules directory
+		                           and the root directory.
+		  kBaseName                Strips away everything but the base file name and look in the current workspace,
+		  kInputFile               This mode is the default on file open and import, and is suitable for
+		                           files that are to be used as input files.  The file will be checked for
+		                           existence.
+		                           Combination of kExact, kDirMap, kRelative and kBaseName.
+		  kInputReference          This mode is the default on file reference. In addition to the checks done for
+		                           a regular input file, it will also check the reference mappings.
+		                           Combination of kInputFile and kReferenceMappings.
+		  kStrict                  Combination of kExact and kDirMap."""
+	@staticmethod
+	def isAbsolutePath(*args)->Any:
+		"""isAbsolutePath(fileName) -> bool
 
-		Convert a function to be a static method.
+		Checks a file path string and determines if it represents an absolute file path. An absolute path can uniquely identify a directory or file.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def isAbsolutePath(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def isSet(self,*args,**kwargs)->Any:
+		* fileName (string) - the string used to check if it is absolute"""
+	def isSet(self,*args)->Any:
 		"""isSet() -> bool
 
 		Checks to see if both file and path elements of the file object have been set."""
-	def overrideResolvedFullName(self,*args,**kwargs)->Any:
+	def overrideResolvedFullName(self,*args)->Any:
 		"""overrideResolvedFullName(fullFileName, reresolveType=False) -> self
 
 		Normally when a raw file name is set, Maya will perform a series of operations on it in an attempt to resolve it to a valid file name. This final resolved file name can be accessed through the resolvedName(), resolvedPath(), and resolvedFullFileName() methods and can be quite different from the originally specified raw file name.
@@ -3280,56 +2921,56 @@ class MFileObject:
 		Once the resolved file name is set, it is only guaranteed to be retained in the file object so long as the raw file path is not updated. Once the rawPath, rawName or rawFullName are set, the normal Maya path resolution process will be re-invoked and the resolved path and filename will be updated.
 
 		- fullFileName (string) - the string used to override the path and filename.- reresolveType (bool) - if Maya should re-resolve the file type/translator."""
-	def path(self,*args,**kwargs)->Any:
+	def path(self,*args)->Any:
 		"""path(index) -> string
 
 		Returns the indicated portion of the path element of the file object.  All variables in the path element are expanded, and the portion indicated by the argument is extracted and returned.
 
 		* index (int) - the index of the desired path portion."""
-	def pathCount(self,*args,**kwargs)->Any:
+	def pathCount(self,*args)->Any:
 		"""pathCount() -> int
 
 		Returns the number of paths in the path element of the file object.
 		This will be equal to one more than the number of ':' characters specified of the rawPath attribute."""
-	def rawFullName(self,*args,**kwargs)->Any:
+	def rawFullName(self,*args)->Any:
 		"""rawFullName() -> string
 
 		Returns the unresolved full file name (path plus filename) of the MFileObject with all environment variables unexpanded.
 
 		This method differs from expandedFullName() in that it returns the unexpanded instead of expanded values."""
-	def rawName(self,*args,**kwargs)->Any:
+	def rawName(self,*args)->Any:
 		"""rawName() -> string
 
 		Returns the unresolved filename element of the MFileObject."""
-	def rawPath(self,*args,**kwargs)->Any:
+	def rawPath(self,*args)->Any:
 		"""rawPath() -> string
 
 		Returns the path element of the MFileObject with all environment variables unexpanded."""
-	def rawURI(self,*args,**kwargs)->Any:
+	def rawURI(self,*args)->Any:
 		"""rawURI() -> MURI
 
 		Returns the unresolved URI of the MFileObject, if any.
 
 		This will be empty if the MFileObject was not resolved from a URI."""
-	def resolvedFullName(self,*args,**kwargs)->Any:
+	def resolvedFullName(self,*args)->Any:
 		"""resolvedFullName() -> string
 
-		Returns the first pathname of a file constructed from the path and filename elements.  All variables in the path element are expanded, and the first path (the part before the first ':' in the path) is prepended to the filename element. After expanding all environment	variables Maya may then perform additional modifications, such	as prepending directories to a relative path name, in order to resolve the path to a valid location on disk.
+		Returns the first pathname of a file constructed from the path and filename elements.  All variables in the path element are expanded, and the first path (the part before the first ':' in the path) is prepended to the filename element. After expanding all environment     variables Maya may then perform additional modifications, such  as prepending directories to a relative path name, in order to resolve the path to a valid location on disk.
 
 		The resolution is performed using the ResolveMethod of the file object.
 		By default, this will be set to kNone. While this is suitable in many situations, it may not be appropriate if the file is expected to exist.
 		Refer to getResolvedFullNameAndExistsStatus() for more information about how the  resolution mode is used.
 
 		Failure to resolve the path according to the specifications of the file object will result in an empty return value."""
-	def resolvedName(self,*args,**kwargs)->Any:
+	def resolvedName(self,*args)->Any:
 		"""resolvedName() -> string
 
 		Returns the resolved filename element of the file object."""
-	def resolvedPath(self,*args,**kwargs)->Any:
+	def resolvedPath(self,*args)->Any:
 		"""resolvedPath() -> string
 
 		Returns the resolved path element of the file object. In order to build the resolved path, Maya first expands all environment variables and then may perform additional modifications, such as prepending directories to a relative path name, in order to resolve the path to a valid location on disk."""
-	def setRawFullName(self,*args,**kwargs)->Any:
+	def setRawFullName(self,*args)->Any:
 		"""setRawFullName(fullFileName) -> self
 
 		This method combines the functions of the setRawName and setRawPath methods in that it sets both the path and filename from the given name.
@@ -3343,13 +2984,13 @@ class MFileObject:
 		Also note that for URI-based file paths (e.g. "arrow:uri_path_to_file"),  setRawFullName will not call setRawName and setRawPath (raw name and path will remain empty). Use resolvedName and resolvedPath to retrieve the resolved file path, or rawFullName to retrieve the unresolved file path.
 
 		* fullFileName (string) - The string used to initialize the path and filename."""
-	def setRawName(self,*args,**kwargs)->Any:
+	def setRawName(self,*args)->Any:
 		"""setRawName(fileName) -> self
 
 		Set the unresolved filename element of the MFileObject instance.  This name should not contain any '/' characters, it should indicate simply the name of a file.  The directories in which this name will be searched for are specified by setRawPath.
 
 		* fileName (string) - The filename to set."""
-	def setRawPath(self,*args,**kwargs)->Any:
+	def setRawPath(self,*args)->Any:
 		"""setRawPath(pathName) -> self
 
 		Set the unresolved path element of the MFileObject instance.  This should contain a list of directories, each separated by a single ':' character.  The pathnames can contain Unix environment variables in the form $VARNAME.  These will be expanded when paths to actual filenames are constructed.
@@ -3357,7 +2998,7 @@ class MFileObject:
 		Note that if the specified pathName is relative, contains environment variables, or does not exist, the paths returned by resolvedPath() and expandedPath() may not match the rawPath. See the description of resolvedPath() and expandedPath() for more information.
 
 		* pathName (string) - The path string."""
-	def setRawURI(self,*args,**kwargs)->Any:
+	def setRawURI(self,*args)->Any:
 		"""setRawURI(uri) -> self
 
 		Set the unresolved URI of the MFileObject instance.
@@ -3365,203 +3006,248 @@ class MFileObject:
 		* uri (string or MURI) - The unresolved URI."""
 class MFloatArray:
 	"""Array of float values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MFloatMatrix:
 	"""4x4 matrix with single-precision elements."""
 	__hash__:None=None
 	kTolerance:float=9.999999747378752e-06
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __radd__(self,*args,**kwargs)->Any:
+	def __radd__(self,*args)->Any:
 		"""Return value+self."""
-	def __sub__(self,*args,**kwargs)->Any:
+	def __sub__(self,other)->Any:
 		"""Return self-value."""
-	def __rsub__(self,*args,**kwargs)->Any:
+	def __rsub__(self,*args)->Any:
 		"""Return value-self."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Return self+=value."""
-	def __isub__(self,*args,**kwargs)->Any:
+	def __isub__(self,*args)->Any:
 		"""Return self-=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Return self*=value."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def getElement(self,*args,**kwargs)->Any:
+	def getElement(self,*args)->Any:
 		"""Returns the matrix element for the specified row and column."""
-	def setElement(self,*args,**kwargs)->Any:
+	def setElement(self,*args)->Any:
 		"""Sets the matrix element for the specified row and column."""
-	def setToIdentity(self,*args,**kwargs)->Any:
+	def setToIdentity(self,*args)->Any:
 		"""Sets this matrix to the identity."""
-	def setToProduct(self,*args,**kwargs)->Any:
+	def setToProduct(self,*args)->Any:
 		"""Sets this matrix to the product of the two matrices passed in."""
-	def transpose(self,*args,**kwargs)->Any:
+	def transpose(self,*args)->Any:
 		"""Returns a new matrix containing this matrix's transpose."""
-	def inverse(self,*args,**kwargs)->Any:
+	def inverse(self,*args)->Any:
 		"""Returns a new matrix containing this matrix's inverse."""
-	def adjoint(self,*args,**kwargs)->Any:
+	def adjoint(self,*args)->Any:
 		"""Returns a new matrix containing this matrix's adjoint."""
-	def homogenize(self,*args,**kwargs)->Any:
+	def homogenize(self,*args)->Any:
 		"""Returns a new matrix containing the homogenized version of this matrix."""
-	def det4x4(self,*args,**kwargs)->Any:
+	def det4x4(self,*args)->Any:
 		"""Returns this matrix's determinant."""
-	def det3x3(self,*args,**kwargs)->Any:
+	def det3x3(self,*args)->Any:
 		"""Returns the determinant of the 3x3 matrix formed by the first 3 elements of the first 3 rows of this matrix."""
-	def isEquivalent(self,*args,**kwargs)->Any:
+	def isEquivalent(self,*args)->Any:
 		"""Test for equivalence of two matrices, within a tolerance."""
 class MFloatPoint:
 	"""3D point with single-precision coordinates."""
+	@property
+	def x(self)->float:
+		"""X coordinate"""
+	@x.setter
+	def x(self,value:float)->None:...
+	@property
+	def y(self)->float:
+		"""Y coordinate"""
+	@y.setter
+	def y(self,value:float)->None:...
+	@property
+	def z(self)->float:
+		"""Z coordinate"""
+	@z.setter
+	def z(self,value:float)->None:...
+	@property
+	def w(self)->float:
+		"""W coordinate"""
+	@w.setter
+	def w(self,value:float)->None:...
 	__hash__:None=None
 	kOrigin:MFloatPoint
 	kTolerance:float=9.999999747378752e-06
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __radd__(self,*args,**kwargs)->Any:
+	def __radd__(self,*args)->Any:
 		"""Return value+self."""
-	def __sub__(self,*args,**kwargs)->Any:
+	def __sub__(self,other)->Any:
 		"""Return self-value."""
-	def __rsub__(self,*args,**kwargs)->Any:
+	def __rsub__(self,*args)->Any:
 		"""Return value-self."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Return self+=value."""
-	def __isub__(self,*args,**kwargs)->Any:
+	def __isub__(self,*args)->Any:
 		"""Return self-=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Return self*=value."""
-	def __truediv__(self,*args,**kwargs)->Any:
+	def __truediv__(self,other)->Any:
 		"""Return self/value."""
-	def __rtruediv__(self,*args,**kwargs)->Any:
+	def __rtruediv__(self,other)->Any:
 		"""Return value/self."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def cartesianize(self,*args,**kwargs)->Any:
+	def cartesianize(self,*args)->Any:
 		"""Convert point to cartesian form."""
-	def rationalize(self,*args,**kwargs)->Any:
+	def rationalize(self,*args)->Any:
 		"""Convert point to rational form."""
-	def homogenize(self,*args,**kwargs)->Any:
+	def homogenize(self,*args)->Any:
 		"""Convert point to homogenous form."""
-	def distanceTo(self,*args,**kwargs)->Any:
+	def distanceTo(self,*args)->Any:
 		"""Return distance between this point and another."""
-	def isEquivalent(self,*args,**kwargs)->Any:
+	def isEquivalent(self,*args)->Any:
 		"""Test for equivalence of two points, within a tolerance."""
 class MFloatPointArray:
 	"""Array of MFloatPoint values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MFloatVector:
 	"""3D vector with single-precision coordinates."""
+	@property
+	def x(self)->float:
+		"""X coordinate"""
+	@x.setter
+	def x(self,value:float)->None:...
+	@property
+	def y(self)->float:
+		"""Y coordinate"""
+	@y.setter
+	def y(self,value:float)->None:...
+	@property
+	def z(self)->float:
+		"""Z coordinate"""
+	@z.setter
+	def z(self,value:float)->None:...
 	__hash__:None=None
 	kTolerance:float=9.999999747378752e-06
 	kZeroVector:MFloatVector
@@ -3572,107 +3258,112 @@ class MFloatVector:
 	kXnegAxisVector:MFloatVector
 	kYnegAxisVector:MFloatVector
 	kZnegAxisVector:MFloatVector
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __radd__(self,*args,**kwargs)->Any:
+	def __radd__(self,*args)->Any:
 		"""Return value+self."""
-	def __sub__(self,*args,**kwargs)->Any:
+	def __sub__(self,other)->Any:
 		"""Return self-value."""
-	def __rsub__(self,*args,**kwargs)->Any:
+	def __rsub__(self,*args)->Any:
 		"""Return value-self."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __neg__(self,*args,**kwargs)->Any:
+	def __neg__(self,*args)->Any:
 		"""-self"""
-	def __xor__(self,*args,**kwargs)->Any:
+	def __xor__(self,*args)->Any:
 		"""Return self^value."""
-	def __rxor__(self,*args,**kwargs)->Any:
+	def __rxor__(self,*args)->Any:
 		"""Return value^self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Return self+=value."""
-	def __isub__(self,*args,**kwargs)->Any:
+	def __isub__(self,*args)->Any:
 		"""Return self-=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Return self*=value."""
-	def __truediv__(self,*args,**kwargs)->Any:
+	def __truediv__(self,other)->Any:
 		"""Return self/value."""
-	def __rtruediv__(self,*args,**kwargs)->Any:
+	def __rtruediv__(self,other)->Any:
 		"""Return value/self."""
-	def __itruediv__(self,*args,**kwargs)->Any:
+	def __itruediv__(self,other)->Any:
 		"""Return self/=value."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def length(self,*args,**kwargs)->Any:
+	def length(self,*args)->Any:
 		"""Returns the magnitude of this vector."""
-	def normal(self,*args,**kwargs)->Any:
+	def normal(self,*args)->Any:
 		"""Returns a new vector containing the normalized version of this one."""
-	def normalize(self,*args,**kwargs)->Any:
+	def normalize(self,*args)->Any:
 		"""Normalizes this vector in-place and returns a new reference to it."""
-	def transformAsNormal(self,*args,**kwargs)->Any:
+	def transformAsNormal(self,*args)->Any:
 		"""Returns a new vector which is calculated by postmultiplying this vector by the transpose of the given matrix and then normalizing the result."""
-	def angle(self,*args,**kwargs)->Any:
+	def angle(self,*args)->Any:
 		"""Returns the angle, in radians, between this vector and another."""
-	def isEquivalent(self,*args,**kwargs)->Any:
+	def isEquivalent(self,*args)->Any:
 		"""Returns True if this vector and another are within a given tolerance of being equal."""
-	def isParallel(self,*args,**kwargs)->Any:
+	def isParallel(self,*args)->Any:
 		"""Returns True if this vector and another are within the given tolerance of being parallel."""
 class MFloatVectorArray:
 	"""Array of MFloatVector values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MFn:
 	"""Static class providing constants for all API types."""
@@ -4889,28 +4580,14 @@ class MFn:
 	kAnimInContextNode:int=1210
 class MFnAssembly(MFnDagNode):
 	"""Function set for assemblies."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def getTopLevelAssemblies(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def getTopLevelAssemblies(*args)->Any:
+		"""getTopLevelAssemblies() -> MObjectArray
 
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def createRepresentation(self,*args,**kwargs)->Any:
+		Returns a list containing top-level assemblies. These are assembliesthat are not nested inside another assembly."""
+	def createRepresentation(self,*args)->Any:
 		"""createRepresentation(input, type[, undoRedo]) -> MString
 		createRepresentation(input, type, representation[, undoRedo]) -> MString
 
@@ -4925,35 +4602,35 @@ class MFnAssembly(MFnDagNode):
 		* type           - Type of representation to create.
 		* representation - Representation name starting point.
 		* undoRedo       - Optional MDagModifier object, for undo/redo purposes."""
-	def getRepresentations(self,*args,**kwargs)->Any:
+	def getRepresentations(self,*args)->Any:
 		"""getRepresentations() -> [MString]
 
 		Returns an array of the representations managed by the node attached to this function set."""
-	def getParentAssembly(self,*args,**kwargs)->Any:
+	def getParentAssembly(self,*args)->Any:
 		"""getParentAssembly() -> MObject
 
 		Return the immediate parent assembly of this assembly if there is one, otherwise returns None. An assembly with no parent is a top level assembly."""
-	def getSubAssemblies(self,*args,**kwargs)->Any:
+	def getSubAssemblies(self,*args)->Any:
 		"""getSubAssemblies() -> MObjectArray
 
 		Returns a list containing direct children of this assembly that are themselves assemblies, for the currently active representation. The returned list will be empty if there are no assembly children of the currently active representation."""
-	def postLoad(self,*args,**kwargs)->Any:
+	def postLoad(self,*args)->Any:
 		"""postLoad() -> self
 
 		Initialize assemblies after their creation.
 		In general, postLoad() does not need to be called explicity by a plugin. Maya will call it automatically on any assembly node created by representation activation, to initialize the assembly node.
 		However, if an existing assembly needs to be re-initialized, because of a parameter change for example, the representation activation code path is obviously not involved. In such a case, the postLoad() re-initialization can be done by calling this method explicitly, so that Maya is made aware that the node is being re-initialized, and that for example, no edits should be recorded during this re-initialization."""
-	def activate(self,*args,**kwargs)->Any:
+	def activate(self,*args)->Any:
 		"""activate([representation]) -> self
 
 		Activate a representation. The representation to activate is specified as a string name. If no representation is specified then the previously-active representation (if any) will be inactivated and no representation will be active. This method will fail if canActivate() returns False.
 
 		* representation - representation to activate."""
-	def getActive(self,*args,**kwargs)->Any:
+	def getActive(self,*args)->Any:
 		"""getActive() -> MString
 
 		Get the active representation in the list of representations. If the list of representations is empty, the return string will be empty."""
-	def activateNonRecursive(self,*args,**kwargs)->Any:
+	def activateNonRecursive(self,*args)->Any:
 		"""activateNonRecursive([representation]) -> self
 
 		Activate a representation, but prevent any nested assemblies created and initialized during this activation from activating any of their representations.
@@ -4963,35 +4640,35 @@ class MFnAssembly(MFnDagNode):
 		If canActivate() is False, activateNonRecursive() will return failure.
 
 		The representation is specified as a string identifier.  Passing in an empty string argument means inactivate the previously-active representation (if any), and activate no representation.  * representation - Representation to activate."""
-	def canActivate(self,*args,**kwargs)->Any:
+	def canActivate(self,*args)->Any:
 		"""canActivate() -> bool
 
 		Determines whether this assembly can activate a representation, for the node attached to this function set. For example, this method will return False for a nested assembly, during a call to activateNonRecursive() on the parent assembly. If canActivate() returns False, activate() and activateNonRecursive() will fail."""
-	def isActive(self,*args,**kwargs)->Any:
+	def isActive(self,*args)->Any:
 		"""isActive(representation) -> bool
 
 		Determines whether the given representation is the active representation for the node attached to this function set.
 
 		* representation - Representation to query."""
-	def getInitialRep(self,*args,**kwargs)->Any:
+	def getInitialRep(self,*args)->Any:
 		"""getInitialRep() -> (MString, bool)
 
 		Get the initial representation to use when the assembly is first loaded.
 
 		This method returns the representation which should be activated when the assembly is first initialized and a boolean that indicates whether the assembly has an initial representation. If both an empty string and True is returned it means that assembly has been explicitly set to have no initial representation"""
-	def getRepType(self,*args,**kwargs)->Any:
+	def getRepType(self,*args)->Any:
 		"""getRepType(representation) -> MString
 
 		Get the type of the specified representation. The type string does not have to be user-readable, and does not have to be localized; the type label should be used for UI purposes. If the specified representation is not found in this assembly, an empty string is returned.
 
 		* representation - Representation whose type must be returned."""
-	def getRepLabel(self,*args,**kwargs)->Any:
+	def getRepLabel(self,*args)->Any:
 		"""getRepLabel(representation) -> MString
 
 		Get the label of the specified representation. The label of a representation is a string that is meant to be shown in the UI and identify the representation meaningfully to a user. The representation label should support localization requirements. If the specified representation is not found in this assembly, an empty string is returned.
 
 		* representation - Representation whose label must be returned."""
-	def setRepName(self,*args,**kwargs)->Any:
+	def setRepName(self,*args)->Any:
 		"""setRepName(representation, newName) -> MString
 
 		Rename a representation. The newName argument is used as a starting point for the new representation name. This string value can be modified by the derived implementation to meet representation name uniqueness, or other constraints. This method returns the final representation name.
@@ -5001,18 +4678,18 @@ class MFnAssembly(MFnDagNode):
 		* status         - Return status.
 
 		Returns new representation name."""
-	def setRepLabel(self,*args,**kwargs)->Any:
+	def setRepLabel(self,*args)->Any:
 		"""setRepLabel(representation, label) -> self
 
 		Change the representation label.
 
 		* representation - Representation name.
 		* label          - New representation label."""
-	def repTypes(self,*args,**kwargs)->Any:
+	def repTypes(self,*args)->Any:
 		"""repTypes() -> [MString]
 
 		Return the list of representation types that can be created for this assembly node."""
-	def canRepApplyEdits(self,*args,**kwargs)->Any:
+	def canRepApplyEdits(self,*args)->Any:
 		"""canRepApplyEdits(representation) -> bool
 
 		Determines whether the given representation can apply edits to its data, for the node attached to this function set. If an empty string is passed in as the representation name, this method will return False, since an invalid (or 'None') representation does not have any data and thus, cannot have edits applied to it.
@@ -5021,25 +4698,25 @@ class MFnAssembly(MFnDagNode):
 		* status         - Return status.
 
 		Returns True if the representation can apply edits, False otherwise."""
-	def deleteRepresentation(self,*args,**kwargs)->Any:
+	def deleteRepresentation(self,*args)->Any:
 		"""deleteRepresentation(representation) -> self
 
 		Delete a representation managed by the node attached to this function set."""
-	def deleteAllRepresentations(self,*args,**kwargs)->Any:
+	def deleteAllRepresentations(self,*args)->Any:
 		"""deleteAllRepresentations() -> self
 
 		Delete all representations managed by the node attached to this function set."""
-	def isTopLevel(self,*args,**kwargs)->Any:
+	def isTopLevel(self,*args)->Any:
 		"""isTopLevel() -> bool
 
 		Returns whether this assembly node is a top-level assembly. An assembly node is a top-level assembly if no container in its (possibly empty) chain of nesting parent containers is an assembly. Of course, this includes the trivial case of its immediate parent container being null.
 
 		Returns True if the assembly node is a top-level assembly."""
-	def supportsEdits(self,*args,**kwargs)->Any:
+	def supportsEdits(self,*args)->Any:
 		"""supportsEdits() -> bool
 
 		Returns True if this assembly supports tracking of edits on its nodes."""
-	def supportsMemberChanges(self,*args,**kwargs)->Any:
+	def supportsMemberChanges(self,*args)->Any:
 		"""supportsMemberChanges() -> bool
 
 		If the assembly does not use Maya's edit tracking system (see supportsEdits()), does it support changes to its member nodes, outside of activation? If so, this means that any mutatingoperation on Maya nodes (parenting, connecting, disconnecting, renaming, deleting, setting attributes, adding attributes, removing attributes, locking) can be performed on member nodes of the assembly.
@@ -5049,13 +4726,13 @@ class MFnAssembly(MFnDagNode):
 		This predicate is only used outside of representation activation. During activation, all types of changes to the assembly's members are allowed, including of course deleting the previous representation's nodes, and creating nodes for the new representation.
 
 		Returns True if the assembly supports changes to its nodes"""
-	def getRepNamespace(self,*args,**kwargs)->Any:
+	def getRepNamespace(self,*args)->Any:
 		"""getRepNamespace() -> MString
 
 		Get the representations namespace of this assembly node. This is the namespace where nodes created by the activation of a representation will be added. This namespace is shared by all representations. The name can be updated by Maya if a name clash occurs when the namespace is added to its parent namespace (see MPxAssembly::updateRepNamespace() for details).
 
 		Returns the namespace for representations."""
-	def importFile(self,*args,**kwargs)->Any:
+	def importFile(self,*args)->Any:
 		"""importFile(fileName[, type][, preserveReferences][, nameSpace][, ignoreVersion]) -> self
 
 		Import the scene elements from the given file into this assembly. See MFileIO::importFile() for more information.  All elements imported from the file become members of the assembly. DAG nodes in the imported file that are parented to world are parented to the assembly. DAG nodes in the imported file whose parent is not world keep their existing parenting relationship.
@@ -5070,7 +4747,7 @@ class MFnAssembly(MFnDagNode):
 		                       objects. If empty defaults tp no namespace.
 		* ignoreVersion      - Boolean to control whether to ignore version when
 		                       importing a file."""
-	def getAbsoluteRepNamespace(self,*args,**kwargs)->Any:
+	def getAbsoluteRepNamespace(self,*args)->Any:
 		"""getAbsoluteRepNamespace() -> MString
 
 		Get the fully-qualified (absolute) namespace for representations of this assembly node. This is the namespace where nodes created by the activation of a representation will be added. This namespace is shared by all representations.
@@ -5082,7 +4759,7 @@ class MFnAssembly(MFnDagNode):
 		It should be noted that if the assembly node is nested, the assembly node's namespace will be (by virtue of its nesting) the representation namespace of its containing assembly.
 
 		Returns the fully-qualified (absolute) namespace for representations of this assembly node. The name can be empty if the namespace has not been created yet."""
-	def handlesAddEdits(self,*args,**kwargs)->Any:
+	def handlesAddEdits(self,*args)->Any:
 		"""handlesAddEdits() -> bool
 
 		Determines whether the assembly supplies edits to its data, for the node attached to this function set.
@@ -5096,39 +4773,415 @@ class MFnAssembly(MFnDagNode):
 		Returns True if the assembly adds edits, False if no edits are added."""
 class MFnAttribute(MFnBase):
 	"""Base class for attribute functionsets."""
+	@property
+	def affectsAppearance(self)->bool:
+		"""Does the attribute affect how the node is drawn in Maya's viewport?"""
+	@affectsAppearance.setter
+	def affectsAppearance(self,value:bool)->None:...
+	@property
+	def isProxyAttribute(self)->Any:
+		"""Does the attribute is a proxy attribute?"""
+	@isProxyAttribute.setter
+	def isProxyAttribute(self,value:Any)->None:...
+	@property
+	def affectsWorldSpace(self)->bool:
+		"""Does the attribute affect the node's worldSpace matrix?"""
+	@affectsWorldSpace.setter
+	def affectsWorldSpace(self,value:bool)->None:...
+	@property
+	def array(self)->bool:
+		"""Is the attribute an array?"""
+	@array.setter
+	def array(self,value:bool)->None:...
+	@property
+	def cached(self)->bool:
+		"""Should the attribute's value be cached in the datablock?"""
+	@cached.setter
+	def cached(self,value:bool)->None:...
+	@property
+	def channelBox(self)->bool:
+		"""Should the attribute be displayed in the Channel Box?"""
+	@channelBox.setter
+	def channelBox(self,value:bool)->None:...
+	@property
+	def connectable(self)->bool:
+		"""Can connections be made to the attribute?"""
+	@connectable.setter
+	def connectable(self,value:bool)->None:...
+	@property
+	def disconnectBehavior(self)->int:
+		"""What should happen when the attribute loses an incoming connection?"""
+	@disconnectBehavior.setter
+	def disconnectBehavior(self,value:int)->None:...
+	@property
+	def dynamic(self)->bool:
+		"""Is the attribute a dynamic attribute?"""
+	@property
+	def extension(self)->bool:
+		"""Is the attribute an extension attribute?"""
+	@property
+	def hidden(self)->bool:
+		"""If True the attribute will not be displayed in the Attribute Editor."""
+	@hidden.setter
+	def hidden(self,value:bool)->None:...
+	@property
+	def indeterminant(self)->bool:
+		"""Hint to DG that this attribute may not always be used when computing the attributes which are dependent upon it."""
+	@indeterminant.setter
+	def indeterminant(self,value:bool)->None:...
+	@property
+	def indexMatters(self)->bool:
+		"""If False, connectAttr -nextAvailable can be used with this attribute. If True then an explicit index must be provided."""
+	@indexMatters.setter
+	def indexMatters(self,value:bool)->None:...
+	@property
+	def internal(self)->bool:
+		"""Will the node handle the attribute's data storage itself, outside of the node's data block?"""
+	@internal.setter
+	def internal(self,value:bool)->None:...
+	@property
+	def keyable(self)->bool:
+		"""Can keys be set on the attribute?"""
+	@keyable.setter
+	def keyable(self,value:bool)->None:...
+	@property
+	def name(self)->str:
+		"""Attribute's long name."""
+	@property
+	def parent(self)->MObject:
+		"""Parent attribute. MObject::kNullObj if attr has no parent."""
+	@parent.setter
+	def parent(self,value:MObject)->None:...
+	@property
+	def readable(self)->bool:
+		"""Is the attribute readable?"""
+	@readable.setter
+	def readable(self,value:bool)->None:...
+	@property
+	def renderSource(self)->bool:
+		"""Is the attribute a render source?"""
+	@renderSource.setter
+	def renderSource(self,value:bool)->None:...
+	@property
+	def shortName(self)->str:
+		"""Attribute's short name."""
+	@property
+	def storable(self)->bool:
+		"""Should the attribute's value be preserved when the node is written to file?"""
+	@storable.setter
+	def storable(self,value:bool)->None:...
+	@property
+	def usedAsColor(self)->bool:
+		"""Should the attribute be treated as a color in the UI?"""
+	@usedAsColor.setter
+	def usedAsColor(self,value:bool)->None:...
+	@property
+	def usedAsFilename(self)->bool:
+		"""Should the attribute be treated as a file name in the UI?"""
+	@usedAsFilename.setter
+	def usedAsFilename(self,value:bool)->None:...
+	@property
+	def usesArrayDataBuilder(self)->bool:
+		"""Array attributes only: does the attribute create elements using MArrayDataBuilder?"""
+	@usesArrayDataBuilder.setter
+	def usesArrayDataBuilder(self,value:bool)->None:...
+	@property
+	def worldSpace(self)->bool:
+		"""DAG nodes only: if the node is instanced, will the attribute have separate values for each instance?"""
+	@worldSpace.setter
+	def worldSpace(self,value:bool)->None:...
+	@property
+	def writable(self)->bool:
+		"""Is the attribute writable?"""
+	@writable.setter
+	def writable(self,value:bool)->None:...
+	@property
+	def enforcingUniqueName(self)->Any:
+		"""Is the attribute enforcing to have a unique name?"""
+	@enforcingUniqueName.setter
+	def enforcingUniqueName(self,value:Any)->None:...
 	kDelete:int=0
 	kReset:int=1
 	kNothing:int=2
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def acceptsAttribute(self,*args,**kwargs)->Any:
+	def acceptsAttribute(self,*args)->Any:
 		"""Returns True if this attribute can accept a connection with the given attribute."""
-	def accepts(self,*args,**kwargs)->Any:
+	def accepts(self,*args)->Any:
 		"""Returns True if this attribute can accept a connection of the given type."""
-	def addToCategory(self,*args,**kwargs)->Any:
+	def addToCategory(self,*args)->Any:
 		"""Adds the attribute to a category"""
-	def getAddAttrCmd(self,*args,**kwargs)->Any:
+	def getAddAttrCmd(self,*args)->Any:
 		"""Returns a string containing a MEL 'addAttr' command capable of recreating the attribute."""
-	def pathName(self,*args,**kwargs)->Any:
+	def pathName(self,*args)->Any:
 		"""Returns the pathName for the attribute."""
-	def hasCategory(self,*args,**kwargs)->Any:
+	def hasCategory(self,*args)->Any:
 		"""Checks to see if the attribute has a given category"""
-	def setNiceNameOverride(self,*args,**kwargs)->Any:
+	def setNiceNameOverride(self,*args)->Any:
 		"""Sets a nice UI name for this attribute rather than using the default derived from it's long name."""
 class MFnBase:
 	"""Base class for function sets."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def hasObj(self,*args,**kwargs)->Any:
+	def hasObj(self,*args)->Any:
 		"""Returns True if the function set is compatible with the specified Maya object."""
-	def object(self,*args,**kwargs)->Any:
+	def object(self,*args)->Any:
 		"""Returns a reference to the object to which the function set is currently attached, or MObject.kNullObj if none."""
-	def setObject(self,*args,**kwargs)->Any:
+	def setObject(self,*args)->Any:
 		"""Attaches the function set to the specified Maya object."""
-	def type(self,*args,**kwargs)->Any:
+	def type(self,*args)->Any:
 		"""Returns the type of the function set."""
 class MFnCamera(MFnDagNode):
 	"""Function set for cameras."""
+	@property
+	def horizontalFilmAperture(self)->Any:
+		"""The horizontal film aperture for the camera."""
+	@horizontalFilmAperture.setter
+	def horizontalFilmAperture(self,value:Any)->None:...
+	@property
+	def verticalFilmAperture(self)->Any:
+		"""The vertical film aperture for the camera."""
+	@verticalFilmAperture.setter
+	def verticalFilmAperture(self,value:Any)->None:...
+	@property
+	def isVerticalLock(self)->Any:
+		"""Determines if vertical lock is turned on for the camera."""
+	@isVerticalLock.setter
+	def isVerticalLock(self,value:Any)->None:...
+	@property
+	def horizontalFilmOffset(self)->Any:
+		"""The horizontal offset of the film. Unit used is inches."""
+	@horizontalFilmOffset.setter
+	def horizontalFilmOffset(self,value:Any)->None:...
+	@property
+	def verticalFilmOffset(self)->Any:
+		"""The vertical offset of the film. Unit used is inches."""
+	@verticalFilmOffset.setter
+	def verticalFilmOffset(self,value:Any)->None:...
+	@property
+	def shakeEnabled(self)->Any:
+		"""The toggle value for the camera shake enabled attribute.
+		If this attribute is False, the horizontalShake and verticalShake values are ignored by the camera."""
+	@shakeEnabled.setter
+	def shakeEnabled(self,value:Any)->None:...
+	@property
+	def horizontalShake(self)->Any:
+		"""The horizontal offset of the film due to the shake attribute. Unit used is inches."""
+	@horizontalShake.setter
+	def horizontalShake(self,value:Any)->None:...
+	@property
+	def verticalShake(self)->Any:
+		"""The vertical film-based camera shake value. Unit used is inches."""
+	@verticalShake.setter
+	def verticalShake(self,value:Any)->None:...
+	@property
+	def shakeOverscanEnabled(self)->Any:
+		"""The toggle value for the camera shake overscan attribute.
+		If this attribute is False, the shakeOverscan value is ignored by the camera."""
+	@shakeOverscanEnabled.setter
+	def shakeOverscanEnabled(self,value:Any)->None:...
+	@property
+	def shakeOverscan(self)->Any:
+		"""The camera shake overscan value. Unit is a multiplier to the film aperture."""
+	@shakeOverscan.setter
+	def shakeOverscan(self,value:Any)->None:...
+	@property
+	def panZoomEnabled(self)->Any:
+		"""The toggle value for the camera 2D pan/zoom enabled attribute.
+		If this attribute is False, the 2D pan/zoom values are ignored by the camera."""
+	@panZoomEnabled.setter
+	def panZoomEnabled(self,value:Any)->None:...
+	@property
+	def renderPanZoom(self)->Any:
+		"""The toggle value for the camera render 2D pan/zoom attribute.
+		If this attribute is False, the 2D pan/zoom values will not affect the output render."""
+	@renderPanZoom.setter
+	def renderPanZoom(self,value:Any)->None:...
+	@property
+	def horizontalPan(self)->Any:
+		"""The camera 2D horizontal pan value. Unit is inches."""
+	@horizontalPan.setter
+	def horizontalPan(self,value:Any)->None:...
+	@property
+	def verticalPan(self)->Any:
+		"""The camera 2D vertical pan value. Unit is inches."""
+	@verticalPan.setter
+	def verticalPan(self,value:Any)->None:...
+	@property
+	def zoom(self)->Any:
+		"""The camera 2D zoom value, which is the percent over the film viewable frustum to display"""
+	@zoom.setter
+	def zoom(self,value:Any)->None:...
+	@property
+	def stereoHITEnabled(self)->Any:
+		"""The toggle value for the stereo HIT enabled attribute.
+		If this attribute is False, the stereoHIT value is ignored by the camera."""
+	@stereoHITEnabled.setter
+	def stereoHITEnabled(self,value:Any)->None:...
+	@property
+	def stereoHIT(self)->Any:
+		"""The camera stereo horizontal image translation (stereo HIT) value.  Unit is inches."""
+	@stereoHIT.setter
+	def stereoHIT(self,value:Any)->None:...
+	@property
+	def filmFit(self)->Any:
+		"""How the digital image is to be fitted to the film back.
+		Valid values:
+		* kFillFilmFit           The system calculates both horizontal and vertical fits and then applies the one that makes the digital image larger than the film back.
+		* kHorizontalFilmFit     The digital image is made to fit the film back exactly in the horizontal direction. This then gives each pixel a horizontal size = (film back width) / (horizontal resolution). The pixel height is then = (pixel width) / (pixel aspect ratio). Now that the pixel has a size, resolution gives us a complete image. That image will match the film back exactly in width. It will almost never match in height, either being too tall or too short. By playing with the numbers you can get it pretty close though.
+		* kVerticalFilmFit       The same idea as horizontal fit, only applied vertically. Thus the digital image will match the film back exactly in height, but miss in width.
+		* kOverscanFilmFit       Over-scanning the film gate in the camera view allows us to choreograph action outside of the frustum from within the camera view without having to resort to a dolly or zoom. This feature is also essential for animating image planes."""
+	@filmFit.setter
+	def filmFit(self,value:Any)->None:...
+	@property
+	def filmFitOffset(self)->Any:
+		"""The film fit offset for the camera."""
+	@filmFitOffset.setter
+	def filmFitOffset(self,value:Any)->None:...
+	@property
+	def overscan(self)->Any:
+		"""The percent of overscan for this camera."""
+	@overscan.setter
+	def overscan(self,value:Any)->None:...
+	@property
+	def horizontalRollPivot(self)->Any:
+		"""The horizontal roll pivot for film back roll."""
+	@horizontalRollPivot.setter
+	def horizontalRollPivot(self,value:Any)->None:...
+	@property
+	def verticalRollPivot(self)->Any:
+		"""The vertical roll pivot for film back roll."""
+	@verticalRollPivot.setter
+	def verticalRollPivot(self,value:Any)->None:...
+	@property
+	def filmRollValue(self)->Any:
+		"""The film roll value for film back."""
+	@filmRollValue.setter
+	def filmRollValue(self,value:Any)->None:...
+	@property
+	def filmRollOrder(self)->Any:
+		"""The order in which the film back rotation is applied with respect to the pivot point.
+		Valid values:
+		* kRotateTranslate      The film back is first rotated before it is translated by the pivot value.
+		* kTranslateRotate      The film back is translated by the pivot before it is rotated."""
+	@filmRollOrder.setter
+	def filmRollOrder(self,value:Any)->None:...
+	@property
+	def preScale(self)->Any:
+		"""The post projection matrix's pre-scale value."""
+	@preScale.setter
+	def preScale(self,value:Any)->None:...
+	@property
+	def postScale(self)->Any:
+		"""The post projection matrix's post-scale value."""
+	@postScale.setter
+	def postScale(self,value:Any)->None:...
+	@property
+	def filmTranslateH(self)->Any:
+		"""The horizontal film translate value.  This value corresponds to the normalized viewport."""
+	@filmTranslateH.setter
+	def filmTranslateH(self,value:Any)->None:...
+	@property
+	def filmTranslateV(self)->Any:
+		"""The vertical film translate value. This value corresponds to the normalized viewport, [-1,1]."""
+	@filmTranslateV.setter
+	def filmTranslateV(self,value:Any)->None:...
+	@property
+	def isDisplayGateMask(self)->Any:
+		"""Whether or not the film gate is displayed shaded."""
+	@isDisplayGateMask.setter
+	def isDisplayGateMask(self,value:Any)->None:...
+	@property
+	def isDisplayFilmGate(self)->Any:
+		"""Whether or not the film gate icons are displayed when looking through the camera."""
+	@isDisplayFilmGate.setter
+	def isDisplayFilmGate(self,value:Any)->None:...
+	@property
+	def focalLength(self)->Any:
+		"""The focal length for the camera.
+		This is the distance along the lens axis between the lens and the film plane when "focal distance" is infinitely large. This is an optical property of the lens. Specified in millimeters."""
+	@focalLength.setter
+	def focalLength(self,value:Any)->None:...
+	@property
+	def lensSqueezeRatio(self)->Any:
+		"""The lens squeeze ratio for the camera"""
+	@lensSqueezeRatio.setter
+	def lensSqueezeRatio(self,value:Any)->None:...
+	@property
+	def isClippingPlanes(self)->Any:
+		"""Whether or not manual clipping planes are activated."""
+	@isClippingPlanes.setter
+	def isClippingPlanes(self,value:Any)->None:...
+	@property
+	def nearClippingPlane(self)->Any:
+		"""The distance to the near clipping plane."""
+	@nearClippingPlane.setter
+	def nearClippingPlane(self,value:Any)->None:...
+	@property
+	def farClippingPlane(self)->Any:
+		"""The distance to the far clipping plane."""
+	@farClippingPlane.setter
+	def farClippingPlane(self,value:Any)->None:...
+	@property
+	def isDepthOfField(self)->Any:
+		"""Whether or not the depth of field calculation is performed for the camera."""
+	@isDepthOfField.setter
+	def isDepthOfField(self,value:Any)->None:...
+	@property
+	def fStop(self)->Any:
+		"""The f-stop value for the camera."""
+	@fStop.setter
+	def fStop(self,value:Any)->None:...
+	@property
+	def focusDistance(self)->Any:
+		"""The focus distance for the camera. This value sets the focus at a certain distance in front of the camera."""
+	@focusDistance.setter
+	def focusDistance(self,value:Any)->None:...
+	@property
+	def nearFocusDistance(self)->Any:
+		"""The nearest distance within the well-focus region"""
+	@nearFocusDistance.setter
+	def nearFocusDistance(self,value:Any)->None:...
+	@property
+	def farFocusDistance(self)->Any:
+		"""The farthest distance within the well-focus region"""
+	@farFocusDistance.setter
+	def farFocusDistance(self,value:Any)->None:...
+	@property
+	def isMotionBlur(self)->Any:
+		"""Wheter or not motion blur is on/off for the camera."""
+	@isMotionBlur.setter
+	def isMotionBlur(self,value:Any)->None:...
+	@property
+	def shutterAngle(self)->Any:
+		"""The shutter angle which is one of the variables used to compute motion blur. The shutter angle is specified in radians."""
+	@shutterAngle.setter
+	def shutterAngle(self,value:Any)->None:...
+	@property
+	def centerOfInterest(self)->Any:
+		"""The linear distance from the camera's eye point to the center of interest."""
+	@centerOfInterest.setter
+	def centerOfInterest(self,value:Any)->None:...
+	@property
+	def orthoWidth(self)->Any:
+		"""The orthographic projection width."""
+	@orthoWidth.setter
+	def orthoWidth(self,value:Any)->None:...
+	@property
+	def cameraScale(self)->Any:
+		"""The camera scale."""
+	@cameraScale.setter
+	def cameraScale(self,value:Any)->None:...
+	@property
+	def tumblePivot(self)->Any:
+		"""The tumble pivot value for the camera. The pivot value will be in world space coordinates unless usePivotAsLocalSpace is True in which case the pivot is a relative offset."""
+	@tumblePivot.setter
+	def tumblePivot(self,value:Any)->None:...
+	@property
+	def usePivotAsLocalSpace(self)->Any:
+		"""The local axis tumble setting for this camera.True if using local space tumbling for this camera, or False if using the current global tumble setting in Maya."""
+	@usePivotAsLocalSpace.setter
+	def usePivotAsLocalSpace(self,value:Any)->None:...
 	kFillFilmFit:int=0
 	kHorizontalFilmFit:int=1
 	kVerticalFilmFit:int=2
@@ -5136,25 +5189,25 @@ class MFnCamera(MFnDagNode):
 	kInvalid:int=4
 	kRotateTranslate:int=0
 	kTranslateRotate:int=1
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def aspectRatio(self,*args,**kwargs)->Any:
+	def aspectRatio(self,*args)->Any:
 		"""aspectRatio() -> float
 
 		Returns the aspect ratio for the camera."""
-	def centerOfInterestPoint(self,*args,**kwargs)->Any:
+	def centerOfInterestPoint(self,*args)->Any:
 		"""centerOfInterestPoint(space=kObject) -> MPoint
 
 		Returns the center of interest point for the camera.
 
 		* space (int) - Specifies the coordinate system for this operation"""
-	def computeDepthOfField(self,*args,**kwargs)->Any:
+	def computeDepthOfField(self,*args)->Any:
 		"""computeDepthOfField(nearLimit=None) -> self
 
 		Compute the depth of field
 
 		* nearLimit (float) - the near limit"""
-	def copyViewFrom(self,*args,**kwargs)->Any:
+	def copyViewFrom(self,*args)->Any:
 		"""copyViewFrom(otherCamera) -> self
 
 		Copy the camera settings related to the perspective from the given camera view.
@@ -5162,7 +5215,7 @@ class MFnCamera(MFnDagNode):
 		This method will only work when the world space information for the camera is available, i.e. when the function set has been initialized with a DAG path.
 
 		* otherCamera (MDagPath) - Camera to copy view from"""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(parent=None) -> MObject
 
 		Creates a perspective camera. A parent can be specified for the new camera, otherwise a transform is created.
@@ -5170,28 +5223,28 @@ class MFnCamera(MFnDagNode):
 		The camera is positioned at (0, 0, 0), its center of interest at (0, 0, -1), which implies that the view-direction is pointing in the direction of the negative z-axis, and its up-direction along the positive Y axis.
 
 		* parent (MObject) - The parent of the new camera"""
-	def eyePoint(self,*args,**kwargs)->Any:
+	def eyePoint(self,*args)->Any:
 		"""eyePoint(space=kObject) -> MPoint
 
 		Returns the eye point for the camera.
 
 		* space (int) - Specifies the coordinate system for this operation"""
-	def getAspectRatioLimits(self,*args,**kwargs)->Any:
+	def getAspectRatioLimits(self,*args)->Any:
 		"""getAspectRatioLimits() -> (float, float)
 
 		Returns the minimum and maximum aspect ratio limits for the camera."""
-	def getFilmApertureLimits(self,*args,**kwargs)->Any:
+	def getFilmApertureLimits(self,*args)->Any:
 		"""getFilmApertureLimits() -> (float, float)
 
 		Returns the maximum and minimum film aperture limits for the camera."""
-	def getFilmFrustum(self,*args,**kwargs)->Any:
+	def getFilmFrustum(self,*args)->Any:
 		"""getFilmFrustum(distance, applyPanZoom=False) -> (float, float, float, float)
 
 		Returns the film frustum for the camera (horizontal size, vertical size, horizontal offset and vertical offset). The frustum defines the projective transformation.
 
 		* distance (float) - Specifies the focal length
 		* applyPanZoom (bool) - specifies whether to apply 2D pan/zoom"""
-	def getFilmFrustumCorners(self,*args,**kwargs)->Any:
+	def getFilmFrustumCorners(self,*args)->Any:
 		"""getFilmFrustumCorners(distance, applyPanZoom=False) -> MPointArray
 
 		Returns the film frustum for the camera. The frustum defines the projective transformation.
@@ -5203,25 +5256,25 @@ class MFnCamera(MFnDagNode):
 
 		* distance (float) - Specifies the focal length
 		* applyPanZoom (bool) - specifies whether to apply 2D pan/zoom"""
-	def getFocalLengthLimits(self,*args,**kwargs)->Any:
+	def getFocalLengthLimits(self,*args)->Any:
 		"""getFocalLengthLimits() -> (float, float)
 
 		Returns the maximum and minimum focal length limits for the camera."""
-	def getPortFieldOfView(self,*args,**kwargs)->Any:
+	def getPortFieldOfView(self,*args)->Any:
 		"""getPortFieldOfView(int, int) -> (float, float)
 
 		Returns the horizontal and vertical field of view in radians from the given viewport width and height.
 
 		* width (int) - width of viewport
 		* height (int) - height of viewport"""
-	def getRenderingFrustum(self,*args,**kwargs)->Any:
+	def getRenderingFrustum(self,*args)->Any:
 		"""getRenderingFrustum(windowAspect) -> (float, float, float, float)
 
 		Returns the rendering frustum (left, right, bottom and top) for the camera.
 		This is the frustum that the maya renderer uses.
 
 		* windowAspect (float) - windowAspect"""
-	def getViewParameters(self,*args,**kwargs)->Any:
+	def getViewParameters(self,*args)->Any:
 		"""getViewParameters(windowAspect, applyOverscan=False, applySqueeze=False, applyPanZoom=False) -> (float, float, float, float)
 
 		Returns the intermediate viewing frustum (apertureX, apertureY, offsetX and offsetY) parameters for the camera. The aperture and offset are used by getViewingFrustum() and getRenderingFrustum() to compute the extent (left, right, top, bottom) of the frustum in the following manner:
@@ -5237,7 +5290,7 @@ class MFnCamera(MFnDagNode):
 		* applyOverscan (bool) - specifies whether to apply overscan
 		* applySqueeze (bool) - specifies whether to apply the lens squeeze ratio of the camera
 		* applyPanZoom (bool) - specifies whether to apply 2D pan/zoom"""
-	def getViewingFrustum(self,*args,**kwargs)->Any:
+	def getViewingFrustum(self,*args)->Any:
 		"""getViewingFrustum(windowAspect, applyOverscan=False, applySqueeze=False, applyPanZoom=False) -> (float, float, float, float)
 
 		Returns the viewing frustum (left, right, bottom and top) for the camera.
@@ -5246,7 +5299,7 @@ class MFnCamera(MFnDagNode):
 		* applyOverscan (bool) - specifies whether to apply overscan
 		* applySqueeze (bool) - specifies whether to apply the lens squeeze ratio of the camera
 		* applyPanZoom (bool) - specifies whether to apply 2D pan/zoom"""
-	def hasSamePerspective(self,*args,**kwargs)->Any:
+	def hasSamePerspective(self,*args)->Any:
 		"""hasSamePerspective(otherCamera) -> bool
 
 		Returns True if the camera has same perspective settings as the given camera.
@@ -5254,34 +5307,34 @@ class MFnCamera(MFnDagNode):
 		This method will only work when the world space information for the camera is available, i.e. when the function set has been initialized with a DAG path.
 
 		* otherCamera (MDagPath) - Camera to compare perspective with"""
-	def horizontalFieldOfView(self,*args,**kwargs)->Any:
+	def horizontalFieldOfView(self,*args)->Any:
 		"""horizontalFieldOfView() -> float
 
 		Returns the horizontal field of view for the camera."""
-	def isOrtho(self,*args,**kwargs)->Any:
+	def isOrtho(self,*args)->Any:
 		"""isOrtho() -> bool
 
 		Returns True if the camera is in orthographic mode."""
-	def postProjectionMatrix(self,*args,**kwargs)->Any:
+	def postProjectionMatrix(self,*args)->Any:
 		"""postProjectionMatrix(context=None) -> MFloatMatrix
 
 		Returns the post projection matrix used to compute film roll on the film back plane.
 
 		* context (MDGContext) - DG time-context to specify time of evaluation"""
-	def projectionMatrix(self,*args,**kwargs)->Any:
+	def projectionMatrix(self,*args)->Any:
 		"""projectionMatrix(context=None) -> MFloatMatrix
 
 		Returns the orthographic or perspective projection matrix for the camera.
 		The projection matrix that maya's software renderer uses is almost identical to the OpenGL projection matrix. The difference is that maya uses a left hand coordinate system and so the entries [2][2] and [3][2] are negated.
 
 		* context (MDGContext) - DG time-context to specify time of evaluation"""
-	def rightDirection(self,*args,**kwargs)->Any:
+	def rightDirection(self,*args)->Any:
 		"""rightDirection(space=kObject) -> MVector
 
 		Returns the right direction vector for the camera.
 
 		* space (int) - Specifies the coordinate system for this operation"""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""set(wsEyeLocation, wsViewDirection, wsUpDirection, horizFieldOfView, aspectRatio) -> self
 
 		Convenience routine to set the camera viewing parameters. The specified values should be in world space where applicable.
@@ -5293,13 +5346,13 @@ class MFnCamera(MFnDagNode):
 		* wsUpDirection (MVector) - Up direction to set in world space
 		* horizFieldOfView (float) - The horizontal field of view to set
 		* aspectRatio (float) - The aspect ratio to set"""
-	def setAspectRatio(self,*args,**kwargs)->Any:
+	def setAspectRatio(self,*args)->Any:
 		"""setAspectRatio(aspectRatio) -> self
 
 		Set the aspect ratio of the View.  The aspect ratio is expressed as width/height.  This also modifies the entity's scale transformation to reflect the new aspect ratio.
 
 		* aspectRatio (float) - The aspect ratio to be set"""
-	def setCenterOfInterestPoint(self,*args,**kwargs)->Any:
+	def setCenterOfInterestPoint(self,*args)->Any:
 		"""setCenterOfInterestPoint(centerOfInterest, space=kObject) -> self
 
 		Positions the center-of-interest of the camera keeping the eye-point fixed in space. This method changed the orientation and translation of the camera's transform attributes as well as the center-of-interest distance.
@@ -5308,7 +5361,7 @@ class MFnCamera(MFnDagNode):
 
 		* centerOfInterest (MPoint) - Center of interest point to be set
 		* space (int) - Specifies the coordinate system for this operation"""
-	def setEyePoint(self,*args,**kwargs)->Any:
+	def setEyePoint(self,*args)->Any:
 		"""setEyePoint(eyeLocation, space=kObject) -> self
 
 		Positions the eye-point of the camera keeping the center of interest fixed in space. This method changed the orientation and translation of the camera's transform attributes as well as the center-of-interest distance.
@@ -5317,43 +5370,43 @@ class MFnCamera(MFnDagNode):
 
 		* eyeLocation (MPoint) - The eye location to set
 		* space (int) - Specifies the coordinate system for this operation"""
-	def setHorizontalFieldOfView(self,*args,**kwargs)->Any:
+	def setHorizontalFieldOfView(self,*args)->Any:
 		"""setHorizontalFieldOfView(fov) -> self
 
 		Sets the horizontal field of view for the camera.
 
 		* fov (float) - The horizontal field of view value to be set"""
-	def setIsOrtho(self,*args,**kwargs)->Any:
+	def setIsOrtho(self,*args)->Any:
 		"""setIsOrtho(orthoState, useDist=None) -> self
 
 		Switch the camera in and out of orthographic mode.  When the switch happens, the camera has to calculate a new fov or ortho width, each of which is based on the other and a set distance.  The caller can specify the distance; otherwise the center of interest is used.
 
 		* orthoState (bool) - If True then the camera will be orthographic
 		* useDist (float) - distance to use."""
-	def setNearFarClippingPlanes(self,*args,**kwargs)->Any:
+	def setNearFarClippingPlanes(self,*args)->Any:
 		"""setNearFarClippingPlanes(near, far) -> self
 
 		Set the distances to the Near and Far Clipping Planes.
 
 		* near (float) - The near clipping plane value to be set
 		* far (float) - The far clipping plane value to be set"""
-	def setVerticalFieldOfView(self,*args,**kwargs)->Any:
+	def setVerticalFieldOfView(self,*args)->Any:
 		"""setVerticalFieldOfView(fov) -> self
 
 		Sets the vertical field of view for the camera.
 
 		* fov (float) - The vertical field of view value to be set"""
-	def upDirection(self,*args,**kwargs)->Any:
+	def upDirection(self,*args)->Any:
 		"""upDirection(space=kObject) -> MVector
 
 		Returns the up direction vector for the camera.
 
 		* space (int) - Specifies the coordinate system for this operation"""
-	def verticalFieldOfView(self,*args,**kwargs)->Any:
+	def verticalFieldOfView(self,*args)->Any:
 		"""verticalFieldOfView() -> float
 
 		Returns the vertical field of view for the camera."""
-	def viewDirection(self,*args,**kwargs)->Any:
+	def viewDirection(self,*args)->Any:
 		"""viewDirection(space=kObject) -> MVector
 
 		Returns the view direction for the camera
@@ -5367,14 +5420,32 @@ class MFnComponent(MFnBase):
 	Initializes a new, empty MFnComponent object
 	__init__(MObject component)
 	Initializes a new MFnComponent function set, attached to the specified component."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def componentType(self)->int:
+		"""Type of the component. (MFn Type constant)"""
+	@property
+	def elementCount(self)->int:
+		"""Number of elements in the component."""
+	@property
+	def hasWeights(self)->bool:
+		"""True if the component has weights associated with its elements."""
+	@property
+	def isComplete(self)->bool:
+		"""Marking a component as complete means that it represents a full set
+		of indices from 0 to elementCount-1"""
+	@isComplete.setter
+	def isComplete(self,value:bool)->None:...
+	@property
+	def isEmpty(self)->bool:
+		"""True if the component contains no elements."""
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def isEqual(self,*args,**kwargs)->Any:
+	def isEqual(self,*args)->Any:
 		"""isEqual(MObject other) -> bool
 
 		Returns True if other refers to the same component as the
 		one to which the function set is currently attached."""
-	def weight(self,*args,**kwargs)->Any:
+	def weight(self,*args)->Any:
 		"""weight(index) -> MWeight
 
 		Returns the weight associated with the specified element,
@@ -5389,36 +5460,36 @@ class MFnComponentListData(MFnData):
 	__init__(MObject)
 	Initializes a new MFnComponentListData function set, attached
 	to the specified object."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def add(self,*args,**kwargs)->Any:
+	def add(self,*args)->Any:
 		"""add(MObject) -> self
 
 		Adds the specified component to the end of the list."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""clear() -> self
 
 		Removes all of the components from the list."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create() -> MObject
 
 		Creates a new, empty component list, attaches it to the
 		function set and returns an MObject which references it."""
-	def get(self,*args,**kwargs)->Any:
+	def get(self,*args)->Any:
 		"""get(index) -> MObject
 
 		Returns a copy of the component at the specified index.
 		Raises IndexError if the index is out of range."""
-	def length(self,*args,**kwargs)->Any:
+	def length(self,*args)->Any:
 		"""length() -> int
 
 		Returns the number of components in the list."""
-	def has(self,*args,**kwargs)->Any:
+	def has(self,*args)->Any:
 		"""has(MObject) -> bool
 
 		Returns True if the list contains the specified
 		component, False otherwise."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""remove(MObject) -> self
 		remove(index) -> self
 
@@ -5427,95 +5498,65 @@ class MFnComponentListData(MFnData):
 		raises IndexError if index is out of range"""
 class MFnCompoundAttribute(MFnAttribute):
 	"""Functionset for creating and working with compound attributes."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addChild(self,*args,**kwargs)->Any:
+	def addChild(self,*args)->Any:
 		"""Add a child attribute."""
-	def child(self,*args,**kwargs)->Any:
+	def child(self,*args)->Any:
 		"""Returns one of the attribute's children, specified by index."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new compound attribute, attaches it to the function set and returns it as an MObject."""
-	def getAddAttrCmds(self,*args,**kwargs)->Any:
+	def getAddAttrCmds(self,*args)->Any:
 		"""Returns a list of MEL 'addAttr' commands capable of recreating the attribute and all of its children."""
-	def numChildren(self,*args,**kwargs)->Any:
+	def numChildren(self,*args)->Any:
 		"""Returns number of child attributes currently parented under the compound attribute."""
-	def removeChild(self,*args,**kwargs)->Any:
+	def removeChild(self,*args)->Any:
 		"""Remove a child attribute."""
 class MFnContainerNode(MFnDependencyNode):
 	"""Function set for containers."""
 	kParentAnchor:int=0
 	kChildAnchor:int=1
 	kGeneric:int=2
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def getCurrentAsMObject(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def getCurrentAsMObject(*args)->Any:
+		"""getCurrentAsMObject() -> MObject
 
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getPublishedPlugs(self,*args,**kwargs)->Any:
+		Retrieve the current container node."""
+	def getPublishedPlugs(self,*args)->Any:
 		"""getPublishedPlugs() -> (MPlugArray publishedPlugs, [MString] publishedNames)
 
-		Return a tuple of plugs that have been published on this container and the names of those plugs.
-
-		"""
-	def getPublishedNames(self,*args,**kwargs)->Any:
+		Return a tuple of plugs that have been published on this container and the names of those plugs."""
+	def getPublishedNames(self,*args)->Any:
 		"""getPublishedNames(unboundOnly=bool) -> [MString]
 
-		Return a list of published names on the container. Depending on the arguments, either all published names or only unbound published names will be returned.
-
-		"""
-	def getMembers(self,*args,**kwargs)->Any:
+		Return a list of published names on the container. Depending on the arguments, either all published names or only unbound published names will be returned."""
+	def getMembers(self,*args)->Any:
 		"""getMembers() -> MObjectArray
 
-		Return an array of the nodes included in this container.
-
-		"""
-	def getSubcontainers(self,*args,**kwargs)->Any:
+		Return an array of the nodes included in this container."""
+	def getSubcontainers(self,*args)->Any:
 		"""getSubcontainers() -> MObjectArray
 
-		Return an array of the container nodes included in this container.
-
-		"""
-	def getParentContainer(self,*args,**kwargs)->Any:
+		Return an array of the container nodes included in this container."""
+	def getParentContainer(self,*args)->Any:
 		"""getParentContainer() -> MObject
 
-		Return the parent container, if there is one. Otherwise return an empty MObject.
-
-		"""
-	def getRootTransform(self,*args,**kwargs)->Any:
+		Return the parent container, if there is one. Otherwise return an empty MObject."""
+	def getRootTransform(self,*args)->Any:
 		"""getRootTransform() -> MObject
 
-		Return the root transform, if there is one. Otherwise return an empty MObject.
-
-		"""
-	def getPublishedNodes(self,*args,**kwargs)->Any:
+		Return the root transform, if there is one. Otherwise return an empty MObject."""
+	def getPublishedNodes(self,*args)->Any:
 		"""getPublishedNodes(publishNodeType=MPublishNodeType) -> ([MString] publishedNames, MObjectArray publishedNodes)
 
-		Return a list of the published nodes of a given type. For any names that have assigned nodes, return the node at the corresponding array index. For any names that do not have assigned nodes, a NULL MObject will be at the corresponding array index.
-
-		"""
-	def isCurrent(self,*args,**kwargs)->Any:
+		Return a list of the published nodes of a given type. For any names that have assigned nodes, return the node at the corresponding array index. For any names that do not have assigned nodes, a NULL MObject will be at the corresponding array index."""
+	def isCurrent(self,*args)->Any:
 		"""isCurrent() -> bool
 
-		Return whether the container node managed by this function set is the current container.
-
-		"""
-	def makeCurrent(self,*args,**kwargs)->Any:
+		Return whether the container node managed by this function set is the current container."""
+	def makeCurrent(self,*args)->Any:
 		"""makeCurrent(isCurrent) -> self
 
 		Set or clear whether the container managed by this function set is denoted as the
@@ -5524,15 +5565,11 @@ class MFnContainerNode(MFnDependencyNode):
 		container managed by the function set is the current container, then the current
 		container is cleared.
 
-		* isCurrent (True/False) - Specifies whether this container shall be current.
-
-		"""
-	def clear(self,*args,**kwargs)->Any:
+		* isCurrent (True/False) - Specifies whether this container shall be current."""
+	def clear(self)->None:
 		"""clear()
 
-		Delete all members of the container.
-
-		"""
+		Delete all members of the container."""
 class MFnDagNode(MFnDependencyNode):
 	"""Function set for operating on DAG nodes.
 
@@ -5546,22 +5583,61 @@ class MFnDagNode(MFnDependencyNode):
 	__init__(MDagPath)
 	Initializes a new MFnDagNode functionset and attaches it to a
 	DAG path."""
+	@property
+	def boundingBox(self)->MBoundingBox:
+		"""Node's bounding box, in object space."""
+	@property
+	def inModel(self)->bool:
+		"""True if the node has been added to the model."""
+	@property
+	def inUnderWorld(self)->bool:
+		"""True if this node is in the underworld of another node (e.g. a curve on surface is in the underworld of the surface)."""
+	@property
+	def isInstanceable(self)->bool:
+		"""True if instancing is allowed for this node."""
+	@isInstanceable.setter
+	def isInstanceable(self,value:bool)->None:...
+	@property
+	def isIntermediateObject(self)->bool:
+		"""True if this node is just an intermediate in part of a larger calculation (e.g. input to a deformer)."""
+	@isIntermediateObject.setter
+	def isIntermediateObject(self,value:bool)->None:...
+	@property
+	def objectColor(self)->int:
+		"""Index from 0 to 7 indicating the color in which the node is to be drawn when inactive, assuming that it is drawable."""
+	@objectColor.setter
+	def objectColor(self,value:int)->None:...
+	@property
+	def objectColorRGB(self)->Any:
+		"""RGB value indicating the color in which the node is to be drawn when inactive, assuming that it is drawable."""
+	@objectColorRGB.setter
+	def objectColorRGB(self,value:Any)->None:...
+	@property
+	def useObjectColor(self)->bool:
+		"""If True then the node will be drawn using its 'objectColor', otherwise it will be drawn using Maya's default color. Thismethod is deprecated, use objectColorType instead."""
+	@useObjectColor.setter
+	def useObjectColor(self,value:bool)->None:...
+	@property
+	def objectColorType(self)->Any:
+		"""Determines whether the default color, indexed object color, orRGB object color is used for this object."""
+	@objectColorType.setter
+	def objectColorType(self,value:Any)->None:...
 	kNextPos:int=255
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addChild(self,*args,**kwargs)->Any:
+	def addChild(self,*args)->Any:
 		"""addChild(node, index=kNextPos, keepExistingParents=False) -> self
 
 		Makes a node a child of this one."""
-	def child(self,*args,**kwargs)->Any:
+	def child(self,*args)->Any:
 		"""child(index) -> MObject
 
 		Returns the specified child of this node."""
-	def childCount(self,*args,**kwargs)->Any:
+	def childCount(self,*args)->Any:
 		"""childCount() -> int
 
 		Returns the number of nodes which are children of this one."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(type, name=None, parent=MObject.kNullObj) -> MObject
 
 		Creates a new DAG node of the specified type, with the given name.
@@ -5581,89 +5657,88 @@ class MFnDagNode(MFnDependencyNode):
 		transform node will be created under the world, the new node will be
 		parented under it, and the functionset will be attached to the
 		transform. The transform will be returned."""
-	def dagPath(self,*args,**kwargs)->Any:
+	def dagPath(self,*args)->Any:
 		"""dagPath() -> MDagPath
 
 		Returns the DAG path to which this function set is attached. Raises a TypeError if the function set is attached to an MObject rather than a path."""
-	def dagRoot(self,*args,**kwargs)->Any:
+	def dagRoot(self,*args)->Any:
 		"""dagRoot() -> MObject
 
 		Returns the root node of the first path leading to this node."""
-	def duplicate(self,*args,**kwargs)->Any:
+	def duplicate(self,*args)->Any:
 		"""duplicate(instance=False, instanceLeaf=False) -> MObject
 
 		Duplicates the DAG hierarchy rooted at the current node."""
-	def fullPathName(self,*args,**kwargs)->Any:
+	def fullPathName(self,*args)->Any:
 		"""fullPathName() -> string
 
 		Returns the full path of the attached object, from the root of the DAG on down."""
-	def getAllPaths(self,*args,**kwargs)->Any:
+	def getAllPaths(self,*args)->Any:
 		"""getAllPaths() -> MDagPathArray
 
 		Returns all of the DAG paths which lead to the object to which this function set is attached."""
-	def getConnectedSetsAndMembers(self,*args,**kwargs)->Any:
+	def getConnectedSetsAndMembers(self,*args)->Any:
 		"""getConnectedSetsAndMembers(instance, renderableSetsOnly) -> (MObjectArray, MObjectArray)
 
 		Returns a tuple containing an array of sets and an array of the
-		components of the DAG object which are in those sets. If the entire object is in a set, then the corresponding entry in the comps array will have no elements in it.
-		"""
-	def getPath(self,*args,**kwargs)->Any:
+		components of the DAG object which are in those sets. If the entire object is in a set, then the corresponding entry in the comps array will have no elements in it."""
+	def getPath(self,*args)->Any:
 		"""getPath() -> MDagPath
 
 		Returns the DAG path to which this function set is attached, or the first path to the node if the function set is attached to an MObject."""
-	def hasChild(self,*args,**kwargs)->Any:
+	def hasChild(self,*args)->Any:
 		"""hasChild(node) -> bool
 
 		Returns True if the specified node is a child of this one."""
-	def hasParent(self,*args,**kwargs)->Any:
+	def hasParent(self,*args)->Any:
 		"""hasParent(node) -> bool
 
 		Returns True if the specified node is a parent of this one."""
-	def instanceCount(self,*args,**kwargs)->Any:
+	def instanceCount(self,*args)->Any:
 		"""instanceCount(indirect) -> int
 
 		Returns the number of instances for this node."""
-	def isChildOf(self,*args,**kwargs)->Any:
+	def isChildOf(self,*args)->Any:
 		"""isChildOf(node) -> bool
 
 		Returns True if the specified node is a parent of this one."""
-	def isInstanced(self,*args,**kwargs)->Any:
+	def isInstanced(self,*args)->Any:
 		"""isInstanced(indirect=True) -> bool
 
 		Returns True if this node is instanced."""
-	def isInstancedAttribute(self,*args,**kwargs)->Any:
+	def isInstancedAttribute(self,*args)->Any:
 		"""isInstancedAttribute(attr) -> bool
 
 		Returns True if the specified attribute is an instanced attribute of this node."""
-	def isParentOf(self,*args,**kwargs)->Any:
+	def isParentOf(self,*args)->Any:
 		"""isParentOf(node) -> bool
 
 		Returns True if the specified node is a child of this one."""
-	def parent(self,*args,**kwargs)->Any:
+	def parent(self,*args)->Any:
 		"""parent(index) -> MObject
 
 		Returns the specified parent of this node."""
-	def parentCount(self,*args,**kwargs)->Any:
+	def parentCount(self,*args)->Any:
 		"""parentCount() -> int
 
 		Returns the number of parents this node has."""
-	def partialPathName(self,*args,**kwargs)->Any:
+	def partialPathName(self,*args)->Any:
 		"""partialPathName() -> string
 
 		Returns the minimum path string necessary to uniquely identify the attached object."""
-	def removeChild(self,*args,**kwargs)->Any:
+	def removeChild(self,*args)->Any:
 		"""removeChild(node) -> self
 
 		Removes the child, specified by MObject, reparenting it under the world."""
-	def removeChildAt(self,*args,**kwargs)->Any:
+	def removeChildAt(self,*args)->Any:
 		"""removeChildAt(index) -> self
 
 		Removes the child, specified by index, reparenting it under the world."""
-	def setObject(self,*args,**kwargs)->Any:
+	def setObject(self,*args)->Any:
 		"""setObject(MObject or MDagPath) -> self
 
 		Attaches the function set to the specified node or DAG path."""
-	def transformationMatrix(self,*args,**kwargs)->Any:
+	def transformationMatrix(self,*args)->Any:
 		"""transformationMatrix() -> MMatrix
 
 		Returns the object space transformation matrix for this DAG node."""
@@ -5696,10 +5771,36 @@ class MFnData(MFnBase):
 	kAny:int=24
 	kFalloffFunction:int=25
 	kLast:int=26
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 class MFnDependencyNode(MFnBase):
 	"""Function set for operating on dependency nodes."""
+	@property
+	def isDefaultNode(self)->bool:
+		"""True if this is a default node, created automatically by Maya."""
+	@property
+	def isFromReferencedFile(self)->bool:
+		"""True if the node is from a referenced file, False if the node is part of the main scene."""
+	@property
+	def isLocked(self)->bool:
+		"""True if the node is locked against changes."""
+	@isLocked.setter
+	def isLocked(self,value:bool)->None:...
+	@property
+	def isShared(self)->bool:
+		"""True if the node is shared."""
+	@property
+	def namespace(self)->str:
+		"""Name of the namespace which contains the node."""
+	@property
+	def pluginName(self)->str:
+		"""Name of the plugin which registered the node type, if any."""
+	@property
+	def typeId(self)->MTypeId:
+		"""MTypeId for the node's type."""
+	@property
+	def typeName(self)->str:
+		"""Name of the node's type."""
 	kLocalDynamicAttr:int=1
 	kNormalAttr:int=2
 	kExtensionAttr:int=3
@@ -5722,171 +5823,107 @@ class MFnDependencyNode(MFnBase):
 	kTimerType_inclusive:int=1
 	kTimerType_count:int=2
 	kTimerTypes:int=3
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def allocateFlag(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def classification(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def deallocateAllFlags(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def deallocateFlag(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def absoluteName(self,*args,**kwargs)->Any:
+	@staticmethod
+	def allocateFlag(*args)->Any:
+		"""Allocates a flag on all nodes for use by the named plugin and returns the flag's index."""
+	@staticmethod
+	def classification(*args)->Any:
+		"""Returns the classification string for the named node type."""
+	@staticmethod
+	def deallocateAllFlags(*args)->Any:
+		"""Deallocates all node flags which are currently allocated to the named plugin."""
+	@staticmethod
+	def deallocateFlag(*args)->Any:
+		"""Deallocates the specified node flag, which was previously allocated by the named plugin using allocateFlag()."""
+	def absoluteName(self,*args)->Any:
 		"""Returns the absolute name of this node.  The absolute name of a node is the full namespace path starting at (and including) the root namespace, down to (and including) the node itself.  Regardless of relative name mode, absoluteName() will always return a full namespace path prefixed with a leading colon (the root namespace).  If the underlying node is a DAG node, then absoluteName() does not guarantee uniqueness, that is, two dependency nodes could have the same absoluteName().  In cases like this the uniqueName() method will guarantee that the name uniquely identifies the node."""
-	def uniqueName(self,*args,**kwargs)->Any:
+	def uniqueName(self,*args)->Any:
 		"""For a DAG node, the unique name of a node is the full namespace path starting at (and including) the root namespace, down to (and including) the node itself. For a non-DAG node, the uniqueName is just its name."""
-	def addAttribute(self,*args,**kwargs)->Any:
+	def addAttribute(self,*args)->Any:
 		"""Adds a new dynamic attribute to the node."""
-	def affectsAnimation(self,*args,**kwargs)->Any:
+	def affectsAnimation(self,*args)->Any:
 		"""Returns true if the changes to the node may affect animation."""
-	def attribute(self,*args,**kwargs)->Any:
+	def attribute(self,*args)->Any:
 		"""Returns an attribute of the node, given either its index or name."""
-	def attributeClass(self,*args,**kwargs)->Any:
+	def attributeClass(self,*args)->Any:
 		"""Returns the class of the specified attribute."""
-	def attributeCount(self,*args,**kwargs)->Any:
+	def attributeCount(self,*args)->Any:
 		"""Returns the number of attributes on the node."""
-	def canBeWritten(self,*args,**kwargs)->Any:
+	def canBeWritten(self,*args)->Any:
 		"""Returns true if the node will be written to file."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new node of the given type."""
-	def dgCallbackIds(self,*args,**kwargs)->Any:
+	def dgCallbackIds(self,*args)->Any:
 		"""Returns DG timing information for a specific callback type, broken down by callbackId."""
-	def dgCallbacks(self,*args,**kwargs)->Any:
+	def dgCallbacks(self,*args)->Any:
 		"""Returns DG timing information broken down by callback type."""
-	def dgTimer(self,*args,**kwargs)->Any:
+	def dgTimer(self,*args)->Any:
 		"""Returns a specific DG timer metric for a given timer type."""
-	def dgTimerOff(self,*args,**kwargs)->Any:
+	def dgTimerOff(self,*args)->Any:
 		"""Turns DG timing off for this node."""
-	def dgTimerOn(self,*args,**kwargs)->Any:
+	def dgTimerOn(self,*args)->Any:
 		"""Turns DG timing on for this node."""
-	def dgTimerQueryState(self,*args,**kwargs)->Any:
+	def dgTimerQueryState(self,*args)->Any:
 		"""Returns the current DG timer state for this node."""
-	def dgTimerReset(self,*args,**kwargs)->Any:
+	def dgTimerReset(self,*args)->Any:
 		"""Resets all DG timers for this node."""
-	def findAlias(self,*args,**kwargs)->Any:
+	def findAlias(self,*args)->Any:
 		"""Returns the attribute which has the given alias."""
-	def findPlug(self,*args,**kwargs)->Any:
+	def findPlug(self,*args)->Any:
 		"""Returns a plug for the given attribute."""
-	def getAffectedAttributes(self,*args,**kwargs)->Any:
+	def getAffectedAttributes(self,*args)->Any:
 		"""Returns all of the attributes which are affected by the specified attribute."""
-	def getAffectingAttributes(self,*args,**kwargs)->Any:
+	def getAffectingAttributes(self,*args)->Any:
 		"""Returns all of the attributes which affect the specified attribute."""
-	def getAliasAttr(self,*args,**kwargs)->Any:
+	def getAliasAttr(self,*args)->Any:
 		"""Returns the node's alias attribute, which is a special attribute used to store information about the node's attribute aliases."""
-	def getAliasList(self,*args,**kwargs)->Any:
+	def getAliasList(self,*args)->Any:
 		"""Returns all of the node's attribute aliases."""
-	def getConnections(self,*args,**kwargs)->Any:
+	def getConnections(self,*args)->Any:
 		"""Returns all the plugs which are connected to attributes of this node."""
-	def hasAttribute(self,*args,**kwargs)->Any:
+	def hasAttribute(self,*args)->Any:
 		"""Returns True if the node has an attribute with the given name."""
-	def hasUniqueName(self,*args,**kwargs)->Any:
+	def hasUniqueName(self,*args)->Any:
 		"""Returns True if the node's name is unique."""
-	def isFlagSet(self,*args,**kwargs)->Any:
+	def isFlagSet(self,*args)->Any:
 		"""Returns the state of the specified node flag."""
-	def isNewAttribute(self,*args,**kwargs)->Any:
+	def isNewAttribute(self,*args)->Any:
 		"""Returns True if the specified attribute was added in the current scene, and not by by one of its referenced files."""
-	def isTrackingEdits(self,*args,**kwargs)->Any:
+	def isTrackingEdits(self,*args)->Any:
 		"""Returns True if the node is referenced or in an assembly that is tracking edits."""
-	def name(self,*args,**kwargs)->Any:
+	def name(self,*args)->Any:
 		"""Returns the node's name."""
-	def plugsAlias(self,*args,**kwargs)->Any:
+	def plugsAlias(self,*args)->Any:
 		"""Returns the alias for a plug's attribute."""
-	def removeAttribute(self,*args,**kwargs)->Any:
+	def removeAttribute(self,*args)->Any:
 		"""Removes a dynamic attribute from the node."""
-	def reorderedAttribute(self,*args,**kwargs)->Any:
+	def reorderedAttribute(self,*args)->Any:
 		"""Returns one of the node's attribute, based on the order in which they are written to file."""
-	def setAffectsAnimation(self,*args,**kwargs)->Any:
+	def setAffectsAnimation(self,*args)->Any:
 		"""Specifies that modifications to a node could potentially affect the animation."""
-	def setAlias(self,*args,**kwargs)->Any:
+	def setAlias(self,*args)->Any:
 		"""Adds or removes an attribute alias."""
-	def setDoNotWrite(self,*args,**kwargs)->Any:
+	def setDoNotWrite(self,*args)->Any:
 		"""Used to prevent the node from being written to file."""
-	def setFlag(self,*args,**kwargs)->Any:
+	def setFlag(self,*args)->Any:
 		"""Sets the state of the specified node flag."""
-	def setName(self,*args,**kwargs)->Any:
+	def setName(self,*args)->Any:
 		"""Sets the node's name."""
-	def setUuid(self,*args,**kwargs)->Any:
+	def setUuid(self,*args)->Any:
 		"""Sets the node's UUID."""
-	def userNode(self,*args,**kwargs)->Any:
+	def userNode(self,*args)->Any:
 		"""Returns the MPxNode object for a plugin node."""
-	def uuid(self,*args,**kwargs)->Any:
+	def uuid(self,*args)->Any:
 		"""Returns the node's UUID."""
-	def addExternalContentForFileAttr(self,*args,**kwargs)->Any:
+	def addExternalContentForFileAttr(self,*args)->Any:
 		"""Adds content info to the specified table from a file path attribute."""
-	def getExternalContent(self,*args,**kwargs)->Any:
+	def getExternalContent(self,*args)->Any:
 		"""Gets the external content (files) that this node depends on."""
-	def setExternalContent(self,*args,**kwargs)->Any:
+	def setExternalContent(self,*args)->Any:
 		"""Changes the location of external content."""
-	def setExternalContentForFileAttr(self,*args,**kwargs)->Any:
+	def setExternalContentForFileAttr(self,*args)->Any:
 		"""Sets content info in the specified attribute from the table."""
 class MFnDisplayLayer(MFnDependencyNode):
 	"""Function set display layer.
@@ -5895,32 +5932,27 @@ class MFnDisplayLayer(MFnDependencyNode):
 	Initializes a new, empty MFnDisplayLayer object.
 
 	"""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def getMembers(self,*args,**kwargs)->Any:
+	def getMembers(self,*args)->Any:
 		"""getMembers(members) -> status
-		Get the members of the display layer
-		"""
-	def add(self,*args,**kwargs)->Any:
+		Get the members of the display layer"""
+	def add(self,*args)->Any:
 		"""add(item) -> status
 		Adds the item to the display layer, where item can be a Ufe path string
-		(MString) or a Maya path (MDagPath).
-		"""
-	def remove(self,*args,**kwargs)->Any:
+		(MString) or a Maya path (MDagPath)."""
+	def remove(self,item)->None:
 		"""remove(item) -> status
 		Removes the item to the display layer, where item can be a Ufe path string
-		(MString) or a Maya path (MDagPath).
-		"""
-	def contains(self,*args,**kwargs)->Any:
+		(MString) or a Maya path (MDagPath)."""
+	def contains(self,*args)->Any:
 		"""contains(item) -> bool
 		Returns true if the item is in the display layer, where item can be a Ufe
-		path string (MString) or a Maya path (MDagPath).
-		"""
-	def containsAncestorInclusive(self,*args,**kwargs)->Any:
+		path string (MString) or a Maya path (MDagPath)."""
+	def containsAncestorInclusive(self,*args)->Any:
 		"""containsAncestorInclusive(item) -> status
 		Returns true if the item or one of its ancestors is in the display layer,
-		 where item can be a Ufe path string (MString) or a Maya path (MDagPath).
-		"""
+		 where item can be a Ufe path string (MString) or a Maya path (MDagPath)."""
 class MFnDisplayLayerManager(MFnDependencyNode):
 	"""Function set display layer.
 
@@ -5928,61 +5960,43 @@ class MFnDisplayLayerManager(MFnDependencyNode):
 	Initializes a new, empty MFnDisplayLayerManager object.
 
 	"""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def currentDisplayLayerManager(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getAllDisplayLayers(self,*args,**kwargs)->Any:
+	@staticmethod
+	def currentDisplayLayerManager(*args)->Any:
+		"""currentDisplayLayerManager() -> MObject
+		Get the current display layer manager"""
+	def getAllDisplayLayers(self,*args)->Any:
 		"""getAllDisplayLayers() -> object array
 		Get all the display layers managed by the display layer manager
-		(MString) or a Maya path (MDagPath).
-		"""
-	def getLayer(self,*args,**kwargs)->Any:
+		(MString) or a Maya path (MDagPath)."""
+	def getLayer(self,*args)->Any:
 		"""getLayer(item) -> status
 		Finds the layer the item is in, where item can be a Ufe
-		path string (MString) or a Maya object (MObject).
-		"""
-	def getAncestorLayersInclusive(self,*args,**kwargs)->Any:
+		path string (MString) or a Maya object (MObject)."""
+	def getAncestorLayersInclusive(self,*args)->Any:
 		"""getAncestorLayersInclusive(item) -> status
 		Finds the layers the item and it's ancestors are in, where item can be a Ufe
-		path string (MString) or a Maya object (MObject).
-		"""
+		path string (MString) or a Maya object (MObject)."""
 class MFnDoubleArrayData(MFnData):
 	"""Function set for node data consisting of an array of doubles."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args,**kwargs)->Any:
+	def array(self,*args)->Any:
 		"""Returns the encapsulated array as an MDoubleArray."""
-	def copyTo(self,*args,**kwargs)->Any:
+	def copyTo(self,*args)->Any:
 		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new double array data object."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""Sets values in the encapsulated array."""
 class MFnDoubleIndexedComponent(MFnComponent):
 	"""This function set allows you to create, edit, and query double indexed
@@ -5994,40 +6008,40 @@ class MFnDoubleIndexedComponent(MFnComponent):
 	__init__(MObject component)
 	Initializes a new MFnDoubleIndexedComponent function set, attached
 	to the specified component."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addElement(self,*args,**kwargs)->Any:
+	def addElement(self,*args)->Any:
 		"""addElement(uIndex, vIndex) -> self
 		addElement([uIndex, vIndex]) -> self
 
 		Adds the element identified by (uIndex, vIndex) to the component."""
-	def addElements(self,*args,**kwargs)->Any:
+	def addElements(self,*args)->Any:
 		"""addElements(sequence of [uIndex, vIndex]) -> self
 
 		Adds the specified elements to the component. Each item in the
 		elements sequence is itself a sequence of two ints which are the U and
 		V indices of an element to be added."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(MFn Type constant) -> MObject
 
 		Creates a new, empty component, attaches it to the function set and
 		returns an MObject which references it."""
-	def getCompleteData(self,*args,**kwargs)->Any:
+	def getCompleteData(self,*args)->Any:
 		"""getCompleteData() -> (numU, numV)
 
 		Returns a tuple containing the number of U and V indices in the complete
 		component, or (0,0) if the component is not complete."""
-	def getElement(self,*args,**kwargs)->Any:
+	def getElement(self,*args)->Any:
 		"""getElement(index) -> (uIndex, vIndex)
 
 		Returns the index'th element of the component as a tuple containing the
 		element's U and V indices."""
-	def getElements(self,*args,**kwargs)->Any:
+	def getElements(self,*args)->Any:
 		"""getElements() -> list of (uIndex, vIndex)
 
 		Returns all of the component's elements as a list of tuples with each
 		tuple containing the U and V indices of a single element."""
-	def setCompleteData(self,*args,**kwargs)->Any:
+	def setCompleteData(self,*args)->Any:
 		"""setCompleteData(numU, numV) -> self
 
 		Marks the component as complete (i.e. contains all possible elements).
@@ -6035,39 +6049,44 @@ class MFnDoubleIndexedComponent(MFnComponent):
 		component (i.e. the max U index is numU-1 and the max V index is numV-1)."""
 class MFnEnumAttribute(MFnAttribute):
 	"""Functionset for creating and working with enumeration attributes."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def default(self)->int:
+		"""Default value"""
+	@default.setter
+	def default(self,value:int)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addField(self,*args,**kwargs)->Any:
+	def addField(self,*args)->Any:
 		"""Add an item to the enumeration with a specified UI name and corresponding attribute value."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new enumeration attribute, attaches it to the function set and returns it as an MObject."""
-	def fieldName(self,*args,**kwargs)->Any:
+	def fieldName(self,*args)->Any:
 		"""Returns the name of the enumeration item which has a given value."""
-	def fieldValue(self,*args,**kwargs)->Any:
+	def fieldValue(self,*args)->Any:
 		"""Returns the value of the enumeration item which has a given name."""
-	def getMax(self,*args,**kwargs)->Any:
+	def getMax(self,*args)->Any:
 		"""Returns the maximum value of all the enumeration items."""
-	def getMin(self,*args,**kwargs)->Any:
+	def getMin(self,*args)->Any:
 		"""Returns the minimum value of all the enumeration items."""
-	def setDefaultByName(self,*args,**kwargs)->Any:
+	def setDefaultByName(self,*args)->Any:
 		"""Set the default value using the name of an enumeration item. Equivalent to: attr.default = attr.fieldValue(name)"""
 class MFnGenericAttribute(MFnAttribute):
 	"""Functionset for creating and working with attributes which can accept several different types of data."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addDataType(self,*args,**kwargs)->Any:
+	def addDataType(self,*args)->Any:
 		"""Adds the specified Maya data type to the list of those accepted by the attribute."""
-	def addNumericType(self,*args,**kwargs)->Any:
+	def addNumericType(self,*args)->Any:
 		"""Adds the specified numeric type to the list of those accepted by the attribute."""
-	def addTypeId(self,*args,**kwargs)->Any:
+	def addTypeId(self,*args)->Any:
 		"""Adds the specified data typeId to the list of those accepted by the attribute."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new generic attribute, attaches it to the function set and returns it as an MObject."""
-	def removeDataType(self,*args,**kwargs)->Any:
+	def removeDataType(self,*args)->Any:
 		"""Removes the specified Maya data type from the list of those accepted by the attribute."""
-	def removeNumericType(self,*args,**kwargs)->Any:
+	def removeNumericType(self,*args)->Any:
 		"""Removes the specified numeric type from the list of those accepted by the attribute."""
-	def removeTypeId(self,*args,**kwargs)->Any:
+	def removeTypeId(self,*args)->Any:
 		"""Removes the specified data typeId from the list of those accepted by the attribute."""
 class MFnGeometryData(MFnData):
 	"""This class is the function set for geometry data.
@@ -6082,6 +6101,20 @@ class MFnGeometryData(MFnData):
 	__init__(MObject)
 	Initializes a new MFnGeometryData function set, attached
 	to the specified object."""
+	@property
+	def matrix(self)->MMatrix:
+		"""MMatrix used to convert the object into local space."""
+	@matrix.setter
+	def matrix(self,value:MMatrix)->None:...
+	@property
+	def isIdentity(self)->bool:
+		"""True if the matrix for the geometry is the identity."""
+	@property
+	def isNotIdentity(self)->bool:
+		"""True if the matrix for the geometry is not the identity."""
+	@property
+	def objectGroupCount(self)->int:
+		"""The number of object groups contained by the object."""
 	kAuto:int=0
 	kNull:int=1
 	kVerts:int=2
@@ -6092,176 +6125,186 @@ class MFnGeometryData(MFnData):
 	kEmptyGroup:int=1
 	kCompleteGroup:int=2
 	kPartialGroup:int=3
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addObjectGroup(self,*args,**kwargs)->Any:
+	def addObjectGroup(self,*args)->Any:
 		"""addObjectGroup(id) -> self
 
 		Adds an object group with the given id to the object."""
-	def addObjectGroupComponent(self,*args,**kwargs)->Any:
+	def addObjectGroupComponent(self,*args)->Any:
 		"""addObjectGroupComponent(id, MObject component) -> self
 
 		Adds the members of the given component to the object group
 		with the given id."""
-	def changeObjectGroupId(self,*args,**kwargs)->Any:
+	def changeObjectGroupId(self,*args)->Any:
 		"""changeObjectGroupId(sourceId, destId) -> self
 
 		Changes the id of the object group with the given id to the new id."""
-	def copyObjectGroups(self,*args,**kwargs)->Any:
+	def copyObjectGroups(self,*args)->Any:
 		"""copyObjectGroups(MObject inGeom) -> self
 
 		Copies the object groups from the given geometry data object."""
-	def hasObjectGroup(self,*args,**kwargs)->Any:
+	def hasObjectGroup(self,*args)->Any:
 		"""hasObjectGroup(id) -> self
 
 		Returns True if an object group with the given id is
 		contained in the data."""
-	def objectGroup(self,*args,**kwargs)->Any:
+	def objectGroup(self,*args)->Any:
 		"""objectGroup(index) -> int
 
 		Returns the id of the index'th object group contained by the object."""
-	def objectGroupComponent(self,*args,**kwargs)->Any:
+	def objectGroupComponent(self,*args)->Any:
 		"""objectGroupComponent(id) -> MObject
 
 		Returns a component which contains the members of the object group
 		with the given id."""
-	def objectGroupType(self,*args,**kwargs)->Any:
+	def objectGroupType(self,*args)->Any:
 		"""objectGroupType(id) -> MFn Type constant
 
 		Returns the type of the component that the object group with the
 		given id contains."""
-	def removeObjectGroup(self,*args,**kwargs)->Any:
+	def removeObjectGroup(self,*args)->Any:
 		"""removeObjectGroup(id) -> self
 
 		Removes an object group with the given id from the object."""
-	def removeObjectGroupComponent(self,*args,**kwargs)->Any:
+	def removeObjectGroupComponent(self,*args)->Any:
 		"""removeObjectGroupComponent(id, MObject component) -> self
 
 		Removes the members of the given component from the object group
 		with the given id."""
-	def setObjectGroupComponent(self,*args,**kwargs)->Any:
+	def setObjectGroupComponent(self,*args)->Any:
 		"""setObjectGroupComponent(id, MObject component) -> self
 
 		Sets the members of the object group with the given id
 		to be only those in the given component."""
-	def hasComponentTag(self,*args,**kwargs)->Any:
+	def hasComponentTag(self,*args)->Any:
 		"""hasComponentTag(key) -> bool
 
 		Returns True if a componentTag with the given key exists."""
-	def addComponentTag(self,*args,**kwargs)->Any:
+	def addComponentTag(self,*args)->Any:
 		"""addComponentTag(key) -> self
 
 		Adds a componentTag with the given key to the object."""
-	def removeComponentTag(self,*args,**kwargs)->Any:
+	def removeComponentTag(self,*args)->Any:
 		"""removeComponentTag(key) -> self
 
 		Removes a componentTag with the given key from the object."""
-	def renameComponentTag(self,*args,**kwargs)->Any:
+	def renameComponentTag(self,*args)->Any:
 		"""renameComponentTag(key, newKey) -> self
 
 		Renames a componentag with the given key the object."""
-	def componentTagType(self,*args,**kwargs)->Any:
+	def componentTagType(self,*args)->Any:
 		"""componentTagType(key) -> MFn Type constant
 
 		Returns the type of the component that the componentTag with the
 		given key contains."""
-	def setComponentTagContents(self,*args,**kwargs)->Any:
+	def setComponentTagContents(self,*args)->Any:
 		"""setComponentTagContents(key, MObject component) -> self
 
 		Sets the members of the componentTag with the given key
 		to be those in the given component."""
-	def componentTagContents(self,*args,**kwargs)->Any:
+	def componentTagContents(self,*args)->Any:
 		"""componentTagContents(key) -> MObject
 
 		Returns a component which contains the members of the componentTag
 		with the given key."""
-	def componentTags(self,*args,**kwargs)->Any:
+	def componentTags(self,*args)->Any:
 		"""componentTags() -> MObject
 
 		Returns the componentTag keys contained in the object."""
-	def objectGroupSubsetState(self,*args,**kwargs)->Any:
+	def objectGroupSubsetState(self,*args)->Any:
 		"""objectGroupSubsetState(id) -> MFnGeometryData::SubsetState type constant
 
 		Returns the state of the group contents of the object group with the
 		given id."""
-	def componentTagExpressionSubsetState(self,*args,**kwargs)->Any:
+	def componentTagExpressionSubsetState(self,*args)->Any:
 		"""componentTagExpressionSubsetState(expr,ctg) -> MFnGeometryData::SubsetState type constant
 
 		Returns the state of the contents of the resolved componentTag expression."""
-	def resolveComponentTagExpression(self,*args,**kwargs)->Any:
+	def resolveComponentTagExpression(self,*args)->Any:
 		"""resolveComponentTagExpression(key, ctg) -> MObject
 
 		Returns a component which is the result of the resolved componentTag expression
 		with the given key."""
 class MFnIntArrayData(MFnData):
 	"""Function set for node data consisting of an array of ints."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args,**kwargs)->Any:
+	def array(self,*args)->Any:
 		"""Returns the encapsulated array as an MIntArray."""
-	def copyTo(self,*args,**kwargs)->Any:
+	def copyTo(self,*args)->Any:
 		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new int array data object."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""Sets values in the encapsulated array."""
 class MFnLightDataAttribute(MFnAttribute):
 	"""Functionset for creating and working with light data attributes."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def default(self)->tuple[tuple[dirX, dirY, dirZ], tuple[intR, intG, intB], ambient, diffuse, specular, shadowFraction, preshadowIntensity, blindData]:
+		"""Default values for the light data attribute's child attributes."""
+	@default.setter
+	def default(self,value:tuple[tuple[dirX, dirY, dirZ], tuple[intR, intG, intB], ambient, diffuse, specular, shadowFraction, preshadowIntensity, blindData])->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def child(self,*args,**kwargs)->Any:
+	def child(self,*args)->Any:
 		"""Returns one of the attribute's children, specified by index."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new light data attribute, attaches it to the function set and returns it as an MObject."""
 class MFnMatrixArrayData(MFnData):
 	"""Function set for node data consisting of an array of MMatrix."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args,**kwargs)->Any:
+	def array(self,*args)->Any:
 		"""Returns the encapsulated array as an MMatrixArray."""
-	def copyTo(self,*args,**kwargs)->Any:
+	def copyTo(self,*args)->Any:
 		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new MMatrix array data object."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""Sets values in the encapsulated array."""
 class MFnMatrixAttribute(MFnAttribute):
 	"""Functionset for creating and working with matrix attributes."""
+	@property
+	def default(self)->MMatrix|MFloatMatrix:
+		"""Default value"""
+	@default.setter
+	def default(self,value:MMatrix|MFloatMatrix)->None:...
 	kFloat:int=0
 	kDouble:int=1
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new matrix attribute, attaches it to the function set and returns it as an MObject."""
 class MFnMatrixData(MFnData):
 	"""Function set for matrix node data."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new matrix data object."""
-	def isTransformation(self,*args,**kwargs)->Any:
+	def isTransformation(self,*args)->Any:
 		"""Returns True if the attached object is an MTransformationMatrix, False if it is an MMatrix."""
-	def matrix(self,*args,**kwargs)->Any:
+	def matrix(self,*args)->Any:
 		"""Returns the encapsulated matrix as an MMatrix."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""Sets the value of the encapsulated matrix."""
-	def transformation(self,*args,**kwargs)->Any:
+	def transformation(self,*args)->Any:
 		"""Returns the encapsulated matrix as an MTransformationMatrix."""
 class MFnMesh(MFnDagNode):
 	"""Function set for operation on meshes (polygonal surfaces).
@@ -6276,6 +6319,41 @@ class MFnMesh(MFnDagNode):
 	__init__(MObject nodeOrData)
 	Initializes a new MFnMesh object and attaches it to a mesh
 	node or mesh data object."""
+	@property
+	def checkSamePointTwice(self)->bool:
+		"""Controls whether polygons created or added through the functionset
+		are checked for duplicate points."""
+	@checkSamePointTwice.setter
+	def checkSamePointTwice(self,value:bool)->None:...
+	@property
+	def displayColors(self)->bool:
+		"""Determines if the mesh's colors are displayed. Attempting to turn
+		color display on when the functionset is attached to mesh data (as
+		opposed to a mesh node) will raise TypeError."""
+	@displayColors.setter
+	def displayColors(self,value:bool)->None:...
+	@property
+	def numColorSets(self)->int:
+		"""Number of color sets."""
+	@property
+	def numEdges(self)->int:
+		"""Number of edges."""
+	@property
+	def numFaceVertices(self)->int:
+		"""Total number of vertices within faces. Shared vertices are counted
+		for each face which uses them."""
+	@property
+	def numNormals(self)->int:
+		"""Number of per-polygon per-vertex normals."""
+	@property
+	def numPolygons(self)->int:
+		"""Number of polygons (faces)."""
+	@property
+	def numUVSets(self)->int:
+		"""Number of UV (texture coordinate) sets."""
+	@property
+	def numVertices(self)->int:
+		"""Number of distinct vertices. Shared vertices are only counted once."""
 	kAlpha:int=1
 	kRGB:int=3
 	kRGBA:int=4
@@ -6305,85 +6383,70 @@ class MFnMesh(MFnDagNode):
 	kInstanceUnspecified:int=-1
 	kIntersectTolerance:float=1e-06
 	kPointTolerance:float=1e-10
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def autoUniformGridParams(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def autoUniformGridParams(*args)->Any:
+		"""autoUniformGridParams() -> MMeshIsectAccelParams
 
-		Convert a function to be a static method.
+		Creates an object which specifies a uniform voxel grid structure
+		which can be used by the intersection routines to speed up their
+		operation. The number of voxel cells to use will be determined
+		automatically based on the density of triangles in the mesh. The
+		grid acceleration structure will be cached with the mesh, so that
+		if the same MMeshIsectAccelParams configuration is used on the next
+		intersect call, the acceleration structure will not need to be rebuilt."""
+	@staticmethod
+	def clearGlobalIntersectionAcceleratorInfo(*args)->Any:
+		"""clearGlobalIntersectionAcceleratorInfo()
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		Clears the 'total count', 'total build time', and 'peak memory'
+		fields from the information string returned by
+		globalIntersectionAcceleratorsInfo(). It will not cause information
+		about currently existing accelerators to be lost."""
+	@staticmethod
+	def globalIntersectionAcceleratorsInfo(*args)->Any:
+		"""globalIntersectionAcceleratorsInfo() -> string
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		Returns a string that describes the system-wide resource usage for
+		cached mesh intersection accelerators. The string will be of the
+		following form:
+		  total 10 accelerators created (2 currently active - total current memory = 10000KB), total build time = 10.2s, peak memory = 14567.1KB
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This means that:
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def clearGlobalIntersectionAcceleratorInfo(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		* a total of 10 intersection accelerators have been created as
+		  instructed by calls to closestIntersection(), allIntersections(),
+		  or anyIntersection() with non-NULL accelParams values. Thesen  structures are destroyed and re-created when intersection requests
+		  with differing acceleration parameters are passed in for the same
+		  mesh, so it is useful to see this value, which is the total count
+		  of how many have been created. In this case, 8 of the 10 created
+		  have been destroyed, either automatically or via calls to the
+		  freeCachedIntersectionAccelerator() method
 
-		Convert a function to be a static method.
+		* the total memory footprint for the 2 accelerators currently in
+		  existence is 10,000KB
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		* the total build time for all 10 structures that have been created
+		  is 10.2 seconds
+		* the peak of total memory usage for all accelerators in the system
+		  was 14567.1KB
+		Calling clearGlobalIntersectionAcceleratorInfo() will clear the
+		'total count', 'total build time', and 'peak memory' fields from
+		this information. It will not cause information about currently
+		existing accelerators to be lost."""
+	@staticmethod
+	def uniformGridParams(*args)->Any:
+		"""uniformGridParams(xDiv, yDiv, zDiv) -> MMeshIsectAccelParams
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def globalIntersectionAcceleratorsInfo(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def uniformGridParams(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addHoles(self,*args,**kwargs)->Any:
+		Creates an object which specifies a uniform voxel grid structure
+		which can be used by the intersection routines to speed up their
+		operation. This object specifies the number of voxel cells to be
+		used in the x, y, and z dimensions. The grid acceleration structure
+		will be cached with the mesh, so that if the same MMeshIsectAccelParams
+		configuration is used on the next intersect call, the acceleration
+		structure will not need to be rebuilt."""
+	def addHoles(self,*args)->Any:
 		"""addHoles(faceIndex, vertices, loopCounts, mergeVertices=True, pointTolerance=kPointTolerance) -> self
 
 		Adds holes to a mesh polygon.
@@ -6396,7 +6459,7 @@ class MFnMesh(MFnDagNode):
 		length of vertexArray.
 		Note that holes should normally be specified with the opposite winding order
 		to the exterior polygon."""
-	def addPolygon(self,*args,**kwargs)->Any:
+	def addPolygon(self,*args)->Any:
 		"""addPolygon(vertices, mergeVertices=True, pointTolerance=kPointTolerance, loopCounts=None) -> faceId
 
 		Adds a new polygon to the mesh, returning the index of the new
@@ -6413,7 +6476,7 @@ class MFnMesh(MFnDagNode):
 		length of vertexArray.
 		Note that holes should normally be specified with the opposite winding order
 		to the exterior polygon."""
-	def allIntersections(self,*args,**kwargs)->Any:
+	def allIntersections(self,*args)->Any:
 		"""allIntersections(raySource, rayDirection, space, maxParam,
 		    testBothDirections, faceIds=None, triIds=None, idsSorted=False,
 		    accelParams=None, tolerance=kIntersectTolerance, sortHits=False)
@@ -6463,7 +6526,7 @@ class MFnMesh(MFnDagNode):
 		  (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3.* hitBary2s (MFloatArray) - second barycentric coordinate of the
 		  points hit.
 		If no point was hit then None will be returned."""
-	def anyIntersection(self,*args,**kwargs)->Any:
+	def anyIntersection(self,*args)->Any:
 		"""anyIntersection(raySource, rayDirection, space, maxParam,
 		    testBothDirections, faceIds=None, triIds=None, idsSorted=False,
 		    accelParams=None, tolerance=kIntersectTolerance)
@@ -6512,22 +6575,22 @@ class MFnMesh(MFnDagNode):
 		  then the barycentric coordinates are such that the hitPoint =
 		  (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3.* hitBary2 (float) - second barycentric coordinate of the point hit.
 		If no point was hit then None will be returned."""
-	def assignColor(self,*args,**kwargs)->Any:
+	def assignColor(self,*args)->Any:
 		"""assignColor(faceId, vertexIndex, colorId, colorSet='') -> self
 
 		Assigns a color from a colorSet to a specified vertex of a face."""
-	def assignColors(self,*args,**kwargs)->Any:
+	def assignColors(self,*args)->Any:
 		"""assignColors(colorIds, colorSet=') -> self
 
 		Assigns colors to all of the mesh's face-vertices. The colorIds
 		sequence must contain an entry for every vertex of every face, in
 		face order, meaning that the entries for all the vertices of face 0
 		come first, followed by the entries for the vertices of face 1, etc."""
-	def assignUV(self,*args,**kwargs)->Any:
+	def assignUV(self,*args)->Any:
 		"""assignUV(faceId, vertexIndex, uvId, uvSet='') -> self
 
 		Assigns a UV coordinate from a uvSet to a specified vertex of a face."""
-	def assignUVs(self,*args,**kwargs)->Any:
+	def assignUVs(self,*args)->Any:
 		"""assignUVs(uvCounts, uvIds, uvSet='') -> self
 
 		Assigns UV coordinates to the mesh's face-vertices.
@@ -6536,22 +6599,22 @@ class MFnMesh(MFnDagNode):
 		faces. That number must equal the number of vertices in the
 		corresponding face or be 0 to indicate that no UVs will be assigned
 		to that face."""
-	def booleanOp(self,*args,**kwargs)->Any:
+	def booleanOp(self,*args)->Any:
 		"""(Deprecated: Please use booleanOps instead) booleanOp(Boolean Operation constant, MFnMesh, MFnMesh) -> self
 
 		Replaces this mesh's geometry with the result of a boolean operation
 		on the two specified meshes."""
-	def booleanOps(self,*args,**kwargs)->Any:
+	def booleanOps(self,*args)->Any:
 		"""booleanOps(Boolean Operation constant, MObjectArray, bool) -> self
 
 		Replaces this mesh's geometry with the result of a boolean operation
 		on the specified meshes."""
-	def booleanOperations(self,*args,**kwargs)->Any:
+	def booleanOperations(self,*args)->Any:
 		"""booleanOperations(Boolean Operation constant, MObjectArray) -> self
 
 		Replaces this mesh's geometry with the result of a boolean operation
 		on the specified meshes."""
-	def cachedIntersectionAcceleratorInfo(self,*args,**kwargs)->Any:
+	def cachedIntersectionAcceleratorInfo(self,*args)->Any:
 		"""cachedIntersectionAcceleratorInfo() -> string
 
 		Retrieves a string that describes the intersection acceleration
@@ -6564,14 +6627,14 @@ class MFnMesh(MFnDagNode):
 		accelerator, as well as how long it took to build it, and how much
 		memory it is currently occupying. If the mesh has no cached
 		intersection accelerator, the empty string is returned."""
-	def cleanupEdgeSmoothing(self,*args,**kwargs)->Any:
+	def cleanupEdgeSmoothing(self,*args)->Any:
 		"""cleanupEdgeSmoothing() -> self
 
 		Updates the mesh after setEdgeSmoothing has been done. This should
 		be called only once, after all the desired edges have been had their
 		smoothing set. If you don't call this method, the normals may not be
 		correct, and the object will look odd in shaded mode."""
-	def clearBlindData(self,*args,**kwargs)->Any:
+	def clearBlindData(self,*args)->Any:
 		"""clearBlindData(compType) -> self
 		clearBlindData(compType, blindDataId, compId=None, attr='') -> self
 
@@ -6586,7 +6649,7 @@ class MFnMesh(MFnDagNode):
 		specified type. If a blind data attribute name is provided then only
 		data for that attribute is deleted, otherwise data for all of the
 		blind data type's attributes is deleted."""
-	def clearColors(self,*args,**kwargs)->Any:
+	def clearColors(self,*args)->Any:
 		"""clearColors(colorSet='') -> self
 
 		Clears out all colors from a colorSet, and leaves behind an empty
@@ -6601,7 +6664,7 @@ class MFnMesh(MFnDagNode):
 		polyColorDel command is invoked and a polyColorDel node is created.
 
 		If no colorSet is specified the mesh's current color set will be used."""
-	def clearUVs(self,*args,**kwargs)->Any:
+	def clearUVs(self,*args)->Any:
 		"""clearUVs(uvSet='') -> self
 
 		Clears out all uvs from a uvSet, and leaves behind an empty
@@ -6616,7 +6679,7 @@ class MFnMesh(MFnDagNode):
 		polyMapDel command is invoked and a polyMapDel node is created.
 
 		If no uvSet is specified the mesh's current uv set will be used."""
-	def closestIntersection(self,*args,**kwargs)->Any:
+	def closestIntersection(self,*args)->Any:
 		"""closestIntersection(raySource, rayDirection, space, maxParam,
 		    testBothDirections, faceIds=None, triIds=None, idsSorted=False,
 		    accelParams=None, tolerance=kIntersectTolerance)
@@ -6665,19 +6728,19 @@ class MFnMesh(MFnDagNode):
 		  then the barycentric coordinates are such that the hitPoint =
 		  (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3.* hitBary2 (float) - second barycentric coordinate of the point hit.
 		If no point was hit then None will be returned."""
-	def collapseEdges(self,*args,**kwargs)->Any:
+	def collapseEdges(self,*args)->Any:
 		"""collapseEdges(seq of int) -> self
 
 		Collapses edges into vertices. The two vertices that create each
 		given edge are replaced in turn by one vertex placed at the average
 		of the two initial vertex."""
-	def collapseFaces(self,*args,**kwargs)->Any:
+	def collapseFaces(self,*args)->Any:
 		"""collapseFaces(seq of int) -> self
 
 		Collapses faces into vertices. Adjacent faces will be collapsed
 		together into a single vertex. Non-adjacent faces will be collapsed
 		into their own, separate vertices."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(MObject, parent=kNullObj) -> MObject
 
 		Creates a new mesh with the same geometry as the source. Raises
@@ -6697,13 +6760,13 @@ class MFnMesh(MFnDagNode):
 		If no parent is provided then a transform node will be created and
 		returned and a mesh node will be created and parented under the
 		transform."""
-	def copyInPlace(self,*args,**kwargs)->Any:
+	def copyInPlace(self,*args)->Any:
 		"""copyInPlace(MObject) -> self
 
 		Replaces the current mesh's geometry with that from the source.
 		Raises TypeError if the source is not a mesh node or mesh data
 		object or it contains an empty mesh."""
-	def copyUVSet(self,*args,**kwargs)->Any:
+	def copyUVSet(self,*args)->Any:
 		"""copyUVSet(fromName, toName, modifier=None) -> string
 
 		Copies the contents of one UV set into another.
@@ -6722,7 +6785,7 @@ class MFnMesh(MFnDagNode):
 
 		This method is only valid for functionsets which are attached to
 		mesh nodes, not mesh data."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(vertices, polygonCounts, polygonConnects, uValues=None, vValues=None, parent=kNullObj) -> MObjectcreate(vertices, edges, edgeConnectsCount, edgeFaceConnects, edgeFaceDesc, storeDoubles=False, parent=kNullObj) -> MObjectcreate(vertices, edges, polygonCounts, polygonConnects, uValues=None, vValues=None, parent=kNullObj) -> MObject
 
 		Creates a new polygonal mesh and sets this function set to operate
@@ -6744,7 +6807,7 @@ class MFnMesh(MFnDagNode):
 		If no parent is provided then a transform node will be created and
 		returned and a mesh node will be created and parented under the
 		transform."""
-	def createBlindDataType(self,*args,**kwargs)->Any:
+	def createBlindDataType(self,*args)->Any:
 		"""createBlindDataType(blindDataId, ((longName, shortName, typeName), ...)) -> self
 
 		Create a new blind data type with the specified attributes.
@@ -6755,7 +6818,7 @@ class MFnMesh(MFnDagNode):
 
 		Raises RuntimeError if the blind data id is already in use or an
 		invalid format was specified."""
-	def createColorSet(self,*args,**kwargs)->Any:
+	def createColorSet(self,*args)->Any:
 		"""createColorSet(name, clamped, rep=kRGBA, modifier=None, instances=None) -> string
 
 		Creates a new, empty color set for this mesh.
@@ -6768,7 +6831,7 @@ class MFnMesh(MFnDagNode):
 
 		This method will only work when the functionset is attached to a
 		mesh node, not mesh data."""
-	def createInPlace(self,*args,**kwargs)->Any:
+	def createInPlace(self,*args)->Any:
 		"""createInPlace(vertices, polygonCounts, polygonConnects) -> selfcreateInPlace(vertices, edges, polygonCounts, polygonConnects) -> self
 
 		Replaces the existing polygonal mesh with a new one. This method is
@@ -6778,7 +6841,7 @@ class MFnMesh(MFnDagNode):
 		If edges are supplied, edges must be an integer array containingconsecutive sets of 3 integers (startVertex, endVertex, smooth) peredge. polygonConnects then references edges by index into the edgearray, where the ID == edge array index / 3.
 		The vertices may be given as a sequence of MFloatPoint's or a
 		sequence of MPoint's, but not a mix of the two."""
-	def createUVSet(self,*args,**kwargs)->Any:
+	def createUVSet(self,*args)->Any:
 		"""createUVSet(name, modifier=None, instances=None) -> string
 
 		Creates a new, empty UV set for this mesh.
@@ -6793,7 +6856,7 @@ class MFnMesh(MFnDagNode):
 
 		This method is only valid for functionsets which are attached to
 		mesh nodes, not mesh data."""
-	def currentColorSetName(self,*args,**kwargs)->Any:
+	def currentColorSetName(self,*args)->Any:
 		"""currentColorSetName(instance=kInstanceUnspecified) -> string
 
 		Get the name of the 'current' color set. The current color set is
@@ -6811,7 +6874,7 @@ class MFnMesh(MFnDagNode):
 		color set will be returned regardless of which instance it is for.
 		If there is no current color set, then an empty string will be
 		returned."""
-	def currentUVSetName(self,*args,**kwargs)->Any:
+	def currentUVSetName(self,*args)->Any:
 		"""currentUVSetName(instance=kInstanceUnspecified) -> string
 
 		Get the name of the 'current' uv set. The current uv set is
@@ -6829,44 +6892,44 @@ class MFnMesh(MFnDagNode):
 		uv set will be returned regardless of which instance it is for.
 		If there is no current uv set, then an empty string will be
 		returned."""
-	def deleteColorSet(self,*args,**kwargs)->Any:
+	def deleteColorSet(self,*args)->Any:
 		"""deleteColorSet(colorSet, modifier=None, currentSelection=None) -> self
 
 		Deletes a color set from the mesh.
 
 		This method is only valid for functionsets which are attached to
 		mesh nodes, not mesh data."""
-	def deleteUVSet(self,*args,**kwargs)->Any:
+	def deleteUVSet(self,*args)->Any:
 		"""deleteUVSet(uvSet, modifier=None, currentSelection=None) -> self
 
 		Deletes a uv set from the mesh.
 
 		This method is only valid for functionsets which are attached to
 		mesh nodes, not mesh data."""
-	def deleteEdge(self,*args,**kwargs)->Any:
+	def deleteEdge(self,*args)->Any:
 		"""deleteEdge(edgeId, modifier=None) -> self
 
 		Deletes the specified edge."""
-	def deleteFace(self,*args,**kwargs)->Any:
+	def deleteFace(self,*args)->Any:
 		"""deleteFace(faceId, modifier=None) -> self
 
 		Deletes the specified face."""
-	def deleteVertex(self,*args,**kwargs)->Any:
+	def deleteVertex(self,*args)->Any:
 		"""deleteVertex(vertexId, modifier=None) -> self
 
 		Deletes the specified vertex."""
-	def duplicateFaces(self,*args,**kwargs)->Any:
+	def duplicateFaces(self,*args)->Any:
 		"""duplicateFaces(faces, translation=None) -> self
 
 		Duplicates a set of faces and detaches them from the rest of the
 		mesh. The resulting mesh will contain one more independant piece of
 		geometry."""
-	def extractFaces(self,*args,**kwargs)->Any:
+	def extractFaces(self,*args)->Any:
 		"""extractFaces(faces, translation=None) -> self
 
 		Detaches a set of faces from the rest of the mesh. The resulting
 		mesh will contain one more independant piece of geometry."""
-	def extrudeEdges(self,*args,**kwargs)->Any:
+	def extrudeEdges(self,*args)->Any:
 		"""extrudeEdges(edges, extrusionCount=1, translation=None, extrudeTogether=True, thickness=0.0, offset=0.0) -> self
 
 		Extrude the given edges along a vector. The resulting mesh will have
@@ -6885,7 +6948,7 @@ class MFnMesh(MFnDagNode):
 		Both the thickness and offset variables will attempt to move the components
 		a distance that will maintain angles between edges at the border of the
 		extrusion."""
-	def extrudeFaces(self,*args,**kwargs)->Any:
+	def extrudeFaces(self,*args)->Any:
 		"""extrudeFaces(faces, extrusionCount=1, translation=None, extrudeTogether=True, thickness=0.0, offset=0.0) -> self
 
 		Extrude the given faces along a vector. The resulting mesh will have
@@ -6904,7 +6967,7 @@ class MFnMesh(MFnDagNode):
 		Both the thickness and offset variables will attempt to move the components
 		a distance that will maintain angles between edges at the border of the
 		extrusion."""
-	def freeCachedIntersectionAccelerator(self,*args,**kwargs)->Any:
+	def freeCachedIntersectionAccelerator(self,*args)->Any:
 		"""freeCachedIntersectionAccelerator() -> self
 
 		If the mesh has a cached intersection accelerator structure, then
@@ -6914,7 +6977,7 @@ class MFnMesh(MFnDagNode):
 		structure. Once the client is finished with these intersection
 		operations, however, they are responsible for freeing the acceleration
 		structure, which is what this method does."""
-	def generateSmoothMesh(self,*args,**kwargs)->Any:
+	def generateSmoothMesh(self,*args)->Any:
 		"""generateSmoothMesh(parent=kNullObj, options=None) -> MObject
 
 		Creates a new polygonal mesh which is a smoothed version of the one
@@ -6936,7 +6999,7 @@ class MFnMesh(MFnDagNode):
 		Note that, unlike the create functions, this function does not set
 		the functionset to operate on the new mesh, but leaves it attached
 		to the original mesh."""
-	def getAssignedUVs(self,*args,**kwargs)->Any:
+	def getAssignedUVs(self,*args)->Any:
 		"""getAssignedUVs(uvSet='') -> (counts, uvIds)
 
 		Returns a tuple containing all of the UV assignments for the specified
@@ -6946,7 +7009,7 @@ class MFnMesh(MFnDagNode):
 		assigned, or else it will equal the number of the face's vertices.
 		The second element of the tuple is an array of UV IDs for all of the
 		face-vertices which have UVs assigned."""
-	def getAssociatedColorSetInstances(self,*args,**kwargs)->Any:
+	def getAssociatedColorSetInstances(self,*args)->Any:
 		"""getAssociatedColorSetInstances(colorSet) -> MIntArray
 
 		Returns the instance numbers associated with the specified Color set.
@@ -6956,7 +7019,7 @@ class MFnMesh(MFnDagNode):
 		This method will only work if the functionset is attached to a mesh
 		node. It will raise RuntimeError if the functionset is attached to
 		mesh data."""
-	def getAssociatedUVSetInstances(self,*args,**kwargs)->Any:
+	def getAssociatedUVSetInstances(self,*args)->Any:
 		"""getAssociatedUVSetInstances(uvSet) -> MIntArray
 
 		Returns the instance numbers associated with the specified UV set.
@@ -6966,7 +7029,7 @@ class MFnMesh(MFnDagNode):
 		This method will only work if the functionset is attached to a mesh
 		node. It will raise RuntimeError if the functionset is attached to
 		mesh data."""
-	def getAssociatedUVSetTextures(self,*args,**kwargs)->Any:
+	def getAssociatedUVSetTextures(self,*args)->Any:
 		"""getAssociatedUVSetTextures(uvSet) -> MObjectArray
 
 		Returns the texture nodes which are using the specified UV set. If
@@ -6976,7 +7039,7 @@ class MFnMesh(MFnDagNode):
 		This method will only work if the functionset is attached to a mesh
 		node. It will raise RuntimeError if the functionset is attached to
 		mesh data."""
-	def getBinaryBlindData(self,*args,**kwargs)->Any:
+	def getBinaryBlindData(self,*args)->Any:
 		"""getBinaryBlindData(compId, compType, blindDataId, attr) -> string
 		getBinaryBlindData(compType, blindDataId, attr)
 		  -> (MIntArray, [string, string, ...])
@@ -6990,25 +7053,25 @@ class MFnMesh(MFnDagNode):
 
 		Both versions raise RuntimeError if the attribute is not of 'binary'
 		type."""
-	def getBinormals(self,*args,**kwargs)->Any:
+	def getBinormals(self,*args)->Any:
 		"""getBinormals(space=MSpace.kObject, uvSet='') -> MFloatVectorArray
 
 		Returns the binormal vectors for all face-vertices.
 
 		This method is not threadsafe."""
-	def getBlindDataAttrNames(self,*args,**kwargs)->Any:
+	def getBlindDataAttrNames(self,*args)->Any:
 		"""getBlindDataAttrNames(blindDataId) -> ((longName, shortName, typeName), ...)
 
 		Returns a tuple listing the attributes of the given blind data type.
 		Each element of the tuple is itself a tuple containing the long
 		name, short name and type name of the attribute. Type names can be
 		'int', 'float', 'double', 'boolean', 'string' or 'binary'."""
-	def getBlindDataTypes(self,*args,**kwargs)->Any:
+	def getBlindDataTypes(self,*args)->Any:
 		"""getBlindDataTypes(MFn Type constant) -> MIntArray
 
 		Returns all the blind data ID's associated with the given component
 		type on this mesh."""
-	def getBoolBlindData(self,*args,**kwargs)->Any:
+	def getBoolBlindData(self,*args)->Any:
 		"""getBoolBlindData(compId, compType, blindDataId, attr) -> bool
 		getBoolBlindData(compType, blindDataId, attr) -> (MIntArray, MIntArray)
 
@@ -7021,13 +7084,13 @@ class MFnMesh(MFnDagNode):
 
 		Both versions raise RuntimeError if the attribute is not of
 		'boolean' type."""
-	def getClosestUVs(self,*args,**kwargs)->Any:
+	def getClosestUVs(self,*args)->Any:
 		"""getClosestUVs(u, v, uvSet='') -> MIntArray
 
 		Returns the IDs of the UVs which are nearest in uv space to the
 		given texture coordinate in the specified UV set. All these UVs
 		locate at the same distance to the given coordinate."""
-	def intersectFaceAtUV(self,*args,**kwargs)->Any:
+	def intersectFaceAtUV(self,*args)->Any:
 		"""intersectFaceAtUV(u, v, uvSet='') -> int
 
 		Returns the IDs of the UVs on this surface which are nearest
@@ -7035,20 +7098,20 @@ class MFnMesh(MFnDagNode):
 		locate at the same distance to the given coordinate.
 
 		This method is not threadsafe."""
-	def getClosestNormal(self,*args,**kwargs)->Any:
+	def getClosestNormal(self,*args)->Any:
 		"""getClosestNormal(MPoint, space=MSpace.kObject) -> (MVector, int)
 
 		Returns a tuple containing the normal at the closest point on the
 		mesh to the given point and the ID of the face in which that closest
 		point lies."""
-	def getClosestPoint(self,*args,**kwargs)->Any:
+	def getClosestPoint(self,*args)->Any:
 		"""getClosestPoint(MPoint, space=MSpace.kObject) -> (MPoint, int)
 
 		Returns a tuple containing the closest point on the mesh to the
 		given point and the ID of the face in which that closest point lies.
 
 		This method is not threadsafe."""
-	def getClosestPointAndNormal(self,*args,**kwargs)->Any:
+	def getClosestPointAndNormal(self,*args)->Any:
 		"""getClosestPointAndNormal(MPoint, space=MSpace.kObject)
 		  -> (MPoint, MVector, int)
 
@@ -7057,22 +7120,22 @@ class MFnMesh(MFnDagNode):
 		which that point lies.
 
 		This method is not threadsafe."""
-	def getColor(self,*args,**kwargs)->Any:
+	def getColor(self,*args)->Any:
 		"""getColor(colorId, colorSet='') -> MColor
 
 		Returns a color from a colorSet. Raises IndexError if the colorId is
 		out of range."""
-	def getColorIndex(self,*args,**kwargs)->Any:
+	def getColorIndex(self,*args)->Any:
 		"""getColorIndex(faceId, localVertexId, colorSet='') -> int
 
 		Returns the index into the specified colorSet of the color used by a
 		specific face-vertex. This can be used to index into the sequence
 		returned by getColors()."""
-	def getColorRepresentation(self,*args,**kwargs)->Any:
+	def getColorRepresentation(self,*args)->Any:
 		"""getColorRepresentation(colorSet) -> Color Representation constant
 
 		Returns the Color Representation used by the specified color set."""
-	def getColors(self,*args,**kwargs)->Any:
+	def getColors(self,*args)->Any:
 		"""getColors(colorSet='') -> MColorArray
 
 		Returns all of the colors in a colorSet. If no colorSet is specified
@@ -7080,7 +7143,7 @@ class MFnMesh(MFnDagNode):
 
 		Use the index returned by getColorIndex() to access the returned
 		array."""
-	def getColorSetFamilyNames(self,*args,**kwargs)->Any:
+	def getColorSetFamilyNames(self,*args)->Any:
 		"""getColorSetFamilyNames() -> (string, ...)
 
 		Returns the names of all of the color set families on this object. A
@@ -7091,11 +7154,11 @@ class MFnMesh(MFnDagNode):
 
 		Given a color set family name, getColorSetsInFamily() may be used to
 		determine the names of the associated individual sets."""
-	def getColorSetNames(self,*args,**kwargs)->Any:
+	def getColorSetNames(self,*args)->Any:
 		"""getColorSetNames() -> (string, ...)
 
 		Returns the names of all the color sets on this object."""
-	def getColorSetsInFamily(self,*args,**kwargs)->Any:
+	def getColorSetsInFamily(self,*args)->Any:
 		"""getColorSetsInFamily(familyName) -> (string, ...)
 
 		Returns the names of all of the color sets that belong to the
@@ -7103,7 +7166,7 @@ class MFnMesh(MFnDagNode):
 		family, with each individual set applying to one or more instances.
 		A set which is shared across all instances will be the sole member
 		of its family and will share the same name as its family."""
-	def getConnectedShaders(self,*args,**kwargs)->Any:
+	def getConnectedShaders(self,*args)->Any:
 		"""getConnectedShaders(instance) -> (MObjectArray, MIntArray)
 
 		Returns a tuple containing an array of shaders (sets) and an array
@@ -7116,7 +7179,7 @@ class MFnMesh(MFnDagNode):
 		This method will only work if the functionset is attached to a mesh
 		node. It will raise RuntimeError if the functionset is attached to
 		mesh data."""
-	def getCreaseEdges(self,*args,**kwargs)->Any:
+	def getCreaseEdges(self,*args)->Any:
 		"""getCreaseEdges() -> (MUintArray, MDoubleArray)
 
 		Returns a tuple containing two arrays. The first contains the mesh-
@@ -7126,7 +7189,7 @@ class MFnMesh(MFnDagNode):
 		Please note that to make effective use of the creasing variable in
 		software outside of Maya may require a license under patents owned
 		by Pixar(R)."""
-	def getCreaseVertices(self,*args,**kwargs)->Any:
+	def getCreaseVertices(self,*args)->Any:
 		"""getCreaseVertices() -> (MUintArray, MDoubleArray)
 
 		Returns a tuple containing two arrays. The first contains the mesh-
@@ -7136,7 +7199,7 @@ class MFnMesh(MFnDagNode):
 		Please note that to make effective use of the creasing variable in
 		software outside of Maya may require a license under patents owned
 		by Pixar(R)."""
-	def getDoubleBlindData(self,*args,**kwargs)->Any:
+	def getDoubleBlindData(self,*args)->Any:
 		"""getDoubleBlindData(compId, compType, blindDataId, attr) -> float
 		getDoubleBlindData(compType, blindDataId, attr) -> (MIntArray, MDoubleArray)
 
@@ -7149,13 +7212,13 @@ class MFnMesh(MFnDagNode):
 
 		Both versions raise RuntimeError if the attribute is not of
 		'double' type."""
-	def getEdgeVertices(self,*args,**kwargs)->Any:
+	def getEdgeVertices(self,*args)->Any:
 		"""getEdgeVertices(edgeId) -> (int, int)
 
 		Returns a tuple containing the mesh-relative/global IDs of the
 		edge's two vertices. The indices can be used to refer to the
 		elements in the array returned by the getPoints() method."""
-	def getFaceAndVertexIndices(self,*args,**kwargs)->Any:
+	def getFaceAndVertexIndices(self,*args)->Any:
 		"""getFaceAndVertexIndices(faceVertexIndex, localVertex=True) -> (int, int)
 
 		Returns a tuple containg the faceId and vertexIndex represented by
@@ -7164,30 +7227,30 @@ class MFnMesh(MFnDagNode):
 
 		If localVertex is True then the returned vertexIndex is the face-
 		relative/local index, otherwise it is the mesh-relative/global index."""
-	def getFaceNormalIds(self,*args,**kwargs)->Any:
+	def getFaceNormalIds(self,*args)->Any:
 		"""getFaceNormalIds(faceId) -> MIntArray
 
 		Returns the IDs of the normals for all the vertices of a given face.
 		These IDs can be used to index into the arrays returned by getNormals()."""
-	def getFaceUVSetNames(self,*args,**kwargs)->Any:
+	def getFaceUVSetNames(self,*args)->Any:
 		"""getFaceUVSetNames(faceId) -> (string, ...)
 
 		Returns the names of all of the uv sets mapped to the specified face.
 
 		This method is not threadsafe. """
-	def getFaceVertexBinormal(self,*args,**kwargs)->Any:
+	def getFaceVertexBinormal(self,*args)->Any:
 		"""getFaceVertexBinormal(faceId, vertexId, space=MSpace.kObject, uvSet='') -> MVector
 
 		Returns the binormal vector at a given face vertex.
 
 		This method is not threadsafe."""
-	def getFaceVertexBinormals(self,*args,**kwargs)->Any:
+	def getFaceVertexBinormals(self,*args)->Any:
 		"""getFaceVertexBinormals(faceId, space=MSpace.kObject, uvSet='') -> MFloatVectorArray
 
 		Returns all the per-vertex-per-face binormals for a given face.
 
 		This method is not threadsafe."""
-	def getFaceVertexColors(self,*args,**kwargs)->Any:
+	def getFaceVertexColors(self,*args)->Any:
 		"""getFaceVertexColors(colorSet='', defaultUnsetColor=None) -> MColorArray
 
 		Returns colors for all the mesh's face-vertices.
@@ -7205,7 +7268,7 @@ class MFnMesh(MFnDagNode):
 		If the colorSet is not specified, the default color set will be used.
 		If the defaultUnsetColor is not given, then (-1, -1, -1, -1) will be
 		used."""
-	def getFaceVertexIndex(self,*args,**kwargs)->Any:
+	def getFaceVertexIndex(self,*args)->Any:
 		"""getFaceVertexIndex(faceId, vertexIndex, localVertex=True) -> int
 
 		Returns the index for a specific face-vertex into an array of face-
@@ -7220,19 +7283,19 @@ class MFnMesh(MFnDagNode):
 
 		The opposite operation is performed by the getFaceAndVertexIndices()
 		method."""
-	def getFaceVertexNormal(self,*args,**kwargs)->Any:
+	def getFaceVertexNormal(self,*args)->Any:
 		"""getFaceVertexNormal(faceId, vertexId, space=MSpace.kObject) -> MVector
 
 		Returns the per-vertex-per-face normal for a given face and vertex.
 
 		This method is not threadsafe."""
-	def getFaceVertexNormals(self,*args,**kwargs)->Any:
+	def getFaceVertexNormals(self,*args)->Any:
 		"""getFaceVertexNormals(faceId, space=MSpace.kObject) -> MFloatVectorArray
 
 		Returns the normals for a given face.
 
 		This method is not threadsafe."""
-	def getFaceVertexTangent(self,*args,**kwargs)->Any:
+	def getFaceVertexTangent(self,*args)->Any:
 		"""getFaceVertexTangent(faceId, vertexId, space=MSpace.kObject, uvSet='') -> MVector
 
 		Return the normalized tangent vector at a given face vertex.
@@ -7240,7 +7303,7 @@ class MFnMesh(MFnDagNode):
 		The tangent is defined as the surface tangent of the polygon running
 		in the U direction defined by the uv map.
 		This method is not threadsafe."""
-	def getFaceVertexTangents(self,*args,**kwargs)->Any:
+	def getFaceVertexTangents(self,*args)->Any:
 		"""getFaceVertexTangents(faceId, space=MSpace.kObject, uvSet='') -> MFloatVectorArray
 
 		Returns all the per-vertex-per-face tangents for a given face.
@@ -7249,7 +7312,7 @@ class MFnMesh(MFnDagNode):
 		in the U direction defined by the uv map.
 
 		This method is not threadsafe."""
-	def getFloatBlindData(self,*args,**kwargs)->Any:
+	def getFloatBlindData(self,*args)->Any:
 		"""getFloatBlindData(compId, compType, blindDataId, attr) -> float
 		getFloatBlindData(compType, blindDataId, attr) -> (MIntArray, MFloatArray)
 
@@ -7262,11 +7325,11 @@ class MFnMesh(MFnDagNode):
 
 		Both versions raise RuntimeError if the attribute is not of
 		'float' type."""
-	def getFloatPoints(self,*args,**kwargs)->Any:
+	def getFloatPoints(self,*args)->Any:
 		"""getFloatPoints(space=MSpace.kObject) -> MFloatPointArray
 
 		Returns an MFloatPointArray containing the mesh's vertices."""
-	def getHoles(self,*args,**kwargs)->Any:
+	def getHoles(self,*args)->Any:
 		"""getHoles() -> ((face, (v1, v2, ...)), (face, (v1, v2, ...)), ...)
 
 		Returns a tuple describing the holes in the mesh. Each element of the
@@ -7282,7 +7345,7 @@ class MFnMesh(MFnDagNode):
 		This says that the mesh has two holes. The first hole is in face 3
 		and consists of vertices 7, 2 and 6. The second hole is in face 5 and
 		consists of vertices 11, 10, 3 and 4."""
-	def getIntBlindData(self,*args,**kwargs)->Any:
+	def getIntBlindData(self,*args)->Any:
 		"""getIntBlindData(compId, compType, blindDataId, attr) -> int
 		getIntBlindData(compType, blindDataId, attr) -> (MIntArray, MIntArray)
 
@@ -7295,7 +7358,7 @@ class MFnMesh(MFnDagNode):
 
 		Both versions raise RuntimeError if the attribute is not of
 		'int' type."""
-	def getInvisibleFaces(self,*args,**kwargs)->Any:
+	def getInvisibleFaces(self,*args)->Any:
 		"""getInvisibleFaces() -> MUintArray
 
 		Returns the invisible faces of the mesh. Invisible faces are like
@@ -7306,7 +7369,7 @@ class MFnMesh(MFnDagNode):
 
 		Invisible faces can be set using the setInvisibleFaces() method or
 		the polyHole command."""
-	def getNormalIds(self,*args,**kwargs)->Any:
+	def getNormalIds(self,*args)->Any:
 		"""getNormalIds() -> (MIntArray, MIntArray)
 
 		Returns the normal IDs for all of the mesh's polygons as a tuple of
@@ -7314,7 +7377,7 @@ class MFnMesh(MFnDagNode):
 		each polygon and the second contains the normal IDs for each polygon-
 		vertex. These IDs can be used to index into the array returned by
 		getNormals()."""
-	def getNormals(self,*args,**kwargs)->Any:
+	def getNormals(self,*args)->Any:
 		"""getNormals(space=MSpace.kObject) -> MFloatVectorArray
 
 		Returns a copy of the mesh's normals. The normals are the per-polygon
@@ -7322,63 +7385,61 @@ class MFnMesh(MFnDagNode):
 		use getFaceNormalIds() to get the index into the array.
 
 		This method is not threadsafe."""
-	def getPoint(self,*args,**kwargs)->Any:
+	def getPoint(self,*args)->Any:
 		"""getPoint(vertexId, space=MSpace.kObject) -> MPoint
 
 		Returns the position of specified vertex."""
-	def getPointAtUV(self,*args,**kwargs)->Any:
+	def getPointAtUV(self,*args)->Any:
 		"""getPointAtUV(faceId, u, v, space=MSpace.kObject, uvSet='', tolerance=0.0) -> MPoint
 
 		Returns the position of the point at the give UV value in the
 		specified face.
 
 		This method is not threadsafe."""
-	def getPointsAtUV(self,*args,**kwargs)->Any:
+	def getPointsAtUV(self,*args)->Any:
 		"""getPointsAtUV(u, v, space=MSpace.kObject, uvSet='', tolerance=0.001) -> (MIntArray, MPointArray)
 
-		Returns the polygon ids and positions of points at the given UV position on the mesh.
-
-		"""
-	def getPoints(self,*args,**kwargs)->Any:
+		Returns the polygon ids and positions of points at the given UV position on the mesh."""
+	def getPoints(self,*args)->Any:
 		"""getPoints(space=MSpace.kObject) -> MPointArray
 
 		Returns a copy of the mesh's vertex positions as an MPointArray."""
-	def getPolygonNormal(self,*args,**kwargs)->Any:
+	def getPolygonNormal(self,*args)->Any:
 		"""getPolygonNormal(polygonId, space=MSpace.kObject) -> MVector
 
 		Returns the per-polygon normal for the given polygon.
 
 		This method is not threadsafe."""
-	def getPolygonTriangleVertices(self,*args,**kwargs)->Any:
+	def getPolygonTriangleVertices(self,*args)->Any:
 		"""getPolygonTriangleVertices(polygonId, triangleId) -> (int, int, int)
 
 		Returns the mesh-relative/global IDs of the 3 vertices of the
 		specified triangle of the specified polygon. These IDs can be used
 		to index into the arrays returned by getPoints() and getFloatPoints()."""
-	def getPolygonUV(self,*args,**kwargs)->Any:
+	def getPolygonUV(self,*args)->Any:
 		"""getPolygonUV(polygonId, vertexId, uvSet='') -> (float, float)
 
 		Returns a tuple containing the U and V values at a specified vertex
 		of a specified polygon.
 
 		This method is not threadsafe."""
-	def getPolygonUVid(self,*args,**kwargs)->Any:
+	def getPolygonUVid(self,*args)->Any:
 		"""getPolygonUVid(polygonId, vertexId, uvSet='') -> int
 
 		Returns the ID of the UV at a specified vertex of a specified polygon.
 
 		This method is not threadsafe."""
-	def getPolygonVertices(self,*args,**kwargs)->Any:
+	def getPolygonVertices(self,*args)->Any:
 		"""getPolygonVertices(polygonId) -> MIntArray
 
 		Returns the mesh-relative/global vertex IDs the specified polygon.
 		These IDs can be used to index into the arrays returned by getPoints()
 		and getFloatPoints()."""
-	def getSmoothMeshDisplayOptions(self,*args,**kwargs)->Any:
+	def getSmoothMeshDisplayOptions(self,*args)->Any:
 		"""getSmoothMeshDisplayOptions() -> MMeshSmoothOptions
 
 		Returns the options currently in use when smoothing the mesh for display."""
-	def getStringBlindData(self,*args,**kwargs)->Any:
+	def getStringBlindData(self,*args)->Any:
 		"""getStringBlindData(compId, compType, blindDataId, attr) -> string
 		getStringBlindData(compType, blindDataId, attr)
 		  -> (MIntArray, [string, string, ...])
@@ -7392,11 +7453,11 @@ class MFnMesh(MFnDagNode):
 
 		Both versions raise RuntimeError if the attribute is not of 'string'
 		type."""
-	def getTangentId(self,*args,**kwargs)->Any:
+	def getTangentId(self,*args)->Any:
 		"""getTangentId(faceId, vertexId) -> int
 
 		Returns the ID of the tangent for a given face and vertex."""
-	def getTangents(self,*args,**kwargs)->Any:
+	def getTangents(self,*args)->Any:
 		"""getTangents(space=MSpace.kObject, uvSet='') -> MFloatVectorArray
 
 		Return the tangent vectors for all face vertices. The tangent is
@@ -7404,18 +7465,18 @@ class MFnMesh(MFnDagNode):
 		direction defined by the uv map.
 
 		This method is not threadsafe."""
-	def getTriangles(self,*args,**kwargs)->Any:
+	def getTriangles(self,*args)->Any:
 		"""getTriangles() -> (MIntArray, MIntArray)
 
 		Returns a tuple describing the mesh's triangulation. The first
 		element of the tuple is an array giving the number of triangles for
 		each of the mesh's polygons. The second tuple gives the ids of the
 		vertices of all the triangles."""
-	def getUV(self,*args,**kwargs)->Any:
+	def getUV(self,*args)->Any:
 		"""getUV(uvId, uvSet='') -> (float, float)
 
 		Returns a tuple containing the u and v values of the specified UV."""
-	def getUVAtPoint(self,*args,**kwargs)->Any:
+	def getUVAtPoint(self,*args)->Any:
 		"""getUVAtPoint(point, space=MSpace.kObject, uvSet='') -> (float, float, int)
 
 		Returns a tuple containing the u and v coordinates of the point on
@@ -7423,12 +7484,12 @@ class MFnMesh(MFnDagNode):
 		containing that closest point.
 
 		This method is not threadsafe."""
-	def getUVs(self,*args,**kwargs)->Any:
+	def getUVs(self,*args)->Any:
 		"""getUVs(uvSet='') -> (MFloatArray, MFloatArray)
 
 		Returns a tuple containing an array of U values and an array of V
 		values, representing all of the UVs for the given UV set."""
-	def getUVSetFamilyNames(self,*args,**kwargs)->Any:
+	def getUVSetFamilyNames(self,*args)->Any:
 		"""getUVSetFamilyNames() -> (string, ...)
 
 		Returns the names of all of the uv set families on this object. A
@@ -7439,11 +7500,11 @@ class MFnMesh(MFnDagNode):
 
 		Given a uv set family name, getUVSetsInFamily() may be used to
 		determine the names of the associated individual sets."""
-	def getUVSetNames(self,*args,**kwargs)->Any:
+	def getUVSetNames(self,*args)->Any:
 		"""getUVSetNames() -> (string, ...)
 
 		Returns the names of all the uv sets on this object."""
-	def getUVSetsInFamily(self,*args,**kwargs)->Any:
+	def getUVSetsInFamily(self,*args)->Any:
 		"""getUVSetsInFamily(familyName) -> (string, ...)
 
 		Returns the names of all of the uv sets that belong to the
@@ -7451,21 +7512,21 @@ class MFnMesh(MFnDagNode):
 		family, with each individual set applying to one or more instances.
 		A set which is shared across all instances will be the sole member
 		of its family and will share the same name as its family."""
-	def getUvShellsIds(self,*args,**kwargs)->Any:
+	def getUvShellsIds(self,*args)->Any:
 		"""getUvShellsIds(uvSet='') -> (int, MIntArray)
 
 		Returns a tuple containing describing how the specified UV set's UVs
 		are grouped into shells. The first element of the tuple is the number
 		of distinct shells. The second element of the tuple is an array of
 		shell indices, one per uv, indicating which shell that uv is part of."""
-	def getMeshShellsIds(self,*args,**kwargs)->Any:
+	def getMeshShellsIds(self,*args)->Any:
 		"""getMeshShellsIds(compType) -> (int, MIntArray)
 
 		Returns a tuple containing describing how the specified component type items
 		are grouped into shells. The first element of the tuple is the number
 		of distinct shells. The second element of the tuple is an array of
 		shell indices, one per component, indicating which shell that component is part of."""
-	def getVertexColors(self,*args,**kwargs)->Any:
+	def getVertexColors(self,*args)->Any:
 		"""getVertexColors(colorSet='', defaultUnsetColor=None) -> MColorArray
 
 		Gets colors for all vertices of the given colorSet. If no face has
@@ -7477,7 +7538,7 @@ class MFnMesh(MFnDagNode):
 		If the colorSet is not specified, the default color set will be used.
 		If the defaultUnsetColor is not given, then (-1, -1, -1, -1) will be
 		used."""
-	def getVertexNormal(self,*args,**kwargs)->Any:
+	def getVertexNormal(self,*args)->Any:
 		"""getVertexNormal(vertexId, angleWeighted, space=MSpace.kObject) -> MVector
 
 		Returns the normal at the given vertex. The returned normal is a
@@ -7493,7 +7554,7 @@ class MFnMesh(MFnDagNode):
 		weighted average.
 
 		This method is not threadsafe."""
-	def getVertexNormals(self,*args,**kwargs)->Any:
+	def getVertexNormals(self,*args)->Any:
 		"""getVertexNormals(angleWeighted, space=MSpace.kObject) -> MFloatVectorArray
 
 		Returns all the vertex normals. The returned normals are per-vertex
@@ -7508,7 +7569,7 @@ class MFnMesh(MFnDagNode):
 		weighted average.
 
 		This method is not threadsafe."""
-	def getVertices(self,*args,**kwargs)->Any:
+	def getVertices(self,*args)->Any:
 		"""getVertices() -> (MIntArray, MIntArray)
 
 		Returns the mesh-relative/global vertex IDs for all of the mesh's
@@ -7516,7 +7577,7 @@ class MFnMesh(MFnDagNode):
 		number of vertices for each polygon and the second contains the mesh-
 		relative IDs for each polygon-vertex. These IDs can be used to index
 		into the arrays returned by getPoints() and getFloatPoints()."""
-	def getTriangleOffsets(self,*args,**kwargs)->Any:
+	def getTriangleOffsets(self,*args)->Any:
 		"""getTriangleOffsets() -> (MIntArray, MIntArray)
 
 		Returns the number of triangles for every polygon face and the
@@ -7524,112 +7585,112 @@ class MFnMesh(MFnDagNode):
 		The triangleVertices array holds each vertex for each triangle in sequence,
 		so it has three times as many elements as there are triangles.
 		(i.e. three times the sum of the elements of the triangleCounts array)"""
-	def hasAlphaChannels(self,*args,**kwargs)->Any:
+	def hasAlphaChannels(self,*args)->Any:
 		"""hasAlphaChannels(colorSet) -> bool
 
 		Returns True if the color set has an alpha channel."""
-	def hasBlindData(self,*args,**kwargs)->Any:
+	def hasBlindData(self,*args)->Any:
 		"""hasBlindData(compType, compId=None, blindDataId=None) -> bool
 
 		Returns true if any component of the given type on this mesh has
 		blind data. If a component ID is provided then only that particular
 		component is checked. If a blind data ID is provided then only blind
 		data of that type is checked. """
-	def hasColorChannels(self,*args,**kwargs)->Any:
+	def hasColorChannels(self,*args)->Any:
 		"""hasColorChannels(colorSet) -> bool
 
 		Returns True if the color set has RGB channels."""
-	def isBlindDataTypeUsed(self,*args,**kwargs)->Any:
+	def isBlindDataTypeUsed(self,*args)->Any:
 		"""isBlindDataTypeUsed(blindDataId) -> bool
 
 		Returns True if the blind data type is already in use anywhere in the scene."""
-	def isColorClamped(self,*args,**kwargs)->Any:
+	def isColorClamped(self,*args)->Any:
 		"""isColorClamped(colorSet) -> bool
 
 		Returns True if the color sets RGBA components are clamped to the
 		range 0 to 1."""
-	def isColorSetPerInstance(self,*args,**kwargs)->Any:
+	def isColorSetPerInstance(self,*args)->Any:
 		"""isColorSetPerInstance(colorSet) -> bool
 
 		Returns True if the color set is per-instance, and False if it is
 		shared across all instances."""
-	def edgeBorderInfo(self,*args,**kwargs)->Any:
+	def edgeBorderInfo(self,*args)->Any:
 		"""edgeBorderInfo(edgeId, setId=0) -> MFnMesh::BorderInfo
 
 		Returns if the specified edge is on geom/UV shell border or has shared/unshared UVs."""
-	def getUVBorderEdges(self,*args,**kwargs)->Any:
+	def getUVBorderEdges(self,*args)->Any:
 		"""getUVBorderEdges(setId) -> MIntArray
 
 		Retrieves the edge indices for edges lying on a UV border."""
-	def isEdgeSmooth(self,*args,**kwargs)->Any:
+	def isEdgeSmooth(self,*args)->Any:
 		"""isEdgeSmooth(edgeId) -> bool
 
 		Returns True if the edge is smooth, False if it is hard."""
-	def isNormalLocked(self,*args,**kwargs)->Any:
+	def isNormalLocked(self,*args)->Any:
 		"""isNormalLocked(normalId) -> bool
 
 		Returns True if the normal is locked, False otherwise."""
-	def isPolygonConvex(self,*args,**kwargs)->Any:
+	def isPolygonConvex(self,*args)->Any:
 		"""isPolygonConvex(faceId) -> bool
 
 		Returns True if the polygon is convex, False if it is concave."""
-	def isPolygonUVReversed(self,*args,**kwargs)->Any:
+	def isPolygonUVReversed(self,*args)->Any:
 		"""isPolygonUVReversed(faceId) -> bool
 
 		Returns True if the texture coordinates (uv's) for specified polygon are
 		reversed (clockwise), False if they are not reversed (counter clockwise)."""
-	def isRightHandedTangent(self,*args,**kwargs)->Any:
+	def isRightHandedTangent(self,*args)->Any:
 		"""isRightHandedTangent(tangentId, uvSet='') -> bool
 
 		Returns True if the normal, tangent, and binormal form a right handed
 		coordinate system, False otherwise."""
-	def isUVSetPerInstance(self,*args,**kwargs)->Any:
+	def isUVSetPerInstance(self,*args)->Any:
 		"""isUVSetPerInstance(uvSet) -> bool
 
 		Returns True if the UV set is per-instance, and False if it is shared
 		across all instances."""
-	def lockFaceVertexNormals(self,*args,**kwargs)->Any:
+	def lockFaceVertexNormals(self,*args)->Any:
 		"""lockFaceVertexNormals(seq of faceIds, seq of vertIds) -> self
 
 		Locks the normals for the given face/vertex pairs."""
-	def lockVertexNormals(self,*args,**kwargs)->Any:
+	def lockVertexNormals(self,*args)->Any:
 		"""lockVertexNormals(sequence of vertIds) -> self
 
 		Locks the shared normals for the specified vertices."""
-	def numColors(self,*args,**kwargs)->Any:
+	def numColors(self,*args)->Any:
 		"""numColors(colorSet='') -> int
 
 		Returns the number of colors in the given color set. If no color set
 		is specified then the mesh's current color set will be used."""
-	def numUVs(self,*args,**kwargs)->Any:
+	def numUVs(self,*args)->Any:
 		"""numUVs(uvSet='') -> int
 
 		Returns the number of UVs (texture coordinates) in the given UV set.
 		If no UV set is specified then the mesh's current UV set will be used."""
-	def onBoundary(self,*args,**kwargs)->Any:
+	def onBoundary(self,*args)->Any:
 		"""onBoundary(faceId) -> bool
 
 		Returns true if the face is on the border of the mesh, meaning that
 		one or more of its edges is a border edge."""
-	def polygonVertexCount(self,*args,**kwargs)->Any:
+	def polygonVertexCount(self,*args)->Any:
 		"""polygonVertexCount(faceId) -> int
 
 		Returns the number of vertices in the given polygon. Raises
 		ValueError if the polygon ID is invalid."""
-	def removeFaceColors(self,*args,**kwargs)->Any:
+	def removeFaceColors(self,*args)->Any:
 		"""removeFaceColors(seq of faceIds) -> self
 
 		Removes colors from all vertices of the specified faces."""
-	def removeFaceVertexColors(self,*args,**kwargs)->Any:
+	def removeFaceVertexColors(self,*args)->Any:
 		"""removeFaceVertexColors(seq of faceIds, seq of vertexIds) -> self
 
 		Removes colors from the specified face/vertex pairs."""
-	def removeVertexColors(self,*args,**kwargs)->Any:
+	def removeVertexColors(self,*args)->Any:
 		"""removeVertexColors(seq of vertexIds) -> self
 
 		Removes colors from the specified vertices in all of the faces which
 		share those vertices."""
-	def renameUVSet(self,*args,**kwargs)->Any:
+	def renameUVSet(self,*args)->Any:
 		"""renameUVSet(origName, newName, modifier=None) -> self
 
 		Renames a UV set. The set must exist and the new name cannot be the
@@ -7637,7 +7698,7 @@ class MFnMesh(MFnDagNode):
 
 		This method is only valid for functionsets which are attached to mesh
 		nodes, not mesh data."""
-	def setBinaryBlindData(self,*args,**kwargs)->Any:
+	def setBinaryBlindData(self,*args)->Any:
 		"""setBinaryBlindData(compId, compType, blindDataId, attr, data) -> self
 		setBinaryBlindData(seq of compId, compType, blindDataId, attr, data) -> self
 
@@ -7649,7 +7710,7 @@ class MFnMesh(MFnDagNode):
 		strings then it must provide a value for each component in compIds.
 		If it is a single string then all of the specified components will
 		have their blind data set to that value."""
-	def setBoolBlindData(self,*args,**kwargs)->Any:
+	def setBoolBlindData(self,*args)->Any:
 		"""setBoolBlindData(compId, compType, blindDataId, attr, data) -> self
 		setBoolBlindData(seq of compId, compType, blindDataId, attr, data) -> self
 
@@ -7661,14 +7722,14 @@ class MFnMesh(MFnDagNode):
 		booleans then it must provide a value for each component in compIds.
 		If it is a single boolean then all of the specified components will
 		have their blind data set to that value."""
-	def setColor(self,*args,**kwargs)->Any:
+	def setColor(self,*args)->Any:
 		"""setColor(colorId, MColor, colorSet='', rep=kRGBA) -> self
 
 		Sets a color in the specified colorSet. If no colorSet is given the
 		current colorSet will be used. If the colorId is greater than or
 		equal to numColors() then the colorSet will be grown to accommodate
 		the specified color."""
-	def setColors(self,*args,**kwargs)->Any:
+	def setColors(self,*args)->Any:
 		"""setColors(seq of MColor, colorSet='', rep=kRGBA) -> self
 
 		Sets all the colors of the specified colorSet. If no colorSet is
@@ -7684,7 +7745,7 @@ class MFnMesh(MFnDagNode):
 
 		In order to shrink the colorSet you have to clear its existing
 		colors. E.g: clearColors(), setColors( ... ), assignColors()"""
-	def setCreaseEdges(self,*args,**kwargs)->Any:
+	def setCreaseEdges(self,*args)->Any:
 		"""setCreaseEdges(edgeIds, seq of float) -> self
 
 
@@ -7693,7 +7754,7 @@ class MFnMesh(MFnDagNode):
 		Please note that to make effective use of the creasing variable in
 		software outside of Maya may require a license under patents owned by
 		Pixar(R)."""
-	def setCreaseVertices(self,*args,**kwargs)->Any:
+	def setCreaseVertices(self,*args)->Any:
 		"""setCreaseVertices(edgeIds, seq of float) -> self
 
 
@@ -7702,7 +7763,7 @@ class MFnMesh(MFnDagNode):
 		Please note that to make effective use of the creasing variable in
 		software outside of Maya may require a license under patents owned by
 		Pixar(R)."""
-	def setCurrentColorSetName(self,*args,**kwargs)->Any:
+	def setCurrentColorSetName(self,*args)->Any:
 		"""setCurrentColorSetName(colorSet, modifier=None, currentSelection=None) -> self
 
 		Sets the 'current' color set for this object. The current color set
@@ -7721,7 +7782,7 @@ class MFnMesh(MFnDagNode):
 
 		This method is only valid for functionsets which are attached to mesh
 		nodes, not mesh data."""
-	def setCurrentUVSetName(self,*args,**kwargs)->Any:
+	def setCurrentUVSetName(self,*args)->Any:
 		"""setCurrentUVSetName(uvSet, modifier=None, currentSelection=None) -> self
 
 		Sets the 'current' uv set for this object. The current uv set is the
@@ -7740,7 +7801,7 @@ class MFnMesh(MFnDagNode):
 
 		This method is only valid for functionsets which are attached to mesh
 		nodes, not mesh data."""
-	def setDoubleBlindData(self,*args,**kwargs)->Any:
+	def setDoubleBlindData(self,*args)->Any:
 		"""setDoubleBlindData(compId, compType, blindDataId, attr, data) -> self
 		setDoubleBlindData(seq of compId, compType, blindDataId, attr, data) -> self
 
@@ -7752,31 +7813,31 @@ class MFnMesh(MFnDagNode):
 		floats then it must provide a value for each component in compIds.
 		If it is a single float then all of the specified components will
 		have their blind data set to that value."""
-	def setEdgeSmoothing(self,*args,**kwargs)->Any:
+	def setEdgeSmoothing(self,*args)->Any:
 		"""setEdgeSmoothing(edgeId, smooth=True) -> self
 
 		Sets the specified edge to be hard or smooth. You must use the
 		cleanupEdgeSmoothing() method after all the desired edges on your
 		mesh have had setEdgeSmoothing() done. Use the updateSurface() method
 		to indicate the mesh needs to be redrawn."""
-	def setEdgeSmoothings(self,*args,**kwargs)->Any:
+	def setEdgeSmoothings(self,*args)->Any:
 		"""setEdgeSmoothings(edgeIds, smooths) -> self
 
 		Sets the specified edges to be hard or smooth. You must use the
 		cleanupEdgeSmoothing() method after all the desired edges on your
 		mesh have had setEdgeSmoothings() done. Use the updateSurface() method
 		to indicate the mesh needs to be redrawn."""
-	def setFaceColor(self,*args,**kwargs)->Any:
+	def setFaceColor(self,*args)->Any:
 		"""setFaceColor(color, faceId, rep=kRGBA) -> self
 
 		Sets the face-vertex color for all vertices on this face."""
-	def setFaceColors(self,*args,**kwargs)->Any:
+	def setFaceColors(self,*args)->Any:
 		"""setFaceColors(colors, faceIds, rep=kRGBA) -> self
 
 		Sets the colors of the specified faces. For each face in the faceIds
 		sequence the corresponding color from the colors sequence will be
 		applied to all of its vertices."""
-	def setFaceVertexColor(self,*args,**kwargs)->Any:
+	def setFaceVertexColor(self,*args)->Any:
 		"""setFaceVertexColor(color, faceId, vertexId, modifier=None, rep=kRGBA) -> self
 
 		Sets a face-specific normal at a vertex.
@@ -7784,7 +7845,7 @@ class MFnMesh(MFnDagNode):
 		If 'modifier' (MDGModifier) is provided then the operation will be
 		added to the modifier and will not take effect until the modifier's
 		doIt() is called. Otherwise it will take effect immediately."""
-	def setFaceVertexColors(self,*args,**kwargs)->Any:
+	def setFaceVertexColors(self,*args)->Any:
 		"""setFaceVertexColors(colors, faceIds, vertexIds, modifier=None, rep=kRGBA) -> self
 
 		Sets the colors of the specified face/vertex pairs.
@@ -7792,7 +7853,7 @@ class MFnMesh(MFnDagNode):
 		If 'modifier' (MDGModifier) is provided then the operation will be
 		added to the modifier and will not take effect until the modifier's
 		doIt() is called. Otherwise it will take effect immediately."""
-	def setFaceVertexNormal(self,*args,**kwargs)->Any:
+	def setFaceVertexNormal(self,*args)->Any:
 		"""setFaceVertexNormal(normal, faceId, vertexId, space=MSpace.kObject, modifier=None) -> self
 
 		Sets a face-specific normal at a vertex.
@@ -7800,11 +7861,11 @@ class MFnMesh(MFnDagNode):
 		If 'modifier' (MDGModifier) is provided then the operation will be
 		added to the modifier and will not take effect until the modifier's
 		doIt() is called. Otherwise it will take effect immediately."""
-	def setFaceVertexNormals(self,*args,**kwargs)->Any:
+	def setFaceVertexNormals(self,*args)->Any:
 		"""setFaceVertexNormal(normals, faceIds, vertexIds, space=MSpace.kObject) -> self
 
 		Sets normals for the given face/vertex pairs."""
-	def setFloatBlindData(self,*args,**kwargs)->Any:
+	def setFloatBlindData(self,*args)->Any:
 		"""setFloatBlindData(compId, compType, blindDataId, attr, data) -> self
 		setFloatBlindData(seq of compId, compType, blindDataId, attr, data) -> self
 
@@ -7816,7 +7877,7 @@ class MFnMesh(MFnDagNode):
 		floats then it must provide a value for each component in compIds.
 		If it is a single float then all of the specified components will
 		have their blind data set to that value."""
-	def setIntBlindData(self,*args,**kwargs)->Any:
+	def setIntBlindData(self,*args)->Any:
 		"""setIntBlindData(compId, compType, blindDataId, attr, data) -> self
 		setIntBlindData(seq of compId, compType, blindDataId, attr, data) -> self
 
@@ -7828,21 +7889,21 @@ class MFnMesh(MFnDagNode):
 		ints then it must provide a value for each component in compIds.
 		If it is a single int then all of the specified components will
 		have their blind data set to that value."""
-	def setInvisibleFaces(self,*args,**kwargs)->Any:
+	def setInvisibleFaces(self,*args)->Any:
 		"""setInvisibleFaces(faceIds, makeVisible=False) -> self
 
 		Sets the specified faces of the mesh to be visible or invisible. See
 		the getInvisibleFaces() method for a description of invisible faces."""
-	def setIsColorClamped(self,*args,**kwargs)->Any:
+	def setIsColorClamped(self,*args)->Any:
 		"""setIsColorClamped(colorSet, clamped) -> self
 
 		Sets whether the color set's RGBA components should be clamped to the
 		range 0 to 1."""
-	def setNormals(self,*args,**kwargs)->Any:
+	def setNormals(self,*args)->Any:
 		"""setNormals(normals, space=MSpace.kObject) -> self
 
 		Sets the mesh's normals (user normals)."""
-	def setPoint(self,*args,**kwargs)->Any:
+	def setPoint(self,*args)->Any:
 		"""setPoint(vertexId, MPoint, space=MSpace.kObject) -> self
 
 		Sets the position of specified vertex.
@@ -7854,17 +7915,17 @@ class MFnMesh(MFnDagNode):
 		need to call syncObject() to make sure that the object is valid.
 		Subsequent calls to setPoint() on the same object do not require a
 		syncObject() call."""
-	def setPoints(self,*args,**kwargs)->Any:
+	def setPoints(self,*args)->Any:
 		"""setPoints(points, space=MSpace.kObject) -> self
 
 		Sets the positions of the mesh's vertices. The positions may be
 		given as a sequence of MFloatPoint's or a sequence of MPoint's, but
 		not a mix of the two."""
-	def setSmoothMeshDisplayOptions(self,*args,**kwargs)->Any:
+	def setSmoothMeshDisplayOptions(self,*args)->Any:
 		"""setSmoothMeshDisplayOptions(MMeshSmoothOptions) -> self
 
 		Sets the options to use when smoothing the mesh for display."""
-	def setSomeColors(self,*args,**kwargs)->Any:
+	def setSomeColors(self,*args)->Any:
 		"""setSomeColors(colorIds, colors, colorSet='', rep=kRGBA) -> self
 
 		Sets specific colors in a colorSet.
@@ -7874,7 +7935,7 @@ class MFnMesh(MFnDagNode):
 		If you have added new colorIds, you can call assignColors to assign
 		the colorIds to the geometry. If you are modifying existing colors,
 		they will already be referenced by the existing mesh data."""
-	def setSomeUVs(self,*args,**kwargs)->Any:
+	def setSomeUVs(self,*args)->Any:
 		"""setSomeUVs(uvIds, uValues, vValues, uvSet='') -> self
 
 		Sets the specified texture coordinates (uv's) for this mesh. The uv
@@ -7887,7 +7948,7 @@ class MFnMesh(MFnDagNode):
 		If you have added new uvIds, you must call one of the assignUV
 		methods to assign the uvIds to the geometry. If you are modifying
 		existing UVs, you do not need to call one of the assignUV methods."""
-	def setStringBlindData(self,*args,**kwargs)->Any:
+	def setStringBlindData(self,*args)->Any:
 		"""setStringBlindData(compId, compType, blindDataId, attr, data) -> self
 		setStringBlindData(seq of compId, compType, blindDataId, attr, data) -> self
 
@@ -7899,7 +7960,7 @@ class MFnMesh(MFnDagNode):
 		strings then it must provide a value for each component in compIds.
 		If it is a single string then all of the specified components will
 		have their blind data set to that value."""
-	def setUV(self,*args,**kwargs)->Any:
+	def setUV(self,*args)->Any:
 		"""setUV(uvId, u, v, uvSet='') -> self
 
 		Sets the specified texture coordinate.
@@ -7908,7 +7969,7 @@ class MFnMesh(MFnDagNode):
 		is greater than or equal to numUVs() then the uv list will be grown
 		to accommodate the specified uv. If the UV being added is new, thenyou must call one of the assignUV methods in order to update the
 		geometry."""
-	def setUVs(self,*args,**kwargs)->Any:
+	def setUVs(self,*args)->Any:
 		"""setUVs(uValues, vValues, uvSet='') -> self
 
 		Sets all of the texture coordinates (uv's) for this mesh. The uv
@@ -7927,7 +7988,7 @@ class MFnMesh(MFnDagNode):
 		In order to shrink the uvs array, do the following: clearUVs(),
 		setUVs(...), assignUVs(). These steps will let you to create an
 		array of uvs which is smaller than the original one."""
-	def setVertexColor(self,*args,**kwargs)->Any:
+	def setVertexColor(self,*args)->Any:
 		"""setVertexColor(color, vertexId, modifier=None, rep=kRGBA) -> self
 
 		Sets the color for a vertex in all the faces which share it.
@@ -7935,7 +7996,7 @@ class MFnMesh(MFnDagNode):
 		If 'modifier' (MDGModifier) is provided then the operation will be
 		added to the modifier and will not take effect until the modifier's
 		doIt() is called. Otherwise it will take effect immediately."""
-	def setVertexColors(self,*args,**kwargs)->Any:
+	def setVertexColors(self,*args)->Any:
 		"""setVertexColors(colors, vertexIds, modifier=None, rep=kRGBA) -> self
 
 		Sets the colors of the specified vertices. For each vertex in the
@@ -7945,7 +8006,7 @@ class MFnMesh(MFnDagNode):
 		If 'modifier' (MDGModifier) is provided then the operation will be
 		added to the modifier and will not take effect until the modifier's
 		doIt() is called. Otherwise it will take effect immediately."""
-	def setVertexNormal(self,*args,**kwargs)->Any:
+	def setVertexNormal(self,*args)->Any:
 		"""setVertexNormal(normal, vertexId, space=MSpace.kObject, modifier=None) -> self
 
 		Sets the shared normal at a vertex.
@@ -7953,11 +8014,11 @@ class MFnMesh(MFnDagNode):
 		If 'modifier' (MDGModifier) is provided then the operation will be
 		added to the modifier and will not take effect until the modifier's
 		doIt() is called. Otherwise it will take effect immediately."""
-	def setVertexNormals(self,*args,**kwargs)->Any:
+	def setVertexNormals(self,*args)->Any:
 		"""setVertexNormal(normals, vertexIds, space=MSpace.kObject) -> self
 
 		Sets the shared normals for the given vertices."""
-	def sortIntersectionFaceTriIds(self,*args,**kwargs)->Any:
+	def sortIntersectionFaceTriIds(self,*args)->Any:
 		"""sortIntersectionFaceTriIds(faceIds, triIds=none) -> self
 
 		Convenience routine for sorting faceIds or face/triangle ids before
@@ -7967,7 +8028,7 @@ class MFnMesh(MFnDagNode):
 		faceId/triId arrays be sorted properly to ensure optimal performance.
 
 		Both arguments must be MIntArray's."""
-	def split(self,*args,**kwargs)->Any:
+	def split(self,*args)->Any:
 		"""split(((kOnEdge, int, float), (kInternalPoint, MFloatPoint), ...)) -> self
 
 		Each tuple in the placements sequence consists of a Split Placement
@@ -7983,14 +8044,14 @@ class MFnMesh(MFnDagNode):
 
 		All splits must begin and end on an edge meaning that the first and
 		last tuples in the placements sequence must be kOnEdge placements."""
-	def subdivideEdges(self,*args,**kwargs)->Any:
+	def subdivideEdges(self,*args)->Any:
 		"""subdivideEdges(edges, numDivisions) -> self
 
 		Subdivides edges at regular intervals. For example, if numDivisions
 		is 2 then two equally-spaced vertices will be added to each of the
 		specified edges: one 1/3 of the way along the edge and a second 2/3
 		of the way along the edge."""
-	def subdivideFaces(self,*args,**kwargs)->Any:
+	def subdivideFaces(self,*args)->Any:
 		"""subdivideFaces(faces, numDivisions) -> self
 
 		Subdivides each specified face into a grid of smaller faces.
@@ -8001,7 +8062,7 @@ class MFnMesh(MFnDagNode):
 		The numDivisions parameter tells how many times to subdivide each
 		edge of the face. Internal points and edges are introduced as needed
 		to create a grid of smaller faces."""
-	def syncObject(self,*args,**kwargs)->Any:
+	def syncObject(self,*args)->Any:
 		"""syncObject() -> self
 
 		If a non-api operation happens that many have changed the
@@ -8011,15 +8072,15 @@ class MFnMesh(MFnDagNode):
 		which might affect the mesh. Note that this only applies when the
 		functionset is attached to a mesh node. If it's attached to mesh
 		data the it is not necessary to call this method."""
-	def unlockFaceVertexNormals(self,*args,**kwargs)->Any:
+	def unlockFaceVertexNormals(self,*args)->Any:
 		"""unlockFaceVertexNormals(seq of faceIds, seq of vertIds) -> self
 
 		Unlocks the normals for the given face/vertex pairs."""
-	def unlockVertexNormals(self,*args,**kwargs)->Any:
+	def unlockVertexNormals(self,*args)->Any:
 		"""unlockVertexNormals(sequence of vertIds) -> self
 
 		Unlocks the shared normals for the specified vertices."""
-	def updateSurface(self,*args,**kwargs)->Any:
+	def updateSurface(self,*args)->Any:
 		"""updateSurface() -> self
 
 		Signal that this polygonal mesh has changed and needs to be redrawn."""
@@ -8033,58 +8094,63 @@ class MFnMeshData(MFnGeometryData):
 	__init__(MObject)
 	Initializes a new MFnMeshData function set, attached
 	to the specified object."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create() -> MObject
 
 		Creates a new mesh data object, attaches it to this function set
 		and returns an MObject which references it."""
 class MFnMessageAttribute(MFnAttribute):
 	"""Functionset for creating and working with message attributes."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new message attribute, attaches it to the function set and returns it as an MObject."""
 class MFnNumericAttribute(MFnAttribute):
 	"""Functionset for creating and working with numeric attributes."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def default(self)->float|tuple[float, ...]:
+		"""Default value"""
+	@default.setter
+	def default(self,value:float|tuple[float, ...])->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def child(self,*args,**kwargs)->Any:
+	def child(self,*args)->Any:
 		"""Returns the specified child attribute of the parent attribute currently attached to the function set."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new simple or compound numeric attribute, attaches it to the function set and returns it in an MObject."""
-	def createAddr(self,*args,**kwargs)->Any:
+	def createAddr(self,*args)->Any:
 		"""Creates a new address attribute, attaches it to the function set and returns it in an MObject."""
-	def createColor(self,*args,**kwargs)->Any:
+	def createColor(self,*args)->Any:
 		"""Creates a new color attribute, attaches it to the function set and returns it in an MObject."""
-	def createPoint(self,*args,**kwargs)->Any:
+	def createPoint(self,*args)->Any:
 		"""Creates a new 3D point attribute, attaches it to the function set and returns it in an MObject."""
-	def getMax(self,*args,**kwargs)->Any:
+	def getMax(self,*args)->Any:
 		"""Returns the attribute's hard maximum value(s)."""
-	def getMin(self,*args,**kwargs)->Any:
+	def getMin(self,*args)->Any:
 		"""Returns the attribute's hard minimum value(s)."""
-	def getSoftMax(self,*args,**kwargs)->Any:
+	def getSoftMax(self,*args)->Any:
 		"""Returns the attribute's soft maximum value."""
-	def getSoftMin(self,*args,**kwargs)->Any:
+	def getSoftMin(self,*args)->Any:
 		"""Returns the attribute's soft minimum value."""
-	def hasMax(self,*args,**kwargs)->Any:
+	def hasMax(self,*args)->Any:
 		"""Returns True if a hard maximum value has been specified for the attribute."""
-	def hasMin(self,*args,**kwargs)->Any:
+	def hasMin(self,*args)->Any:
 		"""Returns True if a hard minimum value has been specified for the attribute."""
-	def hasSoftMax(self,*args,**kwargs)->Any:
+	def hasSoftMax(self,*args)->Any:
 		"""Returns True if a soft maximum value has been specified for the attribute."""
-	def hasSoftMin(self,*args,**kwargs)->Any:
+	def hasSoftMin(self,*args)->Any:
 		"""Returns True if a soft minimum value has been specified for the attribute."""
-	def numericType(self,*args,**kwargs)->Any:
+	def numericType(self,*args)->Any:
 		"""Returns the numeric type of the attribute currently attached to the function set."""
-	def setMax(self,*args,**kwargs)->Any:
+	def setMax(self,*args)->Any:
 		"""Sets the attribute's hard maximum value(s)."""
-	def setMin(self,*args,**kwargs)->Any:
+	def setMin(self,*args)->Any:
 		"""Sets the attribute's hard minimum value(s)."""
-	def setSoftMax(self,*args,**kwargs)->Any:
+	def setSoftMax(self,*args)->Any:
 		"""Sets the attribute's soft maximum value."""
-	def setSoftMin(self,*args,**kwargs)->Any:
+	def setSoftMin(self,*args)->Any:
 		"""Sets the attribute's soft minimum value."""
 class MFnNumericData(MFnData):
 	"""Function set for non-simple numeric node data."""
@@ -8111,15 +8177,15 @@ class MFnNumericData(MFnData):
 	k4Double:int=17
 	kAddr:int=18
 	kLast:int=19
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new numeric data object."""
-	def getData(self,*args,**kwargs)->Any:
+	def getData(self,*args)->Any:
 		"""Returns a list containing the attached data object's data."""
-	def numericType(self,*args,**kwargs)->Any:
+	def numericType(self,*args)->Any:
 		"""Returns the type of data in the attached data object."""
-	def setData(self,*args,**kwargs)->Any:
+	def setData(self,*args)->Any:
 		"""Sets the value of the data in the attached data object."""
 class MFnNurbsCurve(MFnDagNode):
 	"""NURBS (Non-Uniform Rational B-Spline) curve function set.
@@ -8195,6 +8261,56 @@ class MFnNurbsCurve(MFnDagNode):
 
 	Maya representation: {0,1,2,...,N,N+1,N+2}
 	External representation: {-1,0,1,2,...,N,N+1,N+2,N+3}"""
+	@property
+	def degree(self)->Any:
+		"""The degree of the curve or 0 if the degree cannot be determined."""
+	@degree.setter
+	def degree(self,value:Any)->None:...
+	@property
+	def form(self)->Any:
+		"""The form of the curve: kOpen, kClosed, kPeriodic or kInvalid"""
+	@form.setter
+	def form(self,value:Any)->None:...
+	@property
+	def hasHistoryOnCreate(self)->Any:
+		"""True if the curve was created with history."""
+	@hasHistoryOnCreate.setter
+	def hasHistoryOnCreate(self,value:Any)->None:...
+	@property
+	def isPlanar(self)->Any:
+		"""True if the curve is planar."""
+	@isPlanar.setter
+	def isPlanar(self,value:Any)->None:...
+	@property
+	def knotDomain(self)->Any:
+		"""A tuple containing a pair of floats corresponding to the maximum and
+		minimum parameter values for this curve."""
+	@knotDomain.setter
+	def knotDomain(self,value:Any)->None:...
+	@property
+	def numCVs(self)->Any:
+		"""Number of CVs in the curve or 0 if the number of CVs cannot be
+		determined."""
+	@numCVs.setter
+	def numCVs(self,value:Any)->None:...
+	@property
+	def numKnots(self)->Any:
+		"""Number of knots in the curve or 0 if the number of knots cannot be
+		determined."""
+	@numKnots.setter
+	def numKnots(self,value:Any)->None:...
+	@property
+	def numSpans(self)->Any:
+		"""Number of spans in the curve or 0 if the number of spans cannot be
+		determined."""
+	@numSpans.setter
+	def numSpans(self,value:Any)->None:...
+	@property
+	def planeNormal(self)->Any:
+		"""MVector of the normal to the plane of the curve, if the curve is
+		planar, or None if the curve is not planar."""
+	@planeNormal.setter
+	def planeNormal(self,value:Any)->None:...
 	kInvalid:int=0
 	kOpen:int=1
 	kClosed:int=2
@@ -8202,16 +8318,16 @@ class MFnNurbsCurve(MFnDagNode):
 	kLast:int=4
 	kPointTolerance:float=0.001
 	kFindParamTolerance:float=1e-06
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def area(self,*args,**kwargs)->Any:
+	def area(self,*args)->Any:
 		"""area(tolerance=kPointTolerance) -> float
 
 		Returns the area bounded by the curve. The curve must be closed and
 		planar. A value of 0.0 will be returned if area cannot be determined.
 
 		* tolerance (float) - Amount of error allowed in the calculation"""
-	def closestPoint(self,*args,**kwargs)->Any:
+	def closestPoint(self,*args)->Any:
 		"""closestPoint(testPoint, guess=None, tolerance=kPointTolerance,
 		    space=kObject) -> (MPoint, float)
 
@@ -8229,7 +8345,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* tolerance  (float) - maximum allowed distance between the curve
 		                       and the returned point.
 		* space (MSpace constant) - coordinate space to use for the points"""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source, parent=MObject.kNullObj) -> MObject
 
 		Returns a new NURBS curve which is a copy of 'source' and resets
@@ -8246,7 +8362,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               transform will be created with the new curve parented
 		               beneath it as a nurbsCurve node. In this last case it
 		               will be the transform node which is returned."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(cvs, knots, degree, form, is2D, rational, parent=kNullObj)
 		    -> self
 		create(subCurves, parent=kNullObj) -> self
@@ -8286,7 +8402,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               curve in the array must be coincident with the end of
 		               the previous curve in the array, and the curves must be
 		               be at least C0 continuous (i.e. tangent breaks are okay)."""
-	def createWithEditPoints(self,*args,**kwargs)->Any:
+	def createWithEditPoints(self,*args)->Any:
 		"""createWithEditPoints(eps, degree, form, is2D, rational, uniform,
 		    parent=kNullObj) -> MObject
 
@@ -8315,9 +8431,8 @@ class MFnNurbsCurve(MFnDagNode):
 		               'parent' is not provided then a new top-level
 		               transform will be created with the new curve parented
 		               beneath it as a nurbsCurve node. In this last case it
-		               will be the transform node which is returned.
-		"""
-	def cvPosition(self,*args,**kwargs)->Any:
+		               will be the transform node which is returned."""
+	def cvPosition(self,*args)->Any:
 		"""cvPosition(index, space=kObject) -> MPoint
 
 		Returns the position of a single control vertex.
@@ -8325,14 +8440,14 @@ class MFnNurbsCurve(MFnDagNode):
 		* index (int) - index of the CV to return
 		* space (int) - an MSpace constant giving the coordinate space in
 		                which the point is given"""
-	def cvPositions(self,*args,**kwargs)->Any:
+	def cvPositions(self,*args)->Any:
 		"""cvPositions(space=kObject) -> MPointArray
 
 		Returns the positions of all of the curve's control vertices.
 
 		* space (int) - an MSpace constant giving the coordinate space in
 		                which the point is given"""
-	def cvs(self,*args,**kwargs)->Any:
+	def cvs(self,*args)->Any:
 		"""cvs(startIndex[, endIndex]) -> MObject
 
 		Returns a CV or a range of CVs as a component. MItCurveCV can be
@@ -8345,7 +8460,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* endIndex   (int) - end of the range of CVs to return. If not
 		                     provided then only the CV specified by
 		                     startIndex will be returned."""
-	def distanceToPoint(self,*args,**kwargs)->Any:
+	def distanceToPoint(self,*args)->Any:
 		"""distanceToPoint(point, space=kObject) -> float
 
 		Returns the distance from the given point to the point on the curve
@@ -8354,7 +8469,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* point (MPoint) - the point to calculate the distance to
 		* space (int)    - an MSpace constant giving the coordinate space in
 		                   which the point is given"""
-	def findParamFromLength(self,*args,**kwargs)->Any:
+	def findParamFromLength(self,*args)->Any:
 		"""findParamFromLength(length, tolerance=kFindParamTolerance) -> float
 
 		Returns the parameter value corresponding to a given length along
@@ -8363,7 +8478,7 @@ class MFnNurbsCurve(MFnDagNode):
 
 		* length (float) - distance along the curve
 		* tolerance (float) - search tolerance"""
-	def findLengthFromParam(self,*args,**kwargs)->Any:
+	def findLengthFromParam(self,*args)->Any:
 		"""findLengthFromParam(param) -> float
 
 		Returns the length along the curve corresponding to a given
@@ -8371,7 +8486,7 @@ class MFnNurbsCurve(MFnDagNode):
 		the given parameter value then a length of zero is returned.
 
 		* param (float) - parameter value on the curve"""
-	def getDerivativesAtParam(self,*args,**kwargs)->Any:
+	def getDerivativesAtParam(self,*args)->Any:
 		"""getDerivativesAtParam(param, space=kObject) -> (MPoint, MVector[, MVector])
 
 		Evaluates the curve at the given parameter value, returning a tuple
@@ -8383,7 +8498,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* space   (int) - an MSpace constant giving the coordinate space in
 		                  which the point is given
 		* dUU    (bool) - if True include the second derivative in the result."""
-	def getParamAtPoint(self,*args,**kwargs)->Any:
+	def getParamAtPoint(self,*args)->Any:
 		"""getParamAtPoint(point, tolerance=kPointTolerance, space=kObject) -> float
 
 		Returns the parameter value corresponding to the given point on the
@@ -8394,7 +8509,7 @@ class MFnNurbsCurve(MFnDagNode):
 		                      still be considered to lie on it.
 		* space       (int) - an MSpace constant giving the coordinate space
 		                      in which the point is given"""
-	def getPointAtParam(self,*args,**kwargs)->Any:
+	def getPointAtParam(self,*args)->Any:
 		"""getPointAtParam(param, space=kObject) -> MPoint
 
 		Returns the point on the curve at the given parameter value.
@@ -8402,15 +8517,14 @@ class MFnNurbsCurve(MFnDagNode):
 		* param (float) - parameter value at which to find the point
 		* space   (int) - an MSpace constant giving the coordinate space in
 		                  which the point should be returned"""
-	def isParamOnCurve(self,*args,**kwargs)->Any:
+	def isParamOnCurve(self,*args)->Any:
 		"""isParamOnCurve(param) -> bool
 
 		Returns True if the given parameter value lies on the curve (i.e. is
 		within the curve's knot domain), False otherwise.
 
-		* param (float) - parameter value to test
-		"""
-	def isPointOnCurve(self,*args,**kwargs)->Any:
+		* param (float) - parameter value to test"""
+	def isPointOnCurve(self,*args)->Any:
 		"""isPointOnCurve(point, tolerance=kPointTolerance, space=kObject) -> bool
 
 		Returns True if the given point lies on the curve, False otherwise.
@@ -8420,32 +8534,31 @@ class MFnNurbsCurve(MFnDagNode):
 		                      still be considered to lie on it.
 		* space       (int) - an MSpace constant giving the coordinate space
 		                      in which the point is given"""
-	def knot(self,*args,**kwargs)->Any:
+	def knot(self,*args)->Any:
 		"""knot(index) -> float
 
 		Returns the parameter value of a single knot.
 
 		* index (int) - index of the knot to return. These range from 0 to
 		                (numKnots - 1)"""
-	def knots(self,*args,**kwargs)->Any:
+	def knots(self,*args)->Any:
 		"""knots() -> MDoubleArray
 
 		Returns the parameter values for all of the curve's knots."""
-	def length(self,*args,**kwargs)->Any:
+	def length(self,*args)->Any:
 		"""length(tolerance=kPointTolerance) -> float
 
 		Returns the arc length of this curve or 0.0 if it cannot be computed.
 
-		* tolerance (float) - max error allowed in the calculation.
-		"""
-	def makeMultipleEndKnots(self,*args,**kwargs)->Any:
+		* tolerance (float) - max error allowed in the calculation."""
+	def makeMultipleEndKnots(self,*args)->Any:
 		"""makeMultipleEndKnots() -> self
 
 		Sets the curve's end knots to have full multiplicity. This ensures
 		that the end points interpolate the first and last CVs (i.e. lie
 		directly on them). It can also be used to convert a periodic curve
 		to a closed curve."""
-	def normal(self,*args,**kwargs)->Any:
+	def normal(self,*args)->Any:
 		"""normal(param, space=kObject) -> MVector
 
 		Returns the normal at the given parameter value on the curve. For
@@ -8456,7 +8569,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* param (float) - parameter value at which to find the normal
 		* space   (int) - an MSpace constant giving the coordinate space in
 		                  which the normal should be returned"""
-	def removeKnot(self,*args,**kwargs)->Any:
+	def removeKnot(self,*args)->Any:
 		"""removeKnot(param, removeAll=False) -> self
 
 		Removes one or more knots at the given parameter value.
@@ -8467,11 +8580,11 @@ class MFnNurbsCurve(MFnDagNode):
 
 		* param     (float) - parameter of the knot
 		* removeAll  (bool) - how to handle multiple knots at the same param"""
-	def reverse(self,*args,**kwargs)->Any:
+	def reverse(self,*args)->Any:
 		"""reverse() -> self
 
 		Reverses the direction of the curve."""
-	def setCVPosition(self,*args,**kwargs)->Any:
+	def setCVPosition(self,*args)->Any:
 		"""setCVPosition(index, point, space=kObject) -> self
 
 		Sets the position of a single control vertex of the curve.
@@ -8480,7 +8593,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* point (MPoint) - new position for the cv
 		* space    (int) - an MSpace constant giving the coordinate space
 		                   in which the point is given"""
-	def setCVPositions(self,*args,**kwargs)->Any:
+	def setCVPositions(self,*args)->Any:
 		"""setCVPositions(points, space=kObject) -> self
 
 		Sets the positions of all of the curve's control vertices.
@@ -8491,14 +8604,13 @@ class MFnNurbsCurve(MFnDagNode):
 		                 curve has control vertices.
 		* space  (int) - an MSpace constant giving the coordinate space
 		                 in which the points are given"""
-	def setKnot(self,*args,**kwargs)->Any:
+	def setKnot(self,*args)->Any:
 		"""setKnot(index, param) -> self
 
 		Sets the parameter value of a single knot.
 		* index   (int) - index of the knot
-		* param (float) - new parameter value for the knot
-		"""
-	def setKnots(self,*args,**kwargs)->Any:
+		* param (float) - new parameter value for the knot"""
+	def setKnots(self,*args)->Any:
 		"""setKnots(params, startIndex, endIndex) -> self
 
 		Sets the parameter values of a contiguous group of knots.
@@ -8507,9 +8619,8 @@ class MFnNurbsCurve(MFnDagNode):
 		                   - the parameter values to set, one per knot in
 		                     the range
 		* startIndex (int) - first knot in the range to be set
-		* endIndex   (int) - last knot in the range to be set
-		"""
-	def tangent(self,*args,**kwargs)->Any:
+		* endIndex   (int) - last knot in the range to be set"""
+	def tangent(self,*args)->Any:
 		"""tangent(param, space=kObject) -> MVector
 
 		Returns the normalized tangent vector at the given parameter value
@@ -8518,7 +8629,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* param (float) - parameter value at which to find the tangent
 		* space   (int) - an MSpace constant giving the coordinate space in
 		                  which the tangent should be returned"""
-	def updateCurve(self,*args,**kwargs)->Any:
+	def updateCurve(self,*args)->Any:
 		"""updateCurve() -> self
 
 		Tells the shape node which represents the curve in the scene, if
@@ -8533,9 +8644,9 @@ class MFnNurbsCurveData(MFnGeometryData):
 	__init__(MObject)
 	Initializes a new MFnNurbsCurveData function set, attached
 	to the specified object."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create() -> MObject
 
 		Creates a new nurbs curve data object, attaches it to this function set
@@ -8622,6 +8733,150 @@ class MFnNurbsSurface(MFnDagNode):
 
 	Maya representation: {0,1,2,...,N,N+1,N+2}
 	External representation: {-1,0,1,2,...,N,N+1,N+2,N+3}"""
+	@property
+	def dataObject(self)->Any:
+		"""If the functionset was created using an MFn.kNurbsSurfaceData object
+		then this attribute will contain an MObject which references that
+		data object. Otherwise it will contain MObject.kNullObj."""
+	@dataObject.setter
+	def dataObject(self,value:Any)->None:...
+	@property
+	def degreeInU(self)->Any:
+		"""The degree of the surface in the U direction or 0 if the degree
+		cannot be determined."""
+	@degreeInU.setter
+	def degreeInU(self,value:Any)->None:...
+	@property
+	def degreeInV(self)->Any:
+		"""The degree of the surface in the V direction or 0 if the degree
+		cannot be determined."""
+	@degreeInV.setter
+	def degreeInV(self,value:Any)->None:...
+	@property
+	def formInU(self)->Any:
+		"""Form of the surface in the U direction. Can be one of kOpen,
+		kClosed, kPeriodic or kInvalid."""
+	@formInU.setter
+	def formInU(self,value:Any)->None:...
+	@property
+	def formInV(self)->Any:
+		"""Form of the surface in the V direction. Can be one of kOpen,
+		kClosed, kPeriodic or kInvalid."""
+	@formInV.setter
+	def formInV(self,value:Any)->None:...
+	@property
+	def hasHistoryOnCreate(self)->Any:
+		"""True if the surface was created with history."""
+	@hasHistoryOnCreate.setter
+	def hasHistoryOnCreate(self,value:Any)->None:...
+	@property
+	def isBezier(self)->Any:
+		"""True if the knot spacing gives a Bezier surface."""
+	@isBezier.setter
+	def isBezier(self,value:Any)->None:...
+	@property
+	def isFoldedOnBispan(self)->Any:
+		"""True if surface contains are any folds or creases on bispan
+		boundaries, including trimmed regions."""
+	@isFoldedOnBispan.setter
+	def isFoldedOnBispan(self,value:Any)->None:...
+	@property
+	def isTrimmedSurface(self)->Any:
+		"""True if the surface is a trimmed surface."""
+	@isTrimmedSurface.setter
+	def isTrimmedSurface(self,value:Any)->None:...
+	@property
+	def isUniform(self)->Any:
+		"""True if the knot spacing is uniform."""
+	@isUniform.setter
+	def isUniform(self,value:Any)->None:...
+	@property
+	def knotDomainInU(self)->Any:
+		"""A tuple containing a pair of floats corresponding to the maximum and
+		minimum U parameter values for this surface."""
+	@knotDomainInU.setter
+	def knotDomainInU(self,value:Any)->None:...
+	@property
+	def knotDomainInV(self)->Any:
+		"""A tuple containing a pair of floats corresponding to the maximum and
+		minimum V parameter values for this surface."""
+	@knotDomainInV.setter
+	def knotDomainInV(self,value:Any)->None:...
+	@property
+	def numCVsInU(self)->Any:
+		"""Number of CVs in the surface in the U direction or 0 if the number
+		of CVs cannot be determined."""
+	@numCVsInU.setter
+	def numCVsInU(self,value:Any)->None:...
+	@property
+	def numCVsInV(self)->Any:
+		"""Number of CVs in the surface in the V direction or 0 if the number
+		of CVs cannot be determined."""
+	@numCVsInV.setter
+	def numCVsInV(self,value:Any)->None:...
+	@property
+	def numKnotsInU(self)->Any:
+		"""Number of knots in the surface in the U direction or 0 if the number
+		of knots cannot be determined."""
+	@numKnotsInU.setter
+	def numKnotsInU(self,value:Any)->None:...
+	@property
+	def numKnotsInV(self)->Any:
+		"""Number of knots in the surface in the V direction or 0 if the number
+		of knots cannot be determined."""
+	@numKnotsInV.setter
+	def numKnotsInV(self,value:Any)->None:...
+	@property
+	def numNonZeroSpansInU(self)->Any:
+		"""Number of spans in the U direction which are non-zero (i.e. their
+		max param value is greater than their min param value)."""
+	@numNonZeroSpansInU.setter
+	def numNonZeroSpansInU(self,value:Any)->None:...
+	@property
+	def numNonZeroSpansInV(self)->Any:
+		"""Number of spans in the V direction which are non-zero (i.e. their
+		max param value is greater than their min param value)."""
+	@numNonZeroSpansInV.setter
+	def numNonZeroSpansInV(self,value:Any)->None:...
+	@property
+	def numPatches(self)->Any:
+		"""Number of non-zero patches on the surface."""
+	@numPatches.setter
+	def numPatches(self,value:Any)->None:...
+	@property
+	def numPatchesInU(self)->Any:
+		"""Number of non-zero patches in the U direction."""
+	@numPatchesInU.setter
+	def numPatchesInU(self,value:Any)->None:...
+	@property
+	def numPatchesInV(self)->Any:
+		"""Number of non-zero patches in the V direction."""
+	@numPatchesInV.setter
+	def numPatchesInV(self,value:Any)->None:...
+	@property
+	def numRegions(self)->Any:
+		"""Number of trimmed regions for this surface or 0 if the surface is
+		not a trimmed surface."""
+	@numRegions.setter
+	def numRegions(self,value:Any)->None:...
+	@property
+	def numSpansInU(self)->Any:
+		"""Number of spans in the U direction, including zero-length spans."""
+	@numSpansInU.setter
+	def numSpansInU(self,value:Any)->None:...
+	@property
+	def numSpansInV(self)->Any:
+		"""Number of spans in the V direction, including zero-length spans."""
+	@numSpansInV.setter
+	def numSpansInV(self,value:Any)->None:...
+	@property
+	def numUVs(self)->Any:
+		"""Number of texture (uv) coordinates for this surface. The uvs are
+		stored in a list which is referenced by patches requiring textures
+		on a per-patch per-patchCorner basis. This attribute contains the
+		number of elements in this list."""
+	@numUVs.setter
+	def numUVs(self,value:Any)->None:...
 	kInvalidBoundary:int=0
 	kOuter:int=1
 	kInner:int=2
@@ -8633,13 +8888,13 @@ class MFnNurbsSurface(MFnDagNode):
 	kPeriodic:int=3
 	kLast:int=4
 	kPointTolerance:float=0.001
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def area(self,*args,**kwargs)->Any:
+	def area(self,*args)->Any:
 		"""area(space=kObject, tolerance=kPointTolerance) -> float
 
 		Returns the surface's area, or 0.0 if the area cannot be determined."""
-	def assignUV(self,*args,**kwargs)->Any:
+	def assignUV(self,*args)->Any:
 		"""assignUV(patchId, cornerIndex, uvId) -> self
 
 		Maps a texture coordinate (uv) to a the specified corner of a patch.
@@ -8654,7 +8909,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* patchId     (int) - Patch to map to.
 		* cornerIndex (int) - Corner of the patch to map to.
 		* uvId        (int) - Index into the uv list of the UV to map."""
-	def assignUVs(self,*args,**kwargs)->Any:
+	def assignUVs(self,*args)->Any:
 		"""assignUVs(uvCounts, uvIds) -> self
 
 		Maps all texture coordinates for the surface. setUV() and setUVs()
@@ -8690,7 +8945,7 @@ class MFnNurbsSurface(MFnDagNode):
 		             - UV counts for each patch in the surface.
 		* uvIds    (MIntArray or seq of int)
 		             - UV indices to be mapped to each patch-corner."""
-	def boundaryType(self,*args,**kwargs)->Any:
+	def boundaryType(self,*args)->Any:
 		"""boundaryType(region, boundary) -> int
 
 		Returns the type of the specified boundary. The surface must be a
@@ -8704,7 +8959,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* region (int)   - Region containing the boundary
 		* boundary (int) - Index of the boundary within the region."""
-	def clearUVs(self,*args,**kwargs)->Any:
+	def clearUVs(self,*args)->Any:
 		"""clearUVs() -> self
 
 		Clears out all texture coordinates for the nurbsSurface, and leaves
@@ -8718,7 +8973,7 @@ class MFnNurbsSurface(MFnDagNode):
 		on a shape with no history, the UVs are removed and the attributes
 		are set on the shape. When called on a shape with history, the
 		polyDelMap command is invoked and a polyMapDel node is created."""
-	def closestPoint(self,*args,**kwargs)->Any:
+	def closestPoint(self,*args)->Any:
 		"""closestPoint(testPoint, uStart=None, vStart=None,
 		    ignoreTrimBoundaries=False, tolerance=kPointTolerance,
 		    space=kObject) -> (MPoint, float, float)
@@ -8758,7 +9013,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* space        (int) - an MSpace constant giving the coordinate
 		                       space which 'testPoint' is in. The returned
 		                       point will be in the same space."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source, parent=kNullObj) -> MObject
 
 		Returns a new NURBS surface, which is a copy of the source surface,
@@ -8776,7 +9031,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                    with the new surface parented beneath it as a
 		                    nurbsSurface node. In this last case it will be
 		                    the transform node which is returned."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(cvs, uKnots, vKnots, uDegree, vDegree, uForm, vForm,
 		    rational, parent=kNullObj) -> MObject
 
@@ -8808,15 +9063,14 @@ class MFnNurbsSurface(MFnDagNode):
 		                    with the new surface parented beneath it as a
 		                    nurbsSurface node. In this last case it will be
 		                    the transform node which is returned."""
-	def cv(self,*args,**kwargs)->Any:
+	def cv(self,*args)->Any:
 		"""cv(uIndex, vIndex) -> MObject
 
 		Returns a component for the specified control vertex.
 
 		* uIndex (int) - U index of the CV.
-		* vIndex (int) - V index of the CV.
-		"""
-	def cvPosition(self,*args,**kwargs)->Any:
+		* vIndex (int) - V index of the CV."""
+	def cvPosition(self,*args)->Any:
 		"""cvPosition(uIndex, vIndex, space=kObject) -> MPoint
 
 		Returns the position of the specified control vertex.
@@ -8825,14 +9079,14 @@ class MFnNurbsSurface(MFnDagNode):
 		* vIndex (int) - V index of the CV.
 		* space  (int) - an MSpace constant giving the coordinate
 		                 space which the point should be returned."""
-	def cvPositions(self,*args,**kwargs)->Any:
+	def cvPositions(self,*args)->Any:
 		"""cvPositions(space=kObject) -> MPointArray
 
 		Returns the positions of all the surface's control vertices.
 
 		* space  (int) - an MSpace constant giving the coordinate
 		                 space which the points should be returned."""
-	def cvsInU(self,*args,**kwargs)->Any:
+	def cvsInU(self,*args)->Any:
 		"""cvsInU(startUIndex, endUIndex, vIndex) -> MObject
 
 		Returns a component for a set of control vertices in the U direction.
@@ -8840,7 +9094,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* startUIndex (int) - U index of the first CV to return.
 		* endUIndex   (int) - U index of the last CV to return.
 		* vIndex      (int) - V index for all of the returned CVs."""
-	def cvsInV(self,*args,**kwargs)->Any:
+	def cvsInV(self,*args)->Any:
 		"""cvsInV(startVIndex, endVIndex, uIndex) -> MObject
 
 		Returns a component for a set of control vertices in the V direction.
@@ -8848,7 +9102,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* startVIndex (int) - V index of the first CV to return.
 		* endVIndex   (int) - V index of the last CV to return.
 		* uIndex      (int) - U index for all of the returned CVs."""
-	def distanceToPoint(self,*args,**kwargs)->Any:
+	def distanceToPoint(self,*args)->Any:
 		"""distanceToPoint(point, space=kObject) -> float
 
 		Returns the distance from the given point to the closest point on
@@ -8857,7 +9111,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* point (MPoint) - Point to calculate distance to.
 		* space  (int)   - An MSpace constant giving the coordinate space in
 		                   which the point has been specified."""
-	def edge(self,*args,**kwargs)->Any:
+	def edge(self,*args)->Any:
 		"""edge(region, boundary, edge, paramEdge=False) -> MObjectArray
 
 		Return the specified edge of a trim boundary.
@@ -8878,7 +9132,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* edge       (int) - Index of the edge within the boundary.
 		* paramEdge (bool) - If True a 2D parameter edge is returned,
 		                     otherwise a 3D edge is returned."""
-	def getAssignedUVs(self,*args,**kwargs)->Any:
+	def getAssignedUVs(self,*args)->Any:
 		"""getAssignedUVs() -> (MIntArray, MIntArray)
 
 		Returns the indices of all UVs which have been mapped to the surface.
@@ -8886,7 +9140,7 @@ class MFnNurbsSurface(MFnDagNode):
 		of UVs for each patch in the surface, and a second array containing
 		the indices of the UVs mapped to each corner of those patches. This
 		is the same format as the arrays taken by the assignUVs() method."""
-	def getConnectedShaders(self,*args,**kwargs)->Any:
+	def getConnectedShaders(self,*args)->Any:
 		"""getConnectedShaders(instanceNumber) -> (MObjectArray, MIntArray)
 
 		Returns a tuple containing an array of all the shaders (sets)
@@ -8904,7 +9158,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* instanceNumber (int) - Determines which instance of the surface to
 		                         query. This will be zero if there is only
 		                         one instance."""
-	def getDerivativesAtParam(self,*args,**kwargs)->Any:
+	def getDerivativesAtParam(self,*args)->Any:
 		"""getDerivativesAtParam(uParam, vParam, space=kObject, secondOrder=False)
 		    -> (MPoint, MVector, MVector)
 		    -> (MPoint, MVector, MVector, MVector, MVector, MVector)
@@ -8926,7 +9180,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                 - If True, second order derivatives will be included
 		                   in the result. Note that this will increase
 		                   computation time."""
-	def getParamAtPoint(self,*args,**kwargs)->Any:
+	def getParamAtPoint(self,*args)->Any:
 		"""getParamAtPoint(point, ignoreTrimBoundaries, tolerance=kPointTolerance,
 		    space=kObject) -> (float, float)
 
@@ -8941,7 +9195,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* tolerance (float) - Accuracy to be used in the operation.
 		* space       (int) - An MSpace constant giving the coordinate space
 		                      in which to perform the operation."""
-	def getPatchUV(self,*args,**kwargs)->Any:
+	def getPatchUV(self,*args)->Any:
 		"""getPatchUV(patchId, cornerIndex) -> (float, float)
 
 		Returns a tuple containing the texture texture coordinate for a
@@ -8950,14 +9204,14 @@ class MFnNurbsSurface(MFnDagNode):
 		that the u and v values are mapped to.
 		* patchId (int)     - Patch of interest.
 		* cornerIndex (int) - Corner of interest."""
-	def getPatchUVid(self,*args,**kwargs)->Any:
+	def getPatchUVid(self,*args)->Any:
 		"""getPatchUVid(patchId, cornerIndex) -> int
 
 		Returns the id of the texture coordinate for a single corner of a patch.
 
 		* patchId (int)     - Patch of interest.
 		* cornerIndex (int) - Corner of interest."""
-	def getPatchUVs(self,*args,**kwargs)->Any:
+	def getPatchUVs(self,*args)->Any:
 		"""getPatchUVs(patchId) -> (MFloatArray, MFloatArray)
 
 		Returns a tuple containing the values of the texture coordinates on
@@ -8965,22 +9219,20 @@ class MFnNurbsSurface(MFnDagNode):
 		coordinates and an array of V coordinates, both the same length.
 
 		* patchId (int)     - Patch of interest."""
-	def getPointAtParam(self,*args,**kwargs)->Any:
-		"""getPointAtParam(uParam, vParam, space=kObject) -> MPoint
-
-		"""
-	def getUV(self,*args,**kwargs)->Any:
+	def getPointAtParam(self,*args)->Any:
+		"""getPointAtParam(uParam, vParam, space=kObject) -> MPoint"""
+	def getUV(self,*args)->Any:
 		"""getUV(uvId) -> (float, float)
 
 		Returns a tuple containing the U and V values for the a texture coordinate
 
 		* uvId (int) - Id of the texture coordinate of intest."""
-	def getUVs(self,*args,**kwargs)->Any:
+	def getUVs(self,*args)->Any:
 		"""getUVs() -> (MFloatArray, MFloatArray)
 
 		Returns all of the surface's texture coordinates as a tuple containing
 		an array of U values and an array of V values."""
-	def intersect(self,*args,**kwargs)->Any:
+	def intersect(self,*args)->Any:
 		"""intersect(rayStart, rayDir, tolerance=kPointTolerance, space=kObject,
 		    distance=False, exactHit=False, all=False)
 		    -> (MPoint, float, float[, float][, bool])
@@ -9004,35 +9256,35 @@ class MFnNurbsSurface(MFnDagNode):
 		                      be returned. In this case the point of
 		                      intersection, U and V parameters, and distance
 		                      (if requested) will all be returned as arrays."""
-	def isFlipNorm(self,*args,**kwargs)->Any:
+	def isFlipNorm(self,*args)->Any:
 		"""isFlipNorm(region) -> bool
 
 		Checks whether the normal for the specified region is flipped
 		This method is only valid for trimmed surfaces.
 
 		region (int) - Region to check."""
-	def isKnotU(self,*args,**kwargs)->Any:
+	def isKnotU(self,*args)->Any:
 		"""isKnotU(param) -> bool
 
 		Checks if the specified parameter value is a knot value in the U
 		direction.
 
 		* param (float) - Parameter value to check."""
-	def isKnotV(self,*args,**kwargs)->Any:
+	def isKnotV(self,*args)->Any:
 		"""isKnotV(param) -> bool
 
 		Checks if the specified parameter value is a knot value in the V
 		direction.
 
 		* param (float) - Parameter value to check."""
-	def isParamOnSurface(self,*args,**kwargs)->Any:
+	def isParamOnSurface(self,*args)->Any:
 		"""isParamOnSurface(uParam, vParam) -> bool
 
 		Checks if the specified parameter point is on this surface.
 
 		* uParam (float) - U parameter value.
 		* vParam (float) - V parameter value."""
-	def isPointInTrimmedRegion(self,*args,**kwargs)->Any:
+	def isPointInTrimmedRegion(self,*args)->Any:
 		"""isPointInTrimmedRegion(uParam, vParam) -> bool
 
 		Checks if the given point is in a trimmed away region of a trimmed
@@ -9041,7 +9293,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* uParam (float) - U parameter of the point to check.
 		* vParam (float) - V parameter of the point to check."""
-	def isPointOnSurface(self,*args,**kwargs)->Any:
+	def isPointOnSurface(self,*args)->Any:
 		"""isPointOnSurface(point, tolerance=kPointTolerance, space=kObject) -> bool
 
 		Checks if the given point is on this surface.
@@ -9050,27 +9302,27 @@ class MFnNurbsSurface(MFnDagNode):
 		* tolerance (float) - Accuracy to be used in the operation.
 		* space       (int) - An MSpace constant giving the coordinate space
 		                      in which to perform the operation"""
-	def knotInU(self,*args,**kwargs)->Any:
+	def knotInU(self,*args)->Any:
 		"""knotInU(index) -> float
 
 		Returns the knot value at the specified U index. U knots are indexed
 		from 0 to numKnotsInU-1.
 		* index (int) - Index of the U knot to return."""
-	def knotInV(self,*args,**kwargs)->Any:
+	def knotInV(self,*args)->Any:
 		"""knotInV(index) -> float
 
 		Returns the knot value at the specified V index. V knots are indexed
 		from 0 to numKnotsInV-1.
 		* index (int) - Index of the V knot to return."""
-	def knotsInU(self,*args,**kwargs)->Any:
+	def knotsInU(self,*args)->Any:
 		"""knotsInU() -> MDoubleArray
 
 		Returns all of the surface's knots in the U direction."""
-	def knotsInV(self,*args,**kwargs)->Any:
+	def knotsInV(self,*args)->Any:
 		"""knotsInV() -> MDoubleArray
 
 		Returns all of the surface's knots in the V direction."""
-	def normal(self,*args,**kwargs)->Any:
+	def normal(self,*args)->Any:
 		"""normal(uParam, vParam, space=kObject) -> MVector
 
 		Returns the normal at the given parameter value on the surface.
@@ -9079,7 +9331,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* vParam (float) - V parameter at which to obtain normal.
 		* space    (int) - An MSpace constant giving the coordinate space
 		                   in which to perform the operation"""
-	def numBoundaries(self,*args,**kwargs)->Any:
+	def numBoundaries(self,*args)->Any:
 		"""numBoundaries(region) -> unsigned int
 
 		Returns the number of boundaries for the specified region. The
@@ -9090,7 +9342,7 @@ class MFnNurbsSurface(MFnDagNode):
 		boundary curves are made up of one or more curves called edges.
 
 		* region (int) - Region of interest."""
-	def numEdges(self,*args,**kwargs)->Any:
+	def numEdges(self,*args)->Any:
 		"""numEdges(region, boundary) -> unsigned int
 
 		Returns the number of edges for the specified trim boundary.
@@ -9100,7 +9352,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* region   (int) - Region of interest.
 		* boundary (int) - Boundary of interest"""
-	def projectCurve(self,*args,**kwargs)->Any:
+	def projectCurve(self,*args)->Any:
 		"""projectCurve(curve[, direction], keepHistory=False) -> self
 
 		Projects the given curve onto the surface, creating a curve on surface.
@@ -9109,7 +9361,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                        then surface normals will be used.
 		* keepHistory  (bool) - Determines whether the construction history
 		                        of the projection should be retained."""
-	def removeKnotInU(self,*args,**kwargs)->Any:
+	def removeKnotInU(self,*args)->Any:
 		"""removeKnotInU(param, removeAll=False) -> self
 
 		Removes one or more U knots at the specified parameter value from
@@ -9119,7 +9371,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* removeAll (bool) - If True and there are multiple knots at the
 		                     parameter value then they will all be removed.
 		                     Otherwise, all but one will be removed."""
-	def removeKnotInV(self,*args,**kwargs)->Any:
+	def removeKnotInV(self,*args)->Any:
 		"""removeKnotInV(param, removeAll=False) -> self
 
 		Removes one or more V knots at the specified parameter value from
@@ -9129,27 +9381,23 @@ class MFnNurbsSurface(MFnDagNode):
 		* removeAll (bool) - If True and there are multiple knots at the
 		                     parameter value then they will all be removed.
 		                     Otherwise, all but one will be removed."""
-	def removeOneKnotInU(self,*args,**kwargs)->Any:
+	def removeOneKnotInU(self,*args)->Any:
 		"""removeOneKnotInU(param) -> self
 
 		Removes one U knot at the specified parameter value. If there are
 		multiple knots at that the value the others are retained.
 
-		* param (float) - U parameter value of the knot to remove.
-		"""
-	def removeOneKnotInV(self,*args,**kwargs)->Any:
+		* param (float) - U parameter value of the knot to remove."""
+	def removeOneKnotInV(self,*args)->Any:
 		"""removeOneKnotInV(param) -> self
 
 		Removes one V knot at the specified parameter value. If there are
 		multiple knots at that the value the others are retained.
 
-		* param (float) - V parameter value of the knot to remove.
-		"""
-	def setCVPosition(self,*args,**kwargs)->Any:
-		"""setCVPosition(uIndex, vIndex, point, space=kObject) -> self
-
-		"""
-	def setCVPositions(self,*args,**kwargs)->Any:
+		* param (float) - V parameter value of the knot to remove."""
+	def setCVPosition(self,*args)->Any:
+		"""setCVPosition(uIndex, vIndex, point, space=kObject) -> self"""
+	def setCVPositions(self,*args)->Any:
 		"""setCVPositions(points, space=kObject) -> self
 
 		Set the positions of all of the surface's CVs.
@@ -9168,7 +9416,7 @@ class MFnNurbsSurface(MFnDagNode):
 		               - Positions of the CVs.
 		* space  (int) - An MSpace constant giving the coordinate space
 		                 in which to perform the operation"""
-	def setKnotInU(self,*args,**kwargs)->Any:
+	def setKnotInU(self,*args)->Any:
 		"""setKnotInU(index, param) -> self
 
 		Sets the value of an existing U knot. U knots are indexed from 0 to
@@ -9181,7 +9429,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* index   (int) - U index of the knot to set.
 		* param (float) - New parameter value for the knot."""
-	def setKnotInV(self,*args,**kwargs)->Any:
+	def setKnotInV(self,*args)->Any:
 		"""setKnotInV(index, param) -> self
 
 		Sets the value of an existing V knot. V knots are indexed from 0 to
@@ -9194,7 +9442,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* index   (int) - V index of the knot to set.
 		* param (float) - New parameter value for the knot."""
-	def setKnotsInU(self,*args,**kwargs)->Any:
+	def setKnotsInU(self,*args)->Any:
 		"""setKnotsInU(params, startIndex, endIndex) -> self
 
 		Sets the values of a range of U knots.
@@ -9203,9 +9451,8 @@ class MFnNurbsSurface(MFnDagNode):
 		                   - Parameter values to set at the knots. One value
 		                     per knot in the range.
 		* startIndex (int) - Index of the first U knot to set.
-		* endIndex   (int) - Index of the last U knot to set.
-		"""
-	def setKnotsInV(self,*args,**kwargs)->Any:
+		* endIndex   (int) - Index of the last U knot to set."""
+	def setKnotsInV(self,*args)->Any:
 		"""setKnotsInV(params, startIndex, endIndex) -> self
 
 		Sets the values of a range of V knots.
@@ -9214,9 +9461,8 @@ class MFnNurbsSurface(MFnDagNode):
 		                   - Parameter values to set at the knots. One value
 		                     per knot in the range.
 		* startIndex (int) - Index of the first V knot to set.
-		* endIndex   (int) - Index of the last V knot to set.
-		"""
-	def setUV(self,*args,**kwargs)->Any:
+		* endIndex   (int) - Index of the last V knot to set."""
+	def setUV(self,*args)->Any:
 		"""setUV(uvId, u, v) -> self
 
 		Sets a single texture coordinate. If 'uvId' is greater than or equal
@@ -9231,9 +9477,8 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* uvId (int) - Index of the element in the surface's uv list to set.
 		* u  (float) - U value to set the uv to.
-		* v  (float) - V value to set the uv to.
-		"""
-	def setUVs(self,*args,**kwargs)->Any:
+		* v  (float) - V value to set the uv to."""
+	def setUVs(self,*args)->Any:
 		"""setUVs(uList, vList) -> self
 
 		Sets all of the texture coordinates (uvs) for this surface. The
@@ -9253,7 +9498,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* uList (MFloatArray or seq of float) - U values to set
 		* vList (MFloatArray or seq of float) - V values to set"""
-	def tangents(self,*args,**kwargs)->Any:
+	def tangents(self,*args)->Any:
 		"""tangents(uParam, vParam, space=kObject) -> (MVector, MVector)
 
 		Returns the tangents in the U and V directions at a given parameter
@@ -9267,7 +9512,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* vParam (float) - V parameter value at which to obtain the tangents.
 		* space    (int) - An MSpace constant giving the coordinate space
 		                   in which to perform the operation"""
-	def trim(self,*args,**kwargs)->Any:
+	def trim(self,*args)->Any:
 		"""trim(regionsToKeepU, regionsToKeepV, keepHistory=False) -> self
 
 		Trims the surface to its curves on surface. Regions which are kept
@@ -9284,7 +9529,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                          to be kept.
 		* keepHistory    (bool) - Determines whether the construction history
 		                          of the operation should be retained."""
-	def updateSurface(self,*args,**kwargs)->Any:
+	def updateSurface(self,*args)->Any:
 		"""updateSurface() -> self
 
 		Signals that this surface has changed and needs to be recalculated.
@@ -9303,75 +9548,64 @@ class MFnNurbsSurfaceData(MFnGeometryData):
 	__init__(MObject)
 	Initializes a new MFnNurbsSurfaceData function set, attached
 	to the specified object."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create() -> MObject
 
 		Creates a new nurbs surface data object, attaches it to this function set
 		and returns an MObject which references it."""
 class MFnPlugin(MFnBase):
 	"""Register and deregister plug-in services with Maya."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def version(self)->str:
+		"""Plug-in version string."""
+	@version.setter
+	def version(self,value:str)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def apiVersion(self,*args,**kwargs)->Any:
+	def apiVersion(self,*args)->Any:
 		"""Return the API version required by the plug-in."""
-	def deregisterAttributePatternFactory(self,*args,**kwargs)->Any:
+	def deregisterAttributePatternFactory(self,*args)->Any:
 		"""Deregister a user defined attribute pattern factory type from Maya."""
-	def deregisterCommand(self,*args,**kwargs)->Any:
+	def deregisterCommand(self,*args)->Any:
 		"""Deregister a user defined command from Maya."""
-	def deregisterData(self,*args,**kwargs)->Any:
+	def deregisterData(self,*args)->Any:
 		"""Deregister a user defined data type from Maya."""
-	def deregisterDragAndDropBehavior(self,*args,**kwargs)->Any:
+	def deregisterDragAndDropBehavior(self,*args)->Any:
 		"""Deregister a user defined drag and drop behavior from Maya."""
-	def deregisterNode(self,*args,**kwargs)->Any:
+	def deregisterNode(self,*args)->Any:
 		"""Deregister a user defined dependency node from Maya."""
-	def deregisterContextCommand(self,*args,**kwargs)->Any:
+	def deregisterContextCommand(self,*args)->Any:
 		"""Deregister a user defined context command from Maya."""
-	def findPlugin(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def loadPath(self,*args,**kwargs)->Any:
+	@staticmethod
+	def findPlugin(*args)->Any:
+		"""Returns an MObject corresponding to the named plugin."""
+	def loadPath(self,*args)->Any:
 		"""Return the full path name of the file from which the plug-in was loaded."""
-	def name(self,*args,**kwargs)->Any:
+	def name(self,*args)->Any:
 		"""Return the plug-in's name."""
-	def registerAttributePatternFactory(self,*args,**kwargs)->Any:
+	def registerAttributePatternFactory(self,*args)->Any:
 		"""Register a new attribute pattern factory type with Maya."""
-	def registerCommand(self,*args,**kwargs)->Any:
+	def registerCommand(self,*args)->Any:
 		"""Register a new command with Maya."""
-	def registerContextCommand(self,*args,**kwargs)->Any:
+	def registerContextCommand(self,*args)->Any:
 		"""Register a new context command with Maya.  Once registered, the context
 		can be used to create a new tool that can be used in a manner
 		identical to built-in Maya tools."""
-	def registerData(self,*args,**kwargs)->Any:
+	def registerData(self,*args)->Any:
 		"""Register a new data type with Maya."""
-	def registerDragAndDropBehavior(self,*args,**kwargs)->Any:
+	def registerDragAndDropBehavior(self,*args)->Any:
 		"""Register a new drag and drop behavior with Maya.
 		Once registered, the new behavior can be used to finish connections between node drag and drops from the hyperGraph/hyperShade to other nodes or Maya UI."""
-	def registerNode(self,*args,**kwargs)->Any:
+	def registerNode(self,*args)->Any:
 		"""Register a new dependency node with Maya."""
-	def registerShape(self,*args,**kwargs)->Any:
+	def registerShape(self,*args)->Any:
 		"""Register a new user defined shape node with Maya.
 		To deregister the shape node use the MFnPlugin.deregisterNode()."""
-	def setName(self,*args,**kwargs)->Any:
+	def setName(self,*args)->Any:
 		"""Set the plug-in's name."""
-	def vendor(self,*args,**kwargs)->Any:
+	def vendor(self,*args)->Any:
 		"""Return the plug-in's vendor string."""
 class MFnPluginData(MFnData):
 	"""MFnPluginData allows the creation and manipulation of plugin
@@ -9383,17 +9617,17 @@ class MFnPluginData(MFnData):
 	__init__(MObject)
 	Initializes a new MFnPluginData function set, attached
 	to the specified object."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def typeId(self,*args,**kwargs)->Any:
+	def typeId(self,*args)->Any:
 		"""typeId() -> MTypeId
 
 		Return the unique MTypeId of the user defined data that is held by this instance"""
-	def data(self,*args,**kwargs)->Any:
+	def data(self,*args)->Any:
 		"""data() -> MPxData
 
 		Return the user defined data held in this instance"""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(id) -> MObject
 
 		Create an instance of the specified user defined data type and attach it to this functionset.
@@ -9401,138 +9635,89 @@ class MFnPluginData(MFnData):
 		* id (MTypeId) - the unique MTypeId of the user defined data class derived from MPxData."""
 class MFnPointArrayData(MFnData):
 	"""Function set for node data consisting of an array of MPoints."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args,**kwargs)->Any:
+	def array(self,*args)->Any:
 		"""Returns the encapsulated array as an MPointArray."""
-	def copyTo(self,*args,**kwargs)->Any:
+	def copyTo(self,*args)->Any:
 		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new MPoint array data object."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""Sets values in the encapsulated array."""
 class MFnReference(MFnDependencyNode):
 	"""Function set for reference nodes."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def isValidReference(self,*args,**kwargs)->Any:
+	def isValidReference(self,*args)->Any:
 		"""isValidReference() -> bool
 
-		Returns true if the reference is an valid file reference.
-
-		"""
-	def fileName(self,*args,**kwargs)->Any:
+		Returns true if the reference is an valid file reference."""
+	def fileName(self,*args)->Any:
 		"""fileName(bool resolvedName, bool includePath, bool includeCopyNumber) -> MString
 
-		Returns the name of file associated with this reference.
-
-		"""
-	def associatedNamespace(self,*args,**kwargs)->Any:
+		Returns the name of file associated with this reference."""
+	def associatedNamespace(self,*args)->Any:
 		"""associatedNamespace(bool shortName) -> MString
 
-		Returns the namespace associated with this reference.
-
-		"""
-	def parentFileName(self,*args,**kwargs)->Any:
+		Returns the namespace associated with this reference."""
+	def parentFileName(self,*args)->Any:
 		"""parentFileName(bool resolvedName, bool includePath, bool includeCopyNumber) -> MString
 
-		Returns the name of parent file associated with this reference.
-
-		"""
-	def parentReference(self,*args,**kwargs)->Any:
+		Returns the name of parent file associated with this reference."""
+	def parentReference(self,*args)->Any:
 		"""parentReference() -> MObject
 
-		Returns the reference node associated with the parent reference.
-
-		"""
-	def parentAssembly(self,*args,**kwargs)->Any:
+		Returns the reference node associated with the parent reference."""
+	def parentAssembly(self,*args)->Any:
 		"""parentAssembly() -> MObject
 
-		Returns the parent assembly node that contains this reference. See MFnAssembly documentation for more details.
-
-		"""
-	def containsNode(self,*args,**kwargs)->Any:
+		Returns the parent assembly node that contains this reference. See MFnAssembly documentation for more details."""
+	def containsNode(self,*args)->Any:
 		"""containsNode(MObject) -> bool
 
-		Returns true if the specified node is from this reference or one of its child references. The containsNodeExactly method can be used to test membership without including the child references.
-
-		"""
-	def containsNodeExactly(self,*args,**kwargs)->Any:
+		Returns true if the specified node is from this reference or one of its child references. The containsNodeExactly method can be used to test membership without including the child references."""
+	def containsNodeExactly(self,*args)->Any:
 		"""containsNodeExactly(MObject) -> bool
 
-		Returns true if the specified node is from this reference. Membership in child references is not checked. The containsNode method may be used to test membership in a reference and its child references.
-
-		"""
-	def nodes(self,*args,**kwargs)->Any:
+		Returns true if the specified node is from this reference. Membership in child references is not checked. The containsNode method may be used to test membership in a reference and its child references."""
+	def nodes(self,*args)->Any:
 		"""nodes() -> MObjectArray
 
-		Returns an array of the nodes associated with this reference.
-
-		"""
-	def isLoaded(self,*args,**kwargs)->Any:
+		Returns an array of the nodes associated with this reference."""
+	def isLoaded(self,*args)->Any:
 		"""isLoaded() -> bool
 
-		Returns true if the reference is loaded.
-
-		"""
-	def isLocked(self,*args,**kwargs)->Any:
+		Returns true if the reference is loaded."""
+	def isLocked(self,*args)->Any:
 		"""isLocked() -> bool
 
-		Returns true if the reference is locked or if the referenced file was saved as locked.
-
-		"""
-	def isExportEditsFile(self,*args,**kwargs)->Any:
+		Returns true if the reference is locked or if the referenced file was saved as locked."""
+	def isExportEditsFile(self,*args)->Any:
 		"""isExportEditsFile() -> bool
 
-		Returns true if the reference is an export edits file. An export edits file is a file of type '.editMA' or '.editMB' which was created using Maya's offline file functionality.
+		Returns true if the reference is an export edits file. An export edits file is a file of type '.editMA' or '.editMB' which was created using Maya's offline file functionality."""
+	@staticmethod
+	def ignoreReferenceEdits(*args)->Any:
+		"""ignoreReferenceEdits() -> bool
 
-		"""
-	def ignoreReferenceEdits(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		Indicates whether reference edits will be tracked and logged or not."""
+	@staticmethod
+	def setIgnoreReferenceEdits(*args)->Any:
+		"""setIgnoreReferenceEdits(bool) -> None
 
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setIgnoreReferenceEdits(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		Specify whether reference edits should be tracked and logged or not.
+		This should be treated as a temporary state and should be enabled
+		around a batch of operations where reference edits should be ignored.
+		Restore the previous value when the batch of operations is complete."""
 class MFnSet(MFnDependencyNode):
 	"""Function set for sets."""
 	kNone:int=0
@@ -9541,34 +9726,32 @@ class MFnSet(MFnDependencyNode):
 	kFacetsOnly:int=3
 	kEditPointsOnly:int=4
 	kRenderableOnly:int=5
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(members, restriction=kNone) -> MObject
 
 		Creates a new set dependency node and puts it in the dependency graph.
 
 		* members (MSelectionList) - list of members for new set
 		* restriction (MFnSet.Restriction) - restriction applied to members"""
-	def getUnion(self,*args,**kwargs)->Any:
+	def getUnion(self,*args)->Any:
 		"""getUnion( otherSet ) -> MSelectionList
 
 		This method calculates the union of two sets.  The result will be the union of this set and the set passed into the method.
 
-		* otherSet (MObject or MObjectArray or list of sets) - set(s) to find union of with this set
-		"""
-	def getIntersection(self,*args,**kwargs)->Any:
+		* otherSet (MObject or MObjectArray or list of sets) - set(s) to find union of with this set"""
+	def getIntersection(self,*args)->Any:
 		"""getIntersection( otherSet ) -> MSelectionList
 
 		This method calculates the intersection of two sets.  The result will be the intersection of this set and the set passed into the method.
 
-		* otherSet (MObject or MObjectArray or list of sets) - set(s) to find union of with this set
-		"""
-	def clear(self,*args,**kwargs)->Any:
+		* otherSet (MObject or MObjectArray or list of sets) - set(s) to find union of with this set"""
+	def clear(self)->None:
 		"""clear() -> self
 
 		Removes all elements from this set."""
-	def getMembers(self,*args,**kwargs)->Any:
+	def getMembers(self,*args)->Any:
 		"""getMembers( flatten ) -> MSelectionList
 
 		Get the members of this set as a selection list.  This information is providedas a selection list so that all of the path information is retained forDAG nodes.
@@ -9576,53 +9759,53 @@ class MFnSet(MFnDependencyNode):
 		It is possible to ask for the returned list to be flattened.  This means thatall sets that exist inside this set will be expanded into a list of theircontents.
 
 		* flatten (bool) - whether to flatten the returned list"""
-	def addMember(self,*args,**kwargs)->Any:
+	def addMember(self,*args)->Any:
 		"""addMember( object ) -> self
 
 		Add a new object to the set.
 
 		The added object may be an MObject, an (MDagPath, MObject) tuple, or an MPlug."""
-	def addMembers(self,*args,**kwargs)->Any:
+	def addMembers(self,*args)->Any:
 		"""addMembers( MSelectionList ) -> self
 
 		Add a list of new objects to the set."""
-	def removeMember(self,*args,**kwargs)->Any:
+	def removeMember(self,*args)->Any:
 		"""removeMember( object ) -> self
 
 		Remove an object from the set.
 
 		The removed object may be an MObject, an (MDagPath, MObject) tuple, or an MPlug."""
-	def removeMembers(self,*args,**kwargs)->Any:
+	def removeMembers(self,*args)->Any:
 		"""removeMembers( MSelectionList ) -> self
 
 		Remove items of the selection list from the set."""
-	def isMember(self,*args,**kwargs)->Any:
+	def isMember(self,*args)->Any:
 		"""isMember( object ) -> bool
 
 		Returns true if the given object is a member of this set.
 
 		The object may be an MObject, an (MDagPath, MObject) tuple, or an MPlug."""
-	def intersectsWith(self,*args,**kwargs)->Any:
+	def intersectsWith(self,*args)->Any:
 		"""intersectsWith( otherSet ) -> self
 
 		Returns true if this set intersects with the given set.  An intersection occurs if there are any common members between the two sets."""
-	def hasRestrictions(self,*args,**kwargs)->Any:
+	def hasRestrictions(self,*args)->Any:
 		"""hasRestrictions() -> bool
 
 		Returns true if this function set has restrictions on the type of objects that it may contain."""
-	def restriction(self,*args,**kwargs)->Any:
+	def restriction(self,*args)->Any:
 		"""restriction() -> MFnSet.Restriction
 
 		Returns the type of membership restriction that this set has."""
-	def annotation(self,*args,**kwargs)->Any:
+	def annotation(self,*args)->Any:
 		"""annotation() -> string
 
 		Returns the annotation string for this set.  This allows a description of the set to be stored with it."""
-	def setAnnotation(self,*args,**kwargs)->Any:
+	def setAnnotation(self,*args)->Any:
 		"""setAnnotation( annotation ) -> self
 
 		Sets the annotation string for this set.  This allows a description of the set to be stored with it."""
-	def getMemberPaths(self,*args,**kwargs)->Any:
+	def getMemberPaths(self,*args)->Any:
 		"""getMemberPaths( shading ) -> MDagPathArray
 
 		Get the members of this set as an array of dagPaths.
@@ -9639,66 +9822,71 @@ class MFnSingleIndexedComponent(MFnComponent):
 
 	__init__(MObject component)
 	Initializes a new MFnSingleIndexedComponent function set, attached to the specified component."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def elementMax(self)->Any:
+		"""Biggest element plus 1 in the component."""
+	@elementMax.setter
+	def elementMax(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addElement(self,*args,**kwargs)->Any:
+	def addElement(self,*args)->Any:
 		"""addElement(int element) -> self
 
 		Adds the specified element to the component."""
-	def addElements(self,*args,**kwargs)->Any:
+	def addElements(self,*args)->Any:
 		"""addElements([int]) -> self
 		addElements(MIntArray) -> self
 
 		Adds the specified elements to the component."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(MFn Type constant) -> MObject
 
 		Creates a new, empty component, attaches it to the function set and
 		returns an MObject which references it."""
-	def element(self,*args,**kwargs)->Any:
+	def element(self,*args)->Any:
 		"""element(index) -> int
 
 		Returns the index'th element of the component."""
-	def getCompleteData(self,*args,**kwargs)->Any:
+	def getCompleteData(self,*args)->Any:
 		"""getCompleteData() -> int
 
 		Returns the number of elements in the complete component, or 0 if the component is not complete."""
-	def getElements(self,*args,**kwargs)->Any:
+	def getElements(self,*args)->Any:
 		"""getElements() -> MIntArray
 
 		Returns all of the component's elements."""
-	def setCompleteData(self,*args,**kwargs)->Any:
+	def setCompleteData(self,*args)->Any:
 		"""setCompleteData(numElements) -> self
 
 		Marks the component as complete (i.e. contains all possible elements).
 		numElements indicates the number of elements in the complete component."""
 class MFnStringArrayData(MFnData):
 	"""Function set for node data consisting of an array of string."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args,**kwargs)->Any:
+	def array(self,*args)->Any:
 		"""Returns the encapsulated array as a list of unicode objects."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new string array data object."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""Sets values in the encapsulated array."""
 class MFnStringData(MFnData):
 	"""Function set for string node data."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new string data object."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""Sets the value of the encapsulated string."""
-	def string(self,*args,**kwargs)->Any:
+	def string(self,*args)->Any:
 		"""Returns the encapsulated string as a unicode object."""
 class MFnTransform(MFnDagNode):
 	"""Function set for operating on transform nodes."""
@@ -9726,104 +9914,90 @@ class MFnTransform(MFnDagNode):
 	kTranslateMaxY:int=21
 	kTranslateMinZ:int=22
 	kTranslateMaxZ:int=23
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def balanceTransformation(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def clearRestPosition(self,*args,**kwargs)->Any:
+	@staticmethod
+	def balanceTransformation(*args)->Any:
+		"""Balance a transformation when applying a world matrix to a joint. Thisaccesses the same underlying functionality as the xform command.
+		mtx The world matrix to be applied to the joint node, as an MTransformationMatrixrotateAxis The joint's rotateAxis attribute, as an MQuaternionjointOrient The joint's jointOrient attribute, as an MQuaternionsegmentScaleCompensate The joint's segmentScaleCompensate attribute, as a boolinverseScale The joint's inverseScale attribute, as an MVectorrotateOrder The joint's rotateOrder attribute, as an MEulerRotation::RotationOrder
+		Returns:List consisting of:localTranslate The resulting translation, as an MVectorlocalRotate The resulting rotation for the joint, as an MEulerRotationlocalScale The resulting scale for the joint, as an MVector"""
+	def clearRestPosition(self,*args)->Any:
 		"""Clears the transform's rest position matrix."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new transform node and attaches it to the function set."""
-	def enableLimit(self,*args,**kwargs)->Any:
+	def enableLimit(self,*args)->Any:
 		"""Enables or disables a specified limit type."""
-	def isLimited(self,*args,**kwargs)->Any:
+	def isLimited(self,*args)->Any:
 		"""Returns True if the specified limit type is enabled."""
-	def limitValue(self,*args,**kwargs)->Any:
+	def limitValue(self,*args)->Any:
 		"""Returns the value of the specified limit."""
-	def resetFromRestPosition(self,*args,**kwargs)->Any:
+	def resetFromRestPosition(self,*args)->Any:
 		"""Resets the transform from its rest position matrix."""
-	def resetTransformation(self,*args,**kwargs)->Any:
+	def resetTransformation(self,*args)->Any:
 		"""Resets the transform's attribute values to represent the given transformation matrix in world space."""
-	def restPosition(self,*args,**kwargs)->Any:
+	def restPosition(self,*args)->Any:
 		"""Returns the transform's rest position matrix."""
-	def rotateBy(self,*args,**kwargs)->Any:
+	def rotateBy(self,*args)->Any:
 		"""Adds an MEulerRotation or MQuaternion to the transform's rotation."""
-	def rotateByComponents(self,*args,**kwargs)->Any:
+	def rotateByComponents(self,*args)->Any:
 		"""Adds to the transform's rotation using the individual components of an MEulerRotation or MQuaternion."""
-	def rotatePivot(self,*args,**kwargs)->Any:
+	def rotatePivot(self,*args)->Any:
 		"""Returns the transform's rotate pivot."""
-	def rotatePivotTranslation(self,*args,**kwargs)->Any:
+	def rotatePivotTranslation(self,*args)->Any:
 		"""Returns the transform's rotate pivot translation."""
-	def rotation(self,*args,**kwargs)->Any:
+	def rotation(self,*args)->Any:
 		"""Returns the transform's rotation as an MEulerRotation or MQuaternion."""
-	def rotationComponents(self,*args,**kwargs)->Any:
+	def rotationComponents(self,*args)->Any:
 		"""Returns the transform's rotation as the individual components of an MEulerRotation or MQuaternion."""
-	def rotationOrder(self,*args,**kwargs)->Any:
+	def rotationOrder(self,*args)->Any:
 		"""Returns the order of rotations when the transform's rotation is expressed as an MEulerRotation."""
-	def rotateOrientation(self,*args,**kwargs)->Any:
+	def rotateOrientation(self,*args)->Any:
 		"""Returns the MQuaternion which orients the local rotation space."""
-	def scale(self,*args,**kwargs)->Any:
+	def scale(self,*args)->Any:
 		"""Returns a list containing the transform's XYZ scale components."""
-	def scaleBy(self,*args,**kwargs)->Any:
+	def scaleBy(self,*args)->Any:
 		"""Multiplies the transform's XYZ scale components by a sequence of three floats."""
-	def scalePivot(self,*args,**kwargs)->Any:
+	def scalePivot(self,*args)->Any:
 		"""Returns the transform's scale pivot."""
-	def scalePivotTranslation(self,*args,**kwargs)->Any:
+	def scalePivotTranslation(self,*args)->Any:
 		"""Returns the transform's scale pivot translation."""
-	def setLimit(self,*args,**kwargs)->Any:
+	def setLimit(self,*args)->Any:
 		"""Sets the value of the specified limit."""
-	def setRestPosition(self,*args,**kwargs)->Any:
+	def setRestPosition(self,*args)->Any:
 		"""Sets the transform's rest position matrix."""
-	def setRotatePivot(self,*args,**kwargs)->Any:
+	def setRotatePivot(self,*args)->Any:
 		"""Sets the transform's rotate pivot."""
-	def setRotatePivotTranslation(self,*args,**kwargs)->Any:
+	def setRotatePivotTranslation(self,*args)->Any:
 		"""Sets the transform's rotate pivot translation."""
-	def setRotation(self,*args,**kwargs)->Any:
+	def setRotation(self,*args)->Any:
 		"""Sets the transform's rotation using an MEulerRotation or MQuaternion."""
-	def setRotationComponents(self,*args,**kwargs)->Any:
+	def setRotationComponents(self,*args)->Any:
 		"""Sets the transform's rotation using the individual components of an MEulerRotation or MQuaternion."""
-	def setRotationOrder(self,*args,**kwargs)->Any:
+	def setRotationOrder(self,*args)->Any:
 		"""Sets the transform's rotation order."""
-	def setRotateOrientation(self,*args,**kwargs)->Any:
+	def setRotateOrientation(self,*args)->Any:
 		"""Sets the MQuaternion which orients the local rotation space."""
-	def setScale(self,*args,**kwargs)->Any:
+	def setScale(self,*args)->Any:
 		"""Sets the transform's scale components."""
-	def setScalePivot(self,*args,**kwargs)->Any:
+	def setScalePivot(self,*args)->Any:
 		"""Sets the transform's scale pivot."""
-	def setScalePivotTranslation(self,*args,**kwargs)->Any:
+	def setScalePivotTranslation(self,*args)->Any:
 		"""Sets the transform's scale pivot translation."""
-	def setShear(self,*args,**kwargs)->Any:
+	def setShear(self,*args)->Any:
 		"""Sets the transform's shear."""
-	def setTransformation(self,*args,**kwargs)->Any:
+	def setTransformation(self,*args)->Any:
 		"""Sets the transform's attribute values to represent the given transformation matrix."""
-	def setTranslation(self,*args,**kwargs)->Any:
+	def setTranslation(self,*args)->Any:
 		"""Sets the transform's translation."""
-	def shear(self,*args,**kwargs)->Any:
+	def shear(self,*args)->Any:
 		"""Returns a list containing the transform's shear components."""
-	def shearBy(self,*args,**kwargs)->Any:
+	def shearBy(self,*args)->Any:
 		"""Multiplies the transform's shear components by a sequence of three floats."""
-	def transformation(self,*args,**kwargs)->Any:
+	def transformation(self,*args)->Any:
 		"""Returns the transformation matrix represented by this transform."""
-	def translateBy(self,*args,**kwargs)->Any:
+	def translateBy(self,*args)->Any:
 		"""Adds an MVector to the transform's translation."""
-	def translation(self,*args,**kwargs)->Any:
+	def translation(self,*args)->Any:
 		"""Returns the transform's translation as an MVector."""
 class MFnTripleIndexedComponent(MFnComponent):
 	"""This function set allows you to create, edit, and query triple indexed
@@ -9835,40 +10009,40 @@ class MFnTripleIndexedComponent(MFnComponent):
 	__init__(MObject component)
 	Initializes a new MFnTripleIndexedComponent function set, attached
 	to the specified component."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addElement(self,*args,**kwargs)->Any:
+	def addElement(self,*args)->Any:
 		"""addElement(sIndex, tIndex, uIndex) -> self
 		addElement([sIndex, tIndex, uIndex]) -> self
 
 		Adds the element identified by (sIndex, tIndex, uIndex) to the component."""
-	def addElements(self,*args,**kwargs)->Any:
+	def addElements(self,*args)->Any:
 		"""addElements(sequence of [sIndex, tIndex, uIndex]) -> self
 
 		Adds the specified elements to the component. Each item in the
 		elements sequence is itself a sequence of three ints which are the
 		S, T and U indices of an element to be added."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(MFn Type constant) -> MObject
 
 		Creates a new, empty component, attaches it to the function set and
 		returns an MObject which references it."""
-	def getCompleteData(self,*args,**kwargs)->Any:
+	def getCompleteData(self,*args)->Any:
 		"""getCompleteData() -> (numS, numT, numU)
 
 		Returns a tuple containing the number of S, T and U indices in
 		the complete component, or (0,0,0) if the component is not complete."""
-	def getElement(self,*args,**kwargs)->Any:
+	def getElement(self,*args)->Any:
 		"""getElement(index) -> (sIndex, tIndex, uIndex)
 
 		Returns the index'th element of the component as a tuple containing the
 		element's S, T and U indices."""
-	def getElements(self,*args,**kwargs)->Any:
+	def getElements(self,*args)->Any:
 		"""getElements() -> list of (sIndex, tIndex, uIndex)
 
 		Returns all of the component's elements as a list of tuples with each
 		tuple containing the S, T and U indices of a single element."""
-	def setCompleteData(self,*args,**kwargs)->Any:
+	def setCompleteData(self,*args)->Any:
 		"""setCompleteData(numS, numT, numU) -> self
 
 		Marks the component as complete (i.e. contains all possible elements).
@@ -9877,88 +10051,98 @@ class MFnTripleIndexedComponent(MFnComponent):
 		index is numT-1 and the max U index is numU-1)."""
 class MFnTypedAttribute(MFnAttribute):
 	"""Functionset for creating and working typed attributes."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def default(self)->MObject:
+		"""Default value"""
+	@default.setter
+	def default(self,value:MObject)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def attrType(self,*args,**kwargs)->Any:
+	def attrType(self,*args)->Any:
 		"""Returns the type of data handled by the attribute."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new type attribute, attaches it to the function set and returns it as an MObject."""
 class MFnUInt64ArrayData(MFnData):
 	"""Function set for node data consisting of an array of MUint64."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args,**kwargs)->Any:
+	def array(self,*args)->Any:
 		"""Returns the encapsulated array as an MUint64Array."""
-	def copyTo(self,*args,**kwargs)->Any:
+	def copyTo(self,*args)->Any:
 		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new MUint64 array data object."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""Sets values in the encapsulated array."""
 class MFnUnitAttribute(MFnAttribute):
 	"""Functionset for creating and working with angle, distance and time attributes."""
+	@property
+	def default(self)->MAngle|MDistance|MTime:
+		"""Default value"""
+	@default.setter
+	def default(self,value:MAngle|MDistance|MTime)->None:...
 	kInvalid:int=0
 	kAngle:int=1
 	kDistance:int=2
 	kTime:int=3
 	kLast:int=4
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new unit attribute, attaches it to the function set and returns it as an MObject."""
-	def getMax(self,*args,**kwargs)->Any:
+	def getMax(self,*args)->Any:
 		"""Returns the attribute's hard maximum value. Returned MAngle and MDistance are always in radians and centimeters, respectively"""
-	def getMin(self,*args,**kwargs)->Any:
+	def getMin(self,*args)->Any:
 		"""Returns the attribute's hard minimum value. Returned MAngle and MDistance are always in radians and centimeters, respectively"""
-	def getSoftMax(self,*args,**kwargs)->Any:
+	def getSoftMax(self,*args)->Any:
 		"""Returns the attribute's soft maximum value. Returned MAngle and MDistance are always in radians and centimeters, respectively"""
-	def getSoftMin(self,*args,**kwargs)->Any:
+	def getSoftMin(self,*args)->Any:
 		"""Returns the attribute's soft minimum value. Returned MAngle and MDistance are always in radians and centimeters, respectively"""
-	def hasMax(self,*args,**kwargs)->Any:
+	def hasMax(self,*args)->Any:
 		"""Returns True if the attribute has a hard maximum value."""
-	def hasMin(self,*args,**kwargs)->Any:
+	def hasMin(self,*args)->Any:
 		"""Returns True if the attribute has a hard minimum value."""
-	def hasSoftMax(self,*args,**kwargs)->Any:
+	def hasSoftMax(self,*args)->Any:
 		"""Returns True if the attribute has a soft maximum value."""
-	def hasSoftMin(self,*args,**kwargs)->Any:
+	def hasSoftMin(self,*args)->Any:
 		"""Returns True if the attribute has a soft minimum value."""
-	def setMax(self,*args,**kwargs)->Any:
+	def setMax(self,*args)->Any:
 		"""Sets the attribute's hard maximum value."""
-	def setMin(self,*args,**kwargs)->Any:
+	def setMin(self,*args)->Any:
 		"""Sets the attribute's hard minimum value."""
-	def setSoftMax(self,*args,**kwargs)->Any:
+	def setSoftMax(self,*args)->Any:
 		"""Sets the attribute's soft maximum value."""
-	def setSoftMin(self,*args,**kwargs)->Any:
+	def setSoftMin(self,*args)->Any:
 		"""Sets the attribute's soft minimum value."""
-	def unitType(self,*args,**kwargs)->Any:
+	def unitType(self,*args)->Any:
 		"""Returns the type of data handled by the attribute."""
 class MFnVectorArrayData(MFnData):
 	"""Function set for node data consisting of an array of MVectors."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args,**kwargs)->Any:
+	def array(self,*args)->Any:
 		"""Returns the encapsulated array as an MVectorArray."""
-	def copyTo(self,*args,**kwargs)->Any:
+	def copyTo(self,*args)->Any:
 		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""Creates a new MVector array data object."""
-	def set(self,*args,**kwargs)->Any:
+	def set(self,*args)->Any:
 		"""Sets values in the encapsulated array."""
 class MGlobal:
 	"""Static class providing common API global functions.
@@ -9982,1488 +10166,563 @@ class MGlobal:
 	kHighIdlePriority:int=0
 	kLowIdlePriority:int=1
 	kVeryLowIdlePriority:int=2
-	def animSelectionMask(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def componentSelectionMask(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def displayError(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def displayInfo(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def displayWarning(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getActiveSelectionList(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getFunctionSetList(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getRichSelection(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getSelectionListByName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def miscSelectionMask(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def objectSelectionMask(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def selectionMode(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setActiveSelectionList(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setAnimSelectionMask(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setComponentSelectionMask(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setMiscSelectionMask(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setObjectSelectionMask(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setRichSelection(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setSelectionMode(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def isUndoing(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def isRedoing(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def mayaName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def mayaVersion(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def apiVersion(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def mayaFeatureSet(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def mayaState(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getLiveList(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getHiliteList(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setHiliteList(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getPreselectionHiliteList(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setPreselectionHiliteList(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def selectCommand(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def selectByName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def unselectByName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def unselect(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def selectFromScreen(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def isSelected(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def selectionMethod(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def clearSelectionList(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def trackSelectionOrderEnabled(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setTrackSelectionOrderEnabled(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addToModel(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addToModelAt(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def removeFromModel(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def deleteNode(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def executeCommandOnIdle(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def executeCommandOnIdleWithPriority(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def executeCommandStringResult(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def optionVarIntValue(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def optionVarDoubleValue(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def optionVarStringValue(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setOptionVarValue(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def initOptionVar(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def removeOptionVar(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def optionVarExists(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def resetToDefaultErrorLogPathName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def defaultErrorLogPathName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setErrorLogPathName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def errorLogPathName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def errorLoggingIsOn(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def startErrorLogging(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def stopErrorLogging(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def closeErrorLog(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def doErrorLogEntry(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getAbsolutePathToResources(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def disableStow(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setDisableStow(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def sourceFile(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setDisplayCVs(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getAssociatedSets(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def viewFrame(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def currentToolContext(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setYAxisUp(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def isYAxisUp(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setZAxisUp(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def isZAxisUp(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def upAxis(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def className(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+	@staticmethod
+	def animSelectionMask(*args)->Any:
+		"""animSelectionMask() -> MSelectionMask
+
+		Returns the animation selection mask."""
+	@staticmethod
+	def componentSelectionMask(*args)->Any:
+		"""componentSelectionMask() -> MSelectionMask
+
+		Returns the component selection mask."""
+	@staticmethod
+	def displayError(*args)->Any:
+		"""displayError(msg) -> None
+
+		Display an error in the script editor."""
+	@staticmethod
+	def displayInfo(*args)->Any:
+		"""displayInfo(msg) -> None
+
+		Display an informational message in the script editor."""
+	@staticmethod
+	def displayWarning(*args)->Any:
+		"""displayWarning(msg) -> None
+
+		Display a warning in the script editor."""
+	@staticmethod
+	def getActiveSelectionList(*args)->Any:
+		"""getActiveSelectionList(orderedSelectionIfAvailable=False) -> MSelectionList
+
+		Return an MSelectionList containing the nodes, components and
+		plugs currently selected in Maya. If orderedSelectionIfAvailable
+		is True, and tracking is enabled, will return the selected items
+		in the order that they were selected."""
+	@staticmethod
+	def getFunctionSetList(*args)->Any:
+		"""getFunctionSetList(MObject) -> (string, string, ...)
+
+		Returns a tuple of strings that represent the type of each function
+		set that will accept this object."""
+	@staticmethod
+	def getRichSelection(*args)->Any:
+		"""getRichSelection(defaultToActiveSelection=True) -> MRichSelection
+
+		Returns the current rich selection (usually the active selection with
+		any soft selection and symmetry applied). If no rich selection exists
+		and 'defaultToActiveSelection' is True, the current active selection
+		will be returned instead."""
+	@staticmethod
+	def getSelectionListByName(*args)->Any:
+		"""getSelectionListByName(name) -> MSelectionList
+
+		Returns an MSelectionList with all of the objects that match the
+		specified name. The name may use the same type of regular expressions
+		as can be used in MEL commands. For example, the pattern 'pCube*' will
+		match all occurrences of objects whose names begin with 'pCube'."""
+	@staticmethod
+	def miscSelectionMask(*args)->Any:
+		"""miscSelectionMask() -> MSelectionMask
+
+		Returns the miscellaneous selection mask."""
+	@staticmethod
+	def objectSelectionMask(*args)->Any:
+		"""objectSelectionMask() -> MSelectionMask
+
+		Returns the object selection mask."""
+	@staticmethod
+	def selectionMode(*args)->Any:
+		"""selectionMode() -> int
+
+		Get current selection mode:
+		  kSelectObjectMode     Objects are selected as a whole. Components are not directly accessible.
+		  kSelectComponentMode  Components such as vertices are selectable in this mode.
+		  kSelectRootMode       Selecting the child in a hierarchy will also select its root DAG node.
+		  kSelectLeafMode       Selecting the child in a hierarchy will result only in that child being selected.
+		  kSelectTemplateMode   Templated objects are selectable in this mode."""
+	@staticmethod
+	def setActiveSelectionList(*args)->Any:
+		"""setActiveSelectionList(MSelectionList, listAdjustment=kReplaceList) -> None
+
+		Set the active selection list.
+		The selection items on the given list will update the contents of the active selection
+		list as indicated by the listAdjustment parameter.
+		Valid listAdjustment values are:
+		  kReplaceList      #Totally replace the list with the given items.
+		  kXORWithList      #Items already in the list will be removed. New items will be appended to the end of the list.
+		  kAddToList        #Add the items to the end of the list.
+		  kRemoveFromList   #Remove the items from the list.
+		  kAddToHeadOfList  #Add the items to the beginning of the list."""
+	@staticmethod
+	def setAnimSelectionMask(*args)->Any:
+		"""setAnimSelectionMask(mask) -> selfsetAnimSelectionMask(type) -> self
+
+		Set the animation selection mask to the supplied value.
+
+		* mask (MSelectionMask) - The selection mask.
+		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
+	@staticmethod
+	def setComponentSelectionMask(*args)->Any:
+		"""setComponentSelectionMask(mask) -> selfsetComponentSelectionMask(type) -> self
+
+		Set the component selection mask to the supplied value.
+
+		* mask (MSelectionMask) - The selection mask.
+		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
+	@staticmethod
+	def setMiscSelectionMask(*args)->Any:
+		"""setMiscSelectionMask(mask) -> selfsetMiscSelectionMask(type) -> self
+
+		Set the miscellaneous selection mask to the supplied value.
+
+		* mask (MSelectionMask) - The selection mask.
+		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
+	@staticmethod
+	def setObjectSelectionMask(*args)->Any:
+		"""setObjectSelectionMask(mask) -> selfsetObjectSelectionMask(type) -> self
+
+		Set the object selection mask to the supplied value.
+
+		* mask (MSelectionMask) - The selection mask.
+		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
+	@staticmethod
+	def setRichSelection(*args)->Any:
+		"""setRichSelection(MRichSelection) -> None
+
+		Set the current rich selection."""
+	@staticmethod
+	def setSelectionMode(*args)->Any:
+		"""setSelectionMode(int) -> None
+
+		Set the current selection mode.
+		See selectionMode() for a list of valid modes."""
+	@staticmethod
+	def isUndoing(*args)->Any:
+		"""isUndoing() -> bool
+
+		true if Maya is currently in the middle of an undo."""
+	@staticmethod
+	def isRedoing(*args)->Any:
+		"""isRedoing() -> bool
+
+		true if Maya is currently in the middle of a redo."""
+	@staticmethod
+	def mayaName(*args)->Any:
+		"""mayaName() -> string
+
+		Returns a string containing name of running application."""
+	@staticmethod
+	def mayaVersion(*args)->Any:
+		"""mayaVersion() -> string
+
+		Returns a string describing this version of Maya."""
+	@staticmethod
+	def apiVersion(*args)->Any:
+		"""apiVersion() -> int
+
+		Returns a number describing the version of the Maya API at runtime."""
+	@staticmethod
+	def mayaFeatureSet(*args)->Any:
+		"""mayaFeatureSet() -> int
+
+		Returns an enumerated type specifying if Maya API has unlimited set of features.
+		  kComplete  Running Maya version with all features available.
+		  kRestricted  Running Maya version with some features limited in availability."""
+	@staticmethod
+	def mayaState(*args)->Any:
+		"""mayaState() -> int
+
+		Returns an enumerated type specifying the way in which Maya was invoked.
+		  kInteractive  Running with a UI
+		  kBatch  Running without a UI
+		  kLibraryApp  Running as a standalone (MLibrary) application.
+		  kBaseUIMode  Running with UI enabled but Maya's std UI scripts not run."""
+	@staticmethod
+	def getLiveList(*args)->Any:
+		"""getLiveList() -> MSelectionList
+
+		Returns a copy of the live list. When a user performs a
+		"Modify->Make Live" in the user interface the currently selected
+		objects are added to the live list."""
+	@staticmethod
+	def getHiliteList(*args)->Any:
+		"""getHiliteList() -> MSelectionList
+
+		Returns a copy of the hilite list.  The hilite list contains all DAG objects
+		that are hilited for component selection mode.  (e.g. when the user right clicks
+		over a Mesh object and chooses the "vertex" option the Mesh line drawing changes
+		color and the mesh is added to the hiliteList.)"""
+	@staticmethod
+	def setHiliteList(*args)->Any:
+		"""setHiliteList(MSelectionList) -> None
+
+		Sets the current hilite list. The current selection list is unchanged."""
+	@staticmethod
+	def getPreselectionHiliteList(*args)->Any:
+		"""getPreselectionHiliteList() -> MSelectionList
+
+		Gets the objects for which Maya is displaying a preselection
+		highlight in the viewports."""
+	@staticmethod
+	def setPreselectionHiliteList(*args)->Any:
+		"""setPreselectionHiliteList(MSelectionList) -> None
+
+		Sets the objects for which Maya will display a preselection
+		highlight in the viewports.
+
+		The objects/components in the list will be drawn in Maya's
+		preselection highlight style on the next viewport refresh
+		(if preselection highlighting is enabled in the preferences).
+
+		If preselection highlighting is not enabled, Maya will still
+		store the list."""
+	@staticmethod
+	def selectCommand(*args)->Any:
+		"""selectCommand(MSelectionList, listAdjustment=kReplaceList) -> None
+
+		Set the active selection list, by calling the built in Maya select
+		command.  This differs from setActiveSelectionList in that in this
+		version Maya takes over the selection list you give it and will be
+		responsible for maintaing the necessary information required for
+		undo, redo, and journaling."""
+	@staticmethod
+	def selectByName(*args)->Any:
+		"""selectByName(string, listAdjustment=kReplaceList) -> None
+
+		Puts objects that match the give name on the active selection list."""
+	@staticmethod
+	def unselectByName(*args)->Any:
+		"""unselectByName(string) -> None
+
+		Removes objects matching the pattern from the active selection list."""
+	@staticmethod
+	def unselect(*args)->Any:
+		"""unselect(MObject) -> None
+		unselect(MDagPath, MObject) -> None
+
+		Remove the given object/components from the active selection list.
+		If components is null then the object will be unselected, otherwise
+		the components will be unselected.
+
+		Perform marquee type selection on the dag.  If an object intersects the
+		selection rectangle, it is selected according to listAdjustment."""
+	@staticmethod
+	def selectFromScreen(*args)->Any:
+		"""selectFromScreen(short, short, listAdjustment=kAddToList, selectMethod=kWireframeSelectMethod) -> None
+		selectFromScreen(short, short, short, short, listAdjustment=kAddToList, selectMethod=kWireframeSelectMethod) -> None
+
+		Perform click-pick type selection on the dag. If an object intersects
+		the click point then it is selected according to listAdjustment."""
+	@staticmethod
+	def isSelected(*args)->Any:
+		"""isSelected(MObject) -> bool
+
+		Determines whether the given object is on the active selection list."""
+	@staticmethod
+	def selectionMethod(*args)->Any:
+		"""selectionMethod() -> int
+
+		Determines the selection method that should be used in the currently active
+		viewport.  This is useful as input to the "selectFromScreen" functions."""
+	@staticmethod
+	def clearSelectionList(*args)->Any:
+		"""clearSelectionList() -> None
+
+		Removes all items from the active selection list."""
+	@staticmethod
+	def trackSelectionOrderEnabled(*args)->Any:
+		"""trackSelectionOrderEnabled() -> bool
+
+		Returns whether the selection order is currerntly being tracked."""
+	@staticmethod
+	def setTrackSelectionOrderEnabled(*args)->Any:
+		"""setTrackSelectionOrderEnabled() -> None
+
+		Set whether Maya should maintain an active selection list which
+		maintains object and component selection order."""
+	@staticmethod
+	def addToModel(*args)->Any:
+		"""addToModel(MObject, MObject) -> None
+
+		This method is used to add new dag objects to the model.  If no parent node
+		is specified, then the node is added under the world.  When a node is
+		added under the world, then a transform node is automatically created as
+		a parent.  This assumes that the node being added is not already a
+		transform node.
+		This method is only valid for dag nodes. If the specified
+		object is not of type MFn::kDagNode then MS::kInvalidParameter will be returned."""
+	@staticmethod
+	def addToModelAt(*args)->Any:
+		"""addToModelAt(MObject, MVector, double[3], double[3], rotateOrder=MTransformationMatrix.kXYZ) -> None
+
+		Adds the specified dag object to the DAG and transform the object
+		by the specified arguments.
+		This method is only valid for dag nodes. If the specified
+		object is not of type MFn::kDagNode then MS::kInvalidParameter
+		will be returned."""
+	@staticmethod
+	def removeFromModel(*args)->Any:
+		"""removeFromModel(MObject) -> None
+
+		Removes the specified dag node from the scene.
+		This method is only valid for dag nodes. If the specified
+		object is not of type MFn::kDagNode then MS::kInvalidParameter
+		will be returned.
+
+		Note that this method doesn't delete the dag node which means
+		the node must be added back to scene by calling either
+		MGlobal::addToModel() or MGlobal::addToModelAt() in later
+		calls, otherwise the dag node is leaked. To delete the dag node,
+		call MGlobal::deleteNode() instead."""
+	@staticmethod
+	def deleteNode(*args)->Any:
+		"""deleteNode(MObject) -> None
+
+		Delete the given dag node or dependency graph node."""
+	@staticmethod
+	def executeCommandOnIdle(*args)->Any:
+		"""executeCommandOnIdle(string, bool displayEnabled=False) -> None
+
+		Sets a MEL command to execute on the next idle event. Since the command
+		will likely not be executed until some time after control is returned to
+		caller, there is no access to the command results.
+
+		This method is thread safe and can be called from a thread other than
+		Maya's main thread. However, that thread must still be part of the Maya
+		process. Calling this method from a completely separate process will
+		not work and may lead to unpredictable behaviour."""
+	@staticmethod
+	def executeCommandOnIdleWithPriority(*args)->Any:
+		"""executeCommandOnIdleWithPriority(string, int priority, bool displayEnabled=False) -> None
+
+		Sets a MEL command to execute on the next idle event with the given priority.
+		Since the command will likely not be executed until some time after control is
+		returned to caller, there is no access to the command results.
+
+		This method is thread safe and can be called from a thread other than
+		Maya's main thread. However, that thread must still be part of the Maya
+		process. Calling this method from a completely separate process will
+		not work and may lead to unpredictable behaviour."""
+	@staticmethod
+	def executeCommandStringResult(*args)->Any:
+		"""executeCommandStringResult(string, bool displayEnabled=False, bool undoEnabled=False) -> string or [string, string, ...]
+
+		Executes a MEL command that returns a string or an array of strings
+		result from the command engine depending on the number of return values.
+		Optionally allows display of the command in the Command Window to be
+		enabled or disabled.  Defaults to disabled.  Optionally allows undo
+		for the command to be enabled or disabled.  Defaults to disabled.
+
+		Note: This is not thread safe; you may use executeCommandOnIdle instead"""
+	@staticmethod
+	def optionVarIntValue(*args)->Any:
+		"""optionVarIntValue(string) -> int
+
+		This method is used to get the option variable value of int type"""
+	@staticmethod
+	def optionVarDoubleValue(*args)->Any:
+		"""optionVarDoubleValue(string) -> double
+
+		This method is used to get the option variable value of type double"""
+	@staticmethod
+	def optionVarStringValue(*args)->Any:
+		"""optionVarStringValue(string) -> MString
+
+		This method is used to get the option variable value of type string"""
+	@staticmethod
+	def setOptionVarValue(*args)->Any:
+		"""setOptionVarValue(string, int) -> bool
+		setOptionVarValue(string name, double) -> bool
+		setOptionVarValue(string name, string) -> bool
+
+
+		This method is used to set the option variable value of int, bool, string type"""
+	@staticmethod
+	def initOptionVar(*args)->Any:
+		"""initOptionVar(string name, int, string category) -> bool
+		initOptionVar(string name, double, string category) -> bool
+		initOptionVar(string name, string, string category) -> bool
+
+
+		This method is used to initialize an option variable value of int, bool, string type.
+		This method will create the option var if it doesn't exist and set the default value
+		and category."""
+	@staticmethod
+	def removeOptionVar(*args)->Any:
+		"""removeOptionVar(string) -> None
+
+		This method is used to remove the option variable"""
+	@staticmethod
+	def optionVarExists(*args)->Any:
+		"""optionVarExists(string) -> bool
+
+		This method is used to check if the option variable exists"""
+	@staticmethod
+	def resetToDefaultErrorLogPathName(*args)->Any:
+		"""resetToDefaultErrorLogPathName() -> None
+
+		Closes the current log file if it is open, and then resets the log path to
+		the default path.
+		Logging is disabled and the log file speicified by the default path is not opened.
+		If logging is disabled, it remains disabled.
+		Use startErrorLogging() to enable logging to the default log file.
+		If the current path is the default path, no action is taken,
+		but an invalid parameter error is returned.
+
+		Note that if the default log is reopened after it is closed, all information
+		previously logged to it is lost."""
+	@staticmethod
+	def defaultErrorLogPathName(*args)->Any:
+		"""defaultErrorLogPathName() -> string
+
+		Determines the default path name of the error log file.
+		Returns an empty string on failure."""
+	@staticmethod
+	def setErrorLogPathName(*args)->Any:
+		"""setErrorLogPathName(string) -> None
+
+		Determines the default path name of the error log file.
+		Returns an empty string on failure."""
+	@staticmethod
+	def errorLogPathName(*args)->Any:
+		"""errorLogPathName() -> string
+
+		Determines the path name of the current error log file.
+		Returns the null stringon failure."""
+	@staticmethod
+	def errorLoggingIsOn(*args)->Any:
+		"""errorLoggingIsOn() -> bool
+
+		This method determines whether or not API errors are being logged."""
+	@staticmethod
+	def startErrorLogging(*args)->Any:
+		"""startErrorLogging() -> None
+		startErrorLogging(string)
+
+		This method enables output to the API error log file specified by the path.
+		If another error log file is already open this method time and date stamps
+		the log, and closes it.
+		The new error log is time and date stamped when it is opened.
+
+		If the new path name is the same as the current path name, this method ensures
+		that logging is enabled, but no other action is taken."""
+	@staticmethod
+	def stopErrorLogging(*args)->Any:
+		"""stopErrorLogging() -> None
+
+		This method disables output to the API error log but does not close the log file."""
+	@staticmethod
+	def closeErrorLog(*args)->Any:
+		"""closeErrorLog() -> None
+
+		This method closes the API error log file.  If error logging is currently
+		enabled this method disables it.
+		The error log is time and date stamped before it is closed.
+		After the log is closed the error log path name is reset to the default
+		path name.
+		If the error log file is already closed, then no action is taken.
+
+		Note that if a log is reopened after it is closed, all information previously
+		logged to it is lost."""
+	@staticmethod
+	def doErrorLogEntry(*args)->Any:
+		"""doErrorLogEntry(string) -> bool
+
+		Logs an entry in the currently open log file.  It is not necessary for error
+		logging to be enabled, but a log file must be open.
+		A newline is appended to each log entry."""
+	@staticmethod
+	def getAbsolutePathToResources(*args)->Any:
+		"""getAbsolutePathToResources() -> string
+
+		Return the absolute path of Maya's "Resources" fold on the system,
+		including the "Resources" folder itself."""
+	@staticmethod
+	def disableStow(*args)->Any:
+		"""disableStow() -> bool
+
+		This method is used to query if the disabling of Stowing (hiding)
+		and Unstowing (showing) windows is active."""
+	@staticmethod
+	def setDisableStow(*args)->Any:
+		"""setDisableStow(bool) -> None
+
+		This method is used to make the visiblity of all Maya windows unchangable.
+		If set to true, it disables any attempts to change the visiblity of any window.
+		In addition, all popup windows will be supressed."""
+	@staticmethod
+	def sourceFile(*args)->Any:
+		"""sourceFile(string) -> None
+
+		Causes the MEL command engine to open the named file and execute
+		the contents of the file as a MEL script.  If the provided fileName
+		is a Unix absolute pathname, then that file is opened.  If a relative
+		pathname is provided, the directories indicated by the environment
+		variable, MAYA_SCRIPT_PATH, will be searched for a matching filename."""
+	@staticmethod
+	def setDisplayCVs(*args)->Any:
+		"""setDisplayCVs(MSelectionList, bool) -> None
+
+		Controls drawing of control points in the specified selection list.
+
+		The selection items on the given list will be marked for drawing. This
+		overrides Maya's current draw list and allow, for example, the drawing
+		of control points without being in vertex selection mode."""
+	@staticmethod
+	def getAssociatedSets(*args)->Any:
+		"""getAssociatedSets(MSelectionList) -> list
+
+		This utility method finds all the sets that the items in
+		the given selection list are members of."""
+	@staticmethod
+	def viewFrame(*args)->Any:
+		"""viewFrame(double) -> None
+		viewFrame(MTime) -> None
+
+		Sets the global time to the specified time.  This function is optimized
+		for sequential time values that are monotonically increasing.  While
+		one can set the time randomly with this function, a significant
+		performance hit will be incurred."""
+	@staticmethod
+	def currentToolContext(*args)->Any:
+		"""currentToolContext() -> MObject
+
+		Returns the current tool context as an MObject."""
+	@staticmethod
+	def setYAxisUp(*args)->Any:
+		"""setYAxisUp() -> None
+
+		This method sets the flag to identify which axis is Up, and
+		rotates the ground plane around around the X-axis 90 degrees to get
+		the Y-Up from Z-Up."""
+	@staticmethod
+	def isYAxisUp(*args)->Any:
+		"""isYAxisUp() -> bool
+
+		This method returns true if, currently, the Y-axis is UP."""
+	@staticmethod
+	def setZAxisUp(*args)->Any:
+		"""setZAxisUp() -> None
+
+		This method sets the flag to identify which axis is Up, and
+		rotates the ground plane around around the X-axis 90 degrees to get
+		the Y-Up from Y-Up."""
+	@staticmethod
+	def isZAxisUp(*args)->Any:
+		"""isZAxisUp() -> bool
+
+		This method returns true if, currently, the Z-axis is UP."""
+	@staticmethod
+	def upAxis(*args)->Any:
+		"""upAxis() -> MVector
+
+		This method returns the model's current up axis."""
+	@staticmethod
+	def className(*args)->Any:
+		"""className() -> string
+
+		Returns the name of this class."""
 class MImage:
 	"""Manipulate color data."""
 	kNoFormat:int=0
@@ -11473,56 +10732,56 @@ class MImage:
 	kUnknown:int=0
 	kByte:int=1
 	kFloat:int=2
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def pixelType(self,*args,**kwargs)->Any:
+	def pixelType(self,*args)->Any:
 		"""pixelType() -> int
 
 		Get the current pixel format of the image:  kUnknown    Format not known or invalid.
 		  kByte       One byte per channel, ranging from 0 to 255.
 		  kFloat      One float per channel, ranging from 0.0 to 1.0."""
-	def depth(self,*args,**kwargs)->Any:
+	def depth(self,*args)->Any:
 		"""depth() -> int
 
 		Get the color depth (in bytes) of the currently opened image."""
-	def isRGBA(self,*args,**kwargs)->Any:
+	def isRGBA(self,*args)->Any:
 		"""isRGBA() -> bool
 
 		Query flag which indicates whether the pixel information is in RGBA sequence or BGRA sequence.
 		If no pixel data exists, then False will be returned."""
-	def setRGBA(self,*args,**kwargs)->Any:
+	def setRGBA(self,*args)->Any:
 		"""setRGBA(bool) -> self
 
 		Sets a flag to indicate that pixel information is in RGBA sequence or BGRA sequence.
 		Pixel data must have been allocated before this call is made."""
-	def pixels(self,*args,**kwargs)->Any:
+	def pixels(self,*args)->Any:
 		"""pixels() -> long
 
 		Returns a long containing a C++ 'unsigned char' pointer which points to the pixel data.
 		This data is uncompressed and tightly packed, of size (width * height * depth) bytes.
 		For the moment, pixels are always stored in a RGBA (depth=4 bytes) pixel format."""
-	def floatPixels(self,*args,**kwargs)->Any:
+	def floatPixels(self,*args)->Any:
 		"""floatPixels() -> long
 
 		Returns a long containing a C++ 'float' pointer which points to the pixel data.
 		This data is uncompressed and tightly packed, of size (width * height * depth * sizeof( float)) bytes."""
-	def haveDepth(self,*args,**kwargs)->Any:
+	def haveDepth(self,*args)->Any:
 		"""haveDepth() -> bool
 
 		Returns True if this instance of MImage contains a depth map."""
-	def depthMap(self,*args,**kwargs)->Any:
+	def depthMap(self,*args)->Any:
 		"""depthMap() -> long
 
 		Returns a long containing a C++ 'float' pointer which points to the depth data."""
-	def release(self,*args,**kwargs)->Any:
+	def release(self,*args)->Any:
 		"""release() -> self
 
 		Release the current image. If there is no current image, the call is ignored."""
-	def verticalFlip(self,*args,**kwargs)->Any:
+	def verticalFlip(self,*args)->Any:
 		"""verticalFlip() -> bool
 
 		Flips the image vertically."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(width, height, channels=4, type=kByte) -> self
 
 		Create a new MImage object. Allocates memory for an RGBA array of pixels
@@ -11532,22 +10791,19 @@ class MImage:
 		* height (unsigned int) - the desired image's height in pixels.
 		* channels (unsigned int) - the desired number of channels per pixel.
 		* type (int) - the desired pixel format (kByte or kFloat, see MImage.pixelType() description for details.)"""
-	def getSize(self,*args,**kwargs)->Any:
+	def getSize(self,*args)->Any:
 		"""getSize() -> [width, height]
 
-		Get the width and height of the currently opened image.
-		"""
-	def resize(self,*args,**kwargs)->Any:
+		Get the width and height of the currently opened image."""
+	def resize(self,*args)->Any:
 		"""resize(width, height, preserveAspectRatio=True) -> self
 
 		Resize the currently opened image to the specified dimension, or to the closest
 		width/height that is preserves the original aspect ratio.* width (unsigned int) - the desired image's width in pixels.
 		* height (unsigned int) - the desired image's height in pixels.
 		* preserveAspectRatio (bool) - specifies whether the aspect ratio should be preserved or not.
-		         If this flag is set, the given width and height are interpreted as the maximum dimensions allowable.
-
-		"""
-	def setPixels(self,*args,**kwargs)->Any:
+		         If this flag is set, the given width and height are interpreted as the maximum dimensions allowable."""
+	def setPixels(self,*args)->Any:
 		"""setPixels(pixels, width, height) -> self
 
 		Copy the uncompressed pixels array passed in into the MImage.
@@ -11557,7 +10813,7 @@ class MImage:
 		* pixels (unsigned char*) - the variable containing a block of pixels.
 		* width (unsigned int) - the variable that will be set to the image's width in pixels.
 		* height (unsigned int) - the variable that will be set to the image's height in pixels."""
-	def setFloatPixels(self,*args,**kwargs)->Any:
+	def setFloatPixels(self,*args)->Any:
 		"""setFloatPixels(pixels, width, height, channels=4) -> self
 
 		Copy the uncompressed pixels array passed in into the MImage.
@@ -11568,16 +10824,15 @@ class MImage:
 		* width (unsigned int) - the variable that will be set to the image's width in pixels.
 		* height (unsigned int) - the variable that will be set to the image's height in pixels.
 		* channels (unsigned int) - the number of channels per pixel."""
-	def getDepthMapSize(self,*args,**kwargs)->Any:
+	def getDepthMapSize(self,*args)->Any:
 		"""getDepthMapSize() -> [width, height]
 
 		Returns the size of the depth map buffer."""
-	def getDepthMapRange(self,*args,**kwargs)->Any:
+	def getDepthMapRange(self,*args)->Any:
 		"""getDepthMapRange() -> [minValue, maxValue]
 
-		Compute the minimum and maximum depth values (range) for any stored depth buffer.
-		"""
-	def setDepthMap(self,*args,**kwargs)->Any:
+		Compute the minimum and maximum depth values (range) for any stored depth buffer."""
+	def setDepthMap(self,*args)->Any:
 		"""setDepthMap(depth, width, heigth) -> self
 
 		Specifies the depth map resolution and data.
@@ -11589,26 +10844,15 @@ class MImage:
 		* depth (MFloatArray) - float array that contains depth values.
 		* width (unsigned int) - the width of the depth buffer.
 		* height (unsigned int) - the height of the depth buffer."""
-	def filterExists(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def filterExists(*args)->Any:
+		"""filterExists(sourceFormat, targetFormat) -> bool
 
-		Convert a function to be a static method.
+		Return whether or not a given source format can be directly converted to a given target format.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def filter(self,*args,**kwargs)->Any:
+		* sourceFormat (MImageFilterFormat) - the format of the source image.
+		* targetFormat (MImageFilterFormat) - the format of the resulting image."""
+	def filter(self,*args)->Any:
 		"""filter(sourceFormat, targetFormat, scale=1.0, offset=1.0) -> self
 
 		Modify the content of the image by applying a filter.
@@ -11620,14 +10864,14 @@ class MImage:
 
 		The scale argument for this filter can vary from -256.0 to 256.0, although typical values range from 1.0 to 10.0.
 		The offset argument is currently ignored and should be left to the default value of 0.0."""
-	def readFromFile(self,*args,**kwargs)->Any:
+	def readFromFile(self,*args)->Any:
 		"""readFromFile(pathname, type=kByte) -> self
 
 		Attempt to identify and open the specified image file.
 
 		* pathname (string) - the full path of the image file that should be opened.
 		* type (MPixelType) - the desired pixel format. kUnknown attempts to load the native pixel type."""
-	def readFromTextureNode(self,*args,**kwargs)->Any:
+	def readFromTextureNode(self,*args)->Any:
 		"""readFromTextureNode(fileTextureObject, type=kByte) -> self
 
 		Attempt to read the content of the given file texture node.
@@ -11635,16 +10879,16 @@ class MImage:
 
 		* fileTextureObject (MObject) - an object that refers to the file texture node that should be read.
 		* type (MPixelType) - the desired pixel format. kUnknown attempts to load the native pixel type."""
-	def readDepthMap(self,*args,**kwargs)->Any:
+	def readDepthMap(self,*args)->Any:
 		"""readDepthMap(pathname) -> self
 
 		Reads the depth map from the specified file and place the result into the depth map array of this MImage instance."""
-	def writeToFile(self,*args,**kwargs)->Any:
+	def writeToFile(self,*args)->Any:
 		"""writeToFile(pathname, outputFormat=iff) -> self
 
 		Save the content of this image in a file. By default, the file is saved in IFF format.
 		Optionally, the file can also be converted in a variety of image formats."""
-	def writeToFileWithDepth(self,*args,**kwargs)->Any:
+	def writeToFileWithDepth(self,*args)->Any:
 		"""writeToFileWithDepth(pathname, outputFormat=iff, writeDepth=False) -> self
 
 		Save the content of this image in a file. By default, the file is saved in IFF format.
@@ -11652,93 +10896,103 @@ class MImage:
 		If the writeDepth parameter is True then any depth information stored in MImage will be written to file."""
 class MInt64Array:
 	"""Array of MInt64 values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MIntArray:
 	"""Array of int values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MItCurveCV:
 	"""An iterator for traversing a curve's CVs."""
-	def __iter__(self,*args,**kwargs)->Any:
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> bool
 
 		Indicates if all of the edges have been traversed yet."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Advances to the next edge in the iteration."""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset() -> self
 		reset(curve) -> self
 		reset(curve, component=None) -> self
@@ -11754,11 +11008,11 @@ class MItCurveCV:
 
 		* curve (MDagPath) - The curve to iterate over
 		* component (MObject) - The CVs of the curve to iterate over"""
-	def position(self,*args,**kwargs)->Any:
+	def position(self,*args)->Any:
 		"""position() -> MPoint
 
 		Returns the position of the current CV."""
-	def setPosition(self,*args,**kwargs)->Any:
+	def setPosition(self,*args)->Any:
 		"""setPosition(point, space=kObject) -> self
 
 		Sets the position of the current CV, in the given transformation
@@ -11767,7 +11021,7 @@ class MItCurveCV:
 
 		* point       (MPoint) - The new position for the specified vertex
 		* space (MSpace constant) - The transformation space"""
-	def translateBy(self,*args,**kwargs)->Any:
+	def translateBy(self,*args)->Any:
 		"""translateBy(vector, space=kObject) -> self
 
 		Translate the current CV by the amount specified
@@ -11775,21 +11029,21 @@ class MItCurveCV:
 
 		* vector (MVector) - The amount of translation
 		* space (int) - The Transformation space"""
-	def index(self,*args,**kwargs)->Any:
+	def index(self,*args)->Any:
 		"""index() -> int
 
 		Returns the index of the current edge in the iteration."""
-	def currentItem(self,*args,**kwargs)->Any:
+	def currentItem(self,*args)->Any:
 		"""currentItem() -> MObject
 
 		Returns the current CV in the iteration as an MObject."""
-	def hasHistoryOnCreate(self,*args,**kwargs)->Any:
+	def hasHistoryOnCreate(self,*args)->Any:
 		"""hasHistoryOnCreate() -> bool
 
 		This method determines if the shape was created with history.
 
 		If the object that this iterator is attached to is not a shape then this method will fail."""
-	def updateCurve(self,*args,**kwargs)->Any:
+	def updateCurve(self,*args)->Any:
 		"""updateCurve() -> self
 
 		This method is used to signal the curve that it has been changed and needs to redraw itself.
@@ -11821,45 +11075,50 @@ class MItDag:
 
 	Additionally, the iterator can be queried for the root, mode and type
 	of traversal, and to determine if the the traversal has been completed."""
+	@property
+	def traverseUnderWorld(self)->Any:
+		"""Specifies whether underworld traversal is turned on (Bool)."""
+	@traverseUnderWorld.setter
+	def traverseUnderWorld(self,value:Any)->None:...
 	kInvalidType:int=0
 	kDepthFirst:int=1
 	kBreadthFirst:int=2
-	def __iter__(self,*args,**kwargs)->Any:
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iternext(self,*args,**kwargs)->Any:
+	def iternext(self,*args)->Any:
 		"""iternext() -> self
 
 		Used in pythonic iteration to move the iterator"""
-	def iter(self,*args,**kwargs)->Any:
+	def iter(self,*args)->Any:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def currentItem(self,*args,**kwargs)->Any:
+	def currentItem(self,*args)->Any:
 		"""currentItem() -> MObject
 
 		Retrieves DAG node to which the iterator points."""
-	def depth(self,*args,**kwargs)->Any:
+	def depth(self,*args)->Any:
 		"""depth() -> integer
 
 		Returns the height or depth of the current node in the DAG relative to the
 		root node.  The root node has a depth of zero."""
-	def fullPathName(self,*args,**kwargs)->Any:
+	def fullPathName(self,*args)->Any:
 		"""fullPathName() -> MString
 
 		Return a string representing the full path from the root of the dag to this object."""
-	def getAllPaths(self,*args,**kwargs)->Any:
+	def getAllPaths(self,*args)->Any:
 		"""getAllPaths() -> MDagPathArray
 
 		Determines all DAG Paths to current item in the iteration."""
-	def getPath(self,*args,**kwargs)->Any:
+	def getPath(self,*args)->Any:
 		"""getPath() -> MDagPath
 
 		Determines a DAG Path to the current item in the iteration."""
-	def instanceCount(self,*args,**kwargs)->Any:
+	def instanceCount(self,*args)->Any:
 		"""instanceCount(total) -> Integer
 
 		Determines the number of times the current item (DAG node) in the iteration
@@ -11871,11 +11130,11 @@ class MItDag:
 		If total is True the total number of instances is returned, including
 		indirect instances resulting from instancing higher up the DAG hierarchy
 		(i.e. one or more of the node's ancestors also has multiple instances)."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> Bool
 
 		Indicates end of iteration path."""
-	def isInstanced(self,*args,**kwargs)->Any:
+	def isInstanced(self,*args)->Any:
 		"""isInstanced(indirect = True) -> Bool
 
 		Determines whether the current item (DAG node) in the iteration is directly
@@ -11890,11 +11149,11 @@ class MItDag:
 		(node.parentCount()=1 and parent.parentCount >1).
 
 		* indirect (Bool) -Indirect instance flag, defaults to True."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Moves to the next node matching the filter in the graph."""
-	def partialPathName(self,*args,**kwargs)->Any:
+	def partialPathName(self,*args)->Any:
 		"""partialPathName() -> MString
 
 		Return a string representing the partial path from the root of the
@@ -11902,11 +11161,11 @@ class MItDag:
 
 		The partial path is the minimum path that is still unique. This string
 		may contain wildcards."""
-	def prune(self,*args,**kwargs)->Any:
+	def prune(self,*args)->Any:
 		"""prune() -> self
 
 		Prunes iteration tree at current node."""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset() -> self
 		reset(rootObject, traversalType = MItDag.kDepthFirst, filterType = MFn.kInvalid) -> self
 		reset(rootPath, traversalType = MItDag.kDepthFirst, filterType = MFn.kInvalid) -> self
@@ -11922,15 +11181,14 @@ class MItDag:
 		   rootPath (MDagPath) - Root path to to begin the next traversal. Useful with instances.
 		   dagInfoObject (MIteratorType) - Iterator object having info on filter or filterlist.
 		   traversalType (MItDag.TraversalType) - Enumerated type that determines the direction of the traversal, defaults to kDepthFirst.
-		   filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid
-		"""
-	def root(self,*args,**kwargs)->Any:
+		   filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid"""
+	def root(self,*args)->Any:
 		"""root() -> MObject
 
 		Returns the root (start node) of the current traversal.
 		The constructor sets the root of traversal to the world node.
 		The root can be changed by the reset() method."""
-	def traversalType(self,*args,**kwargs)->Any:
+	def traversalType(self,*args)->Any:
 		"""traversalType() -> MItDag.TraversalType
 
 		Returns the direction of the traversal."""
@@ -12009,6 +11267,46 @@ class MItDependencyGraph:
 
 	Attributes on the nodes can be manipulated using the Attribute Function Set
 	(MFnAttribute) and its derivations."""
+	@property
+	def currentFilter(self)->Any:
+		"""Current node type filter (MFn.Type) ."""
+	@currentFilter.setter
+	def currentFilter(self,value:Any)->None:...
+	@property
+	def pruningOnFilter(self)->Any:
+		"""Whether or not the iteration path is pruned automatically at nodes or plugs which do not match the filter (Bool)."""
+	@pruningOnFilter.setter
+	def pruningOnFilter(self,value:Any)->None:...
+	@property
+	def currentDirection(self)->Any:
+		"""Direction of the iteration through the graph (MItDependencyGraph.Direction)."""
+	@currentDirection.setter
+	def currentDirection(self,value:Any)->None:...
+	@property
+	def currentTraversal(self)->Any:
+		"""Traversal mode of the iteration through the graph (MItDependencyGraph.Traversal)."""
+	@currentTraversal.setter
+	def currentTraversal(self,value:Any)->None:...
+	@property
+	def currentLevel(self)->Any:
+		"""Level of the iteration through the graph (MItDependencyGraph.Level)."""
+	@currentLevel.setter
+	def currentLevel(self,value:Any)->None:...
+	@property
+	def currentRelationship(self)->Any:
+		"""Relationship mode of the iteration through the graph (MItDependencyGraph.Relationship)."""
+	@currentRelationship.setter
+	def currentRelationship(self,value:Any)->None:...
+	@property
+	def traversingOverWorldSpaceDependents(self)->Any:
+		"""Whether the iterator is set to traverse world-space attribute dependencies (Bool)."""
+	@traversingOverWorldSpaceDependents.setter
+	def traversingOverWorldSpaceDependents(self,value:Any)->None:...
+	@property
+	def nodeDepth(self)->Any:
+		"""Depth of the iteration through the graph (int)."""
+	@nodeDepth.setter
+	def nodeDepth(self,value:Any)->None:...
 	kDownstream:int=0
 	kUpstream:int=1
 	kDepthFirst:int=0
@@ -12018,48 +11316,48 @@ class MItDependencyGraph:
 	kDependsOn:int=0
 	kConnectedTo:int=1
 	kEvaluationGraph:int=2
-	def __iter__(self,*args,**kwargs)->Any:
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iternext(self,*args,**kwargs)->Any:
+	def iternext(self,*args)->Any:
 		"""iternext() -> self
 
 		Used in pythonic iteration to move the iterator"""
-	def iter(self,*args,**kwargs)->Any:
+	def iter(self,*args)->Any:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def currentNode(self,*args,**kwargs)->Any:
+	def currentNode(self,*args)->Any:
 		"""currentNode() -> MObject
 
 		Retrieves the current node of the iteration.  Results in a null object on
 		failure or if the node is of a unrecognized type."""
-	def currentNodeHasUnknownType(self,*args,**kwargs)->Any:
+	def currentNodeHasUnknownType(self,*args)->Any:
 		"""currentNodeHasUnknownType() -> Bool
 
 		Indicates whether or not the current node has an unrecognised
 		type.  This is useful if an unexpected failure is encountered
 		in the next() or currentNode() methods."""
-	def currentPlug(self,*args,**kwargs)->Any:
+	def currentPlug(self,*args)->Any:
 		"""currentPlug() -> MPlug
 
 		Retrieves the current plug of the iteration.  Results in a null
 		plug on failure."""
-	def getNodePath(self,*args,**kwargs)->Any:
+	def getNodePath(self,*args)->Any:
 		"""getNodePath() -> MObjectArray
 
 		Retrieves the direct path from the current node to the root
 		node.  Path does not include the current node.
 		State of the provided array is undefined if this method fails."""
-	def getNodesVisited(self,*args,**kwargs)->Any:
+	def getNodesVisited(self,*args)->Any:
 		"""getNodesVisited() -> MObjectArray
 
 		Retrieves all nodes visited during the iteration.
 		State of the provided array is undefined if this method fails."""
-	def getPlugPath(self,*args,**kwargs)->Any:
+	def getPlugPath(self,*args)->Any:
 		"""getPlugPath() -> MPlugArray
 
 		Retrieves the direct path from the current plug to the root
@@ -12070,19 +11368,19 @@ class MItDependencyGraph:
 		longer a current plug and this method will return an empty array.
 
 		If this method fails the state of the returned array is undefined."""
-	def getPlugsVisited(self,*args,**kwargs)->Any:
+	def getPlugsVisited(self,*args)->Any:
 		"""getPlugsVisited() -> MPlugArray
 
 		Retrieves all plugs visited during the iteration.
 		State of the provided array is undefined if this method fails."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> Bool
 
 		Indicates whether or not all nodes or plugs have been iterated over
 		in accordance with the direction, traversal, level, relationship and filter.
 		If a valid filter is set, the iterator only visits those nodes that match
 		the filter."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Iterates to the next node or plug in accordance with the
@@ -12093,18 +11391,18 @@ class MItDependencyGraph:
 		iteration to a node with an unknown type is treated as a
 		failure.  An attempt to iterate when there is nothing left to
 		iterate over has no effect."""
-	def previousPlug(self,*args,**kwargs)->Any:
+	def previousPlug(self,*args)->Any:
 		"""previousPlug() -> MPlug
 
 		Retrieves the previous plug of the iteration.  Results in a
 		null plug on failure.  Null plug may also indicate that the
 		current plug is the root plug."""
-	def prune(self,*args,**kwargs)->Any:
+	def prune(self,*args)->Any:
 		"""prune() -> self
 
 		Prunes the search path at the current plug.  Iterator will not
 		visit any of the plugs connected to the pruned plug."""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset() -> self
 
 		Clears iterator data and resets the iterator to the root node
@@ -12112,13 +11410,13 @@ class MItDependencyGraph:
 		automatically advances to the next node after the root node
 		that matches the filter.  If no matching node is found an
 		exception is thrown."""
-	def resetFilter(self,*args,**kwargs)->Any:
+	def resetFilter(self,*args)->Any:
 		"""resetFilter() -> self
 
 		Resets the node or plug filter to default, MFn.kInvalid
 		(filter disabled).  Disables pruning on the filter (default).
 		Resets the iterator."""
-	def resetTo(self,*args,**kwargs)->Any:
+	def resetTo(self,*args)->Any:
 		"""resetTo(rootObject, filter = MFn.kInvalid, direction = MItDependencyGraph.kDownstream, traversal = MItDependencyGraph.kDepthFirst, level = MItDependencyGraph.kNodeLevel, relationship = MItDependencyGraph.kDependsOn) -> self
 		resetTo(rootPlug, filter = MFn.kInvalid, direction = MItDependencyGraph.kDownstream, traversal = MItDependencyGraph.kDepthFirst, level = MItDependencyGraph.kNodeLevel, relationship = MItDependencyGraph.kDependsOn) -> self
 		resetTo(infoObject, rootObject OR rootPlug, direction = MItDependencyGraph.kDownstream, traversal = MItDependencyGraph.kDepthFirst, level = MItDependencyGraph.kNodeLevel, relationship = MItDependencyGraph.kDependsOn) -> self
@@ -12137,13 +11435,12 @@ class MItDependencyGraph:
 		   direction (MItDependencyGraph.Direction) - Primary direction of iteration, defaults to MItDependencyGraph.kDownstream
 		   traversal (MItDependencyGraph.Traversal) - Order of traversal, defaults to MItDependencyGraph.kDepthFirst
 		   level (MItDependencyGraph.Level) - Level of detail of the iteration, defaults to MItDependencyGraph.kNodeLevel
-		   relationship (MItDependencyGraph.Relationship) - Relationship mode of the iteration, defaults to MItDependencyGraph.kDependsOn
-		"""
-	def rootNode(self,*args,**kwargs)->Any:
+		   relationship (MItDependencyGraph.Relationship) - Relationship mode of the iteration, defaults to MItDependencyGraph.kDependsOn"""
+	def rootNode(self,*args)->Any:
 		"""rootNode() -> MObject
 
 		Retrieves the root node of the iteration."""
-	def rootPlug(self,*args,**kwargs)->Any:
+	def rootPlug(self,*args)->Any:
 		"""rootPlug() -> MPlug
 
 		Retrieves the root plug of the iteration."""
@@ -12166,35 +11463,35 @@ class MItDependencyNodes:
 	function set (MFnDependencyNode), which is compatible with all
 	dependency nodes, to perform queries on each node as the iterator
 	traverses the Dependency Graph."""
-	def __iter__(self,*args,**kwargs)->Any:
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iternext(self,*args,**kwargs)->Any:
+	def iternext(self,*args)->Any:
 		"""iternext() -> self
 
 		Used in pythonic iteration to move the iterator"""
-	def iter(self,*args,**kwargs)->Any:
+	def iter(self,*args)->Any:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def thisNode(self,*args,**kwargs)->Any:
+	def thisNode(self,*args)->Any:
 		"""thisNode() -> MObject
 
 		Retrieves the dependency node to which the iterator points."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> Bool
 
 		Indicates end of the iteration."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Moves to the next node matching the filter.  If the filter
 		is set to kInvalid, this method advances to the next
 		DG node without doing any filtering."""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset() -> self
 		reset(filterType = MFn.kInvalid) -> self
 		reset(dagInfoObject) -> self
@@ -12204,72 +11501,70 @@ class MItDependencyNodes:
 
 
 		   dagInfoObject (MIteratorType) - Iterator object having info on filter or filterlist.
-		   filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid.
-		"""
+		   filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid."""
 class MItGeometry:
 	"""Geometry iterator.
 
 	This class is the iterator class for geometry data, and can be used to
 	loop over the CVs of NURBS, the points of subds & lattices, and the
 	vertices of polygonal meshes."""
-	def __iter__(self,*args,**kwargs)->Any:
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iternext(self,*args,**kwargs)->Any:
+	def iternext(self,*args)->Any:
 		"""iternext() -> self
 
 		Used in pythonic iteration to move the iterator"""
-	def iter(self,*args,**kwargs)->Any:
+	def iter(self,*args)->Any:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> Bool
 
 		Indicates end of the iteration."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Advance to the next component in the iteration.
 		If the iterator is already at the last component then this
 		method has no effect. Use isDone to determine if the iterator
 		is at the last component."""
-	def position(self,*args,**kwargs)->Any:
+	def position(self,*args)->Any:
 		"""position() -> MPoint
 
 		Return the position of the current point/CV/vertex component."""
-	def normal(self,*args,**kwargs)->Any:
+	def normal(self,*args)->Any:
 		"""normal() -> MVector
 
 		Return the normal of the current point/CV/vertex component."""
-	def setPosition(self,*args,**kwargs)->Any:
+	def setPosition(self,*args)->Any:
 		"""setPosition() -> MStatus
 
 		Set the position of the current point/CV/vertex."""
-	def weight(self,*args,**kwargs)->Any:
+	def weight(self,*args)->Any:
 		"""weight() -> MWeight
 
 		Return the weight of the current point/CV/vertex component."""
-	def index(self,*args,**kwargs)->Any:
+	def index(self,*args)->Any:
 		"""index() -> int
 
 
 		This method returns the index of the current point/CV/vertex
 		component in the iteration."""
-	def component(self,*args,**kwargs)->Any:
+	def component(self,*args)->Any:
 		"""component() -> MObject
 
 		    DEPRECATED in 2019, use currentItem instead.
-		This method returns the current component in the iteration.
-		"""
-	def currentItem(self,*args,**kwargs)->Any:
+		This method returns the current component in the iteration."""
+	def currentItem(self,*args)->Any:
 		"""currentItem() -> MObject
 
-		    This method returns the current component in the iteration."""
-	def count(self,*args,**kwargs)->Any:
+		This method returns the current component in the iteration."""
+	def count(self,*args)->Any:
 		"""count() -> int
 
 
@@ -12280,27 +11575,26 @@ class MItGeometry:
 		sufficient size. If the exact number of items is required, use the
 		exactCount method instead. The exactCount method is however
 		significantly slower than this method."""
-	def exactCount(self,*args,**kwargs)->Any:
+	def exactCount(self,*args)->Any:
 		"""exactCount() -> int
 
 
 		Return the exact number of items in this iteration. This method is
 		significantly slower than the count() method, so use if only if
 		the precise number is required."""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset() -> self
 
 
-		Resets the iterator.
-		"""
-	def allPositions(self,*args,**kwargs)->Any:
+		Resets the iterator."""
+	def allPositions(self,*args)->Any:
 		"""allPositions() -> MStatus
 
 		Return the position of all the points/CVs/vertices.  This
 		operation is faster than using the iterator to get values one by
 		one, but uses more memory as it requires an array to hold all the
 		values to be returned."""
-	def setAllPositions(self,*args,**kwargs)->Any:
+	def setAllPositions(self,*args)->Any:
 		"""setAllPositions() -> MStatus
 
 		Set the position of all the points/CVs/vertices at once. This
@@ -12309,51 +11603,55 @@ class MItGeometry:
 		values to be set."""
 class MItMeshEdge:
 	"""An iterator for traversing a mesh's edges."""
-	def __iter__(self,*args,**kwargs)->Any:
+	@property
+	def isSmooth(self)->Any:
+		"""True if the edge is smooth, False if it is hard."""
+	@isSmooth.setter
+	def isSmooth(self,value:Any)->None:...
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iternext(self,*args,**kwargs)->Any:
+	def iternext(self,*args)->Any:
 		"""iternext() -> self
 
 		Used in pythonic iteration to move the iterator"""
-	def iter(self,*args,**kwargs)->Any:
+	def iter(self,*args)->Any:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def center(self,*args,**kwargs)->Any:
+	def center(self,*args)->Any:
 		"""center(space=kObject) -> MPoint
 
 		Returns the center point of the edge, in the given transformation space.
 
-		* space (MSpace constant) - The  transformation space
-		"""
-	def connectedToEdge(self,*args,**kwargs)->Any:
+		* space (MSpace constant) - The  transformation space"""
+	def connectedToEdge(self,*args)->Any:
 		"""connectedToEdge(index) -> bool
 
 		Determines whether the given edge is connected to the current edge.
 
 		* index (int) - Index of edge to check."""
-	def connectedToFace(self,*args,**kwargs)->Any:
+	def connectedToFace(self,*args)->Any:
 		"""connectedToFace(index) -> bool
 
 		Determines whether the given face contains the current edge.
 
 		* index (int) - Index of face to check."""
-	def count(self,*args,**kwargs)->Any:
+	def count(self,*args)->Any:
 		"""count() -> int
 
 		Return the number of edges in the iteration"""
-	def currentItem(self,*args,**kwargs)->Any:
+	def currentItem(self,*args)->Any:
 		"""currentItem() -> MObject
 
 		Returns the current edge in the iteration as a component.
 
 		Components are used to specify one or more edges and are useful in operating on groups of non-contiguous edges for a surface.
 		Components do not contain any information about the surface that they refer to so an MDagPath must be specified when dealing with components."""
-	def geomChanged(self,*args,**kwargs)->Any:
+	def geomChanged(self,*args)->Any:
 		"""geomChanged() -> self
 
 		Resets the geom pointer in the MItMeshEdge. If you're using MFnMesh to
@@ -12362,58 +11660,56 @@ class MItMeshEdge:
 		geometry is up to date. A crash may result if this method is not called.
 		A similar approach must be taken for updating upstream vertex tweaks
 		with an MPlug. After the update, call this method."""
-	def getConnectedEdges(self,*args,**kwargs)->Any:
+	def getConnectedEdges(self,*args)->Any:
 		"""getConnectedEdges() -> MIntArray
 
 		Returns the indices of edges connected to the current edge."""
-	def getConnectedFaces(self,*args,**kwargs)->Any:
+	def getConnectedFaces(self,*args)->Any:
 		"""getConnectedFaces() -> MIntArray
 
 		Returns the indices of the faces connected to the current edge.
 		Normally a boundary edge will only have one face connected to it and
 		an internal edge will have two, but if the mesh has manifold geometry
 		then the edge may have three or more faces connected to it."""
-	def index(self,*args,**kwargs)->Any:
+	def index(self,*args)->Any:
 		"""index() -> int
 
 		Returns the index of the current edge in the iteration."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> bool
 
 		Indicates if all of the edges have been traversed yet."""
-	def length(self,*args,**kwargs)->Any:
+	def length(self,*args)->Any:
 		"""length(space=kObject) -> float
 
 		Returns the length of the edge, in the given transformation space.
 
-		* space (MSpace constant) - The  transformation space
-		"""
-	def next(self,*args,**kwargs)->Any:
+		* space (MSpace constant) - The  transformation space"""
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Advances to the next edge in the iteration."""
-	def numConnectedEdges(self,*args,**kwargs)->Any:
+	def numConnectedEdges(self,*args)->Any:
 		"""numConnectedEdges() -> int
 
 		Returns the number of edges connected to the current edge."""
-	def numConnectedFaces(self,*args,**kwargs)->Any:
+	def numConnectedFaces(self,*args)->Any:
 		"""numConnectedFaces() -> int
 
 		Returns the number of faces connected to the current edge."""
-	def onBoundary(self,*args,**kwargs)->Any:
+	def onBoundary(self,*args)->Any:
 		"""onBoundary() -> bool
 
 		Determines if the current edge is a border edge."""
-	def point(self,*args,**kwargs)->Any:
+	def point(self,*args)->Any:
 		"""point(whichVertex, space=kObject) -> MPoint
 
 		Returns the position of one of the current edge's vertices, int the
 		given transformation space.
 
 		* whichVertex    (0 or 1) - Which of the edge's two vertices to return
-		* space (MSpace constant) - The transformation space
-		"""
-	def reset(self,*args,**kwargs)->Any:
+		* space (MSpace constant) - The transformation space"""
+	def reset(self,*args)->Any:
 		"""reset() -> self
 		reset(mesh) -> self
 		reset(mesh, component=None) -> self
@@ -12429,7 +11725,7 @@ class MItMeshEdge:
 
 		* mesh (MDagPath) - The mesh to iterate over
 		* component (MObject) - The edges of the mesh to iterate over"""
-	def setIndex(self,*args,**kwargs)->Any:
+	def setIndex(self,*args)->Any:
 		"""setIndex(index) -> int
 
 		Sets the index of the current edge to be accessed. The current edge
@@ -12439,7 +11735,7 @@ class MItMeshEdge:
 
 
 		* index (int) - The index of desired edge to access. """
-	def setPoint(self,*args,**kwargs)->Any:
+	def setPoint(self,*args)->Any:
 		"""setPoint(point, whichVertex, space=kObject) -> self
 
 		Sets the position of one of the current edge's vertices, in the given
@@ -12448,49 +11744,48 @@ class MItMeshEdge:
 		* point       (MPoint) - The new position for the specified vertex
 		* whichVertex (0 or 1) - Which of the edge's 2 vertices to set.
 		* space (MSpace constant) - The transformation space"""
-	def updateSurface(self,*args,**kwargs)->Any:
+	def updateSurface(self,*args)->Any:
 		"""updateSurface() -> self
 
 		Tells Maya that mesh has been changed and needs to redraw itself."""
-	def vertexId(self,*args,**kwargs)->Any:
+	def vertexId(self,*args)->Any:
 		"""vertexId(whichVertex) -> int
 
 		Returns the global index (as opposed to face-relative index) of one of
 		the edge's vertices.
 
-		* whichVertex (0 or 1) - Which of the edge's 2 vertices to use.
-		"""
+		* whichVertex (0 or 1) - Which of the edge's 2 vertices to use."""
 class MItMeshFaceVertex:
 	"""An iterator for traversing a mesh's face vertices."""
-	def __iter__(self,*args,**kwargs)->Any:
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iternext(self,*args,**kwargs)->Any:
+	def iternext(self,*args)->Any:
 		"""iternext() -> self
 
 		Used in pythonic iteration to move the iterator"""
-	def iter(self,*args,**kwargs)->Any:
+	def iter(self,*args)->Any:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def currentItem(self,*args,**kwargs)->Any:
+	def currentItem(self,*args)->Any:
 		"""currentItem() -> MObject
 
 		Returns the current faceVertex as a double-indexed component."""
-	def faceId(self,*args,**kwargs)->Any:
+	def faceId(self,*args)->Any:
 		"""faceId() -> int
 
 		Returns the current face index."""
-	def faceVertexId(self,*args,**kwargs)->Any:
+	def faceVertexId(self,*args)->Any:
 		"""faceVertexId() -> int
 
 		Returns the relative index of the vertex within the current face. This
 		index together with the faceId can be used for a fast access to get
 		various info stored per vertex (normals, uvs, colors)."""
-	def geomChanged(self,*args,**kwargs)->Any:
+	def geomChanged(self,*args)->Any:
 		"""geomChanged() -> self
 
 		Resets the geom pointer in the MItMeshFaceVertex. If you're using
@@ -12500,66 +11795,66 @@ class MItMeshFaceVertex:
 		if this method is not called. A similar approach must be taken for
 		updating upstream vertex tweaks with an MPlug. After the update, call
 		this method."""
-	def getBinormal(self,*args,**kwargs)->Any:
+	def getBinormal(self,*args)->Any:
 		"""getBinormal(space=MSpace.kObject, uvSet='') -> MVector
 
 		Returns the face vertex binormal associated with the UV set."""
-	def getColor(self,*args,**kwargs)->Any:
+	def getColor(self,*args)->Any:
 		"""getColor(colorSetName='') -> MColor
 
 		Returns a color of the current face vertex."""
-	def getColorIndex(self,*args,**kwargs)->Any:
+	def getColorIndex(self,*args)->Any:
 		"""getColorIndex(colorSetName='') -> int
 
 		Return a color index of the current face vertex."""
-	def getNormal(self,*args,**kwargs)->Any:
+	def getNormal(self,*args)->Any:
 		"""getNormal(space=MSpace.kObject) -> MVector
 
 		Returns the face vertex normal."""
-	def getTangent(self,*args,**kwargs)->Any:
+	def getTangent(self,*args)->Any:
 		"""getTangent(space=MSpace.kObject, uvSet='') -> MVector
 
 		Returns the face vertex tangent associated with the given UV set. The
 		tangent is defined as the surface tangent of the polygon running in
 		the U direction."""
-	def getUV(self,*args,**kwargs)->Any:
+	def getUV(self,*args)->Any:
 		"""getUV(uvSet='') -> (float, float)
 
 		Returns the texture coordinate for the current face vertex."""
-	def getUVIndex(self,*args,**kwargs)->Any:
+	def getUVIndex(self,*args)->Any:
 		"""getUVIndex(uvSet='') -> int
 
 		Returns the index of the texture coordinate for the current face
 		vertex. This index refers to an element of the mesh's texture
 		coordinate array as returned by MFnMesh::getUVs()."""
-	def hasColor(self,*args,**kwargs)->Any:
+	def hasColor(self,*args)->Any:
 		"""hasColor() -> bool
 
 		Returns whether the current face vertex has a color-per-vertex set."""
-	def hasUVs(self,*args,**kwargs)->Any:
+	def hasUVs(self,*args)->Any:
 		"""hasUVs(uvSet='') -> bool
 
 		Returns whether the current face vertex has UVs mapped in the given
 		set."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> bool
 
 		Indicates if all of the face vertices have been traversed."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Advances to the next face vertex in the iteration."""
-	def normalId(self,*args,**kwargs)->Any:
+	def normalId(self,*args)->Any:
 		"""normalId() -> int
 
 		Returns the normal index for the specified vertex. This index refers
 		to an element in the normal array returned by MFnMesh::getNormals().
 		These normals are per-face per-vertex normals."""
-	def position(self,*args,**kwargs)->Any:
+	def position(self,*args)->Any:
 		"""position(space=MSpace.kObject) -> MPoint
 
 		Returns the position of the current face vertex."""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset() -> self
 		reset(mesh) -> self
 		reset(mesh, component=None) -> self
@@ -12575,7 +11870,7 @@ class MItMeshFaceVertex:
 
 		* mesh (MDagPath) - The mesh to iterate over
 		* component (MObject) - The faces of the mesh to iterate over"""
-	def setIndex(self,*args,**kwargs)->Any:
+	def setIndex(self,*args)->Any:
 		"""setIndex(faceId, faceVertexId) -> (oldFaceId, oldFaceVertexId)
 
 		Sets the index of the current face vertex to be accessed. The current
@@ -12587,68 +11882,66 @@ class MItMeshFaceVertex:
 		* faceId (int) - Index of desired face to access.
 		* faceVertexId (int) - Face-relative index of desired vertex to access.
 		* oldFaceId (int) - Index of the face which was current before the change.
-		* oldFaceVertexId (int) - Face-relative index of the vertex which was current before the change.
-		"""
-	def tangentId(self,*args,**kwargs)->Any:
+		* oldFaceVertexId (int) - Face-relative index of the vertex which was current before the change."""
+	def tangentId(self,*args)->Any:
 		"""tangentId() -> int
 
 		Returns the tangent index for the current face vertex. This index
 		refers to an element in the array returned by MFnMesh::getTangents.
 		These tangents are per-face per-vertex."""
-	def updateSurface(self,*args,**kwargs)->Any:
+	def updateSurface(self,*args)->Any:
 		"""updateSurface() -> self
 
 		Tells Maya that mesh has been changed and needs to redraw itself."""
-	def vertexId(self,*args,**kwargs)->Any:
+	def vertexId(self,*args)->Any:
 		"""vertexId() -> int
 
 		Returns the global (as opposed to face-relative) index of the
 		current vertex."""
 class MItMeshPolygon:
 	"""This class is the iterator for polygonal surfaces (meshes)."""
-	def __iter__(self,*args,**kwargs)->Any:
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iternext(self,*args,**kwargs)->Any:
+	def iternext(self,*args)->Any:
 		"""iternext() -> self
 
 		Used in pythonic iteration to move the iterator"""
-	def iter(self,*args,**kwargs)->Any:
+	def iter(self,*args)->Any:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def center(self,*args,**kwargs)->Any:
+	def center(self,*args)->Any:
 		"""center(space=kObject) -> MPoint
 
 		Return the position of the center of the current polygon
 
-		* space (int) - The coordinate system for this operation
-		"""
-	def count(self,*args,**kwargs)->Any:
+		* space (int) - The coordinate system for this operation"""
+	def count(self,*args)->Any:
 		"""count() -> int
 
 		Return the number of polygons in the iteration"""
-	def currentItem(self,*args,**kwargs)->Any:
+	def currentItem(self,*args)->Any:
 		"""currentItem() -> MObject
 
 		Get the current polygon in the iteration as a component.
 
 		Components are used to specify one or more polygons and are usefull in operating on groups of non-contiguous polygons for a surface.
 		Components do not contain any information about the surface that they refer to so an MDagPath must be specified when dealing with components."""
-	def geomChanged(self,*args,**kwargs)->Any:
+	def geomChanged(self,*args)->Any:
 		"""geomChanged() -> self
 
 		Reset the geom pointer in the MItMeshPolygon. This is now being handled automatically inside the iterator, and users should no longer need to call this method directly to sync up the iterator to changes made by MFnMesh"""
-	def getArea(self,*args,**kwargs)->Any:
+	def getArea(self,*args)->Any:
 		"""getArea(space=kObject) -> float
 
 		This method gets the area of the face
 
 		* space (int) - World Space or Object Space"""
-	def getColor(self,*args,**kwargs)->Any:
+	def getColor(self,*args)->Any:
 		"""getColor(colorSetName=None) -> MColor
 		getColor(vertexIndex) -> MColor
 
@@ -12659,42 +11952,42 @@ class MItMeshPolygon:
 		Or the average color of the all the vertices in this face
 
 		* colorSetName (string) - Name of the color set."""
-	def getColorIndex(self,*args,**kwargs)->Any:
+	def getColorIndex(self,*args)->Any:
 		"""getColorIndex(vertexIndex, colorSetName=None) -> int
 
 		This method returns the colorIndex for a vertex of the current face.
 
 		* vertexIndex (int) - Face-relative index of vertex.
 		* colorSetName (string) - Name of the color set."""
-	def getColorIndices(self,*args,**kwargs)->Any:
+	def getColorIndices(self,*args)->Any:
 		"""getColorIndices(colorSetName=None) -> MIntArray
 
 		This method returns the colorIndices for each vertex on the face.
 
 		* colorSetName (string) - Name of the color set."""
-	def getColors(self,*args,**kwargs)->Any:
+	def getColors(self,*args)->Any:
 		"""getColors(colorSetName=None) -> MColorArray
 
 		This method gets the color of the each vertex in the current face.
 
 		* colorSetName (string) - Name of the color set."""
-	def getConnectedEdges(self,*args,**kwargs)->Any:
+	def getConnectedEdges(self,*args)->Any:
 		"""getConnectedEdges() -> MIntArray
 
 		This method gets the indices of the edges connected to the vertices of the current face, but DOES not include the edges contained in the current face"""
-	def getConnectedFaces(self,*args,**kwargs)->Any:
+	def getConnectedFaces(self,*args)->Any:
 		"""getConnectedFaces() -> MIntArray
 
 		This method gets the indices of the faces connected to the current face."""
-	def getConnectedVertices(self,*args,**kwargs)->Any:
+	def getConnectedVertices(self,*args)->Any:
 		"""getConnectedVertices() -> MIntArray
 
 		This method gets the object-relative indices of the vertices surrounding the vertices of the current face, but does not include the vertices of the current face"""
-	def getEdges(self,*args,**kwargs)->Any:
+	def getEdges(self,*args)->Any:
 		"""getEdges() -> MIntArray
 
 		This method gets the indices of the edges contained in the current face."""
-	def getNormal(self,*args,**kwargs)->Any:
+	def getNormal(self,*args)->Any:
 		"""getNormal(space=kObject) -> MVector
 		getNormal(vertexIndex, [space=]kObject) -> MVector
 
@@ -12706,13 +11999,13 @@ class MItMeshPolygon:
 
 		* index (int) - face-relative vertex index of the vertex whose normal to retrieve
 		* space (int) - The transformation space. Defaults to kObject, the keyword 'space' is optional as well."""
-	def getNormals(self,*args,**kwargs)->Any:
+	def getNormals(self,*args)->Any:
 		"""getNormals(space=kObject) -> MVectorArray
 
 		Returns the normals for all vertices in the current face
 
 		* space (int) - The transformation space"""
-	def getPointAtUV(self,*args,**kwargs)->Any:
+	def getPointAtUV(self,*args)->Any:
 		"""getPointAtUV(uvPoint, space=kObject, uvSet=None, tolerance=0) -> MPoint
 
 		Return the position of the point at the given UV value in the current polygon.
@@ -12721,39 +12014,39 @@ class MItMeshPolygon:
 		* space (int) - The coordinate system for this operation
 		* uvSet (string) - UV set to work with
 		* tolerance (float) - tolerance value to compare float data type"""
-	def getPoints(self,*args,**kwargs)->Any:
+	def getPoints(self,*args)->Any:
 		"""getPoints(space=kObject) -> MPointArray
 
 		Retrieves the positions of the vertices on the current face/polygon that the iterator is pointing to. Vertex positions will be inserted into the given array and will be indexed using face-relative vertex IDs (ie. ordered from 0 to (vertexCount of the face) - 1), which should not be confused with the vertexIDs of each vertex in relation to the entire mesh object.
 
 		* space (int) - The coordinate system for this operation"""
-	def getTriangle(self,*args,**kwargs)->Any:
+	def getTriangle(self,*args)->Any:
 		"""getTriangle(localTriIndex, space=kObject) -> [MPointArray, MIntArray]
 
 		Get the vertices and vertex positions of the given triangle in the current face's triangulation.
 
 		* localTriIndex (int) - Local index of the desired triangle in this face
 		* space (int) - World Space or Object Space"""
-	def getTriangles(self,*args,**kwargs)->Any:
+	def getTriangles(self,*args)->Any:
 		"""getTriangles(space=kObject) -> [MPointArray, MIntArray]
 
 		Get the vertices and vertex positions of all the triangles in the current face's triangulation
 
 		* space (int) - World Space or Object Space"""
-	def getUV(self,*args,**kwargs)->Any:
+	def getUV(self,*args)->Any:
 		"""getUV(vertexId, uvSet=None) -> [float, float]
 
 		Return the texture coordinate for the given vertex.
 
 		* vertex (int) - The face-relative vertex index to get UV for
 		* uvSet (string) - UV set to work with"""
-	def getUVArea(self,*args,**kwargs)->Any:
+	def getUVArea(self,*args)->Any:
 		"""getUVArea(uvSet=None) -> float
 
 		This method gets the UV area of the face
 
 		* uvSet (string) - UV set to work with"""
-	def getUVAtPoint(self,*args,**kwargs)->Any:
+	def getUVAtPoint(self,*args)->Any:
 		"""getUVAtPoint(pt, space=kObject, uvSet=None) -> [float, float]
 
 		Find the point closest to the given point in the current polygon, and return the UV value at that point.
@@ -12761,7 +12054,7 @@ class MItMeshPolygon:
 		* pt (MPoint) - The point to try to get UV for
 		* space (int) - The coordinate system for this operation
 		* uvSet (string) - UV set to work with"""
-	def getUVIndex(self,*args,**kwargs)->Any:
+	def getUVIndex(self,*args)->Any:
 		"""getUVIndex(vertex, uvSet=None) -> int
 
 		Returns the index of the texture coordinate for the given vertex.
@@ -12769,140 +12062,140 @@ class MItMeshPolygon:
 
 		* vertex (int) - The face-relative vertex index of the current polygon
 		* uvSet (string) - UV set to work with"""
-	def getUVIndexAndValue(self,*args,**kwargs)->Any:
+	def getUVIndexAndValue(self,*args)->Any:
 		"""getUVIndexAndValue(vertex, uvSet=None) -> [int, float, float]
 
 		Return the index and value of the texture coordinate for the given vertex. This index refers to an element of the texture coordinate array for the polygonal object returned by MFnMesh.getUVs.
 
 		* vertex (int) - The face-relative vertex index of the current polygon
 		* uvSet (string) - UV set to work with"""
-	def getUVSetNames(self,*args,**kwargs)->Any:
+	def getUVSetNames(self,*args)->Any:
 		"""getUVSetNames() -> list of strings
 
 		This method is used to find the UV set names mapped to the current face"""
-	def getUVs(self,*args,**kwargs)->Any:
+	def getUVs(self,*args)->Any:
 		"""getUVs(uvSet=None) -> [MFloatArray, MFloatArray]
 
 		Return the all the texture coordinates for the vertices of this face (in local vertex order).
 
 		* uvSet (string) - UV set to work with"""
-	def getVertices(self,*args,**kwargs)->Any:
+	def getVertices(self,*args)->Any:
 		"""getVertices() -> MIntArray
 
 		This method gets the indices of the vertices of the current face"""
-	def hasColor(self,*args,**kwargs)->Any:
+	def hasColor(self,*args)->Any:
 		"""hasColor() -> bool
 		hasColor(localVertexIndex) -> bool
 
 		This method determines whether the current face has color-per-vertex set for any or the given vertex
 
 		* localVertexIndex (int) - face-relative vertex index to check for color on"""
-	def hasUVs(self,*args,**kwargs)->Any:
+	def hasUVs(self,*args)->Any:
 		"""hasUVs(uvSet=None) -> bool
 
 		Tests whether this face has UV's mapped or not (either all the vertices for a face should have UV's, or none of them do, so the UV count for a face is either 0, or equal to the number of vertices).
 
 		* uvSet (string) - UV set to work with"""
-	def hasValidTriangulation(self,*args,**kwargs)->Any:
+	def hasValidTriangulation(self,*args)->Any:
 		"""hasValidTriangulation() -> bool
 
 		This method checks if the face has a valid triangulation. If it doesn't, then the face was bad geometry: it may gave degenerate points or cross over itself."""
-	def index(self,*args,**kwargs)->Any:
+	def index(self,*args)->Any:
 		"""index() -> int
 
 		Returns the index of the current polygon"""
-	def isConnectedToEdge(self,*args,**kwargs)->Any:
+	def isConnectedToEdge(self,*args)->Any:
 		"""isConnectedToEdge(index) -> bool
 
 		This method determines whether the given face is adjacent to the current face
 
 		* index (int) - Index of the face to be tested for"""
-	def isConnectedToFace(self,*args,**kwargs)->Any:
+	def isConnectedToFace(self,*args)->Any:
 		"""isConnectedToFace(index) -> bool
 
 		This method determines whether the given face is adjacent to the current face
 
 		* index (int) - Index of the face to be tested for"""
-	def isConnectedToVertex(self,*args,**kwargs)->Any:
+	def isConnectedToVertex(self,*args)->Any:
 		"""isConnectedToVertex(index) -> bool
 
 		This method determines whether the given vertex shares an edge with a vertex in the current face
 
 		* index (int) - Index of the face to be tested for"""
-	def isConvex(self,*args,**kwargs)->Any:
+	def isConvex(self,*args)->Any:
 		"""isConvex() -> bool
 
 		This method checks if the face is convex."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> bool
 
 		Indicates if all of the polygons have been traversed yet."""
-	def isHoled(self,*args,**kwargs)->Any:
+	def isHoled(self,*args)->Any:
 		"""isHoled() -> bool
 
 		This method checks if the face has any holes."""
-	def isLamina(self,*args,**kwargs)->Any:
+	def isLamina(self,*args)->Any:
 		"""isLamina() -> bool
 
 		This method checks if the face is a lamina (the face is folded over onto itself)."""
-	def isPlanar(self,*args,**kwargs)->Any:
+	def isPlanar(self,*args)->Any:
 		"""isPlanar() -> bool
 
 		This method checks if the face is planar"""
-	def isStarlike(self,*args,**kwargs)->Any:
+	def isStarlike(self,*args)->Any:
 		"""isStarlike() -> bool
 
 		This method checks if the face is starlike. That is, a line from the centre to any vertex lies entirely within the face."""
-	def isUVReversed(self,*args,**kwargs)->Any:
+	def isUVReversed(self,*args)->Any:
 		"""isUVReversed(faceId) -> bool
 
 		Returns True if the texture coordinates (uv's) for the face are
 		reversed (clockwise), False if they are not reversed (counter clockwise)."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Advance to the next polygon in the iteration."""
-	def normalIndex(self,*args,**kwargs)->Any:
+	def normalIndex(self,*args)->Any:
 		"""normalIndex(vertex) -> int
 
 		Returns the normal index for the specified vertex.
 		This index refers to an element in the normal array returned by MFnMesh.getNormals.  These normals are per-polygon per-vertex normals. See the MFnMesh description for more information on normals.
 
 		* localVertexIndex (int) - The face-relative index of the vertex to examine for the current polygon"""
-	def numColors(self,*args,**kwargs)->Any:
+	def numColors(self,*args)->Any:
 		"""numColors(colorSetName=None) -> int
 
 		This method checks for the number of colors on vertices in this face
 
 		* colorSetName (string) - Name of the color set."""
-	def numConnectedEdges(self,*args,**kwargs)->Any:
+	def numConnectedEdges(self,*args)->Any:
 		"""numConnectedEdges() -> int
 
 		This method checks for the number of connected edges on the vertices of this face"""
-	def numConnectedFaces(self,*args,**kwargs)->Any:
+	def numConnectedFaces(self,*args)->Any:
 		"""numConnectedFaces() -> int
 
 		This method checks for the number of connected faces"""
-	def numTriangles(self,*args,**kwargs)->Any:
+	def numTriangles(self,*args)->Any:
 		"""numTriangles() -> int
 
 		This Method checks for the number of triangles in this face in the current triangulation"""
-	def onBoundary(self,*args,**kwargs)->Any:
+	def onBoundary(self,*args)->Any:
 		"""onBoundary() -> bool
 
 		This method determines whether the current face is on a boundary"""
-	def point(self,*args,**kwargs)->Any:
+	def point(self,*args)->Any:
 		"""point(index, space=kObject) -> MPoint
 
 		Return the position of the vertex at index in the current polygon.
 
 		* index (int) - The face-relative index of the vertex in the current polygon
 		* space (int) - The coordinate system for this operation"""
-	def polygonVertexCount(self,*args,**kwargs)->Any:
+	def polygonVertexCount(self,*args)->Any:
 		"""polygonVertexCount() -> int
 
 		Return the number of vertices for the current polygon"""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset() -> self
 		reset(polyObject) -> self
 		reset(polyObject, component=None) -> self
@@ -12918,7 +12211,7 @@ class MItMeshPolygon:
 
 		* polyObject (MDagPath) - The surface (mesh) to iterate over
 		* component (MObject) - The polygons (faces) of the polyObject to iterate over"""
-	def setIndex(self,*args,**kwargs)->Any:
+	def setIndex(self,*args)->Any:
 		"""setIndex(index) -> int
 
 		This method sets the index of the current face to be accessed.
@@ -12926,7 +12219,7 @@ class MItMeshPolygon:
 		Returns the index of the current face in the iteration
 
 		* index (int) - The index of desired face to access."""
-	def setPoint(self,*args,**kwargs)->Any:
+	def setPoint(self,*args)->Any:
 		"""setPoint(point, index, space=kObject) -> self
 
 		Set the vertex at the given index in the current polygon.
@@ -12934,14 +12227,14 @@ class MItMeshPolygon:
 		* point (MPoint) - The new position for the vertex
 		* index (int) - The face-relative index of the vertex in the current polygon
 		* space (int) - The coordinate system for this operation"""
-	def setPoints(self,*args,**kwargs)->Any:
+	def setPoints(self,*args)->Any:
 		"""setPoints(pointArray, space=kObject) -> self
 
 		Sets new locations for vertices of the current polygon that the iterator is pointing to.
 
 		* pointArray (MPointArray) - The new positions for the vertices.
 		* space (int) - The coordinate system for this operation."""
-	def setUV(self,*args,**kwargs)->Any:
+	def setUV(self,*args)->Any:
 		"""setUV(vertexId, uvPoint, uvSet=None) -> self
 
 		Modify the UV value for the given vertex in the current face.
@@ -12950,7 +12243,7 @@ class MItMeshPolygon:
 		* vertexId (int) - face-relative index of the vertex to set UV for.
 		* uvPoint ([float, float]) - The UV values to set it to
 		* uvSet (string) - UV set to work with"""
-	def setUVs(self,*args,**kwargs)->Any:
+	def setUVs(self,*args)->Any:
 		"""setUVs(uArray, vArray, uvSet=None) -> self
 
 		Modify the UV value for all vertices in the current face.
@@ -12959,7 +12252,7 @@ class MItMeshPolygon:
 		* uArray (MFloatArray) - All the U values - in local face order
 		* vArray (MFloatArray) - The corresponding V values
 		* uvSet (string) - UV set to work with"""
-	def tangentIndex(self,*args,**kwargs)->Any:
+	def tangentIndex(self,*args)->Any:
 		"""tangentIndex(localVertexIndex) -> int
 
 		Returns the tangent (or binormal) index for the specified vertex.
@@ -12967,22 +12260,22 @@ class MItMeshPolygon:
 		See the MFnMesh description for more information on tangents and binormals.
 
 		* localVertexIndex(int) - The face-relative index of the vertex to examine for the current polygon"""
-	def updateSurface(self,*args,**kwargs)->Any:
+	def updateSurface(self,*args)->Any:
 		"""updateSurface() -> self
 
 		Signal that this polygonal surface has changed and needs to redraw itself."""
-	def vertexIndex(self,*args,**kwargs)->Any:
+	def vertexIndex(self,*args)->Any:
 		"""vertexIndex(index) -> int
 
 		Returns the object-relative index of the specified vertex of the current polygon.
 		The index returned may be used to refer to an element in the vertex list returned by MFnMesh.getPoints.
 
 		* index (int) - The face-relative index of the vertex in the polygon"""
-	def zeroArea(self,*args,**kwargs)->Any:
+	def zeroArea(self,*args)->Any:
 		"""zeroArea() -> bool
 
 		This method checks if its a zero area face"""
-	def zeroUVArea(self,*args,**kwargs)->Any:
+	def zeroUVArea(self,*args)->Any:
 		"""zeroUVArea(uvSet=None) -> bool
 
 		This method checks if the UV area of the face is zero
@@ -12990,32 +12283,32 @@ class MItMeshPolygon:
 		* uvSet (string) - UV set to work with"""
 class MItMeshVertex:
 	"""This class is the iterator for polygonal surfaces (meshes)."""
-	def __iter__(self,*args,**kwargs)->Any:
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iternext(self,*args,**kwargs)->Any:
+	def iternext(self,*args)->Any:
 		"""iternext() -> self
 
 		Used in pythonic iteration to move the iterator"""
-	def iter(self,*args,**kwargs)->Any:
+	def iter(self,*args)->Any:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def count(self,*args,**kwargs)->Any:
+	def count(self,*args)->Any:
 		"""count() -> int
 
 		Return the number of vertices in the iteration"""
-	def currentItem(self,*args,**kwargs)->Any:
+	def currentItem(self,*args)->Any:
 		"""currentItem() -> MObject
 
 		Get the current vertex in the iteration as a component.
 
 		Components are used to specify one or more vertices and are usefull in operating on groups of non-contiguous vertices for a surface.
 		Components do not contain any information about the surface that they refer to so an MDagPath must be specified when dealing with components."""
-	def geomChanged(self,*args,**kwargs)->Any:
+	def geomChanged(self,*args)->Any:
 		"""geomChanged() -> self
 
 		Reset the geom pointer in the MItMeshVertex. If you're using MFnMesh to
@@ -13024,19 +12317,19 @@ class MItMeshVertex:
 		geometry is up to date. A crash may result if this method is not called.
 		A similar approach must be taken for updating upstream vertex tweaks
 		with an MPlug. After the update, call this method."""
-	def getConnectedEdges(self,*args,**kwargs)->Any:
+	def getConnectedEdges(self,*args)->Any:
 		"""getConnectedEdges() -> MIntArray
 
 		This method gets the indices of the edges contained in the current vertex."""
-	def getConnectedFaces(self,*args,**kwargs)->Any:
+	def getConnectedFaces(self,*args)->Any:
 		"""getConnectedFaces() -> MIntArray
 
 		This method gets the indices of the faces connected to the current vertex."""
-	def getConnectedVertices(self,*args,**kwargs)->Any:
+	def getConnectedVertices(self,*args)->Any:
 		"""getConnectedVertices() -> MIntArray
 
 		This method gets the indices of the vertices surrounding the current vertex."""
-	def getNormal(self,*args,**kwargs)->Any:
+	def getNormal(self,*args)->Any:
 		"""getNormal(space=kObject) -> MVector
 		getNormal(faceIndex, space=kObject) -> MVector
 
@@ -13048,18 +12341,18 @@ class MItMeshVertex:
 
 		* faceIndex (int) - face index to get normal for
 		* space (int) - The transformation space"""
-	def getNormals(self,*args,**kwargs)->Any:
+	def getNormals(self,*args)->Any:
 		"""getNormals(space=kObject) -> MVectorArray
 
 		Return the normals of the current vertex for all faces
 
 		* space (int) - The transformation space"""
-	def getNormalIndices(self,*args,**kwargs)->Any:
+	def getNormalIndices(self,*args)->Any:
 		"""getNormalIndices() -> MIntArray
 
 		This method returns the normal indices of the face/vertex associated
 		with the current vertex."""
-	def getUV(self,*args,**kwargs)->Any:
+	def getUV(self,*args)->Any:
 		"""getUV(uvSet=None) -> [float, float]getUV(faceId, uvSet=None) -> [float, float]
 
 		Get the shared UV value at this vertex.
@@ -13070,21 +12363,21 @@ class MItMeshVertex:
 
 		* faceId (int) - Index of the required face
 		* uvSet (string) - Name of the uv set to work with"""
-	def getUVIndices(self,*args,**kwargs)->Any:
+	def getUVIndices(self,*args)->Any:
 		"""getUVIndices(uvSet=None) -> MIntArray
 
 		This method returns the uv indices into the normal array see MFnMesh::getUVs()
 		of the current vertex.
 
 		* uvSet (string) - Name of the uv set."""
-	def getUVs(self,*args,**kwargs)->Any:
+	def getUVs(self,*args)->Any:
 		"""getUVs(uvSet=None) -> [MFloatArray, MFloatArray, MIntArray]
 
 		Get the UV values for all mapped faces at the current vertex.
 		If at least one face was mapped the method will succeed.
 
 		* uvSet (string) - Name of the uv set to work with"""
-	def index(self,*args,**kwargs)->Any:
+	def index(self,*args)->Any:
 		"""index() -> int
 
 		Returns the index of the current vertex in the vertex list for this
@@ -13092,19 +12385,19 @@ class MItMeshVertex:
 		Polygonal objects contain a list of vertices. Faces and edges are
 		specified as indicies from this list, in this way vertices can
 		be shared amoung faces and edges."""
-	def connectedToEdge(self,*args,**kwargs)->Any:
+	def connectedToEdge(self,*args)->Any:
 		"""connectedToEdge(index) -> bool
 
 		This method determines whether the given edge contains the current vertex
 
 		* index (int) - Index of edge to check."""
-	def connectedToFace(self,*args,**kwargs)->Any:
+	def connectedToFace(self,*args)->Any:
 		"""connectedToFace(index) -> bool
 
 		This method determines whether the given face contains the current vertex
 
 		* index (int) - Index of face to check."""
-	def getColor(self,*args,**kwargs)->Any:
+	def getColor(self,*args)->Any:
 		"""getColor(colorSetName=None) -> MColor
 		getColor(faceIndex, colorSetName=None) -> MColor
 
@@ -13115,14 +12408,14 @@ class MItMeshVertex:
 		This method gets the color of the current vertex in the specified face
 
 		* index (int) - The face to get the color for this vertex for* colorSetName (string) - Name of the color set."""
-	def getColorIndices(self,*args,**kwargs)->Any:
+	def getColorIndices(self,*args)->Any:
 		"""getColorIndices(colorSetName=None) -> MIntArray
 
 		This method returns the colorIndices into the color array see MFnMesh::getColors()
 		of the current vertex.
 
 		* colorSetName (string) - Name of the color set."""
-	def getColors(self,*args,**kwargs)->Any:
+	def getColors(self,*args)->Any:
 		"""getColors(colorSetName=None) -> MColorArray
 
 		This method gets the colors of the current vertex for each face it
@@ -13132,13 +12425,13 @@ class MItMeshVertex:
 		been set will be (0, 0, 0, 1).
 
 		* colorSetName (string) - Name of the color set."""
-	def getOppositeVertex(self,*args,**kwargs)->Any:
+	def getOppositeVertex(self,*args)->Any:
 		"""getOppositeVertex(edgeId) -> int
 
 		This method gets the other vertex of the given edge
 
 		* edgeId (int) - The edge to get the other vertex for"""
-	def hasColor(self,*args,**kwargs)->Any:
+	def hasColor(self,*args)->Any:
 		"""hasColor() -> bool
 		hasColor(index) -> bool
 
@@ -13146,42 +12439,41 @@ class MItMeshVertex:
 		for one or more faces.
 
 		* index (int) - Index of face to check"""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> bool
 
 		Indicates if all of the vertices have been traversed yet."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Advance to the next edge in the iteration."""
-	def numConnectedEdges(self,*args,**kwargs)->Any:
+	def numConnectedEdges(self,*args)->Any:
 		"""numConnectedEdges() -> int
 
 		This Method checks for the number of connected Edges on this vertex"""
-	def numConnectedFaces(self,*args,**kwargs)->Any:
+	def numConnectedFaces(self,*args)->Any:
 		"""numConnectedFaces() -> int
 
 		This Method checks for the number of Connected Faces"""
-	def numUVs(self,*args,**kwargs)->Any:
+	def numUVs(self,*args)->Any:
 		"""numUVs(uvSet=None) -> int
 
 		This method returns the number of unique UVs mapped on this vertex
 
 		* uvSet (string) - Name of the uv set to work with"""
-	def onBoundary(self,*args,**kwargs)->Any:
+	def onBoundary(self,*args)->Any:
 		"""onBoundary() -> bool
 
 		This method determines whether the current vertex is on a Boundary"""
-	def position(self,*args,**kwargs)->Any:
+	def position(self,*args)->Any:
 		"""position(space=kObject) -> MPoint
 
 		Return the position of the current vertex in the specified space.
 		Object space ignores all transformations for the polygon, world space
 		includes all such transformations.
 
-		* space (int) - The  transformation space
-		"""
-	def reset(self,*args,**kwargs)->Any:
+		* space (int) - The  transformation space"""
+	def reset(self,*args)->Any:
 		"""reset() -> self
 		reset(polyObject) -> self
 		reset(polyObject, component=None) -> self
@@ -13197,21 +12489,21 @@ class MItMeshVertex:
 
 		* polyObject (MDagPath) - The surface (mesh) to iterate over
 		* component (MObject) - The vertices of the polyObject to iterate over"""
-	def setIndex(self,*args,**kwargs)->Any:
+	def setIndex(self,*args)->Any:
 		"""setIndex(index) -> int
 
 		This method sets the index of the current vertex to be accessed.
 		The current vertex will no longer be in sync with any previous iteration.
 
 		* index (int) - The index of desired vertex to access."""
-	def setPosition(self,*args,**kwargs)->Any:
+	def setPosition(self,*args)->Any:
 		"""setPosition(point, space=kObject) -> self
 
 		Set the position of the current vertex in the given space.
 
 		* point (MPoint) - The new position for the current vertex
 		* space (int) - The Transformation space"""
-	def setUV(self,*args,**kwargs)->Any:
+	def setUV(self,*args)->Any:
 		"""setUV(uvPoint, uvSet=None) -> selfsetUV(faceId, uvPoint, uvSet=None) -> self
 
 		Set the shared UV value at this vertex
@@ -13224,7 +12516,7 @@ class MItMeshVertex:
 		* faceId (int) - Index of required face
 		* uvPoint ([float, float]) - The UV values to set
 		* uvSet (string) - Name of the UV set to work with"""
-	def setUVs(self,*args,**kwargs)->Any:
+	def setUVs(self,*args)->Any:
 		"""setUVs(uArray, vArray, faceIds, uvSet=None) -> self
 
 		Set the UV value for the specified faces at the current vertex.
@@ -13236,7 +12528,7 @@ class MItMeshVertex:
 		* vArray (MFloatArray) - The corresponding V values
 		* faceIds (MIntArray) - The corresponding face Ids
 		* uvSet (string) - UV set to work with"""
-	def translateBy(self,*args,**kwargs)->Any:
+	def translateBy(self,*args)->Any:
 		"""translateBy(vector, space=kObject) -> self
 
 		Translate the current vertex by the amount specified
@@ -13244,7 +12536,7 @@ class MItMeshVertex:
 
 		* vector (MVector) - The amount of translation
 		* space (int) - The Transformation space"""
-	def updateSurface(self,*args,**kwargs)->Any:
+	def updateSurface(self,*args)->Any:
 		"""updateSurface() -> self
 
 		Signal that this polygonal surface has changed and needs to redraw itself."""
@@ -13255,50 +12547,50 @@ class MItSelectionList:
 	kAnimSelectionItem:int=1
 	kDNselectionItem:int=2
 	kPlugSelectionItem:int=3
-	def __iter__(self,*args,**kwargs)->Any:
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iternext(self,*args,**kwargs)->Any:
+	def iternext(self,*args)->Any:
 		"""iternext() -> self
 
 		Used in pythonic iteration to move the iterator"""
-	def iter(self,*args,**kwargs)->Any:
+	def iter(self,*args)->Any:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def getDagPath(self,*args,**kwargs)->Any:
+	def getDagPath(self,*args)->Any:
 		"""getDagPath() -> MDagPath
 
 		This method retrieves the dag path of the current selection item."""
-	def getComponent(self,*args,**kwargs)->Any:
+	def getComponent(self,*args)->Any:
 		"""getComponent() -> (MDagPath, MObject)
 
 		This method retrieves the dag path and the component of the current selection item."""
-	def getDependNode(self,*args,**kwargs)->Any:
+	def getDependNode(self,*args)->Any:
 		"""getDependNode() -> MObject
 
 		This method retrieves the dependency node of the current selection itemRaises kFailure if there is no dependency node associated with the current item"""
-	def getPlug(self,*args,**kwargs)->Any:
+	def getPlug(self,*args)->Any:
 		"""getPlug() -> MPlug
 
 		This method retrieves the plug of the current selection item."""
-	def getStrings(self,*args,**kwargs)->Any:
+	def getStrings(self,*args)->Any:
 		"""getStrings() -> list of strings
 
 		Get the string representation of the current item in the selection list.
 		It is possible that it will require more than one string to represent the item (the item may contain groups of CVs for example)"""
-	def hasComponents(self,*args,**kwargs)->Any:
+	def hasComponents(self,*args)->Any:
 		"""hasComponents() -> bool
 
 		Returns whether or not the current selection item has components."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> bool
 
 		Specifies whether or not there is anything more to iterator over."""
-	def itemType(self,*args,**kwargs)->Any:
+	def itemType(self,*args)->Any:
 		"""itemType() -> int
 
 		Returns the current selection item type.
@@ -13306,85 +12598,85 @@ class MItSelectionList:
 		  kDagSelectionItem    selection item is in the DAG
 		  kAnimSelectionItem   selection item is a keyset
 		  kDNselectionItem     selection item is a dependency node"""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Advance to the next item. If components are selected then advance to next component.
 
 		If a filter is specified then the next item will be one that matches the filter."""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset() -> self
 
 		Reset the iterator.
 		If a filter has been specified then the current item will be the first selected item that matches the filter."""
-	def setFilter(self,*args,**kwargs)->Any:
+	def setFilter(self,*args)->Any:
 		"""setFilter(filter) -> self
 
 		Apply a filter to the iteration.
 		Selection items not matching the filter type will be excluded from the iteration."""
 class MItSurfaceCV:
 	""" NURBS surface CV iterator."""
-	def __iter__(self,*args,**kwargs)->Any:
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def iternext(self,*args,**kwargs)->Any:
+	def iternext(self,*args)->Any:
 		"""iternext() -> self
 
 		Used in pythonic iteration to move the iterator"""
-	def iter(self,*args,**kwargs)->Any:
+	def iter(self,*args)->Any:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def hasHistoryOnCreate(self,*args,**kwargs)->Any:
+	def hasHistoryOnCreate(self,*args)->Any:
 		"""hasHistoryOnCreate() -> bool
 
 		This method determines if the shape was created with history.
 
 		If the object that this iterator is attached to is not a shape then this method will raise."""
-	def currentItem(self,*args,**kwargs)->Any:
+	def currentItem(self,*args)->Any:
 		"""currentItem() -> MObject
 
 		Get the current CV in the iteration as a component.
 
 		Components are used to specify one or more CVs and are useful in operating on groups of non-contiguous CVs for a curve or surface.
 		Components do not contain any information about the surface that they refer to so an MDagPath must be specified when dealing with components."""
-	def index(self,*args,**kwargs)->Any:
+	def index(self,*args)->Any:
 		"""index() -> int
 
 		Get the index of the current CV as it appears in CV array for this surface."""
-	def uvIndices(self,*args,**kwargs)->Any:
+	def uvIndices(self,*args)->Any:
 		"""uvIndices() -> (indexU, indexV)
 
 		Get the u and v index of the current CV."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> bool
 
 		Returns True if the iteration is finished, i.e. there are no more CVs to iterate on."""
-	def isRowDone(self,*args,**kwargs)->Any:
+	def isRowDone(self,*args)->Any:
 		"""isRowDone() -> bool
 
 		Returns True if the current row has no more CVs to iterate over.
 		The row can be in the U or V direction depending on what value of useURows has been set in the constructor."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Advance to the next CV in the iteration.
 		If the iterator is already at the last CV then this method has no effect. Use isDone() to determine if the iterator is at the last CV."""
-	def nextRow(self,*args,**kwargs)->Any:
+	def nextRow(self,*args)->Any:
 		"""nextRow() -> self
 
 		Advance to the next row in the iteration.
 		The row can be in the U or V direction depending on what value of useURows has been set in the constructor."""
-	def position(self,*args,**kwargs)->Any:
+	def position(self,*args)->Any:
 		"""position(space=kObject) -> MPoint
 
 		Returns the position of the current CV in the iteration in the specified space.
 
 		* space (int) - The coordinate space in which the CV is set"""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset() -> self
 		reset(surface, useURows=True) -> self
 		reset(surface, component, useURows=True) -> self
@@ -13403,21 +12695,21 @@ class MItSurfaceCV:
 		* surface (MDagPath) - The surface for the iteration
 		* component (MObject) - A group of CVs to be iterated on
 		* useURows (bool) - If True then the iterator will iterate in the U direction, otherwise it will be in the V direction."""
-	def setPosition(self,*args,**kwargs)->Any:
+	def setPosition(self,*args)->Any:
 		"""setPosition(point, space=kObject) -> self
 
 		Set the position of the current CV in the iteration to the specified point.
 
 		* point (MPoint) - The new position for the current CV in the iteration
 		* space (int) - The coordinate space in which the CV is set"""
-	def translateBy(self,*args,**kwargs)->Any:
+	def translateBy(self,*args)->Any:
 		"""translateBy(vector, space=kObject) -> self
 
 		Move the current CV in the iteration by the sepcified vector.
 
 		* vector (MVector) - The translation vector
 		* space (int) - The coordinate space in which the CV is set"""
-	def updateSurface(self,*args,**kwargs)->Any:
+	def updateSurface(self,*args)->Any:
 		"""updateSurface() -> self
 
 		This method is used to signal the surface that it has been changed and needs to redraw itself.
@@ -13433,10 +12725,30 @@ class MIteratorType:
 
 	Also, the class has functionalities for specifying the type of object the
 	iterator will be reset to. This could be an MObject, an MPlug or an MDagPath."""
+	@property
+	def filterType(self)->Any:
+		"""Filter type (MFn.Type)."""
+	@filterType.setter
+	def filterType(self,value:Any)->None:...
+	@property
+	def filterList(self)->Any:
+		"""Filter list (MIntArray containing MFn.Type)."""
+	@filterList.setter
+	def filterList(self,value:Any)->None:...
+	@property
+	def objectType(self)->Any:
+		"""Object type (MIteratorType.objFilterType)."""
+	@objectType.setter
+	def objectType(self,value:Any)->None:...
+	@property
+	def filterListEnabled(self)->Any:
+		"""Whether the we are using a single filter on the iterator or a filter list (Boolean)."""
+	@filterListEnabled.setter
+	def filterListEnabled(self,value:Any)->None:...
 	kMObject:int=0
 	kMDagPathObject:int=1
 	kMPlugObject:int=2
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 class MLockMessage(MMessage):
 	"""Class used to register callbacks for model related messages."""
@@ -13469,176 +12781,377 @@ class MLockMessage(MMessage):
 	kUnlockAttr:int=8
 	kLockAttr:int=9
 	kLast:int=10
-	def setNodeLockDAGQueryCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def setNodeLockDAGQueryCallback(*args)->Any:
+		"""setNodeLockDAGQueryCallback(dagPath, function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This methods registers a callback that is invoked in any situation
+		involving a locking condition on DAG level changes.  When called,
+		the API user can make a decision on how to handle the given locking
+		situation. The programmer can either accept the default action, or
+		they can deny the default action. The decision is returned through a
+		decision variable which is passed to the callback function.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		The callback function takes the following parameters:
+		 * dagPath - The DAG path that the event occurred on.
+		 * otherPath - The other path involved, e.g. the new parent.
+		 * clientData - User defined data passed to the callback function.
+		 * eventType - Description of the event.
+		And return True to accept the default behavior and False to
+		reject it.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 The meanings of the dagPath and otherPath parameters for each
+		eventType, and default actions associated with those event types, are
+		as follows:
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		kGroup
+		 * dagPath - Path of the node to be grouped.
+		 * otherPath - Path of the group node.
+		 * default actions - If dagPath
+		   is locked then the default action is to not allow the grouping.
+		   If dagPath is unlocked then dagPath
+		   can be grouped with otherPath.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setNodeLockQueryCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		kUnGroup
+		 * dagPath - Path of the node attempted to ungroup.
+		 * otherPath - Path of the group node.
+		 * default actions - If dagPath is locked then
+		   the default action is to not allow the ungrouping. If dagPath
+		   is unlocked then dagPath can be ungrouped from otherPath.
 
-		Convert a function to be a static method.
+		kReparent
+		 * dagPath - Path of the node which is being reparented.
+		 * otherPath - Path of the new parent, if any. When
+		   reparenting to the world, otherPath will be invalid.
+		 * default actions - If dagPath is locked then
+		   the default action is to not allow the reparenting. If dagPath
+		   is unlocked then dagPath can be parented to otherPath.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		kChildReorder
+		 * dagPath - Path of the child node to be reordered.
+		 * otherPath - Path of the parent node.
+		 * default actions - If dagPath is locked then
+		   the default action is to not allow the reordering. If dagPath
+		   is unlocked then dagPath can be reordered on otherPath.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		kCreateNodeInstance
+		 * dagPath - Path of the node which is being instanced.
+		 * otherPath - Invalid Path.
+		 * default actions - If dagPath is locked then
+		   the default action is to not allow the instance to be created.
+		   If dagPath is unlocked then dagPath can be instanced.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		kCreateChildInstance
+		 * dagPath - Path of the node whose child is being
+		   instanced.
+		 * otherPath - Path of the child node.
+		 * default actions - If dagPath is locked then
+		   the default action is to not allow the instance to be created.
+		   If dagPath is unlocked then dagPath can be instanced.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setPlugLockQueryCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * dagPath (MDagPath) - The path to attach the callback.
+		 * function - the callback function (see below for the description)
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def setNodeLockQueryCallback(*args)->Any:
+		"""setNodeLockQueryCallback(node, function, clientData=None) -> id
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		This methods registers a callback that is invoked in any locking
+		condition on node properties, e.g. name, lock status, etc. When
+		called, the API user can make a decision on how to handle the given
+		locking situation. The programmer can either accept the default
+		action, or they can deny the default action. The decision is returned
+		through a decision variable which is passed to the callback function.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		The callback function takes the following parameters:
+		   * node - The node that triggered the callback.
+		   * aux - Any auxiliary data that may be needed, e.g.
+		     the attribute about to be added.
+		   * clientData - User defined data passed to the
+		     callback function.
+		   * eventType - Description of the event.
+		And return True to accept the default behavior and False to
+		reject it.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		The meanings of the node and aux parameters for each
+		eventType, and default actions associated with those event types, are
+		as follows:
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		kRename
+		   * node - The node that the user is attempting to rename.
+		   * aux - MObject.kNullObj
+		   * default actions - If node is locked then the
+		     default action is to not allow the rename. Otherwise,
+		     if node is unlocked then node can be renamed.
+
+		kDelete   * node - The node that the user is attempting to delete.
+		   * aux - MObject.kNullObj
+		   * default actions - If node is locked then the
+		     default action is to not allow the delete. If node is unlocked
+		     then the node can be deleted.
+
+		kLockNode   * node - The node that the user is attempting to lock.
+		   * aux - MObject.kNullObj
+		   * default actions - If node is unlocked then the
+		     default action is to ALLOW the node to be locked. The callback
+		     is not invoked when the user tries to unlock an already unlocked
+		     node.
+
+		kUnlockNode   * node - The node that the user is attempting to unlock.
+		   * aux - MObject.kNullObj
+		   * default actions - If node is locked then the
+		     default action is to ALLOW the unlock. The callback is not invoked
+		     when the user tries to unlock an already unlocked node.
+
+		kAddAttr   * node - The node that is having an attribute added.
+		   * aux - MObject of the attribute to be added. Note:
+		     the attribute does not belong to the node yet. You can only
+		     access the attribute information using MFnAttribute.
+		   * default actions - If node is locked then the default
+		     action is to not allow to the addition of aux. If node
+		     is unlocked then aux can be added to the node.
+
+		kRemoveAttr
+		   * node - The node that is having an attribute removed.
+		   * aux - The attribute to be removed. In certain
+		     situations the user is allowed to do a global delete,
+		     e.g. "deleteAttr -at AttrName [nodes]". In these cases the plug is not
+		     created until checks have been performed; so aux ==
+		     MObject.kNullObj
+		   * default actions - If node is locked then the default
+		     action is to not allow the attribute removal. If node is
+		     unlocked then aux can be removed.
+
+		kRenameAttr
+		   * node - The node that is having an attribute renamed.
+		   * aux - The attribute.
+		   * default actions - If node is locked then the default
+		     action is to not allow the rename. If node is unlocked then
+		     aux can be renamed.
+
+		kUnlockAttr
+		   * node - The node that is having an attribute unlocked.
+		   * aux - The attribute to be unlocked.
+		   * default actions - If node is locked then the default
+		     action is to not allow the unlock. If node is unlocked then
+		     aux attribute can be unlocked.
+
+		kLockAttr
+		   * node - The node that is having an attribute locked.
+		   * aux - The attribute to be locked.
+		   * default actions - If node is locked then the default
+		     action is to not allow the locking of aux. If node is
+		     unlocked then aux can be locked.
+
+		 * node (MObject) - The node to register the callback for.
+		 * function - the callback function (see below for description)
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def setPlugLockQueryCallback(*args)->Any:
+		"""setPlugLockQueryCallback(plug, function, clientData=None) -> id
+
+		This method registers a callback that is invoked in any locking
+		condition on a plug, e.g. plug unlock, plug lock, connections, etc.
+		When the callback is invoked, the API programmer can make a decision on
+		how to handle the given locking situation. The programmer can either
+		accept the default action, or they can deny the default action.
+		The decision is made through the decision variable described above.
+
+		The callback function takes the following parameters:
+		   * plug - The plug that triggered the callback.
+		   * otherPlug - The other plug involved in the callback.
+		     This is only valid during connect and disconnect events.
+		     clientData - User defined data passed to the
+		     callback function.
+		   * eventType - Description of the event.
+		And return True to accept the default behavior and False to
+		reject it.
+
+		The meanings of the plug and otherPlug parameters for each
+		eventType, and default actions associated with those event types, are
+		as follows:
+
+		kPlugLockAttr
+		   * plug - The plug that the user is attempting to lock.
+		   * otherPlug - None.
+		   * default actions - If plug is unlocked then the
+		     default action is to allow the plug to be locked.
+
+		kPlugUnlockAttr
+		   * plug - The plug that the user is attempting to unlock.
+		   * otherPlug - None.
+		   * default actions - If plug is locked then the
+		     default action is to allow the plug to be unlocked.
+
+		kPlugAttrValChange
+		   * plug - The plug that the user is attempting to change.
+		   * otherPlug - None.
+		   * default actions - If plug is locked then the
+		     default action is to not allow plug to change. If plug is
+		     unlocked then plug can change.
+
+		kPlugRemoveAttr
+		   * plug - The plug that the user is attempting to remove.
+		   * otherPlug - None.
+		   * default actions - If plug is locked then the
+		     default action is to not allow removal. Otherwise, if plug is
+		     unlocked then plug can be removed.
+
+		kPlugRenameAttr
+		   * plug - The plug that the user is attempting to rename.
+		   * otherPlug - None.
+		   * default actions - If plug is locked then the default
+		     action is to not allow the rename. Otherwise, if plug is
+		     unlocked then plug can be renamed.
+
+		kPlugConnect
+		   * plug - The plug that is to be connected (incoming
+		     connection).
+		   * otherPlug - The source plug of the connection being made.
+		   * default actions - If plug is locked then the
+		     connection is DENIED. If plug is unlocked then otherPlug can
+		     be connected to plug.
+
+		kPlugDisconnect
+		   * plug - The plug that it is having an incoming connection broken.
+		   * otherPlug - The source plug of the connection being made.
+		   * default actions - If plug is locked then the
+		     default action is to DENY the connection from being broken. If
+		     plug is unlocked then otherPlug can be disconnected from
+		     plug.
+
+		 * plug (MPlug) - the plug to attach the callback
+		 * function - the callback function (see below for description)
+		 * clientData - User defined data passed to the callback function
+
+		 * return: Identifier used for removing the callback."""
 class MMatrix:
 	"""4x4 matrix with double-precision elements."""
 	__hash__:None=None
 	kIdentity:MMatrix
 	kTolerance:float=1e-10
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __radd__(self,*args,**kwargs)->Any:
+	def __radd__(self,*args)->Any:
 		"""Return value+self."""
-	def __sub__(self,*args,**kwargs)->Any:
+	def __sub__(self,other)->Any:
 		"""Return self-value."""
-	def __rsub__(self,*args,**kwargs)->Any:
+	def __rsub__(self,*args)->Any:
 		"""Return value-self."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Return self+=value."""
-	def __isub__(self,*args,**kwargs)->Any:
+	def __isub__(self,*args)->Any:
 		"""Return self-=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Return self*=value."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def getElement(self,*args,**kwargs)->Any:
+	def getElement(self,*args)->Any:
 		"""Returns the matrix element for the specified row and column."""
-	def setElement(self,*args,**kwargs)->Any:
+	def setElement(self,*args)->Any:
 		"""Sets the matrix element for the specified row and column."""
-	def setToIdentity(self,*args,**kwargs)->Any:
+	def setToIdentity(self,*args)->Any:
 		"""Sets this matrix to the identity."""
-	def setToProduct(self,*args,**kwargs)->Any:
+	def setToProduct(self,*args)->Any:
 		"""Sets this matrix to the product of the two matrices passed in."""
-	def transpose(self,*args,**kwargs)->Any:
+	def transpose(self,*args)->Any:
 		"""Returns a new matrix containing this matrix's transpose."""
-	def inverse(self,*args,**kwargs)->Any:
+	def inverse(self,*args)->Any:
 		"""Returns a new matrix containing this matrix's inverse."""
-	def adjoint(self,*args,**kwargs)->Any:
+	def adjoint(self,*args)->Any:
 		"""Returns a new matrix containing this matrix's adjoint."""
-	def homogenize(self,*args,**kwargs)->Any:
+	def homogenize(self,*args)->Any:
 		"""Returns a new matrix containing the homogenized version of this matrix."""
-	def det4x4(self,*args,**kwargs)->Any:
+	def det4x4(self,*args)->Any:
 		"""Returns this matrix's determinant."""
-	def det3x3(self,*args,**kwargs)->Any:
+	def det3x3(self,*args)->Any:
 		"""Returns the determinant of the 3x3 matrix formed by the first 3 elements of the first 3 rows of this matrix."""
-	def isEquivalent(self,*args,**kwargs)->Any:
+	def isEquivalent(self,*args)->Any:
 		"""Test for equivalence of two matrices, within a tolerance."""
-	def isSingular(self,*args,**kwargs)->Any:
+	def isSingular(self,*args)->Any:
 		"""Returns True if this matrix is singular."""
 class MMatrixArray:
 	"""Array of MMatrix values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MMeshIntersector:
 	"""Provides methods for efficiently finding the closest point on
 	the surface of a mesh. An octree algorithm is used to find the
 	closest point.
 	"""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def isCreated(self)->Any:
+		"""True if the intersector has been created, False otherwise."""
+	@isCreated.setter
+	def isCreated(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args,**kwargs)->Any:
+	def create(self,*args)->Any:
 		"""create(mesh, matrix) -> self
 
 		Creates the internal data required by the intersector. It is a
@@ -13647,7 +13160,7 @@ class MMeshIntersector:
 		mesh (MObject)   - the mesh to be used
 		matrix (MMatrix) - transformation to use to bring points into the
 		mesh's object space.faceIds (list) - the faces of the mesh to be passed to the intersector"""
-	def getClosestPoint(self,*args,**kwargs)->Any:
+	def getClosestPoint(self,*args)->Any:
 		"""getClosestPoint(referencePoint, maxDistance=sys.float_info.max) -> MPointOnMesh
 
 		Finds the closest point within 'maxDistance' of the reference point
@@ -13669,10 +13182,50 @@ class MMeshIsectAccelParams:
 	uniformGridParams() or autoUniformGridParams() to create one
 	of these to pass into the allIntersections(),
 	closestIntersection(), and anyIntersection() methods"""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 class MMeshSmoothOptions:
 	"""Options for control of smooth mesh generation."""
+	@property
+	def boundaryRule(self)->Any:
+		"""Determines how boundary edges and vertices are creased."""
+	@boundaryRule.setter
+	def boundaryRule(self,value:Any)->None:...
+	@property
+	def subdivisionType(self)->Any:
+		"""Determines subdivision algorithm used for mesh smoothing."""
+	@subdivisionType.setter
+	def subdivisionType(self,value:Any)->None:...
+	@property
+	def divisions(self)->Any:
+		"""Number of subdivisions used in smoothing."""
+	@divisions.setter
+	def divisions(self,value:Any)->None:...
+	@property
+	def keepBorderEdge(self)->Any:
+		"""If True, border edges will not be smoothed."""
+	@keepBorderEdge.setter
+	def keepBorderEdge(self,value:Any)->None:...
+	@property
+	def keepHardEdge(self)->Any:
+		"""If True, hard edges will not be smoothed."""
+	@keepHardEdge.setter
+	def keepHardEdge(self,value:Any)->None:...
+	@property
+	def propEdgeHardness(self)->Any:
+		"""If True, the hardness of edges in the base cage will be propagated to the edges of the smoothed mesh which derive from them."""
+	@propEdgeHardness.setter
+	def propEdgeHardness(self,value:Any)->None:...
+	@property
+	def smoothness(self)->Any:
+		"""The degree of smoothness desired. Ranges from 0.0 (hard) to 1.0 (fully smoothed)."""
+	@smoothness.setter
+	def smoothness(self,value:Any)->None:...
+	@property
+	def smoothUVs(self)->Any:
+		"""If True, UVs will be smoothed as well as geometry. If False, only geometry will be smoothed."""
+	@smoothUVs.setter
+	def smoothUVs(self,value:Any)->None:...
 	kInvalid:int=-1
 	kLegacy:int=0
 	kCreaseAll:int=1
@@ -13683,555 +13236,340 @@ class MMeshSmoothOptions:
 	kOpenSubdivCatmullClarkUniform:int=2
 	kOpenSubdivCatmullClarkAdaptive:int=3
 	kLastSubdivision:int=4
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 class MMessage:
 	"""Base class for message callbacks."""
 	kDefaultAction:int=0
 	kDoNotDoAction:int=1
 	kDoAction:int=2
-	def currentCallbackId(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def currentCallbackId(*args)->Any:
+		"""currentCallbackId() -> id
 
-		Convert a function to be a static method.
+		Returns the callback ID of the currently executing callback. If called
+		outside of a callback, an invalid MCallbackId and failed status will
+		be returned."""
+	@staticmethod
+	def nodeCallbacks(*args)->Any:
+		"""nodeCallbacks(node) -> ids
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		Returns a list of callback IDs registered to a given node.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * node (MObject) - Node to query for callbacks.
+		 * ids (MCallbackIdArray) - Array to store the list of callback IDs."""
+	@staticmethod
+	def removeCallback(*args)->Any:
+		"""removeCallback(id) -> None
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		Removes the specified callback from Maya.
+		This method must be called for all callbacks registered by a
+		plug-in before that plug-in is unloaded.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def nodeCallbacks(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * id (MCallbackId) - identifier of callback to be removed"""
+	@staticmethod
+	def removeCallbacks(*args)->Any:
+		"""removeCallbacks(ids) -> None
 
-		Convert a function to be a static method.
+		Removes all of the specified callbacks from Maya.
+		This method must be called for all callbacks registered by a
+		plug-in before that plug-in is unloaded.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def removeCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def removeCallbacks(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * idList (MCallbackIdArray) - list of callbacks to be removed."""
 class MModelMessage(MMessage):
 	"""Class used to register callbacks for model related messages.The class also provides the following Message constants which
 	describe the different types supported by the addCallback method:
 	  kActiveListModified		#active selection changes
 	"""
 	kActiveListModified:int=0
-	def addPostDuplicateNodeListCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addPostDuplicateNodeListCallback(*args)->Any:
+		"""addPostDuplicateNodeListCallback(function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback that is called after a duplicate
+		command is made. The callback will be called after everything is
+		duplicated, and provides a list of originals and duplicates.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * function - callable which will be passed the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addAfterDuplicateCallback(*args)->Any:
+		"""addAfterDuplicateCallback(function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This method registers a callback that is called after a duplicate
+		command is made. The callback will be called after everything is
+		duplicated.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addAfterDuplicateCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * function - callable which will be passed the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addBeforeDuplicateCallback(*args)->Any:
+		"""addBeforeDuplicateCallback(function, clientData=None) -> id
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		This method registers a callback that is called whenever a duplicate
+		command is made. The callback will be called before anything is
+		duplicated.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * function - callable which will be passed the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addCallback(*args)->Any:
+		"""addCallback(message, function, clientData=None) -> id
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addBeforeDuplicateCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		Adds a new callback for the specified model message.
 
-		Convert a function to be a static method.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * message (Message constant, see class doc for a list) - the model
+		   message that will trigger the callback
+		 * function - callable which will be passed the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNodeAddedToModelCallback(*args)->Any:
+		"""addNodeAddedToModelCallback(dagNode, function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This method registers a callback that is called when a dag node is about
+		to be added to the Maya model.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * dagNode (MObject) - Node that should acquire the callback
+		 * function - callable which will be passed a MObject indicating
+		   the node being added to the model and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNodeRemovedFromModelCallback(*args)->Any:
+		"""addNodeRemovedFromModelCallback(dagNode, function, clientData=None) -> id
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		This method registers a callback that is called when the
+		specified dag node is being removed from the Maya model.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * dagNode (MObject) - Node that should acquire the callback
+		 * function - callable which will be passed a MObject indicating
+		   the node being removed to the model and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNodeAddedToModelCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNodeRemovedFromModelCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MNamespace:
 	"""Access Maya namespace functionality."""
-	def addNamespace(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def validateName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def currentNamespace(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setCurrentNamespace(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getNamespaces(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def namespaceExists(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def parentNamespace(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def removeNamespace(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def renameNamespace(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getNamespaceObjects(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def moveNamespace(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def rootNamespace(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def relativeNames(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setRelativeNames(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getNamespaceFromName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def stripNamespaceFromName(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def makeNamepathAbsolute(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+	@staticmethod
+	def addNamespace(*args)->Any:
+		"""addNamespace(MString name, MString parent=None)
+
+		Create the namespace 'name'. If the `parent' namespace is given
+		the new namespace will be a child of `parent', otherwise the new
+		namespace will be a child of the current namespace.
+		The new namespace is added, but not made current. To make the
+		new namespace be current use MNamespace.setCurrentNamespace().
+		Note that adding a namespace changes the scene, so any code that calls
+		this method needs to handle undo.
+
+		     name    The new namespace to create. A qualified or unqualified
+		             name may be used. If a qualified name is used and one or
+		             more of the higher level namespaces do not already exist,
+		             they will be created automatically. For example, if the new
+		             name is 'a:b:c' and 'a' does not yet exist, then it will be
+		             created automatically and 'b' automatically created beneath
+		             it and finally 'c' will be created beneath 'b'.
+		             If the supplied name contains invalid characters it will first
+		             be modified as per the validateName() method.
+		     parent  The fully qualified name of the namespace under which
+		             the new one is to be created. If not provided then the
+		             current namespace will be used. If the name of the new
+		             namespace is absolute (i.e. begins with a colon, ':a:b:c')
+		             then the 'parent' parameter will be ignored and the new namespace
+		             will be created under the root namespace."""
+	@staticmethod
+	def validateName(*args)->Any:
+		"""validateName(MString name) -> MString
+
+		Convert the specified name to a validated name which
+		contains no illegal characters.
+		The leading illegal characters will be removed and
+		other illegal characters will be converted to '_'.
+
+		For example, name '@name@space@' will be converted to 'name_space_'.
+
+		If the entire name consists solely of illegal characters,
+		e.g. '123' which contains only leading digits, then the
+		returned string will be empty."""
+	@staticmethod
+	def currentNamespace(*args)->Any:
+		"""currentNamespace() -> MString
+
+		Get the name of the current namespace. This name is returned
+		as an absolute namepath (i.e. fully qualfied from the root
+		namespace downwards, ':a:b:c')."""
+	@staticmethod
+	def setCurrentNamespace(*args)->Any:
+		"""setCurrentNamespace(MString name) -> MString
+
+		Set the specified namespace to be the current namespace. The 'name'
+		parameter you specify is relative to whatever namespace is current,
+		but any namespace can be specified by passing an absolute name (e.g. :a:b:c).
+		Note that making a namespace current changes the scene, so any code
+		that calls this method needs to handle undo.
+
+		To make the root namespace become current, use:
+		    MNamespace.setCurrentNamespace(MNamespace.rootNamespace())"""
+	@staticmethod
+	def getNamespaces(*args)->Any:
+		"""getNamespaces(MString parentNamespace=None, bool recurse=False) -> [MString]
+
+		Return a list of all namespaces in the current namespace.
+		Notes:
+		    1)  Names returned are always absolute (e.g. :a:b:sphere).
+		    2)  The list returned is just the child namespaces (and
+		        descendents if `recurse' is true). It thus never contains
+		        the root namespace in the list returned.
+
+		           parentNamespace  the namespace to query.
+		           recurse          optional parameter to control whether all
+		                            namespaces or just top-level namespaces
+		                            are returned. A value of false (the
+		                            default if unspecified) causes only the
+		                            top-level namespaces to be returned. If
+		                            true, all namespaces will be listed."""
+	@staticmethod
+	def namespaceExists(*args)->Any:
+		"""namespaceExists(MString name) -> bool
+
+		Check if a given namespace exists."""
+	@staticmethod
+	def parentNamespace(*args)->Any:
+		"""parentNamespace() -> MString
+
+		Get the name of the current namespace's parent. This name is returned
+		as an absolute namepath (i.e. fully qualfied from the root namespace
+		downwards, ':a:b'). If the root namespace is
+		current, this method returns an error. """
+	@staticmethod
+	def removeNamespace(*args)->Any:
+		"""removeNamespace(MString name, bool removeContents=False)
+
+		Remove the specified namespace.
+		Note that removing a namespace changes the scene, so any code
+		that calls this method needs to handle undo. """
+	@staticmethod
+	def renameNamespace(*args)->Any:
+		"""renameNamespace(MString oldName, MString newName, MString parent=None)
+
+		Rename the specified namespace to a new name with optional parent name.
+		Note that removing a namespace changes the scene, so any code
+		that calls this method needs to handle undo. """
+	@staticmethod
+	def getNamespaceObjects(*args)->Any:
+		"""getNamespaceObjects(MString parentNamespace, bool recurse=False) -> MObjectArray
+
+		Return an array of MObjects representing the object contained within
+		the specified namespace. To query the current namespace, call this
+		method in this way: """
+	@staticmethod
+	def moveNamespace(*args)->Any:
+		"""moveNamespace(MString src, MString dst, bool force=False)
+
+		Move the contents of the namespace 'src' into the namespace 'dst'.
+		Note that moving namespace contents changes the scene, so any code
+		that calls this method needs to handle undo.
+
+		          src       source namespace from which objects will be moved.
+		          dst       destination namespace to which objects will be moved.
+		          force     optional parameter which if true forces the move
+		                    even if name clashes occur, in which case nodes are
+		                    renamed to ensure uniqueness. If false, the move
+		                    will not happen if there are clashes. The default
+		                    value is false. """
+	@staticmethod
+	def rootNamespace(*args)->Any:
+		"""rootNamespace() -> MString
+
+		Get the name of the root namespace. This name is an absolute
+		namepath (i.e. prefixed by a ':'). """
+	@staticmethod
+	def relativeNames(*args)->Any:
+		"""relativeNames() -> bool
+
+		Query Maya's current 'relative name lookup' state. Relative name
+		lookup causes lookups to be relative to the current namespace.
+		By default, relative name lookup in Maya is off, which causes
+		name lookups to be relative to the root namespace. For example,
+		if you have the object :a:b:sphere, and the current namespace is
+		':a:b', in relative name lookup mode you can issue a command like
+
+		    setAttr sphere.translateX 10;
+
+		If relative name lookup is off, you need to specify the full
+		namepath, e.g.
+
+		    setAttr a:b:sphere.translateX 10; """
+	@staticmethod
+	def setRelativeNames(*args)->Any:
+		"""setRelativeNames(bool newState)
+
+		Set relative name lookup mode.
+
+		Note that turning on or off relativeNames mode can change the scene,
+		so any code that calls this method needs to handle undo.
+		See MNamespace.relativeNames() for details on relative name lookup.
+
+		Note: relative name lookup mode is intended for bracketing user
+		code which needs to be namespace-independent. Leaving relative
+		name lookup enabled outside of your specific code could cause
+		functionality such as 3rd-party plugins that assume absolute
+		name lookup to fail.
+
+		   newState         true to turn on relative name lookup, false to
+		                    turn it off. Maya's default setting is false. """
+	@staticmethod
+	def getNamespaceFromName(*args)->Any:
+		"""getNamespaceFromName(MString fullName) -> MString
+
+		Get namespace from a full name.
+		For example, given a full name: 'a:b:c:d:ball' this method
+		would return: 'a:b:c:d'. """
+	@staticmethod
+	def stripNamespaceFromName(*args)->Any:
+		"""stripNamespaceFromName(MString fullName) -> MString
+
+		Strips the namespace from a full name.
+		For example, given a full name: 'a:b:c:d:ball' this method
+		would return: 'ball'. """
+	@staticmethod
+	def makeNamepathAbsolute(*args)->Any:
+		"""makeNamepathAbsolute(MString fullName) -> MString
+
+		Make a namepath which is relative to the root into an absolute
+		namepath. For example, given the namepath 'a:sphere' this method
+		returns ':a:sphere'. It also culls out duplicate and trailing
+		separators, e.g. 'a:b::c:' will return ':a:b:c'. """
 class MNodeCacheDisablingInfo:
 	"""Defines additional info about why the node disables Cached Playback."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def setCacheDisabled(self,*args,**kwargs)->Any:
+	def setCacheDisabled(self,*args)->Any:
 		"""setCacheDisabled(bool)
 
 		Set if the cache should be disabled because of this node."""
-	def getCacheDisabled(self,*args,**kwargs)->Any:
+	def getCacheDisabled(self,*args)->Any:
 		"""getCacheDisabled() -> bool
 
 		Return True if the cache should be disabled because of this node."""
-	def setReason(self,*args,**kwargs)->Any:
+	def setReason(self,*args)->Any:
 		"""setReason(reason)
 
 		Sets the reason for disabling Cached Playback."""
-	def setMitigation(self,*args,**kwargs)->Any:
+	def setMitigation(self,*args)->Any:
 		"""setMitigation(mitigation)
 
 		Sets the mitigation to fix the reason for disabling Cached Playback."""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset()
 
 		Resets the disabling info to an enabled state."""
@@ -14241,39 +13579,54 @@ class MNodeCacheSetupInfo:
 	kLastPreference:int=1
 	kSimulationSupport:int=0
 	kLastRequirement:int=1
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def getPreference(self,*args,**kwargs)->Any:
+	def getPreference(self,*args)->Any:
 		"""getPreference(PreferenceFlag) -> bool
 
 		Get a preference flag for this node."""
-	def setPreference(self,*args,**kwargs)->Any:
+	def setPreference(self,*args)->Any:
 		"""setPreference(PreferenceFlag, bool)
 
 		Set a preference flag for this node."""
-	def getRequirement(self,*args,**kwargs)->Any:
+	def getRequirement(self,*args)->Any:
 		"""getRequirement(RequirementFlag) -> bool
 
 		Get a requirement flag for this node."""
-	def setRequirement(self,*args,**kwargs)->Any:
+	def setRequirement(self,*args)->Any:
 		"""setRequirement(RequirementFlag, bool)
 
 		Set a requirement flag for this node."""
 class MNodeClass:
 	"""A class for performing node class-level operations in the dependency graph."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def attributeCount(self)->int:
+		"""Number of attributes the node class has. Includes extension attributes, since those are applied to the entire node class, but not dynamic attributes, since those are only applied to individual nodes."""
+	@property
+	def classification(self)->str:
+		"""This is a string that is used in dependency nodes that are also shaders to provide more detailed type information to the rendering system."""
+	@property
+	def pluginName(self)->str:
+		"""File path of the plug-in in which the node class is defined. The empty string is returned for Maya's built-in node types."""
+	@property
+	def typeId(self)->MTypeId:
+		"""Type ID for the node class."""
+	@property
+	def typeName(self)->str:
+		"""Name of the node class. This is the name that is given to the createNode command to create nodes of this type."""
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addExtensionAttribute(self,*args,**kwargs)->Any:
+	def addExtensionAttribute(self,*args)->Any:
 		"""Adds an extension attribute to the node class. An extension attribute is a class-level attribute which has been added dynamically to a node class. Because it is added at the class level, all nodes of that class will have the given attribute, and will only store the attribute's value if it differs from the default. Returns the type of the object at the end of the path."""
-	def attribute(self,*args,**kwargs)->Any:
+	def attribute(self,*args)->Any:
 		"""If passed an int: Returns the node class's i'th attribute. Raises IndexError if index is out of bounds.  If passed a string, Returns the node class's attribute having the given name. Returns MObject.kNullObj if the class does not have an attribute with that name."""
-	def getAttributes(self,*args,**kwargs)->Any:
+	def getAttributes(self,*args)->Any:
 		"""Returns an MObjectArray array containing all of the node class's attributes."""
-	def hasAttribute(self,*args,**kwargs)->Any:
+	def hasAttribute(self,*args)->Any:
 		"""Returns True if the node class has an attribute of the given name, False otherwise."""
-	def removeExtensionAttribute(self,*args,**kwargs)->Any:
+	def removeExtensionAttribute(self,*args)->Any:
 		"""Removes an extension attribute from the node class. Raises ValueError if attr is not an extension attribute of this node class."""
-	def removeExtensionAttributeIfUnset(self,*args,**kwargs)->Any:
+	def removeExtensionAttributeIfUnset(self,*args)->Any:
 		"""Removes an extension attribute from the node class, but only if there are no nodes in the graph with non-default values for this attribute. Returns True if the attribute was removed, False otherwise. Raises ValueError if attr is not an extension attribute of this node class."""
 class MNodeMessage(MMessage):
 	"""Class used to register callbacks for dependency node messages of specific dependency nodes.
@@ -14324,337 +13677,350 @@ class MNodeMessage(MMessage):
 	kMakeKeyable:int=1
 	kMakeUnkeyable:int=2
 	kKeyChangeLast:int=3
-	def addAttributeAddedOrRemovedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addAttributeAddedOrRemovedCallback(*args)->Any:
+		"""addAttributeAddedOrRemovedCallback(node, function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		Registers callbacks for attribute add/removed messages.
+		This is a more specific version of addAttributeChanged as only attribute
+		added and attribute removed messages will trigger the callback.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * node (MObject) - the node to register the callback for
+		 * function - callable which will be passed an AttributeMessage constant (see
+		   class doc for a list) containing the kind of attribute change triggering
+		   the callback, a MObject indicating the node's plug where the connection
+		   changed and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addAttributeChangedCallback(*args)->Any:
+		"""addAttributeChangedCallback(node, function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This method registers a callback for attribute changed messages.
+		See the AttributeChanged enum for a list of all possible messages
+		that will trigger the callback.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addAttributeChangedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		Note: Attribute Changed messages will not be generated
+		while Maya is either in playback or scrubbing modes. If you need to
+		do something during playback or scrubbing you will have to register
+		a callback for the timeChanged message which is the only
+		message that is sent during those modes.
 
-		Convert a function to be a static method.
+		The callback function will be passed the type of attribute message
+		that has occurred, the plug(s) for the attributes, and any client
+		data that the user wishes to pass in.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * node (MObject) - the node to register the callback for
+		 * function - callable which will be passed an AttributeMessage constant (see
+		   class doc for a list) containing the kind of attribute change triggering
+		   the callback, a MObject indicating the node's plug where the connection
+		   changed, a MObject indicating the plug opposite the node's plug where the
+		   connection changed and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addKeyableChangeOverride(*args)->Any:
+		"""addKeyableChangeOverride(plug, function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This method registers a callback that is invoked by any class that
+		changes the keyable state of an attribute.  When the callback is
+		invoked, the API programmer can make a decision on how to handle
+		the given keyable change event.  The programmer can either accept
+		the keyable state change by returning True
+		or reject it by returning False.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addKeyableChangeOverride(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		Note: you can only attach one callback keyable change override
+		callback per attribute.  It is an error to attach more than one
+		callback to the same attribute.
 
-		Convert a function to be a static method.
+		 * plug (MPlug) - The plug to which to attach the callback.
+		 * function - callable which will be passed a MPlug indicating the plug that
+		   has triggered the callback, the clientData object, and a KeyableChangeMsg
+		   constant (see class doc for a list) containing the kind of Keyable change
+		   the callback, a MObject indicating the node's plug where the connection.
+		   User can return True to accept the keyable state change or False to reject it.
+		 * clientData - User defined data passed to the callback function
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNameChangedCallback(*args)->Any:
+		"""addNameChangedCallback(node, function, clientData=None) -> id
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		Registers a callback for name changed messages.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * node (MObject) - the node. If this is a NULL MObject then the callback
+		   applies to all node name changes.
+		 * function - callable which will be passed a MObject indicating the node whose
+		   name's changed, a string containing the previous name of the node and the
+		   clientData object
+		 * clientData - User defined data passed to the callback function
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNameChangedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNodeAboutToDeleteCallback(*args)->Any:
+		"""addNodeAboutToDeleteCallback(node, function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		Registers a callback which will get called when a node is about to
+		be deleted.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		The callback will be passed the MDGModifer that will be used to
+		delete the node. This modifier can be used to do any DG modifications,
+		such as disconnections, before the node is deleted.  These operations are
+		also stored and performed when the deletion operation is undone or redone.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		The callback registered with this method will only get called when the
+		deletion operation is first performed. Undos and redos will be handled solely
+		through the MDGModifier which was passed to the callback on the original
+		deletion. If you also wish to receive notification of deletion events
+		when they are redone, you should register an additional callback using
+		addNodePreRemovalCallback().
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		When a node is deleted Maya automatically breaks all connections to that
+		node. This process takes place after the callback has been called. This
+		means that if you use the passed-in MDGModifier to break any
+		connections to the node you must be sure to call the modifier's doIt() method
+		before returning from the callback. Otherwise Maya will see that the connections
+		still exist and try to delete them again, which can lead to errors.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNodeAboutToDeleteCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		Note that it uses the passed-in MDGModifier to perform all the disconnections and
+		connections. This ensures that if the deletion is undone or redone then all of
+		the connections will be restored correctly.
 
-		Convert a function to be a static method.
+		After it is done breaking connections, the callback calls the
+		modifier's doIt() method to commit those disconnections. As noted
+		above, this is necessary to ensure that Maya doesn't see the
+		connections and try to break them again later on.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * node (MObject) - the node to register the callback for
+		 * function - callable which will be passed a MObject indicating the node that
+		   will be deleted, a MDGModifier indicating the DG modifier used to delete the
+		   node and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNodeDestroyedCallback(*args)->Any:
+		"""addNodeDestroyedCallback(node, function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		Registers a callback which will get called when a node's destructor is
+		called.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNodeDestroyedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * node (MObject) - the node to register the callback for
+		 * function - callable which will be passed the clientData object
+		 * clientData - User defined data that will be passed to the callback
+		   function
 
-		Convert a function to be a static method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNodeDirtyCallback(*args)->Any:
+		"""addNodeDirtyCallback(node, function, clientData=None) -> id
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		Registers a callback for node dirty messages.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * node (MObject) - the node to register the callback for
+		 * function - callable which will be passed a MObject indicating the node
+		   that has  become dirty and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNodeDirtyPlugCallback(*args)->Any:
+		"""addNodeDirtyPlugCallback(node, function, clientData=None) -> id
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNodeDirtyCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		Registers a callback for node dirty messages.  This callback provides
+		the plug on the node that was dirtied.  Only provides dirty information
+		on input plugs.
 
-		Convert a function to be a static method.
+		 * node (MObject) - the node to register the callback for
+		 * function - callable which will be passed a MObject indicating the node
+		   that has  become dirty, a MPlug indicating the plug on the node that has
+		   become dirty and the clientData object * clientData - User defined data passed to the callback function
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNodePreRemovalCallback(*args)->Any:
+		"""addNodePreRemovalCallback(node, function, clientData=None) -> id
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		Registers a callback which will get called before a node is deleted.
+		This callback is called before connections on the node are removed.
+		Unlike the aboutToDelete callback, this callback will be invoked whenever
+		the node is deleted, even during a redo.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		Pre-removal and aboutToDelete callbacks serve different purposes.  If DG
+		changes need to be made when a node is deleted, the aboutToDelete callback
+		should be used to add undoable operations to an MDGModifier to perform
+		these changes.  When the desired actions cannot be accomplished using the
+		MDGModifier passed to the aboutToDelete callback, this callback can be
+		used to receive notification of the deletion event, even during redo.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNodeDirtyPlugCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		Note that this callback method should not perform any DG operations.
 
-		Convert a function to be a static method.
+		 * node (MObject) - the node to register the callback for
+		 * function - callable which will be passed a MObject indicating the node
+		   that is being deleted and the clientData object
+		 * clientData - User defined data that will be passed to the callback
+		   function
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addUuidChangedCallback(*args)->Any:
+		"""addUuidChangedCallback(node, function, clientData=None) -> id
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		Registers a callback for UUID changed messages.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * node (MObject) - the node to register the callback for
+		 * function - callable which will be passed a MObject indicating the node
+		   that is being modified, a MUuid containing the previous UUID of the node
+		   and the clientData object
+		 * clientData - User defined data that will be passed to the callback
+		   function
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNodePreRemovalCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addUuidChangedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MObject:
 	"""Opaque wrapper for internal Maya objects."""
+	@property
+	def apiTypeStr(self)->str:
+		"""(readonly) String containing the object's type name."""
 	__hash__:None=None
 	kNullObj:MObject
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def hasFn(self,*args,**kwargs)->Any:
+	def hasFn(self,*args)->Any:
 		"""Tests whether object is compatible with the specified function set."""
-	def isNull(self,*args,**kwargs)->Any:
+	def isNull(self,*args)->Any:
 		"""Tests whether there is an internal Maya object."""
-	def apiType(self,*args,**kwargs)->Any:
+	def apiType(self,*args)->Any:
 		"""Returns the function set type for the object."""
 class MObjectArray:
 	"""Array of MObject values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MObjectHandle:
 	"""Generic Class for validating MObjects."""
-	def __hash__(self,*args,**kwargs)->Any:
+	def __hash__(self,*args)->Any:
 		"""Return hash(self)."""
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def assign(self,*args,**kwargs)->Any:
+	def assign(self,*args)->Any:
 		"""assign(source) -> self
 
 		Assigns this MObjectHandle to an instance of another MObjectHandle, or to a MObject instance.
 
 		* source (MObject/MObjectHandle) - other instance to assign from."""
-	def hashCode(self,*args,**kwargs)->Any:
+	def hashCode(self,*args)->Any:
 		"""hashCode() -> int
 
 		Returns a hash code for the internal Maya object referenced by the MObject within this MObjectHandle. If the MObject is null or no longer alive then 0 will be returned, otherwise the hash code is guaranteed to be non-zero"""
-	def isAlive(self,*args,**kwargs)->Any:
+	def isAlive(self,*args)->Any:
 		"""isAlive() -> bool
 
 		Returns the live state of the associated MObject. An object can still be 'alive' but not 'valid' (eg. a deleted object that resides in the undo queue)."""
-	def isValid(self,*args,**kwargs)->Any:
+	def isValid(self,*args)->Any:
 		"""isValid() -> bool
 
 		Returns the validity of the associated MObject."""
-	def object(self,*args,**kwargs)->Any:
+	def object(self,*args)->Any:
 		"""object() -> MObject
 
 		Returns the MObject associated with this handle. The returned MObject will be MObject.kNullObj if the object is invalid."""
 class MObjectSetMessage(MMessage):
 	"""Class used to register callbacks for set modified related messages."""
-	def addSetMembersModifiedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addSetMembersModifiedCallback(*args)->Any:
+		"""addSetMembersModifiedCallback(node, function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		Registers callbacks for set modified messages.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * node (MObject) - the set that has triggered a setModified event
+		 * function (MMessage::MNodeFunction) - the callback function
+		 * function - callable which will be passed a MObject indicating the
+		   set that has triggered a setModified event and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MPlane:
 	"""This class describes a mathematical plane."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def distance(self,*args,**kwargs)->Any:
+	def distance(self,*args)->Any:
 		"""distance() -> float
 
 		Returns the distance of the plane along the normal."""
-	def distanceToPoint(self,*args,**kwargs)->Any:
+	def distanceToPoint(self,*args)->Any:
 		"""distanceToPoint(point, signed=False) -> float
 
 		Returns the distance from the plane to the specified point.
 
 		* point (MVector) - The point from which to calculate the distance
 		* signed (bool) - Whether to return a signed or unsigned distance"""
-	def normal(self,*args,**kwargs)->Any:
+	def normal(self,*args)->Any:
 		"""normal() -> MVector
 
 		Returns the normal of the plane."""
-	def setPlane(self,*args,**kwargs)->Any:
+	def setPlane(self,*args)->Any:
 		"""setPlane(a, b, c, d) -> self
 		setPlane(n, d) -> self
 
@@ -14671,6 +14037,73 @@ class MPlane:
 		* d (float) - The offset of the plane along the normal"""
 class MPlug:
 	"""Create and access dependency node plugs."""
+	@property
+	def info(self)->str:
+		"""Description of the plug for debugging purposes, in the form node:attr1.attr2[].attr3..."""
+	@property
+	def isArray(self)->bool:
+		"""True if plug is an array of plugs."""
+	@property
+	def isCaching(self)->bool:
+		"""True if plug's value is being cached."""
+	@isCaching.setter
+	def isCaching(self,value:bool)->None:...
+	@property
+	def isChannelBox(self)->bool:
+		"""True if plug will appear in Maya's Channel Box."""
+	@isChannelBox.setter
+	def isChannelBox(self,value:bool)->None:...
+	@property
+	def isChild(self)->bool:
+		"""True if plug is a child of a compound parent."""
+	@property
+	def isCompound(self)->bool:
+		"""True if plug is compound parent with children."""
+	@property
+	def isConnected(self)->bool:
+		"""True if plug has any connections."""
+	@property
+	def isDestination(self)->bool:
+		"""True if plug is the destination of a connection."""
+	@property
+	def isDynamic(self)->bool:
+		"""True if plug is for a dynamic attribute."""
+	@property
+	def isElement(self)->bool:
+		"""True if plug is an element of an array of plugs."""
+	@property
+	def isFromReferencedFile(self)->bool:
+		"""True if plug is part of a connection from a referenced file."""
+	@property
+	def isIgnoredWhenRendering(self)->bool:
+		"""True if connetions to plug are ignored during rendering."""
+	@property
+	def isKeyable(self)->bool:
+		"""True if keys can be set on plug from Maya's UI."""
+	@isKeyable.setter
+	def isKeyable(self,value:bool)->None:...
+	@property
+	def isLocked(self)->bool:
+		"""True if plug is locked against changes."""
+	@isLocked.setter
+	def isLocked(self,value:bool)->None:...
+	@property
+	def isNetworked(self)->bool:
+		"""True if plug is networked."""
+	@property
+	def isNull(self)->bool:
+		"""True if plug does not reference an attribute."""
+	@property
+	def isProcedural(self)->bool:
+		"""True if plug is procedural."""
+	@property
+	def isSource(self)->bool:
+		"""True if plug is the source of a connection."""
+	@property
+	def isProxy(self)->Any:
+		"""True if plug is a proxy plug."""
+	@isProxy.setter
+	def isProxy(self,value:Any)->None:...
 	__hash__:None=None
 	kFreeToChange:int=0
 	kNotFreeToChange:int=1
@@ -14679,534 +14112,485 @@ class MPlug:
 	kNonDefault:int=1
 	kChanged:int=2
 	kLastAttrSelector:int=3
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def array(self,*args,**kwargs)->Any:
+	def array(self,*args)->Any:
 		"""Returns a plug for the array of plugs of which this plug is an element."""
-	def asBool(self,*args,**kwargs)->Any:
+	def asBool(self,*args)->Any:
 		"""Retrieves the plug's value, as a boolean."""
-	def asChar(self,*args,**kwargs)->Any:
+	def asChar(self,*args)->Any:
 		"""Retrieves the plug's value, as a single-byte integer."""
-	def asDouble(self,*args,**kwargs)->Any:
+	def asDouble(self,*args)->Any:
 		"""Retrieves the plug's value, as a double-precision float."""
-	def asFloat(self,*args,**kwargs)->Any:
+	def asFloat(self,*args)->Any:
 		"""Retrieves the plug's value, as a single-precision float."""
-	def asInt(self,*args,**kwargs)->Any:
+	def asInt(self,*args)->Any:
 		"""Retrieves the plug's value, as a regular integer."""
-	def asMAngle(self,*args,**kwargs)->Any:
+	def asMAngle(self,*args)->Any:
 		"""Retrieves the plug's value, as an MAngle."""
-	def asMDistance(self,*args,**kwargs)->Any:
+	def asMDistance(self,*args)->Any:
 		"""Retrieves the plug's value, as an MDistance."""
-	def asMObject(self,*args,**kwargs)->Any:
+	def asMObject(self,*args)->Any:
 		"""Retrieves the plug's value, as as an MObject containing a direct reference to the plug's data."""
-	def asMDataHandle(self,*args,**kwargs)->Any:
+	def asMDataHandle(self,*args)->Any:
 		"""Retrieve the current value of the attribute this plug references."""
-	def asMTime(self,*args,**kwargs)->Any:
+	def asMTime(self,*args)->Any:
 		"""Retrieves the plug's value, as an MTime."""
-	def asShort(self,*args,**kwargs)->Any:
+	def asShort(self,*args)->Any:
 		"""Retrieves the plug's value, as a short integer."""
-	def asString(self,*args,**kwargs)->Any:
+	def asString(self,*args)->Any:
 		"""Retrieves the plug's value, as a string."""
-	def attribute(self,*args,**kwargs)->Any:
+	def attribute(self,*args)->Any:
 		"""Returns the attribute currently referenced by this plug."""
-	def child(self,*args,**kwargs)->Any:
+	def child(self,*args)->Any:
 		"""Returns a plug for the specified child attribute of this plug."""
-	def connectedTo(self,*args,**kwargs)->Any:
+	def connectedTo(self,*args)->Any:
 		"""Returns an array of plugs which are connected to this one."""
-	def source(self,*args,**kwargs)->Any:
+	def source(self,*args)->Any:
 		"""If this plug is a destination, return the source plug connected to it.
 		If this plug is not a destination, a null plug is returned.
 		This method will produce the networked version of the connectedplug."""
-	def sourceWithConversion(self,*args,**kwargs)->Any:
+	def sourceWithConversion(self,*args)->Any:
 		"""If this plug is a destination, return the source plug connected to it.
 		This method is very similar to the source() method.  The only difference is that the source() method skips over any unit conversionnode connected to this destination, and returns the source of the unit conversion node.
 		sourceWithConversion() does not skip over unitconversion nodes, and returns the source plug on a unit conversionnode, if present.
 		Note that the behavior of connectedTo() is identical to sourceWithConversion(), that is, do not skip over unit conversion nodes."""
-	def destinations(self,*args,**kwargs)->Any:
+	def destinations(self,*args)->Any:
 		"""If this plug is a source, return the destination plugs connected to it.
 		If this plug is not a source, a null plug is returned.
 		This method will produce the networked version of the connected plug."""
-	def destinationsWithConversions(self,*args,**kwargs)->Any:
+	def destinationsWithConversions(self,*args)->Any:
 		"""If this plug is a source, return the destination plugs connected to it.
 		This method is very similar to the destinations() method.  The only difference is that the destinations() method skips over any unit conversion node connected to this source, and returns the destination of the unit conversion node.
 		destinationsWithConversionNode() does not skip over unit conversion nodes, and returns the destination plug on a unit conversion node, if present.
 		Note that the behavior of connectedTo() is identical to destinationsWithConversions(), that is, do not skip over unit conversion nodes."""
-	def connectionByPhysicalIndex(self,*args,**kwargs)->Any:
+	def connectionByPhysicalIndex(self,*args)->Any:
 		"""Returns a plug for the index'th connected element of this plug."""
-	def constructHandle(self,*args,**kwargs)->Any:
+	def constructHandle(self,*args)->Any:
 		"""Constructs a data handle for the plug."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Copies one plug to another."""
-	def destructHandle(self,*args,**kwargs)->Any:
+	def destructHandle(self,*args)->Any:
 		"""Destroys a data handle previously constructed using constructHandle()."""
-	def elementByLogicalIndex(self,*args,**kwargs)->Any:
+	def elementByLogicalIndex(self,*args)->Any:
 		"""Returns a plug for the element of this plug array having the specified logical index."""
-	def elementByPhysicalIndex(self,*args,**kwargs)->Any:
+	def elementByPhysicalIndex(self,*args)->Any:
 		"""Returns a plug for the element of this plug array having the specified physical index. """
-	def evaluateNumElements(self,*args,**kwargs)->Any:
+	def evaluateNumElements(self,*args)->Any:
 		"""Like numElements() but evaluates all connected elements first to ensure that they are included in the count."""
-	def getExistingArrayAttributeIndices(self,*args,**kwargs)->Any:
+	def getExistingArrayAttributeIndices(self,*args)->Any:
 		"""Returns an array of all the plug's logical indices which are currently in use."""
-	def getSetAttrCmds(self,*args,**kwargs)->Any:
+	def getSetAttrCmds(self,*args)->Any:
 		"""Returns a list of strings containing the setAttr commands (in MEL syntax) for this plug and all of its descendents."""
-	def isDefaultValue(self,*args,**kwargs)->Any:
+	def isDefaultValue(self,*args)->Any:
 		"""Returns a value indicating if the plug's value is equivalent to the plug's default value."""
-	def isFreeToChange(self,*args,**kwargs)->Any:
+	def isFreeToChange(self,*args)->Any:
 		"""Returns a value indicating if the plug's value can be changed, after taking into account the effects of locking and connections."""
-	def logicalIndex(self,*args,**kwargs)->Any:
+	def logicalIndex(self,*args)->Any:
 		"""Returns this plug's logical index within its parent array."""
-	def name(self,*args,**kwargs)->Any:
+	def name(self,*args)->Any:
 		"""Returns the name of the plug."""
-	def node(self,*args,**kwargs)->Any:
+	def node(self,*args)->Any:
 		"""Returns the node that this plug belongs to."""
-	def numChildren(self,*args,**kwargs)->Any:
+	def numChildren(self,*args)->Any:
 		"""Returns the number of children this plug has."""
-	def numConnectedChildren(self,*args,**kwargs)->Any:
+	def numConnectedChildren(self,*args)->Any:
 		"""Returns the number of this plug's children which have connections."""
-	def numConnectedElements(self,*args,**kwargs)->Any:
+	def numConnectedElements(self,*args)->Any:
 		"""Returns the number of this plug's elements which have connections."""
-	def numElements(self,*args,**kwargs)->Any:
+	def numElements(self,*args)->Any:
 		"""Returns the number of the plug's logical indices which are currently in use. Connected elements which have not yet been evaluated may not yet fully exist and may be excluded from the count."""
-	def parent(self,*args,**kwargs)->Any:
+	def parent(self,*args)->Any:
 		"""Returns a plug for the parent of this plug."""
-	def partialName(self,*args,**kwargs)->Any:
+	def partialName(self,*args)->Any:
 		"""Returns the name of the plug, formatted according to various criteria."""
-	def selectAncestorLogicalIndex(self,*args,**kwargs)->Any:
+	def selectAncestorLogicalIndex(self,*args)->Any:
 		"""Changes the logical index of the specified attribute in the plug's path."""
-	def setAttribute(self,*args,**kwargs)->Any:
+	def setAttribute(self,*args)->Any:
 		"""Switches the plug to reference the given attribute of the same node as the previously referenced attribute."""
-	def setBool(self,*args,**kwargs)->Any:
+	def setBool(self,*args)->Any:
 		"""Sets the plug's value as a boolean."""
-	def setChar(self,*args,**kwargs)->Any:
+	def setChar(self,*args)->Any:
 		"""Sets the plug's value as a single-byte integer."""
-	def setDouble(self,*args,**kwargs)->Any:
+	def setDouble(self,*args)->Any:
 		"""Sets the plug's value as a double-precision float."""
-	def setFloat(self,*args,**kwargs)->Any:
+	def setFloat(self,*args)->Any:
 		"""Sets the plug's value as a single-precision float."""
-	def setInt(self,*args,**kwargs)->Any:
+	def setInt(self,*args)->Any:
 		"""Sets the plug's value as a regular integer."""
-	def setMAngle(self,*args,**kwargs)->Any:
+	def setMAngle(self,*args)->Any:
 		"""Sets the plug's value as an MAngle."""
-	def setMDataHandle(self,*args,**kwargs)->Any:
+	def setMDataHandle(self,*args)->Any:
 		"""Sets the plug's value as a data handle."""
-	def setMDistance(self,*args,**kwargs)->Any:
+	def setMDistance(self,*args)->Any:
 		"""Sets the plug's value as an MDistance."""
-	def setMObject(self,*args,**kwargs)->Any:
+	def setMObject(self,*args)->Any:
 		"""Sets the plug's value as an MObject."""
-	def proxied(self,*args,**kwargs)->Any:
+	def proxied(self,*args)->Any:
 		"""Returns the proxied plug for this plug."""
-	def setMPxData(self,*args,**kwargs)->Any:
+	def setMPxData(self,*args)->Any:
 		"""Sets the plug's value using custom plug-in data."""
-	def setMTime(self,*args,**kwargs)->Any:
+	def setMTime(self,*args)->Any:
 		"""Sets the plug's value as an MTime."""
-	def setNumElements(self,*args,**kwargs)->Any:
+	def setNumElements(self,*args)->Any:
 		"""Pre-allocates space for count elements in an array of plugs."""
-	def setShort(self,*args,**kwargs)->Any:
+	def setShort(self,*args)->Any:
 		"""Sets the plug's value as a short integer."""
-	def setString(self,*args,**kwargs)->Any:
+	def setString(self,*args)->Any:
 		"""Sets the plug's value as a string."""
-	def isExactlyEqual(self,*args,**kwargs)->Any:
+	def isExactlyEqual(self,*args)->Any:
 		"""Returns true if both plugs refer to the same node, attribute and multi-index. If either or both plugs are null, the plugs are not considered equal."""
 class MPlugArray:
 	"""Array of MPlug values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MPoint:
 	"""3D point with double-precision coordinates."""
+	@property
+	def x(self)->float:
+		"""X coordinate"""
+	@x.setter
+	def x(self,value:float)->None:...
+	@property
+	def y(self)->float:
+		"""Y coordinate"""
+	@y.setter
+	def y(self,value:float)->None:...
+	@property
+	def z(self)->float:
+		"""Z coordinate"""
+	@z.setter
+	def z(self,value:float)->None:...
+	@property
+	def w(self)->float:
+		"""W coordinate"""
+	@w.setter
+	def w(self,value:float)->None:...
 	__hash__:None=None
 	kOrigin:MPoint
 	kTolerance:float=1e-10
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __radd__(self,*args,**kwargs)->Any:
+	def __radd__(self,*args)->Any:
 		"""Return value+self."""
-	def __sub__(self,*args,**kwargs)->Any:
+	def __sub__(self,other)->Any:
 		"""Return self-value."""
-	def __rsub__(self,*args,**kwargs)->Any:
+	def __rsub__(self,*args)->Any:
 		"""Return value-self."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Return self+=value."""
-	def __isub__(self,*args,**kwargs)->Any:
+	def __isub__(self,*args)->Any:
 		"""Return self-=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Return self*=value."""
-	def __truediv__(self,*args,**kwargs)->Any:
+	def __truediv__(self,other)->Any:
 		"""Return self/value."""
-	def __rtruediv__(self,*args,**kwargs)->Any:
+	def __rtruediv__(self,other)->Any:
 		"""Return value/self."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def cartesianize(self,*args,**kwargs)->Any:
+	def cartesianize(self,*args)->Any:
 		"""Convert point to cartesian form."""
-	def rationalize(self,*args,**kwargs)->Any:
+	def rationalize(self,*args)->Any:
 		"""Convert point to rational form."""
-	def homogenize(self,*args,**kwargs)->Any:
+	def homogenize(self,*args)->Any:
 		"""Convert point to homogenous form."""
-	def distanceTo(self,*args,**kwargs)->Any:
+	def distanceTo(self,*args)->Any:
 		"""Return distance between this point and another."""
-	def isEquivalent(self,*args,**kwargs)->Any:
+	def isEquivalent(self,*args)->Any:
 		"""Test for equivalence of two points, within a tolerance."""
 class MPointArray:
 	"""Array of MPoint values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MPointOnMesh:
 	"""This class is used to return information about a point on the
 	surface of a mesh: 3D position, normal, barycentric coordinates,
 	etc. The point can be anywhere on the mesh, not just at its
 	vertices."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def barycentricCoords(self)->Any:
+		"""(float, float) Tuple containing the barycentric coordinates of the
+		point. If the triangle has vertices (A, B, C) then barycentric
+		coordinates of (u, v) mean that the 3D position of the point is
+		u*A + v*B + (1 - u - v)*C. The barycentric coordinates are
+		particularly useful when interpolating attributes from one mesh to
+		another."""
+	@barycentricCoords.setter
+	def barycentricCoords(self,value:Any)->None:...
+	@property
+	def face(self)->Any:
+		"""(int) Mesh-global index of the face containing the point."""
+	@face.setter
+	def face(self,value:Any)->None:...
+	@property
+	def normal(self)->Any:
+		"""(MFloatVector) Surface normal vector at the point."""
+	@normal.setter
+	def normal(self,value:Any)->None:...
+	@property
+	def point(self)->Any:
+		"""(MFloatPoint) 3D position of the point."""
+	@point.setter
+	def point(self,value:Any)->None:...
+	@property
+	def triangle(self)->Any:
+		"""(int) Face-local index of the triangle containing the point."""
+	@triangle.setter
+	def triangle(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 class MPolyMessage(MMessage):
 	"""Class used to register callbacks for poly related messages."""
-	def addPolyComponentIdChangedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addPolyComponentIdChangedCallback(*args)->Any:
+		"""addPolyComponentIdChangedCallback(node, (wantVertIds, wantEdgeIds, wantFaceIds), function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback that should be called whenever a poly
+		component id is modified.
+		Currently, there are some cases where the component ids for a polygonal
+		mesh can be modified without generating a callback or without generating a
+		correct mapping.  These cases are outlined below.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		- Polygonal mesh has construction history enabled, and there is more than
+		         one topology changing operation in the history.  In this case, the
+		         callback is only called when the component ID mapping changes for the
+		         most recent operation, and performs the mapping with respect to the
+		         input and output meshes for this operation node.
+		- Polygonal mesh has construction history enabled, and the most recent
+		         topology changing operation is no longer the most recent operation.
+		         In this case, no id remapping callbacks will be invoked when the
+		         attributes on the operation node are changed in the history.
+		- When undo is used to revert a topology changing operation, the callback
+		         will not be invoked.  The MEventMessage class can be used to get
+		         notification when undo is performed.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		Component id mapping should always work correctly when construction history
+		is off.  It should also work correctly when construction history is on and
+		only the most recent operation is permitted to be adjusted (eg. changing
+		the distance parameter for a merge vertex node, when merge vertices was the
+		most recent operation.)  In either case, undo will not produce a poly
+		message callback.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addPolyTopologyChangedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * node (MObject) - the node the callback function should listen to
+		 *(wantVertIds, wantEdgeIds, wantFaceIds) - tuple of 3 booleans specifying
+		   what arrays should be provided to the callback function when it is
+		   invoked: (vertex indices, edge indices, face indices).
+		 * function - callable which will be passed a tuple and the clientData object.
+		   The tuple will contain three MUintArrays which are, respectively, the vertex,
+		   edge and face ids of the modified components. Only the arrays which were requested
+		   when the callback was registered will contain data, the others will be empty.
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addPolyTopologyChangedCallback(*args)->Any:
+		"""addPolyTopologyChangedCallback(node, function, clientData=None) -> id
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		This method registers a callback that will be called when a node impacting
+		the topology of a meshShape is modified. Because the callback is invoked
+		before the mesh has evaluated, the new topology data cannot be
+		queried at the time the callback is received. If you want to receive a
+		callback at a time when the new mesh data can be queried, use the
+		following technique:
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		- Use this method to register a topology-changed callback.
+		- In the topology-changed callback, add an MNodeMessage.addAttributeChangedCallback on the mesh shape.
+		- In the attribute-changed callback, check the inputs for an MNodeMessage.kAttributeEval message received by the "outMesh" plug of the mesh.
+		- Once you have received the eval message on that plug, the attribute-changed callback can be removed and the mesh topology can be queried.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * node (MObject) - the node the callback function should listen to
+		 * function - callable which will be passed the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MPxAttributePatternFactory:
 	"""Base class for custom attribute pattern factories."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 class MPxCommand:
 	"""Base class for custom commands."""
+	@property
+	def historyOn(self)->bool:
+		"""Determines if construction history is on for the command."""
+	@historyOn.setter
+	def historyOn(self,value:bool)->None:...
+	@property
+	def commandString(self)->str:
+		"""Command string to be echoed to the user."""
+	@commandString.setter
+	def commandString(self,value:str)->None:...
 	kLong:int=0
 	kDouble:int=1
 	kString:int=2
 	kNoArg:int=3
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def doIt(self,*args,**kwargs)->Any:
+	def doIt(self,*args)->Any:
 		"""Called by Maya to execute the command."""
-	def undoIt(self,*args,**kwargs)->Any:
+	def undoIt(self,*args)->Any:
 		"""Called by Maya to undo a previously executed command."""
-	def redoIt(self,*args,**kwargs)->Any:
+	def redoIt(self,*args)->Any:
 		"""Called by Maya to redo a previously undone command."""
-	def isUndoable(self,*args,**kwargs)->Any:
+	def isUndoable(self,*args)->Any:
 		"""Called by Maya to determine if the command supports undo."""
-	def hasSyntax(self,*args,**kwargs)->Any:
+	def hasSyntax(self,*args)->Any:
 		"""Called by Maya to determine if the command provides an MSyntax object describing its syntax."""
-	def syntax(self,*args,**kwargs)->Any:
+	def syntax(self,*args)->Any:
 		"""Returns the command's MSyntax object, if it has one."""
-	def displayInfo(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def displayWarning(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def displayError(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def clearResult(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setResult(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def appendToResult(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def currentResultType(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def isCurrentResultArray(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def currentResult(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+	@staticmethod
+	def displayInfo(*args)->Any:
+		"""Display an informational message."""
+	@staticmethod
+	def displayWarning(*args)->Any:
+		"""Display a warning message."""
+	@staticmethod
+	def displayError(*args)->Any:
+		"""Display an error message."""
+	@staticmethod
+	def clearResult(*args)->Any:
+		"""Clears the command's result."""
+	@staticmethod
+	def setResult(*args)->Any:
+		"""Set the value of the result to be returned by the command."""
+	@staticmethod
+	def appendToResult(*args)->Any:
+		"""Append a value to the result to be returned by the command."""
+	@staticmethod
+	def currentResultType(*args)->Any:
+		"""Returns the type of the current result."""
+	@staticmethod
+	def isCurrentResultArray(*args)->Any:
+		"""Returns true if the command's current result is an array of values."""
+	@staticmethod
+	def currentResult(*args)->Any:
+		"""Returns the command's current result."""
 class MPxData:
 	"""Base Class for User-defined Dependency Graph Data Types."""
 	kData:int=0
 	kGeometryData:int=1
 	kLast:int=2
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def readASCII(self,*args,**kwargs)->Any:
+	def readASCII(self,*args)->Any:
 		"""readASCII(argList, endOfTheLastParsedElement) -> int
 
 		Creates Data in Data Block as specified by input from ASCII file record.
 		Returns the new last argument parsed by this method.
 
 		* argList (MArgList) - List of arguments read from ASCII record* endOfTheLastParsedElement (int) - points to last argument already parsed."""
-	def readBinary(self,*args,**kwargs)->Any:
+	def readBinary(self,*args)->Any:
 		"""readBinary(in, length) -> int
 
 		Creates Data in Data Block as specified by binary data from the given stream.
@@ -15214,36 +14598,41 @@ class MPxData:
 
 		* in (bytearray) - Input stream
 		* length (int) - Length in bytes of binary data to be read."""
-	def writeASCII(self,*args,**kwargs)->Any:
+	def writeASCII(self,*args)->Any:
 		"""writeASCII() -> string
 
 		Encodes Data in accordance with the ASCII file format and returns as string."""
-	def writeBinary(self,*args,**kwargs)->Any:
+	def writeBinary(self,*args)->Any:
 		"""writeBinary() -> bytearray
 
 		Encodes Data in accordance with the binary file format and returns as bytearray."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(src) -> self
 
 		This method initializes an instance of an MPxData derived class from another existing instance.  This method can be thought of as the second half of a copy constructor for the class.  The default constructor has already been called for the instance, and this method is used to set the private data by copying the values from an existing instance.
 		This method must be implemented by the derived class.
 
 		* src (MPxData) - The object from which to copy the private data"""
-	def typeId(self,*args,**kwargs)->Any:
+	def typeId(self,*args)->Any:
 		"""typeId() -> MTypeId
 
 		Determines the type id of the Data object.
 		This method must be implemented by the derived class."""
-	def name(self,*args,**kwargs)->Any:
+	def name(self,*args)->Any:
 		"""name() -> string
 
 		Returns the name of the custom data type.
 		This method must be implemented by the derived class."""
 class MPxGeometryData(MPxData):
 	"""Base Class for User-defined Dependency Graph Geometry Data Types."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def matrix(self)->Any:
+		"""The matrix associated to MPxGeometryData."""
+	@matrix.setter
+	def matrix(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def deleteComponent(self,*args,**kwargs)->Any:
+	def deleteComponent(self,*args)->Any:
 		"""deleteComponent(compList) -> bool
 
 		This method should be overridden if this data is to support component deletion. For user defined shapes (MPxSurfaceShape) which support components, this method must be overridden if component deletion is to be supported when the shape has history.
@@ -15251,7 +14640,7 @@ class MPxGeometryData(MPxData):
 		Returns True if the deletion was successfull, False otherwise.
 
 		* compList (MObjectArray) - a list of components that are to be deleted"""
-	def deleteComponentsFromGroups(self,*args,**kwargs)->Any:
+	def deleteComponentsFromGroups(self,*args)->Any:
 		"""deleteComponentsFromGroups(compList, groupIdArray, groupComponentArray) -> bool
 
 		This method should be overridden to modify the groups that flows along with the geometry, as part of the data, based on the components being deleted. It should intelligently update the groups based on what gets deleted. The class MFnGeometryData can be used to access and modify grouping information for data.
@@ -15263,13 +14652,13 @@ class MPxGeometryData(MPxData):
 		* compList (MObjectArray) - a list of components that are to be deleted
 		* groupIdArray [OUT] (MIntArray) - array of group id's
 		* groupComponentArray (MObjectArray) - array of updated components, one for each group id"""
-	def getMatrix(self,*args,**kwargs)->Any:
+	def getMatrix(self,*args)->Any:
 		"""getMatrix(matrix) -> bool
 
 		Gets the matrix associated to MPxGeometryData and retursn True if is identity
 
 		* matrix [OUT] (MMatrix) - the returned matrix that takes a point from local object space to world space."""
-	def iterator(self,*args,**kwargs)->Any:
+	def iterator(self,*args)->Any:
 		"""iterator(componentList, component, useComponents, world=None) -> MPxGeometryIterator
 
 		Associates a control point based geometry iterator with this data.
@@ -15283,7 +14672,7 @@ class MPxGeometryData(MPxData):
 		* component (MObject) - a component to be iterator over.
 		* useComponents (bool) - if True then componentList is to be iterated over, otherwise the iteration is on component.
 		* world (bool) - specifies whether the iteration is for world space data."""
-	def smartCopy(self,*args,**kwargs)->Any:
+	def smartCopy(self,*args)->Any:
 		"""smartCopy(srcGeom) -> self
 
 		This method is used in conjunction with MPxSurfaceShape classes which support maya's deformations.
@@ -15293,7 +14682,7 @@ class MPxGeometryData(MPxData):
 		This method is not mandatory and only needs to be overridden to improve performance of deformations on shapes.
 
 		* srcGeom (MPxGeometryData) - the data to be copied"""
-	def updateCompleteVertexGroup(self,*args,**kwargs)->Any:
+	def updateCompleteVertexGroup(self,*args)->Any:
 		"""updateCompleteVertexGroup(component) -> bool
 
 		This method is used in conjunction with MPxSurfaceShape classes which support maya's deformations.
@@ -15308,72 +14697,83 @@ class MPxGeometryData(MPxData):
 		* component (MObject) - the component to test"""
 class MPxGeometryIterator:
 	"""Base class for user defined geometry iterators."""
-	def __iter__(self,*args,**kwargs)->Any:
+	@property
+	def currentPoint(self)->Any:
+		"""The current index of the iteration.
+		This value is used when iterating over all elements of your geometry, i.e. when there are no components specified."""
+	@currentPoint.setter
+	def currentPoint(self,value:Any)->None:...
+	@property
+	def maxPoints(self)->Any:
+		"""The largest index that will be iterated over.
+		This value is used when iterating over all elements of your geometry, i.e. when there are no components specified."""
+	@maxPoints.setter
+	def maxPoints(self,value:Any)->None:...
+	def __iter__(self)->Any:
 		"""Implement iter(self)."""
-	def __next__(self,*args,**kwargs)->Any:
+	def __next__(self)->Any:
 		"""Implement next(self)."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def component(self,*args,**kwargs)->Any:
+	def component(self,*args)->Any:
 		"""component() -> MObject
 
 		Returns a component for the current item in the iteration."""
-	def geometry(self,*args,**kwargs)->Any:
+	def geometry(self,*args)->Any:
 		"""geometry() -> long/object
 
-		Returns the user geometry that this iterator is iterating over.
-		"""
-	def hasNormals(self,*args,**kwargs)->Any:
+		Returns the user geometry that this iterator is iterating over."""
+	def hasNormals(self,*args)->Any:
 		"""hasNormals() -> bool
 
 		Returns whether the underlying geometry has normals."""
-	def hasPoints(self,*args,**kwargs)->Any:
+	def hasPoints(self,*args)->Any:
 		"""hasPoints() -> bool
 
 		Returns whether the underlying geometry has point data."""
-	def index(self,*args,**kwargs)->Any:
+	def index(self,*args)->Any:
 		"""index() -> int
 
 		Returns a unique index for the current item in the iteration.
 		If the iteration is over the whole geometry then this index is the same as current point. If the iteration is over some elements of the geometry specified by a component then this index is the index in your geometry."""
-	def indexUnsimplified(self,*args,**kwargs)->Any:
+	def indexUnsimplified(self,*args)->Any:
 		"""indexUnsimplified() -> int
 
 		Returns a unique index for the current item in the iteration.
 		Rather than being the iterator index this is the index for the actual item when simplification is skipping items. This index will be equal to index() if no simplification, otherwise it will be larger."""
-	def isDone(self,*args,**kwargs)->Any:
+	def isDone(self,*args)->Any:
 		"""isDone() -> bool
 
 		Returns whether all the items have been traversed yet."""
-	def iteratorCount(self,*args,**kwargs)->Any:
+	def iteratorCount(self,*args)->Any:
 		"""iteratorCount() -> int
 
 		Returns an estimate of how many items will be iterated over."""
-	def next(self,*args,**kwargs)->Any:
+	def next(self,*args)->Any:
 		"""next() -> self
 
 		Advances to the next component."""
-	def point(self,*args,**kwargs)->Any:
+	def point(self,*args)->Any:
 		"""point() -> MPoint
 
 		Returns the current component's positional data."""
-	def reset(self,*args,**kwargs)->Any:
+	def reset(self,*args)->Any:
 		"""reset() -> self
 
 		Resets the iterator to the start of the components so that another pass over them may be made."""
-	def setObject(self,*args,**kwargs)->Any:
+	def setObject(self,*args)->Any:
 		"""setObject(shape) -> self
 
 		Optional method to set a shape object to iterate over to allow tweaking of the shape's history (input geometry).
 
 		* shape (MPxSurfaceShape) - a user defined shape object."""
-	def setPoint(self,*args,**kwargs)->Any:
+	def setPoint(self,*args)->Any:
 		"""setPoint(point) -> self
 
 		Sets the current component's positional data.
 
 		* point (MPoint) - the new positional value to set."""
-	def setPointGetNext(self,*args,**kwargs)->Any:
+	def setPointGetNext(self,*args)->Any:
 		"""setPointGetNext(point) -> int
 
 		Sets the current component's positional data, and returns the next index value.
@@ -15412,47 +14812,33 @@ class MPxNode:
 	kEvaluatedDirectly:int=1
 	kLeaveDirty:int=2
 	kPostEvaluationTypeLast:int=3
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addAttribute(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addAttribute(*args)->Any:
+		"""addAttribute(attr) -> None
 
-		Convert a function to be a static method.
+		This method adds a new attribute to a user defined node type during the type's initialization.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		This method will only work during the static initialization method of the user defined node class.  The initialization method is the one that is passed into  MFnPlugin.registerNode(). The attributes must first be created using one of the MFnAttribute classes, and can then be added using this method.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		For compound attributes, the proper way to use this method is by calling it with the parent attribute. If a compound attribute is passed, this method will add all of its children.
+		NOTE: A failure will occur if you attempt to call addAttribute() on the children of a compound attribute.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		* attr (MObject) - new attribute to add."""
+	@staticmethod
+	def attributeAffects(*args)->Any:
+		"""attributeAffects(whenChanges, isAffected) -> None
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def attributeAffects(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		This method specifies that a particular input attribute affects a specific output attribute.  This is required to make evaluation efficient.  When an input changes, only the affected outputs will be computed. Output attributes cannot be keyable - if they are keyable, this method will fail.
 
-		Convert a function to be a static method.
+		This method must be called for every attribute dependency when initializing the node's attributes.  The attributes must first be added using the MPxNode.addAttribute() method.  Failing to call this method will cause the node not to update when its inputs change. If there are no calls to this method in a node's initialization, then the compute method will never be called.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		This method will only work during the static initialization method of the user defined node class.  The initialization method is the one that is passed into MFnPlugin.registerNode().  As a result, it does not work with dynamic attributes. For an alternate solution which handles dynamic as well as non-dynamic attributes refer to MPxNode.setDependentsDirty.()
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def compute(self,*args,**kwargs)->Any:
+		* whenChanges (MObject) - input attribute - MObject that points to an input attribute that has already been added.
+		* isAffected (MObject) - affected output attribute - MObject that points to an output attribute that has already been added."""
+	def compute(self,*args)->Any:
 		"""compute(plug, dataBlock) -> self
 
 		This method should be overridden in user defined nodes.
@@ -15469,7 +14855,7 @@ class MPxNode:
 
 		* plug (MPlug) - plug representing the attribute that needs to be recomputed.
 		* block (MDataBlock) - data block containing storage for the node's attributes."""
-	def preEvaluation(self,*args,**kwargs)->Any:
+	def preEvaluation(self,*args)->Any:
 		"""preEvaluation(context, evalNode) -> None
 
 		Prepare a node's internal state for threaded evaluation.
@@ -15489,7 +14875,7 @@ class MPxNode:
 		                                     information about the dirty plugs that
 		                                     are about to be evaluated for the context.
 		                                     Should be only used to query information."""
-	def postEvaluation(self,*args,**kwargs)->Any:
+	def postEvaluation(self,*args)->Any:
 		"""postEvaluation(context, evalNode, evalType) -> None
 
 		Clean up node's internal state after threaded evaluation.
@@ -15515,7 +14901,7 @@ class MPxNode:
 		                           update any additional internal state based on the new values.
 		  * kLeaveDirty          : Evaluation was performed without updating this node. Internal
 		                           state should be updated to reflect that the node is dirty."""
-	def getCacheSetup(self,*args,**kwargs)->Any:
+	def getCacheSetup(self,*args)->Any:
 		"""getCacheSetup(evalNode, disablingInfo, setupInfo, objectArray) -> None
 
 		Provide node-specific setup info for the Cached Playback system.
@@ -15533,9 +14919,8 @@ class MPxNode:
 		* evalNode (MEvaluationNode)              - This node's evaluation node, contains animated plug information
 		* disablingInfo (MNodeCacheDisablingInfo) - Information about why the node disables Cached Playback to be reported to the user
 		* cacheSetupInfo (MNodeCacheSetupInfo)    - Preferences and requirements this node has for Cached Playback
-		* monitoredAttributes (MObjectArray)      - Attributes impacting the behavior of this method that will be monitored for change
-		"""
-	def configCache(self,*args,**kwargs)->Any:
+		* monitoredAttributes (MObjectArray)      - Attributes impacting the behavior of this method that will be monitored for change"""
+	def configCache(self,*args)->Any:
 		"""configCache(evalNode, schema) -> None
 
 		Defines the node's behavior when participating in Cached Playback.
@@ -15543,9 +14928,8 @@ class MPxNode:
 		This method will be called at EM partitioning time, after rules evaluation.
 
 		* evalNode (MEvaluationNode)  - This node's evaluation node, contains animated plug information
-		* schema (MCacheSchema)       - Specification about what attributes to cache
-		"""
-	def transformInvalidationRange(self,*args,**kwargs)->Any:
+		* schema (MCacheSchema)       - Specification about what attributes to cache"""
+	def transformInvalidationRange(self,*args)->Any:
 		"""transformInvalidationRange(plug, timeRange) -> timeRange
 
 		Override this method to register this node as an Invalidation-Range-Transformation kernel (IRT kernel) An IRT kernel node will change the invalidation time range for its downstream nodes For example, Dynamics-solver will transform invalidation time range [a,b] to [a,+inf) And Clip-Time-Editor will send out the invalidation range for each of the clip [a,b] to ( [t0+a,t0+b] U [t1+a,t1+b] U [t2+a,t2+b] U ... )
@@ -15559,11 +14943,11 @@ class MPxNode:
 		WARNING: You cannot do any evaluation in this function, because it can be called in dirty-propagation
 		WARNING: Do *not* call MPxNode::transformInvalidationRange from your override method
 		NOTE: If a plugin node have invalidation-range-transformation *conditionally* Only transform the invalidation range when attribute 'enableIRT' is set The plugin should call MPxNode::transformInvalidationRange to signal it does not perform any IRT."""
-	def hasInvalidationRangeTransformation(self,*args,**kwargs)->Any:
+	def hasInvalidationRangeTransformation(self,*args)->Any:
 		"""hasInvalidationRangeTransformation() -> bool
 
 		Checks if this MPxNode derived node overrides the MPxNode::transformInvalidationRange method"""
-	def connectionBroken(self,*args,**kwargs)->Any:
+	def connectionBroken(self,*args)->Any:
 		"""connectionBroken( plug, otherPlug, asSrc) -> self
 
 		This method gets called when connections are broken with attributes of this node.
@@ -15571,7 +14955,7 @@ class MPxNode:
 		* plug (MPlug) - attribute on this node.
 		* otherPlug (MPlug) - attribute on other node.
 		* asSrc (bool) - is this plug a source of the connection."""
-	def connectionMade(self,*args,**kwargs)->Any:
+	def connectionMade(self,*args)->Any:
 		"""connectionMade(plug, otherPlug, asSrc) -> self
 
 		This method gets called when connections are made to attributes of this node.
@@ -15579,7 +14963,7 @@ class MPxNode:
 		* plug (MPlug) - attribute on this node.
 		* otherPlug (MPlug) - attribute on other node.
 		* asSrc (bool) - is this plug a source of the connection."""
-	def copyInternalData(self,*args,**kwargs)->Any:
+	def copyInternalData(self,*args)->Any:
 		"""copyInternalData(node) -> self
 
 		This method is overriden by nodes that store attribute data in some internal format.
@@ -15587,7 +14971,7 @@ class MPxNode:
 		On duplication this method is called on the duplicated node with the node being duplicated passed as the parameter.  Overriding this method gives your node a chance to duplicate any internal data you've been storing and manipulating outside of normal attribute data.
 
 		* node (MPxNode) - the node that is being duplicated."""
-	def dependsOn(self,*args,**kwargs)->Any:
+	def dependsOn(self,*args)->Any:
 		"""dependsOn( plug, otherPlug) -> bool/None
 
 		This method may be overridden by the user defined node. It should only be required to override this on rare occasions.
@@ -15600,11 +14984,11 @@ class MPxNode:
 
 		* plug (MPlug) - attribute on this node.
 		* otherPlug (MPlug) - attribute on other node."""
-	def doNotWrite(self,*args,**kwargs)->Any:
+	def doNotWrite(self,*args)->Any:
 		"""doNotWrite() -> bool
 
 		use this method to query the "do not write" state of this proxy node. True is returned if this node will not be saved when the maya model is written out. """
-	def existWithoutInConnections(self,*args,**kwargs)->Any:
+	def existWithoutInConnections(self,*args)->Any:
 		"""existWithoutInConnections() -> bool
 
 		Determines whether or not this node can exist without input connections.
@@ -15615,7 +14999,7 @@ class MPxNode:
 		Do not override this method.
 
 		Returns true if this node can exist without input connections, false otherwise"""
-	def existWithoutOutConnections(self,*args,**kwargs)->Any:
+	def existWithoutOutConnections(self,*args)->Any:
 		"""existWithoutOutConnections() -> bool
 
 		Determines whether or not this node can exist without output connections.
@@ -15626,14 +15010,14 @@ class MPxNode:
 		Do not override this method.
 
 		Returns true if this node can exist without output connections, false otherwise"""
-	def forceCache(self,*args,**kwargs)->Any:
+	def forceCache(self,*args)->Any:
 		"""forceCache(ctx=MDGContext::current()) -> MDataBlock
 
 		Get the datablock for this node. If there is no datablock then one will be created.
 		NOTE: This should be used only in places where fast access to the datablock outside of a compute is critical such as the transformUsing method of MPxSurfaceShape.
 
 		* ctx (MDGContext) - The context in which the datablock will be retrieved."""
-	def getFilesToArchive(self,*args,**kwargs)->Any:
+	def getFilesToArchive(self,*args)->Any:
 		"""getFilesToArchive(shortName=False, unresolvedName=False, markCouldBeImageSequence=False) -> list of strings
 
 		Use this method to return all external files used by this node. This file list will be used by the File > Archive zip feature, maya.exe -archive and the `file -q -list` mel command.
@@ -15642,12 +15026,12 @@ class MPxNode:
 
 		If shortName is True, return just the filename portion of the path. Otherwise, return a full path.
 
-		If unresolvedName is True, return the path before any resolution has been done (i.e leave it as a relative path, include unexpanded environment variables,  tildes, ".."s etc). Otherwise, resolve the file	path and return an absolute path (to resolve with standard Maya path resolution, use MFileObject.resolvedFullName()).
+		If unresolvedName is True, return the path before any resolution has been done (i.e leave it as a relative path, include unexpanded environment variables,  tildes, ".."s etc). Otherwise, resolve the file     path and return an absolute path (to resolve with standard Maya path resolution, use MFileObject.resolvedFullName()).
 
 		* shortName (bool) - If True, only add the filename of the path.
 		* unresolvedName (bool) - If True, add paths before any resolution, rather than absolute paths.
 		* markCouldBeImageSequence (bool) - If True, append an asterisk after any file path that could be an image sequence (note: only used by maya.exe -archive)."""
-	def getInternalValue(self,*args,**kwargs)->Any:
+	def getInternalValue(self,*args)->Any:
 		"""getInternalValue(plug, dataHandle) -> bool
 
 		This method is overridden by nodes that store attribute data in some internal format.
@@ -15659,9 +15043,8 @@ class MPxNode:
 		All internal data should respect the current context, which may be obtained from MDGContext::current()
 
 		* plug (MPlug) - the attribute that is being queried.
-		* dataHandle [OUT] (MDataHandle) - the dataHandle to store the attribute value.
-		"""
-	def getInternalValueInContext(self,*args,**kwargs)->Any:
+		* dataHandle [OUT] (MDataHandle) - the dataHandle to store the attribute value."""
+	def getInternalValueInContext(self,*args)->Any:
 		"""getInternalValueInContext(plug, dataHandle, ctx) -> bool [OBSOLETE]
 
 		This method is obsolete. Override MPxNode.getInternalValue instead.
@@ -15669,26 +15052,20 @@ class MPxNode:
 		* plug (MPlug) - the attribute that is being queried.
 		* dataHandle [OUT] (MDataHandle) - the dataHandle to store the attribute value.
 		* ctx (MDGContext) - the context the method is being evaluated in."""
-	def inheritAttributesFrom(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def inheritAttributesFrom(*args)->Any:
+		"""inheritAttributesFrom(parentClassName) -> None
 
-		Convert a function to be a static method.
+		This method allows a class of plugin node to inherit all of the attributes of a second class of plugin node.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		This method will only work during the static initialization method of the user defined node class and must be called before any other attributes have been added.  The initialization method is the one that is passed into  MFnPlugin.registerNode().
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		A plugin node may only inherit attributes from one other class of plugin node. Attempting to call this method multiple times within a node's initialization method will result in an error.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		Both node classes must be registered using the same MPxNode type, listed in MPxNode.type().
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def internalArrayCount(self,*args,**kwargs)->Any:
+		* parentClassName (string) - class of node to inherit attributes from."""
+	def internalArrayCount(self,*args)->Any:
 		"""internalArrayCount(plug) -> int
 		internalArrayCount(plug, ctx) -> int  [OBSOLETE]
 
@@ -15702,19 +15079,19 @@ class MPxNode:
 
 		* plug (MPlug) - the array plug.
 		* ctx (MDGContext) - the context, default to MDGContext.current()."""
-	def isAbstractClass(self,*args,**kwargs)->Any:
+	def isAbstractClass(self,*args)->Any:
 		"""isAbstractClass() -> bool
 
 		Override this class to return True if this node is an abstract node. An abstract node can only be used as a base class.  It cannot be created using the 'createNode' command.
 
 		It is not necessary to override this method."""
-	def isPassiveOutput(self,*args,**kwargs)->Any:
+	def isPassiveOutput(self,*args)->Any:
 		"""isPassiveOutput(plug) -> bool
 
 		This method may be overridden by the user defined node if it wants to provide output attributes which do not prevent value modifications to the destination attribute. For example, output plugs on animation curve nodes are passive. This allows the attributes driven by the animation curves to be set to new values by the user.
 
 		* plug (MPlug) - plug representing output in question."""
-	def legalConnection(self,*args,**kwargs)->Any:
+	def legalConnection(self,*args)->Any:
 		"""legalConnection(plug, otherPlug, asSrc) -> bool/None
 
 		This method allows you to check for legal connections being made to attributes of this node.
@@ -15724,7 +15101,7 @@ class MPxNode:
 		* plug (MPlug) - attribute on this node.
 		* otherPlug (MPlug) - attribute on other node.
 		* asSrc (bool) - is this plug a source of the connection."""
-	def legalDisconnection(self,*args,**kwargs)->Any:
+	def legalDisconnection(self,*args)->Any:
 		"""legalDisconnection(plug, otherPlug, arsSrc) -> bool/None
 
 		This method allows you to check for legal disconnections being made to attributes of this node.
@@ -15734,7 +15111,7 @@ class MPxNode:
 		* plug (MPlug) - attribute on this node.
 		* otherPlug (MPlug) - attribute on other node.
 		* asSrc (boool) - is this plug a source of the connection."""
-	def passThroughToMany(self,*args,**kwargs)->Any:
+	def passThroughToMany(self,*args)->Any:
 		"""passThroughToMany(plug, plugArray) -> bool
 
 		This method is overriden by nodes that want to control the traversal behavior of some Maya search algorithms which traverse the history/future of shape nodes looking for directly related nodes. In particular, the Artisan paint code uses this method when searching for paintable nodes, and the disk cache code uses this method when searching for upstream cacheFile nodes.
@@ -15743,7 +15120,7 @@ class MPxNode:
 
 		* plug (MPlug) - the plug.
 		* plugArray (MPlugArray) - the corresponding plugs."""
-	def passThroughToOne(self,*args,**kwargs)->Any:
+	def passThroughToOne(self,*args)->Any:
 		"""passThroughToOne(plug) -> plug
 
 		This method may be overriden by nodes that have a one-to-one relationship between an input attribute and a corresponding output attribute. This method is used by Maya to perform the following capabilities:
@@ -15753,13 +15130,13 @@ class MPxNode:
 		- The base class Maya implementation of passThroughToAll will call this method if passThroughToAll returns False.
 
 		* plug (MPlug) - the plug."""
-	def postConstructor(self,*args,**kwargs)->Any:
+	def postConstructor(self,*args)->Any:
 		"""postConstructor() -> self
 
 		Internally maya creates two objects when a user defined node is created, the internal MObject and the user derived object.
 		The association between the these two objects is not made until after the MPxNode constructor is called. This implies that no MPxNode member function can be called from the MPxNode constructor.
 		The postConstructor will get called immediately after the constructor when it is safe to call any MPxNode member function."""
-	def setDependentsDirty(self,*args,**kwargs)->Any:
+	def setDependentsDirty(self,*args)->Any:
 		"""setDependentsDirty(plug, plugArray) -> self
 
 		This method can be overridden in user defined nodes to specify which plugs should be set dirty based upon an input plug which Maya is marking dirty. The list of plugs for Maya to mark dirty is returned by the plug array. This method handles both dynamic as well as non-dynamic plugs and is useful in the following ways:
@@ -15778,7 +15155,7 @@ class MPxNode:
 
 		* plug (MPlug) - plug which is being set dirty by Maya.
 		* plugArray the programmer should add any plugs which they want to set dirty to this list."""
-	def setDoNotWrite(self,*args,**kwargs)->Any:
+	def setDoNotWrite(self,*args)->Any:
 		"""setDoNotWrite(bool) -> self
 
 		Use this method to mark the "do not write" state of this proxy node.  If set, this node will not be saved when the Maya model is written out.
@@ -15786,7 +15163,7 @@ class MPxNode:
 		NOTES:
 		1. Plug-in "requires" information will be written out with the model when saved.  But a subsequent reload and resave of the file will cause these to go away.
 		2. If this node is a DAG and has a parent or children, the "do not write" flag of the parent or children will not be set. It is the developer's responsibility to ensure that the resulting scene file is capable of being read in without errors due to unwritten nodes. """
-	def setExistWithoutInConnections(self,*args,**kwargs)->Any:
+	def setExistWithoutInConnections(self,*args)->Any:
 		"""setExistWithoutInConnections(bool) -> bool
 
 		This method specifies whether or not the node can exist without input
@@ -15798,7 +15175,7 @@ class MPxNode:
 		Do not override this method.
 
 		* flag (bool) true if this node can exist without input connections, false otherwise"""
-	def setExistWithoutOutConnections(self,*args,**kwargs)->Any:
+	def setExistWithoutOutConnections(self,*args)->Any:
 		"""setExistWithoutOutConnections(bool) -> bool
 
 		This method specifies whether or not the node can exist without
@@ -15810,7 +15187,7 @@ class MPxNode:
 		Do not override this method.
 
 		* flag (bool) true if this node can exist without output connections, false otherwise"""
-	def setInternalValue(self,*args,**kwargs)->Any:
+	def setInternalValue(self,*args)->Any:
 		"""setInternalValue(plug, dataHandle) -> bool
 
 
@@ -15825,9 +15202,8 @@ class MPxNode:
 		All internal data should respect the current context, which may be obtained from MDGContext::current()
 
 		* plug (MPlug) - the attribute that is being set.
-		* dataHandle (MDataHandle) - the dataHandle containing the value to set.
-		"""
-	def setInternalValueInContext(self,*args,**kwargs)->Any:
+		* dataHandle (MDataHandle) - the dataHandle containing the value to set."""
+	def setInternalValueInContext(self,*args)->Any:
 		"""setInternalValueInContext(plug, dataHandle, ctx) -> bool  [OBSOLETE]
 
 		This method is obsolete. Override MPxNode.setInternalValue instead.
@@ -15835,7 +15211,7 @@ class MPxNode:
 		* plug (MPlug) - the attribute that is being set.
 		* dataHandle (MDataHandle) - the dataHandle containing the value to set.
 		* ctx (MDGContext) - the context the method is being evaluated in."""
-	def setMPSafe(self,*args,**kwargs)->Any:
+	def setMPSafe(self,*args)->Any:
 		"""setMPSafe(bool) -> self
 
 		This method is obsolete. Override MPxNode.setSchedulingType instead.
@@ -15843,7 +15219,7 @@ class MPxNode:
 		Set a flag to specify if a user defined shading node is safe for multi-processor rendering. For a shading node to be MP safe, it cannot access any shared global data and should only use attributes in the datablock to get input data and store output data.
 
 		NOTE: This should be called from the postConstructor() method for shading node plug-ins only. If a shading node is non-safe, then it will only be useful during single processor rendering."""
-	def shouldSave(self,*args,**kwargs)->Any:
+	def shouldSave(self,*args)->Any:
 		"""shouldSave(plug) -> bool/None
 
 		This method may be overridden by the user defined node.  It should only be required to override this on rare occasions.
@@ -15852,11 +15228,11 @@ class MPxNode:
 		This method is not called for ramp attributes since they should always be written.
 
 		* plug (MPlug) - plug representing the attribute to be saved."""
-	def thisMObject(self,*args,**kwargs)->Any:
+	def thisMObject(self,*args)->Any:
 		"""thisMObject() -> MObject
 
 		Returns the MObject associated with this user defined node.  This makes it possible to use MFnDependencyNode or to construct plugs to this node's attributes."""
-	def type(self,*args,**kwargs)->Any:
+	def type(self,*args)->Any:
 		"""type() -> int
 
 		Returns the type of node that this is.  This is used to differentiate user defined nodes that are derived off different MPx base classes.
@@ -15885,18 +15261,18 @@ class MPxNode:
 		  kClientDeviceNode              Custom threaded device derived from MPxThreadedDeviceNode
 		  kThreadedDeviceNode            Custom threaded device node
 		  kAssembly                      Custom assembly derived from MPxAssembly
-		  kSkinCluster					Custom deformer derived from MPxSkinCluster
-		  kGeometryFilter				Custom deformer derived from MPxGeometryFilter
-			 kBlendShape					Custom deformer derived from MPxBlendShape"""
-	def typeId(self,*args,**kwargs)->Any:
+		  kSkinCluster                                  Custom deformer derived from MPxSkinCluster
+		  kGeometryFilter                               Custom deformer derived from MPxGeometryFilter
+		         kBlendShape                                    Custom deformer derived from MPxBlendShape"""
+	def typeId(self,*args)->Any:
 		"""typeId() -> MTypeId
 
 		Returns the TYPEID of this node."""
-	def typeName(self,*args,**kwargs)->Any:
+	def typeName(self,*args)->Any:
 		"""typeName() -> string
 
 		Returns the type name of this node.  The type name identifies the node type to the ASCII file format"""
-	def name(self,*args,**kwargs)->Any:
+	def name(self,*args)->Any:
 		"""name() -> string
 
 		Returns the name of this particular instance of this class.  Each objectin the dependency graph has a name.  This name will be used by the UIand by MEL.
@@ -15904,7 +15280,7 @@ class MPxNode:
 		It is not necessary to override this method.
 
 		Returns the name of the node"""
-	def addExternalContentForFileAttr(self,*args,**kwargs)->Any:
+	def addExternalContentForFileAttr(self,*args)->Any:
 		"""addExternalContentForFileAttr(table, attr) -> bool
 
 		This method is a helper for derived clases implementing getExternalContent().  It augments the external content info table passed in with an entry describing external content whose location is described by the specified attribute.
@@ -15915,7 +15291,7 @@ class MPxNode:
 		* attr (MObject) - The attribute for which the plug value will be queried for a location.
 
 		Returns True if an item was sucessfully added to the table.  False if the attribute does not describe a non-empty location, or an item with the same key was already present in the table."""
-	def getExternalContent(self,*args,**kwargs)->Any:
+	def getExternalContent(self,*args)->Any:
 		"""getExternalContent(table) -> self
 
 		The table populated by this method must include the location of all the content (files) used by this node, including those that do not exist.  See MExternalContentInfoTable for details.
@@ -15927,7 +15303,7 @@ class MPxNode:
 		The default implementation does nothing.
 
 		* table [OUT] (MExternalContentInfoTable) - Content information table that this method must populate."""
-	def setExternalContent(self,*args,**kwargs)->Any:
+	def setExternalContent(self,*args)->Any:
 		"""setExternalContent(table) -> self
 
 		This is useful in the context of content relocation.  This will be called while the scene is being loaded to apply path changes performed externally. Consequently, interaction with the rest of the scene must be kept to a minimum.  It is however valid to call this method outside of scene loading contexts.
@@ -15939,7 +15315,7 @@ class MPxNode:
 		The default implementation does nothing.
 
 		* table Key->location table with new content locations."""
-	def setExternalContentForFileAttr(self,*args,**kwargs)->Any:
+	def setExternalContentForFileAttr(self,*args)->Any:
 		"""setExternalContentForFileAttr(attr, table) -> bool
 
 		This method is a helper for derived clases implementing setExternalContent().  It assigns a value to a plug with the one from the table whose key is the same as the passed in attribute name.
@@ -15952,6 +15328,12 @@ class MPxNode:
 		Returns True if the plug was successfully written to. False if no entry in the table was named after the attribute or if no plug was found."""
 class MPxSurfaceShape(MPxNode):
 	"""Parent class of all user defined shapes."""
+	@property
+	def isRenderable(self)->Any:
+		"""Specifies whether the shape is a renderable shape.
+		Making a shape renderable allows the shape to have shading group assignments."""
+	@isRenderable.setter
+	def isRenderable(self,value:Any)->None:...
 	kNoPointCaching:int=0
 	kSavePoints:int=1
 	kRestorePoints:int=2
@@ -16008,9 +15390,9 @@ class MPxSurfaceShape(MPxNode):
 	objectGroupColor:MObject
 	useObjectColor:MObject
 	objectColor:MObject
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def acceptsGeometryIterator(self,*args,**kwargs)->Any:
+	def acceptsGeometryIterator(self,*args)->Any:
 		"""acceptsGeometryIterator(component, writeable=True, forReadOnly=False) -> bool
 		acceptsGeometryIterator(writeable=True) -> boolboundingBox() -> MBoundingBox
 
@@ -16020,24 +15402,24 @@ class MPxSurfaceShape(MPxNode):
 		* component (MObject) - the component to test
 		* writeable (bool) - is this component type writable by an iterator
 		* forReadOnly (bool) - is this component type readable by an iterator"""
-	def activeComponents(self,*args,**kwargs)->Any:
+	def activeComponents(self,*args)->Any:
 		"""activeComponents() -> MObjectArray
 
 		Returns a list of active (selected) components for the shape."""
-	def boundingBox(self,*args,**kwargs)->Any:
+	def boundingBox(self,*args)->Any:
 		"""boundingBox() -> MBoundingBox
 
 		This method should be overridden to return a bounding box for the shape.
 		If this method is overridden, then MPxSurfaceShape.isBounded() should also be overridden to return True."""
-	def cachedShapeAttr(self,*args,**kwargs)->Any:
+	def cachedShapeAttr(self,*args)->Any:
 		"""cachedShapeAttr() -> MObject
 
 		Returns the attribute containing the shape's cached geometry, if it has one."""
-	def canMakeLive(self,*args,**kwargs)->Any:
+	def canMakeLive(self,*args)->Any:
 		"""canMakeLive() -> bool
 
 		This method is used by Maya to determine whether a surface can be made live. It can be overridden to return True if you wish to allow your surface to be made live. If you return True, you will also need to implement both closestPoint() overloads. The default is to return False."""
-	def childChanged(self,*args,**kwargs)->Any:
+	def childChanged(self,*args)->Any:
 		"""childChanged(state=kObjectChanged) -> self
 
 		This method can be used to trigger the shape to recalculate its bounding box.
@@ -16048,7 +15430,7 @@ class MPxSurfaceShape(MPxNode):
 		  kObjectChanged         Object geometry changed. Internal caches need to be updated.
 		  kBoundingBoxChanged    Object geometry is unchanged but its bounding box has changed.
 		                         This might happen if the object was moved or an offset changed."""
-	def closestPoint(self,*args,**kwargs)->Any:
+	def closestPoint(self,*args)->Any:
 		"""closestPoint(toThisPoint, theClosestPoint, tolerance=MPoint.kTolerance) -> self
 		closestPoint(raySource, rayDirection, theClosestPoint, theClosestNormal, findClosestOnMiss, tolerance=MPoint.kTolerance) -> bool
 
@@ -16065,7 +15447,7 @@ class MPxSurfaceShape(MPxNode):
 		For snapping:
 		If you override this method, you should set theClosestPoint to the closest point on your surface intersected by the ray defined by raySource and rayDirection. You should also populate the theClosestNormal parameter with the surface normal at that intersection point.
 
-		If no intersection is found and findClosestOnMiss is True, you should still provide a point on your surface closest to the ray defined by raySource and rayDirection. When used for live snapping, this allows the user to click and drag outside the bounds	of a live surface and still have it snap to the nearest point on it within the viewport. Note, performing a pure 3D closest point of approach test in this situation may not give the most natural result for live mesh snapping.
+		If no intersection is found and findClosestOnMiss is True, you should still provide a point on your surface closest to the ray defined by raySource and rayDirection. When used for live snapping, this allows the user to click and drag outside the bounds    of a live surface and still have it snap to the nearest point on it within the viewport. Note, performing a pure 3D closest point of approach test in this situation may not give the most natural result for live mesh snapping.
 		To provide behavior that matches Maya, you can project your surface onto the plane defined by the ray, then perform your calculations. This will account for view perspective and give accurate live snap points along the silhouette of the surface.
 
 		If findClosestOnMiss is False, you should not provide a point and normal when the ray misses.
@@ -16078,7 +15460,7 @@ class MPxSurfaceShape(MPxNode):
 		* theClosestNormal [OUT] (MVector) - the normal at the closest point on your surface
 		* findClosestOnMiss (bool) - when True, you should calculate theClosestPoint and theClosestNormal even if the ray misses your surface.
 		* tolerance (float) - tolerance to use in your calculations"""
-	def componentToPlugs(self,*args,**kwargs)->Any:
+	def componentToPlugs(self,*args)->Any:
 		"""componentToPlugs(component, selectionList) -> self
 
 		Converts the given component into a selection list of plugs.
@@ -16088,28 +15470,28 @@ class MPxSurfaceShape(MPxNode):
 
 		* component (MObject) - the component to be converted
 		* list (MSelectionList) - a selection list where the plug should be added"""
-	def convertToTweakNodePlug(self,*args,**kwargs)->Any:
+	def convertToTweakNodePlug(self,*args)->Any:
 		"""convertToTweakNodePlug(plug) -> bool
 
 		Check if a tweak node is connected to this node. If it is, then reset the supplied plug to contain the controlPoints attribute on the tweak node.
 		Returns True if a tweak node was found, False if the plug was unchanged
 
 		* plug (MPlug) - plug which will be set to point to the associated tweak node plug if a tweak node is connected"""
-	def createFullRenderGroup(self,*args,**kwargs)->Any:
+	def createFullRenderGroup(self,*args)->Any:
 		"""createFullRenderGroup() -> MObject
 
 		Returns a component containing all of renderable elements in the shape.
 		This method is used to create a component containing every renderable element in the object.
 
 		This method is supposed to return non-null object only if the dag object contains renderable components. Type of the return component should is the same as the one returned by MPxSurfaceShape::renderGroupComponentType()."""
-	def createFullVertexGroup(self,*args,**kwargs)->Any:
+	def createFullVertexGroup(self,*args)->Any:
 		"""createFullVertexGroup() -> MObject
 
 		Returns a component containing all of the vertices in the shape.
 		This method is used to create a component containing every vertex/CV in the object.
 
 		This method is supposed to return non-null object only if the dag object contains vertices/CVs (control points), so derived classes that do should override this method."""
-	def deleteComponents(self,*args,**kwargs)->Any:
+	def deleteComponents(self,*args)->Any:
 		"""deleteComponents(componentList, undoInfo) -> bool
 
 		Returns True if this method was successful, False otherwise.
@@ -16117,19 +15499,19 @@ class MPxSurfaceShape(MPxNode):
 
 		* componentList (MObjectArray) - List of components to be deleted
 		* undoInfo (MDoubleArray) - Values used for undo purposes"""
-	def excludeAsPluginShape(self,*args,**kwargs)->Any:
+	def excludeAsPluginShape(self,*args)->Any:
 		"""excludeAsPluginShape() -> bool
 
 		A Maya viewport can be set to not display "Plugin Shapes", which means shapes derived from MPxSurfaceShape. By overriding excludeAsPluginShape() to return False, you can change that behaviour so that this shape is still displayed even when the display of "Plugin Shapes" is disabled.
 		The default implementation returns True.
 		Returns True to have this shape obey the "Plugin Shapes" settings in the viewport's "Show" menu; False to have it ignore that setting."""
-	def geometryData(self,*args,**kwargs)->Any:
+	def geometryData(self,*args)->Any:
 		"""geometryData() -> MObject
 
 		Returns the geometry data of the shape. The geometry data must be derived from the MPxGeometryData class.
 
 		The data is used by Maya to add, edit and query component grouping (set) information for the shape. This set information is stored and managed by Maya's shape base class, geometryShape."""
-	def geometryIteratorSetup(self,*args,**kwargs)->Any:
+	def geometryIteratorSetup(self,*args)->Any:
 		"""geometryIteratorSetup(componentList, components, forReadOnly=False) -> MPxGeometryIterator
 
 		This method should be overridden by the user to return a geometry iterator compatible with the user's geometry.
@@ -16141,45 +15523,45 @@ class MPxSurfaceShape(MPxNode):
 		* componentList (MObjectArray) - a list of components to be iterated over
 		* components (MObject) - the components to be iterated over
 		* forReadOnly (bool) - specifies whether the iterator is for read-only"""
-	def getComponentSelectionMask(self,*args,**kwargs)->Any:
+	def getComponentSelectionMask(self,*args)->Any:
 		"""getComponentSelectionMask() -> MSelectionMask
 
 		Returns the selection mask of the shape.
 		This routine must be overridden if the shape is to support interactive component selection in Viewport 2.0 and should provide information about the selection mask of the shape component."""
-	def getShapeSelectionMask(self,*args,**kwargs)->Any:
+	def getShapeSelectionMask(self,*args)->Any:
 		"""getShapeSelectionMask() -> MSelectionMask
 
 		Returns the selection mask of the shape.
 		This routine must be overridden if the shape is to support interactive object selection in Viewport 2.0 and should provide information about the selection mask of the shape."""
-	def getWorldMatrix(self,*args,**kwargs)->Any:
+	def getWorldMatrix(self,*args)->Any:
 		"""getWorldMatrix(block, instanceGeom) -> MMatrix
 
 		Returns MMatrix which takes a point from local object space to world space.
 
 		* block (MDataBlock) - a MDataBlock
 		* instanceGeom (int) - the instance this MPxSurfaceShape corresponds to"""
-	def hasActiveComponents(self,*args,**kwargs)->Any:
+	def hasActiveComponents(self,*args)->Any:
 		"""hasActiveComponents() -> bool
 
 		This method is used to determine whether or not the shape has active (selected) components."""
-	def isBounded(self,*args,**kwargs)->Any:
+	def isBounded(self,*args)->Any:
 		"""isBounded() -> bool
 
 		This method should be overridden to return True if the user supplies a bounding box routine.  Supplying a bounding box routine makes refresh and selection more efficient.
 		Returns a boolean value indicating whether a bounding box routine has been supplied"""
-	def localShapeInAttr(self,*args,**kwargs)->Any:
+	def localShapeInAttr(self,*args)->Any:
 		"""localShapeInAttr() -> MObject
 
 		Returns the attribute containing the shape's input geometry in local space.
 
 		This method will be called by Maya to determine if the shape has construction history and must be overridden if the shape is to support deformers."""
-	def localShapeOutAttr(self,*args,**kwargs)->Any:
+	def localShapeOutAttr(self,*args)->Any:
 		"""localShapeOutAttr() -> MObject
 
 		Returns the attribute containing the shape's output geometry in local space.
 
 		This method must be overridden if the shape is to support deformers."""
-	def match(self,*args,**kwargs)->Any:
+	def match(self,*args)->Any:
 		"""match(mask, componentList) -> bool
 
 		This method is used to check for matches between a selection type (or mask) and a given component. If your shape has components representing attributes then this method is used to match up your components with selection masks.
@@ -16188,7 +15570,7 @@ class MPxSurfaceShape(MPxNode):
 
 		* mask (MSelectionMask) - the selection mask to test against
 		* componentList (MObjectArray) - a list of components to be tested"""
-	def matchComponent(self,*args,**kwargs)->Any:
+	def matchComponent(self,*args)->Any:
 		"""matchComponent(item, spec, list) -> int
 
 		This method is used to convert the string representation of a component into a component object and to validate that the indices.
@@ -16208,13 +15590,13 @@ class MPxSurfaceShape(MPxNode):
 		  kMatchInvalidAttributeIndex    The attribute specification contained an index for a non-array attribute.
 		  kMatchInvalidAttributeRange    An attribute index was out of range.
 		  kMatchInvalidAttributeDim      The attribute specification provided the wrong number of dimensions for an attribute."""
-	def newControlPointComponent(self,*args,**kwargs)->Any:
+	def newControlPointComponent(self,*args)->Any:
 		"""newControlPointComponent() -> MObject
 
 		The default action of this method is to return an MFnSingleIndexedComponent (of type MFn::kMeshVertComponent) in order to support rigid skinning binds.
 
-		This method can be overridden to support other types of components such as MFnDoubleIndexedComponent and MFnTripleIndexedComponent	and should return a new component of that type.  The types allowed are those listed in the create() method docs for each MFn*IndexedComponent."""
-	def pointAtParm(self,*args,**kwargs)->Any:
+		This method can be overridden to support other types of components such as MFnDoubleIndexedComponent and MFnTripleIndexedComponent      and should return a new component of that type.  The types allowed are those listed in the create() method docs for each MFn*IndexedComponent."""
+	def pointAtParm(self,*args)->Any:
 		"""pointAtParm(atThisParm, evaluatedPoint) -> bool
 
 		This method is used by Maya in functions (such as select) that require point at parameter values. This only makes sense for parametric surfaces such as NURBS.
@@ -16222,14 +15604,14 @@ class MPxSurfaceShape(MPxNode):
 
 		* atThisParm (MPoint) - the parameter to check
 		* evaluatedPoint [OUT] (MPoint) - the surface point"""
-	def renderGroupComponentType(self,*args,**kwargs)->Any:
+	def renderGroupComponentType(self,*args)->Any:
 		"""renderGroupComponentType() -> int
 
 		This method is used to return the type of renderable components for this shape. It should return a type among MFn::kMeshPolygonComponent, MFn::kSubdivFaceComponent and MFn::kSurfaceFaceComponent, which is used in the creation of per-face/patch shader assignment.
 
 		Returns the type of renderable components for this shape.
 		See MFnSet.addMember()"""
-	def transformUsing(self,*args,**kwargs)->Any:
+	def transformUsing(self,*args)->Any:
 		"""transformUsing(matrix, componentList, cachingMode=None, pointCache=None) -> self
 
 		Transform the given components using the specified transformation matrix.
@@ -16246,7 +15628,7 @@ class MPxSurfaceShape(MPxNode):
 		  kRestorePoints              Points should be restored from the point cache.
 		  kUpdatePoints               Transform and update the points in the point cache.
 		  kTransformOriginalPoints    Transform using use the original pre-transformation values stored in the pointCache."""
-	def tweakUsing(self,*args,**kwargs)->Any:
+	def tweakUsing(self,*args)->Any:
 		"""tweakUsing(matrix, componentList, cachingMode, pointCache, handle) -> self
 
 		Transform the given components using the specified transformation matrix.
@@ -16259,7 +15641,7 @@ class MPxSurfaceShape(MPxNode):
 		* handle (MArrayDataHandle) - array data handle where the tweaks are stored
 
 		See transformUsing() for a list of valid caching mode"""
-	def undeleteComponents(self,*args,**kwargs)->Any:
+	def undeleteComponents(self,*args)->Any:
 		"""undeleteComponents(componentList, undoInfo) -> bool
 
 		This method should be overridden if the shape is to support undeletion of components. A list of components to be deleted will be passed in as well as an array of doubles where information about each deleted component is stored for undo purposes. A typical use for this array is to store knot values or weights for control points that are deleted.
@@ -16267,7 +15649,7 @@ class MPxSurfaceShape(MPxNode):
 
 		* componentList (MObjectArray) - List of components that were deleted
 		* undoInfo (MDoubleArray) - Values used for undo purposes"""
-	def vertexOffsetDirection(self,*args,**kwargs)->Any:
+	def vertexOffsetDirection(self,*args)->Any:
 		"""vertexOffsetDirection(component, direction, mode, normalize) -> bool
 
 		This method should be overridden if the shape supports components that can be moved in the direction of the normal or UV's using the move vertex normal tool.
@@ -16287,7 +15669,7 @@ class MPxSurfaceShape(MPxNode):
 		  kUTangent     Move in u tangent direction.
 		  kVTangent     Move in v tangent direction.
 		  kUVNTriad     Calculate u, v, and normal offsets."""
-	def weightedTransformUsing(self,*args,**kwargs)->Any:
+	def weightedTransformUsing(self,*args)->Any:
 		"""weightedTransformUsing(xform, space, componentList, cachingMode, pointCache, freezePlane) -> self
 
 		Transform the given components with interpolation using the specified transformation matrix.
@@ -16302,7 +15684,7 @@ class MPxSurfaceShape(MPxNode):
 		* freezePlane (MPlane) - used for symmetric transformation of components. A value of None indicates it is not used and there is no symmetric transformation.
 
 		See transformUsing() for a list of valid caching mode"""
-	def weightedTweakUsing(self,*args,**kwargs)->Any:
+	def weightedTweakUsing(self,*args)->Any:
 		"""weightedTweakUsing(xform, space, componentList, cachingMode, pointCache, freezePlane, handle) -> self
 
 		Transform the given components with interpolation using the specified transformation matrix.
@@ -16320,7 +15702,7 @@ class MPxSurfaceShape(MPxNode):
 		* handle (MArrayDataHandle) - array data handle where the tweaks are stored
 
 		See transformUsing() for a list of valid caching mode"""
-	def worldShapeOutAttr(self,*args,**kwargs)->Any:
+	def worldShapeOutAttr(self,*args)->Any:
 		"""worldShapeOutAttr() -> MObject
 
 		Returns the attribute containing the shape's output geometry in world space.
@@ -16328,226 +15710,156 @@ class MPxSurfaceShape(MPxNode):
 		This method must be overridden if the shape is to support deformers."""
 class MQuaternion:
 	"""Quaternion math."""
+	@property
+	def x(self)->float:
+		"""Imaginary X component"""
+	@x.setter
+	def x(self,value:float)->None:...
+	@property
+	def y(self)->float:
+		"""Imaginary Y component"""
+	@y.setter
+	def y(self,value:float)->None:...
+	@property
+	def z(self)->float:
+		"""Imaginary Z component"""
+	@z.setter
+	def z(self,value:float)->None:...
+	@property
+	def w(self)->float:
+		"""Real component"""
+	@w.setter
+	def w(self,value:float)->None:...
 	__hash__:None=None
 	kIdentity:MQuaternion
 	kTolerance:float=1e-10
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __radd__(self,*args,**kwargs)->Any:
+	def __radd__(self,*args)->Any:
 		"""Return value+self."""
-	def __sub__(self,*args,**kwargs)->Any:
+	def __sub__(self,other)->Any:
 		"""Return self-value."""
-	def __rsub__(self,*args,**kwargs)->Any:
+	def __rsub__(self,*args)->Any:
 		"""Return value-self."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __neg__(self,*args,**kwargs)->Any:
+	def __neg__(self,*args)->Any:
 		"""-self"""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Return self*=value."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def slerp(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def squad(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def squadPt(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def asAxisAngle(self,*args,**kwargs)->Any:
+	@staticmethod
+	def slerp(*args)->Any:
+		"""Returns the quaternion at a given interpolation value along the shortest path between two quaternions."""
+	@staticmethod
+	def squad(*args)->Any:
+		"""Returns the quaternion at a given interpolation value along a cubic curve segment in quaternion space."""
+	@staticmethod
+	def squadPt(*args)->Any:
+		"""Returns a new quaternion representing an intermediate point which when used with squad() will produce a C1 continuous spline."""
+	def asAxisAngle(self,*args)->Any:
 		"""Returns the rotation as a tuple containing an axis vector and an angle in radians about that axis."""
-	def asEulerRotation(self,*args,**kwargs)->Any:
+	def asEulerRotation(self,*args)->Any:
 		"""Returns the rotation as an equivalent MEulerRotation."""
-	def asMatrix(self,*args,**kwargs)->Any:
+	def asMatrix(self,*args)->Any:
 		"""Returns the rotation as an equivalent rotation matrix."""
-	def conjugate(self,*args,**kwargs)->Any:
+	def conjugate(self,*args)->Any:
 		"""Returns the conjugate of this quaternion (i.e. x, y and z components negated)."""
-	def conjugateIt(self,*args,**kwargs)->Any:
+	def conjugateIt(self,*args)->Any:
 		"""In-place conjugation (i.e. negates the x, y and z components)."""
-	def exp(self,*args,**kwargs)->Any:
+	def exp(self,*args)->Any:
 		"""Returns a new quaternion containing the exponent of this one."""
-	def inverse(self,*args,**kwargs)->Any:
+	def inverse(self,*args)->Any:
 		"""Returns a new quaternion containing the inverse of this one."""
-	def invertIt(self,*args,**kwargs)->Any:
+	def invertIt(self,*args)->Any:
 		"""In-place inversion."""
-	def isEquivalent(self,*args,**kwargs)->Any:
+	def isEquivalent(self,*args)->Any:
 		"""Returns True if the distance between the two quaternions (in quaternion space) is less than or equal to the given tolerance."""
-	def log(self,*args,**kwargs)->Any:
+	def log(self,*args)->Any:
 		"""Returns a new quaternion containing the natural log of this one."""
-	def negateIt(self,*args,**kwargs)->Any:
+	def negateIt(self,*args)->Any:
 		"""In-place negation of the x, y, z and w components."""
-	def normal(self,*args,**kwargs)->Any:
+	def normal(self,*args)->Any:
 		"""Returns a new quaternion containing the normalized version of this one (i.e. scaled to unit length)."""
-	def normalizeIt(self,*args,**kwargs)->Any:
+	def normalizeIt(self,*args)->Any:
 		"""In-place normalization (i.e. scales the quaternion to unit length)."""
-	def setToXAxis(self,*args,**kwargs)->Any:
+	def setToXAxis(self,*args)->Any:
 		"""Set this quaternion to be equivalent to a rotation of a given angle, in radians, about the X-axis."""
-	def setToYAxis(self,*args,**kwargs)->Any:
+	def setToYAxis(self,*args)->Any:
 		"""Set this quaternion to be equivalent to a rotation of a given angle, in radians, about the Y-axis."""
-	def setToZAxis(self,*args,**kwargs)->Any:
+	def setToZAxis(self,*args)->Any:
 		"""Set this quaternion to be equivalent to a rotation of a given angle, in radians, about the Z-axis."""
-	def setValue(self,*args,**kwargs)->Any:
+	def setValue(self,*args)->Any:
 		"""Set the value of this quaternion to that of the specified MQuaternion, MEulerRotation, MMatrix or MVector and angle."""
 class MRampAttribute:
 	"""Functionset for creating and working with ramp attributes."""
+	@property
+	def isColorRamp(self)->bool:
+		"""True if the attribute is a color ramp."""
+	@property
+	def isCurveRamp(self)->bool:
+		"""True if the attribute is a curve ramp."""
 	kNone:int=0
 	kLinear:int=1
 	kSmooth:int=2
 	kSpline:int=3
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def createColorRamp(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def createCurveRamp(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def createRamp(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addEntries(self,*args,**kwargs)->Any:
+	@staticmethod
+	def createColorRamp(*args)->Any:
+		"""Creates and returns a new color ramp attribute."""
+	@staticmethod
+	def createCurveRamp(*args)->Any:
+		"""Creates and returns a new curve ramp attribute."""
+	@staticmethod
+	def createRamp(*args)->Any:
+		"""Creates and returns a new color or curve ramp attribute initialized with values."""
+	def addEntries(self,*args)->Any:
 		"""Adds entries to the ramp."""
-	def deleteEntries(self,*args,**kwargs)->Any:
+	def deleteEntries(self,*args)->Any:
 		"""Removes from the ramp those entries with the specified indices."""
-	def getEntries(self,*args,**kwargs)->Any:
+	def getEntries(self,*args)->Any:
 		"""Returns a tuple containing all of the entries in the ramp."""
-	def getValueAtPosition(self,*args,**kwargs)->Any:
+	def getValueAtPosition(self,*args)->Any:
 		"""Returns the value of the entry at the given position."""
-	def numEntries(self,*args,**kwargs)->Any:
+	def numEntries(self,*args)->Any:
 		"""Returns the number of entries in the ramp."""
-	def setInterpolationAtIndex(self,*args,**kwargs)->Any:
+	def setInterpolationAtIndex(self,*args)->Any:
 		"""Sets the interpolation of the entry at the given index."""
-	def setPositionAtIndex(self,*args,**kwargs)->Any:
+	def setPositionAtIndex(self,*args)->Any:
 		"""Sets the position of the entry at the given index."""
-	def setValueAtIndex(self,*args,**kwargs)->Any:
+	def setValueAtIndex(self,*args)->Any:
 		"""Sets the value of the entry at the given index."""
-	def setRamp(self,*args,**kwargs)->Any:
+	def setRamp(self,*args)->Any:
 		"""Set this ramp with one or multiple entries. Current entries are removed before adding the new one(s)."""
-	def pack(self,*args,**kwargs)->Any:
+	def pack(self,*args)->Any:
 		"""Change the indices numbering by re-ordering them from 0."""
-	def hasIndex(self,*args,**kwargs)->Any:
+	def hasIndex(self,*args)->Any:
 		"""Return true if an entry is defined at this index."""
-	def sort(self,*args,**kwargs)->Any:
+	def sort(self,*args)->Any:
 		"""Sort the ramp by position. Indices are also re-ordered during sort."""
 class MRichSelection:
 	"""A selection list supporting soft selection and symmetry.
@@ -16568,35 +15880,35 @@ class MRichSelection:
 	__init__(MRichSelection other)
 	Initializes a new MRichSelection object containing the same
 	items as another rich selection."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""clear() -> self
 
 
 		Empties the rich selection."""
-	def getRawSymmetryMatrix(self,*args,**kwargs)->Any:
+	def getRawSymmetryMatrix(self,*args)->Any:
 		"""getRawSymmetryMatrix() -> (MMatrix, space)
 
 		Returns a tuple containing the raw symmetry matrix to use for the
 		symmetric components of the rich selection, and the transformation
 		space used by the matrix (see MSpace). The caller is responsible for
 		handling any necessary transformation space conversions."""
-	def getSelection(self,*args,**kwargs)->Any:
+	def getSelection(self,*args)->Any:
 		"""getSelection() -> MSelectionList
 
 		Returns a copy of the non-symmetry component of the rich selection."""
-	def getSymmetry(self,*args,**kwargs)->Any:
+	def getSymmetry(self,*args)->Any:
 		"""getSymmetry() -> MSelectionList
 
 		Returns a copy of the symmetry component of the rich selection."""
-	def getSymmetryMatrix(self,*args,**kwargs)->Any:
+	def getSymmetryMatrix(self,*args)->Any:
 		"""getSymmetryMatrix(MDagPath, space) -> MMatrix
 
 		Returns the symmetry matrix to use for the symmetric component of
 		the specified DAG object. The matrix will already be converted to
 		use the specified transformation space (see MSpace)."""
-	def getSymmetryPlane(self,*args,**kwargs)->Any:
+	def getSymmetryPlane(self,*args)->Any:
 		"""getSymmetryPlane(MDagPath, space) -> MPlane
 
 		Returns the plane of symmetry, in the specified transformation space
@@ -16604,7 +15916,7 @@ class MRichSelection:
 		support symmetry. Note that the direction of the plane carries no
 		significance. Specifically, having a positive offset from the plane
 		does not imply a point is part of the non-symmetric selection."""
-	def setSelection(self,*args,**kwargs)->Any:
+	def setSelection(self,*args)->Any:
 		"""setSelection(MSelectionList) -> self
 
 		Sets the non-symmetry component of the rich selection."""
@@ -16663,158 +15975,240 @@ class MSceneMessage(MMessage):
 	kBeforeCreateReferenceAndRecordEdits:int=49
 	kAfterCreateReferenceAndRecordEdits:int=50
 	kLast:int=51
-	def addCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addCallback(*args)->Any:
+		"""addCallback(message, function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		Adds a new callback for the specified scene message.
+		If a 'before' message is sent, the corresponding 'after' message
+		will be as well.
+		Callbacks can be added to the following Message constant with this function: kSceneUpdate
+		 kBeforeNew
+		 kAfterNew
+		 kBeforeImport
+		 kAfterImport
+		 kBeforeOpen
+		 kAfterOpen
+		 kBeforeFileRead
+		 kAfterFileRead
+		 kAfterSceneReadAndRecordEdits
+		 kBeforeExport
+		 kExportStarted
+		 kAfterExport
+		 kBeforeSave
+		 kAfterSave
+		 kBeforeCreateReference
+		 kBeforeCreateReferenceAndRecordEdits
+		 kAfterCreateReference
+		 kAfterCreateReferenceAndRecordEdits
+		 kBeforeRemoveReference
+		 kAfterRemoveReference
+		 kBeforeImportReference
+		 kAfterImportReference
+		 kBeforeExportReference
+		 kAfterExportReference
+		 kBeforeUnloadReference
+		 kAfterUnloadReference
+		 kBeforeLoadReference
+		 kBeforeLoadReferenceAndRecordEdits
+		 kAfterLoadReference
+		 kAfterLoadReferenceAndRecordEdits
+		 kBeforeSoftwareRender
+		 kAfterSoftwareRender
+		 kBeforeSoftwareFrameRender
+		 kAfterSoftwareFrameRender
+		 kSoftwareRenderInterrupted
+		 kMayaInitialized
+		 kMayaExiting
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		Note that for referencing, the creation of the reference (i.e. creation of
+		the reference node and associated structures) is separate from the loading
+		of the reference itself (i.e. read the nodes from file).
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		The kBeforeCreateReference message will be sent when a reference is created.
+		So it will happen for both loaded and unloaded references. But the
+		kBeforeLoadReference message will only be sent when the file is read from disk.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		When opening a file with a loaded reference, the callback order is as follows:
+		 kBeforeCreateReference
+		 kBeforeCreateReferenceAndRecordEdits
+		 kBeforeCreateReferenceAndRecordEdits
+		 kAfterCreateReferenceAndRecordEdits
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addCheckCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 kBeforeLoadReference
+		 kBeforeLoadReferenceAndRecordEdits
+		 kAfterLoadReference
+		 kAfterLoadReferenceAndRecordEdits
 
-		Convert a function to be a static method.
+		By default, edits to referenced objects will not be recorded during the execution
+		of file I/O callbacks. A specific set of callbacks are provided that will enable
+		the recording of reference edits during their execution as follows:
+		 kAfterSceneReadAndRecordEdits
+		 kBeforeCreateReferenceAndRecordEdits
+		 kAfterCreateReferenceAndRecordEdits
+		 kBeforeLoadReferenceAndRecordEdits
+		 kAfterLoadReferenceAndRecordEdits
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		The kExportStarted callback is sent after the kBeforeExport callback, once Maya
+		has actually started to process the exported data. One important difference between
+		the two callbacks is that the fileInfo command affects the exported scene when used
+		in the kExportStarted callback, but affects the current scene in memory when used
+		in the kBeforeExport callback.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * message - the Message constant that will trigger the callback
+		 * function - callable which will be passed the clientData object
+		 * clientData - user data that will be passed to the callback function"""
+	@staticmethod
+	def addCheckCallback(*args)->Any:
+		"""addCheckCallback(message, function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This function adds a new callback for the specified scene message.
+		The callback will have the ability to abort the current operation
+		by returning False.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addCheckFileCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		Callbacks can be added to the following messages with this function:
+		 kBeforeNewCheck
+		 kBeforeImportCheck
+		 kBeforeOpenCheck
+		 kBeforeExportCheck
+		 kBeforeSaveCheck
+		 kBeforeCreateReferenceCheck
+		 kBeforeLoadReferenceCheck
 
-		Convert a function to be a static method.
+		 * message - the scene message that will trigger the callback
+		 * function - callable which will be passed the clientData object,
+		   return False to abort the current operation.
+		 * clientData - user data that will be passed to the callback function
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addCheckFileCallback(*args)->Any:
+		"""addCheckFileCallback(message, function, clientData=None) -> id
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		This function adds a new callback for the specified scene message. This
+		callback has the option to abort the current operation by returning
+		False. The file parameter stores the target file for the current
+		file IO operation, by modifying this file parameter the target file
+		will be changed as well.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		Callbacks can be added to the following messages with this function:
+		 kBeforeImportCheck
+		 kBeforeOpenCheck
+		 kBeforeExportCheck
+		 kBeforeCreateReferenceCheck
+		 kBeforeLoadReferenceCheck
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addCheckReferenceCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * message - the scene message that will trigger the callback
+		 * function - callable which will be passed a MFileObject indicating the
+		   file object that will be acted on by the current file IO operation, any
+		   modifications to it will be passed back to Maya and change the file being
+		   acted on, and the clientData object.
+		   return False to abort the current operation.
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addCheckReferenceCallback(*args)->Any:
+		"""addCheckReferenceCallback(message, function, clientData=None) -> id
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		This function adds a new callback for the specified scene message.
+		The callback will have the ability to abort the current operation
+		by returning False.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		Callbacks can be added to the following Message constant with this function:
+		 BeforeLoadReferenceCheck
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * message - the scene Message constant that will trigger the callback
+		 * function - callable which will be passed a MObject indicating the
+		   reference node, a MFileObject indicating the resolved file path of the
+		   referenced file, and the clientData object
+		   return False to abort the current operation
+		 * clientData - User defined data passed to the callback function
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addConnectionFailedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addConnectionFailedCallback(*args)->Any:
+		"""addConnectionFailedCallback(function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback that is called when a connection was
+		unable to be made.
+		Currently, the callback is only triggered during the reading of files (.ma or .mb)
+		or of edits files (.editMA or .editMB files created by Maya's offline file support).
+		The most common reasons why a connection would fail are:
+		- inability to find the specified node or attribute names, or
+		- a conflicting existing connection
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * function - callable which will be passed a MPlug indicating the
+		   source plug of the connection (or None if it could not be found),
+		   a MPlug indicating destination plug of the connection (or None if
+		   it could not be found), a string containing the name used to look up
+		   the source plug, a string containing the name used to look up the
+		   destination plug and the clientData object.
+		 * clientData - User defined data passed to the callback function
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addNamespaceRenamedCallback(*args)->Any:
+		"""addNamespaceRenamedCallback(function, clientData=None) -> id
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		This method registers a callback that is called when a namespace is renamed.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addNamespaceRenamedCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
 
-		Convert a function to be a static method.
+		 * function - callable which will be passed a string containing the new
+		   name of namespace that was changed, a string containing the old name of
+		   namespace that was changed and the clientData object.
+		 * clientData - User defined data passed to the callback function
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addReferenceCallback(*args)->Any:
+		"""addReferenceCallback(message, function, clientData=None) -> id
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		This function adds a new callback for the specified scene message.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		Callbacks can be added to the following messages with this function:
+		 kBeforeRemoveReference
+		 kBeforeImportReference
+		 kBeforeUnloadReference
+		 kAfterUnloadReference
+		 kBeforeLoadReference
+		 kAfterLoadReference
+		 kAfterCreateReference
+		 kAfterCreateReferenceAndRecordEdits
+		 kBeforeLoadReferenceAndRecordEdits
+		 kAfterLoadReferenceAndRecordEdits
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addReferenceCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * message - the scene Message constant that will trigger the callback
+		 * function - callable which will be passed a MObject indicating the
+		   reference node, a MFileObject indicating he resolved file path of the
+		   referenced file and the clientData object.
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
+		 * return: Identifier used for removing the callback."""
+	@staticmethod
+	def addStringArrayCallback(*args)->Any:
+		"""addStringArrayCallback(message, function, clientData=None) -> id
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		Adds a new callback which takes a string array argument, in addition to
+		the usual clientData.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		The Message constants which can be used with this method and the contents
+		of the string array passed to their callbacks are as follows:
+		 kBeforePluginLoad - path to plug-in file
+		 kAfterPluginLoad - path to plug-in file, name of plug-in
+		 kBeforePluginUnload - name of plug-in
+		 kAfterPluginUnload - name of plug-in, path to plug-in file
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		        To allow for future expansion callbacks should not rely on the number
+		of array elements being exactly as given above. While there will not
+		be fewer elements than given above, there may in future be more.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addStringArrayCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * message - the scene Message constant that will trigger the callback
+		 * function - callable which will be passed a list of strings and the
+		   clientData object.
+		 * clientData - User defined data passed to the callback function
 
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MSelectionList:
 	"""A heterogenous list of MObjects, MPlugs and MDagPaths.
 
@@ -16827,9 +16221,9 @@ class MSelectionList:
 	kMergeNormal:int=0
 	kXORWithList:int=1
 	kRemoveFromList:int=2
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def add(self,*args,**kwargs)->Any:
+	def add(self,*args)->Any:
 		"""add(pattern, searchChildNamespaces=False) -> self
 		add(item, mergeWithExisting=True) -> self
 
@@ -16840,15 +16234,15 @@ class MSelectionList:
 		The second version adds the specific item to the list, where the
 		item can be a plug (MPlug), a node (MObject), a DAG path (MDagPath)
 		or a component (tuple of (MDagPath, MObject) )."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""clear() -> self
 
 		Empties the selection list."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(src) -> self
 
 		Replaces the contents of the selection list with a copy of those from src (MSelectionList)."""
-	def getComponent(self,*args,**kwargs)->Any:
+	def getComponent(self,*args)->Any:
 		"""getComponent(index) -> (MDagPath, MObject)
 
 		Returns the index'th item of the list as a component, represented by
@@ -16857,27 +16251,27 @@ class MSelectionList:
 		in the second element of the tuple. Raises TypeError if the item is
 		neither a DAG path nor a component. Raises IndexError if index is
 		out of range."""
-	def getDagPath(self,*args,**kwargs)->Any:
+	def getDagPath(self,*args)->Any:
 		"""getDagPath(index) -> MDagPath
 
 		Returns the DAG path associated with the index'th item of the list.
 		Raises TypeError if the item is neither a DAG path nor a component.
 		Raises IndexError if index is out of range."""
-	def getDependNode(self,*args,**kwargs)->Any:
+	def getDependNode(self,*args)->Any:
 		"""getDependNode(index) -> MObject
 
 		Returns the node associated with the index'th item, whether it be a
 		dependency node, DAG path, component or plug.
 		Raises kFailure if there is no dependency node associated with the current item.
 		Raises IndexError if index is out of range."""
-	def getPlug(self,*args,**kwargs)->Any:
+	def getPlug(self,*args)->Any:
 		"""getPlug(index) -> MPluggetPlug(index, convertComponents) -> MPlug
 
 		Returns the index'th item of the list as a plug. Raises TypeError if
 		the item is not a plug. Raises IndexError if index is out of range.
 		If convertComponents is True then components in the selection list that have a corresponding plug will return that instead.
 		Note: This only works if the component selection can be converted into a single plug - single component or all components selected."""
-	def getSelectionStrings(self,*args,**kwargs)->Any:
+	def getSelectionStrings(self,*args)->Any:
 		"""getSelectionStrings(index=None) -> (string, string, ...)
 
 		Returns a tuple containing the string representation of the
@@ -16887,28 +16281,28 @@ class MSelectionList:
 		distinct block of contiguous elements. If index is not specified
 		then the string representations of all the items in the selection
 		list are returned. Raises IndexError if index is out of bounds."""
-	def hasItem(self,*args,**kwargs)->Any:
+	def hasItem(self,*args)->Any:
 		"""hasItem(item) -> bool
 
 		Returns True if the given item is on the selection list. For a
 		component this means that all of the elements of the component must
 		be on the list. A component is passed as a tuple containing the
 		MDagPath of the DAG node and an MObject containing the component."""
-	def hasItemPartly(self,*args,**kwargs)->Any:
+	def hasItemPartly(self,*args)->Any:
 		"""hasItemPartly(dagPath, component) -> bool
 
 		Returns True if at least one of the component's elements is on the
 		selection list. Raises TypeError if dagPath is invalid or component
 		does not contain a component."""
-	def isEmpty(self,*args,**kwargs)->Any:
+	def isEmpty(self,*args)->Any:
 		"""isEmpty() -> bool
 
 		Returns True if the selection list is empty."""
-	def length(self,*args,**kwargs)->Any:
+	def length(self,*args)->Any:
 		"""length() -> int
 
 		Returns the number of items on the selection list."""
-	def merge(self,*args,**kwargs)->Any:
+	def merge(self,*args)->Any:
 		"""merge(other, strategy=kMergeNormal) -> self
 		merge(dagPath, component, strategy=kMergeNormal) -> self
 
@@ -16917,24 +16311,24 @@ class MSelectionList:
 
 		The second version merges the specified component with those already
 		on the list."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""remove(index) -> self
 
 		Removes the index'th item from the list. Raises IndexError if the
 		index is out of range."""
-	def replace(self,*args,**kwargs)->Any:
+	def replace(self,*args)->Any:
 		"""replace(index, newItem) -> self
 
 		Replaces the index'th item on the list with a new item. A component
 		is passed as a tuple containing the MDagPath of the DAG node and an
 		MObject containing the component. Raises IndexError if the index is
 		out of range."""
-	def toggle(self,*args,**kwargs)->Any:
+	def toggle(self,*args)->Any:
 		"""toggle(dagPath, component) -> self
 
 		Removes from the list those elements of the given component which
 		are already on it and adds those which are not."""
-	def intersect(self,*args,**kwargs)->Any:
+	def intersect(self,*args)->Any:
 		"""intersect(other, expandToLeaves=False) -> self
 
 		Modify this list to contain the intersection of itself and the given list."""
@@ -17024,9 +16418,9 @@ class MSelectionMask:
 	kSelectNRigids:int=81
 	kSelectDynamicConstraints:int=82
 	kSelectNParticles:int=83
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addMask(self,*args,**kwargs)->Any:
+	def addMask(self,*args)->Any:
 		"""addMask(selType) -> self
 
 		Add the specified selection type to this mask.
@@ -17117,51 +16511,27 @@ class MSelectionMask:
 		  kSelectNRigids
 		  kSelectDynamicConstraints
 		  kSelectNParticles"""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source) -> self
 
 		Copy data from source selection mask.
 
 		* source (MSelectionMask) - The source selection mask to copy from"""
-	def deregisterSelectionType(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def deregisterSelectionType(*args)->Any:
+		"""deregisterSelectionType(selTypeName) -> bool
 
-		Convert a function to be a static method.
+		Unregisters a previously registered selection type.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		* selTypeName (string) - Name of the selection type."""
+	@staticmethod
+	def getSelectionTypePriority(*args)->Any:
+		"""getSelectionTypePriority(selTypeName) -> int
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		Gets the selection priority corresponding to a given selection type.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def getSelectionTypePriority(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def intersects(self,*args,**kwargs)->Any:
+		* selTypeName (string) - Name of the selection type."""
+	def intersects(self,*args)->Any:
 		"""intersects(mask) -> bool
 		intersects(selType) -> bool
 
@@ -17169,26 +16539,19 @@ class MSelectionMask:
 
 		* mask (MSelectionMask) - the selection mask to test.
 		* selType (int) - the selection type to test.  See addMask() for a list of valid selection masks."""
-	def registerSelectionType(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def registerSelectionType(*args)->Any:
+		"""registerSelectionType(selTypeName, priority=0) -> bool
 
-		Convert a function to be a static method.
+		Registers a new selection type. It is perfectly legal for 2 plug-ins to register the same selection type.
+		Currently we use the registration count. The selection type is deleted only when deregisterSelectionType() as been called the same number of times as this function - registerSelectionType().
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		When registerSelectionType() is invoked and the selection type already exists, we neither enable it nor change its priority, just add its registration count by 1.
+		The reason is the user might has modified these values after loading the plug-in that has register the selection type the first time.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setMask(self,*args,**kwargs)->Any:
+		* selTypeName (string) - Name of the selection type.
+		* priority (int) - Priority of the selection type."""
+	def setMask(self,*args)->Any:
 		"""setMask(mask) -> self
 		setMask(selType) -> self
 
@@ -17207,6 +16570,16 @@ class MSpace:
 	kLast:int=5
 class MSyntax:
 	"""Syntax for commands."""
+	@property
+	def enableQuery(self)->bool:
+		"""Enable support for the -query flag."""
+	@enableQuery.setter
+	def enableQuery(self,value:bool)->None:...
+	@property
+	def enableEdit(self)->bool:
+		"""Enable support for the -edit flag."""
+	@enableEdit.setter
+	def enableEdit(self,value:bool)->None:...
 	kInvalidArgType:int=0
 	kNoArg:int=1
 	kBoolean:int=2
@@ -17224,30 +16597,40 @@ class MSyntax:
 	kStringObjects:int=2
 	kSelectionList:int=3
 	kLastObjectFormat:int=4
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addArg(self,*args,**kwargs)->Any:
+	def addArg(self,*args)->Any:
 		"""Add a command argument."""
-	def addFlag(self,*args,**kwargs)->Any:
+	def addFlag(self,*args)->Any:
 		"""Add a flag and its arguments."""
-	def makeFlagMultiUse(self,*args,**kwargs)->Any:
+	def makeFlagMultiUse(self,*args)->Any:
 		"""Set whether a flag may be used multiple times on the command line."""
-	def makeFlagQueryWithFullArgs(self,*args,**kwargs)->Any:
+	def makeFlagQueryWithFullArgs(self,*args)->Any:
 		"""Set whether a flag requires its args when queried."""
-	def maxObjects(self,*args,**kwargs)->Any:
+	def maxObjects(self,*args)->Any:
 		"""Returns the maximum number of objects which can be passed to the command."""
-	def minObjects(self,*args,**kwargs)->Any:
+	def minObjects(self,*args)->Any:
 		"""Returns the minimum number of objects which can be passed to the command."""
-	def setMaxObjects(self,*args,**kwargs)->Any:
+	def setMaxObjects(self,*args)->Any:
 		"""Sets the maximum number of objects which can be passed to the command."""
-	def setMinObjects(self,*args,**kwargs)->Any:
+	def setMinObjects(self,*args)->Any:
 		"""Sets the minimum number of objects which can be passed to the command."""
-	def setObjectType(self,*args,**kwargs)->Any:
+	def setObjectType(self,*args)->Any:
 		"""Set the type and number of objects to be passed to the command."""
-	def useSelectionAsDefault(self,*args,**kwargs)->Any:
+	def useSelectionAsDefault(self,*args)->Any:
 		"""If set to True then when no objects are provided on the command-line Maya will pass the current selection instead."""
 class MTime:
 	"""Manipulate time data."""
+	@property
+	def unit(self)->int:
+		"""Time units currently in use."""
+	@unit.setter
+	def unit(self,value:int)->None:...
+	@property
+	def value(self)->float:
+		"""Value of the time in the current units."""
+	@value.setter
+	def value(self,value:float)->None:...
 	__hash__:None=None
 	kInvalid:int=0
 	kHours:int=1
@@ -17310,193 +16693,158 @@ class MTime:
 	k119_88FPS:int=51
 	kUserDef:int=52
 	kLast:int=53
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __radd__(self,*args,**kwargs)->Any:
+	def __radd__(self,*args)->Any:
 		"""Return value+self."""
-	def __sub__(self,*args,**kwargs)->Any:
+	def __sub__(self,other)->Any:
 		"""Return self-value."""
-	def __rsub__(self,*args,**kwargs)->Any:
+	def __rsub__(self,*args)->Any:
 		"""Return value-self."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Return self+=value."""
-	def __isub__(self,*args,**kwargs)->Any:
+	def __isub__(self,*args)->Any:
 		"""Return self-=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Return self*=value."""
-	def __truediv__(self,*args,**kwargs)->Any:
+	def __truediv__(self,other)->Any:
 		"""Return self/value."""
-	def __rtruediv__(self,*args,**kwargs)->Any:
+	def __rtruediv__(self,other)->Any:
 		"""Return value/self."""
-	def __itruediv__(self,*args,**kwargs)->Any:
+	def __itruediv__(self,other)->Any:
 		"""Return self/=value."""
-	def uiUnit(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def setUIUnit(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def ticksPerSecond(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def asUnits(self,*args,**kwargs)->Any:
+	@staticmethod
+	def uiUnit(*args)->Any:
+		"""Return the units used to display time in Maya's UI."""
+	@staticmethod
+	def setUIUnit(*args)->Any:
+		"""Change the units used to display time in Maya's UI."""
+	@staticmethod
+	def ticksPerSecond(*args)->Any:
+		"""Returns the number of ticks per second, the smallest unit of time available."""
+	def asUnits(self,*args)->Any:
 		"""Return the time value, converted to the specified units."""
 class MTimeArray:
 	"""Array of MTime values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MTimeRange:
 	"""Mathematic type that represents a set of pseudo-real numbers (in units of time), such as [-1s, +1s] U [+2, +5s]"""
 	__hash__:None=None
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __or__(self,*args,**kwargs)->Any:
+	def __or__(self,*args)->Any:
 		"""Return self|value."""
-	def __ror__(self,*args,**kwargs)->Any:
+	def __ror__(self,*args)->Any:
 		"""Return value|self."""
-	def empty(self,*args,**kwargs)->Any:
+	def empty(self,*args)->Any:
 		"""empty() -> bool
 
 		Checks if this time range is an empty set"""
-	def contains(self,*args,**kwargs)->Any:
+	def contains(self,*args)->Any:
 		"""contains(MTime) -> boolcontains(MTime, MTime) -> bool
 
 		Checks if the given time point or interval is contained in this time range."""
-	def intersects(self,*args,**kwargs)->Any:
+	def intersects(self,*args)->Any:
 		"""intersects(MTime, MTime) -> bool
 
 		Checks if the given interval intersects with this time range."""
 class MTimerMessage(MMessage):
 	"""Class used to register callbacks for timer related messages."""
-	def addTimerCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def addTimerCallback(*args)->Any:
+		"""addTimerCallback(period, function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback which is called repeatedly with a
+		specified period of time between calls. Each time the timer fires the
+		callback will be placed on the idle queue for execution in the next
+		idle cycle. If the timer fires again, before the previous invocation
+		has completed execution, the new firing will be skipped.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		If the execution time of the callback exceeds half of its period then
+		the next timeout will be skipped to give Maya time to process other tasks.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		The maximum resolution for this callback is about 1ms.  The response
+		is, however, not guaranteed because while multitasking, the OS may
+		delay for an unspecified length of time before returning control to
+		Maya.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * period (float) - the period at which the callback will be
+		executed (Measured in seconds)
+		 * function - callable which will be passed a float indicating
+		   the elapsed time since this function was last called, a float
+		   indicating the execution time of this function the last time
+		   it was called, and the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MTransformationMatrix:
 	"""Manipulate the individual components of a transformation."""
 	__hash__:None=None
@@ -17510,362 +16858,358 @@ class MTransformationMatrix:
 	kYXZ:int=5
 	kZYX:int=6
 	kLast:int=7
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def asMatrix(self,*args,**kwargs)->Any:
+	def asMatrix(self,*args)->Any:
 		"""Interpolates between the identity transformation and that currently in the object, returning the result as an MMatrix."""
-	def asMatrixInverse(self,*args,**kwargs)->Any:
+	def asMatrixInverse(self,*args)->Any:
 		"""Returns the inverse of the matrix representing the transformation."""
-	def asRotateMatrix(self,*args,**kwargs)->Any:
+	def asRotateMatrix(self,*args)->Any:
 		"""Returns the matrix which takes points from object space to the space immediately following the scale/shear/rotation transformations."""
-	def asScaleMatrix(self,*args,**kwargs)->Any:
+	def asScaleMatrix(self,*args)->Any:
 		"""Returns the matrix which takes points from object space to the space immediately following scale and shear transformations."""
-	def isEquivalent(self,*args,**kwargs)->Any:
+	def isEquivalent(self,*args)->Any:
 		"""Returns true if this transformation's matrix is within tolerance of another's matrix."""
-	def reorderRotation(self,*args,**kwargs)->Any:
+	def reorderRotation(self,*args)->Any:
 		"""Reorders the transformation's rotate component to give the same overall rotation but using a new order or rotations."""
-	def rotateBy(self,*args,**kwargs)->Any:
+	def rotateBy(self,*args)->Any:
 		"""Adds to the transformation's rotation component."""
-	def rotateByComponents(self,*args,**kwargs)->Any:
+	def rotateByComponents(self,*args)->Any:
 		"""Adds to the transformation's rotation component."""
-	def rotatePivot(self,*args,**kwargs)->Any:
+	def rotatePivot(self,*args)->Any:
 		"""Returns the transformation's rotate pivot component."""
-	def rotatePivotTranslation(self,*args,**kwargs)->Any:
+	def rotatePivotTranslation(self,*args)->Any:
 		"""Returns the transformation's rotate pivot translation component."""
-	def rotation(self,*args,**kwargs)->Any:
+	def rotation(self,*args)->Any:
 		"""Returns the transformation's rotation component as either an Euler rotation or a quaternion."""
-	def rotationComponents(self,*args,**kwargs)->Any:
+	def rotationComponents(self,*args)->Any:
 		"""Returns a list containing the four components of the transformation's rotate component."""
-	def rotationOrder(self,*args,**kwargs)->Any:
+	def rotationOrder(self,*args)->Any:
 		"""Returns the order of rotations when the transformation's rotate component is expressed as an euler rotation."""
-	def rotationOrientation(self,*args,**kwargs)->Any:
+	def rotationOrientation(self,*args)->Any:
 		"""Returns a quaternion which orients the local rotation space."""
-	def scale(self,*args,**kwargs)->Any:
+	def scale(self,*args)->Any:
 		"""Returns a list containing the transformation's scale components."""
-	def scaleBy(self,*args,**kwargs)->Any:
+	def scaleBy(self,*args)->Any:
 		"""Multiplies the transformation's scale components by the three floats in the provided sequence."""
-	def scalePivot(self,*args,**kwargs)->Any:
+	def scalePivot(self,*args)->Any:
 		"""Returns the transformation's scale pivot component."""
-	def scalePivotTranslation(self,*args,**kwargs)->Any:
+	def scalePivotTranslation(self,*args)->Any:
 		"""Returns the transformation's scale pivot translation component."""
-	def setRotatePivot(self,*args,**kwargs)->Any:
+	def setRotatePivot(self,*args)->Any:
 		"""Sets the transformation's rotate pivot component."""
-	def setRotatePivotTranslation(self,*args,**kwargs)->Any:
+	def setRotatePivotTranslation(self,*args)->Any:
 		"""Sets the transformation's rotate pivot translation component."""
-	def setRotation(self,*args,**kwargs)->Any:
+	def setRotation(self,*args)->Any:
 		"""Sets the transformation's rotation component."""
-	def setRotationComponents(self,*args,**kwargs)->Any:
+	def setRotationComponents(self,*args)->Any:
 		"""Sets the transformation's rotate component from the four values in the provided sequence."""
-	def setRotationOrientation(self,*args,**kwargs)->Any:
+	def setRotationOrientation(self,*args)->Any:
 		"""Sets a quaternion which orients the local rotation space."""
-	def setScale(self,*args,**kwargs)->Any:
+	def setScale(self,*args)->Any:
 		"""Sets the transformation's scale components to the three floats in the provided sequence."""
-	def setScalePivot(self,*args,**kwargs)->Any:
+	def setScalePivot(self,*args)->Any:
 		"""Sets the transformation's scale pivot component."""
-	def setScalePivotTranslation(self,*args,**kwargs)->Any:
+	def setScalePivotTranslation(self,*args)->Any:
 		"""Sets the transformation's scale pivot translation component."""
-	def setShear(self,*args,**kwargs)->Any:
+	def setShear(self,*args)->Any:
 		"""Sets the transformation's shear component."""
-	def setTranslation(self,*args,**kwargs)->Any:
+	def setTranslation(self,*args)->Any:
 		"""Sets the transformation's translation component."""
-	def setToRotationAxis(self,*args,**kwargs)->Any:
+	def setToRotationAxis(self,*args)->Any:
 		"""Sets the transformation's rotate component to be a given axis vector and angle in radians."""
-	def shear(self,*args,**kwargs)->Any:
+	def shear(self,*args)->Any:
 		"""Returns a list containing the transformation's shear components."""
-	def shearBy(self,*args,**kwargs)->Any:
+	def shearBy(self,*args)->Any:
 		"""Multiplies the transformation's shear components by the three floats in the provided sequence."""
-	def translateBy(self,*args,**kwargs)->Any:
+	def translateBy(self,*args)->Any:
 		"""Adds a vector to the transformation's translation component."""
-	def translation(self,*args,**kwargs)->Any:
+	def translation(self,*args)->Any:
 		"""Returns the transformation's translation component as a vector."""
 class MTypeId:
 	"""Stores a Maya object type identifier."""
 	__hash__:None=None
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def id(self,*args,**kwargs)->Any:
+	def id(self,*args)->Any:
 		"""Returns the type id as a long."""
 class MURI:
 	"""Manipulate URIs."""
 	__hash__:None=None
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def isValidURI(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def isValidURI(*args)->Any:
+		"""isValidURI(uri) -> bool
 
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def asString(self,*args,**kwargs)->Any:
+		Determines if a string value represents a valid URI."""
+	def asString(self,*args)->Any:
 		"""asString() -> string
 
 		Returns the string representation of the URI."""
-	def getScheme(self,*args,**kwargs)->Any:
+	def getScheme(self,*args)->Any:
 		"""getScheme() -> string
 
 		Returns the scheme of the URI."""
-	def getPath(self,*args,**kwargs)->Any:
+	def getPath(self,*args)->Any:
 		"""getPath() -> string
 
 		Returns the path component of the URI."""
-	def getFragment(self,*args,**kwargs)->Any:
+	def getFragment(self,*args)->Any:
 		"""getFragment() -> string
 
 		Returns the fragment component of the URI."""
-	def getFileName(self,*args,**kwargs)->Any:
+	def getFileName(self,*args)->Any:
 		"""getFileName(bool includeExtension=True) -> string
 
 		Returns just the file name portion of the URI, with or without the extension."""
-	def getDirectory(self,*args,**kwargs)->Any:
+	def getDirectory(self,*args)->Any:
 		"""getDirectory() -> string
 
 		Returns just the file directory portion of the URI, without the file name."""
-	def getAuthority(self,*args,**kwargs)->Any:
+	def getAuthority(self,*args)->Any:
 		"""getAuthority() -> string
 
 		Returns the authority component of the URI."""
-	def getUserInfo(self,*args,**kwargs)->Any:
+	def getUserInfo(self,*args)->Any:
 		"""getUserInfo() -> string
 
 		Returns the user info component of the URI."""
-	def getUserName(self,*args,**kwargs)->Any:
+	def getUserName(self,*args)->Any:
 		"""getUserName() -> string
 
 		Returns the user name component of the URI."""
-	def getPassword(self,*args,**kwargs)->Any:
+	def getPassword(self,*args)->Any:
 		"""getPassword() -> string
 
 		Returns the password component of the URI."""
-	def getHost(self,*args,**kwargs)->Any:
+	def getHost(self,*args)->Any:
 		"""getHost() -> string
 
 		Returns the host component of the URI."""
-	def getPort(self,*args,**kwargs)->Any:
+	def getPort(self,*args)->Any:
 		"""getPort() -> int
 
 		Returns the port component of the URI, or -1 if the port is not defined."""
-	def getAllQueryItemKeys(self,*args,**kwargs)->Any:
+	def getAllQueryItemKeys(self,*args)->Any:
 		"""getAllQueryItemKeys() -> array
 
 		Returns an array containing the keys from all query string pairs."""
-	def getQueryItemValue(self,*args,**kwargs)->Any:
+	def getQueryItemValue(self,*args)->Any:
 		"""getQueryItemValue(key) -> string
 
 		Returns the value from the first query string pair in the URI which has a given key."""
-	def getAllQueryItemValues(self,*args,**kwargs)->Any:
+	def getAllQueryItemValues(self,*args)->Any:
 		"""getAllQueryItemValues(key) -> array
 
 		Returns an array containing the values from all query string pairs which have a given key."""
-	def getQueryValueDelimiter(self,*args,**kwargs)->Any:
+	def getQueryValueDelimiter(self,*args)->Any:
 		"""getQueryValueDelimiter() -> string
 
 		Returns the character used to delimit keys and values in the query string of the URI."""
-	def getQueryPairDelimiter(self,*args,**kwargs)->Any:
+	def getQueryPairDelimiter(self,*args)->Any:
 		"""getQueryPairDelimiter() -> string
 
 		Returns the character used to delimit between key-value pairs in the query string of the URI."""
-	def setScheme(self,*args,**kwargs)->Any:
+	def setScheme(self,*args)->Any:
 		"""setScheme(string) -> self
 
 		Sets the scheme component of the URI."""
-	def setPath(self,*args,**kwargs)->Any:
+	def setPath(self,*args)->Any:
 		"""setPath(string) -> self
 
 		Sets the path component of the URI."""
-	def setFragment(self,*args,**kwargs)->Any:
+	def setFragment(self,*args)->Any:
 		"""setFragment(string) -> self
 
 		Sets the fragment component of the URI."""
-	def setFileName(self,*args,**kwargs)->Any:
+	def setFileName(self,*args)->Any:
 		"""setFileName(string) -> self
 
 		Sets just the filename portion of the URI (i.e. not including the directory)."""
-	def setDirectory(self,*args,**kwargs)->Any:
+	def setDirectory(self,*args)->Any:
 		"""setDirectory(string) -> self
 
 		Sets just the directory portion of the URI (i.e. not including the filename)."""
-	def setAuthority(self,*args,**kwargs)->Any:
+	def setAuthority(self,*args)->Any:
 		"""setAuthority(string) -> self
 
 		Set the authority portion of the URI."""
-	def setUserInfo(self,*args,**kwargs)->Any:
+	def setUserInfo(self,*args)->Any:
 		"""setUserInfo(string) -> self
 
 		Decomposes the userInfo string to fill out the userInfo-related component values."""
-	def setUserName(self,*args,**kwargs)->Any:
+	def setUserName(self,*args)->Any:
 		"""setUserName(string) -> self
 
 		Sets the user name part of the user info component."""
-	def setPassword(self,*args,**kwargs)->Any:
+	def setPassword(self,*args)->Any:
 		"""setPassword(string) -> self
 
 		Sets the password part of the user info component."""
-	def setHost(self,*args,**kwargs)->Any:
+	def setHost(self,*args)->Any:
 		"""setHost(string) -> self
 
 		Set the host component of the URI."""
-	def setPort(self,*args,**kwargs)->Any:
+	def setPort(self,*args)->Any:
 		"""setPort(int) -> self
 
 		Set the port component of the URI."""
-	def addQueryItem(self,*args,**kwargs)->Any:
+	def addQueryItem(self,*args)->Any:
 		"""addQueryItem(key, value) -> self
 
 		Add a key/value pair to the query string of the URI."""
-	def setQueryDelimiters(self,*args,**kwargs)->Any:
+	def setQueryDelimiters(self,*args)->Any:
 		"""setQueryDelimiters(valueDelimiter, pairDelimiter) -> self
 
 		Sets the delimiter characters used in the query string of the URI."""
-	def removeQueryItem(self,*args,**kwargs)->Any:
+	def removeQueryItem(self,*args)->Any:
 		"""removeQueryItem(int) -> self
 
 		Removes the first query string pair with a given key from the URI."""
-	def removeAllQueryItems(self,*args,**kwargs)->Any:
+	def removeAllQueryItems(self,*args)->Any:
 		"""removeAllQueryItems(int) -> self
 
 		Removes all query string pairs having a given key from the URI."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source) -> self
 
 		Copy method. Assigns the value of one MURI to another.
 
 		* source (MURI) - Existing MURI object to copy."""
-	def setURI(self,*args,**kwargs)->Any:
+	def setURI(self,*args)->Any:
 		"""setURI(uri) -> self
 
 		Initialize the MURI from a string value."""
-	def isEmpty(self,*args,**kwargs)->Any:
+	def isEmpty(self,*args)->Any:
 		"""isEmpty() -> bool
 
 		Determines if the URI does not contain any data."""
-	def isValid(self,*args,**kwargs)->Any:
+	def isValid(self,*args)->Any:
 		"""isValid() -> bool
 
 		Determines if the URI is valid."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""clear() -> self
 
 		Clears the contents of the MURI object."""
 class MUint64Array:
 	"""Array of MUint64 values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MUintArray:
 	"""Array of unsigned int values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MUserData:
 	"""Virtual base class for user data caching.
@@ -17874,17 +17218,16 @@ class MUserData:
 	* deleteAfterUse (bool) - Enabled if user data should be deleted immediately after use. DEPRECATED in 2022.
 	* legacy (bool) - Enabled if legacy constructor arguments are used. DEPRECATED in 2022.
 	"""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def deleteAfterUse(self,*args,**kwargs)->Any:
+	def deleteAfterUse(self,*args)->Any:
 		"""deleteAfterUse() -> bool
 
 		Returns whether or not this user data should be deleted immediately after use instead of being
 		maintained until the internal owning object is deleted.
 
-		    DEPRECATED in 2022, deleteAfterUse is deprecated.
-		"""
-	def setDeleteAfterUse(self,*args,**kwargs)->Any:
+		    DEPRECATED in 2022, deleteAfterUse is deprecated."""
+	def setDeleteAfterUse(self,*args)->Any:
 		"""setDeleteAfterUse(bool) -> self
 
 		Sets whether or not this user data should be deleted immediately after use instead of being
@@ -17895,142 +17238,117 @@ class MUserData:
 		its delete-after-use set to false, then Maya will retain the data between draws of that object,
 		passing it back to the instance for reuse on subsequent draws.
 
-		    DEPRECATED in 2022, deleteAfterUse is deprecated.
-		"""
+		    DEPRECATED in 2022, deleteAfterUse is deprecated."""
 class MUserEventMessage(MMessage):
 	"""Class used to register callbacks for user event messages."""
-	def registerUserEvent(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+	@staticmethod
+	def registerUserEvent(*args)->Any:
+		"""registerUserEvent(eventName)
 
-		Convert a function to be a static method.
+		Adds a new event type with the given string identifier.  The string
+		identifier can then be used in all other MUserEventMessage methods to operate
+		on the new event type.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		 * eventName (string) - the name of the new event to register.  Any
+		   non-empty string may be used as an event name."""
+	@staticmethod
+	def isUserEvent(*args)->Any:
+		"""isUserEvent(eventName) -> bool
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		Checks if an event type exists with the given event name.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
+		 * eventName (string) - the name of the new event to check. """
+	@staticmethod
+	def deregisterUserEvent(*args)->Any:
+		"""deregisterUserEvent(eventName)
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def isUserEvent(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		Removes the event type with the given event name.  If callbacks have been
+		registered with this event type, they will become invalid after a
+		successful call to this method.
 
-		Convert a function to be a static method.
+		 * eventName (string) - the name of the new event to deregister."""
+	@staticmethod
+	def postUserEvent(*args)->Any:
+		"""postUserEvent(eventName, clientData=None)
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		Notifies all callbacks attached to the given event type of the occurence
+		of the event.
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		If clientData is specified, this data will be passed to all callbacks that
+		receive the event.  If clientData is None (the default), the clientData
+		registered with addUserEventCallback will be passed to the callbacks.
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
 
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def deregisterUserEvent(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
+		 * eventName (string) - the name of the new event.
+		 * clientData - User defined data."""
+	@staticmethod
+	def addUserEventCallback(*args)->Any:
+		"""addUserEventCallback(eventName, function, clientData=None) -> id
 
-		Convert a function to be a static method.
+		This method registers a callback for user-defined messages.
 
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
+		The parameter clientData will be passed to callbacks registered for this
+		event whenever the event is triggered.  To override the data that is passed
+		to the callback whenever the event is posted, you can supply a clientData
+		pointer to postUserEvent()..
 
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
+		 * eventName (string) - the event name to register the callback for
+		 * function - callable which will be passed the clientData object
+		 * clientData - User defined data passed to the callback function
 
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def postUserEvent(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
-	def addUserEventCallback(self,*args,**kwargs)->Any:
-		"""staticmethod(function) -> method
-
-		Convert a function to be a static method.
-
-		A static method does not receive an implicit first argument.
-		To declare a static method, use this idiom:
-
-		     class C:
-		         @staticmethod
-		         def f(arg1, arg2, argN):
-		             ...
-
-		It can be called either on the class (e.g. C.f()) or on an instance
-		(e.g. C().f()). Both the class and the instance are ignored, and
-		neither is passed implicitly as the first argument to the method.
-
-		Static methods in Python are similar to those found in Java or C++.
-		For a more advanced concept, see the classmethod builtin."""
+		 * return: Identifier used for removing the callback."""
 class MUuid:
 	"""Manipulate UUID data."""
 	__hash__:None=None
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def asString(self,*args,**kwargs)->Any:
+	def asString(self,*args)->Any:
 		"""asString() -> string
 
 		Return the UUID as a string."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""copy(source) -> self
 
 		Copy method. Assigns the value of one MUuid to another.
 
 		* source (MUuid) - Existing MUuid object to copy."""
-	def valid(self,*args,**kwargs)->Any:
+	def valid(self,*args)->Any:
 		"""valid() -> bool
 
 		Return whether the UUID is valid."""
-	def generate(self,*args,**kwargs)->Any:
+	def generate(self,*args)->Any:
 		"""generate() -> self
 
 		Generate a new UUID."""
 class MVector:
 	"""3D vector with double-precision coordinates."""
+	@property
+	def x(self)->float:
+		"""X coordinate"""
+	@x.setter
+	def x(self,value:float)->None:...
+	@property
+	def y(self)->float:
+		"""Y coordinate"""
+	@y.setter
+	def y(self,value:float)->None:...
+	@property
+	def z(self)->float:
+		"""Z coordinate"""
+	@z.setter
+	def z(self,value:float)->None:...
 	__hash__:None=None
 	kTolerance:float=1e-10
 	kXaxis:int=0
@@ -18045,111 +17363,116 @@ class MVector:
 	kXnegAxisVector:MVector
 	kYnegAxisVector:MVector
 	kZnegAxisVector:MVector
-	def __lt__(self,*args,**kwargs)->Any:
+	def __lt__(self,other)->bool:
 		"""Return self<value."""
-	def __le__(self,*args,**kwargs)->Any:
+	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,*args,**kwargs)->Any:
+	def __eq__(self,other)->bool:
 		"""Return self==value."""
-	def __ne__(self,*args,**kwargs)->Any:
+	def __ne__(self,other)->bool:
 		"""Return self!=value."""
-	def __gt__(self,*args,**kwargs)->Any:
+	def __gt__(self,other)->bool:
 		"""Return self>value."""
-	def __ge__(self,*args,**kwargs)->Any:
+	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args,**kwargs)->Any:
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __radd__(self,*args,**kwargs)->Any:
+	def __radd__(self,*args)->Any:
 		"""Return value+self."""
-	def __sub__(self,*args,**kwargs)->Any:
+	def __sub__(self,other)->Any:
 		"""Return self-value."""
-	def __rsub__(self,*args,**kwargs)->Any:
+	def __rsub__(self,*args)->Any:
 		"""Return value-self."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __neg__(self,*args,**kwargs)->Any:
+	def __neg__(self,*args)->Any:
 		"""-self"""
-	def __xor__(self,*args,**kwargs)->Any:
+	def __xor__(self,*args)->Any:
 		"""Return self^value."""
-	def __rxor__(self,*args,**kwargs)->Any:
+	def __rxor__(self,*args)->Any:
 		"""Return value^self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Return self+=value."""
-	def __isub__(self,*args,**kwargs)->Any:
+	def __isub__(self,*args)->Any:
 		"""Return self-=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Return self*=value."""
-	def __truediv__(self,*args,**kwargs)->Any:
+	def __truediv__(self,other)->Any:
 		"""Return self/value."""
-	def __rtruediv__(self,*args,**kwargs)->Any:
+	def __rtruediv__(self,other)->Any:
 		"""Return value/self."""
-	def __itruediv__(self,*args,**kwargs)->Any:
+	def __itruediv__(self,other)->Any:
 		"""Return self/=value."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def length(self,*args,**kwargs)->Any:
+	def length(self,*args)->Any:
 		"""Returns the magnitude of this vector."""
-	def normal(self,*args,**kwargs)->Any:
+	def normal(self,*args)->Any:
 		"""Returns a new vector containing the normalized version of this one."""
-	def normalize(self,*args,**kwargs)->Any:
+	def normalize(self,*args)->Any:
 		"""Normalizes this vector in-place and returns a new reference to it."""
-	def transformAsNormal(self,*args,**kwargs)->Any:
+	def transformAsNormal(self,*args)->Any:
 		"""Returns a new vector which is calculated by postmultiplying this vector by the transpose of the given matrix's inverse and then normalizing the result."""
-	def angle(self,*args,**kwargs)->Any:
+	def angle(self,*args)->Any:
 		"""Returns the angle, in radians, between this vector and another."""
-	def isEquivalent(self,*args,**kwargs)->Any:
+	def isEquivalent(self,*args)->Any:
 		"""Returns True if this vector and another are within a given tolerance of being equal."""
-	def isParallel(self,*args,**kwargs)->Any:
+	def isParallel(self,*args)->Any:
 		"""Returns True if this vector and another are within the given tolerance of being parallel."""
-	def rotateBy(self,*args,**kwargs)->Any:
+	def rotateBy(self,*args)->Any:
 		"""Returns the vector resulting from rotating this one by the given amount."""
-	def rotateTo(self,*args,**kwargs)->Any:
+	def rotateTo(self,*args)->Any:
 		"""Returns the quaternion which will rotate this vector into another."""
 class MVectorArray:
 	"""Array of MVector values."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def sizeIncrement(self)->Any:
+		"""Number of elements by which to grow the array when necessary."""
+	@sizeIncrement.setter
+	def sizeIncrement(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self,*args,**kwargs)->Any:
+	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,*args,**kwargs)->Any:
+	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def __setitem__(self,*args,**kwargs)->Any:
+	def __setitem__(self,index:int,value)->None:
 		"""Set self[key] to value."""
-	def __delitem__(self,*args,**kwargs)->Any:
+	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def __add__(self,*args,**kwargs)->Any:
+	def __add__(self,other)->Any:
 		"""Return self+value."""
-	def __mul__(self,*args,**kwargs)->Any:
+	def __mul__(self,other)->Any:
 		"""Return self*value."""
-	def __rmul__(self,*args,**kwargs)->Any:
+	def __rmul__(self,other)->Any:
 		"""Return value*self."""
-	def __contains__(self,*args,**kwargs)->Any:
+	def __contains__(self,item)->bool:
 		"""Return key in self."""
-	def __iadd__(self,*args,**kwargs)->Any:
+	def __iadd__(self,other)->Any:
 		"""Implement self+=value."""
-	def __imul__(self,*args,**kwargs)->Any:
+	def __imul__(self,other)->Any:
 		"""Implement self*=value."""
-	def append(self,*args,**kwargs)->Any:
+	def append(self,item)->None:
 		"""Add a value to the end of the array."""
-	def copy(self,*args,**kwargs)->Any:
+	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
-	def clear(self,*args,**kwargs)->Any:
+	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,*args,**kwargs)->Any:
+	def insert(self,index:int,item)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,*args,**kwargs)->Any:
+	def remove(self,item)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args,**kwargs)->Any:
+	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MWeight:
 	"""Methods for accessing component weight data. This class is currently
@@ -18163,9 +17486,27 @@ class MWeight:
 	weight of 0.
 	__init__(MWeight src)
 	Initializes a new MWeight object with the same value as src."""
-	def __init__(self,*args,**kwargs)->Any:
+	@property
+	def influence(self)->Any:
+		"""Controls how much of a given operation is applied to the entity
+		associated with this weight structure. A value of 1 means the full
+		 effect should be applied. A value of 0 means the operation should
+		not affect the entity at all."""
+	@influence.setter
+	def influence(self,value:Any)->None:...
+	@property
+	def seam(self)->Any:
+		"""Indicates how close the entity associated with this weight is to the
+		plane of reflection (the seam), and hence, how strongly it should be
+		associated with the seam. A value of 0 means the entity is free to move
+		independent of the seam. A value of 1 means the entity is full on the
+		seam, and should ideally maintain it's distance relative to the plane of
+		symmetry. This value is only relevant when symmetry is enabled."""
+	@seam.setter
+	def seam(self,value:Any)->None:...
+	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 
-def getStringResource(*args,**kwargs)->Any:...
-def registerStringResource(*args,**kwargs)->Any:...
-def registerStringResources(*args,**kwargs)->Any:...
+def getStringResource(*args)->Any:...
+def registerStringResource(*args)->Any:...
+def registerStringResources(*args)->Any:...

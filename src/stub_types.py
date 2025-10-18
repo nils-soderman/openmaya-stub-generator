@@ -59,8 +59,8 @@ class Function:
     deprecated: bool = False
 
     def get_params_str(self) -> str:
-        if not self.parameters:
-            return "*args,**kwargs"
+        if self.parameters is None:
+            return "*args"
 
         return ",".join(str(param) for param in self.parameters)
 
@@ -85,11 +85,14 @@ class Method(Function):
     static: bool = False
 
     def get_params_str(self) -> str:
+        param_str = super().get_params_str()
         if self.static:
-            return super().get_params_str()
+            return param_str
         else:
             self_name = "cls" if self.name == "__new__" else "self"
-            return f"{self_name},{super().get_params_str()}"
+            if param_str:
+                return f"{self_name},{param_str}"
+            return self_name
 
     def __str__(self) -> str:
         method_str = ""

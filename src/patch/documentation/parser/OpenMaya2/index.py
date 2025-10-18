@@ -1,68 +1,19 @@
-import dataclasses
 import typing
 import json
 
-import requests
 import bs4
 
-from . import cached_request
+from .. import cached_request, interface
 
 AUTODESK_HELP_BASE_URL = "https://help.autodesk.com/cloudhelp"
 AUTODESK_MAYA_API_NAMESPACE_PATH = "/ENU/MAYA-API-REF/py_ref"
 
 
-class Namespace(typing.NamedTuple):
-    version: int
-    name: str
-    url: str
-
-
-class IndexClass(typing.NamedTuple):
-    name: str
-    url: str
-
-
-class IndexFunction(typing.NamedTuple):
-    name: str
-    url: str
-
-
-class IndexVariable(typing.NamedTuple):
-    name: str
-    type: str
-    default: str | None = None
-
-
-@dataclasses.dataclass
-class Index:
-    classes: list[IndexClass]
-    functions: list[IndexFunction]
-    variables: list[IndexVariable]
-
-    def get_class_by_name(self, name: str) -> IndexClass | None:
-        for cls in self.classes:
-            if cls.name == name:
-                return cls
-        return None
-
-    def get_function_by_name(self, name: str) -> IndexFunction | None:
-        for func in self.functions:
-            if func.name == name:
-                return func
-        return None
-
-    def get_variable_by_name(self, name: str) -> IndexVariable | None:
-        for var in self.variables:
-            if var.name == name:
-                return var
-        return None
-
-
-def get_base_url(version: int):
+def get_base_url(version: int) -> str:
     return f"{AUTODESK_HELP_BASE_URL}/{version}{AUTODESK_MAYA_API_NAMESPACE_PATH}"
 
 
-def get_namespaces(version: int, use_cache: bool) -> list[Namespace]:
+def get_namespaces(version: int, use_cache: bool) -> list[interface.Namespace]:
     base_url = get_base_url(version)
     url = f"{base_url}/namespaces.js"
     js_raw = cached_request.request(url, use_cache=use_cache)
@@ -72,7 +23,7 @@ def get_namespaces(version: int, use_cache: bool) -> list[Namespace]:
 
     namespace_content: list = json.loads(js_parsable)
 
-    return [Namespace(version, x[0], f"{base_url}/{x[1]}") for x in namespace_content]
+    return [interface.Namespace(x[0], version, f"{base_url}/{x[1]}") for x in namespace_content]
 
 
 def find_table_by_heading(tables: list[bs4.element.Tag], heading: str):
@@ -86,7 +37,7 @@ def find_table_by_heading(tables: list[bs4.element.Tag], heading: str):
     return None
 
 
-def parse_table_url(table: bs4.element.Tag, base_url: str) -> typing.Generator[IndexClass, None, None]:
+def parse_table_url(table: bs4.element.Tag, base_url: str) -> typing.Generator[interface.IndexClass, None, None]:
     for a_tag in table.find_all('a'):
         if not isinstance(a_tag, bs4.element.Tag):
             raise ValueError("Expected a_tag to be a Tag")
@@ -95,10 +46,10 @@ def parse_table_url(table: bs4.element.Tag, base_url: str) -> typing.Generator[I
         class_url = str(a_tag.get('href', ''))
 
         if class_name and class_url:
-            yield IndexClass(class_name, f"{base_url}/{class_url}")
+            yield interface.IndexClass(class_name, f"{base_url}/{class_url}")
 
 
-def parse_table_functions(table: bs4.element.Tag, base_url: str) -> typing.Generator[IndexFunction, None, None]:
+def parse_table_functions(table: bs4.element.Tag, base_url: str) -> typing.Generator[interface.IndexFunction, None, None]:
     for a_tag in table.find_all('a'):
         if not isinstance(a_tag, bs4.element.Tag):
             raise ValueError("Expected a_tag to be a Tag")
@@ -107,10 +58,10 @@ def parse_table_functions(table: bs4.element.Tag, base_url: str) -> typing.Gener
         class_url = str(a_tag.get('href', ''))
 
         if class_name and class_url:
-            yield IndexFunction(class_name, f"{base_url}/{class_url}")
+            yield interface.IndexFunction(class_name, f"{base_url}/{class_url}")
 
 
-def parse_table_variables(table: bs4.element.Tag) -> typing.Generator[IndexVariable, None, None]:
+def parse_table_variables(table: bs4.element.Tag) -> typing.Generator[interface.IndexVariable, None, None]:
     # Find all tr elements and filter by class starting with "memitem:"
     for row in table.find_all('tr'):
         if not isinstance(row, bs4.element.Tag):
@@ -143,10 +94,10 @@ def parse_table_variables(table: bs4.element.Tag) -> typing.Generator[IndexVaria
             name, default = name_col, None
 
         if name and type_col:
-            yield IndexVariable(name, type_col, default)
+            yield interface.IndexVariable(name, type_col, default)
 
 
-def get_namespace_index(namespace: Namespace, use_cache: bool) -> Index:
+def get_namespace_index(namespace: interface.Namespace, use_cache: bool) -> interface.Index:
     html = cached_request.request(namespace.url, use_cache=use_cache)
 
     soup = bs4.BeautifulSoup(html, 'html.parser')
@@ -175,4 +126,4 @@ def get_namespace_index(namespace: Namespace, use_cache: bool) -> Index:
     if table_variables := find_table_by_heading(member_tables, "Variables"):
         variables = list(parse_table_variables(table_variables))
 
-    return Index(classes, functions, variables)
+    return interface.Index(classes, functions, variables)

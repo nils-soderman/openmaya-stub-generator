@@ -34,9 +34,6 @@ def get_type_from_name(name: str) -> str | None:
 class Patch_AssumeParameterType(PatchBase):
     ORDER = 50
 
-    def desc(self) -> str:
-        return "Assume parameter types based on their names"
-
     def patch_method(self, class_, method):
         if method.parameters:
             for param in method.parameters:

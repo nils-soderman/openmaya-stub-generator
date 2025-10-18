@@ -1,5 +1,4 @@
 import argparse
-import logging
 import time
 import os
 
@@ -11,12 +10,9 @@ try:
 except ImportError:
     raise ImportError("This script must be run in the mayapy.exe interpreter.")
 
-logger = logging.getLogger(__name__)
-
-
 class MayaStandalone:
     def __enter__(self):
-        logger.info("Initializing Maya standalone...")
+        print("Initializing Maya standalone...")
         try:
             maya.standalone.initialize()
         except RuntimeError:
@@ -44,7 +40,6 @@ def main() -> None:
 
     output_path = os.path.abspath(args.output)
 
-    logging.info("Generating stubs...")
     start_time = time.perf_counter()
 
     flags = Flags.NONE
@@ -55,7 +50,7 @@ def main() -> None:
         generator.generate_stubs(output_path, flags=flags)
 
     elapsed_time = time.perf_counter() - start_time
-    logging.info(f"Stubs generated successfully in {elapsed_time:.2f} seconds.")
+    print(f"Stubs generated successfully in {elapsed_time:.2f} seconds.")
 
 
 if __name__ == "__main__":

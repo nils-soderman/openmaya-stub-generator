@@ -1,60 +1,12 @@
-import dataclasses
-import requests
 import logging
-import typing
 import uuid
 import bs4
 
-from . import cached_request
+from .. import cached_request, interface
 
 logger = logging.getLogger(__name__)
 
 RANDOM_UUID = str(uuid.uuid4())
-
-
-class MemItem(typing.NamedTuple):
-    title: str
-    identifier: str
-    is_static: bool
-    docstring: str
-    data: list[dict]
-
-
-class Parameter(typing.NamedTuple):
-    name: str
-    type: str
-    description: str = ""
-
-
-class DetailedDescription(typing.NamedTuple):
-    description: str
-
-
-@dataclasses.dataclass
-class Page:
-    url: str
-    detailed_description: DetailedDescription | None
-    functions: list[MemItem]
-    member_data: list[MemItem]
-    properties: list[MemItem]
-
-    def find_member_by_name(self, name: str) -> MemItem | None:
-        for member in self.member_data:
-            if member.identifier == name:
-                return member
-        return None
-
-    def find_property_by_name(self, name: str) -> MemItem | None:
-        for prop in self.properties:
-            if prop.identifier == name:
-                return prop
-        return None
-
-    def find_function_by_name(self, name: str) -> MemItem | None:
-        for func in self.functions:
-            if func.identifier == name:
-                return func
-        return None
 
 
 def get_memitems(soup: bs4.BeautifulSoup, header_text: str):
@@ -86,7 +38,7 @@ def get_memitems(soup: bs4.BeautifulSoup, header_text: str):
         current = current.next_sibling
 
 
-def parse_detailed_description(soup: bs4.BeautifulSoup) -> DetailedDescription | None:
+def parse_detailed_description(soup: bs4.BeautifulSoup) -> interface.DetailedDescription | None:
     # Find the h2 class groupheader with text "Detailed Description"
     header = soup.find('h2', class_='groupheader',
                        string='Detailed Description')
@@ -101,7 +53,7 @@ def parse_detailed_description(soup: bs4.BeautifulSoup) -> DetailedDescription |
     if fragment := div_textblock.find('pre', class_='fragment'):
         desc = fragment.get_text(strip=True)
 
-    return DetailedDescription(desc)
+    return interface.DetailedDescription(desc)
 
 
 def parse_memitem(memitem: bs4.element.Tag):
@@ -164,10 +116,10 @@ def parse_memitem(memitem: bs4.element.Tag):
             table_data[key] = value
 
         data.append(table_data)
-    return MemItem(title, identifier, bool(span_mlabel), docstring, data)
+    return interface.MemItem(title, identifier, bool(span_mlabel), docstring, data)
 
 
-def parse_memitem_value_parameters(td: bs4.element.Tag) -> list[Parameter]:
+def parse_memitem_value_parameters(td: bs4.element.Tag) -> list[interface.Parameter]:
     if td.find("th"):  # Parameters in a table layout
         parms = []
         for tr in td.find_all("tr")[1:]:
@@ -183,7 +135,7 @@ def parse_memitem_value_parameters(td: bs4.element.Tag) -> list[Parameter]:
             type_ = tds[1].get_text(strip=True, separator=" ")
             description = tds[2].get_text(strip=True, separator=" ")
 
-            parms.append(Parameter(name=name, type=type_, description=description))
+            parms.append(interface.Parameter(name=name, type=type_, description=description))
 
         return parms
     
@@ -200,9 +152,9 @@ def parse_memitem_value_parameters(td: bs4.element.Tag) -> list[Parameter]:
         for param_str in value:
             if '-' in param_str:
                 name, _, type_ = param_str.partition('-')
-                parms.append(Parameter(name=name.strip(), type=type_.strip()))
+                parms.append(interface.Parameter(name=name.strip(), type=type_.strip()))
             else:
-                parms.append(Parameter(name=param_str.strip(), type=""))
+                parms.append(interface.Parameter(name=param_str.strip(), type=""))
 
         return parms
 
@@ -212,20 +164,15 @@ def parse_memitems(soup: bs4.BeautifulSoup, header_text: str):
         yield parse_memitem(memitem)
 
 
-def parse(page_url: str, use_cache: bool = True) -> Page:
-    if use_cache:
-        html = cached_request.request(page_url, use_cache=True)
-    else:
-        response = requests.get(page_url)
-        response.raise_for_status()
-        html = response.text
+def parse(page_url: str, use_cache: bool = True) -> interface.Page:
+    html = cached_request.request(page_url, use_cache=use_cache)
     soup = bs4.BeautifulSoup(html, 'html.parser')
 
-    logging.info(f"Parsing page: {page_url}")
+    # logging.info(f"Parsing page: {page_url}")
 
     detailed_desc = parse_detailed_description(soup)
     functions = list(parse_memitems(soup, "Member Function Documentation"))
     member_data = list(parse_memitems(soup, "Member Data Documentation"))
     properties = list(parse_memitems(soup, "Property Documentation"))
 
-    return Page(page_url, detailed_desc, functions, member_data, properties)
+    return interface.Page(page_url, detailed_desc, functions, member_data, properties)

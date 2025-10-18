@@ -19,22 +19,23 @@ MODULES = [
 def generate_string(module: str, flags: Flags) -> str:
     version = maya_info.get_version()
 
-    header_str = header.get(module, {"VERSION": version, "MODULE": module})
+    header_str = header.get(module, {"VERSION": str(version), "MODULE": module})
 
     variables = generate_variables.generate_variables(module)
     classes = generate_classes.generate_classes(module)
     functions = generate_functions.generate_functions(module)
 
     for patch in ALL_PATCHES:
-        patch(module, flags).apply_patch(variables, classes, functions)
+        patch(module, version, flags).apply_patch(variables, classes, functions)
 
     out_str = header_str
-    if variables:
-        out_str += "\n\n"
-        out_str += "\n".join(str(var) for var in variables)
+
+    # OpenMaya currently does not have any module-level variables that are meant to be accessed
+    # if variables:
+    #     out_str += "\n\n"
+    #     out_str += "\n".join(str(var) for var in variables)
 
     if classes:
-
         out_str += "\n\n"
         out_str += "\n".join(str(cls) for cls in classes)
 

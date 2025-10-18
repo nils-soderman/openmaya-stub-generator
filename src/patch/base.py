@@ -1,26 +1,18 @@
 import time
-import logging
 
 from ..flags import Flags
 from .. import stub_types
-
-logger = logging.getLogger(__name__)
 
 
 class PatchBase:
     ORDER = 100
 
-    def __init__(self, module_name: str, flags: Flags) -> None:
+    def __init__(self, module_name: str, version: int, flags: Flags) -> None:
         self.module_name = module_name
         self.flags = flags
 
-    def desc(self) -> str:
-        return ""
-
     def apply_patch(self, variables: list[stub_types.Variable], classes: list[stub_types.Class], functions: list[stub_types.Function]):
-        if desc := self.desc():
-            desc = f' - "{desc}"'
-        logger.info(f"Applying patch: {self.__class__.__name__} [{self.ORDER}]: {desc}")
+        print(f"Applying patch {self.__class__.__name__} [{self.ORDER}]:")
 
         start_time = time.perf_counter()
 
@@ -35,7 +27,7 @@ class PatchBase:
 
         end_time = time.perf_counter()
 
-        logger.info(f"patch took {end_time - start_time:.2f} seconds")
+        print(f"\tPatch took {end_time - start_time:.2f} seconds")
 
     def patch_variable(self, variable: stub_types.Variable):
         pass

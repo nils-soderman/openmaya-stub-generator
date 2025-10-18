@@ -1,8 +1,9 @@
-import os
+import tempfile
 import hashlib
+import os
+
 import requests
 
-import tempfile
 
 cache_dir = os.path.join(tempfile.gettempdir(), "openmaya_cache")
 
