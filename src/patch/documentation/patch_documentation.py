@@ -1,8 +1,10 @@
 """
 Patch stubs based on the Online Documentation
 """
+import copy
 
-from ...stub_types import Class, Property, PropertyGetSet
+from src.stub_types import Method
+from ...stub_types import Class, Parameter, Property, PropertyGetSet
 from ...flags import Flags
 
 from ..base import PatchBase
@@ -43,6 +45,10 @@ class Patch_Documentation(PatchBase):
             if prop_doc := class_doc.find_property_by_name(property.name):
                 self.patch_property(class_, property, prop_doc)
 
+        for method in class_.methods:
+            if method_doc := class_doc.find_function_by_name(method.name):
+                self.patch_method(class_, method, method_doc)
+
     def patch_property(self, class_: Class, property_: Property, prop_doc: parser.interface.MemItem):
         if is_none_or_any(property_.type) and len(prop_doc.data) > 0:
             if len(prop_doc.data) > 1:
@@ -59,4 +65,59 @@ class Patch_Documentation(PatchBase):
                 access = data.get('access', "RW").lower()
                 property_.can_set = "w" in access
 
-        
+    def patch_builtin_method(self, method: Method, method_doc: parser.interface.MemItem):
+        ...
+
+    def patch_method(self, class_: Class, method: Method, method_doc: parser.interface.MemItem):
+        if method.name.startswith("__") and method.name.endswith("__"):
+            return self.patch_builtin_method(method, method_doc)
+
+        if method_doc.data:
+            self.patch_method_from_data(method, method_doc)
+        else:
+            ...
+
+    def patch_method_from_data(self, in_method: Method, method_doc: parser.interface.MemItem):
+        """
+        If method is properly documented, patch based on the parsed data
+        """
+
+        for i, data in enumerate(method_doc.data):
+            if i > 0:
+                # Create a new overload method
+                method = Method(in_method.ref,
+                                in_method.name,
+                                return_type="Any",
+                                docstring=in_method.docstring,
+                                deprecated=in_method.deprecated,
+                                static=in_method.static)
+                in_method.overloads.append(method)
+            else:
+                method = in_method
+
+            if docstring := data.get('description'):
+                method.docstring = docstring
+
+            method.parameters = []
+            for param_doc in data.get('parameters', []):
+                if not isinstance(param_doc, parser.interface.Parameter):
+                    raise TypeError("Expected Parameter instance")
+
+                method.parameters.append(
+                    Parameter(
+                        name=param_doc.name,
+                        type=convert_type.get_python_type_from_desc(param_doc.type),
+                        default=param_doc.default,
+                    )
+                )
+
+            # Return type
+            if return_type_desc := data.get('returns'):
+                method.return_type = convert_type.get_python_type_from_desc(return_type_desc)
+
+    def patch_method_from_docstring_signatures(self, method: Method, desc: str):
+        """
+        Some methods are not properly documented, and only have a docstring with signatures.
+        Try to extract type information from those signatures.
+        """
+        ...

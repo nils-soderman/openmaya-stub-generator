@@ -57,6 +57,7 @@ class Function:
     parameters: list[Parameter] | None = None
     docstring: str | None = None
     deprecated: bool = False
+    overloads: list[typing.Self] = field(default_factory=list)
 
     def get_params_str(self) -> str:
         if self.parameters is None:
@@ -76,6 +77,10 @@ class Function:
             func_str += "\n" + indent(f'"""{safe_docstring(self.docstring)}"""', 1)
         else:
             func_str += "..."
+
+        if self.overloads:
+            overloads_str = "\n@overload\n".join(str(x) for x in self.overloads)
+            func_str = f"@overload\n{func_str}\n@overload\n{overloads_str}"
 
         return func_str
 
@@ -147,12 +152,6 @@ class Class:
     methods: list[Method]
     docstring: str | None = None
 
-    def get_grouped_methods(self) -> dict[str, list[Method]]:
-        grouped_methods = defaultdict(list)
-        for method in self.methods:
-            grouped_methods[method.name].append(method)
-        return grouped_methods
-
     def __str__(self) -> str:
         bases_str = f"({','.join(self.base_class_names)})" if self.base_class_names else ""
 
@@ -166,15 +165,8 @@ class Class:
             class_str += f"\n{indent(props_str, 1)}"
 
         if self.methods:
-            function_str = ""
-            for methods in self.get_grouped_methods().values():
-                if len(methods) > 1:
-                    for method in methods:
-                        function_str += f"@overload\n{str(method)}\n"
-                else:
-                    function_str += str(methods[0]) + "\n"
-
-            class_str += f"\n{indent(function_str.strip(), 1)}"
+            method_str = "\n".join(str(method) for method in self.methods)
+            class_str += f"\n{indent(method_str.strip(), 1)}"
 
         if "\n" not in class_str:
             class_str += "..."
