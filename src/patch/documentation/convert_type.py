@@ -104,11 +104,48 @@ def get_python_type_from_desc(desc: str) -> str:
         - [MObject, ...]
         - List of Strings
     """
+    # Sanitize input
     desc = re.sub(r'<[^>]+>', '', desc)  # Remove HTML tags that may be left if the online docs html is broken
-    desc = desc.replace('*', '')
-    desc = desc.strip()
+    desc = re.sub(r'[*#]', '', desc).strip()  # Remove some illegal characters
+    desc = re.sub(r'^the new ', "", desc, flags=re.IGNORECASE).strip()
+    desc = re.sub(r'^a ', "", desc, flags=re.IGNORECASE).strip()
+    desc = desc.removeprefix("unsigned ").strip()
+
+    # Remove unmatched closing bracket
+    if desc.count(')') > desc.count('('):
+        desc = desc.replace(')', '', desc.count(')') - desc.count('('))
+
+    if desc.endswith(".") and not desc.endswith("..."):
+        desc = desc[:-1].strip()
 
     desc_lower = desc.lower()
+
+
+
+    # Tuples: "tuple of strings" -> "tuple[str, ...]"
+    # Lists: "list of floats" -> "list[float]"
+    # Sequence: "Sequence of floats" -> "Sequence[float]"
+    for prefix, py_type, include_elipsis in [
+        ("tuple of ", "tuple", True),
+        ("tuples of ", "tuple", True),
+        ("tuples containing ", "tuple", True),
+        ("list of ", "list", False),
+        ("sequence of ", "Sequence", False)
+    ]:
+        if desc_lower.startswith(prefix):
+            inner_content = desc[len(prefix):].strip()
+            inner_types = inner_content.split(" or ")
+            inner_types = [t.removesuffix("s").removesuffix("'").strip(f" ()") for t in inner_types]
+            inner_types = [
+                re.sub(r'^(?:[1-9]|two|three|four|five|six|seven|eight)\s+', '', x, flags=re.IGNORECASE) for x in inner_types
+            ]
+            inner_types = [get_python_type_from_desc(t) for t in inner_types]
+            # inner_content might be "Sequence of three floats"
+            # inner_type = get_python_type_from_desc(inner_content)
+            inner_type_str = "|".join(inner_types)
+            if include_elipsis:
+                return f"{py_type}[{inner_type_str},...]"
+            return f"{py_type}[{inner_type_str}]"
 
     # Split by delimiters "X , Y or Z"
     if " or " in desc or "," in desc:
@@ -116,29 +153,55 @@ def get_python_type_from_desc(desc: str) -> str:
         if len(split_types) > 1:
             return "|".join(get_python_type_from_desc(t) for t in split_types)
 
-    # Tuples: "tuple of strings" -> "tuple[str, ...]"
-    if desc_lower.startswith("tuple of "):
-        inner_content = desc.removeprefix("tuple of ").strip()
-        inner_content = inner_content.removesuffix("s").strip()
-        inner_type = get_python_type_from_desc(inner_content)
-        return f"tuple[{inner_type}, ...]"
-
     # Tuples: "(X, Y, Z)" -> "tuple[X, Y, Z]"
-    if desc_lower.startswith("(") and desc_lower.endswith(")"):
+    if desc.startswith("(") and desc.endswith(")"):
         desc_inner = desc[1:-1].strip()
         inner_types = split_outside_nested(desc_inner, ",")
         inner_types = [get_python_type_from_desc(t) for t in inner_types]
+
+        # ellipsis must be the 2nd element if present
+        if inner_types[-1] == "..." and len(inner_types) > 2:
+            return f"tuple[{inner_types[0]},...]"
+
         inner_type_str = ",".join(inner_types)
         return f"tuple[{inner_type_str}]"
+
+    # Lists: "[X, Y, Z]" -> "list[X|Y|Z]"
+    if desc.startswith("[") and desc.endswith("]"):
+        desc_inner = desc[1:-1].strip()
+        inner_types = split_outside_nested(desc_inner, ",")
+        inner_types = [get_python_type_from_desc(t) for t in inner_types]
+        inner_types = list(dict.fromkeys(inner_types))  # Make sure types are unique
+        if "..." in inner_types:
+            inner_types.remove("...")
+        inner_type_str = "|".join(inner_types)
+        return f"list[{inner_type_str}]"
 
     # types that end with " constant" are enums represented as int
     if desc_lower.endswith(" constant"):
         return "int"
 
+    if desc_lower.endswith("reference to self"):
+        return "Self"
+
     desc = convert_type(desc)
     desc = guess_python_from_desc_type(desc)
 
+    if " " in desc:
+        print(f'Could not convert documented type "{desc}" to a Python type')
+        desc = "Any"
+
     return desc
+
+
+def extract_collection_type(desc: str, prefix: str, py_type: str) -> str | None:
+    desc_lower = desc.lower()
+    if desc_lower.startswith(prefix):
+        inner_content = desc.removeprefix(prefix).strip()
+        inner_content = inner_content.removesuffix("s").strip()
+        inner_type = get_python_type_from_desc(inner_content)
+        return f"{py_type}[{inner_type}{',...' if py_type == 'tuple' else ''}]"
+    return None
 
 
 def old(desc: str):

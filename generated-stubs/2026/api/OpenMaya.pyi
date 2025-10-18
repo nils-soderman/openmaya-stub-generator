@@ -39,52 +39,42 @@ class MAngle:
 	kLast:int=5
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def asUnits(self,*args)->Any:
-		"""Returns the angular value, converted to the specified units."""
-	def asRadians(self,*args)->Any:
-		"""Returns the angular value, converted to radians."""
-	def asDegrees(self,*args)->Any:
-		"""Returns the angular value, converted to degrees."""
-	def asAngMinutes(self,*args)->Any:
-		"""Returns the angular value, converted to minutes of arc."""
-	def asAngSeconds(self,*args)->Any:
-		"""Returns the angular value, converted to seconds of arc."""
+	def asUnits(self,unit:int)->float:
+		"""Returns the angular value converted to the specified unit ."""
+	def asRadians(self)->float:
+		"""Returns the angular value converted to radians."""
+	def asDegrees(self)->float:
+		"""Returns the angular value converted to degrees."""
+	def asAngMinutes(self)->float:
+		"""Returns the angular value converted to minutes of arc."""
+	def asAngSeconds(self)->float:
+		"""Returns the angular value converted to seconds of arc."""
 	@staticmethod
-	def uiUnit(*args)->Any:
-		"""Returns the units used to display angles in Maya's UI."""
+	def uiUnit()->int:
+		"""Returns the units currently used by Maya's UI when entering and displaying angular values."""
 	@staticmethod
-	def setUIUnit(*args)->Any:
-		"""Sets the angular unit used in Maya's UI."""
+	def setUIUnit(newUnit:int)->None:
+		"""Sets the units used by Maya's UI when entering and displaying angular values."""
 	@staticmethod
-	def internalUnit(*args)->Any:
-		"""Returns the angular unit used internally by Maya."""
+	def internalUnit()->int:
+		"""Returns the unit type used by Maya to store angular values internally (e.g. in plugs and binary files)."""
 	@staticmethod
-	def internalToUI(*args)->Any:
-		"""Converts a value from Maya's internal units to the units used in the UI."""
+	def internalToUI(internalValue:float)->float:
+		"""Interprets internalValue as an angular value in Maya's internal units and returns it converted to UI units."""
 	@staticmethod
-	def uiToInternal(*args)->Any:
-		"""Converts a value from the units used in the UI to Maya's internal units."""
+	def uiToInternal(uiValue:float)->float:
+		"""Interprets uiValue as an angular value in Maya's UI units and returns it converted to UI units."""
 class MArgDatabase(MArgParser):
 	"""Command argument list parser which extends MArgParser with the
 	ability to return arguments and objects as MSelectionLists"""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def commandArgumentMSelectionList(self,*args)->Any:
-		"""commandArgumentMSelectionList(argIndex) -> MSelectionList
-
-		Returns the specified command argument as an MSelectionList."""
-	def flagArgumentMSelectionList(self,*args)->Any:
-		"""flagArgumentMSelectionList(flagName, argIndex) -> MSelectionList
-
-		Returns the specified argument of the specified single-use flag as
-		an MSelectionList."""
-	def getObjectList(self,*args)->Any:
-		"""getObjectList() -> MSelectionList
-
-		If the command's MSyntax has set the object format to kSelectionList
-		then this method will return the objects passed to the command as an
-		MSelectionList. If any other object format is set then an empty
-		selection list will be returned."""
+	def commandArgumentMSelectionList(self,index:int)->MSelectionList:
+		"""Returns the specified command argument in an MSelectionList . Raises TypeError if the argument cannot be placed in an MSelectionList . Raises IndexError if index is out of range."""
+	def flagArgumentMSelectionList(self,flag:str,index:int)->MSelectionList:
+		"""Returns the index 'th argument of the specified flag in an MSelectionList . Raises TypeError if the argument cannot be placed in an MSelectionList . Raises IndexError if index is out of range."""
+	def getObjectList(self)->MSelectionList:
+		"""Returns the list of objects passed to the command as an MSelectionList ."""
 class MArgList:
 	"""Argument list for passing to commands."""
 	kInvalidArgIndex:int=-1
@@ -92,75 +82,40 @@ class MArgList:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def addArg(self,*args)->Any:
-		"""addArg(arg) -> self , 'arg' is a numeric value, MAngle, MDistance,
-		MTime, MPoint or        MVector.
-
-		Add an argument to the end of the arg list."""
-	def asAngle(self,*args)->Any:
-		"""asAngle(index) -> MAngle
-
-		Return an argument as an MAngle."""
-	def asBool(self,*args)->Any:
-		"""asBool(index) -> bool
-
-		Return an argument as a boolean."""
-	def asDistance(self,*args)->Any:
-		"""asDistance(index) -> MDistance
-
-		Return an argument as an MDistance."""
-	def asDouble(self,*args)->Any:
-		"""asDouble(index) -> float
-
-		Alias for asFloat()."""
-	def asDoubleArray(self,*args)->Any:
-		"""asDoubleArray(index) -> MDoubleArray
-
-		Return a sequence of arguments as an MDoubleArray."""
-	def asFloat(self,*args)->Any:
-		"""asFloat(index) -> float
-
-		Return an argument as a float."""
-	def asInt(self,*args)->Any:
-		"""asInt(index) -> int
-
-		Return an argument as an integer."""
-	def asIntArray(self,*args)->Any:
-		"""asIntArray(index) -> MIntArray
-
-		Return a sequence of arguments as an MIntArray."""
-	def asMatrix(self,*args)->Any:
-		"""asMatrix(index) -> MMatrix
-
-		Return a sequence of arguments as an MMatrix."""
-	def asPoint(self,*args)->Any:
-		"""asPoint(index) -> MPoint
-
-		Return a sequence of arguments as an MPoint."""
-	def asString(self,*args)->Any:
-		"""asString(index) -> string
-
-		Return an argument as a string."""
-	def asStringArray(self,*args)->Any:
-		"""asStringArray(index) -> list of strings
-
-		Return a sequence of arguments as a list of strings."""
-	def asTime(self,*args)->Any:
-		"""asTime(index) -> MTime
-
-		Return an argument as an MTime."""
-	def asVector(self,*args)->Any:
-		"""asVector(index) -> MVector
-
-		Return a sequence of arguments as an MVector."""
-	def flagIndex(self,*args)->Any:
-		"""flagIndex(shortFlag, longFlag=None) -> int
-
-		Return index of first occurrence of specified flag."""
-	def lastArgUsed(self,*args)->Any:
-		"""lastArgUsed() -> int
-
-		Return index of last argument used by the most recent as*() method."""
+	def addArg(self,arg:bool|int|float|str|MAngle|MDistance|MPoint|MTime|MVector)->Any:
+		"""Add an argument to the end of the arg list."""
+	def asAngle(self,index:int)->MAngle:
+		"""Return an argument as an MAngle . IndexError will be raised if index is out of bounds."""
+	def asBool(self,index:int)->bool:
+		"""Return an argument as a boolean. IndexError will be raised if index is out of bounds."""
+	def asDistance(self,index:int)->MDistance:
+		"""Return an argument as an MDistance . IndexError will be raised if index is out of bounds."""
+	def asDouble(self,index:int)->float:
+		"""Alias for asFloat() ."""
+	def asDoubleArray(self,index:int)->MDoubleArray:
+		"""Return a sequence of arguments as an MDoubleArray . IndexError will be raised if index is out of bounds."""
+	def asFloat(self,index:int)->float:
+		"""Return an argument as a float. IndexError will be raised if index is out of bounds."""
+	def asInt(self,index:int)->int:
+		"""Return an argument as an integer. IndexError will be raised if index is out of bounds."""
+	def asIntArray(self,index:int)->MIntArray:
+		"""Return a sequence of arguments as an MIntArray . IndexError will be raised if index is out of bounds."""
+	def asMatrix(self,index:int)->MMatrix:
+		"""Return a sequence of arguments as an MMatrix . IndexError will be raised if index is out of bounds."""
+	def asPoint(self,index:int,numElements:int)->MPoint:
+		"""Return a sequence of arguments as an MPoint . ValueError will be raised if numElements is greater than 4 as that is the maximum dimension for an MPoint . IndexError will be raised if index is out of bounds"""
+	def asString(self,index:int)->str:
+		"""Return an argument as a string. IndexError will be raised if index is out of bounds."""
+	def asStringArray(self,index:int)->list[str]:
+		"""Return a sequence of arguments as a list of strings. IndexError will be raised if index is out of bounds."""
+	def asTime(self,index:int)->MTime:
+		"""Return an argument as an MTime . IndexError will be raised if index is out of bounds."""
+	def asVector(self,index:int,numElements:int)->MVector:
+		"""Return a sequence of arguments as an MVector . ValueError will be raised if numElements is greater than 3 as that is the maximum dimension for an MVector . IndexError will be raised if index is out of bounds."""
+	def flagIndex(self,shortName:str,longName:str)->int:
+		"""Return the index of the first occurrence of the specified flag or kInvalidFlagIndex if the flag is not in the arg list."""
+	def lastArgUsed(self)->int:
+		"""Return the index of the last argument used by the most recent as*() method call, or -1 if no arguments have been used yet."""
 class MArgParser:
 	"""Command argument list parser."""
 	@property
@@ -174,103 +129,48 @@ class MArgParser:
 		"""Number of different flags used on the command line. If the same flag appears multiple times it is only counted once."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def commandArgumentBool(self,*args)->Any:
-		"""commandArgumentBool(argIndex) -> bool
-
-		Returns the specified command argument as a bool."""
-	def commandArgumentDouble(self,*args)->Any:
-		"""Alias for commandArgumentFloat()."""
-	def commandArgumentFloat(self,*args)->Any:
-		"""commandArgumentFloat(argIndex) -> float
-
-		Returns the specified command argument as a float."""
-	def commandArgumentInt(self,*args)->Any:
-		"""commandArgumentInt(argIndex) -> int
-
-		Returns the specified command argument as an int."""
-	def commandArgumentMAngle(self,*args)->Any:
-		"""commandArgumentMAngle(argIndex) -> MAngle
-
-		Returns the specified command argument as an MAngle."""
-	def commandArgumentMDistance(self,*args)->Any:
-		"""commandArgumentMDistance(argIndex) -> MDistance
-
-		Returns the specified command argument as an MDistance."""
-	def commandArgumentMTime(self,*args)->Any:
-		"""commandArgumentMTime(argIndex) -> MTime
-
-		Returns the specified command argument as an MTime."""
-	def commandArgumentString(self,*args)->Any:
-		"""commandArgumentString(argIndex) -> unicode string
-
-		Returns the specified command argument as a string."""
-	def flagArgumentBool(self,*args)->Any:
-		"""flagArgumentBool(flagName, argIndex) -> bool
-
-		Returns the specified argument of the specified single-use flag as
-		a bool."""
-	def flagArgumentDouble(self,*args)->Any:
-		"""flagArgumentDouble(flagName, argIndex) -> float
-
-		Alias for flagArgumentFloat()."""
-	def flagArgumentFloat(self,*args)->Any:
-		"""flagArgumentFloat(flagName, argIndex) -> float
-
-		Returns the specified argument of the specified single-use flag as
-		a float."""
-	def flagArgumentInt(self,*args)->Any:
-		"""flagArgumentInt(flagName, argIndex) -> int
-
-		Returns the specified argument of the specified single-use flag as
-		an int."""
-	def flagArgumentMAngle(self,*args)->Any:
-		"""flagArgumentMAngle(flagName, argIndex) -> MAngle
-
-		Returns the specified argument of the specified single-use flag as
-		an MAngle."""
-	def flagArgumentMDistance(self,*args)->Any:
-		"""flagArgumentMDistance(flagName, argIndex) -> MDistance
-
-		Returns the specified argument of the specified single-use flag as
-		an MDistance."""
-	def flagArgumentMTime(self,*args)->Any:
-		"""flagArgumentMTime(flagName, argIndex) -> MTime
-
-		Returns the specified argument of the specified single-use flag as
-		an MTime."""
-	def flagArgumentString(self,*args)->Any:
-		"""flagArgumentString(flagName, argIndex) -> string
-
-		Returns the specified argument of the specified single-use flag as
-		a string."""
-	def getFlagArgumentList(self,*args)->Any:
-		"""getFlagArgumentList(flagName, occurrence) -> MArgList
-
-		Returns the arguments for the specified occurrence of the given
-		multi-use flag as an MArgList. Raises RuntimeError if the flag has
-		not been enabled for multi-use. Raises IndexError if occurrence is
-		out of range."""
-	def getFlagArgumentPosition(self,*args)->Any:
-		"""getFlagArgumentPosition(flagName, occurrence) -> int
-
-		Returns the position in the argument list of the specified occurrence
-		of the given flag. Raises IndexError if occurrence is out of range."""
-	def getObjectStrings(self,*args)->Any:
-		"""getObjectStrings() -> tuple of unicode strings
-
-		If the command's MSyntax has set the object format to kStringObjects
-		then this method will return the objects passed to the command as a
-		tuple of strings. If any other object format is set then an empty
-		tuple will be returned."""
-	def isFlagSet(self,*args)->Any:
-		"""isFlagSet(flagName) -> bool
-
-		Returns True if the given flag appears on the command line."""
-	def numberOfFlagUses(self,*args)->Any:
-		"""numberOfFlagUses(flagName) -> int
-
-		Returns the number of times that the flag appears on the command
-		line."""
+	def commandArgumentBool(self,index:int)->bool:
+		"""Returns the specified command argument as a bool."""
+	def commandArgumentDouble(self,index:int)->float:
+		"""This is an alternate name for commandArgumentFloat()"""
+	def commandArgumentFloat(self,index:int)->float:
+		"""Returns the specified command argument as a float."""
+	def commandArgumentInt(self,index:int)->int:
+		"""Returns the specified command argument as an int."""
+	def commandArgumentMAngle(self,index:int)->MAngle:
+		"""Returns the specified command argument as an MAngle ."""
+	def commandArgumentMDistance(self,index:int)->MDistance:
+		"""Returns the specified command argument as an MDistance ."""
+	def commandArgumentMTime(self,index:int)->MTime:
+		"""Returns the specified command argument as an MTime ."""
+	def commandArgumentString(self,index:int)->str:
+		"""Returns the specified command argument as a string."""
+	def flagArgumentBool(self,flag:str,index:int)->bool:
+		"""Returns the index 'th argument of the specified flag as a bool. Raises RuntimeError if the flag has been enabled for multi-use."""
+	def flagArgumentDouble(self,flag:str,index:int)->float:
+		"""This is an alternate name for flagArgumentFloat() ."""
+	def flagArgumentFloat(self,flag:str,index:int)->float:
+		"""Returns the index 'th argument of the specified flag as a float. Raises RuntimeError if the flag has been enabled for multi-use."""
+	def flagArgumentInt(self,flag:str,index:int)->int:
+		"""Returns the index 'th argument of the specified flag as a int. Raises RuntimeError if the flag has been enabled for multi-use."""
+	def flagArgumentMAngle(self,flag:str,index:int)->MAngle:
+		"""Returns the index 'th argument of the specified flag as an MAngle . Raises RuntimeError if the flag has been enabled for multi-use."""
+	def flagArgumentMDistance(self,flag:str,index:int)->MDistance:
+		"""Returns the index 'th argument of the specified flag as an MDistance . Raises RuntimeError if the flag has been enabled for multi-use."""
+	def flagArgumentMTime(self,flag:str,index:int)->MTime:
+		"""Returns the index 'th argument of the specified flag as an MTime . Raises RuntimeError if the flag has been enabled for multi-use."""
+	def flagArgumentString(self,flag:str,index:int)->str:
+		"""Returns the index 'th argument of the specified flag as a string. Raises RuntimeError if the flag has been enabled for multi-use."""
+	def getFlagArgumentList(self,flag:str,occurrence:int)->MArgList:
+		"""Returns the arguments for the specified occurrence of the given multi-use flag as an MArgList . Raises RuntimeError if the flag has not been enabled for multi-use. Raises IndexError if occurrence is out of range."""
+	def getFlagArgumentPosition(self,flag:str,index:int)->int:
+		"""Returns the position in the argument list of the specified occurrence of the given flag . Raises IndexError if occurrence is out of range."""
+	def getObjectStrings(self)->tuple[str,...]:
+		"""If the command's MSyntax has set the object format to kStringObjects then this method will return the objects passed to the command as a tuple of strings. If any other object format is set then an empty tuple will be returned."""
+	def isFlagSet(self,flag:str)->bool:
+		"""Returns True if the given flag appears on the command line."""
+	def numberOfFlagUses(self,flag:str)->int:
+		"""Returns the number of times that the flag appears on the command line."""
 class MArrayDataBuilder:
 	"""Array builder for arrays in data blocks."""
 	def __init__(self,*args)->None:
@@ -633,16 +533,20 @@ class MBoundingBox:
 		"""Size in Z"""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def clear(self)->None:
-		"""Empties the bounding box, setting its corners to (0, 0, 0)."""
-	def transformUsing(self,*args)->Any:
-		"""Multiplies the bounding box's corners by a matrix."""
-	def expand(self,*args)->Any:
-		"""Expands the bounding box to include a point or other bounding box."""
-	def contains(self,*args)->Any:
-		"""Returns True if a point lies within the bounding box."""
-	def intersects(self,*args)->Any:
-		"""Returns True if any part of a given bounding box lies within this one."""
+	def clear(self)->Self:
+		"""Empties bounding box, setting its corners to (0, 0, 0)."""
+	def transformUsing(self,matrix:MMatrix)->Self:
+		"""Multiplies bounding box's corners by matrix and returns the smallest bounding box which contains the results."""
+	@overload
+	def expand(self,point:MPoint)->Self:
+		"""Expands bounding box to include point ."""
+	@overload
+	def expand(self,box:MBoundingBox)->Self:
+		"""Expands bounding box to include all of box ."""
+	def contains(self,point:MPoint)->bool:
+		"""Returns True if point lies within bounding box."""
+	def intersects(self,box:MBoundingBox,tolerance:float)->bool:
+		"""Returns True if any part of box lies within a distance of tolerance of this bounding box."""
 class MCacheSchema:
 	"""Defines a node's cached data when participant in EM Cached Playback.
 	Can be used to query or modify the attributes being cached.
@@ -797,10 +701,10 @@ class MColor:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def getColor(self,*args)->Any:
-		"""Returns a list containing the color's components, in the specified color model."""
-	def setColor(self,*args)->Any:
-		"""Sets the color's components and color model."""
+	def getColor(self,model:int)->list[float]:
+		"""Returns a list containing the color's components, in the specified color model ."""
+	def setColor(self,components:Sequence[float],model:int,dataType:int)->Self:
+		"""Sets the color. The interpretation of the parameters is the same as for the MColor(components,model,dataType) constructor."""
 class MColorArray:
 	"""Array of MColor values."""
 	@property
@@ -1057,11 +961,11 @@ class MDGContext:
 		Copy data from source context.
 
 		* source (MDGContext) - The source object to copy from"""
-	def getTime(self,*args)->Any:
-		"""Returns the time at which this context is set to evaluate."""
+	def getTime(self)->MTime:
+		"""Returns the time at which this context is set to evaluate. If the context does not have a specific time (i.e. it's a "normal" context) then a ValueError will be raised."""
 	def isCurrent(self,*args)->Any:
 		"""Returns True if the context is currently being used for evaluation. Returns False if some other context is being used for evaluation."""
-	def isNormal(self,*args)->Any:
+	def isNormal(self)->bool:
 		"""Returns True if the context is set to evaluate normally. Returns False if the context is set to evaluate at a specific time."""
 	def isTimed(self,*args)->Any:
 		"""Returns True if the context is used for evaluating at a time that is different than the current time."""
@@ -1840,31 +1744,14 @@ class MDagModifier(MDGModifier):
 	"""Used to change the structure of the DAG"""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def createNode(self,*args)->Any:
-		"""createNode(typeName, parent=MObject.kNullObj) -> new DAG node MObject
-		createNode(typeId,   parent=MObject.kNullObj) -> new DAG node MObject
-
-		Adds an operation to the modifier to create a DAG node of the specified
-		type. If a parent DAG node is provided the new node will be parented
-		under it. If no parent is provided and the new DAG node is a transform
-		type then it will be parented under the world. In both of these cases
-		the method returns the new DAG node.
-
-		If no parent is provided and the new DAG node is not a transform type
-		then a transform node will be created and the child parented under that. The new transform will be parented under the world and it is the
-		transform node which will be returned by the method, not the child.
-
-		None of the newly created nodes will be added to the DAG until the
-		modifier's doIt() method is called."""
-	def reparentNode(self,*args)->Any:
-		"""reparentNode(MObject node, newParent=MObject.kNullObj) -> self
-
-		Adds an operation to the modifier to reparent a DAG node under a
-		specified parent.
-
-		If no parent is provided then the DAG node will be reparented under the
-		world, so long as it is a transform type. If it is not a transform type
-		then the doIt() will raise a RuntimeError."""
+	@overload
+	def createNode(self,typeName:str,parent:MObject)->MObject:
+		"""Adds an operation to the modifier to create a DAG node of the specified type. If a parent DAG node is provided the new node will be parented under it. If no parent is provided and the new DAG node is a transform type then it will be parented under the world. In both of these cases the method returns the new DAG node<br> If no parent is provided and the new DAG node is not a transform type then a transform node will be created and the child parented under that. The new transform will be parented under the world and it is the transform node which will be returned by the method, not the child. None of the newly created nodes will be added to the DAG until the modifier's doIt() method is called. Raises TypeError if the node type does not exist or if the parent is not a transform type."""
+	@overload
+	def createNode(self,typeName:MTypeId,parent:MObject)->MObject:
+		"""Adds an operation to the modifier to create a DAG node of the specified type. If a parent DAG node is provided the new node will be parented under it. If no parent is provided and the new DAG node is a transform type then it will be parented under the world. In both of these cases the method returns the new DAG node. If no parent is provided and the new DAG node is not a transform type then a transform node will be created and the child parented under that. The new transform will be parented under the world and it is the transform node which will be returned by the method, not the child. None of the newly created nodes will be added to the DAG until the modifier's doIt() method is called. Raises TypeError if the node type does not exist or if the parent is not a transform type<span>."""
+	def reparentNode(self,node:MObject,newParent:MObject)->Self:
+		"""Adds an operation to the modifier to reparent a DAG node under a specified parent. Raises TypeError if the node is not a DAG node or the parent is not a transform type. If no parent is provided then the DAG node will be reparented under the world, so long as it is a transform type. If it is not a transform type then the doIt() will raise a RuntimeError."""
 class MDagPath:
 	"""Path to a DAG node from the top of the DAG."""
 	__hash__:None=None
@@ -1883,70 +1770,70 @@ class MDagPath:
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@staticmethod
-	def getAllPathsTo(*args)->Any:
-		"""Returns all paths to the given node."""
+	def getAllPathsTo(node:MObject)->MDagPathArray:
+		"""Returns all paths to the given node ."""
 	@staticmethod
-	def getAPathTo(*args)->Any:
-		"""Returns the first path found to the given node."""
+	def getAPathTo(node:MObject)->MDagPath:
+		"""Returns the first path found to the given node ."""
 	@staticmethod
 	def matchTransform(*args)->Any:
 		"""Returns the transformationMatrix which, when applied to the source object, will bring the source object to the location of the target object."""
 	@staticmethod
 	def matchLocalMatrix(*args)->Any:
 		"""Returns the transformationMatrix which, when applied to the source object, will have the source object match the local matrix."""
-	def apiType(self,*args)->Any:
+	def apiType(self)->int:
 		"""Returns the type of the object at the end of the path."""
-	def child(self,*args)->Any:
-		"""Returns the specified child of the object at the end of the path."""
-	def childCount(self,*args)->Any:
+	def child(self,childNum:int)->MObject:
+		"""The childNum 'th object parented directly beneath the object at the end of the path."""
+	def childCount(self)->int:
 		"""Returns the number of objects parented directly beneath the object at the end of the path."""
-	def exclusiveMatrix(self,*args)->Any:
+	def exclusiveMatrix(self)->MMatrix:
 		"""Returns the matrix for all transforms in the path, excluding the end object."""
-	def exclusiveMatrixInverse(self,*args)->Any:
-		"""Returns the inverse of exclusiveMatrix()."""
-	def extendToShape(self,*args)->Any:
-		"""Extends the path to the specified shape node parented directly beneath the transform at the current end of the path."""
-	def fullPathName(self,*args)->Any:
+	def exclusiveMatrixInverse(self)->MMatrix:
+		"""Returns the inverse of exclusiveMatrix() ."""
+	def extendToShape(self,shapeNum:int)->Self:
+		"""Extends the path to the shapeNum 'th shape node parented directly beneath the transform at the current end of the path."""
+	def fullPathName(self)->str:
 		"""Returns a string representation of the path from the DAG root to the path's last node."""
 	def getDisplayStatus(self,*args)->Any:
 		"""Returns the display status for this path."""
 	def getDrawOverrideInfo(self,*args)->Any:
 		"""Returns the draw override information for this path."""
-	def getPath(self,*args)->Any:
-		"""Returns the specified sub-path of this path."""
-	def hasFn(self,*args)->Any:
-		"""Returns True if the object at the end of the path supports the given function set."""
-	def inclusiveMatrix(self,*args)->Any:
+	def getPath(self,pathNum:int)->MDagPath:
+		"""The pathNum 'th sub-path of this path."""
+	def hasFn(self,type:int)->bool:
+		"""Returns True if the object at the end of the path supports the function set represented by type ."""
+	def inclusiveMatrix(self)->MMatrix:
 		"""Returns the matrix for all transforms in the path, including the end object, if it is a transform."""
-	def inclusiveMatrixInverse(self,*args)->Any:
-		"""Returns the inverse of inclusiveMatrix()."""
-	def instanceNumber(self,*args)->Any:
+	def inclusiveMatrixInverse(self)->MMatrix:
+		"""Returns the inverse of inclusiveMatrix() ."""
+	def instanceNumber(self)->int:
 		"""Returns the instance number of this path to the object at the end."""
-	def isInstanced(self,*args)->Any:
+	def isInstanced(self)->bool:
 		"""Returns True if the object at the end of the path can be reached by more than one path."""
 	def isTemplated(self,*args)->Any:
 		"""Returns true if the DAG Node at the end of the path is templated."""
-	def isValid(self,*args)->Any:
-		"""Returns True if this is a valid path."""
+	def isValid(self)->bool:
+		"""True if this is a valid path."""
 	def isVisible(self,*args)->Any:
 		"""Returns true if the DAG Node at the end of the path is visible."""
-	def length(self,*args)->Any:
+	def length(self)->int:
 		"""Returns the number of nodes on the path, not including the DAG's root node."""
-	def node(self,*args)->Any:
+	def node(self)->MObject:
 		"""Returns the DAG node at the end of the path."""
-	def numberOfShapesDirectlyBelow(self,*args)->Any:
-		"""Returns the number of shape nodes parented directly beneath the transform at the end of the path."""
-	def partialPathName(self,*args)->Any:
+	def numberOfShapesDirectlyBelow(self)->int:
+		"""Returns the number of shape nodes parented directly beneath the transform at the end of the path. If the path does not end at a transform, or if the transform has no shape nodes directly beneath it, 0 will be returned."""
+	def partialPathName(self)->str:
 		"""Returns the minimum string representation which will uniquely identify the path."""
-	def pathCount(self,*args)->Any:
+	def pathCount(self)->int:
 		"""Returns the number of sub-paths which make up this path."""
-	def pop(self,*args)->Any:
-		"""Removes objects from the end of the path."""
-	def push(self,*args)->Any:
+	def pop(self,num:int)->Self:
+		"""Removes num objects from the end of the path."""
+	def push(self,child:MObject)->Self:
 		"""Extends the path to the specified child object, which must be parented directly beneath the object currently at the end of the path."""
-	def set(self,*args)->Any:
-		"""Replaces the current path held by this object with another."""
-	def transform(self,*args)->Any:
+	def set(self,path:MDagPath)->Self:
+		"""Replaces the current path held by this object with that of path ."""
+	def transform(self)->MObject:
 		"""Returns the last transform node on the path."""
 class MDagPathArray:
 	"""Array of MDagPath values."""
@@ -2470,38 +2357,38 @@ class MDistance:
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@staticmethod
-	def uiUnit(*args)->Any:
-		"""Return the units used to display distances in Maya's UI."""
+	def uiUnit()->int:
+		"""Returns the type of units currently being used to enter and display distances in Maya's UI."""
 	@staticmethod
-	def setUIUnit(*args)->Any:
-		"""Change the units used to display distances in Maya's UI."""
+	def setUIUnit(newUnit:int)->None:
+		"""Sets the type of units to be used to enter and display distances in Maya's UI"""
 	@staticmethod
-	def internalUnit(*args)->Any:
-		"""Return the distance unit used internally by Maya."""
+	def internalUnit()->int:
+		"""Returns the type of units in which Maya stores distance values internally (e.g. in plugs and binary file formats)."""
 	@staticmethod
-	def internalToUI(*args)->Any:
-		"""Convert a value from Maya's internal units to the units used in the UI."""
+	def internalToUI(internalValue:float)->float:
+		"""Interprets internalValue as a distance in Maya's internal units and returns it converted to UI units."""
 	@staticmethod
-	def uiToInternal(*args)->Any:
-		"""Convert a value from the units used in the UI to Maya's internal units."""
-	def asUnits(self,*args)->Any:
-		"""Return the distance value, converted to the specified units."""
-	def asInches(self,*args)->Any:
-		"""Return the distance value, converted to inches."""
-	def asFeet(self,*args)->Any:
-		"""Return the distance value, converted to feet."""
-	def asYards(self,*args)->Any:
-		"""Return the distance value, converted to yards."""
-	def asMiles(self,*args)->Any:
-		"""Return the distance value, converted to miles."""
-	def asMillimeters(self,*args)->Any:
-		"""Return the distance value, converted to millimeters."""
-	def asCentimeters(self,*args)->Any:
-		"""Return the distance value, converted to centimeters."""
-	def asKilometers(self,*args)->Any:
-		"""Return the distance value, converted to kilometers."""
-	def asMeters(self,*args)->Any:
-		"""Return the distance value, converted to meters."""
+	def uiToInternal(uiValue:float)->float:
+		"""Interprets uiValue as a distance in Maya's UI units and returns it converted to internal units."""
+	def asUnits(self,unit:int)->float:
+		"""Returns the distance value, converted to the specified unit ."""
+	def asInches(self)->float:
+		"""Returns the distance value, converted to inches."""
+	def asFeet(self)->float:
+		"""Returns the distance value, converted to feet."""
+	def asYards(self)->float:
+		"""Returns the distance value, converted to yards."""
+	def asMiles(self)->float:
+		"""Returns the distance value, converted to miles."""
+	def asMillimeters(self)->float:
+		"""Returns the distance value, converted to millimeters."""
+	def asCentimeters(self)->float:
+		"""Returns the distance value, converted to centimeters."""
+	def asKilometers(self)->float:
+		"""Returns the distance value, converted to kilometers."""
+	def asMeters(self)->float:
+		"""Returns the distance value, converted to meters."""
 class MDoubleArray:
 	"""Array of double values."""
 	@property
@@ -2617,58 +2504,90 @@ class MEulerRotation:
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
 	@staticmethod
-	def computeAlternateSolution(*args)->Any:
-		"""Returns an equivalent rotation which is not simply a multiple."""
+	def computeAlternateSolution(rot:MEulerRotation)->MEulerRotation:
+		"""Returns a rotation equivalent to rot which is not simply a multiple of it."""
 	@staticmethod
-	def computeBound(*args)->Any:
-		"""Returns an equivalent rotation with each rotation component bound within +/- PI."""
+	def computeBound(rot:MEulerRotation)->MEulerRotation:
+		"""Returns a rotation equivalent to rot but bound within +/- PI."""
 	@staticmethod
-	def computeClosestCut(*args)->Any:
-		"""Returns the rotation which is full spin multiples of the src and comes closest to target."""
+	def computeClosestCut(src:MEulerRotation,target:MEulerRotation)->MEulerRotation:
+		"""Returns the rotation which is full spin multiples of src and comes closest to target ."""
 	@staticmethod
-	def computeClosestSolution(*args)->Any:
-		"""Returns the equivalent rotation which comes closest to a target."""
+	def computeClosestSolution(src:MEulerRotation,target:MEulerRotation)->MEulerRotation:
+		"""Returns the rotation equivalent to src which comes closest to target ."""
 	@staticmethod
-	def decompose(*args)->Any:
-		"""Extracts a rotation from a matrix."""
-	def alternateSolution(self,*args)->Any:
-		"""Returns an equivalent rotation which is not simply a multiple."""
-	def asMatrix(self,*args)->Any:
+	def decompose(matrix:MMatrix,order:int)->MEulerRotation:
+		"""Extracts from matrix a valid rotation having the specified rotation order . Note that this may be just one of several different rotations which could each give rise to the same matrix."""
+	def alternateSolution(self)->MEulerRotation:
+		"""Returns a new MEulerRotation with a different rotation which is equivalent to this one and has the same rotation order. Each rotation component will lie within +/- PI."""
+	def asMatrix(self)->MMatrix:
 		"""Returns the rotation as an equivalent matrix."""
-	def asQuaternion(self,*args)->Any:
+	def asQuaternion(self)->MQuaternion:
 		"""Returns the rotation as an equivalent quaternion."""
-	def asVector(self,*args)->Any:
-		"""Returns the X, Y and Z rotations as a vector."""
-	def bound(self,*args)->Any:
+	def asVector(self)->MVector:
+		"""Returns the X, Y and Z rotations as a vector. Rotation order is ignored."""
+	def bound(self)->MEulerRotation:
 		"""Returns a new MEulerRotation having this rotation, but with each rotation component bound within +/- PI."""
-	def boundIt(self,*args)->Any:
+	@overload
+	def boundIt(self)->Self:
 		"""In-place bounding of each rotation component to lie wthin +/- PI."""
-	def closestCut(self,*args)->Any:
-		"""Returns the rotation which is full spin multiples of this one and comes closest to target."""
-	def closestSolution(self,*args)->Any:
-		"""Returns the equivalent rotation which comes closest to a target."""
-	def incrementalRotateBy(self,*args)->Any:
-		"""Increase this rotation by a given angle around the specified axis. The update is done in series of small increments to avoid flipping."""
-	def inverse(self,*args)->Any:
+	@overload
+	def boundIt(self,rot:MEulerRotation)->Self:
+		"""Replace this rotation with the bound version of rot ."""
+	def closestCut(self,target:MEulerRotation)->MEulerRotation:
+		"""Returns a new MEulerRotation containing the rotation which is full spin multiples of this one and comes closest to target ."""
+	def closestSolution(self,target:MEulerRotation)->MEulerRotation:
+		"""Returns a new MEulerRotation containing the rotation equivalent to this one which comes closest to target ."""
+	def incrementalRotateBy(self,axis:MVector,angle:float)->Self:
+		"""Increase this rotation by angle radians around the specified axis . The update is done in series of small increments to avoid flipping."""
+	def inverse(self)->MEulerRotation:
 		"""Returns a new MEulerRotation containing the inverse rotation of this one and reversed rotation order."""
-	def invertIt(self,*args)->Any:
+	def invertIt(self)->Self:
 		"""In-place inversion of the rotation. Rotation order is also reversed."""
-	def isEquivalent(self,*args)->Any:
-		"""Returns true if this rotation has the same order as another and their X, Y and Z components are within a tolerance of each other."""
-	def isZero(self,*args)->Any:
-		"""Returns true if the X, Y and Z components are each within a tolerance of 0.0."""
-	def reorder(self,*args)->Any:
-		"""Returns a new MEulerRotation having this rotation, reordered to use the given rotation order."""
-	def reorderIt(self,*args)->Any:
-		"""In-place reordering to use the given rotation order."""
-	def setToAlternateSolution(self,*args)->Any:
-		"""Replace this rotation with an alternate solution."""
-	def setToClosestCut(self,*args)->Any:
-		"""Replace this rotation with the closest cut to a target."""
-	def setToClosestSolution(self,*args)->Any:
-		"""Replace this rotation with the closest solution to a target."""
-	def setValue(self,*args)->Any:
-		"""Set the rotation."""
+	def isEquivalent(self,other:MEulerRotation,tolerance:float)->bool:
+		"""Inexact equality test. Returns true if this rotation has the same order as other and their X, Y and Z components are within tolerance of each other."""
+	def isZero(self,tolerance:float)->bool:
+		"""Inexact zero test. Returns true if the X, Y and Z components are each within tolerance of 0.0."""
+	def reorder(self,order:int)->MEulerRotation:
+		"""Returns a new MEulerRotation having this rotation, reordered to use the given rotation order ."""
+	def reorderIt(self,order:int)->Self:
+		"""In-place reordering to use the given rotation order ."""
+	@overload
+	def setToAlternateSolution(self)->Self:
+		"""Replace with a different but equivalent rotation, having the same rotation order and with each rotation component lying wthin +/- PI."""
+	@overload
+	def setToAlternateSolution(self,rot:MEulerRotation)->Self:
+		"""Replace this rotation with the alternate solution for rot ."""
+	@overload
+	def setToClosestCut(self,target:MEulerRotation)->Self:
+		"""Replace this rotation with the one which is full spin multiples of this one and comes closest to target ."""
+	@overload
+	def setToClosestCut(self,src:MEulerRotation,target:MEulerRotation)->Self:
+		"""Replace this rotation with the closest cut of src to target ."""
+	@overload
+	def setToClosestSolution(self,target:MEulerRotation)->Self:
+		"""Replace this rotation with the equivalent rotation which comes closest to target ."""
+	@overload
+	def setToClosestSolution(self,src:MEulerRotation,target:MEulerRotation)->Self:
+		"""Replace this rotation with the closest solution of src to target ."""
+	@overload
+	def setValue(self,rot:MEulerRotation)->Self:
+		"""Set the rotation and order to match that of rot ."""
+	@overload
+	def setValue(self,quat:MQuaternion)->Self:
+		"""Set the rotation and order to provide a rotation equivalent to that of rot ."""
+	@overload
+	def setValue(self,mat:MMatrix)->Self:
+		"""Set the rotation order and the X, Y and Z rotations to those extracted from mat , as per the decompose() method, using the current order."""
+	@overload
+	def setValue(self,vec:MVector,order:int)->Self:
+		"""Set the rotation order to order and set the X, Y and Z rotations to the corresponding components of vec ."""
+	@overload
+	def setValue(self,seq:Sequence[float],order:int)->Self:
+		"""Set the rotation order to order and the X, Y and Z rotations to the corresponding components of seq ."""
+	@overload
+	def setValue(self,x:float,y:float,z:float,order:int)->Self:
+		"""Set the given rotation order and x , y and z rotation components."""
 class MEvaluationNode:
 	"""A class providing access to Evaluation Manager node information."""
 	def __init__(self,*args)->None:
@@ -3089,28 +3008,28 @@ class MFloatMatrix:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def getElement(self,*args)->Any:
-		"""Returns the matrix element for the specified row and column."""
-	def setElement(self,*args)->Any:
-		"""Sets the matrix element for the specified row and column."""
-	def setToIdentity(self,*args)->Any:
+	def getElement(self,row:int,col:int)->float:
+		"""Returns the matrix element specified by row and col . For retrieving single elements this is faster than indexing into the matrix as a sequence because it does not require the creation of an entire row tuple simply to retrieve one element from that row."""
+	def setElement(self,row:int,col:int,value:float)->Self:
+		"""Set the matrix element specified by row and col to the given value ."""
+	def setToIdentity(self)->Self:
 		"""Sets this matrix to the identity."""
-	def setToProduct(self,*args)->Any:
-		"""Sets this matrix to the product of the two matrices passed in."""
-	def transpose(self,*args)->Any:
+	def setToProduct(self,left:MFloatMatrix,right:MFloatMatrix)->Self:
+		"""Sets this matrix to the product of left and right ."""
+	def transpose(self)->MFloatMatrix:
 		"""Returns a new matrix containing this matrix's transpose."""
-	def inverse(self,*args)->Any:
-		"""Returns a new matrix containing this matrix's inverse."""
-	def adjoint(self,*args)->Any:
+	def inverse(self)->MFloatMatrix:
+		"""Returns a new matrix containing this matrix's nverse."""
+	def adjoint(self)->MFloatMatrix:
 		"""Returns a new matrix containing this matrix's adjoint."""
-	def homogenize(self,*args)->Any:
+	def homogenize(self)->MFloatMatrix:
 		"""Returns a new matrix containing the homogenized version of this matrix."""
-	def det4x4(self,*args)->Any:
+	def det4x4(self)->float:
 		"""Returns this matrix's determinant."""
-	def det3x3(self,*args)->Any:
+	def det3x3(self)->float:
 		"""Returns the determinant of the 3x3 matrix formed by the first 3 elements of the first 3 rows of this matrix."""
-	def isEquivalent(self,*args)->Any:
-		"""Test for equivalence of two matrices, within a tolerance."""
+	def isEquivalent(self,other:MFloatMatrix,tol:float)->bool:
+		"""Inexact equality test. Returns True if each element of this matrix is within tolerance of the corresponding element of other ."""
 class MFloatPoint:
 	"""3D point with single-precision coordinates."""
 	@property
@@ -3180,16 +3099,16 @@ class MFloatPoint:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def cartesianize(self,*args)->Any:
-		"""Convert point to cartesian form."""
-	def rationalize(self,*args)->Any:
-		"""Convert point to rational form."""
-	def homogenize(self,*args)->Any:
-		"""Convert point to homogenous form."""
-	def distanceTo(self,*args)->Any:
-		"""Return distance between this point and another."""
-	def isEquivalent(self,*args)->Any:
-		"""Test for equivalence of two points, within a tolerance."""
+	def cartesianize(self)->Self:
+		"""Converts this point to cartesian form."""
+	def rationalize(self)->Self:
+		"""Converts this point to rational form."""
+	def homogenize(self)->Self:
+		"""Converts this point to homogenous form."""
+	def distanceTo(self,other:MFloatPoint)->float:
+		"""Returns the distance between this point and other ."""
+	def isEquivalent(self,other:MFloatPoint,tol:float)->bool:
+		"""Returns True if the coordinates of this point and other are equal to within a tolerance of tol ."""
 class MFloatPointArray:
 	"""Array of MFloatPoint values."""
 	@property
@@ -3310,20 +3229,20 @@ class MFloatVector:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def length(self,*args)->Any:
+	def length(self)->float:
 		"""Returns the magnitude of this vector."""
-	def normal(self,*args)->Any:
-		"""Returns a new vector containing the normalized version of this one."""
-	def normalize(self,*args)->Any:
+	def normal(self)->MFloatVector:
+		"""Returns a new vector containing the normalized version of this vector."""
+	def normalize(self)->Self:
 		"""Normalizes this vector in-place and returns a new reference to it."""
-	def transformAsNormal(self,*args)->Any:
-		"""Returns a new vector which is calculated by postmultiplying this vector by the transpose of the given matrix and then normalizing the result."""
-	def angle(self,*args)->Any:
-		"""Returns the angle, in radians, between this vector and another."""
-	def isEquivalent(self,*args)->Any:
-		"""Returns True if this vector and another are within a given tolerance of being equal."""
-	def isParallel(self,*args)->Any:
-		"""Returns True if this vector and another are within the given tolerance of being parallel."""
+	def transformAsNormal(self,matrix:MFloatMatrix)->MFloatVector:
+		"""Returns a new vector which is calculated by postmultiplying this vector by the transpose of matrix and then normalizing it."""
+	def angle(self,other:MFloatVector)->float:
+		"""Returns the angle, in radians, between this vector and other ."""
+	def isEquivalent(self,other:MFloatVector,tolerance:float)->bool:
+		"""Returns True if this vector and other are within the given tolerance of being equal."""
+	def isParallel(self,other:MFloatVector,tolerance:float)->bool:
+		"""Returns True if this vector and other are within the given tolerance of being parallel."""
 class MFloatVectorArray:
 	"""Array of MFloatVector values."""
 	@property
@@ -4907,12 +4826,12 @@ class MFnAttribute(MFnBase):
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def acceptsAttribute(self,*args)->Any:
 		"""Returns True if this attribute can accept a connection with the given attribute."""
-	def accepts(self,*args)->Any:
+	def accepts(self,type:MTypeId|int)->bool:
 		"""Returns True if this attribute can accept a connection of the given type."""
 	def addToCategory(self,*args)->Any:
 		"""Adds the attribute to a category"""
-	def getAddAttrCmd(self,*args)->Any:
-		"""Returns a string containing a MEL 'addAttr' command capable of recreating the attribute."""
+	def getAddAttrCmd(self,longFlags:bool)->str:
+		"""Returns a string containing the addAttr command which would be required to recreate the attribute. The command includes the terminating semicolon and is formatted as if for use with a selected node, meaning that it contains no node name. If longFlags is True then the long flag names will be used, otherwise their short names will be used."""
 	def pathName(self,*args)->Any:
 		"""Returns the pathName for the attribute."""
 	def hasCategory(self,*args)->Any:
@@ -4923,13 +4842,17 @@ class MFnBase:
 	"""Base class for function sets."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def hasObj(self,*args)->Any:
-		"""Returns True if the function set is compatible with the specified Maya object."""
-	def object(self,*args)->Any:
+	@overload
+	def hasObj(self,type:int)->bool:
+		"""True if the function set is compatible with the specified type of Maya object."""
+	@overload
+	def hasObj(self,object:MObject)->bool:
+		"""True if the function set is compatible with the specified Maya object ."""
+	def object(self)->MObject:
 		"""Returns a reference to the object to which the function set is currently attached, or MObject.kNullObj if none."""
-	def setObject(self,*args)->Any:
-		"""Attaches the function set to the specified Maya object."""
-	def type(self,*args)->Any:
+	def setObject(self,object:MObject)->Self:
+		"""Attaches the function set to the specified Maya object ."""
+	def type(self)->int:
 		"""Returns the type of the function set."""
 class MFnCamera(MFnDagNode):
 	"""Function set for cameras."""
@@ -5440,16 +5363,10 @@ class MFnComponent(MFnBase):
 		"""True if the component contains no elements."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def isEqual(self,*args)->Any:
-		"""isEqual(MObject other) -> bool
-
-		Returns True if other refers to the same component as the
-		one to which the function set is currently attached."""
-	def weight(self,*args)->Any:
-		"""weight(index) -> MWeight
-
-		Returns the weight associated with the specified element,
-		where index can range from 0 to elementCount-1."""
+	def isEqual(self,other:MObject)->bool:
+		"""Returns true if other refers to the same component as the one to which the function set is currently attached."""
+	def weight(self,index:int)->MWeight:
+		"""Returns the weight associated with the specified element, where index can range from 0 to elementCount-1."""
 class MFnComponentListData(MFnData):
 	"""MFnComponentListData allows the creation and manipulation of component list
 	(represented as MObjects) data objects for use in the dependency graph.
@@ -5462,55 +5379,39 @@ class MFnComponentListData(MFnData):
 	to the specified object."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def add(self,*args)->Any:
-		"""add(MObject) -> self
-
-		Adds the specified component to the end of the list."""
-	def clear(self)->None:
-		"""clear() -> self
-
-		Removes all of the components from the list."""
-	def create(self,*args)->Any:
-		"""create() -> MObject
-
-		Creates a new, empty component list, attaches it to the
-		function set and returns an MObject which references it."""
-	def get(self,*args)->Any:
-		"""get(index) -> MObject
-
-		Returns a copy of the component at the specified index.
-		Raises IndexError if the index is out of range."""
-	def length(self,*args)->Any:
-		"""length() -> int
-
-		Returns the number of components in the list."""
-	def has(self,*args)->Any:
-		"""has(MObject) -> bool
-
-		Returns True if the list contains the specified
-		component, False otherwise."""
-	def remove(self,item)->None:
-		"""remove(MObject) -> self
-		remove(index) -> self
-
-		Removes the specified component from the list.
-		No exception is raised if the component is not in the list,
-		raises IndexError if index is out of range"""
+	def add(self,component:MObject)->Self:
+		"""Adds the specified component to the end of the list."""
+	def clear(self)->Self:
+		"""Removes all of the components from the list."""
+	def create(self)->MObject:
+		"""Creates a new, empty component list, attaches it to the function set and returns an MObject which references it."""
+	def get(self,index:int)->MObject:
+		"""Returns a copy of the component at the specified index . Raises IndexError if the index is out of range."""
+	def length(self)->int:
+		"""Returns the number of components in the list."""
+	def has(self,component:MObject)->bool:
+		"""Returns True if the list contains the specified component , False otherwise."""
+	@overload
+	def remove(self,component:MObject)->Self:
+		"""Removes the specified component from the list. No exception is raised if the component is not in the list."""
+	@overload
+	def remove(self,index:int)->Self:
+		"""Removes the component at the specified index from the list. Raises IndexError if the index is out of range."""
 class MFnCompoundAttribute(MFnAttribute):
 	"""Functionset for creating and working with compound attributes."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addChild(self,*args)->Any:
+	def addChild(self,child:MObject)->Self:
 		"""Add a child attribute."""
-	def child(self,*args)->Any:
-		"""Returns one of the attribute's children, specified by index."""
-	def create(self,*args)->Any:
-		"""Creates a new compound attribute, attaches it to the function set and returns it as an MObject."""
-	def getAddAttrCmds(self,*args)->Any:
-		"""Returns a list of MEL 'addAttr' commands capable of recreating the attribute and all of its children."""
-	def numChildren(self,*args)->Any:
-		"""Returns number of child attributes currently parented under the compound attribute."""
-	def removeChild(self,*args)->Any:
+	def child(self,index:int)->MObject:
+		"""Returns the index 'th child attribute of this compound."""
+	def create(self,longName:str,shortName:str)->MObject:
+		"""Create a new compound attribute with the given longName and shortName , attach it to the function set and return it in an MObject ."""
+	def getAddAttrCmds(self,longNames:bool)->list[str]:
+		"""Returns a list of strings containing the addAttr commands necessary to recreate the compound attribute and all of its children. The attributes are returned in depth-first order, meaning that element 0 of the array will contain this attribute's addAttr command, element 1 will contain the command for its first child, element 2 will contain the command for its first child's child, if one exists, and so on. Each command is returned with the terminating semicolon and is formatted as if for use with a selected node, meaning that no node name is supplied."""
+	def numChildren(self)->int:
+		"""Returns number of child attributes currently parented under this compound attribute."""
+	def removeChild(self,child:MObject)->Self:
 		"""Remove a child attribute."""
 class MFnContainerNode(MFnDependencyNode):
 	"""Function set for containers."""
@@ -5625,123 +5526,63 @@ class MFnDagNode(MFnDependencyNode):
 	kNextPos:int=255
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addChild(self,*args)->Any:
-		"""addChild(node, index=kNextPos, keepExistingParents=False) -> self
-
-		Makes a node a child of this one."""
-	def child(self,*args)->Any:
-		"""child(index) -> MObject
-
-		Returns the specified child of this node."""
-	def childCount(self,*args)->Any:
-		"""childCount() -> int
-
-		Returns the number of nodes which are children of this one."""
-	def create(self,*args)->Any:
-		"""create(type, name=None, parent=MObject.kNullObj) -> MObject
-
-		Creates a new DAG node of the specified type, with the given name.
-		The type may be either a type name or a type ID. If no name is given
-		then a unique name will be generated by combining the type name with
-		an integer.
-
-		If a parent is given then the new node will be parented under it and
-		the functionset will be attached to the newly-created node. The
-		newly-created node will be returned.
-
-		If no parent is given and the new node is a transform, it will be
-		parented under the world and the functionset will be attached to the
-		newly-created transform. The newly-created transform will be returned.
-
-		If no parent is given and the new node is not a transform then a
-		transform node will be created under the world, the new node will be
-		parented under it, and the functionset will be attached to the
-		transform. The transform will be returned."""
-	def dagPath(self,*args)->Any:
-		"""dagPath() -> MDagPath
-
-		Returns the DAG path to which this function set is attached. Raises a TypeError if the function set is attached to an MObject rather than a path."""
-	def dagRoot(self,*args)->Any:
-		"""dagRoot() -> MObject
-
-		Returns the root node of the first path leading to this node."""
-	def duplicate(self,*args)->Any:
-		"""duplicate(instance=False, instanceLeaf=False) -> MObject
-
-		Duplicates the DAG hierarchy rooted at the current node."""
-	def fullPathName(self,*args)->Any:
-		"""fullPathName() -> string
-
-		Returns the full path of the attached object, from the root of the DAG on down."""
-	def getAllPaths(self,*args)->Any:
-		"""getAllPaths() -> MDagPathArray
-
-		Returns all of the DAG paths which lead to the object to which this function set is attached."""
+	def addChild(self,node:MObject,index:int,keepExistingParents:bool)->Self:
+		"""Parent's node under this node, making it the index 'th child and moving other children down to make room, if necessary. If index is kNextPos then it is added to the end of the list of children. If keepExistingParents is False the child node will be removed from its existing parents, otherwise they will be retained."""
+	def child(self,index:int)->MObject:
+		"""Returns the node's index 'th child."""
+	def childCount(self)->int:
+		"""Returns the number of nodes which are parented under this one."""
+	def create(self,type:str|MTypeId,name:str,parent:MObject)->MObject:
+		"""Creates a new DAG node of the specified type , with the given name . type may be either a type name or a type ID. If no name is given then a unique name will be generated by combining the type name with an integer. If a parent is given then the new node will be parented under it and the functionset will be attached to the newly-created node. The newly-created node will be returned. If no parent is given and the new node is a transform, it will be parented under the world and the functionset will be attached to the newly-created transform. The newly-created transform will bereturned. If no parent is given and the new node is not a transform then a transform node will be created under the world, the new node will be parented under it, and the functionset will be attached to the transform. The transform will be returned."""
+	def dagPath(self)->MDagPath:
+		"""Returns the DAG path to which this function set is attached. Raises a TypeError if the function set is not attached to a path (e.g. it was initialized with an MObject )."""
+	def dagRoot(self)->MObject:
+		"""Returns the root node of the first path leading to this node."""
+	def duplicate(self,instance:bool,instanceLeaf:bool)->MObject:
+		"""Duplicates the DAG hierarchy rooted at the current node. The copy will have the same parent, if any, as the original node. If instance is false then a true copy will be made, otherwise a new node will be created which instances the child nodes of the original node. If instance is false then instanceLeaf is ignored. If instance is true and instanceLeaf is false then the child nodes of the original node are instanced. If instanceLeaf is true, then the results are similar to a copy, but the leaf level objects are instanced. Returns the new node at the top of the duplicated hierarchy."""
+	def fullPathName(self)->str:
+		"""Returns the full path of the attached object, from the root of the DAG on down."""
+	def getAllPaths(self)->MDagPathArray:
+		"""Returns all of the DAG paths which lead to the object to which this function set is attached."""
 	def getConnectedSetsAndMembers(self,*args)->Any:
 		"""getConnectedSetsAndMembers(instance, renderableSetsOnly) -> (MObjectArray, MObjectArray)
 
 		Returns a tuple containing an array of sets and an array of the
 		components of the DAG object which are in those sets. If the entire object is in a set, then the corresponding entry in the comps array will have no elements in it."""
-	def getPath(self,*args)->Any:
-		"""getPath() -> MDagPath
-
-		Returns the DAG path to which this function set is attached, or the first path to the node if the function set is attached to an MObject."""
-	def hasChild(self,*args)->Any:
-		"""hasChild(node) -> bool
-
-		Returns True if the specified node is a child of this one."""
-	def hasParent(self,*args)->Any:
-		"""hasParent(node) -> bool
-
-		Returns True if the specified node is a parent of this one."""
-	def instanceCount(self,*args)->Any:
-		"""instanceCount(indirect) -> int
-
-		Returns the number of instances for this node."""
-	def isChildOf(self,*args)->Any:
-		"""isChildOf(node) -> bool
-
-		Returns True if the specified node is a parent of this one."""
-	def isInstanced(self,*args)->Any:
-		"""isInstanced(indirect=True) -> bool
-
-		Returns True if this node is instanced."""
-	def isInstancedAttribute(self,*args)->Any:
-		"""isInstancedAttribute(attr) -> bool
-
-		Returns True if the specified attribute is an instanced attribute of this node."""
-	def isParentOf(self,*args)->Any:
-		"""isParentOf(node) -> bool
-
-		Returns True if the specified node is a child of this one."""
-	def parent(self,*args)->Any:
-		"""parent(index) -> MObject
-
-		Returns the specified parent of this node."""
-	def parentCount(self,*args)->Any:
-		"""parentCount() -> int
-
-		Returns the number of parents this node has."""
-	def partialPathName(self,*args)->Any:
-		"""partialPathName() -> string
-
-		Returns the minimum path string necessary to uniquely identify the attached object."""
-	def removeChild(self,*args)->Any:
-		"""removeChild(node) -> self
-
-		Removes the child, specified by MObject, reparenting it under the world."""
-	def removeChildAt(self,*args)->Any:
-		"""removeChildAt(index) -> self
-
-		Removes the child, specified by index, reparenting it under the world."""
-	def setObject(self,*args)->Any:
-		"""setObject(MObject or MDagPath) -> self
-
-		Attaches the function set to the specified node or DAG path."""
-	def transformationMatrix(self,*args)->Any:
-		"""transformationMatrix() -> MMatrix
-
-		Returns the object space transformation matrix for this DAG node."""
+	def getPath(self)->MDagPath:
+		"""Returns the DAG path to which this function set is attached. If the function set is attached to an MObject rather tha a DAG path then the first path to the object will be returned."""
+	def hasChild(self,node:MObject)->bool:
+		"""Returns True if node is a child of this node."""
+	def hasParent(self,node:MObject)->bool:
+		"""Returns True if node is a parent of this node."""
+	def instanceCount(self,indirect:bool)->int:
+		"""Returns the number of instances for this node. If indirect is True then the instancing of ancestor nodes further up the DAG path is included, otherwise only the immediate instancing of this node is counted."""
+	def isChildOf(self,node:MObject)->bool:
+		"""Alias for hasParent() ."""
+	def isInstanced(self,indirect:bool)->bool:
+		"""Returns True if this node is instanced (i.e. has multiple parents). If indirect is True then the instancing of ancestor nodes further up the DAG path is included, otherwise not."""
+	def isInstancedAttribute(self,attr:MObject)->bool:
+		"""Returns True if attr is an instanced attribute of this node."""
+	def isParentOf(self,node:MObject)->bool:
+		"""Alias for hasChild() ."""
+	def parent(self,index:int)->MObject:
+		"""Returns the node's index 'th parent."""
+	def parentCount(self)->int:
+		"""Returns the number of different nodes under which this one is parented."""
+	def partialPathName(self)->str:
+		"""Returns the minimum path necessary to uniquely identify the attached object."""
+	def removeChild(self,node:MObject)->Self:
+		"""Removes node as a child of this node."""
+	def removeChildAt(self,index:int)->Self:
+		"""Removes the index 'th child from this node."""
+	@overload
+	def setObject(self,object:MObject)->Self:
+		"""Attaches the function set to the specified object ."""
+	@overload
+	def setObject(self,object:MDagPath)->Self:
+		"""Attaches the function set to the specified DAG path ."""
+	def transformationMatrix(self)->MMatrix:
+		"""Returns the object space transformation matrix for this DAG node. In general, only transform nodes have matrices associated with them. Nodes such as shapes (geometry nodes) do not have transform matrices. The identity matrix will be returned if this node does not have a transformation matrix."""
 class MFnData(MFnBase):
 	"""Base class for dependency graph data function sets."""
 	kInvalid:int=0
@@ -5826,95 +5667,103 @@ class MFnDependencyNode(MFnBase):
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@staticmethod
-	def allocateFlag(*args)->Any:
-		"""Allocates a flag on all nodes for use by the named plugin and returns the flag's index."""
+	def allocateFlag(plugin:str)->int:
+		"""Allocates a flag on all nodes for use by the named plugin . Returns the flag's index. Raises a ValueError if there are no unallocated node flags available."""
 	@staticmethod
-	def classification(*args)->Any:
-		"""Returns the classification string for the named node type."""
+	def classification(nodeType:str)->str:
+		"""Returns the classification string for the named nodeType ."""
 	@staticmethod
-	def deallocateAllFlags(*args)->Any:
-		"""Deallocates all node flags which are currently allocated to the named plugin."""
+	def deallocateAllFlags(plugin:str)->None:
+		"""Deallocates all node flags which are currently allocated to the named plugin ."""
 	@staticmethod
-	def deallocateFlag(*args)->Any:
-		"""Deallocates the specified node flag, which was previously allocated by the named plugin using allocateFlag()."""
+	def deallocateFlag(plugin:str,flag:int)->None:
+		"""Deallocates the specified node flag , which was previously allocated by the named plugin using allocateFlag() ."""
 	def absoluteName(self,*args)->Any:
 		"""Returns the absolute name of this node.  The absolute name of a node is the full namespace path starting at (and including) the root namespace, down to (and including) the node itself.  Regardless of relative name mode, absoluteName() will always return a full namespace path prefixed with a leading colon (the root namespace).  If the underlying node is a DAG node, then absoluteName() does not guarantee uniqueness, that is, two dependency nodes could have the same absoluteName().  In cases like this the uniqueName() method will guarantee that the name uniquely identifies the node."""
 	def uniqueName(self,*args)->Any:
 		"""For a DAG node, the unique name of a node is the full namespace path starting at (and including) the root namespace, down to (and including) the node itself. For a non-DAG node, the uniqueName is just its name."""
-	def addAttribute(self,*args)->Any:
+	def addAttribute(self,attribute:MObject)->Self:
 		"""Adds a new dynamic attribute to the node."""
 	def affectsAnimation(self,*args)->Any:
 		"""Returns true if the changes to the node may affect animation."""
-	def attribute(self,*args)->Any:
-		"""Returns an attribute of the node, given either its index or name."""
-	def attributeClass(self,*args)->Any:
-		"""Returns the class of the specified attribute."""
-	def attributeCount(self,*args)->Any:
+	@overload
+	def attribute(self,index:int)->MObject:
+		"""Returns the node's index 'th attribute, based on the order in which they were added to the node."""
+	@overload
+	def attribute(self,name:str)->MObject:
+		"""Returns the attribute with the given name ."""
+	def attributeClass(self,attribute:MObject)->int:
+		"""Returns the class of the specified attribute ."""
+	def attributeCount(self)->int:
 		"""Returns the number of attributes on the node."""
-	def canBeWritten(self,*args)->Any:
+	def canBeWritten(self)->bool:
 		"""Returns true if the node will be written to file."""
-	def create(self,*args)->Any:
-		"""Creates a new node of the given type."""
-	def dgCallbackIds(self,*args)->Any:
-		"""Returns DG timing information for a specific callback type, broken down by callbackId."""
-	def dgCallbacks(self,*args)->Any:
-		"""Returns DG timing information broken down by callback type."""
-	def dgTimer(self,*args)->Any:
-		"""Returns a specific DG timer metric for a given timer type."""
-	def dgTimerOff(self,*args)->Any:
+	@overload
+	def create(self,typeId:MTypeId,nodeName:str)->MObject:
+		"""Creates a new node of the given type, using the nodeName provided, attaches it to the function set and returns it in an MObject . If no nodeName is given the node's type name will be used, followed by a number to ensure uniqueness."""
+	@overload
+	def create(self,typeName:str,nodeName:str)->MObject:
+		"""Creates a new node of the given type, using the nodeName provided, attaches it to the function set and returns it in an MObject . If no nodeName is given the node's type name will be used, followed by a number to ensure uniqueness."""
+	def dgCallbackIds(self,timerType:int,callbackName:str)->tuple[MCallbackIdArray,MDoubleArray]:
+		"""Returns a tuple containing an array of callback ids as its first element and an array of doubles as its second element. These represent the callback timer values for the specified timerType and callbackName , separated out per callback ID."""
+	def dgCallbacks(self,type:int)->tuple[list[str],MDoubleArray]:
+		"""Returns a tuple containing a list of callback type names as its first element and an array of doubles as its second element. These represent the callback timer values for the specified timer type , grouped by type of callback."""
+	def dgTimer(self,metric:int,type:int)->float:
+		"""Returns the timer value for the given metric and type ."""
+	def dgTimerOff(self)->Self:
 		"""Turns DG timing off for this node."""
-	def dgTimerOn(self,*args)->Any:
+	def dgTimerOn(self)->Self:
 		"""Turns DG timing on for this node."""
-	def dgTimerQueryState(self,*args)->Any:
+	def dgTimerQueryState(self)->int:
 		"""Returns the current DG timer state for this node."""
-	def dgTimerReset(self,*args)->Any:
+	def dgTimerReset(self)->Self:
 		"""Resets all DG timers for this node."""
-	def findAlias(self,*args)->Any:
-		"""Returns the attribute which has the given alias."""
-	def findPlug(self,*args)->Any:
-		"""Returns a plug for the given attribute."""
-	def getAffectedAttributes(self,*args)->Any:
-		"""Returns all of the attributes which are affected by the specified attribute."""
-	def getAffectingAttributes(self,*args)->Any:
-		"""Returns all of the attributes which affect the specified attribute."""
-	def getAliasAttr(self,*args)->Any:
+	def findAlias(self,alias:str)->MObject:
+		"""Returns the attribute which has the given alias or MObject::kNullObj if none."""
+	def findPlug(self,attr:str|MObject,wantNetworkedPlug:bool)->MPlug:
+		"""Returns a plug for the given attribute, which may be specified either by name or by MObject ."""
+	def getAffectedAttributes(self,attribute:MObject)->MObjectArray:
+		"""Returns all of the attributes which are affected by the specified attribute ."""
+	def getAffectingAttributes(self,attribute:MObject)->MObjectArray:
+		"""Returns all of the attributes which affect the specified attribute ."""
+	def getAliasAttr(self,force:bool)->MObject:
 		"""Returns the node's alias attribute, which is a special attribute used to store information about the node's attribute aliases."""
-	def getAliasList(self,*args)->Any:
-		"""Returns all of the node's attribute aliases."""
-	def getConnections(self,*args)->Any:
+	def getAliasList(self)->tuple[tuple[str,...],...]:
+		"""Returns all of the node's attribute aliases in a tuple. Each element of the tuple is itself a tuple containing a pair of strings representing the attribute's alias and its real name."""
+	def getConnections(self)->MPlugArray:
 		"""Returns all the plugs which are connected to attributes of this node."""
-	def hasAttribute(self,*args)->Any:
-		"""Returns True if the node has an attribute with the given name."""
-	def hasUniqueName(self,*args)->Any:
+	def hasAttribute(self,name:str)->bool:
+		"""Returns True if the node has an attribute with the given name ."""
+	def hasUniqueName(self)->bool:
 		"""Returns True if the node's name is unique."""
-	def isFlagSet(self,*args)->Any:
-		"""Returns the state of the specified node flag."""
-	def isNewAttribute(self,*args)->Any:
+	def isFlagSet(self,flag:int)->bool:
+		"""Returns the state of the specified node flag , which must previously have been allocated by a call to allocateFlag() ."""
+	def isNewAttribute(self,attribute:MObject)->bool:
 		"""Returns True if the specified attribute was added in the current scene, and not by by one of its referenced files."""
 	def isTrackingEdits(self,*args)->Any:
 		"""Returns True if the node is referenced or in an assembly that is tracking edits."""
-	def name(self,*args)->Any:
+	def name(self)->str:
 		"""Returns the node's name."""
-	def plugsAlias(self,*args)->Any:
-		"""Returns the alias for a plug's attribute."""
-	def removeAttribute(self,*args)->Any:
+	def plugsAlias(self,plug:MPlug)->str:
+		"""Returns the alias for the plug's attribute or the empty string if that attribute has no alias."""
+	def removeAttribute(self,attribute:MObject)->Self:
 		"""Removes a dynamic attribute from the node."""
-	def reorderedAttribute(self,*args)->Any:
-		"""Returns one of the node's attribute, based on the order in which they are written to file."""
+	def reorderedAttribute(self,index:int)->MObject:
+		"""Returns the node's index 'th attribute, based on the order in which they are written to file."""
 	def setAffectsAnimation(self,*args)->Any:
 		"""Specifies that modifications to a node could potentially affect the animation."""
-	def setAlias(self,*args)->Any:
-		"""Adds or removes an attribute alias."""
-	def setDoNotWrite(self,*args)->Any:
+	def setAlias(self,alias:str,attrName:str,plug:MPlug,add:bool)->bool:
+		"""Adds or removes an attribute alias. Returns False if the alias to be added already exists, or if the alias to be removed does not exist."""
+	def setDoNotWrite(self,flag:bool)->Self:
 		"""Used to prevent the node from being written to file."""
-	def setFlag(self,*args)->Any:
-		"""Sets the state of the specified node flag."""
-	def setName(self,*args)->Any:
-		"""Sets the node's name."""
+	def setFlag(self,flag:int,state:bool)->Self:
+		"""Sets the state of the specified node flag , which must previously have been allocated by a call to allocateFlag() ."""
+	def setName(self,name:str)->str:
+		"""Sets the node's name. If there is a conflict with another node the name will be modified to make it unique. The name actually used is returned."""
 	def setUuid(self,*args)->Any:
 		"""Sets the node's UUID."""
-	def userNode(self,*args)->Any:
-		"""Returns the MPxNode object for a plugin node."""
+	def userNode(self)->MPxNode|None:
+		"""If the node is a plug-in node, its proxy object is returned, otherwise None is returned."""
 	def uuid(self,*args)->Any:
 		"""Returns the node's UUID."""
 	def addExternalContentForFileAttr(self,*args)->Any:
@@ -5990,14 +5839,22 @@ class MFnDoubleArrayData(MFnData):
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args)->Any:
-		"""Returns the encapsulated array as an MDoubleArray."""
-	def copyTo(self,*args)->Any:
-		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args)->Any:
-		"""Creates a new double array data object."""
-	def set(self,*args)->Any:
-		"""Sets values in the encapsulated array."""
+	def array(self)->MDoubleArray:
+		"""Returns the encapsulated array as an MDoubleArray . For performance reasons the returned array is a live reference to the encapsulated array so changes made to one directly affect the other. The returned array is only valid for as long as the function set retains the same data object. If the function set is destroyed or attached to a different object then the returned array should be discarded. Failure to do so could result in Maya becoming unstable."""
+	def copyTo(self,array:MDoubleArray)->Self:
+		"""Replaces the elements of array with those in the encapsulated array."""
+	@overload
+	def create(self)->MObject:
+		"""Creates a new, empty double array data object, attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def create(self,array:MDoubleArray|Sequence[float])->MObject:
+		"""Creates a new, double array data object, initializes it with the elements from array , attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def set(self,array:MDoubleArray|Sequence[float])->Self:
+		"""Replaces the elements in the encapsulated array with those from the supplied array ."""
+	@overload
+	def set(self,value:float,index:int)->Self:
+		"""Sets the value of the index 'th element of the array."""
 class MFnDoubleIndexedComponent(MFnComponent):
 	"""This function set allows you to create, edit, and query double indexed
 	components. Double indexed components store 2 dimensional index values.
@@ -6056,37 +5913,37 @@ class MFnEnumAttribute(MFnAttribute):
 	def default(self,value:int)->None:...
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addField(self,*args)->Any:
-		"""Add an item to the enumeration with a specified UI name and corresponding attribute value."""
-	def create(self,*args)->Any:
-		"""Creates a new enumeration attribute, attaches it to the function set and returns it as an MObject."""
-	def fieldName(self,*args)->Any:
-		"""Returns the name of the enumeration item which has a given value."""
-	def fieldValue(self,*args)->Any:
-		"""Returns the value of the enumeration item which has a given name."""
-	def getMax(self,*args)->Any:
+	def addField(self,name:str,value:int)->Self:
+		"""Add an item to the enumeration with the specified UI name and corresponding attribute value ."""
+	def create(self,longName:str,shortName:str,defaultValue:int)->MObject:
+		"""Create a new enum attribute with the given longName , shortName and defaultValue , attach it to the function set and return it in an MObject ."""
+	def fieldName(self,value:int)->str:
+		"""Returns the name of the enumeration item which has the given value ."""
+	def fieldValue(self,name:str)->int:
+		"""Returns the value of the enumeration item which has the given name ."""
+	def getMax(self)->int:
 		"""Returns the maximum value of all the enumeration items."""
-	def getMin(self,*args)->Any:
+	def getMin(self)->int:
 		"""Returns the minimum value of all the enumeration items."""
-	def setDefaultByName(self,*args)->Any:
-		"""Set the default value using the name of an enumeration item. Equivalent to: attr.default = attr.fieldValue(name)"""
+	def setDefaultByName(self,name:str)->Self:
+		"""Set the default value using the name of an enumeration item. Equivalent to attr.default = attr.fieldValue(name) ."""
 class MFnGenericAttribute(MFnAttribute):
 	"""Functionset for creating and working with attributes which can accept several different types of data."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addDataType(self,*args)->Any:
+	def addDataType(self,type:int)->Self:
 		"""Adds the specified Maya data type to the list of those accepted by the attribute."""
-	def addNumericType(self,*args)->Any:
+	def addNumericType(self,type:int)->Self:
 		"""Adds the specified numeric type to the list of those accepted by the attribute."""
-	def addTypeId(self,*args)->Any:
-		"""Adds the specified data typeId to the list of those accepted by the attribute."""
-	def create(self,*args)->Any:
-		"""Creates a new generic attribute, attaches it to the function set and returns it as an MObject."""
-	def removeDataType(self,*args)->Any:
+	def addTypeId(self,typeId:MTypeId)->Self:
+		"""Adds the specified MPxData or MPxGeometryData typeId to the list of those accepted by the attribute."""
+	def create(self,longName:str,shortName:str)->MObject:
+		"""Create a new message attribute with the given longName and shortName , attach it to the function set and return it in an MObject ."""
+	def removeDataType(self,type:int)->Self:
 		"""Removes the specified Maya data type from the list of those accepted by the attribute."""
-	def removeNumericType(self,*args)->Any:
+	def removeNumericType(self,type:int)->Self:
 		"""Removes the specified numeric type from the list of those accepted by the attribute."""
-	def removeTypeId(self,*args)->Any:
+	def removeTypeId(self,typeId:MTypeId)->Self:
 		"""Removes the specified data typeId from the list of those accepted by the attribute."""
 class MFnGeometryData(MFnData):
 	"""This class is the function set for geometry data.
@@ -6127,56 +5984,28 @@ class MFnGeometryData(MFnData):
 	kPartialGroup:int=3
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addObjectGroup(self,*args)->Any:
-		"""addObjectGroup(id) -> self
-
-		Adds an object group with the given id to the object."""
-	def addObjectGroupComponent(self,*args)->Any:
-		"""addObjectGroupComponent(id, MObject component) -> self
-
-		Adds the members of the given component to the object group
-		with the given id."""
-	def changeObjectGroupId(self,*args)->Any:
-		"""changeObjectGroupId(sourceId, destId) -> self
-
-		Changes the id of the object group with the given id to the new id."""
-	def copyObjectGroups(self,*args)->Any:
-		"""copyObjectGroups(MObject inGeom) -> self
-
-		Copies the object groups from the given geometry data object."""
-	def hasObjectGroup(self,*args)->Any:
-		"""hasObjectGroup(id) -> self
-
-		Returns True if an object group with the given id is
-		contained in the data."""
-	def objectGroup(self,*args)->Any:
-		"""objectGroup(index) -> int
-
-		Returns the id of the index'th object group contained by the object."""
-	def objectGroupComponent(self,*args)->Any:
-		"""objectGroupComponent(id) -> MObject
-
-		Returns a component which contains the members of the object group
-		with the given id."""
-	def objectGroupType(self,*args)->Any:
-		"""objectGroupType(id) -> MFn Type constant
-
-		Returns the type of the component that the object group with the
-		given id contains."""
-	def removeObjectGroup(self,*args)->Any:
-		"""removeObjectGroup(id) -> self
-
-		Removes an object group with the given id from the object."""
-	def removeObjectGroupComponent(self,*args)->Any:
-		"""removeObjectGroupComponent(id, MObject component) -> self
-
-		Removes the members of the given component from the object group
-		with the given id."""
-	def setObjectGroupComponent(self,*args)->Any:
-		"""setObjectGroupComponent(id, MObject component) -> self
-
-		Sets the members of the object group with the given id
-		to be only those in the given component."""
+	def addObjectGroup(self,id:int)->Self:
+		"""Adds an object group with the given id to the object."""
+	def addObjectGroupComponent(self,id:int,component:MObject)->Self:
+		"""Adds the members of the given component to the object group with the given id."""
+	def changeObjectGroupId(self,sourceId:int,destId:int)->Self:
+		"""Changes the id of the object group with the given id to the new id."""
+	def copyObjectGroups(self,inGeom:MObject)->Self:
+		"""Copies the object groups from the given geometry data object."""
+	def hasObjectGroup(self,id:int)->bool:
+		"""Returns True if an object group with the given id is contained in the data."""
+	def objectGroup(self,index:int)->Any:
+		"""Returns the id of the index'th object group contained by the object."""
+	def objectGroupComponent(self,id:int)->MObject:
+		"""Returns a component which contains the members of the object group with the given id."""
+	def objectGroupType(self,id:int)->int:
+		"""Returns the type of the component that the object group with the given id contains."""
+	def removeObjectGroup(self,id:int)->Self:
+		"""Removes an object group with the given id from the object."""
+	def removeObjectGroupComponent(self,id:int,component:MObject)->Self:
+		"""Removes the members of the given component from the object group with the given id."""
+	def setObjectGroupComponent(self,id:int,component:MObject)->Self:
+		"""Sets the members of the object group with the given id to be only those in the given component."""
 	def hasComponentTag(self,*args)->Any:
 		"""hasComponentTag(key) -> bool
 
@@ -6238,27 +6067,35 @@ class MFnIntArrayData(MFnData):
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args)->Any:
-		"""Returns the encapsulated array as an MIntArray."""
-	def copyTo(self,*args)->Any:
-		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args)->Any:
-		"""Creates a new int array data object."""
-	def set(self,*args)->Any:
-		"""Sets values in the encapsulated array."""
+	def array(self)->MIntArray:
+		"""Returns the encapsulated array as an MIntArray . For performance reasons the returned array is a live reference to the encapsulated array so changes made to one directly affect the other. The returned array is only valid for as long as the function set retains the same data object. If the function set is destroyed or attached to a different object then the returned array should be discarded. Failure to do so could result in Maya becoming unstable."""
+	def copyTo(self,array:MIntArray)->Self:
+		"""Replaces the elements of array with those in the encapsulated array."""
+	@overload
+	def create(self)->MObject:
+		"""Creates a new, empty int array data object, attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def create(self,array:MIntArray|Sequence[int])->MObject:
+		"""Creates a new, int array data object, initializes it with the elements from array , attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def set(self,array:MIntArray|Sequence[int])->Self:
+		"""Replaces the elements in the encapsulated array with those from the supplied array ."""
+	@overload
+	def set(self,value:int,index:int)->Self:
+		"""Sets the value of the index 'th array element."""
 class MFnLightDataAttribute(MFnAttribute):
 	"""Functionset for creating and working with light data attributes."""
 	@property
-	def default(self)->tuple[tuple[dirX, dirY, dirZ], tuple[intR, intG, intB], ambient, diffuse, specular, shadowFraction, preshadowIntensity, blindData]:
+	def default(self)->tuple[tuple[float, float, float], tuple[int, int, int], bool, bool, bool, float, float, int]:
 		"""Default values for the light data attribute's child attributes."""
 	@default.setter
-	def default(self,value:tuple[tuple[dirX, dirY, dirZ], tuple[intR, intG, intB], ambient, diffuse, specular, shadowFraction, preshadowIntensity, blindData])->None:...
+	def default(self,value:tuple[tuple[float, float, float], tuple[int, int, int], bool, bool, bool, float, float, int])->None:...
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def child(self,*args)->Any:
-		"""Returns one of the attribute's children, specified by index."""
-	def create(self,*args)->Any:
-		"""Creates a new light data attribute, attaches it to the function set and returns it as an MObject."""
+	def child(self,index:int)->MObject:
+		"""Returns the specified child attribute."""
+	def create(self,longName:str,shortName:str,direction:MObject,intensity:MObject,ambient:MObject,diffuse:MObject,specular:MObject,shadowFraction:MObject,preShadowIntensity:MObject,blindData:MObject)->MObject:
+		"""Creates a new light data attribute having the child attributes provided, attaches it to the function set and returns it in an MObject ."""
 class MFnMatrixArrayData(MFnData):
 	"""Function set for node data consisting of an array of MMatrix."""
 	def __init__(self,*args)->None:
@@ -6290,22 +6127,33 @@ class MFnMatrixAttribute(MFnAttribute):
 	kDouble:int=1
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args)->Any:
-		"""Creates a new matrix attribute, attaches it to the function set and returns it as an MObject."""
+	def create(self,longName:str,shortName:str,type:int)->MObject:
+		"""Create a new float or double matrix attribute with the given longName and shortName , attach it to the function set and return it in an MObject ."""
 class MFnMatrixData(MFnData):
 	"""Function set for matrix node data."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args)->Any:
-		"""Creates a new matrix data object."""
-	def isTransformation(self,*args)->Any:
-		"""Returns True if the attached object is an MTransformationMatrix, False if it is an MMatrix."""
-	def matrix(self,*args)->Any:
-		"""Returns the encapsulated matrix as an MMatrix."""
-	def set(self,*args)->Any:
-		"""Sets the value of the encapsulated matrix."""
-	def transformation(self,*args)->Any:
-		"""Returns the encapsulated matrix as an MTransformationMatrix."""
+	@overload
+	def create(self)->MObject:
+		"""Creates a new MMatrix data object, initializes it to the identity matrix, attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def create(self,matrix:MMatrix)->MObject:
+		"""Creates a new MMatrix data object, initializes it from the given matrix , attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def create(self,tm:MTransformationMatrix)->MObject:
+		"""Creates a new MTransformationMatrix data object, initializes it from transformation matrix tm , attaches it to the function set and returns an MObject which references it."""
+	def isTransformation(self)->bool:
+		"""Returns True if the attached object is an MTransformationMatrix , False if it is an MMatrix ."""
+	def matrix(self)->MMatrix:
+		"""Returns the encapsulated MMatrix . If the function set was previously encapsulating an MTransformationMatrix it will be converted to an MMatrix and any previously returned references (e.g. from the transformation() method) will no longer be invalid."""
+	@overload
+	def set(self,matrix:MMatrix)->Self:
+		"""Replaces the contents of the encapsulated matrix with that of the supplied matrix . If the function set was previously encapsulating an MTransformationMatrix it will be switched to an MMatrix and any previously returned references (e.g. from the transformation() method) will no longer be invalid."""
+	@overload
+	def set(self,tm:MTransformationMatrix)->Self:
+		"""Replaces the contents of the encapsulated matrix with that of the supplied transformation matrix tm . If the function set was previously encapsulating an MMatrix it will be switched to an MTransformationMatrix and any previously returned references (e.g. from the matrix() method) will no longer be invalid."""
+	def transformation(self)->MTransformationMatrix:
+		"""Returns the encapsulated MTransformationMatrix . If the function set was previously encapsulating an MMatrix it will be converted to an MTransformationMatrix and any previously returned references (e.g. from the matrix() method) will no longer be invalid."""
 class MFnMesh(MFnDagNode):
 	"""Function set for operation on meshes (polygonal surfaces).
 
@@ -6386,66 +6234,17 @@ class MFnMesh(MFnDagNode):
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@staticmethod
-	def autoUniformGridParams(*args)->Any:
-		"""autoUniformGridParams() -> MMeshIsectAccelParams
-
-		Creates an object which specifies a uniform voxel grid structure
-		which can be used by the intersection routines to speed up their
-		operation. The number of voxel cells to use will be determined
-		automatically based on the density of triangles in the mesh. The
-		grid acceleration structure will be cached with the mesh, so that
-		if the same MMeshIsectAccelParams configuration is used on the next
-		intersect call, the acceleration structure will not need to be rebuilt."""
+	def autoUniformGridParams(arg)->MMeshIsectAccelParams:
+		"""Creates an object which specifies a uniform voxel grid structure which can be used by the intersection routines to speed up their operation. The number of voxel cells to use will be determined automatically based on the density of triangles in the mesh. The grid acceleration structure will be cached with the mesh, so that if the same MMeshIsectAccelParams configuration is used on the next intersect call, the acceleration structure will not need to be rebuilt."""
 	@staticmethod
-	def clearGlobalIntersectionAcceleratorInfo(*args)->Any:
-		"""clearGlobalIntersectionAcceleratorInfo()
-
-		Clears the 'total count', 'total build time', and 'peak memory'
-		fields from the information string returned by
-		globalIntersectionAcceleratorsInfo(). It will not cause information
-		about currently existing accelerators to be lost."""
+	def clearGlobalIntersectionAcceleratorInfo(arg)->Any:
+		"""Clears the "total count", "total build time", and "peak memory" fields from the information string returned by globalIntersectionAcceleratorsInfo() . It will not cause information about currently existing accelerators to be lost."""
 	@staticmethod
-	def globalIntersectionAcceleratorsInfo(*args)->Any:
-		"""globalIntersectionAcceleratorsInfo() -> string
-
-		Returns a string that describes the system-wide resource usage for
-		cached mesh intersection accelerators. The string will be of the
-		following form:
-		  total 10 accelerators created (2 currently active - total current memory = 10000KB), total build time = 10.2s, peak memory = 14567.1KB
-
-		This means that:
-
-		* a total of 10 intersection accelerators have been created as
-		  instructed by calls to closestIntersection(), allIntersections(),
-		  or anyIntersection() with non-NULL accelParams values. Thesen  structures are destroyed and re-created when intersection requests
-		  with differing acceleration parameters are passed in for the same
-		  mesh, so it is useful to see this value, which is the total count
-		  of how many have been created. In this case, 8 of the 10 created
-		  have been destroyed, either automatically or via calls to the
-		  freeCachedIntersectionAccelerator() method
-
-		* the total memory footprint for the 2 accelerators currently in
-		  existence is 10,000KB
-
-		* the total build time for all 10 structures that have been created
-		  is 10.2 seconds
-		* the peak of total memory usage for all accelerators in the system
-		  was 14567.1KB
-		Calling clearGlobalIntersectionAcceleratorInfo() will clear the
-		'total count', 'total build time', and 'peak memory' fields from
-		this information. It will not cause information about currently
-		existing accelerators to be lost."""
+	def globalIntersectionAcceleratorsInfo(arg)->str:
+		"""Returns a string that describes the systemwide resource usage for cached mesh intersection accelerators. The string will be of the following form: total 10 accelerators created (2 currently active - total current memory = 10000KB), total build time = 10.2s, peak memory = 14567.1KB This means that: a total of 10 intersection accelerators have been created as instructed by calls to closestIntersection() , allIntersections() , or anyIntersection() with non-NULL accelParams values. These structures are destroyed and re-created when intersection requests with differing acceleration parameters are passed in for the same mesh, so it is useful to see this value, which is the total count of how many have been created. In this case, 8 of the 10 created have been destroyed, either automatically or via calls to the freeCachedIntersectionAccelerator() method the total memory footprint for the 2 accelerators currently in existence is 10,000KB the total build time for all 10 structures that have been created is 10.2 seconds the peak of total memory usage for all accelerators in the system was 14567.1KB Calling clearGlobalIntersectionAcceleratorInfo() will clear the "total count", "total build time", and "peak memory" fields from this information. It will not cause information about currently existing accelerators to be lost."""
 	@staticmethod
-	def uniformGridParams(*args)->Any:
-		"""uniformGridParams(xDiv, yDiv, zDiv) -> MMeshIsectAccelParams
-
-		Creates an object which specifies a uniform voxel grid structure
-		which can be used by the intersection routines to speed up their
-		operation. This object specifies the number of voxel cells to be
-		used in the x, y, and z dimensions. The grid acceleration structure
-		will be cached with the mesh, so that if the same MMeshIsectAccelParams
-		configuration is used on the next intersect call, the acceleration
-		structure will not need to be rebuilt."""
+	def uniformGridParams(xDiv:int,yDiv:int,zDiv:int)->MMeshIsectAccelParams:
+		"""Creates an object which specifies a uniform voxel grid structure which can be used by the intersection routines to speed up their operation. This object specifies the number of voxel cells to be used in the x, y, and z dimensions. The grid acceleration structure will be cached with the mesh, so that if the same MMeshIsectAccelParams configuration is used on the next intersect call, the acceleration structure will not need to be rebuilt."""
 	def addHoles(self,*args)->Any:
 		"""addHoles(faceIndex, vertices, loopCounts, mergeVertices=True, pointTolerance=kPointTolerance) -> self
 
@@ -6459,151 +6258,22 @@ class MFnMesh(MFnDagNode):
 		length of vertexArray.
 		Note that holes should normally be specified with the opposite winding order
 		to the exterior polygon."""
-	def addPolygon(self,*args)->Any:
-		"""addPolygon(vertices, mergeVertices=True, pointTolerance=kPointTolerance, loopCounts=None) -> faceId
-
-		Adds a new polygon to the mesh, returning the index of the new
-		polygon. If mergeVertices is True and a new vertex is within
-		pointTolerance of an existing one, then they are 'merged' by reusing
-		the existing vertex and discarding the new one.
-
-		loopCounts allows for polygons with holes. If supplied, it is an array of integer vertex
-		counts. The first entry gives the count of vertices that make up the
-		exterior of the polygon (using that many entries in vertexArray). The following
-		entries in loopCounts give the count of vertices that make up each hole,
-		using the following entries in vertexArray.
-		Therefore the sum of the entries of loopCounts should equal the total
-		length of vertexArray.
-		Note that holes should normally be specified with the opposite winding order
-		to the exterior polygon."""
-	def allIntersections(self,*args)->Any:
-		"""allIntersections(raySource, rayDirection, space, maxParam,
-		    testBothDirections, faceIds=None, triIds=None, idsSorted=False,
-		    accelParams=None, tolerance=kIntersectTolerance, sortHits=False)
-		  -> (hitPoints, hitRayParams, hitFaces, hitTriangles, hitBary1s, hitBary2s) or None
-
-		Finds all intersection of a ray starting at raySource and travelling
-		in rayDirection with the mesh.
-
-		If faceIds is specified, then only those faces will be considered
-		for intersection. If both faceIds and triIds are given, then the
-		triIds will be interpreted as face-relative and each pair of entries
-		will be taken as a (face, triangle) pair to be considered for
-		intersection. Thus, the face-triangle pair (10, 0) means the first
-		triangle on face 10. If neither faceIds nor triIds is given, then
-		all face-triangles in the mesh will be considered.
-
-		The maxParam and testBothDirections flags can be used to control the
-		radius of the search around the raySource point.
-
-		The search proceeds by testing all applicable face-triangles looking
-		for intersections. If the accelParams parameter is given then the
-		mesh builds an intersection acceleration structure based on it. This
-		acceleration structure is used to speed up the intersection
-		operation, sometimes by a factor of several hundred over the non-
-		accelerated case. Once created, the acceleration structure is cached
-		and will be reused the next time this method (or anyIntersection()
-		or allIntersections()) is called with an identically-configured
-		MMeshIsectAccelParams object. If a different MMeshIsectAccelParams
-		object is used, then the acceleration structure will be deleted and
-		re-created according to the new settings. Once created, the
-		acceleration structure will persist until either the object is
-		destroyed (or rebuilt by a construction history operation), or the
-		freeCachedIntersectionAccelerator() method is called. The
-		cachedIntersectionAcceleratorInfo() and
-		globalIntersectionAcceleratorsInfo() methods provide useful
-		information about the resource usage of individual acceleration
-		structures, and of all such structures in the system.
-		If the ray hits the mesh, the details of the intersection points
-		will be returned as a tuple containing the following:
-		* hitPoints (MFloatPointArray) - coordinates of the points hit, in
-		  the space specified by the caller.* hitRayParams (MFloatArray) - parametric distances along the ray to
-		  the points hit.* hitFaces (MIntArray) - IDs of the faces hit
-		* hitTriangles (MIntArray) - face-relative IDs of the triangles hit
-		* hitBary1s (MFloatArray) - first barycentric coordinate of the
-		  points hit. If the vertices of the hitTriangle are (v1, v2, v3)
-		  then the barycentric coordinates are such that the hitPoint =
-		  (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3.* hitBary2s (MFloatArray) - second barycentric coordinate of the
-		  points hit.
-		If no point was hit then None will be returned."""
-	def anyIntersection(self,*args)->Any:
-		"""anyIntersection(raySource, rayDirection, space, maxParam,
-		    testBothDirections, faceIds=None, triIds=None, idsSorted=False,
-		    accelParams=None, tolerance=kIntersectTolerance)
-		  -> (hitPoint, hitRayParam, hitFace, hitTriangle, hitBary1, hitBary2) or None
-
-		Finds any intersection of a ray starting at raySource and travelling
-		in rayDirection with the mesh.
-
-		If faceIds is specified, then only those faces will be considered
-		for intersection. If both faceIds and triIds are given, then the
-		triIds will be interpreted as face-relative and each pair of entries
-		will be taken as a (face, triangle) pair to be considered for
-		intersection. Thus, the face-triangle pair (10, 0) means the first
-		triangle on face 10. If neither faceIds nor triIds is given, then
-		all face-triangles in the mesh will be considered.
-
-		The maxParam and testBothDirections flags can be used to control the
-		radius of the search around the raySource point.
-
-		The search proceeds by testing all applicable face-triangles looking
-		for intersections. If the accelParams parameter is given then the
-		mesh builds an intersection acceleration structure based on it. This
-		acceleration structure is used to speed up the intersection
-		operation, sometimes by a factor of several hundred over the non-
-		accelerated case. Once created, the acceleration structure is cached
-		and will be reused the next time this method (or anyIntersection()
-		or allIntersections()) is called with an identically-configured
-		MMeshIsectAccelParams object. If a different MMeshIsectAccelParams
-		object is used, then the acceleration structure will be deleted and
-		re-created according to the new settings. Once created, the
-		acceleration structure will persist until either the object is
-		destroyed (or rebuilt by a construction history operation), or the
-		freeCachedIntersectionAccelerator() method is called. The
-		cachedIntersectionAcceleratorInfo() and
-		globalIntersectionAcceleratorsInfo() methods provide useful
-		information about the resource usage of individual acceleration
-		structures, and of all such structures in the system.
-		If the ray hits the mesh, the details of the intersection point
-		will be returned as a tuple containing the following:
-		* hitPoint (MFloatPoint) - coordinates of the point hit, in
-		  the space specified by the caller.* hitRayParam (float) - parametric distance along the ray to
-		  the point hit.* hitFace (int) - ID of the face hit
-		* hitTriangle (int) - face-relative ID of the triangle hit
-		* hitBary1 (float) - first barycentric coordinate of the
-		  point hit. If the vertices of the hitTriangle are (v1, v2, v3)
-		  then the barycentric coordinates are such that the hitPoint =
-		  (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3.* hitBary2 (float) - second barycentric coordinate of the point hit.
-		If no point was hit then None will be returned."""
-	def assignColor(self,*args)->Any:
-		"""assignColor(faceId, vertexIndex, colorId, colorSet='') -> self
-
-		Assigns a color from a colorSet to a specified vertex of a face."""
-	def assignColors(self,*args)->Any:
-		"""assignColors(colorIds, colorSet=') -> self
-
-		Assigns colors to all of the mesh's face-vertices. The colorIds
-		sequence must contain an entry for every vertex of every face, in
-		face order, meaning that the entries for all the vertices of face 0
-		come first, followed by the entries for the vertices of face 1, etc."""
-	def assignUV(self,*args)->Any:
-		"""assignUV(faceId, vertexIndex, uvId, uvSet='') -> self
-
-		Assigns a UV coordinate from a uvSet to a specified vertex of a face."""
-	def assignUVs(self,*args)->Any:
-		"""assignUVs(uvCounts, uvIds, uvSet='') -> self
-
-		Assigns UV coordinates to the mesh's face-vertices.
-
-		uvCounts contains the number of UVs to assign for each of the mesh's
-		faces. That number must equal the number of vertices in the
-		corresponding face or be 0 to indicate that no UVs will be assigned
-		to that face."""
-	def booleanOp(self,*args)->Any:
-		"""(Deprecated: Please use booleanOps instead) booleanOp(Boolean Operation constant, MFnMesh, MFnMesh) -> self
-
-		Replaces this mesh's geometry with the result of a boolean operation
-		on the two specified meshes."""
+	def addPolygon(self,vertices:Sequence[MPoint],mergeVertices:bool,pointTolerance:float)->int:
+		"""Adds a new polygon to the mesh, returning the index of the new polygon. If mergeVertices is True and a new vertex is within pointTolerance of an existing one, then they are "merged" by reusing the existing vertex and discarding the new one."""
+	def allIntersections(self,raySource:MFloatPoint,rayDirection:MFloatVector,space:int,maxParam:float,testBothDirections:bool,faceIds:Sequence[int],triIds:Sequence[int],idsSorted:bool,accelParams:MMeshIsectAccelParams,tolerance:float,sortHits:bool)->tuple[hitPoints,hitRayParams,hitFaces,hitTriangles,hitBary1s,hitBay2s]:
+		"""Finds all intersection of a ray starting at raySource and travelling in rayDirection with the mesh. If faceIds is specified, then only those faces will be considered for intersection. If both faceIds and triIds are given, then the triIds will be interpreted as face-relative and each pair of entries will be taken as a (face,triangle) pair to be considered for intersection. Thus, the face-triangle pair (10,0) means the first triangle on face 10. If neither faceIds nor triIds is given, then all face-triangles in the mesh will be considered. The maxParam and testBothDirections flags can be used to control the radius of the search around the raySource point. The search proceeds by testing all applicable face-triangles looking for intersections. If the accelParams parameter is given then the mesh builds an intersection acceleration structure based on it. This acceleration structure is used to speed up the intersection operation, sometimes by a factor of several hundred over the non-accelerated case. Once created, the acceleration structure is cached, and will be reused the next time this method (or anyIntersection() or allIntersections() ) is called with an identically-configured MMeshIsectAccelParams object. If a different MMeshIsectAccelParams object is used, then the acceleration structure will be deleted and re-created according to the new settings. Once created, the acceleration structure will persist until either the object is destroyed (or rebuilt by a construction history operation), or the freeCachedIntersectionAccelerator() method is called. The cachedIntersectionAcceleratorInfo() and globalIntersectionAcceleratorsInfo() methods provide useful information about the resource usage of individual acceleration structures, and of all such structures in the system. If the ray hits the mesh, the details of the intersection points will be returned as a tuple containing the following: hitPoints ( MFloatPointArray ) - coordinates of the points hit, in the space specified by the caller. hitRayParams ( MFloatArray ) - parametric distances along the ray to the points hit. hitFaces ( MIntArray ) - IDs of the faces hit hitTriangles ( MIntArray ) - face-relative IDs of the triangles hit hitBary1s ( MFloatArray ) - first barycentric coordinate of the points hit. If the vertices of the hitTriangle are (v1, v2, v3) then the barycentric coordinates are such that the hitPoint = (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3. hitBary2s ( MFloatArray ) - second barycentric coordinate of the points hit. If no point was hit then the arrays will all be empty."""
+	def anyIntersection(self,raySource:MFloatPoint,rayDirection:MFloatVector,space:int,maxParam:float,testBothDirections:bool,faceIds:Sequence[int],triIds:Sequence[int],idsSorted:bool,accelParams:MMeshIsectAccelParams,tolerance:float)->tuple[hitPoint,hitRayParam,hitFace,hitTriangle,hitBary1,hitBay2]|None:
+		"""Finds any intersection of a ray starting at raySource and travelling in rayDirection with the mesh. If faceIds is specified, then only those faces will be considered for intersection. If both faceIds and triIds are given, then the triIds will be interpreted as face-relative and each pair of entries will be taken as a (face,triangle) pair to be considered for intersection. Thus, the face-triangle pair (10,0) means the first triangle on face 10. If neither faceIds nor triIds is given, then all face-triangles in the mesh will be considered. The maxParam and testBothDirections flags can be used to control the radius of the search around the raySource point. The search proceeds by testing all applicable face-triangles looking for intersections. If the accelParams parameter is given then the mesh builds an intersection acceleration structure based on it. This acceleration structure is used to speed up the intersection operation, sometimes by a factor of several hundred over the non-accelerated case. Once created, the acceleration structure is cached, and will be reused the next time this method (or anyIntersection() or allIntersections() ) is called with an identically-configured MMeshIsectAccelParams object. If a different MMeshIsectAccelParams object is used, then the acceleration structure will be deleted and re-created according to the new settings. Once created, the acceleration structure will persist until either the object is destroyed (or rebuilt by a construction history operation), or the freeCachedIntersectionAccelerator() method is called. The cachedIntersectionAcceleratorInfo() and globalIntersectionAcceleratorsInfo() methods provide useful information about the resource usage of individual acceleration structures, and of all such structures in the system. If the ray hits the mesh, the details of the intersection point will be returned as a tuple containing the following: hitPoint ( MFloatPoint ) - coordinate of the point hit, in the space specified by the caller. hitRayParam (float) - parametric distance along the ray to the point hit. hitFace (int) - ID of the face hit hitTriangle (int) - face-relative ID of the triangle hit hitBary1 (float) - first barycentric coordinate of the point hit. If the vertices of the hitTriangle are (v1, v2, v3) then the barycentric coordinates are such that hitPoint = (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3. hitBary2 (float) - second barycentric coordinate of the point hit. If no point was hit then None will be returned."""
+	def assignColor(self,faceId:int,vertexIndex:int,colorId:int,colorSet:str)->Self:
+		"""Assigns a color from a colorSet to a specified vertex of a face."""
+	def assignColors(self,colorIds:Sequence[int],colorSet:str)->Self:
+		"""Assigns colors to all of the mesh's face-vertices. The colorIds sequence must contain an entry for every vertex of every face, in face order, meaning that the entries for all the vertices of face 0 come first, followed by the entries for the vertices of face 1, etc."""
+	def assignUV(self,faceId:int,vertexIndex:int,uvId:int,uvSet:str)->Self:
+		"""Assigns a UV coordinate to a specified vertex of a polygon."""
+	def assignUVs(self,uvCounts:Sequence[int],uvIds:Sequence[int],uvSet:str)->Self:
+		"""Assigns UV coordinates to the mesh's face-vertices."""
+	def booleanOp(self,op:int,mesh1:MFnMesh,mesh2:MFnMesh)->Self:
+		"""Replaces this mesh's geometry with the result of a boolean operation on the two specified meshes."""
 	def booleanOps(self,*args)->Any:
 		"""booleanOps(Boolean Operation constant, MObjectArray, bool) -> self
 
@@ -6614,476 +6284,94 @@ class MFnMesh(MFnDagNode):
 
 		Replaces this mesh's geometry with the result of a boolean operation
 		on the specified meshes."""
-	def cachedIntersectionAcceleratorInfo(self,*args)->Any:
-		"""cachedIntersectionAcceleratorInfo() -> string
-
-		Retrieves a string that describes the intersection acceleration
-		structure for this object, if any. The string will be of the
-		following form:
-
-		  10x10x10 uniform grid, (build time 0.5s), (memory footprint 2000KB)
-
-		It describes the configuration of the cached intersection
-		accelerator, as well as how long it took to build it, and how much
-		memory it is currently occupying. If the mesh has no cached
-		intersection accelerator, the empty string is returned."""
-	def cleanupEdgeSmoothing(self,*args)->Any:
-		"""cleanupEdgeSmoothing() -> self
-
-		Updates the mesh after setEdgeSmoothing has been done. This should
-		be called only once, after all the desired edges have been had their
-		smoothing set. If you don't call this method, the normals may not be
-		correct, and the object will look odd in shaded mode."""
-	def clearBlindData(self,*args)->Any:
-		"""clearBlindData(compType) -> self
-		clearBlindData(compType, blindDataId, compId=None, attr='') -> self
-
-
-		The first version deletes all blind data from all the mesh's
-		components of the given type (an MFn Type constant).
-
-		The second version deletes values of the specified blind data type
-		from the mesh's components of a given type. If a component ID is
-		provided then the data is only deleted from that component,
-		otherwise it is deleted from all of the mesh's components of the
-		specified type. If a blind data attribute name is provided then only
-		data for that attribute is deleted, otherwise data for all of the
-		blind data type's attributes is deleted."""
-	def clearColors(self,*args)->Any:
-		"""clearColors(colorSet='') -> self
-
-		Clears out all colors from a colorSet, and leaves behind an empty
-		colorset. This method should be used if it is needed to shrink the
-		actual size of the color set. In this case, the user should call
-		clearColors(), setColors() and then assignColors() to rebuild the
-		mapping info.
-
-		When called on mesh data, the colors are removed. When called on a
-		shape with no history, the colors are removed and the attributes are
-		set on the shape. When called on a shape with history, the
-		polyColorDel command is invoked and a polyColorDel node is created.
-
-		If no colorSet is specified the mesh's current color set will be used."""
-	def clearUVs(self,*args)->Any:
-		"""clearUVs(uvSet='') -> self
-
-		Clears out all uvs from a uvSet, and leaves behind an empty
-		uvset. This method should be used if it is needed to shrink the
-		actual size of the uv set. In this case, the user should call
-		clearUVs(), setUVs() and then assignUVs() to rebuild the
-		mapping info.
-
-		When called on mesh data, the uvs are removed. When called on a
-		shape with no history, the uvs are removed and the attributes are
-		set on the shape. When called on a shape with history, the
-		polyMapDel command is invoked and a polyMapDel node is created.
-
-		If no uvSet is specified the mesh's current uv set will be used."""
-	def closestIntersection(self,*args)->Any:
-		"""closestIntersection(raySource, rayDirection, space, maxParam,
-		    testBothDirections, faceIds=None, triIds=None, idsSorted=False,
-		    accelParams=None, tolerance=kIntersectTolerance)
-		  -> (hitPoint, hitRayParam, hitFace, hitTriangle, hitBary1, hitBary2) or None
-
-		Finds the closest intersection of a ray starting at raySource and
-		travelling in rayDirection with the mesh.
-
-		If faceIds is specified, then only those faces will be considered
-		for intersection. If both faceIds and triIds are given, then the
-		triIds will be interpreted as face-relative and each pair of entries
-		will be taken as a (face, triangle) pair to be considered for
-		intersection. Thus, the face-triangle pair (10, 0) means the first
-		triangle on face 10. If neither faceIds nor triIds is given, then
-		all face-triangles in the mesh will be considered.
-
-		The maxParam and testBothDirections flags can be used to control the
-		radius of the search around the raySource point.
-
-		The search proceeds by testing all applicable face-triangles looking
-		for intersections. If the accelParams parameter is given then the
-		mesh builds an intersection acceleration structure based on it. This
-		acceleration structure is used to speed up the intersection
-		operation, sometimes by a factor of several hundred over the non-
-		accelerated case. Once created, the acceleration structure is cached
-		and will be reused the next time this method (or anyIntersection()
-		or allIntersections()) is called with an identically-configured
-		MMeshIsectAccelParams object. If a different MMeshIsectAccelParams
-		object is used, then the acceleration structure will be deleted and
-		re-created according to the new settings. Once created, the
-		acceleration structure will persist until either the object is
-		destroyed (or rebuilt by a construction history operation), or the
-		freeCachedIntersectionAccelerator() method is called. The
-		cachedIntersectionAcceleratorInfo() and
-		globalIntersectionAcceleratorsInfo() methods provide useful
-		information about the resource usage of individual acceleration
-		structures, and of all such structures in the system.
-		If the ray hits the mesh, the details of the intersection point
-		will be returned as a tuple containing the following:
-		* hitPoint (MFloatPoint) - coordinates of the point hit, in
-		  the space specified by the caller.* hitRayParam (float) - parametric distance along the ray to
-		  the point hit.* hitFace (int) - ID of the face hit
-		* hitTriangle (int) - face-relative ID of the triangle hit
-		* hitBary1 (float) - first barycentric coordinate of the
-		  point hit. If the vertices of the hitTriangle are (v1, v2, v3)
-		  then the barycentric coordinates are such that the hitPoint =
-		  (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3.* hitBary2 (float) - second barycentric coordinate of the point hit.
-		If no point was hit then None will be returned."""
-	def collapseEdges(self,*args)->Any:
-		"""collapseEdges(seq of int) -> self
-
-		Collapses edges into vertices. The two vertices that create each
-		given edge are replaced in turn by one vertex placed at the average
-		of the two initial vertex."""
-	def collapseFaces(self,*args)->Any:
-		"""collapseFaces(seq of int) -> self
-
-		Collapses faces into vertices. Adjacent faces will be collapsed
-		together into a single vertex. Non-adjacent faces will be collapsed
-		into their own, separate vertices."""
-	def copy(self,*args)->Any:
-		"""copy(MObject, parent=kNullObj) -> MObject
-
-		Creates a new mesh with the same geometry as the source. Raises
-		TypeError if the source is not a mesh node or mesh data object or it
-		contains an empty mesh.
-
-		If the parent is a kMeshData wrapper (e.g. from MFnMeshData.create())
-		then a mesh data object will be created and returned and the wrapper
-		will be set to reference it.
-
-		If the parent is a transform type node then a mesh node will be
-		created and parented beneath it and the return value will be the
-		mesh node.
-
-		If the parent is any other type of node a TypeError will be raised.
-
-		If no parent is provided then a transform node will be created and
-		returned and a mesh node will be created and parented under the
-		transform."""
-	def copyInPlace(self,*args)->Any:
-		"""copyInPlace(MObject) -> self
-
-		Replaces the current mesh's geometry with that from the source.
-		Raises TypeError if the source is not a mesh node or mesh data
-		object or it contains an empty mesh."""
-	def copyUVSet(self,*args)->Any:
-		"""copyUVSet(fromName, toName, modifier=None) -> string
-
-		Copies the contents of one UV set into another.
-
-		If the source UV set does not exist, or if it has the same name as
-		the destination, then no copy will be made.
-
-		If the destination UV set exists then its contents will be replace
-		by a copy of the source UV set.
-
-		If the destination UV set does not exist then a new UV set will be
-		created and the source UV set will be copied into it. The name of
-		the UV set will be that provided with a number appended to the end
-		to ensure uniqueness.
-		The final name of the destination UV set will be returned.
-
-		This method is only valid for functionsets which are attached to
-		mesh nodes, not mesh data."""
-	def create(self,*args)->Any:
-		"""create(vertices, polygonCounts, polygonConnects, uValues=None, vValues=None, parent=kNullObj) -> MObjectcreate(vertices, edges, edgeConnectsCount, edgeFaceConnects, edgeFaceDesc, storeDoubles=False, parent=kNullObj) -> MObjectcreate(vertices, edges, polygonCounts, polygonConnects, uValues=None, vValues=None, parent=kNullObj) -> MObject
-
-		Creates a new polygonal mesh and sets this function set to operate
-		on it. This method is meant to be as efficient as possible and thus
-		assumes that all the given data is topologically correct.
-		If edges are supplied, edges must be an integer array containingconsecutive sets of 3 integers (startVertex, endVertex, smooth) peredge. polygonConnects then references edges by index into the edgearray, where the ID == edge array index / 3.
-		If UV values are supplied both parameters must be given and they
-		must contain the same number of values, otherwise IndexError will be
-		raised. Note that the UVs are simply stored in the mesh, not
-		assigned to any vertices. To assign them use assignUVs().
-		If the parent is a kMeshData wrapper (e.g. from MFnMeshData.create())
-		then a mesh data object will be created and returned and the wrapper
-		will be set to reference it.
-		If the parent is a transform type node then a mesh node will be
-		created and parented beneath it and the return value will be the
-		mesh node.
-		If the parent is any other type of node a TypeError will be raised.
-
-		If no parent is provided then a transform node will be created and
-		returned and a mesh node will be created and parented under the
-		transform."""
-	def createBlindDataType(self,*args)->Any:
-		"""createBlindDataType(blindDataId, ((longName, shortName, typeName), ...)) -> self
-
-		Create a new blind data type with the specified attributes.
-
-		Each element of the attrs sequence is a tuple containing the long
-		name, short name and type name of the attribute. Valid type names
-		are 'int', 'float', 'double', 'boolean', 'string' or 'binary'.
-
-		Raises RuntimeError if the blind data id is already in use or an
-		invalid format was specified."""
-	def createColorSet(self,*args)->Any:
-		"""createColorSet(name, clamped, rep=kRGBA, modifier=None, instances=None) -> string
-
-		Creates a new, empty color set for this mesh.
-
-		If no name is provided 'colorSet#' will be used, where # is a number
-		that makes the name unique for this mesh. If a name is provided but
-		it conflicts with that of an existing color set then a number will
-		be appended to the proposed name to make it unique.
-		The return value is the final name used for the new color set.
-
-		This method will only work when the functionset is attached to a
-		mesh node, not mesh data."""
-	def createInPlace(self,*args)->Any:
-		"""createInPlace(vertices, polygonCounts, polygonConnects) -> selfcreateInPlace(vertices, edges, polygonCounts, polygonConnects) -> self
-
-		Replaces the existing polygonal mesh with a new one. This method is
-		meant to be as efficient as possible and thus assumes that all the
-		given data is topologically correct.
-
-		If edges are supplied, edges must be an integer array containingconsecutive sets of 3 integers (startVertex, endVertex, smooth) peredge. polygonConnects then references edges by index into the edgearray, where the ID == edge array index / 3.
-		The vertices may be given as a sequence of MFloatPoint's or a
-		sequence of MPoint's, but not a mix of the two."""
-	def createUVSet(self,*args)->Any:
-		"""createUVSet(name, modifier=None, instances=None) -> string
-
-		Creates a new, empty UV set for this mesh.
-
-		If a UV set with proposed name already exists then a number will be
-		appended to the proposed name to name it unique.
-
-		If the proposed name is empty then a name of the form uvSet# will be
-		used where '#' is a number chosen to ensure that the name is unique.
-
-		The name used for the UV set will be returned.
-
-		This method is only valid for functionsets which are attached to
-		mesh nodes, not mesh data."""
-	def currentColorSetName(self,*args)->Any:
-		"""currentColorSetName(instance=kInstanceUnspecified) -> string
-
-		Get the name of the 'current' color set. The current color set is
-		the one used for color operations when no color set is explicitly
-		specified.
-		On instanced meshes, color sets may be applied on a per-instance
-		basis or may be shared across all instances. When the color sets are
-		per-instance, the concept of the current color set has two levels of
-		granularity. Namely, the current color set applies to one or more
-		instances, plus there are other color sets in the same color set
-		family that apply to different instances. The instance arguement is
-		used to indicate that if this is a per-instance color set, you are
-		interested in the name of the color set that applies to the
-		specified instance. When the index is not specified, the current
-		color set will be returned regardless of which instance it is for.
-		If there is no current color set, then an empty string will be
-		returned."""
-	def currentUVSetName(self,*args)->Any:
-		"""currentUVSetName(instance=kInstanceUnspecified) -> string
-
-		Get the name of the 'current' uv set. The current uv set is
-		the one used for uv operations when no uv set is explicitly
-		specified.
-		On instanced meshes, uv sets may be applied on a per-instance
-		basis or may be shared across all instances. When the uv sets are
-		per-instance, the concept of the current uv set has two levels of
-		granularity. Namely, the current uv set applies to one or more
-		instances, plus there are other uv sets in the same uv set
-		family that apply to different instances. The instance arguement is
-		used to indicate that if this is a per-instance uv set, you are
-		interested in the name of the uv set that applies to the
-		specified instance. When the index is not specified, the current
-		uv set will be returned regardless of which instance it is for.
-		If there is no current uv set, then an empty string will be
-		returned."""
-	def deleteColorSet(self,*args)->Any:
-		"""deleteColorSet(colorSet, modifier=None, currentSelection=None) -> self
-
-		Deletes a color set from the mesh.
-
-		This method is only valid for functionsets which are attached to
-		mesh nodes, not mesh data."""
-	def deleteUVSet(self,*args)->Any:
-		"""deleteUVSet(uvSet, modifier=None, currentSelection=None) -> self
-
-		Deletes a uv set from the mesh.
-
-		This method is only valid for functionsets which are attached to
-		mesh nodes, not mesh data."""
-	def deleteEdge(self,*args)->Any:
-		"""deleteEdge(edgeId, modifier=None) -> self
-
-		Deletes the specified edge."""
-	def deleteFace(self,*args)->Any:
-		"""deleteFace(faceId, modifier=None) -> self
-
-		Deletes the specified face."""
-	def deleteVertex(self,*args)->Any:
-		"""deleteVertex(vertexId, modifier=None) -> self
-
-		Deletes the specified vertex."""
-	def duplicateFaces(self,*args)->Any:
-		"""duplicateFaces(faces, translation=None) -> self
-
-		Duplicates a set of faces and detaches them from the rest of the
-		mesh. The resulting mesh will contain one more independant piece of
-		geometry."""
-	def extractFaces(self,*args)->Any:
-		"""extractFaces(faces, translation=None) -> self
-
-		Detaches a set of faces from the rest of the mesh. The resulting
-		mesh will contain one more independant piece of geometry."""
-	def extrudeEdges(self,*args)->Any:
-		"""extrudeEdges(edges, extrusionCount=1, translation=None, extrudeTogether=True, thickness=0.0, offset=0.0) -> self
-
-		Extrude the given edges along a vector. The resulting mesh will have
-		extra parallelograms coming out of the given edges and going to the
-		new extruded edges. The length of the new polygon is determined by
-		the length of the vector. The extrusionCount parameter is the number
-		of subsequent extrusions per edges and represents the number of
-		polygons that will be created from each given edge to the extruded
-		edges.
-		The difference between using thickness or offset instead of providing
-		a vector with the translation variable is that the translation will
-		be applied to each vertex in the extrusion along its local direction.  This
-		can result in vertices being moved the same distance, but the angles between
-		the original components are not maintained so the overall shape is not the
-		same.
-		Both the thickness and offset variables will attempt to move the components
-		a distance that will maintain angles between edges at the border of the
-		extrusion."""
-	def extrudeFaces(self,*args)->Any:
-		"""extrudeFaces(faces, extrusionCount=1, translation=None, extrudeTogether=True, thickness=0.0, offset=0.0) -> self
-
-		Extrude the given faces along a vector. The resulting mesh will have
-		extra parallelograms coming out of the given faces and going to the
-		new extruded faces. The length of the new polygon is determined by
-		the length of the vector. The extrusionCount parameter is the number
-		of subsequent extrusions per faces and represents the number of
-		polygons that will be created from each given face to the extruded
-		faces.
-		The difference between using thickness or offset instead of providing
-		a vector with the translation variable is that the translation will
-		be applied to each vertex in the extrusion along its local direction.  This
-		can result in vertices being moved the same distance, but the angles between
-		the original components are not maintained so the overall shape is not the
-		same.
-		Both the thickness and offset variables will attempt to move the components
-		a distance that will maintain angles between edges at the border of the
-		extrusion."""
-	def freeCachedIntersectionAccelerator(self,*args)->Any:
-		"""freeCachedIntersectionAccelerator() -> self
-
-		If the mesh has a cached intersection accelerator structure, then
-		this routine forces it to be deleted. Ordinarily, these structures
-		are cached so that series of calls to the closestIntersection(),
-		allIntersections(), and anyIntersection() methods can reuse the same
-		structure. Once the client is finished with these intersection
-		operations, however, they are responsible for freeing the acceleration
-		structure, which is what this method does."""
-	def generateSmoothMesh(self,*args)->Any:
-		"""generateSmoothMesh(parent=kNullObj, options=None) -> MObject
-
-		Creates a new polygonal mesh which is a smoothed version of the one
-		to which the functionset is attached. If an options object is supplied
-		it will be used to direct the smoothing operation, otherwise the
-		mesh's Smooth Mesh Preview attributes will be used.
-
-		If the parent is a kMeshData wrapper (e.g. from MFnMeshData.create())
-		then a mesh data object will be created and returned.
-		If the parent is a transform type node then a mesh node will be
-		created and parented beneath it and the return value will be the
-		mesh node.
-		If the parent is any other type of node a TypeError will be raised.
-
-		If no parent is provided then a transform node will be created and
-		returned and a mesh node will be created and parented under the
-		transform.
-
-		Note that, unlike the create functions, this function does not set
-		the functionset to operate on the new mesh, but leaves it attached
-		to the original mesh."""
-	def getAssignedUVs(self,*args)->Any:
-		"""getAssignedUVs(uvSet='') -> (counts, uvIds)
-
-		Returns a tuple containing all of the UV assignments for the specified
-		UV set. The first element of the tuple is an array of counts giving
-		the number of UVs assigned to each face of the mesh. The count will
-		either be zero, indicating that that face's vertices do not have UVs
-		assigned, or else it will equal the number of the face's vertices.
-		The second element of the tuple is an array of UV IDs for all of the
-		face-vertices which have UVs assigned."""
-	def getAssociatedColorSetInstances(self,*args)->Any:
-		"""getAssociatedColorSetInstances(colorSet) -> MIntArray
-
-		Returns the instance numbers associated with the specified Color set.
-		If the color map is shared across all instances, an empty array will
-		be returned.
-
-		This method will only work if the functionset is attached to a mesh
-		node. It will raise RuntimeError if the functionset is attached to
-		mesh data."""
-	def getAssociatedUVSetInstances(self,*args)->Any:
-		"""getAssociatedUVSetInstances(uvSet) -> MIntArray
-
-		Returns the instance numbers associated with the specified UV set.
-		If the uv map is shared across all instances, an empty array will be
-		returned.
-
-		This method will only work if the functionset is attached to a mesh
-		node. It will raise RuntimeError if the functionset is attached to
-		mesh data."""
-	def getAssociatedUVSetTextures(self,*args)->Any:
-		"""getAssociatedUVSetTextures(uvSet) -> MObjectArray
-
-		Returns the texture nodes which are using the specified UV set. If
-		the texture has a 2d texture placement, the texture, and not the
-		placement will be returned.
-
-		This method will only work if the functionset is attached to a mesh
-		node. It will raise RuntimeError if the functionset is attached to
-		mesh data."""
-	def getBinaryBlindData(self,*args)->Any:
-		"""getBinaryBlindData(compId, compType, blindDataId, attr) -> string
-		getBinaryBlindData(compType, blindDataId, attr)
-		  -> (MIntArray, [string, string, ...])
-
-		The first version returns the value of the specified blind data
-		attribute from the specified mesh component.
-
-		The second version returns a tuple containing an array of component
-		IDs and an array of values for the specified blind data attribute
-		for all of the mesh's components of the specified type.
-
-		Both versions raise RuntimeError if the attribute is not of 'binary'
-		type."""
-	def getBinormals(self,*args)->Any:
-		"""getBinormals(space=MSpace.kObject, uvSet='') -> MFloatVectorArray
-
-		Returns the binormal vectors for all face-vertices.
-
-		This method is not threadsafe."""
-	def getBlindDataAttrNames(self,*args)->Any:
-		"""getBlindDataAttrNames(blindDataId) -> ((longName, shortName, typeName), ...)
-
-		Returns a tuple listing the attributes of the given blind data type.
-		Each element of the tuple is itself a tuple containing the long
-		name, short name and type name of the attribute. Type names can be
-		'int', 'float', 'double', 'boolean', 'string' or 'binary'."""
-	def getBlindDataTypes(self,*args)->Any:
-		"""getBlindDataTypes(MFn Type constant) -> MIntArray
-
-		Returns all the blind data ID's associated with the given component
-		type on this mesh."""
-	def getBoolBlindData(self,*args)->Any:
-		"""getBoolBlindData(compId, compType, blindDataId, attr) -> bool
-		getBoolBlindData(compType, blindDataId, attr) -> (MIntArray, MIntArray)
-
-		The first version returns the value of the specified blind data
-		attribute from the specified mesh component.
-
-		The second version returns a tuple containing an array of component
-		IDs and an array of values for the specified blind data attribute
-		for all of the mesh's components of the specified type.
-
-		Both versions raise RuntimeError if the attribute is not of
-		'boolean' type."""
+	def cachedIntersectionAcceleratorInfo(self,arg)->str:
+		"""Retrieves a string that describes the intersection acceleration structure for this object, if any. The string will be of the following form: 10x10x10 uniform grid, (build time 0.5s), (memory footprint 2000KB) It describes the configuration of the cached intersection accelerator, as well as how long it took to build it, and how much memory it is currently occupying. If the mesh has no cached intersection accelerator, the empty string is returned."""
+	def cleanupEdgeSmoothing(self,arg)->Self:
+		"""Updates the mesh after setEdgeSmoothing has been done. This should be called only once, after all the desired edges have been had their smoothing set. If you don't call this method, the normals may not be correct, and the object will look odd in shaded mode"""
+	@overload
+	def clearBlindData(self,compType:int)->Self:
+		"""Deletes all blind data from all the mesh's components of a given type."""
+	@overload
+	def clearBlindData(self,compType:int,blindDataId:int,compId:int,attr:str)->Self:
+		"""Deletes values of the specified blind data type from the mesh's components of a given type. If a component ID is provided then the data is only deleted from that component, otherwise it is deleted from all of the mesh's components of the specified type. If a blind data attribute name is provided then only data for that attribute is deleted, otherwise data for all of the blind data type's attributes is deleted."""
+	def clearColors(self,colorSet:str)->Self:
+		"""Clears out all colors from a colorSet, and leaves behind an empty colorset. This method should be used if it is needed to shrink the actual size of the color set. In this case, the user should call clearColors() , setColors() and then assignColors() to rebuild the mapping info. When called on mesh data, the colors are removed. When called on a shape with no history, the colors are removed and the attributes are set on the shape. When called on a shape with history, the polyColorDel command is invoked and a polyColorDel node is created."""
+	def clearUVs(self,uvSet:str)->Self:
+		"""Clears out all texture coordinates from the mesh, and leaves behind an empty UVset. This method should be used if it is needed to shrink the actual size of the UV table. In this case, the user should call clearUVs() , setUVs() and then assignUVs() to rebuild the mapping info. When called on mesh data, the UVs are removed. When called on a shape with no history, the UVs are removed and the attributes are set on the shape. When called on a shape with history, the polyMapDel command is invoked and a polyMapDel node is created."""
+	def closestIntersection(self,raySource:MFloatPoint,rayDirection:MFloatVector,space:int,maxParam:float,testBothDirections:bool,faceIds:Sequence[int],triIds:Sequence[int],idsSorted:bool,accelParams:MMeshIsectAccelParams,tolerance:float)->tuple[hitPoint,hitRayParam,hitFace,hitTriangle,hitBary1,hitBay2]|None:
+		"""Finds the closest intersection of a ray starting at raySource and travelling in rayDirection with the mesh. If faceIds is specified, then only those faces will be considered for intersection. If both faceIds and triIds are given, then the triIds will be interpreted as face-relative and each pair of entries will be taken as a (face,triangle) pair to be considered for intersection. Thus, the face-triangle pair (10,0) means the first triangle on face 10. If neither faceIds nor triIds is given, then all face-triangles in the mesh will be considered. The maxParam and testBothDirections flags can be used to control the radius of the search around the raySource point. The search proceeds by testing all applicable face-triangles looking for intersections. If the accelParams parameter is given then the mesh builds an intersection acceleration structure based on it. This acceleration structure is used to speed up the intersection operation, sometimes by a factor of several hundred over the non-accelerated case. Once created, the acceleration structure is cached, and will be reused the next time this method (or anyIntersection() or allIntersections() ) is called with an identically-configured MMeshIsectAccelParams object. If a different MMeshIsectAccelParams object is used, then the acceleration structure will be deleted and re-created according to the new settings. Once created, the acceleration structure will persist until either the object is destroyed (or rebuilt by a construction history operation), or the freeCachedIntersectionAccelerator() method is called. The cachedIntersectionAcceleratorInfo() and globalIntersectionAcceleratorsInfo() methods provide useful information about the resource usage of individual acceleration structures, and of all such structures in the system. If the ray hits the mesh, the details of the closest intersection point to the raySource will be returned as a tuple containing the following: hitPoint ( MFloatPoint ) - coordinate of the point hit, in the space specified by the caller. hitRayParam (float) - parametric distance along the ray to the point hit. hitFace (int) - ID of the face hit hitTriangle (int) - face-relative ID of the triangle hit hitBary1 (float) - first barycentric coordinate of the point hit. If the vertices of the hitTriangle are (v1, v2, v3) then the barycentric coordinates are such that hitPoint = (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3. hitBary2 (float) - second barycentric coordinate of the point hit. If no point was hit then None will be returned."""
+	def collapseEdges(self,edges:Sequence[int])->Self:
+		"""Collapses edges into vertices. The two vertices that create each given edge are replaced in turn by one vertex placed at the average of the two initial vertex."""
+	def collapseFaces(self,faces:Sequence[int])->Self:
+		"""Collapses faces into vertices. Adjacent faces will be collapsed together into a single vertex. Non-adjacent faces will be collapsed into their own, separate vertices."""
+	def copy(self,source:MObject,parent:MObject)->MObject:
+		"""Creates a new mesh with the same geometry as the source. Raises TypeError if the source is not a mesh node or mesh data object or it contains an empty mesh. If the parent is a kMeshData wrapper (e.g. from MFnMeshData.create() ) then a mesh data object will be created and returned and the wrapper will be set to reference it. If the parent is a transform type node then a mesh node will be created and parented beneath it and the return value will be the mesh node. If the parent is any other type of node a TypeError will be raised. If no parent is provided then a transform node will be created and returned and a mesh node will be created and parented under the transform."""
+	def copyInPlace(self,source:MObject)->Self:
+		"""Replaces the current mesh's geometry with that from the source. Raises TypeError if the source is not a mesh node or mesh data object or it contains an empty mesh."""
+	def copyUVSet(self,fromName:str,toName:str,modifier:MDGModifier)->str:
+		"""Copies the contents of one UV set into another. If the source UV set does not exist, or if it has the same name as the destination, then no copy will be made. If the destination UV set exists then its contents will be replace by a copy of the source UV set. If the destination UV set does not exist then a new UV set will be created and the source UV set will be copied into it. The name of the UV set will be that provided with a number appended to the end to ensure uniqueness. The final name of the destination UV set will be returned. This method is only valid for functionsets which are attached to mesh nodes, not mesh data."""
+	def create(self,vertices:Sequence[MPoint|MFloatPoint],polygonCounts:Sequence[int],polygonConnects:Sequence[int],uValues:Sequence[float],vValues:Sequence[float],parent:MObject)->MObject:
+		"""Creates a new polygonal mesh and sets this function set to operate on it. This method is meant to be as efficient as possible and thus assumes that all the given data is topologically correct. If UV values are supplied both parameters must be given and they must contain the same number of values, otherwise IndexError will be raised. Note that the UVs are simply stored in the mesh, not assigned to any vertices. To assign them use assignUVs() . If the parent is a kMeshData wrapper (e.g. from MFnMeshData.create() ) then a mesh data object will be created and returned and the wrapper will be set to reference it. If the parent is a transform type node then a mesh node will be created and parented beneath it and the return value will be the mesh node. If the parent is any other type of node a TypeError will be raised. If no parent is provided then a transform node will be created and returned and a mesh node will be created and parented under the transform."""
+	def createBlindDataType(self,blindDataId:int,attrs:Sequence[tuple[str|str|str,...]])->Self:
+		"""Create a new blind data type with the specified attributes. Each element of the attrs sequence is a tuple containing the long name, short name and type name of the attribute. Valid type names are "int", "float", "double", "boolean", "string" or "binary". Raises RuntimeError if the blind data id is already in use or an invalid format was specified."""
+	def createColorSet(self,name:str,clamped:bool,rep:int,modifier:MDGModifier,instances:Sequence[int])->str:
+		"""Creates a new, empty color set for this mesh. If no name is provided "colorSet#" will be used, where # is a number that makes the name unique for this mesh. If a name is provided but it conflicts with that of an existing color set then a number will be appended to the proposed name to make it unique. The return value is the final name used for the new color set. This method will only work when the functionset is attached to a mesh node, not mesh data."""
+	def createInPlace(self,vertices:Sequence[MPoint|MFloatPoint],polygonCounts:Sequence[int],polygonConnects:Sequence[int])->Self:
+		"""Replaces the existing polygonal mesh with a new one. This method is meant to be as efficient as possible and thus assumes that all the given data is topologically correct."""
+	def createUVSet(self,name:str,modifier:MDGModifier,instances:Sequence[int])->str:
+		"""Creates a new, empty UV set for this mesh. If a UV set with proposed name already exists then a number will be appended to the proposed name to name it unique. If the proposed name is empty then a name of the form uvSet# will be used where '#' is a number chosen to ensure that the name is unique. The name used for the UV set will be returned. This method is only valid for functionsets which are attached to mesh nodes, not mesh data."""
+	def currentColorSetName(self,instance:int)->str:
+		"""Get the name of the "current" color set. The current color set is the one used for color operations when no color set is explicitly specified. On instanced meshes, color sets may be applied on a per-instance basis or may be shared across all instances. When the color sets are per-instance, the concept of the current color set has two levels of granularity. Namely, the current color set applies to one or more instances, plus there are other color sets in the same color set family that apply to different instances. The instance arguement is used to indicate that if this is a per-instance color set, you are interested in the name of the color set that applies to the specified instance. When the index is not specified, the current color set will be returned regardless of which instance it is for. If there is no current color set, then an empty string will be returned."""
+	def currentUVSetName(self,instance:int)->str:
+		"""Get the name of the "current" uv set. The current uv set is the one used for uv operations when no uv set is explicitly specified. On instanced meshes, uv sets may be applied on a per-instance basis or may be shared across all instances. When the uv sets are per-instance, the concept of the current uv set has two levels of granularity. Namely, the current uv set applies to one or more instances, plus there are other uv sets in the same uv set family that apply to different instances. The instance arguement is used to indicate that if this is a per-instance uv set, you are interested in the name of the uv set that applies to the specified instance. When the index is not specified, the current uv set will be returned regardless of which instance it is for. If there is no current uv set, then an empty string will be returned."""
+	def deleteColorSet(self,colorSet:str,modifier:MDGModifier,currentSelection:MSelectionList)->Self:
+		"""Deletes a color set from the mesh. This method is only valid for functionsets which are attached to mesh nodes, not mesh data."""
+	def deleteUVSet(self,uvSet:str,modifier:MDGModifier,currentSelection:MSelectionList)->Self:
+		"""Deletes a named uv set from the mesh. This method is only valid for functionsets which are attached to mesh nodes, not mesh data."""
+	def deleteEdge(self,edgeId:int,modifier:MDGModifier)->Self:
+		"""Deletes the specified edge."""
+	def deleteFace(self,faceId:int,modifier:MDGModifier)->Self:
+		"""Deletes the specified face."""
+	def deleteVertex(self,vertexId:int,modifier:MDGModifier)->Self:
+		"""Deletes the specified vertex."""
+	def duplicateFaces(self,faces:Sequence[int],translation:MFloatVector)->Self:
+		"""Duplicates a set of faces and detaches them from the rest of the mesh. The resulting mesh will contain one more independant piece of geometry."""
+	def extractFaces(self,faces:Sequence[int],translation:MFloatVector)->Self:
+		"""Detaches a set of faces from the rest of the mesh. The resulting mesh will contain one more independant piece of geometry."""
+	def extrudeEdges(self,edges:Sequence[int],extrusionCount:int,translation:MFloatVector,extrudeTogether:bool)->Self:
+		"""Extrude the given edges along a vector. The resulting mesh will have extra parallelograms coming out of the given edges and going to the new extruded edges. The length of the new polygon is determined by the length of the vector. The extrusionCount parameter is the number of subsequent extrusions per edges and represents the number of polygons that will be created from each given edge to the extruded edges."""
+	def extrudeFaces(self,faces:Sequence[int],extrusionCount:int,translation:MFloatVector,extrudeTogether:bool)->Self:
+		"""Extrude the given faces along a vector. The resulting mesh will have extra parallelograms coming out of the given faces and going to the new extruded faces. The length of the new polygon is determined by the length of the vector. The extrusionCount parameter is the number of subsequent extrusions per faces and represents the number of polygons that will be created from each given face to the extruded faces."""
+	def freeCachedIntersectionAccelerator(self,arg)->Self:
+		"""If the mesh has a cached intersection accelerator structure, then this routine forces it to be deleted. Ordinarily, these structures are cached so that series of calls to the closestIntersection() , allIntersections() , and anyIntersection() methods can reuse the same structure. Once the client is finished with these intersection operations, however, they are responsible for freeing the acceleration structure, which is what this method does."""
+	def generateSmoothMesh(self,parent:MObject,options:MMeshSmoothOptions)->MObject:
+		"""Creates a new polygonal mesh which is a smoothed version of the one to which the functionset is attached. If an options object is supplied it will be used to direct the smoothing operation, otherwise the mesh's Smooth Mesh Preview attributes will be used. If the parent is a kMeshData wrapper (e.g. from MFnMeshData.create() ) then a mesh data object will be created and returned. If the parent is a transform type node then a mesh node will be created and parented beneath it and the return value will be the mesh node. If the parent is any other type of node a TypeError will be raised. If no parent is provided then a transform node will be created and returned and a mesh node will be created and parented under the transform. Note that, unlike the create functions, this function does not set the functionset to operate on the new mesh, but leaves it attached to the original mesh."""
+	def getAssignedUVs(self,uvSet:str)->tuple[MIntArray,MIntArray]:
+		"""Returns a tuple containing all of the UV assignments for the specified UV set. The first element of the tuple is an array of counts giving the number of UVs assigned to each face of the mesh. The count will either be zero, indicating that that face's vertices do not have UVs assigned, or else it will equal the number of the face's vertices. The second element of the tuple is an array of UV IDs for all of the face-vertices which have UVs assigned."""
+	def getAssociatedColorSetInstances(self,colorSet:str)->MIntArray:
+		"""Returns the instance numbers associated with the specified Color set. If the color map is shared across all instances, an empty array will be returned. This method will only work if the functionset is attached to a mesh node. It will raise RuntimeError if the functionset is attached to mesh data."""
+	def getAssociatedUVSetInstances(self,uvSet:str)->MIntArray:
+		"""Returns the instance numbers associated with the specified UV set. If the uv map is shared across all instances, an empty array will be returned. This method will only work if the functionset is attached to a mesh node. It will raise RuntimeError if the functionset is attached to mesh data."""
+	def getAssociatedUVSetTextures(self,uvSet:str)->MObjectArray:
+		"""Returns the texture nodes which are using the specified UV set. If the texture has a 2d texture placement, the texture, and not the placement will be returned. This method will only work if the functionset is attached to a mesh node. It will raise RuntimeError if the functionset is attached to mesh data."""
+	@overload
+	def getBinaryBlindData(self,compId:int,compType:int,blindDataId:int,attr:str)->str:
+		"""Returns the value of the specified blind data attribute from the specified mesh component. Raises RuntimeError if the attribute is not of "binary" type."""
+	@overload
+	def getBinaryBlindData(self,compType:int,blindDataId:int,attr:str)->tuple[MIntArray,list[str]]:
+		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "binary" type."""
+	def getBinormals(self,space:int,uvSet:str)->MFloatVectorArray:
+		"""Returns the binormal vectors for all face vertices. This method is not threadsafe."""
+	def getBlindDataAttrNames(self,blindDataId:int)->tuple[tuple[str,str,str],...]:
+		"""Returns a tuple listing the attributes of the given blind data type. Each element of the tuple is itself a tuple containing the long name, short name and type name of the attribute. Type names can be "int", "float", "double", "boolean", "string" or "binary\""""
+	def getBlindDataTypes(self,compType:int)->MIntArray:
+		"""Returns all the blind data ID's associated with the given component type on this mesh."""
+	@overload
+	def getBoolBlindData(self,compId:int,compType:int,blindDataId:int,attr:str)->bool:
+		"""Returns the value of the specified blind data attribute from the specified mesh component. Raises RuntimeError if the attribute is not of "bool" type."""
+	@overload
+	def getBoolBlindData(self,compType:int,blindDataId:int,attr:str)->tuple[MIntArray,MIntArray]:
+		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "bool" type."""
 	def getClosestUVs(self,*args)->Any:
 		"""getClosestUVs(u, v, uvSet='') -> MIntArray
 
@@ -7098,427 +6386,132 @@ class MFnMesh(MFnDagNode):
 		locate at the same distance to the given coordinate.
 
 		This method is not threadsafe."""
-	def getClosestNormal(self,*args)->Any:
-		"""getClosestNormal(MPoint, space=MSpace.kObject) -> (MVector, int)
-
-		Returns a tuple containing the normal at the closest point on the
-		mesh to the given point and the ID of the face in which that closest
-		point lies."""
-	def getClosestPoint(self,*args)->Any:
-		"""getClosestPoint(MPoint, space=MSpace.kObject) -> (MPoint, int)
-
-		Returns a tuple containing the closest point on the mesh to the
-		given point and the ID of the face in which that closest point lies.
-
-		This method is not threadsafe."""
-	def getClosestPointAndNormal(self,*args)->Any:
-		"""getClosestPointAndNormal(MPoint, space=MSpace.kObject)
-		  -> (MPoint, MVector, int)
-
-		Returns a tuple containing the closest point on the mesh to the
-		given point, the normal at that point, and the ID of the face in
-		which that point lies.
-
-		This method is not threadsafe."""
-	def getColor(self,*args)->Any:
-		"""getColor(colorId, colorSet='') -> MColor
-
-		Returns a color from a colorSet. Raises IndexError if the colorId is
-		out of range."""
-	def getColorIndex(self,*args)->Any:
-		"""getColorIndex(faceId, localVertexId, colorSet='') -> int
-
-		Returns the index into the specified colorSet of the color used by a
-		specific face-vertex. This can be used to index into the sequence
-		returned by getColors()."""
-	def getColorRepresentation(self,*args)->Any:
-		"""getColorRepresentation(colorSet) -> Color Representation constant
-
-		Returns the Color Representation used by the specified color set."""
-	def getColors(self,*args)->Any:
-		"""getColors(colorSet='') -> MColorArray
-
-		Returns all of the colors in a colorSet. If no colorSet is specified
-		then the default colorSet is used.
-
-		Use the index returned by getColorIndex() to access the returned
-		array."""
-	def getColorSetFamilyNames(self,*args)->Any:
-		"""getColorSetFamilyNames() -> (string, ...)
-
-		Returns the names of all of the color set families on this object. A
-		color set family is a set of per-instance sets with the same name
-		with each individual set applying to one or more instances. A set
-		which is shared across all instances will be the sole member of its
-		family.
-
-		Given a color set family name, getColorSetsInFamily() may be used to
-		determine the names of the associated individual sets."""
-	def getColorSetNames(self,*args)->Any:
-		"""getColorSetNames() -> (string, ...)
-
-		Returns the names of all the color sets on this object."""
-	def getColorSetsInFamily(self,*args)->Any:
-		"""getColorSetsInFamily(familyName) -> (string, ...)
-
-		Returns the names of all of the color sets that belong to the
-		specified family. Per-instance sets will have multiple sets in a
-		family, with each individual set applying to one or more instances.
-		A set which is shared across all instances will be the sole member
-		of its family and will share the same name as its family."""
-	def getConnectedShaders(self,*args)->Any:
-		"""getConnectedShaders(instance) -> (MObjectArray, MIntArray)
-
-		Returns a tuple containing an array of shaders (sets) and an array
-		of ints mapping the mesh's polygons onto those shaders. For each
-		polygon in the mesh there will be corresponding value in the second
-		array. If it is -1 that means that the polygon is not assigned to a
-		shader, otherwise it indicates the index into the first array of the
-		shader to which that polygon is assigned.
-
-		This method will only work if the functionset is attached to a mesh
-		node. It will raise RuntimeError if the functionset is attached to
-		mesh data."""
-	def getCreaseEdges(self,*args)->Any:
-		"""getCreaseEdges() -> (MUintArray, MDoubleArray)
-
-		Returns a tuple containing two arrays. The first contains the mesh-
-		relative/global IDs of the mesh's creased edges and the second
-		contains the associated crease data.
-
-		Please note that to make effective use of the creasing variable in
-		software outside of Maya may require a license under patents owned
-		by Pixar(R)."""
-	def getCreaseVertices(self,*args)->Any:
-		"""getCreaseVertices() -> (MUintArray, MDoubleArray)
-
-		Returns a tuple containing two arrays. The first contains the mesh-
-		relative/global IDs of the mesh's creased vertices and the second
-		contains the associated crease data.
-
-		Please note that to make effective use of the creasing variable in
-		software outside of Maya may require a license under patents owned
-		by Pixar(R)."""
-	def getDoubleBlindData(self,*args)->Any:
-		"""getDoubleBlindData(compId, compType, blindDataId, attr) -> float
-		getDoubleBlindData(compType, blindDataId, attr) -> (MIntArray, MDoubleArray)
-
-		The first version returns the value of the specified blind data
-		attribute from the specified mesh component.
-
-		The second version returns a tuple containing an array of component
-		IDs and an array of values for the specified blind data attribute
-		for all of the mesh's components of the specified type.
-
-		Both versions raise RuntimeError if the attribute is not of
-		'double' type."""
-	def getEdgeVertices(self,*args)->Any:
-		"""getEdgeVertices(edgeId) -> (int, int)
-
-		Returns a tuple containing the mesh-relative/global IDs of the
-		edge's two vertices. The indices can be used to refer to the
-		elements in the array returned by the getPoints() method."""
-	def getFaceAndVertexIndices(self,*args)->Any:
-		"""getFaceAndVertexIndices(faceVertexIndex, localVertex=True) -> (int, int)
-
-		Returns a tuple containg the faceId and vertexIndex represented by
-		the given face-vertex index. This is the reverse of the operation
-		performed by getFaceVertexIndex().
-
-		If localVertex is True then the returned vertexIndex is the face-
-		relative/local index, otherwise it is the mesh-relative/global index."""
-	def getFaceNormalIds(self,*args)->Any:
-		"""getFaceNormalIds(faceId) -> MIntArray
-
-		Returns the IDs of the normals for all the vertices of a given face.
-		These IDs can be used to index into the arrays returned by getNormals()."""
-	def getFaceUVSetNames(self,*args)->Any:
-		"""getFaceUVSetNames(faceId) -> (string, ...)
-
-		Returns the names of all of the uv sets mapped to the specified face.
-
-		This method is not threadsafe. """
-	def getFaceVertexBinormal(self,*args)->Any:
-		"""getFaceVertexBinormal(faceId, vertexId, space=MSpace.kObject, uvSet='') -> MVector
-
-		Returns the binormal vector at a given face vertex.
-
-		This method is not threadsafe."""
-	def getFaceVertexBinormals(self,*args)->Any:
-		"""getFaceVertexBinormals(faceId, space=MSpace.kObject, uvSet='') -> MFloatVectorArray
-
-		Returns all the per-vertex-per-face binormals for a given face.
-
-		This method is not threadsafe."""
-	def getFaceVertexColors(self,*args)->Any:
-		"""getFaceVertexColors(colorSet='', defaultUnsetColor=None) -> MColorArray
-
-		Returns colors for all the mesh's face-vertices.
-
-		The colors are returned in face order: e.g. F0V0, F0V1.. F0Vn, F1V0,
-		etc... Use the index returned by getFaceVertexIndex() if you wish to
-		index directly into the returned color array.
-
-		If no face has color for that vertex, the entry returned will be
-		defaultUnsetColor. If a color was set for some but not all the faces
-		for that vertex, the ones where the color has not been explicitly set
-		will return (0,0,0). If a vertex has shared color, the same value
-		will be set for all its vertes/faces.
-
-		If the colorSet is not specified, the default color set will be used.
-		If the defaultUnsetColor is not given, then (-1, -1, -1, -1) will be
-		used."""
-	def getFaceVertexIndex(self,*args)->Any:
-		"""getFaceVertexIndex(faceId, vertexIndex, localVertex=True) -> int
-
-		Returns the index for a specific face-vertex into an array of face-
-		vertex values, such as those returned by getFaceVertexBinormals(),
-		getFaceVertexColors(), getFaceVertexNormals(), etc.
-
-		The values in the target arrays are presumed to be in face order:
-		F0V0, F0V1.. F0Vn, F1V0, etc...
-		If localVertex is True then vertexIndex must be a face-relative/local
-		index. If localVertex is False then vertexIndex must be a mesh-
-		relative/global index.
-
-		The opposite operation is performed by the getFaceAndVertexIndices()
-		method."""
-	def getFaceVertexNormal(self,*args)->Any:
-		"""getFaceVertexNormal(faceId, vertexId, space=MSpace.kObject) -> MVector
-
-		Returns the per-vertex-per-face normal for a given face and vertex.
-
-		This method is not threadsafe."""
-	def getFaceVertexNormals(self,*args)->Any:
-		"""getFaceVertexNormals(faceId, space=MSpace.kObject) -> MFloatVectorArray
-
-		Returns the normals for a given face.
-
-		This method is not threadsafe."""
-	def getFaceVertexTangent(self,*args)->Any:
-		"""getFaceVertexTangent(faceId, vertexId, space=MSpace.kObject, uvSet='') -> MVector
-
-		Return the normalized tangent vector at a given face vertex.
-
-		The tangent is defined as the surface tangent of the polygon running
-		in the U direction defined by the uv map.
-		This method is not threadsafe."""
-	def getFaceVertexTangents(self,*args)->Any:
-		"""getFaceVertexTangents(faceId, space=MSpace.kObject, uvSet='') -> MFloatVectorArray
-
-		Returns all the per-vertex-per-face tangents for a given face.
-
-		The tangent is defined as the surface tangent of the polygon running
-		in the U direction defined by the uv map.
-
-		This method is not threadsafe."""
-	def getFloatBlindData(self,*args)->Any:
-		"""getFloatBlindData(compId, compType, blindDataId, attr) -> float
-		getFloatBlindData(compType, blindDataId, attr) -> (MIntArray, MFloatArray)
-
-		The first version returns the value of the specified blind data
-		attribute from the specified mesh component.
-
-		The second version returns a tuple containing an array of component
-		IDs and an array of values for the specified blind data attribute
-		for all of the mesh's components of the specified type.
-
-		Both versions raise RuntimeError if the attribute is not of
-		'float' type."""
-	def getFloatPoints(self,*args)->Any:
-		"""getFloatPoints(space=MSpace.kObject) -> MFloatPointArray
-
-		Returns an MFloatPointArray containing the mesh's vertices."""
-	def getHoles(self,*args)->Any:
-		"""getHoles() -> ((face, (v1, v2, ...)), (face, (v1, v2, ...)), ...)
-
-		Returns a tuple describing the holes in the mesh. Each element of the
-		tuple is itself a tuple. The first element of the sub-tuple is the
-		integer ID of the face in which the hole occurs. The second element
-		of the sub-tuple is another tuple containing the mesh-relative/global
-		IDs of the vertices which make up the hole.
-
-		Take the following return value as an example:
-
-		    ((3, (7, 2, 6)), (5, (11, 10, 3, 4)))
-
-		This says that the mesh has two holes. The first hole is in face 3
-		and consists of vertices 7, 2 and 6. The second hole is in face 5 and
-		consists of vertices 11, 10, 3 and 4."""
-	def getIntBlindData(self,*args)->Any:
-		"""getIntBlindData(compId, compType, blindDataId, attr) -> int
-		getIntBlindData(compType, blindDataId, attr) -> (MIntArray, MIntArray)
-
-		The first version returns the value of the specified blind data
-		attribute from the specified mesh component.
-
-		The second version returns a tuple containing an array of component
-		IDs and an array of values for the specified blind data attribute
-		for all of the mesh's components of the specified type.
-
-		Both versions raise RuntimeError if the attribute is not of
-		'int' type."""
-	def getInvisibleFaces(self,*args)->Any:
-		"""getInvisibleFaces() -> MUintArray
-
-		Returns the invisible faces of the mesh. Invisible faces are like
-		lightweight holes in that they are not rendered but do not require
-		additional geometry the way that holes do. They have the advantage
-		over holes that if the mesh is smoothed then their edges will be
-		smoothed as well, while holes will retain their hard edges.
-
-		Invisible faces can be set using the setInvisibleFaces() method or
-		the polyHole command."""
-	def getNormalIds(self,*args)->Any:
-		"""getNormalIds() -> (MIntArray, MIntArray)
-
-		Returns the normal IDs for all of the mesh's polygons as a tuple of
-		two int arrays. The first array contains the number of vertices for
-		each polygon and the second contains the normal IDs for each polygon-
-		vertex. These IDs can be used to index into the array returned by
-		getNormals()."""
-	def getNormals(self,*args)->Any:
-		"""getNormals(space=MSpace.kObject) -> MFloatVectorArray
-
-		Returns a copy of the mesh's normals. The normals are the per-polygon
-		per-vertex normals. To find the normal for a particular vertex-face,
-		use getFaceNormalIds() to get the index into the array.
-
-		This method is not threadsafe."""
-	def getPoint(self,*args)->Any:
-		"""getPoint(vertexId, space=MSpace.kObject) -> MPoint
-
-		Returns the position of specified vertex."""
-	def getPointAtUV(self,*args)->Any:
-		"""getPointAtUV(faceId, u, v, space=MSpace.kObject, uvSet='', tolerance=0.0) -> MPoint
-
-		Returns the position of the point at the give UV value in the
-		specified face.
-
-		This method is not threadsafe."""
+	def getClosestNormal(self,point:MPoint,space:int)->tuple[MVector,int]:
+		"""Returns a tuple containing the normal at the closest point on the mesh to the given point and the ID of the face in which that closest point lies."""
+	def getClosestPoint(self,point:MPoint,space:int)->tuple[MPoint,int]:
+		"""Returns a tuple containing the closest point on the mesh to the given point and the ID of the face in which that closest point lies. This method is not threadsafe."""
+	def getClosestPointAndNormal(self,point:MPoint,space:int)->tuple[MPoint,MVector,int]:
+		"""Returns a tuple containing the closest point on the mesh to the given point, the normal at that point, and the ID of the face in which that point lies. This method is not threadsafe."""
+	def getColor(self,colorId:int,colorSet:str)->MColor:
+		"""Returns a color from a colorSet. Raises IndexError if the colorId is out of range."""
+	def getColorIndex(self,faceId:int,localVertexIndex:int,colorSet:str)->int:
+		"""Returns the index into the specified colorSet of the color used by a specific face-vertex. This can be used to index into the sequence returned by getColors() ."""
+	def getColorRepresentation(self,colorSet:str)->int:
+		"""Returns the Color Representation used by the specified color set."""
+	def getColors(self,colorSet:str)->MColorArray:
+		"""Returns all of the colors in a colorSet. If no colorSet is specified then the default colorSet is used. Use the index returned by getColorIndex() to access the returned array."""
+	def getColorSetFamilyNames(self,arg)->tuple[str,...]:
+		"""Returns the names of all of the color set families on this object. A color set family is a set of per-instance sets with the same name with each individual set applying to one or more instances. A set which is shared across all instances will be the sole member of its family. Given a color set family name, getColorSetsInFamily() may be used to determine the names of the associated individual sets."""
+	def getColorSetNames(self,arg)->tuple[str,...]:
+		"""Returns the names of all the color sets on this object."""
+	def getColorSetsInFamily(self,familyName:str)->tuple[str,...]:
+		"""Returns the names of all of the color sets that belong to the specified family. Per-instance sets will have multiple sets in a family, with each individual set applying to one or more instances. A set which is shared across all instances will be the sole member of its family and will share the same name as its family."""
+	def getConnectedShaders(self,instance:int)->tuple[MObjectArray,MIntArray]:
+		"""Returns a tuple containing an array of shaders (sets) and an array of ints mapping the mesh's polygons onto those shaders. For each polygon in the mesh there will be corresponding value in the second array. If it is -1 that means that the polygon is not assigned to a shader, otherwise it indicates the index into the first array of the shader to which that polygon is assigned. This method will only work if the functionset is attached to a mesh node. It will raise RuntimeError if the functionset is attached to mesh data."""
+	def getCreaseEdges(self,arg)->tuple[MUintArray,MDoubleArray]:
+		"""Returns a tuple containing two arrays. The first contains the mesh-relative/global IDs of the mesh's creased edges and the second contains the associated crease data. Please note that to make effective use of the creasing variable in software outside of Maya may require a license under patents owned by Pixar(R)."""
+	def getCreaseVertices(self,arg)->tuple[MUintArray,MDoubleArray]:
+		"""Returns a tuple containing two arrays. The first contains the mesh-relative/global IDs of the mesh's creased vertices and the second contains the associated crease data. Please note that to make effective use of the creasing variable in software outside of Maya may require a license under patents owned by Pixar(R)."""
+	@overload
+	def getDoubleBlindData(self,compId:int,compType:int,blindDataId:int,attr:str)->float:
+		"""Returns the value of the specified blind data attribute from the specified mesh component. Raises RuntimeError if the attribute is not of "double" type."""
+	@overload
+	def getDoubleBlindData(self,compType:int,blindDataId:int,attr:str)->tuple[MIntArray,MDoubleArray]:
+		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "double" type."""
+	def getEdgeVertices(self,edgeId:int)->tuple[int,int]:
+		"""Returns a tuple containing the mesh-relative/global IDs of the edge's two vertices. The indices can be used to refer to the elements in the array returned by the getPoints() method."""
+	def getFaceAndVertexIndices(self,faceVertexIndex:int,localVertex:bool)->tuple[faceId,vertexIndex]:
+		"""Returns a tuple containg the faceId and vertexIndex represented by the given face-vertex index. This is the reverse of the operation performed by getFaceVertexIndex() . If localVertex is True then the returned vertexIndex is the face-relative/local index, otherwise it is the mesh-relative/global index."""
+	def getFaceNormalIds(self,faceId:int)->MIntArray:
+		"""Returns the IDs of the normals for all the vertices of a given face. These IDs can be used to index into the arrays returned by getNormals() ."""
+	def getFaceUVSetNames(self,faceId:int)->tuple[str,...]:
+		"""Returns the names of all of the uv sets mapped to the specified face. This method is not threadsafe."""
+	def getFaceVertexBinormal(self,faceId:int,vertexId:int,space:int,uvSet:str)->MVector:
+		"""Returns the binormal vector at a given face vertex. This method is not threadsafe."""
+	def getFaceVertexBinormals(self,faceId:int,space:int,uvSet:str)->MFloatVectorArray:
+		"""Returns all the per-vertex-per-face binormals for a given face. This method is not threadsafe."""
+	def getFaceVertexColors(self,colorSet:str,defaultUnsetColor:MColor)->MColorArray:
+		"""Returns colors for all the mesh's face-vertices. The colors are returned in face order: e.g. F0V0, F0V1.. F0Vn, F1V0, etc... Use the index returned by getFaceVertexIndex() if you wish to index directly into the returned color array. If no face has color for that vertex, the entry returned will be defaultUnsetColor. If a color was set for some but not all the faces for that vertex, the ones where the color has not been explicitly set will return (0,0,0). If a vertex has shared color, the same value will be set for all its vertes/faces. If the colorSet is not specified, the default color set will be used. If the defaultUnsetColor is not given, then (-1, -1, -1, -1) will be used."""
+	def getFaceVertexIndex(self,faceId:int,vertexIndex:int,localVertex:bool)->int:
+		"""Returns the index for a specific face-vertex into an array of face-vertex values, such as those returned by getFaceVertexBinormals() , getFaceVertexColors() , getFaceVertexNormals() , etc. The values in the target arrays are presumed to be in face order: e.g. F0V0, F0V1.. F0Vn, F1V0, etc... If localVertex is True then vertexIndex must be a face-relative/local index. If localVertex is False then vertexIndex must be a mesh-relative/global index. The opposite operation is performed by the getFaceAndVertexIndices() method."""
+	def getFaceVertexNormal(self,faceId:int,vertexId:int,space:int)->MVector:
+		"""Returns the per-vertex-per-face normal for a given face and vertex. This method is not threadsafe."""
+	def getFaceVertexNormals(self,faceId:int,space:int)->MFloatVectorArray:
+		"""Returns the normals for a given face. This method is not threadsafe."""
+	def getFaceVertexTangent(self,faceId:int,vertexId:int,space:int,uvSet:str)->MVector:
+		"""Return the normalized tangent vector at a given face vertex. The tangent is defined as the surface tangent of the polygon running in the U direction defined by the uv map. This method is not threadsafe."""
+	def getFaceVertexTangents(self,faceId:int,space:int,uvSet:str)->MFloatVectorArray:
+		"""Returns all the per-vertex-per-face tangents for a given face. The tangent is defined as the surface tangent of the polygon running in the U direction defined by the uv map. This method is not threadsafe."""
+	@overload
+	def getFloatBlindData(self,compId:int,compType:int,blindDataId:int,attr:str)->float:
+		"""Returns the value of the specified blind data attribute from the specified mesh component. Raises RuntimeError if the attribute is not of "float" type."""
+	@overload
+	def getFloatBlindData(self,compType:int,blindDataId:int,attr:str)->tuple[MIntArray,MFloatArray]:
+		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "float" type."""
+	def getFloatPoints(self,space:int)->MFloatPointArray:
+		"""Returns a copy of the mesh's vertex positions as an MFloatPointArray ."""
+	def getHoles(self,arg)->tuple[tuple[face,tuple[v1,...]],...]:
+		"""Returns a tuple describing the holes in the mesh. Each element of the tuple is itself a tuple. The first element of the sub-tuple is the integer ID of the face in which the hole occurs. The second element of the sub-tuple is another tuple containing the mesh-relative/global IDs of the vertices which make up the hole. Take the following return value as an example: ((3, (7, 2, 6)), (5, (11, 10, 3, 4))) This says that the mesh has two holes. The first hole is in face 3 and consists of vertices 7, 2 and 6. The second hole is in face 5 and consists of vertices 11, 10, 3 and 4."""
+	@overload
+	def getIntBlindData(self,compId:int,compType:int,blindDataId:int,attr:str)->int:
+		"""Returns the value of the specified blind data attribute from the specified mesh component. Raises RuntimeError if the attribute is not of "int" type."""
+	@overload
+	def getIntBlindData(self,compType:int,blindDataId:int,attr:str)->tuple[MIntArray,MIntArray]:
+		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "int" type."""
+	def getInvisibleFaces(self,arg)->MUintArray:
+		"""Returns the invisible faces of the mesh. Invisible faces are like lightweight holes in that they are not rendered but do not require additional geometry the way that holes do. They have the advantage over holes that if the mesh is smoothed then their edges will be smoothed as well, while holes will retain their hard edges. Invisible faces can be set using the setInvisibleFaces() method or the polyHole command."""
+	def getNormalIds(self,arg)->tuple[MIntArray,MIntArray]:
+		"""Returns the normal IDs for all of the mesh's polygons as a tuple of two int arrays. The first array contains the number of vertices for each polygon and the second contains the normal IDs for each polygon-vertex. These IDs can be used to index into the array returned by getNormals() ."""
+	def getNormals(self,space:int)->MFloatVectorArray:
+		"""Returns a copy of the mesh's normals. The normals are the per-polygon per-vertex normals. To find the normal for a particular vertex-face, use getFaceNormalIds() to get the index into the array. This method is not threadsafe."""
+	def getPoint(self,vertexId:int,space:int)->MPoint:
+		"""Returns the position of specified vertex."""
+	def getPointAtUV(self,faceId:int,u:float,v:float,space:int,uvSet:str,tolerance:float)->MPoint:
+		"""Returns the position of the point at the give UV value in the specified face. This method is not threadsafe."""
 	def getPointsAtUV(self,*args)->Any:
 		"""getPointsAtUV(u, v, space=MSpace.kObject, uvSet='', tolerance=0.001) -> (MIntArray, MPointArray)
 
 		Returns the polygon ids and positions of points at the given UV position on the mesh."""
-	def getPoints(self,*args)->Any:
-		"""getPoints(space=MSpace.kObject) -> MPointArray
-
-		Returns a copy of the mesh's vertex positions as an MPointArray."""
-	def getPolygonNormal(self,*args)->Any:
-		"""getPolygonNormal(polygonId, space=MSpace.kObject) -> MVector
-
-		Returns the per-polygon normal for the given polygon.
-
-		This method is not threadsafe."""
-	def getPolygonTriangleVertices(self,*args)->Any:
-		"""getPolygonTriangleVertices(polygonId, triangleId) -> (int, int, int)
-
-		Returns the mesh-relative/global IDs of the 3 vertices of the
-		specified triangle of the specified polygon. These IDs can be used
-		to index into the arrays returned by getPoints() and getFloatPoints()."""
-	def getPolygonUV(self,*args)->Any:
-		"""getPolygonUV(polygonId, vertexId, uvSet='') -> (float, float)
-
-		Returns a tuple containing the U and V values at a specified vertex
-		of a specified polygon.
-
-		This method is not threadsafe."""
-	def getPolygonUVid(self,*args)->Any:
-		"""getPolygonUVid(polygonId, vertexId, uvSet='') -> int
-
-		Returns the ID of the UV at a specified vertex of a specified polygon.
-
-		This method is not threadsafe."""
-	def getPolygonVertices(self,*args)->Any:
-		"""getPolygonVertices(polygonId) -> MIntArray
-
-		Returns the mesh-relative/global vertex IDs the specified polygon.
-		These IDs can be used to index into the arrays returned by getPoints()
-		and getFloatPoints()."""
-	def getSmoothMeshDisplayOptions(self,*args)->Any:
-		"""getSmoothMeshDisplayOptions() -> MMeshSmoothOptions
-
-		Returns the options currently in use when smoothing the mesh for display."""
-	def getStringBlindData(self,*args)->Any:
-		"""getStringBlindData(compId, compType, blindDataId, attr) -> string
-		getStringBlindData(compType, blindDataId, attr)
-		  -> (MIntArray, [string, string, ...])
-
-		The first version returns the value of the specified blind data
-		attribute from the specified mesh component.
-
-		The second version returns a tuple containing an array of component
-		IDs and an array of values for the specified blind data attribute
-		for all of the mesh's components of the specified type.
-
-		Both versions raise RuntimeError if the attribute is not of 'string'
-		type."""
-	def getTangentId(self,*args)->Any:
-		"""getTangentId(faceId, vertexId) -> int
-
-		Returns the ID of the tangent for a given face and vertex."""
-	def getTangents(self,*args)->Any:
-		"""getTangents(space=MSpace.kObject, uvSet='') -> MFloatVectorArray
-
-		Return the tangent vectors for all face vertices. The tangent is
-		defined as the surface tangent of the polygon running in the U
-		direction defined by the uv map.
-
-		This method is not threadsafe."""
-	def getTriangles(self,*args)->Any:
-		"""getTriangles() -> (MIntArray, MIntArray)
-
-		Returns a tuple describing the mesh's triangulation. The first
-		element of the tuple is an array giving the number of triangles for
-		each of the mesh's polygons. The second tuple gives the ids of the
-		vertices of all the triangles."""
-	def getUV(self,*args)->Any:
-		"""getUV(uvId, uvSet='') -> (float, float)
-
-		Returns a tuple containing the u and v values of the specified UV."""
-	def getUVAtPoint(self,*args)->Any:
-		"""getUVAtPoint(point, space=MSpace.kObject, uvSet='') -> (float, float, int)
-
-		Returns a tuple containing the u and v coordinates of the point on
-		the mesh closest to the given point, and the ID of the face
-		containing that closest point.
-
-		This method is not threadsafe."""
-	def getUVs(self,*args)->Any:
-		"""getUVs(uvSet='') -> (MFloatArray, MFloatArray)
-
-		Returns a tuple containing an array of U values and an array of V
-		values, representing all of the UVs for the given UV set."""
-	def getUVSetFamilyNames(self,*args)->Any:
-		"""getUVSetFamilyNames() -> (string, ...)
-
-		Returns the names of all of the uv set families on this object. A
-		uv set family is a set of per-instance sets with the same name
-		with each individual set applying to one or more instances. A set
-		which is shared across all instances will be the sole member of its
-		family.
-
-		Given a uv set family name, getUVSetsInFamily() may be used to
-		determine the names of the associated individual sets."""
-	def getUVSetNames(self,*args)->Any:
-		"""getUVSetNames() -> (string, ...)
-
-		Returns the names of all the uv sets on this object."""
-	def getUVSetsInFamily(self,*args)->Any:
-		"""getUVSetsInFamily(familyName) -> (string, ...)
-
-		Returns the names of all of the uv sets that belong to the
-		specified family. Per-instance sets will have multiple sets in a
-		family, with each individual set applying to one or more instances.
-		A set which is shared across all instances will be the sole member
-		of its family and will share the same name as its family."""
-	def getUvShellsIds(self,*args)->Any:
-		"""getUvShellsIds(uvSet='') -> (int, MIntArray)
-
-		Returns a tuple containing describing how the specified UV set's UVs
-		are grouped into shells. The first element of the tuple is the number
-		of distinct shells. The second element of the tuple is an array of
-		shell indices, one per uv, indicating which shell that uv is part of."""
+	def getPoints(self,space:int)->MPointArray:
+		"""Returns a copy of the mesh's vertex positions as an MPointArray ."""
+	def getPolygonNormal(self,polygonId:int,space:int)->MVector:
+		"""Returns the per-polygon normal for the given polygon. This method is not threadsafe."""
+	def getPolygonTriangleVertices(self,polygonId:int,triangleId:int)->tuple[int,int,int]:
+		"""Returns the mesh-relative/global IDs of the 3 vertices of the specified triangle of the specified polygon. These IDs can be used to index into the arrays returned by getPoints() and getFloatPoints() ."""
+	def getPolygonUV(self,polygonId:int,vertexId:int,uvSet:str)->tuple[float,float]:
+		"""Returns a tuple containing the U and V values at a specified vertex of a specified polygon. This method is not threadsafe."""
+	def getPolygonUVid(self,polygonId:int,vertexId:int,uvSet:str)->int:
+		"""Returns the ID of the UV at a specified vertex of a specified polygon. This method is not threadsafe."""
+	def getPolygonVertices(self,polygonId:int)->MIntArray:
+		"""Returns the mesh-relative/global vertex IDs the specified polygon. These IDs can be used to index into the arrays returned by getPoints() and getFloatPoints() ."""
+	def getSmoothMeshDisplayOptions(self,arg)->MMeshSmoothOptions:
+		"""Returns the options currently in use when smoothing the mesh for display."""
+	@overload
+	def getStringBlindData(self,compId:int,compType:int,blindDataId:int,attr:str)->str:
+		"""Returns the value of the specified blind data attribute from the specified mesh component. Raises RuntimeError if the attribute is not of "string" type."""
+	@overload
+	def getStringBlindData(self,compType:int,blindDataId:int,attr:str)->tuple[MIntArray,list[str]]:
+		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "string" type."""
+	def getTangentId(self,faceId:int,vertexId:int)->int:
+		"""Returns the ID of the tangent for a given face and vertex."""
+	def getTangents(self,space:int,uvSet:str)->MFloatVectorArray:
+		"""Return the tangent vectors for all face vertices. The tangent is defined as the surface tangent of the polygon running in the U direction defined by the uv map. This method is not threadsafe."""
+	def getTriangles(self,arg)->tuple[MIntArray,MIntArray]:
+		"""Returns a tuple describing the mesh's triangulation. The first element of the tuple is an array giving the number of triangles for each of the mesh's polygons. The second tuple gives the ids of the vertices of all the triangles."""
+	def getUV(self,uvId:int,uvSet:str)->tuple[float,float]:
+		"""Returns a tuple containing the u and v values of the specified UV."""
+	def getUVAtPoint(self,point:MPoint,space:int,uvSet:str)->tuple[float,float,int]:
+		"""Returns a tuple containing the u and v coordinates of the point on the mesh closest to the given point, and the ID of the face containing that closest point. This method is not threadsafe."""
+	def getUVs(self,uvSet:str)->tuple[MFloatArray,MFloatArray]:
+		"""Returns a tuple containing an array of U values and an array of V values, representing all of the UVs for the given UV set."""
+	def getUVSetFamilyNames(self,arg)->tuple[str,...]:
+		"""Returns the names of all of the uv set families on this object. A uv set family is a set of per-instance sets with the same name with each individual set applying to one or more instances. A set which is shared across all instances will be the sole member of its family. Given a uv set family name, getUVSetsInFamily() may be used to determine the names of the associated individual sets."""
+	def getUVSetNames(self,arg)->tuple[str,...]:
+		"""Returns the names of all the uv sets on this object."""
+	def getUVSetsInFamily(self,familyName:str)->tuple[str,...]:
+		"""Returns the names of all of the uv sets that belong to the specified family. Per-instance sets will have multiple sets in a family, with each individual set applying to one or more instances. A set which is shared across all instances will be the sole member of its family and will share the same name as its family."""
+	def getUvShellsIds(self,uvSet:str)->tuple[int,MIntArray]:
+		"""Returns a tuple containing describing how the specified UV set's UVs are grouped into shells. The first element of the tuple is the number of distinct shells. The second element of the tuple is an array of shell indices, one per uv, indicating which shell that uv is part of."""
 	def getMeshShellsIds(self,*args)->Any:
 		"""getMeshShellsIds(compType) -> (int, MIntArray)
 
@@ -7526,57 +6519,14 @@ class MFnMesh(MFnDagNode):
 		are grouped into shells. The first element of the tuple is the number
 		of distinct shells. The second element of the tuple is an array of
 		shell indices, one per component, indicating which shell that component is part of."""
-	def getVertexColors(self,*args)->Any:
-		"""getVertexColors(colorSet='', defaultUnsetColor=None) -> MColorArray
-
-		Gets colors for all vertices of the given colorSet. If no face has
-		color for that vertex, the entry returned will be defaultUnsetColor.
-		If a color was set for some or all the faces for that vertex, an
-		average of those vertex/face values where the color has been set will
-		be returned.
-
-		If the colorSet is not specified, the default color set will be used.
-		If the defaultUnsetColor is not given, then (-1, -1, -1, -1) will be
-		used."""
-	def getVertexNormal(self,*args)->Any:
-		"""getVertexNormal(vertexId, angleWeighted, space=MSpace.kObject) -> MVector
-
-		Returns the normal at the given vertex. The returned normal is a
-		single per-vertex normal, so unshared normals at a vertex will be
-		averaged.
-
-		If angleWeighted is set to true, the normals are computed by an
-		average of surrounding face normals weighted by the angle subtended
-		by the face at the vertex. If angleWeighted is set to false, a simple
-		average of surround face normals is returned.
-
-		The simple average evaluation is significantly faster than the angle-
-		weighted average.
-
-		This method is not threadsafe."""
-	def getVertexNormals(self,*args)->Any:
-		"""getVertexNormals(angleWeighted, space=MSpace.kObject) -> MFloatVectorArray
-
-		Returns all the vertex normals. The returned normals are per-vertex
-		normals, so unshared normals at a vertex will be averaged.
-
-		If angleWeighted is set to True, the normals are computed by an
-		average of surrounding face normals weighted by the angle subtended
-		by the face at the vertex. If angleWeighted is set to false, a simple
-		average of surround face normals is returned.
-
-		The simple average evaluation is significantly faster than the angle-
-		weighted average.
-
-		This method is not threadsafe."""
-	def getVertices(self,*args)->Any:
-		"""getVertices() -> (MIntArray, MIntArray)
-
-		Returns the mesh-relative/global vertex IDs for all of the mesh's
-		polygons as a tuple of two int arrays. The first array contains the
-		number of vertices for each polygon and the second contains the mesh-
-		relative IDs for each polygon-vertex. These IDs can be used to index
-		into the arrays returned by getPoints() and getFloatPoints()."""
+	def getVertexColors(self,colorSet:str,defaultUnsetColor:MColorArray)->MColorArray:
+		"""Gets colors for all vertices of the given colorSet. If no face has color for that vertex, the entry returned will be defaultUnsetColor. If a color was set for some or all the faces for that vertex, an average of those vertex/face values where the color has been set will be returned. If the colorSet is not specified, the default color set will be used. If the defaultUnsetColor is not given, then (-1, -1, -1, -1) will be used."""
+	def getVertexNormal(self,vertexId:int,angleWeighted:bool,space:int)->MVector:
+		"""Returns the normal at the given vertex. The returned normal is a single per-vertex normal, so unshared normals at a vertex will be averaged. If angleWeighted is set to true, the normals are computed by an average of surrounding face normals weighted by the angle subtended by the face at the vertex. If angleWeighted is set to false, a simple average of surround face normals is returned. The simple average evaluation is significantly faster than the angle-weighted average. This method is not threadsafe."""
+	def getVertexNormals(self,angleWeighted:bool,space:int)->MFloatVectorArray:
+		"""Returns all the vertex normals. The returned normals are per-vertex normals, so unshared normals at a vertex will be averaged. If angleWeighted is set to True, the normals are computed by an average of surrounding face normals weighted by the angle subtended by the face at the vertex. If angleWeighted is set to false, a simple average of surround face normals is returned. The simple average evaluation is significantly faster than the angle-weighted average. This method is not threadsafe."""
+	def getVertices(self,arg)->tuple[MIntArray,MIntArray]:
+		"""Returns the mesh-relative/global vertex IDs for all of the mesh's polygons as a tuple of two int arrays. The first array contains the number of vertices for each polygon and the second contains the mesh-relative IDs for each polygon-vertex. These IDs can be used to index into the arrays returned by getPoints() and getFloatPoints() ."""
 	def getTriangleOffsets(self,*args)->Any:
 		"""getTriangleOffsets() -> (MIntArray, MIntArray)
 
@@ -7585,35 +6535,18 @@ class MFnMesh(MFnDagNode):
 		The triangleVertices array holds each vertex for each triangle in sequence,
 		so it has three times as many elements as there are triangles.
 		(i.e. three times the sum of the elements of the triangleCounts array)"""
-	def hasAlphaChannels(self,*args)->Any:
-		"""hasAlphaChannels(colorSet) -> bool
-
-		Returns True if the color set has an alpha channel."""
-	def hasBlindData(self,*args)->Any:
-		"""hasBlindData(compType, compId=None, blindDataId=None) -> bool
-
-		Returns true if any component of the given type on this mesh has
-		blind data. If a component ID is provided then only that particular
-		component is checked. If a blind data ID is provided then only blind
-		data of that type is checked. """
-	def hasColorChannels(self,*args)->Any:
-		"""hasColorChannels(colorSet) -> bool
-
-		Returns True if the color set has RGB channels."""
-	def isBlindDataTypeUsed(self,*args)->Any:
-		"""isBlindDataTypeUsed(blindDataId) -> bool
-
-		Returns True if the blind data type is already in use anywhere in the scene."""
-	def isColorClamped(self,*args)->Any:
-		"""isColorClamped(colorSet) -> bool
-
-		Returns True if the color sets RGBA components are clamped to the
-		range 0 to 1."""
-	def isColorSetPerInstance(self,*args)->Any:
-		"""isColorSetPerInstance(colorSet) -> bool
-
-		Returns True if the color set is per-instance, and False if it is
-		shared across all instances."""
+	def hasAlphaChannels(self,colorSet:str)->bool:
+		"""Returns True if the color set has an alpha channel."""
+	def hasBlindData(self,compId:int,compType:int,blindDataId:int)->bool:
+		"""Returns true if any component of the given type on this mesh has blind data. If a component ID is provided then only that particular component is checked. If a blind data ID is provided then only blind data of that type is checked."""
+	def hasColorChannels(self,colorSet:str)->bool:
+		"""Returns True if the color set has RGB channels."""
+	def isBlindDataTypeUsed(self,blindDataId:int)->bool:
+		"""Returns True if the blind data type is already in use anywhere in the scene."""
+	def isColorClamped(self,colorSet:str)->bool:
+		"""Returns True if the color sets RGBA components are clamped to the range 0 to 1."""
+	def isColorSetPerInstance(self,name:str)->bool:
+		"""Returns True if the color set is per-instance, and False if it is shared across all instances."""
 	def edgeBorderInfo(self,*args)->Any:
 		"""edgeBorderInfo(edgeId, setId=0) -> MFnMesh::BorderInfo
 
@@ -7622,18 +6555,12 @@ class MFnMesh(MFnDagNode):
 		"""getUVBorderEdges(setId) -> MIntArray
 
 		Retrieves the edge indices for edges lying on a UV border."""
-	def isEdgeSmooth(self,*args)->Any:
-		"""isEdgeSmooth(edgeId) -> bool
-
-		Returns True if the edge is smooth, False if it is hard."""
-	def isNormalLocked(self,*args)->Any:
-		"""isNormalLocked(normalId) -> bool
-
-		Returns True if the normal is locked, False otherwise."""
-	def isPolygonConvex(self,*args)->Any:
-		"""isPolygonConvex(faceId) -> bool
-
-		Returns True if the polygon is convex, False if it is concave."""
+	def isEdgeSmooth(self,edgeId:int)->bool:
+		"""Returns True if the edge is smooth, False if it is hard."""
+	def isNormalLocked(self,normalId:int)->bool:
+		"""Returns True if the normal is locked, False otherwise."""
+	def isPolygonConvex(self,faceId:int)->bool:
+		"""Returns True if the polygon is convex, False if it is concave."""
 	def isPolygonUVReversed(self,*args)->Any:
 		"""isPolygonUVReversed(faceId) -> bool
 
@@ -7644,182 +6571,60 @@ class MFnMesh(MFnDagNode):
 
 		Returns True if the normal, tangent, and binormal form a right handed
 		coordinate system, False otherwise."""
-	def isUVSetPerInstance(self,*args)->Any:
-		"""isUVSetPerInstance(uvSet) -> bool
-
-		Returns True if the UV set is per-instance, and False if it is shared
-		across all instances."""
-	def lockFaceVertexNormals(self,*args)->Any:
-		"""lockFaceVertexNormals(seq of faceIds, seq of vertIds) -> self
-
-		Locks the normals for the given face/vertex pairs."""
-	def lockVertexNormals(self,*args)->Any:
-		"""lockVertexNormals(sequence of vertIds) -> self
-
-		Locks the shared normals for the specified vertices."""
-	def numColors(self,*args)->Any:
-		"""numColors(colorSet='') -> int
-
-		Returns the number of colors in the given color set. If no color set
-		is specified then the mesh's current color set will be used."""
-	def numUVs(self,*args)->Any:
-		"""numUVs(uvSet='') -> int
-
-		Returns the number of UVs (texture coordinates) in the given UV set.
-		If no UV set is specified then the mesh's current UV set will be used."""
-	def onBoundary(self,*args)->Any:
-		"""onBoundary(faceId) -> bool
-
-		Returns true if the face is on the border of the mesh, meaning that
-		one or more of its edges is a border edge."""
-	def polygonVertexCount(self,*args)->Any:
-		"""polygonVertexCount(faceId) -> int
-
-		Returns the number of vertices in the given polygon. Raises
-		ValueError if the polygon ID is invalid."""
-	def removeFaceColors(self,*args)->Any:
-		"""removeFaceColors(seq of faceIds) -> self
-
-		Removes colors from all vertices of the specified faces."""
-	def removeFaceVertexColors(self,*args)->Any:
-		"""removeFaceVertexColors(seq of faceIds, seq of vertexIds) -> self
-
-		Removes colors from the specified face/vertex pairs."""
-	def removeVertexColors(self,*args)->Any:
-		"""removeVertexColors(seq of vertexIds) -> self
-
-		Removes colors from the specified vertices in all of the faces which
-		share those vertices."""
-	def renameUVSet(self,*args)->Any:
-		"""renameUVSet(origName, newName, modifier=None) -> self
-
-		Renames a UV set. The set must exist and the new name cannot be the
-		same as that of an existing set.
-
-		This method is only valid for functionsets which are attached to mesh
-		nodes, not mesh data."""
-	def setBinaryBlindData(self,*args)->Any:
-		"""setBinaryBlindData(compId, compType, blindDataId, attr, data) -> self
-		setBinaryBlindData(seq of compId, compType, blindDataId, attr, data) -> self
-
-		The first version sets the value of a 'binary' blind data attribute
-		on a single component of the mesh. The data must be a single string.
-
-		The second version sets the value of a 'binary' blind data attribute
-		on multiple components of the mesh. If the data is a sequence of
-		strings then it must provide a value for each component in compIds.
-		If it is a single string then all of the specified components will
-		have their blind data set to that value."""
-	def setBoolBlindData(self,*args)->Any:
-		"""setBoolBlindData(compId, compType, blindDataId, attr, data) -> self
-		setBoolBlindData(seq of compId, compType, blindDataId, attr, data) -> self
-
-		The first version sets the value of a 'boolean' blind data attribute
-		on a single component of the mesh. The data must be a single boolean.
-
-		The second version sets the value of a 'boolean' blind data attribute
-		on multiple components of the mesh. If the data is a sequence of
-		booleans then it must provide a value for each component in compIds.
-		If it is a single boolean then all of the specified components will
-		have their blind data set to that value."""
-	def setColor(self,*args)->Any:
-		"""setColor(colorId, MColor, colorSet='', rep=kRGBA) -> self
-
-		Sets a color in the specified colorSet. If no colorSet is given the
-		current colorSet will be used. If the colorId is greater than or
-		equal to numColors() then the colorSet will be grown to accommodate
-		the specified color."""
-	def setColors(self,*args)->Any:
-		"""setColors(seq of MColor, colorSet='', rep=kRGBA) -> self
-
-		Sets all the colors of the specified colorSet. If no colorSet is
-		given the current colorSet will be used. After using this method to
-		set the color values, you can call assignColors() to assign the
-		corresponding color ids to the geometry.
-
-		The color sequence must be at least as large as the current color set
-		size. You can determine the color set size by calling numColors() for
-		the default color set, or numColors(colorSet) for a named color set.
-		If the sequence is larger than the color set size, then the color set
-		for this mesh will be expanded to accommodate the new color values.
-
-		In order to shrink the colorSet you have to clear its existing
-		colors. E.g: clearColors(), setColors( ... ), assignColors()"""
-	def setCreaseEdges(self,*args)->Any:
-		"""setCreaseEdges(edgeIds, seq of float) -> self
-
-
-		Sets the specified edges of the mesh as crease edges.
-
-		Please note that to make effective use of the creasing variable in
-		software outside of Maya may require a license under patents owned by
-		Pixar(R)."""
-	def setCreaseVertices(self,*args)->Any:
-		"""setCreaseVertices(edgeIds, seq of float) -> self
-
-
-		Sets the specified edges of the mesh as crease edges.
-
-		Please note that to make effective use of the creasing variable in
-		software outside of Maya may require a license under patents owned by
-		Pixar(R)."""
-	def setCurrentColorSetName(self,*args)->Any:
-		"""setCurrentColorSetName(colorSet, modifier=None, currentSelection=None) -> self
-
-		Sets the 'current' color set for this object. The current color set
-		is the one used when no color set name is specified for a color
-		operation. If the specified color set does not exist then the current
-		color set will not be changed.
-
-		If 'modifier' (MDGModifier) is provided then the operation will be
-		added to the modifier and will not take effect until the modifier's
-		doIt() is called. Otherwise it will take effect immediately.
-
-		This method may change the current selection. If the 'currentSelection'
-		(MSelectionList) parameter is provided then the current selection
-		will be saved to it prior to the change. This is useful for
-		supporting full undo of the change.
-
-		This method is only valid for functionsets which are attached to mesh
-		nodes, not mesh data."""
-	def setCurrentUVSetName(self,*args)->Any:
-		"""setCurrentUVSetName(uvSet, modifier=None, currentSelection=None) -> self
-
-		Sets the 'current' uv set for this object. The current uv set is the
-		one used when no uv set name is specified for a uv operation. If the
-		specified uv set does not exist then the current uv set will not be
-		changed.
-
-		If 'modifier' (MDGModifier) is provided then the operation will be
-		added to the modifier and will not take effect until the modifier's
-		doIt() is called. Otherwise it will take effect immediately.
-
-		This method may change the current selection. If the 'currentSelection'
-		(MSelectionList) parameter is provided then the current selection
-		will be saved to it prior to the change. This is useful for
-		supporting full undo of the change.
-
-		This method is only valid for functionsets which are attached to mesh
-		nodes, not mesh data."""
-	def setDoubleBlindData(self,*args)->Any:
-		"""setDoubleBlindData(compId, compType, blindDataId, attr, data) -> self
-		setDoubleBlindData(seq of compId, compType, blindDataId, attr, data) -> self
-
-		The first version sets the value of a 'double' blind data attribute
-		on a single component of the mesh. The data must be a single float.
-
-		The second version sets the value of a 'double' blind data attribute
-		on multiple components of the mesh. If the data is a sequence of
-		floats then it must provide a value for each component in compIds.
-		If it is a single float then all of the specified components will
-		have their blind data set to that value."""
-	def setEdgeSmoothing(self,*args)->Any:
-		"""setEdgeSmoothing(edgeId, smooth=True) -> self
-
-		Sets the specified edge to be hard or smooth. You must use the
-		cleanupEdgeSmoothing() method after all the desired edges on your
-		mesh have had setEdgeSmoothing() done. Use the updateSurface() method
-		to indicate the mesh needs to be redrawn."""
+	def isUVSetPerInstance(self,name:str)->bool:
+		"""Returns True if the UV set is per-instance, and False if it is shared across all instances."""
+	def lockFaceVertexNormals(self,faceIds:Sequence[int],vertexIds:Sequence[int])->Self:
+		"""Locks the normals for the given face/vertex pairs."""
+	def lockVertexNormals(self,vertexIdx:Sequence[int])->Self:
+		"""Locks the shared normals for the specified vertices."""
+	def numColors(self,colorSet:str)->int:
+		"""Returns the number of colors in the given color set. If no color set is specified then the mesh's current color set will be used."""
+	def numUVs(self,uvSet:str)->int:
+		"""Returns the number of UVs (texture coordinates) in the given UV set. If no UV set is specified then the mesh's current UV set will be used."""
+	def onBoundary(self,faceId:int)->bool:
+		"""Returns true if the face is on the border of the mesh, meaning that one or more of its edges is a border edge."""
+	def polygonVertexCount(self,faceId:int)->int:
+		"""Returns the number of vertices in the given polygon. Raises ValueError if the polygon ID is invalid."""
+	def removeFaceColors(self,faceIds:Sequence[int])->Self:
+		"""Removes colors from all vertices of the specified faces."""
+	def removeFaceVertexColors(self,faceIds:Sequence[int],vertexIds:Sequence[int])->Self:
+		"""Removes colors from the specified face/vertex pairs."""
+	def removeVertexColors(self,vertexIds:Sequence[int])->Self:
+		"""Removes colors from the specified vertices in all of the faces which share those vertices."""
+	def renameUVSet(self,origName:str,newName:str,modifier:MDGModifier)->Self:
+		"""Renames a UV set. The set must exist and the new name cannot be the same as that of an existing set. This method is only valid for functionsets which are attached to mesh nodes, not mesh data."""
+	@overload
+	def setBinaryBlindData(self,compId:int,compType:int,blindDataId:int,attr:str,data:str)->Self:
+		"""Sets the value of a "binary" blind data attribute on a component of the mesh."""
+	@overload
+	def setBinaryBlindData(self,compIds:Sequence[int],compType:int,blindDataId:int,attr:str,data:str|Sequence[str])->Self:
+		"""Sets the value of a "binary" blind data attribute on multiple components of the mesh. If the data is a sequence of strings then it must provide a value for each component in compIds. If it is a single string then all of the specified components will have their blind data set to that value."""
+	@overload
+	def setBoolBlindData(self,compId:int,compType:int,blindDataId:int,attr:str,data:bool|int)->Self:
+		"""Sets the value of a "boolean" blind data attribute on a component of the mesh."""
+	@overload
+	def setBoolBlindData(self,compIds:Sequence[int],compType:int,blindDataId:int,attr:str,data:bool|int|Sequence[bool]|ints)->Self:
+		"""Sets the value of a "boolean" blind data attribute on multiple components of the mesh. If the data is a sequence then it must provide a value for each component in compIds. If it is a single value then all of the specified components will have their blind data set to that value."""
+	def setColor(self,colors:Sequence[MColor],color:MColor,colorSet:str,rep:int)->Self:
+		"""Sets a color in the specified colorSet. If no colorSet is given the current colorSet will be used. If the colorId is greater than or equal to numColors() then the colorSet will be grown to accommodate the specified color."""
+	def setColors(self,colors:Sequence[MColor],colorSet:str,rep:int)->Self:
+		"""Sets all the colors of the specified colorSet. If no colorSet is given the current colorSet will be used. After using this method to set the color values, you can call assignColors() to assign the corresponding color ids to the geometry. The color sequence must be at least as large as the current color set size. You can determine the color set size by calling numColors() for the default color set, or numColors(colorSet) for a named color set. If the sequence is larger than the color set size, then the color set for this mesh will be expanded to accommodate the new color values. In order to shrink the colorSet you have to clear its existing colors. E.g: clearColors() setColors( ... ) assignColors()"""
+	def setCreaseEdges(self,edgeIds:Sequence[int],creaseData:Sequence[float])->Self:
+		"""Sets the specified edges of the mesh as crease edges. Please note that to make effective use of the creasing variable in software outside of Maya may require a license under patents owned by Pixar(R)."""
+	def setCreaseVertices(self,vertexIds:Sequence[int],creaseData:Sequence[float])->Self:
+		"""Sets the specified vertices of the mesh as crease vertices. Please note that to make effective use of the creasing variable in software outside of Maya may require a license under patents owned by Pixar(R)."""
+	def setCurrentColorSetName(self,colorSet:str,modifier:MDGModifier,currentSelection:MSelectionList)->Self:
+		"""Sets the "current" color set for this object. The current color set is the one used when no color set name is specified for a color operation. If the specified color set does not exist then the current color set will not be changed. This method is only valid for functionsets which are attached to mesh nodes, not mesh data."""
+	def setCurrentUVSetName(self,uvSet:str,modifier:MDGModifier,currentSelection:MSelectionList)->Self:
+		"""Sets the "current" uv set for this object. The current uv set is the one used when no uv set name is specified for a uv set operation. If the specified uv set does not exist then the current uv set will not be changed. This method is only valid for functionsets which are attached to mesh nodes, not mesh data."""
+	@overload
+	def setDoubleBlindData(self,compId:int,compType:int,blindDataId:int,attr:str,data:float)->Self:
+		"""Sets the value of a "double" blind data attribute on a component of the mesh."""
+	@overload
+	def setDoubleBlindData(self,compIds:Sequence[int],compType:int,blindDataId:int,attr:str,data:float|Sequence[float])->Self:
+		"""Sets the value of a "double" blind data attribute on multiple components of the mesh. If the data is a sequence then it must provide a value for each component in compIds. If it is a single value then all of the specified components will have their blind data set to that value."""
+	def setEdgeSmoothing(self,edgeId:int,smooth:bool)->Self:
+		"""Sets the specified edge to be hard or smooth. You must use the cleanupEdgeSmoothing() method after all the desired edges on your mesh have had setEdgeSmoothing() done. Use the updateSurface() method to indicate the mesh needs to be redrawn."""
 	def setEdgeSmoothings(self,*args)->Any:
 		"""setEdgeSmoothings(edgeIds, smooths) -> self
 
@@ -7827,263 +6632,80 @@ class MFnMesh(MFnDagNode):
 		cleanupEdgeSmoothing() method after all the desired edges on your
 		mesh have had setEdgeSmoothings() done. Use the updateSurface() method
 		to indicate the mesh needs to be redrawn."""
-	def setFaceColor(self,*args)->Any:
-		"""setFaceColor(color, faceId, rep=kRGBA) -> self
-
-		Sets the face-vertex color for all vertices on this face."""
-	def setFaceColors(self,*args)->Any:
-		"""setFaceColors(colors, faceIds, rep=kRGBA) -> self
-
-		Sets the colors of the specified faces. For each face in the faceIds
-		sequence the corresponding color from the colors sequence will be
-		applied to all of its vertices."""
-	def setFaceVertexColor(self,*args)->Any:
-		"""setFaceVertexColor(color, faceId, vertexId, modifier=None, rep=kRGBA) -> self
-
-		Sets a face-specific normal at a vertex.
-
-		If 'modifier' (MDGModifier) is provided then the operation will be
-		added to the modifier and will not take effect until the modifier's
-		doIt() is called. Otherwise it will take effect immediately."""
-	def setFaceVertexColors(self,*args)->Any:
-		"""setFaceVertexColors(colors, faceIds, vertexIds, modifier=None, rep=kRGBA) -> self
-
-		Sets the colors of the specified face/vertex pairs.
-
-		If 'modifier' (MDGModifier) is provided then the operation will be
-		added to the modifier and will not take effect until the modifier's
-		doIt() is called. Otherwise it will take effect immediately."""
-	def setFaceVertexNormal(self,*args)->Any:
-		"""setFaceVertexNormal(normal, faceId, vertexId, space=MSpace.kObject, modifier=None) -> self
-
-		Sets a face-specific normal at a vertex.
-
-		If 'modifier' (MDGModifier) is provided then the operation will be
-		added to the modifier and will not take effect until the modifier's
-		doIt() is called. Otherwise it will take effect immediately."""
-	def setFaceVertexNormals(self,*args)->Any:
-		"""setFaceVertexNormal(normals, faceIds, vertexIds, space=MSpace.kObject) -> self
-
-		Sets normals for the given face/vertex pairs."""
-	def setFloatBlindData(self,*args)->Any:
-		"""setFloatBlindData(compId, compType, blindDataId, attr, data) -> self
-		setFloatBlindData(seq of compId, compType, blindDataId, attr, data) -> self
-
-		The first version sets the value of a 'float' blind data attribute
-		on a single component of the mesh. The data must be a single float.
-
-		The second version sets the value of a 'float' blind data attribute
-		on multiple components of the mesh. If the data is a sequence of
-		floats then it must provide a value for each component in compIds.
-		If it is a single float then all of the specified components will
-		have their blind data set to that value."""
-	def setIntBlindData(self,*args)->Any:
-		"""setIntBlindData(compId, compType, blindDataId, attr, data) -> self
-		setIntBlindData(seq of compId, compType, blindDataId, attr, data) -> self
-
-		The first version sets the value of a 'int' blind data attribute
-		on a single component of the mesh. The data must be a single int.
-
-		The second version sets the value of a 'int' blind data attribute
-		on multiple components of the mesh. If the data is a sequence of
-		ints then it must provide a value for each component in compIds.
-		If it is a single int then all of the specified components will
-		have their blind data set to that value."""
-	def setInvisibleFaces(self,*args)->Any:
-		"""setInvisibleFaces(faceIds, makeVisible=False) -> self
-
-		Sets the specified faces of the mesh to be visible or invisible. See
-		the getInvisibleFaces() method for a description of invisible faces."""
-	def setIsColorClamped(self,*args)->Any:
-		"""setIsColorClamped(colorSet, clamped) -> self
-
-		Sets whether the color set's RGBA components should be clamped to the
-		range 0 to 1."""
-	def setNormals(self,*args)->Any:
-		"""setNormals(normals, space=MSpace.kObject) -> self
-
-		Sets the mesh's normals (user normals)."""
-	def setPoint(self,*args)->Any:
-		"""setPoint(vertexId, MPoint, space=MSpace.kObject) -> self
-
-		Sets the position of specified vertex.
-
-		Note that if you modify the position of a vertex for a mesh node (as
-		opposed to mesh data), a tweak will be created. If you have a node
-		with no history, the first time that a tweak is created, the
-		underlying pointers under the MFnMesh object may change. You will
-		need to call syncObject() to make sure that the object is valid.
-		Subsequent calls to setPoint() on the same object do not require a
-		syncObject() call."""
-	def setPoints(self,*args)->Any:
-		"""setPoints(points, space=MSpace.kObject) -> self
-
-		Sets the positions of the mesh's vertices. The positions may be
-		given as a sequence of MFloatPoint's or a sequence of MPoint's, but
-		not a mix of the two."""
-	def setSmoothMeshDisplayOptions(self,*args)->Any:
-		"""setSmoothMeshDisplayOptions(MMeshSmoothOptions) -> self
-
-		Sets the options to use when smoothing the mesh for display."""
-	def setSomeColors(self,*args)->Any:
-		"""setSomeColors(colorIds, colors, colorSet='', rep=kRGBA) -> self
-
-		Sets specific colors in a colorSet.
-
-		If the largest colorId in the sequence is larger than numColors()
-		then the colorSet will be grown to accommodate the new color values.
-		If you have added new colorIds, you can call assignColors to assign
-		the colorIds to the geometry. If you are modifying existing colors,
-		they will already be referenced by the existing mesh data."""
-	def setSomeUVs(self,*args)->Any:
-		"""setSomeUVs(uvIds, uValues, vValues, uvSet='') -> self
-
-		Sets the specified texture coordinates (uv's) for this mesh. The uv
-		value sequences and the uvIds sequence must all be of equal size. If
-		the largest uvId in the array is larger than numUVs() then the uv
-		list for this mesh will be grown to accommodate the new uv values.
-		If a named uv set is given, the array will be grown when the largest
-		uvId is larger than numUVs(uvSet).
-
-		If you have added new uvIds, you must call one of the assignUV
-		methods to assign the uvIds to the geometry. If you are modifying
-		existing UVs, you do not need to call one of the assignUV methods."""
-	def setStringBlindData(self,*args)->Any:
-		"""setStringBlindData(compId, compType, blindDataId, attr, data) -> self
-		setStringBlindData(seq of compId, compType, blindDataId, attr, data) -> self
-
-		The first version sets the value of a 'string' blind data attribute
-		on a single component of the mesh. The data must be a single string.
-
-		The second version sets the value of a 'string' blind data attribute
-		on multiple components of the mesh. If the data is a sequence of
-		strings then it must provide a value for each component in compIds.
-		If it is a single string then all of the specified components will
-		have their blind data set to that value."""
-	def setUV(self,*args)->Any:
-		"""setUV(uvId, u, v, uvSet='') -> self
-
-		Sets the specified texture coordinate.
-
-		The uvId is the element in the uv list that will be set. If the uvId
-		is greater than or equal to numUVs() then the uv list will be grown
-		to accommodate the specified uv. If the UV being added is new, thenyou must call one of the assignUV methods in order to update the
-		geometry."""
-	def setUVs(self,*args)->Any:
-		"""setUVs(uValues, vValues, uvSet='') -> self
-
-		Sets all of the texture coordinates (uv's) for this mesh. The uv
-		value sequences must be of equal size and must be at least as large
-		as the current UV set size. You can determine the UV set size by
-		calling numUVs() for the default UV set, or numUVs(uvSet) for a
-		named UV set.
-
-		If the sequences are larger than the UV set size, then the uv list
-		for this mesh will be grown to accommodate the new uv values.
-
-		After using this method to set the UV values, you must call one of
-		the assignUV methods to assign the corresponding UV ids to the
-		geometry.
-
-		In order to shrink the uvs array, do the following: clearUVs(),
-		setUVs(...), assignUVs(). These steps will let you to create an
-		array of uvs which is smaller than the original one."""
-	def setVertexColor(self,*args)->Any:
-		"""setVertexColor(color, vertexId, modifier=None, rep=kRGBA) -> self
-
-		Sets the color for a vertex in all the faces which share it.
-
-		If 'modifier' (MDGModifier) is provided then the operation will be
-		added to the modifier and will not take effect until the modifier's
-		doIt() is called. Otherwise it will take effect immediately."""
-	def setVertexColors(self,*args)->Any:
-		"""setVertexColors(colors, vertexIds, modifier=None, rep=kRGBA) -> self
-
-		Sets the colors of the specified vertices. For each vertex in the
-		vertexIds sequence, the corresponding color from the colors sequence
-		will be applied to the vertex in all of the faces which share it.
-
-		If 'modifier' (MDGModifier) is provided then the operation will be
-		added to the modifier and will not take effect until the modifier's
-		doIt() is called. Otherwise it will take effect immediately."""
-	def setVertexNormal(self,*args)->Any:
-		"""setVertexNormal(normal, vertexId, space=MSpace.kObject, modifier=None) -> self
-
-		Sets the shared normal at a vertex.
-
-		If 'modifier' (MDGModifier) is provided then the operation will be
-		added to the modifier and will not take effect until the modifier's
-		doIt() is called. Otherwise it will take effect immediately."""
-	def setVertexNormals(self,*args)->Any:
-		"""setVertexNormal(normals, vertexIds, space=MSpace.kObject) -> self
-
-		Sets the shared normals for the given vertices."""
-	def sortIntersectionFaceTriIds(self,*args)->Any:
-		"""sortIntersectionFaceTriIds(faceIds, triIds=none) -> self
-
-		Convenience routine for sorting faceIds or face/triangle ids before
-		passing them into the closestIntersection(), allIntersections(), or
-		anyIntersection() methods. When using an acceleration structure with
-		an intersection operation it is essential that any faceId or
-		faceId/triId arrays be sorted properly to ensure optimal performance.
-
-		Both arguments must be MIntArray's."""
-	def split(self,*args)->Any:
-		"""split(((kOnEdge, int, float), (kInternalPoint, MFloatPoint), ...)) -> self
-
-		Each tuple in the placements sequence consists of a Split Placement
-		constant followed by one or two parameters.
-
-		If the Split Placement is kOnEdge then the tuple will contain two
-		more elements giving the int id of the edge to split, and a float
-		value between 0 and 1 indicating how far along the edge to do the
-		split. The same edge cannot be split more than once per call.
-
-		If the Split Placement is kInternalPoint then the tuple will contain
-		just one more element giving an MFloatPoint within the face.
-
-		All splits must begin and end on an edge meaning that the first and
-		last tuples in the placements sequence must be kOnEdge placements."""
-	def subdivideEdges(self,*args)->Any:
-		"""subdivideEdges(edges, numDivisions) -> self
-
-		Subdivides edges at regular intervals. For example, if numDivisions
-		is 2 then two equally-spaced vertices will be added to each of the
-		specified edges: one 1/3 of the way along the edge and a second 2/3
-		of the way along the edge."""
-	def subdivideFaces(self,*args)->Any:
-		"""subdivideFaces(faces, numDivisions) -> self
-
-		Subdivides each specified face into a grid of smaller faces.
-		Triangles are subdivided into a grid of smaller triangles and quads
-		are subdivided into a grid of smaller quads. Faces with more than
-		four edges are ignored.
-
-		The numDivisions parameter tells how many times to subdivide each
-		edge of the face. Internal points and edges are introduced as needed
-		to create a grid of smaller faces."""
-	def syncObject(self,*args)->Any:
-		"""syncObject() -> self
-
-		If a non-api operation happens that many have changed the
-		underlying Maya object attached to this functionset, calling this
-		method will make sure that the functionset picks up those changes.
-		In particular this call should be used after calling mel commands
-		which might affect the mesh. Note that this only applies when the
-		functionset is attached to a mesh node. If it's attached to mesh
-		data the it is not necessary to call this method."""
-	def unlockFaceVertexNormals(self,*args)->Any:
-		"""unlockFaceVertexNormals(seq of faceIds, seq of vertIds) -> self
-
-		Unlocks the normals for the given face/vertex pairs."""
-	def unlockVertexNormals(self,*args)->Any:
-		"""unlockVertexNormals(sequence of vertIds) -> self
-
-		Unlocks the shared normals for the specified vertices."""
-	def updateSurface(self,*args)->Any:
-		"""updateSurface() -> self
-
-		Signal that this polygonal mesh has changed and needs to be redrawn."""
+	def setFaceColor(self,color:MColor,faceId:int,rep:int)->Self:
+		"""Sets the face-vertex color for all vertices on this face."""
+	def setFaceColors(self,colors:Sequence[MColor],faceIds:Sequence[int],rep:int)->Self:
+		"""Sets the colors of the specified faces. For each face in the faceIds sequence the corresponding color from the colors sequence will be applied to all of its vertices."""
+	def setFaceVertexColor(self,color:MColor,faceId:int,vertexId:int,modifier:MDGModifier,rep:int)->Self:
+		"""Sets a face-specific normal at a vertex."""
+	def setFaceVertexColors(self,colors:Sequence[MColor],faceIds:Sequence[int],vertexIds:Sequence[int],modifier:MDGModifier,rep:int)->Self:
+		"""Sets the colors of the specified face/vertex pairs."""
+	def setFaceVertexNormal(self,normal:MVector,faceId:int,vertexId:int,space:int,modifier:MDGModifier)->Self:
+		"""Sets a face-specific normal at a vertex."""
+	def setFaceVertexNormals(self,normals:Sequence[MVector],faceIds:Sequence[int],vertexIds:Sequence[int],space:int)->Self:
+		"""Sets normals for the given face/vertex pairs."""
+	@overload
+	def setFloatBlindData(self,compId:int,compType:int,blindDataId:int,attr:str,data:float)->Self:
+		"""Sets the value of a "float" blind data attribute on a component of the mesh."""
+	@overload
+	def setFloatBlindData(self,compIds:Sequence[int],compType:int,blindDataId:int,attr:str,data:float|Sequence[float])->Self:
+		"""Sets the value of a "float" blind data attribute on multiple components of the mesh. If the data is a sequence then it must provide a value for each component in compIds. If it is a single value then all of the specified components will have their blind data set to that value."""
+	@overload
+	def setIntBlindData(self,compId:int,compType:int,blindDataId:int,attr:str,data:int)->Self:
+		"""Sets the value of an "int" blind data attribute on a component of the mesh."""
+	@overload
+	def setIntBlindData(self,compIds:Sequence[int],compType:int,blindDataId:int,attr:str,data:int|Sequence[int])->Self:
+		"""Sets the value of an "int" blind data attribute on multiple components of the mesh. If the data is a sequence then it must provide a value for each component in compIds. If it is a single value then all of the specified components will have their blind data set to that value."""
+	def setInvisibleFaces(self,faceIds:Sequence[int],makeVisible:bool)->Self:
+		"""Sets the specified faces of the mesh to be visible or invisible. See the getInvisibleFaces() method for a description of invisible faces."""
+	def setIsColorClamped(self,colorSet:str,clamped:bool)->Self:
+		"""Sets whether the color set's RGBA components should be clamped to the range 0 to 1."""
+	def setNormals(self,normals:Sequence[MFloatVector],space:int)->Self:
+		"""Sets the mesh's normals (user normals)."""
+	def setPoint(self,vertexId:int,point:MPoint,space:int)->Self:
+		"""Sets the position of specified vertex. Note that if you modify the position of a vertex for a mesh node (as opposed to mesh data), a tweak will be created. If you have a node with no history, the first time that a tweak is created, the underlying pointers under the MFnMesh object may change. You will need to call syncObject() to make sure that the object is valid. Subsequent calls to setPoint() on the same object do not require a syncObject() call."""
+	def setPoints(self,points:Sequence[MPoint|MFloatPoint],space:int)->Self:
+		"""Sets the positions of the mesh's vertices."""
+	def setSmoothMeshDisplayOptions(self,options:MMeshSmoothOptions)->Self:
+		"""Sets the options to use when smoothing the mesh for display."""
+	def setSomeColors(self,colorIds:Sequence[int],colors:Sequence[MColor],colorSet:str,rep:int)->Self:
+		"""Sets selected colors in a colorSet. If the largest colorId in the sequence is larger than numColors() then the colorSet will be grown to accommodate the new color values. If you have added new colorIds, you can call assignColors to assign the colorIds to the geometry. If you are modifying existing colors, they will already be referenced by the existing mesh data."""
+	def setSomeUVs(self,uvIds:Sequence[int],uValues:Sequence[float],vValues:Sequence[float],uvSet:str)->Self:
+		"""Sets the specified texture coordinates (uv's) for this mesh. The uv value sequences and the uvIds sequence must all be of equal size. If the largest uvId in the array is larger than numUVs() then the uv list for this mesh will be grown to accommodate the new uv values. If a named uv set is given, the array will be grown when the largest uvId is larger than numUVs(uvSet). If you have added new uvIds, you must call one of the assignUV methods to assign the uvIds to the geometry. If you are modifying existing UVs, you do not need to call one of the assignUV methods."""
+	@overload
+	def setStringBlindData(self,compId:int,compType:int,blindDataId:int,attr:str,data:str)->Self:
+		"""Sets the value of a "string" blind data attribute on a component of the mesh."""
+	@overload
+	def setStringBlindData(self,compIds:Sequence[int],compType:int,blindDataId:int,attr:str,data:str|Sequence[str])->Self:
+		"""Sets the value of a "string" blind data attribute on multiple components of the mesh. If the data is a sequence of strings then it must provide a value for each component in compIds. If it is a single string then all of the specified components will have their blind data set to that value."""
+	def setUV(self,uvId:int,u:float,v:float,uvSet:str)->Self:
+		"""Sets the specified texture coordinate. The uvId is the element in the uv list that will be set. If the uvId is greater than or equal to numUVs() then the uv list will be grown to accommodate the specified uv. If the UV being added is new, then you must call one of the assignUV methods in order to update the geometry."""
+	def setUVs(self,uValues:Sequence[float],vValues:Sequence[float],uvSet:str)->Self:
+		"""Sets all of the texture coordinates (uv's) for this mesh. The uv value sequences must be of equal size and must be at least as large as the current UV set size. You can determine the UV set size by calling numUVs() for the default UV set, or numUVs(uvSet) for a named UV set. If the sequences are larger than the UV set size, then the uv list for this mesh will be grown to accommodate the new uv values. After using this method to set the UV values, you must call one of the assignUV methods to assign the corresponding UV ids to the geometry. In order to shrink the uvs array, do the following: clearUVs() setUVs( ... ) assignUVs() These steps will let you to create an array of uvs which is smaller than the original one."""
+	def setVertexColor(self,color:MColor,vertexId:int,modifier:MDGModifier,rep:int)->Self:
+		"""Sets the color for a vertex in all the faces which share it."""
+	def setVertexColors(self,color:Sequence[MColor],vertexIds:Sequence[int],modifier:MDGModifier,rep:int)->Self:
+		"""Sets the colors of the specified vertices. For each vertex in the vertexIds sequence, the corresponding color from the colors sequence will be applied to the vertex in all of the faces which share it."""
+	def setVertexNormal(self,normal:MVector,vertexId:int,space:int,modifier:MDGModifier)->Self:
+		"""Sets the shared normal at a vertex."""
+	def setVertexNormals(self,normals:Sequence[MVector],vertexIds:Sequence[int],space:int)->Self:
+		"""Sets the shared normals for the given vertices."""
+	def sortIntersectionFaceTriIds(self,faceIds:MIntArray,triIds:MIntArray)->Self:
+		"""Convenience routine for sorting faceIds or face/triangle ids before passing them into the closestIntersection() , allIntersections() , or anyIntersection() methods. When using an acceleration structure with an intersection operation it is essential that any faceId or faceId/triId arrays be sorted properly to ensure optimal performance."""
+	def split(self,placements:Sequence[tuple])->Self:
+		"""Each tuple in the placements sequence consists of a Split Placement constant followed by one or two parameters. If the Split Placement is kOnEdge then the tuple will contain two more elements giving the int id of the edge to split, and a float value between 0 and 1 indicating how far along the edge to do the split. The same edge cannot be split more than once per call. If the Split Placement is kInternalPoint then the tuple will contain just one more element giving an MFloatPoint within the face. All splits must begin and end on an edge meaning that the first and last tuples in the placements sequence must be kOnEdge placements."""
+	def subdivideEdges(self,edges:Sequence[int],numDivisions:int)->Self:
+		"""Subdivides edges at regular intervals. For example, if numDivisions is 2 then two equally-spaced vertices will be added to each of the specified edges: one 1/3 of the way along the edge and a second 2/3 of the way along the edge."""
+	def subdivideFaces(self,faces:Sequence[int],numDivisions:int)->Self:
+		"""Subdivides each specified face into a grid of smaller faces. Triangles are subdivided into a grid of smaller triangles and quads are subdivided into a grid of smaller quads. Faces with more than four edges are ignored. The numDivisions parameter tells how many times to subdivide each edge of the face. Internal points and edges are introduced as needed to create a grid of smaller faces."""
+	def syncObject(self,arg)->Self:
+		"""If a non-api operation happens that many have changed the underlying Maya object attached to this functionset, calling this method will make sure that the functionset picks up those changes. In particular this call should be used after calling mel commands which might affect the mesh. Note that this only applies when the functionset is attached to a mesh node. If it's attached to mesh data the it is not necessary to call this method."""
+	def unlockFaceVertexNormals(self,faceIds:Sequence[int],vertexIds:Sequence[int])->Self:
+		"""Unlocks the normals for the given face/vertex pairs."""
+	def unlockVertexNormals(self,vertexIdx:Sequence[int])->Self:
+		"""Unlocks the shared normals for the specified vertices."""
+	def updateSurface(self,arg)->Self:
+		"""Signal that this polygonal mesh has changed and needs to be redrawn."""
 class MFnMeshData(MFnGeometryData):
 	"""MFnMeshData allows the creation and manipulation of Mesh
 	data objects for use in the dependency graph.
@@ -8096,62 +6718,59 @@ class MFnMeshData(MFnGeometryData):
 	to the specified object."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args)->Any:
-		"""create() -> MObject
-
-		Creates a new mesh data object, attaches it to this function set
-		and returns an MObject which references it."""
+	def create(self)->MObject:
+		"""Creates a new mesh data object, attaches it to this function set and returns an MObject which references it."""
 class MFnMessageAttribute(MFnAttribute):
 	"""Functionset for creating and working with message attributes."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args)->Any:
-		"""Creates a new message attribute, attaches it to the function set and returns it as an MObject."""
+	def create(self,longName:str,shortName:str)->MObject:
+		"""Create a new message attribute with the given longName and shortName , attach it to the function set and return it in an MObject ."""
 class MFnNumericAttribute(MFnAttribute):
 	"""Functionset for creating and working with numeric attributes."""
 	@property
-	def default(self)->float|tuple[float, ...]:
+	def default(self)->float|tuple[float,...]:
 		"""Default value"""
 	@default.setter
-	def default(self,value:float|tuple[float, ...])->None:...
+	def default(self,value:float|tuple[float,...])->None:...
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def child(self,*args)->Any:
+	def child(self,index:int)->MObject:
 		"""Returns the specified child attribute of the parent attribute currently attached to the function set."""
-	def create(self,*args)->Any:
-		"""Creates a new simple or compound numeric attribute, attaches it to the function set and returns it in an MObject."""
-	def createAddr(self,*args)->Any:
-		"""Creates a new address attribute, attaches it to the function set and returns it in an MObject."""
-	def createColor(self,*args)->Any:
-		"""Creates a new color attribute, attaches it to the function set and returns it in an MObject."""
-	def createPoint(self,*args)->Any:
-		"""Creates a new 3D point attribute, attaches it to the function set and returns it in an MObject."""
-	def getMax(self,*args)->Any:
-		"""Returns the attribute's hard maximum value(s)."""
-	def getMin(self,*args)->Any:
-		"""Returns the attribute's hard minimum value(s)."""
-	def getSoftMax(self,*args)->Any:
-		"""Returns the attribute's soft maximum value."""
-	def getSoftMin(self,*args)->Any:
-		"""Returns the attribute's soft minimum value."""
-	def hasMax(self,*args)->Any:
+	def create(self,longName:str,shortName:str,type:int,defaultValue:float)->MObject:
+		"""Creates a new numeric attribute of the given type with the given longName , shortName and defaultValue , attaches it to the function set and returns it in an MObject ."""
+	def createAddr(self,longName:str,shortName:str,defaultValue:int)->MObject:
+		"""Creates a new address attribute with the given longName , shortName and defaultValue , attaches it to the function set and returns it in an MObject ."""
+	def createColor(self,longName:str,shortName:str)->MObject:
+		"""Creates a new color attribute with the given longName , shortName , attaches it to the function set and returns it in an MObject ."""
+	def createPoint(self,longName:str,shortName:str)->MObject:
+		"""Creates a new 3D point attribute with the given longName , shortName , attaches it to the function set and returns it in an MObject ."""
+	def getMax(self)->float|tuple[float,...]:
+		"""Returns a float representing the attribute's hard maximum value. If the attribute consists of multiple components (e.g. a k3Float attribute) then a tuple containing a separate maximum value for each component will be returned.Raises a RuntimeError if the attribute does not have a hard maximum."""
+	def getMin(self)->float|tuple[float,...]:
+		"""Returns a float representing the attribute's hard minimum value. If the attribute consists of multiple components (e.g. a k3Float attribute) then a tuple containing a separate minimum value for each component will be returned.Raises a RuntimeError if the attribute does not have a hard minimum."""
+	def getSoftMax(self)->float:
+		"""Returns the attribute's soft maximum value.Raises a RuntimeError if the attribute does not have a soft maximum."""
+	def getSoftMin(self)->float:
+		"""Returns the attribute's soft minimum value.Raises a RuntimeError if the attribute does not have a soft minimum."""
+	def hasMax(self)->bool:
 		"""Returns True if a hard maximum value has been specified for the attribute."""
-	def hasMin(self,*args)->Any:
+	def hasMin(self)->bool:
 		"""Returns True if a hard minimum value has been specified for the attribute."""
-	def hasSoftMax(self,*args)->Any:
+	def hasSoftMax(self)->bool:
 		"""Returns True if a soft maximum value has been specified for the attribute."""
-	def hasSoftMin(self,*args)->Any:
+	def hasSoftMin(self)->bool:
 		"""Returns True if a soft minimum value has been specified for the attribute."""
-	def numericType(self,*args)->Any:
+	def numericType(self)->int:
 		"""Returns the numeric type of the attribute currently attached to the function set."""
-	def setMax(self,*args)->Any:
-		"""Sets the attribute's hard maximum value(s)."""
-	def setMin(self,*args)->Any:
-		"""Sets the attribute's hard minimum value(s)."""
-	def setSoftMax(self,*args)->Any:
-		"""Sets the attribute's soft maximum value."""
-	def setSoftMin(self,*args)->Any:
-		"""Sets the attribute's soft minimum value."""
+	def setMax(self,maxValue:float|Sequence[float])->Self:
+		"""Sets the attribute's hard maximum to maxValue . If the attribute consists of multiple components (e.g. a k3Float or color attribute) then maxValue must be a sequence providing a maximum value for each component."""
+	def setMin(self,minValue:float|Sequence[float])->Self:
+		"""Sets the attribute's hard minimum to minValue . If the attribute consists of multiple components (e.g. a k3Float or color attribute) then minValue must be a sequence providing a minimum value for each component."""
+	def setSoftMax(self,maxValue:float)->Self:
+		"""Sets the attribute's soft maximum to maxValue ."""
+	def setSoftMin(self,minValue:float)->Self:
+		"""Sets the attribute's soft minimum to minValue ."""
 class MFnNumericData(MFnData):
 	"""Function set for non-simple numeric node data."""
 	kInvalid:int=0
@@ -8179,14 +6798,14 @@ class MFnNumericData(MFnData):
 	kLast:int=19
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args)->Any:
-		"""Creates a new numeric data object."""
-	def getData(self,*args)->Any:
-		"""Returns a list containing the attached data object's data."""
-	def numericType(self,*args)->Any:
-		"""Returns the type of data in the attached data object."""
-	def setData(self,*args)->Any:
-		"""Sets the value of the data in the attached data object."""
+	def create(self,type:int)->MObject:
+		"""Creates a new numeric data object of the given type, attaches it to the function set and returns an MObject which references it. Only the multi-value numeric types (e.g. k2Short, k3Short) are accepted. Single-value numeric types (e.g. kShort) can be accessed directly through MPlug and MDataHandle and thus do not require a data object to encapsulate them."""
+	def getData(self)->list:
+		"""Returns a list containing the encapsulated numeric data's elements. k*Short, k*Int and k*Long types will be returned as Python integers. k*Float and k*Double types will be returned as Python floats."""
+	def numericType(self)->int:
+		"""Returns the type of numeric data in the object currently attached to the function set."""
+	def setData(self,seq:Sequence[Any])->Self:
+		"""Replaces the encapsulated data with the elements of the supplied sequence. k*Short, k*Int and k*Long types will accept sequences of Python integers. k*Float and k*Double types will accept sequences of Python floats, integers or a mix of the two. If the sequence contains the wrong number or type of elements then a TypeError will be raised."""
 class MFnNurbsCurve(MFnDagNode):
 	"""NURBS (Non-Uniform Rational B-Spline) curve function set.
 
@@ -8646,11 +7265,8 @@ class MFnNurbsCurveData(MFnGeometryData):
 	to the specified object."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args)->Any:
-		"""create() -> MObject
-
-		Creates a new nurbs curve data object, attaches it to this function set
-		and returns an MObject which references it."""
+	def create(self)->MObject:
+		"""Creates a new nurbs curve data object, attaches it to this function set and returns an MObject which references it."""
 class MFnNurbsSurface(MFnDagNode):
 	"""NURBS (Non-Uniform Rational B-Spline) surface function set.
 
@@ -9550,11 +8166,8 @@ class MFnNurbsSurfaceData(MFnGeometryData):
 	to the specified object."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args)->Any:
-		"""create() -> MObject
-
-		Creates a new nurbs surface data object, attaches it to this function set
-		and returns an MObject which references it."""
+	def create(self)->MObject:
+		"""Creates a new nurbs surface data object, attaches it to this function set and returns an MObject which references it."""
 class MFnPlugin(MFnBase):
 	"""Register and deregister plug-in services with Maya."""
 	@property
@@ -9564,11 +8177,11 @@ class MFnPlugin(MFnBase):
 	def version(self,value:str)->None:...
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def apiVersion(self,*args)->Any:
+	def apiVersion(self)->str:
 		"""Return the API version required by the plug-in."""
 	def deregisterAttributePatternFactory(self,*args)->Any:
 		"""Deregister a user defined attribute pattern factory type from Maya."""
-	def deregisterCommand(self,*args)->Any:
+	def deregisterCommand(self,cmdName:str)->Self:
 		"""Deregister a user defined command from Maya."""
 	def deregisterData(self,*args)->Any:
 		"""Deregister a user defined data type from Maya."""
@@ -9581,14 +8194,14 @@ class MFnPlugin(MFnBase):
 	@staticmethod
 	def findPlugin(*args)->Any:
 		"""Returns an MObject corresponding to the named plugin."""
-	def loadPath(self,*args)->Any:
+	def loadPath(self)->str:
 		"""Return the full path name of the file from which the plug-in was loaded."""
-	def name(self,*args)->Any:
+	def name(self)->str:
 		"""Return the plug-in's name."""
 	def registerAttributePatternFactory(self,*args)->Any:
 		"""Register a new attribute pattern factory type with Maya."""
-	def registerCommand(self,*args)->Any:
-		"""Register a new command with Maya."""
+	def registerCommand(self,cmdName:str,createCmdFunc:Callable,createSyntaxFunc:Callable)->Any:
+		"""Register a new command with Maya. createCmdFunc is a Python callable which takes no arguments and returns a new instance of the MPxCommand-derived class. createSyntaxFunc is a Python callable which takes no arguments and returns an MSyntax object initialized with the command's syntax."""
 	def registerContextCommand(self,*args)->Any:
 		"""Register a new context command with Maya.  Once registered, the context
 		can be used to create a new tool that can be used in a manner
@@ -9603,9 +8216,9 @@ class MFnPlugin(MFnBase):
 	def registerShape(self,*args)->Any:
 		"""Register a new user defined shape node with Maya.
 		To deregister the shape node use the MFnPlugin.deregisterNode()."""
-	def setName(self,*args)->Any:
-		"""Set the plug-in's name."""
-	def vendor(self,*args)->Any:
+	def setName(self,name:str,makeUnique:bool)->Self:
+		"""Set the plug-in's name. If another plug-in is already using name and makeUnique is True then Maya will choose a unique name for the plug-in, otherwise a RuntimeError will be raised."""
+	def vendor(self)->str:
 		"""Return the plug-in's vendor string."""
 class MFnPluginData(MFnData):
 	"""MFnPluginData allows the creation and manipulation of plugin
@@ -9645,14 +8258,22 @@ class MFnPointArrayData(MFnData):
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args)->Any:
-		"""Returns the encapsulated array as an MPointArray."""
-	def copyTo(self,*args)->Any:
-		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args)->Any:
-		"""Creates a new MPoint array data object."""
-	def set(self,*args)->Any:
-		"""Sets values in the encapsulated array."""
+	def array(self)->MPointArray:
+		"""Returns the encapsulated array as an MPointArray . For performance reasons the returned array is a live reference to the encapsulated array so changes made to one directly affect the other. The returned array is only valid for as long as the function set retains the same data object. If the function set is destroyed or attached to a different object then the returned array should be discarded. Failure to do so could result in Maya becoming unstable."""
+	def copyTo(self,array:MPointArray)->Self:
+		"""Replaces the elements of array with those in the encapsulated array."""
+	@overload
+	def create(self)->MObject:
+		"""Creates a new empty MPoint array data object, attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def create(self,array:MPointArray|Sequence[MPoint])->MObject:
+		"""Creates a new MPoint array data object, initializes it with the elements from array , attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def set(self,array:MPointArray|Sequence[MPoint])->Self:
+		"""Replaces the elements in the encapsulated array with those from the supplied array ."""
+	@overload
+	def set(self,value:MPoint,index:int)->Self:
+		"""Sets the value of the index 'th array element."""
 class MFnReference(MFnDependencyNode):
 	"""Function set for reference nodes."""
 	def __init__(self,*args)->None:
@@ -9872,22 +8493,34 @@ class MFnStringArrayData(MFnData):
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args)->Any:
-		"""Returns the encapsulated array as a list of unicode objects."""
-	def create(self,*args)->Any:
-		"""Creates a new string array data object."""
-	def set(self,*args)->Any:
-		"""Sets values in the encapsulated array."""
+	def array(self)->list[str]:
+		"""Returns the encapsulated array as a list of strings."""
+	@overload
+	def create(self)->MObject:
+		"""Creates a new empty string array data object, attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def create(self,seq:Sequence[str])->MObject:
+		"""Creates a new string array data object, initializes it with the elements from seq , attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def set(self,seq:Sequence[str])->Self:
+		"""Replaces the elements in the encapsulated array with those from the supplied sequence."""
+	@overload
+	def set(self,value:str,index:int)->Self:
+		"""Sets the value of the index 'th array element."""
 class MFnStringData(MFnData):
 	"""Function set for string node data."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args)->Any:
-		"""Creates a new string data object."""
-	def set(self,*args)->Any:
-		"""Sets the value of the encapsulated string."""
-	def string(self,*args)->Any:
-		"""Returns the encapsulated string as a unicode object."""
+	@overload
+	def create(self)->MObject:
+		"""Creates a new empty string data object, attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def create(self,str:str)->MObject:
+		"""Creates a new string data object, initializes it with str , attaches it to the function set and returns an MObject which references it."""
+	def set(self,str:str)->Self:
+		"""Replaces the contents of the encapsulated string with that of str ."""
+	def string(self)->str:
+		"""Returns a copy of the encapsulated string."""
 class MFnTransform(MFnDagNode):
 	"""Function set for operating on transform nodes."""
 	kScaleMinX:int=0
@@ -9921,84 +8554,84 @@ class MFnTransform(MFnDagNode):
 		"""Balance a transformation when applying a world matrix to a joint. Thisaccesses the same underlying functionality as the xform command.
 		mtx The world matrix to be applied to the joint node, as an MTransformationMatrixrotateAxis The joint's rotateAxis attribute, as an MQuaternionjointOrient The joint's jointOrient attribute, as an MQuaternionsegmentScaleCompensate The joint's segmentScaleCompensate attribute, as a boolinverseScale The joint's inverseScale attribute, as an MVectorrotateOrder The joint's rotateOrder attribute, as an MEulerRotation::RotationOrder
 		Returns:List consisting of:localTranslate The resulting translation, as an MVectorlocalRotate The resulting rotation for the joint, as an MEulerRotationlocalScale The resulting scale for the joint, as an MVector"""
-	def clearRestPosition(self,*args)->Any:
-		"""Clears the transform's rest position matrix."""
-	def create(self,*args)->Any:
-		"""Creates a new transform node and attaches it to the function set."""
-	def enableLimit(self,*args)->Any:
-		"""Enables or disables a specified limit type."""
-	def isLimited(self,*args)->Any:
-		"""Returns True if the specified limit type is enabled."""
-	def limitValue(self,*args)->Any:
+	def clearRestPosition(self)->Self:
+		"""Clears the transform's rest position matrix, effectively setting it to the identity matrix."""
+	def create(self,parent:MObject)->MObject:
+		"""Creates a new transform node, parents it under parent , attaches it to the function set and returns it in an MObject . If parent is MObject.kNullObj then the new transform will be parented under the world."""
+	def enableLimit(self,limitType:int,state:bool)->Self:
+		"""Enables or disables the specified limitType ."""
+	def isLimited(self,limitType:int)->bool:
+		"""Returns True if the specified limitType is enabled."""
+	def limitValue(self,limitType:int)->float:
 		"""Returns the value of the specified limit."""
-	def resetFromRestPosition(self,*args)->Any:
+	def resetFromRestPosition(self)->Self:
 		"""Resets the transform from its rest position matrix."""
 	def resetTransformation(self,*args)->Any:
 		"""Resets the transform's attribute values to represent the given transformation matrix in world space."""
-	def restPosition(self,*args)->Any:
-		"""Returns the transform's rest position matrix."""
-	def rotateBy(self,*args)->Any:
-		"""Adds an MEulerRotation or MQuaternion to the transform's rotation."""
-	def rotateByComponents(self,*args)->Any:
-		"""Adds to the transform's rotation using the individual components of an MEulerRotation or MQuaternion."""
-	def rotatePivot(self,*args)->Any:
-		"""Returns the transform's rotate pivot."""
-	def rotatePivotTranslation(self,*args)->Any:
-		"""Returns the transform's rotate pivot translation."""
-	def rotation(self,*args)->Any:
-		"""Returns the transform's rotation as an MEulerRotation or MQuaternion."""
-	def rotationComponents(self,*args)->Any:
-		"""Returns the transform's rotation as the individual components of an MEulerRotation or MQuaternion."""
-	def rotationOrder(self,*args)->Any:
-		"""Returns the order of rotations when the transform's rotation is expressed as an MEulerRotation."""
-	def rotateOrientation(self,*args)->Any:
-		"""Returns the MQuaternion which orients the local rotation space."""
-	def scale(self,*args)->Any:
-		"""Returns a list containing the transform's XYZ scale components."""
-	def scaleBy(self,*args)->Any:
-		"""Multiplies the transform's XYZ scale components by a sequence of three floats."""
-	def scalePivot(self,*args)->Any:
-		"""Returns the transform's scale pivot."""
-	def scalePivotTranslation(self,*args)->Any:
-		"""Returns the transform's scale pivot translation."""
-	def setLimit(self,*args)->Any:
+	def restPosition(self)->MTransformationMatrix:
+		"""Returns the transform's rest position matrix, or the identity matrix if no rest position has been set."""
+	def rotateBy(self,rot:MQuaternion|MEulerRotation,space:int)->Self:
+		"""Adds rot to the transform's rotation component."""
+	def rotateByComponents(self,seq:Sequence[float|int],space:int,asQuaternion:bool)->Self:
+		"""Adds the rotation represented by the four parameter values to the transform's rotate component. If asQuaternion is True then seq must contain four floats representing the x, y, z and w components of a quaternion rotation. If asQuaternion is False then seq must contain three floats representing the x, y and z angles, followed by an MTransformationMatrix Rotation Order constant, which together form an Euler rotation."""
+	def rotatePivot(self,space:int)->MPoint:
+		"""Returns the transform's rotate pivot component."""
+	def rotatePivotTranslation(self,space:int)->MVector:
+		"""Returns the transform's rotate pivot translation component."""
+	def rotation(self,space:int,asQuaternion:bool)->MEulerRotation|MQuaternion:
+		"""Returns the transform's rotation component as either an Euler rotation or a quaternion."""
+	def rotationComponents(self,space:int,asQuaternion:bool)->list[float|order]|list[float]:
+		"""Returns a list containing the four components of the transform's rotate component. If asQuaternion is True then the first three elements are the quaternion's unreal x, y, and z components, and the fourth is its real w component. If asQuaternion is False then the first three components are the x, y and z Euler rotation angles and the fourth is an MTransformationMatrix Rotation Order constant."""
+	def rotationOrder(self)->int:
+		"""Returns the order of rotations when the transform's rotate component is expressed as an euler rotation."""
+	def rotateOrientation(self,space:int)->MQuaternion:
+		"""Returns the rotation which orients the local rotation space."""
+	def scale(self)->list[float]:
+		"""Returns a list containing the transform's scale components."""
+	def scaleBy(self,seq:Sequence[float])->Self:
+		"""Multiplies the transform's scale components by the three floats in seq ."""
+	def scalePivot(self,space:int)->MPoint:
+		"""Returns the transform's scale pivot component."""
+	def scalePivotTranslation(self,space:int)->MVector:
+		"""Returns the transform's scale pivot translation component."""
+	def setLimit(self,limitType:int,value:float)->Self:
 		"""Sets the value of the specified limit."""
-	def setRestPosition(self,*args)->Any:
+	def setRestPosition(self,matrix:MTransformationMatrix)->Self:
 		"""Sets the transform's rest position matrix."""
-	def setRotatePivot(self,*args)->Any:
-		"""Sets the transform's rotate pivot."""
-	def setRotatePivotTranslation(self,*args)->Any:
-		"""Sets the transform's rotate pivot translation."""
-	def setRotation(self,*args)->Any:
-		"""Sets the transform's rotation using an MEulerRotation or MQuaternion."""
-	def setRotationComponents(self,*args)->Any:
-		"""Sets the transform's rotation using the individual components of an MEulerRotation or MQuaternion."""
-	def setRotationOrder(self,*args)->Any:
-		"""Sets the transform's rotation order."""
-	def setRotateOrientation(self,*args)->Any:
-		"""Sets the MQuaternion which orients the local rotation space."""
-	def setScale(self,*args)->Any:
-		"""Sets the transform's scale components."""
-	def setScalePivot(self,*args)->Any:
-		"""Sets the transform's scale pivot."""
-	def setScalePivotTranslation(self,*args)->Any:
-		"""Sets the transform's scale pivot translation."""
-	def setShear(self,*args)->Any:
-		"""Sets the transform's shear."""
-	def setTransformation(self,*args)->Any:
-		"""Sets the transform's attribute values to represent the given transformation matrix."""
-	def setTranslation(self,*args)->Any:
-		"""Sets the transform's translation."""
-	def shear(self,*args)->Any:
-		"""Returns a list containing the transform's shear components."""
-	def shearBy(self,*args)->Any:
-		"""Multiplies the transform's shear components by a sequence of three floats."""
-	def transformation(self,*args)->Any:
+	def setRotatePivot(self,pivot:MPoint,space:int,balance:bool)->Self:
+		"""Sets the transform's rotate pivot component."""
+	def setRotatePivotTranslation(self,trans:MVector,space:int)->Self:
+		"""Sets the transform's rotate pivot translation component."""
+	def setRotation(self,rot:MQuaternion|MEulerRotation,space:int)->Self:
+		"""Sets the transform's rotation component to rot ."""
+	def setRotationComponents(self,seq:Sequence[float|int],space:int,asQuaternion:bool)->Self:
+		"""Sets the transform's rotate component. If asQuaternion is True then seq must contain four floats representing the x, y, z and w components of a quaternion rotation. If asQuaternion is False then seq must contain three floats representing the x, y and z angles, followed by an MTransformationMatrix Rotation Order constant, which together form an Euler rotation."""
+	def setRotationOrder(self,order:int,reorder:bool)->Self:
+		"""Sets the transform's rotation order. If reorder is True then the X, Y and Z rotations will be modified so that the resulting rotation under the new order is the same as it was under the old. If reorder is False then the X, Y and Z rotations are unchanged."""
+	def setRotateOrientation(self,rot:MQuaternion,space:int,balance:bool)->Any:
+		"""Sets the rotation which orients the local rotation space. If balance is True then the transform's other components will be adjusted to give the same overall transformation as before."""
+	def setScale(self,seq:Sequence[float])->Self:
+		"""Sets the transform's scale components to the three floats in seq ."""
+	def setScalePivot(self,pivot:MPoint,space:int,balance:bool)->Self:
+		"""Sets the transform's scale pivot component."""
+	def setScalePivotTranslation(self,trans:MVector,space:int)->Self:
+		"""Sets the transform's scale pivot translation component."""
+	def setShear(self,seq:Sequence[float])->Self:
+		"""Sets the transform's shear component."""
+	def setTransformation(self,transformation:MTransformationMatrix)->Self:
+		"""Sets this transform's attribute values to represent the given transformation matrix."""
+	def setTranslation(self,trans:MVector,space:int)->Self:
+		"""Sets the transform's translation component."""
+	def shear(self)->list[float]:
+		"""Returns a list containing the transform's shear component."""
+	def shearBy(self,seq:Sequence[float])->Self:
+		"""Multiplies the transform's shear components by the elements of seq ."""
+	def transformation(self)->MTransformationMatrix:
 		"""Returns the transformation matrix represented by this transform."""
-	def translateBy(self,*args)->Any:
-		"""Adds an MVector to the transform's translation."""
-	def translation(self,*args)->Any:
-		"""Returns the transform's translation as an MVector."""
+	def translateBy(self,vec:MVector,space:int)->Self:
+		"""Adds vec to the transform's translation component."""
+	def translation(self,space:int)->MVector:
+		"""Returns the transform's translation component as a vector."""
 class MFnTripleIndexedComponent(MFnComponent):
 	"""This function set allows you to create, edit, and query triple indexed
 	components. Triple indexed components store 3 dimensional index values.
@@ -10058,10 +8691,10 @@ class MFnTypedAttribute(MFnAttribute):
 	def default(self,value:MObject)->None:...
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def attrType(self,*args)->Any:
+	def attrType(self)->int:
 		"""Returns the type of data handled by the attribute."""
-	def create(self,*args)->Any:
-		"""Creates a new type attribute, attaches it to the function set and returns it as an MObject."""
+	def create(self,longName:str,shortName:str,type:MTypeId|int,defaultValue:MObject)->MObject:
+		"""Creates a new attribute of the given type with the given longName , shortName and defaultValue , attaches it to the function set and returns it in an MObject ."""
 class MFnUInt64ArrayData(MFnData):
 	"""Function set for node data consisting of an array of MUint64."""
 	def __init__(self,*args)->None:
@@ -10074,14 +8707,22 @@ class MFnUInt64ArrayData(MFnData):
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args)->Any:
-		"""Returns the encapsulated array as an MUint64Array."""
-	def copyTo(self,*args)->Any:
-		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args)->Any:
-		"""Creates a new MUint64 array data object."""
-	def set(self,*args)->Any:
-		"""Sets values in the encapsulated array."""
+	def array(self)->MUint64Array:
+		"""Returns the encapsulated array as an MUint64Array . For performance reasons the returned array is a live reference to the encapsulated array so changes made to one directly affect the other. The returned array is only valid for as long as the function set retains the same data object. If the function set is destroyed or attached to a different object then the returned array should be discarded. Failure to do so could result in Maya becoming unstable."""
+	def copyTo(self,array:MUint64Array)->Self:
+		"""Replaces the elements of array with those in the encapsulated array."""
+	@overload
+	def create(self)->MObject:
+		"""Creates a new empty unsigned long array data object, attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def create(self,array:MUint64Array|Sequence[int])->MObject:
+		"""Creates a new unsigned long array data object, initializes it with the elements from array , attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def set(self,array:MUint64Array|Sequence[int])->Self:
+		"""Replaces the elements in the encapsulated array with those from the supplied array ."""
+	@overload
+	def set(self,value:int|int,index:int)->Self:
+		"""Sets the value of the index 'th array element."""
 class MFnUnitAttribute(MFnAttribute):
 	"""Functionset for creating and working with angle, distance and time attributes."""
 	@property
@@ -10096,33 +8737,37 @@ class MFnUnitAttribute(MFnAttribute):
 	kLast:int=4
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,*args)->Any:
-		"""Creates a new unit attribute, attaches it to the function set and returns it as an MObject."""
-	def getMax(self,*args)->Any:
-		"""Returns the attribute's hard maximum value. Returned MAngle and MDistance are always in radians and centimeters, respectively"""
-	def getMin(self,*args)->Any:
-		"""Returns the attribute's hard minimum value. Returned MAngle and MDistance are always in radians and centimeters, respectively"""
-	def getSoftMax(self,*args)->Any:
-		"""Returns the attribute's soft maximum value. Returned MAngle and MDistance are always in radians and centimeters, respectively"""
-	def getSoftMin(self,*args)->Any:
-		"""Returns the attribute's soft minimum value. Returned MAngle and MDistance are always in radians and centimeters, respectively"""
-	def hasMax(self,*args)->Any:
-		"""Returns True if the attribute has a hard maximum value."""
-	def hasMin(self,*args)->Any:
-		"""Returns True if the attribute has a hard minimum value."""
-	def hasSoftMax(self,*args)->Any:
-		"""Returns True if the attribute has a soft maximum value."""
-	def hasSoftMin(self,*args)->Any:
-		"""Returns True if the attribute has a soft minimum value."""
-	def setMax(self,*args)->Any:
-		"""Sets the attribute's hard maximum value."""
-	def setMin(self,*args)->Any:
-		"""Sets the attribute's hard minimum value."""
-	def setSoftMax(self,*args)->Any:
-		"""Sets the attribute's soft maximum value."""
-	def setSoftMin(self,*args)->Any:
-		"""Sets the attribute's soft minimum value."""
-	def unitType(self,*args)->Any:
+	@overload
+	def create(self,longName:str,shortName:str,type:int,defaultValue:float)->MObject:
+		"""Creates a new attribute of the given type with the given longName , shortName and defaultValue , attaches it to the function set and returns it in an MObject ."""
+	@overload
+	def create(self,longName:str,shortName:str,defaultValue:MAngle|MDistance|MTime)->MObject:
+		"""Creates a new angle, distance or time attribute, depending upon the type of the defaultValue , with the given longName , shortName , attaches it to the function set and returns it in an MObject ."""
+	def getMax(self)->MAngle|MDistance|MTime:
+		"""Returns the attribute's hard maximum value. Raises a RuntimeError if the attribute does not have a hard maximum."""
+	def getMin(self)->MAngle|MDistance|MTime:
+		"""Returns the attribute's hard minimum value. Raises a RuntimeError if the attribute does not have a hard minimum."""
+	def getSoftMax(self)->MAngle|MDistance|MTime:
+		"""Returns the attribute's soft maximum value. Raises a RuntimeError if the attribute does not have a soft maximum."""
+	def getSoftMin(self)->MAngle|MDistance|MTime:
+		"""Returns the attribute's soft minimum value. Raises a RuntimeError if the attribute does not have a soft minimum."""
+	def hasMax(self)->bool:
+		"""Returns True if a hard maximum value has been specified for the attribute."""
+	def hasMin(self)->bool:
+		"""Returns True if a hard minimum value has been specified for the attribute."""
+	def hasSoftMax(self)->bool:
+		"""Returns True if a soft maximum value has been specified for the attribute."""
+	def hasSoftMin(self)->bool:
+		"""Returns True if a soft minimum value has been specified for the attribute."""
+	def setMax(self,maxValue:float|MAngle|MDistance|MTime)->Self:
+		"""Sets the attribute's hard maximum to maxValue"""
+	def setMin(self,minValue:float|MAngle|MDistance|MTime)->Self:
+		"""Sets the attribute's hard minimum to minValue ."""
+	def setSoftMax(self,maxValue:float|MAngle|MDistance|MTime)->Self:
+		"""Sets the attribute's soft maximum to maxValue ."""
+	def setSoftMin(self,minValue:float|MAngle|MDistance|MTime)->Self:
+		"""Sets the attribute's soft minimum to minValue ."""
+	def unitType(self)->int:
 		"""Returns the type of data handled by the attribute."""
 class MFnVectorArrayData(MFnData):
 	"""Function set for node data consisting of an array of MVectors."""
@@ -10136,14 +8781,22 @@ class MFnVectorArrayData(MFnData):
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def array(self,*args)->Any:
-		"""Returns the encapsulated array as an MVectorArray."""
-	def copyTo(self,*args)->Any:
-		"""Replaces the elements of an array with those in the encapsulated array."""
-	def create(self,*args)->Any:
-		"""Creates a new MVector array data object."""
-	def set(self,*args)->Any:
-		"""Sets values in the encapsulated array."""
+	def array(self)->MVectorArray:
+		"""Returns the encapsulated array as an MVectorArray . For performance reasons the returned array is a live reference to the encapsulated array so changes made to one directly affect the other. The returned array is only valid for as long as the function set retains the same data object. If the function set is destroyed or attached to a different object then the returned array should be discarded. Failure to do so could result in Maya becoming unstable."""
+	def copyTo(self,array:MVectorArray)->Self:
+		"""Replaces the elements of array with those in the encapsulated array."""
+	@overload
+	def create(self)->MObject:
+		"""Creates a new empty MVector array data object, attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def create(self,array:MVectorArray|Sequence[MVector])->MObject:
+		"""Creates a new MVector array data object, initializes it with the elements from array , attaches it to the function set and returns an MObject which references it."""
+	@overload
+	def set(self,array:MVectorArray|Sequence[MVector])->Self:
+		"""Replaces the elements in the encapsulated array with those from the supplied array ."""
+	@overload
+	def set(self,value:MVector,index:int)->Self:
+		"""Sets the value of the index 'th array element."""
 class MGlobal:
 	"""Static class providing common API global functions.
 	"""
@@ -10177,34 +8830,20 @@ class MGlobal:
 
 		Returns the component selection mask."""
 	@staticmethod
-	def displayError(*args)->Any:
-		"""displayError(msg) -> None
-
-		Display an error in the script editor."""
+	def displayError(msg:str)->Any:
+		"""Display an error in the script editor."""
 	@staticmethod
-	def displayInfo(*args)->Any:
-		"""displayInfo(msg) -> None
-
-		Display an informational message in the script editor."""
+	def displayInfo(msg:str)->Any:
+		"""Display an informational message in the script editor."""
 	@staticmethod
-	def displayWarning(*args)->Any:
-		"""displayWarning(msg) -> None
-
-		Display a warning in the script editor."""
+	def displayWarning(msg:str)->Any:
+		"""Display a warning in the script editor."""
 	@staticmethod
-	def getActiveSelectionList(*args)->Any:
-		"""getActiveSelectionList(orderedSelectionIfAvailable=False) -> MSelectionList
-
-		Return an MSelectionList containing the nodes, components and
-		plugs currently selected in Maya. If orderedSelectionIfAvailable
-		is True, and tracking is enabled, will return the selected items
-		in the order that they were selected."""
+	def getActiveSelectionList()->MSelectionList:
+		"""Returns a copy of the active selection list."""
 	@staticmethod
-	def getFunctionSetList(*args)->Any:
-		"""getFunctionSetList(MObject) -> (string, string, ...)
-
-		Returns a tuple of strings that represent the type of each function
-		set that will accept this object."""
+	def getFunctionSetList(object:MObject)->tuple[str,...]:
+		"""Returns a tuple of strings that represent the type of each function set that will accept this object."""
 	@staticmethod
 	def getRichSelection(*args)->Any:
 		"""getRichSelection(defaultToActiveSelection=True) -> MRichSelection
@@ -10214,13 +8853,8 @@ class MGlobal:
 		and 'defaultToActiveSelection' is True, the current active selection
 		will be returned instead."""
 	@staticmethod
-	def getSelectionListByName(*args)->Any:
-		"""getSelectionListByName(name) -> MSelectionList
-
-		Returns an MSelectionList with all of the objects that match the
-		specified name. The name may use the same type of regular expressions
-		as can be used in MEL commands. For example, the pattern 'pCube*' will
-		match all occurrences of objects whose names begin with 'pCube'."""
+	def getSelectionListByName(name:str)->MSelectionList:
+		"""Returns a selection list with all of the objects that match the specified name . The name may use the same type of regular expressions as can be used in MEL commands. For example, the pattern "pCube*" will match all occurrences of objects whose names begin with "pCube"."""
 	@staticmethod
 	def miscSelectionMask(*args)->Any:
 		"""miscSelectionMask() -> MSelectionMask
@@ -13074,29 +11708,29 @@ class MMatrix:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def getElement(self,*args)->Any:
-		"""Returns the matrix element for the specified row and column."""
-	def setElement(self,*args)->Any:
-		"""Sets the matrix element for the specified row and column."""
-	def setToIdentity(self,*args)->Any:
+	def getElement(self,row:int,col:int)->float:
+		"""Returns the matrix element specified by row and col . For retrieving single elements this is faster than indexing into the matrix as a sequence because it does not require the creation of an entire row tuple simply to retrieve one element from that row."""
+	def setElement(self,row:int,col:int,value:float)->Self:
+		"""Set the matrix element specified by row and col to the given value ."""
+	def setToIdentity(self)->Self:
 		"""Sets this matrix to the identity."""
-	def setToProduct(self,*args)->Any:
-		"""Sets this matrix to the product of the two matrices passed in."""
-	def transpose(self,*args)->Any:
+	def setToProduct(self,left:MMatrix,right:MMatrix)->Self:
+		"""Sets this matrix to the product of left and right ."""
+	def transpose(self)->MMatrix:
 		"""Returns a new matrix containing this matrix's transpose."""
-	def inverse(self,*args)->Any:
-		"""Returns a new matrix containing this matrix's inverse."""
-	def adjoint(self,*args)->Any:
+	def inverse(self)->MMatrix:
+		"""Returns a new matrix containing this matrix's nverse."""
+	def adjoint(self)->MMatrix:
 		"""Returns a new matrix containing this matrix's adjoint."""
-	def homogenize(self,*args)->Any:
+	def homogenize(self)->MMatrix:
 		"""Returns a new matrix containing the homogenized version of this matrix."""
-	def det4x4(self,*args)->Any:
+	def det4x4(self)->float:
 		"""Returns this matrix's determinant."""
-	def det3x3(self,*args)->Any:
+	def det3x3(self)->float:
 		"""Returns the determinant of the 3x3 matrix formed by the first 3 elements of the first 3 rows of this matrix."""
-	def isEquivalent(self,*args)->Any:
-		"""Test for equivalence of two matrices, within a tolerance."""
-	def isSingular(self,*args)->Any:
+	def isEquivalent(self,other:MMatrix,tolerance:float)->bool:
+		"""Inexact equality test. Returns True if each element of this matrix is within tolerance of the corresponding element of other ."""
+	def isSingular(self)->bool:
 		"""Returns True if this matrix is singular."""
 class MMatrixArray:
 	"""Array of MMatrix values."""
@@ -13616,17 +12250,21 @@ class MNodeClass:
 		"""Name of the node class. This is the name that is given to the createNode command to create nodes of this type."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addExtensionAttribute(self,*args)->Any:
-		"""Adds an extension attribute to the node class. An extension attribute is a class-level attribute which has been added dynamically to a node class. Because it is added at the class level, all nodes of that class will have the given attribute, and will only store the attribute's value if it differs from the default. Returns the type of the object at the end of the path."""
-	def attribute(self,*args)->Any:
-		"""If passed an int: Returns the node class's i'th attribute. Raises IndexError if index is out of bounds.  If passed a string, Returns the node class's attribute having the given name. Returns MObject.kNullObj if the class does not have an attribute with that name."""
-	def getAttributes(self,*args)->Any:
+	def addExtensionAttribute(self,attr:MObject)->Self:
+		"""Adds an extension attribute to the node class. An extension attribute is a class-level attribute which has been added dynamically to a node class. Because it is added at the class level, all nodes of that class will have the given attribute, and will only store the attribute's value if it differs from the default."""
+	@overload
+	def attribute(self,index:int)->MObject:
+		"""Returns the node class's index 'th attribute. Raises IndexError if index is out of bounds."""
+	@overload
+	def attribute(self,name:str)->MObject:
+		"""Returns the node class's attribute having the given name . Returns MObject.kNullObj if the class does not have an attribute with that name."""
+	def getAttributes(self)->MObjectArray:
 		"""Returns an MObjectArray array containing all of the node class's attributes."""
-	def hasAttribute(self,*args)->Any:
-		"""Returns True if the node class has an attribute of the given name, False otherwise."""
-	def removeExtensionAttribute(self,*args)->Any:
+	def hasAttribute(self,name:str)->bool:
+		"""Returns True if the node class has an attribute of the given name , False otherwise."""
+	def removeExtensionAttribute(self,attr:MObject)->Self:
 		"""Removes an extension attribute from the node class. Raises ValueError if attr is not an extension attribute of this node class."""
-	def removeExtensionAttributeIfUnset(self,*args)->Any:
+	def removeExtensionAttributeIfUnset(self,attr:MObject)->bool:
 		"""Removes an extension attribute from the node class, but only if there are no nodes in the graph with non-default values for this attribute. Returns True if the attribute was removed, False otherwise. Raises ValueError if attr is not an extension attribute of this node class."""
 class MNodeMessage(MMessage):
 	"""Class used to register callbacks for dependency node messages of specific dependency nodes.
@@ -13899,12 +12537,12 @@ class MObject:
 		"""Return self>=value."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def hasFn(self,*args)->Any:
-		"""Tests whether object is compatible with the specified function set."""
-	def isNull(self,*args)->Any:
-		"""Tests whether there is an internal Maya object."""
-	def apiType(self,*args)->Any:
-		"""Returns the function set type for the object."""
+	def hasFn(self,fn:int)->bool:
+		"""Returns True if the internal Maya object supports the specified function set specified by fn ."""
+	def isNull(self)->bool:
+		"""Returns True if the MObject is not referring to any Maya internal internal object (i.e. it is equivalent to kNullObj)."""
+	def apiType(self)->int:
+		"""Returns a constant indicating the type of the internal Maya object. If the MObject is null MFn.kInvalid will be returned."""
 class MObjectArray:
 	"""Array of MObject values."""
 	@property
@@ -14126,38 +12764,42 @@ class MPlug:
 		"""Return self>=value."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def array(self,*args)->Any:
-		"""Returns a plug for the array of plugs of which this plug is an element."""
-	def asBool(self,*args)->Any:
-		"""Retrieves the plug's value, as a boolean."""
-	def asChar(self,*args)->Any:
-		"""Retrieves the plug's value, as a single-byte integer."""
-	def asDouble(self,*args)->Any:
-		"""Retrieves the plug's value, as a double-precision float."""
-	def asFloat(self,*args)->Any:
-		"""Retrieves the plug's value, as a single-precision float."""
-	def asInt(self,*args)->Any:
-		"""Retrieves the plug's value, as a regular integer."""
-	def asMAngle(self,*args)->Any:
-		"""Retrieves the plug's value, as an MAngle."""
-	def asMDistance(self,*args)->Any:
-		"""Retrieves the plug's value, as an MDistance."""
-	def asMObject(self,*args)->Any:
-		"""Retrieves the plug's value, as as an MObject containing a direct reference to the plug's data."""
+	def array(self)->MPlug:
+		"""Returns a plug for the array of plugs of which this plug is an element. Raises a TypeError if this plug is not an element of an array of plugs."""
+	def asBool(self,context:MDGContext)->bool:
+		"""Retrieves the plug's value, at the time specified by the context , as a boolean."""
+	def asChar(self,context:MDGContext)->int:
+		"""Retrieves the plug's value, at the time specified by the context , as a single-byte integer."""
+	def asDouble(self,context:MDGContext)->float:
+		"""Retrieves the plug's value, at the time specified by the context , as a double-precision float."""
+	def asFloat(self,context:MDGContext)->float:
+		"""Retrieves the plug's value, at the time specified by the context , as a single-precision float."""
+	def asInt(self,context:MDGContext)->int:
+		"""Retrieves the plug's value, at the time specified by the context , as a regular integer."""
+	def asMAngle(self,context:MDGContext)->MAngle:
+		"""Retrieves the plug's value, at the time specified by the context , as an MAngle ."""
+	def asMDistance(self,context:MDGContext)->MDistance:
+		"""Retrieves the plug's value, at the time specified by the context , as an MDistance ."""
+	def asMObject(self,context:MDGContext)->MObject:
+		"""Retrieves the plug's value, at the time specified by the context , and returns it as an MObject containing a direct reference to the plug's data."""
 	def asMDataHandle(self,*args)->Any:
 		"""Retrieve the current value of the attribute this plug references."""
-	def asMTime(self,*args)->Any:
-		"""Retrieves the plug's value, as an MTime."""
-	def asShort(self,*args)->Any:
-		"""Retrieves the plug's value, as a short integer."""
-	def asString(self,*args)->Any:
-		"""Retrieves the plug's value, as a string."""
-	def attribute(self,*args)->Any:
+	def asMTime(self,context:MDGContext)->MTime:
+		"""Retrieves the plug's value, at the time specified by the context , as an MTime ."""
+	def asShort(self,context:MDGContext)->int:
+		"""Retrieves the plug's value, at the time specified by the context , as a short integer."""
+	def asString(self,context:MDGContext)->str:
+		"""Retrieves the plug's value, at the time specified by the context , as a string."""
+	def attribute(self)->MObject:
 		"""Returns the attribute currently referenced by this plug."""
-	def child(self,*args)->Any:
-		"""Returns a plug for the specified child attribute of this plug."""
-	def connectedTo(self,*args)->Any:
-		"""Returns an array of plugs which are connected to this one."""
+	@overload
+	def child(self,attribute:MObject)->MPlug:
+		"""Returns a plug for the specified child attribute of this plug. Raises a TypeError if this plug is not compound."""
+	@overload
+	def child(self,index:int)->MPlug:
+		"""Returns a plug for the index 'th child of this plug. Raises a TypeError if this plug is not compound."""
+	def connectedTo(self,asDest:bool,asSrc:bool)->MPlugArray:
+		"""Returns an array of plugs which are connected to this one. If asDest is True connections in which this plug is the destination will be included in the array. If asSrc is True connections in which this plug is the source will be included in the array."""
 	def source(self,*args)->Any:
 		"""If this plug is a destination, return the source plug connected to it.
 		If this plug is not a destination, a null plug is returned.
@@ -14176,79 +12818,79 @@ class MPlug:
 		This method is very similar to the destinations() method.  The only difference is that the destinations() method skips over any unit conversion node connected to this source, and returns the destination of the unit conversion node.
 		destinationsWithConversionNode() does not skip over unit conversion nodes, and returns the destination plug on a unit conversion node, if present.
 		Note that the behavior of connectedTo() is identical to destinationsWithConversions(), that is, do not skip over unit conversion nodes."""
-	def connectionByPhysicalIndex(self,*args)->Any:
-		"""Returns a plug for the index'th connected element of this plug."""
-	def constructHandle(self,*args)->Any:
+	def connectionByPhysicalIndex(self,index:int)->MPlug:
+		"""Returns a plug for the index 'th connected element of this plug. Raises a TypeError if this plug is not an array of plugs."""
+	def constructHandle(self,block:MDataBlock)->MDataHandle:
 		"""Constructs a data handle for the plug."""
 	def copy(self,*args)->Any:
 		"""Copies one plug to another."""
-	def destructHandle(self,*args)->Any:
-		"""Destroys a data handle previously constructed using constructHandle()."""
-	def elementByLogicalIndex(self,*args)->Any:
-		"""Returns a plug for the element of this plug array having the specified logical index."""
-	def elementByPhysicalIndex(self,*args)->Any:
-		"""Returns a plug for the element of this plug array having the specified physical index. """
-	def evaluateNumElements(self,*args)->Any:
-		"""Like numElements() but evaluates all connected elements first to ensure that they are included in the count."""
-	def getExistingArrayAttributeIndices(self,*args)->Any:
-		"""Returns an array of all the plug's logical indices which are currently in use."""
-	def getSetAttrCmds(self,*args)->Any:
+	def destructHandle(self,handle:MDataHandle)->Self:
+		"""Destroys a data handle previously constructed using constructHandle() ."""
+	def elementByLogicalIndex(self,index:int)->MPlug:
+		"""Returns a plug for the element of this plug array having the specified logical index . Raises a TypeError if this plug is not an array of plugs."""
+	def elementByPhysicalIndex(self,index:int)->MPlug:
+		"""Returns a plug for the element of this plug array having the specified physical index . Raises a TypeError if this plug is not an array of plugs."""
+	def evaluateNumElements(self)->int:
+		"""Like numElements() but evaluates all connected elements first to ensure that they are included in the count. Raises a TypeError if the plug is not a plug array."""
+	def getExistingArrayAttributeIndices(self)->MIntArray:
+		"""Returns an array of all the plug's logical indices which are currently in use. Raises a TypeError if the plug is not a plug array."""
+	def getSetAttrCmds(self,valueSelector:int,useLongNames:bool)->list[str]:
 		"""Returns a list of strings containing the setAttr commands (in MEL syntax) for this plug and all of its descendents."""
 	def isDefaultValue(self,*args)->Any:
 		"""Returns a value indicating if the plug's value is equivalent to the plug's default value."""
-	def isFreeToChange(self,*args)->Any:
+	def isFreeToChange(self)->int:
 		"""Returns a value indicating if the plug's value can be changed, after taking into account the effects of locking and connections."""
-	def logicalIndex(self,*args)->Any:
-		"""Returns this plug's logical index within its parent array."""
-	def name(self,*args)->Any:
+	def logicalIndex(self)->int:
+		"""Returns this plug's logical index within its parent array. Raises a TypeError if the plug is not an element of an array of plugs."""
+	def name(self)->str:
 		"""Returns the name of the plug."""
-	def node(self,*args)->Any:
+	def node(self)->MObject:
 		"""Returns the node that this plug belongs to."""
-	def numChildren(self,*args)->Any:
-		"""Returns the number of children this plug has."""
-	def numConnectedChildren(self,*args)->Any:
-		"""Returns the number of this plug's children which have connections."""
-	def numConnectedElements(self,*args)->Any:
-		"""Returns the number of this plug's elements which have connections."""
-	def numElements(self,*args)->Any:
-		"""Returns the number of the plug's logical indices which are currently in use. Connected elements which have not yet been evaluated may not yet fully exist and may be excluded from the count."""
-	def parent(self,*args)->Any:
-		"""Returns a plug for the parent of this plug."""
-	def partialName(self,*args)->Any:
+	def numChildren(self)->int:
+		"""Returns the number of children this plug has. Raises a TypeError if the plug is not compound."""
+	def numConnectedChildren(self)->int:
+		"""Returns the number of this plug's children which have connections. Raises a TypeError if the plug is not compound."""
+	def numConnectedElements(self)->int:
+		"""Returns the number of this plug's elements which have connections. Raises a TypeError if the plug is not an array of plugs."""
+	def numElements(self)->int:
+		"""Returns the number of the plug's logical indices which are currently in use. Connected elements which have not yet been evaluated may not yet fully exist and may be excluded from the count. Raises a TypeError if the plug is not a plug array."""
+	def parent(self)->MPlug:
+		"""Returns a plug for the parent of this plug. Raises a TypeError if this plug is not the child of a compound plug."""
+	def partialName(self,includeNodeName:bool,includeNonMandatorIndices:bool,includeInstancedIndices:bool,useAlias:bool,useFullAttributePath:bool,useLongNames:bool)->str:
 		"""Returns the name of the plug, formatted according to various criteria."""
-	def selectAncestorLogicalIndex(self,*args)->Any:
-		"""Changes the logical index of the specified attribute in the plug's path."""
-	def setAttribute(self,*args)->Any:
+	def selectAncestorLogicalIndex(self,index:int,attribute:MObject)->Self:
+		"""Changes the logical index of the specified attribute in the plug's path. Raises a TypeError if the current plug is networked. or if attribute is not an array."""
+	def setAttribute(self,attr:MObject)->Self:
 		"""Switches the plug to reference the given attribute of the same node as the previously referenced attribute."""
-	def setBool(self,*args)->Any:
+	def setBool(self,value:bool)->Self:
 		"""Sets the plug's value as a boolean."""
-	def setChar(self,*args)->Any:
+	def setChar(self,value:int)->Self:
 		"""Sets the plug's value as a single-byte integer."""
-	def setDouble(self,*args)->Any:
+	def setDouble(self,value:float)->Self:
 		"""Sets the plug's value as a double-precision float."""
-	def setFloat(self,*args)->Any:
+	def setFloat(self,value:float)->Self:
 		"""Sets the plug's value as a single-precision float."""
-	def setInt(self,*args)->Any:
+	def setInt(self,value:int)->Self:
 		"""Sets the plug's value as a regular integer."""
-	def setMAngle(self,*args)->Any:
-		"""Sets the plug's value as an MAngle."""
-	def setMDataHandle(self,*args)->Any:
-		"""Sets the plug's value as a data handle."""
-	def setMDistance(self,*args)->Any:
-		"""Sets the plug's value as an MDistance."""
-	def setMObject(self,*args)->Any:
-		"""Sets the plug's value as an MObject."""
+	def setMAngle(self,value:MAngle)->Self:
+		"""Sets the plug's value as an MAngle ."""
+	def setMDataHandle(self,value:MDataHandle)->Self:
+		"""Sets the plug's value using a data handle."""
+	def setMDistance(self,value:MDistance)->Self:
+		"""Sets the plug's value as an MDistance ."""
+	def setMObject(self,value:MObject)->Self:
+		"""Sets the plug's value as an MObject ."""
 	def proxied(self,*args)->Any:
 		"""Returns the proxied plug for this plug."""
-	def setMPxData(self,*args)->Any:
+	def setMPxData(self,value:MPxData)->Self:
 		"""Sets the plug's value using custom plug-in data."""
-	def setMTime(self,*args)->Any:
-		"""Sets the plug's value as an MTime."""
-	def setNumElements(self,*args)->Any:
-		"""Pre-allocates space for count elements in an array of plugs."""
-	def setShort(self,*args)->Any:
+	def setMTime(self,value:MTime)->Self:
+		"""Sets the plug's value as an MTime ."""
+	def setNumElements(self,count:int)->Self:
+		"""Pre-allocates space for count elements in an array of plugs. Raises a TypeError if the plug is not a plug array or if it already has elements."""
+	def setShort(self,value:int)->Self:
 		"""Sets the plug's value as a short integer."""
-	def setString(self,*args)->Any:
+	def setString(self,value:str)->Self:
 		"""Sets the plug's value as a string."""
 	def isExactlyEqual(self,*args)->Any:
 		"""Returns true if both plugs refer to the same node, attribute and multi-index. If either or both plugs are null, the plugs are not considered equal."""
@@ -14362,16 +13004,16 @@ class MPoint:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def cartesianize(self,*args)->Any:
-		"""Convert point to cartesian form."""
-	def rationalize(self,*args)->Any:
-		"""Convert point to rational form."""
-	def homogenize(self,*args)->Any:
-		"""Convert point to homogenous form."""
-	def distanceTo(self,*args)->Any:
-		"""Return distance between this point and another."""
-	def isEquivalent(self,*args)->Any:
-		"""Test for equivalence of two points, within a tolerance."""
+	def cartesianize(self)->Self:
+		"""Converts this point to cartesian form."""
+	def rationalize(self)->Self:
+		"""Converts this point to rational form."""
+	def homogenize(self)->Self:
+		"""Converts this point to homogenous form."""
+	def distanceTo(self,other:MPoint)->float:
+		"""Returns the distance between this point and other ."""
+	def isEquivalent(self,other:MPoint,tol:float)->bool:
+		"""Returns True if the coordinates of this point and other are equal to within a tolerance of tol ."""
 class MPointArray:
 	"""Array of MPoint values."""
 	@property
@@ -14537,44 +13179,44 @@ class MPxCommand:
 	kNoArg:int=3
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def doIt(self,*args)->Any:
+	def doIt(self,args:MArgList)->None:
 		"""Called by Maya to execute the command."""
-	def undoIt(self,*args)->Any:
+	def undoIt(self)->None:
 		"""Called by Maya to undo a previously executed command."""
-	def redoIt(self,*args)->Any:
+	def redoIt(self)->None:
 		"""Called by Maya to redo a previously undone command."""
-	def isUndoable(self,*args)->Any:
+	def isUndoable(self)->bool:
 		"""Called by Maya to determine if the command supports undo."""
-	def hasSyntax(self,*args)->Any:
+	def hasSyntax(self)->bool:
 		"""Called by Maya to determine if the command provides an MSyntax object describing its syntax."""
-	def syntax(self,*args)->Any:
+	def syntax(self)->MSyntax:
 		"""Returns the command's MSyntax object, if it has one."""
 	@staticmethod
-	def displayInfo(*args)->Any:
+	def displayInfo(msg:str,showLineNumbers:bool)->None:
 		"""Display an informational message."""
 	@staticmethod
-	def displayWarning(*args)->Any:
+	def displayWarning(msg:str,showLineNumbers:bool)->None:
 		"""Display a warning message."""
 	@staticmethod
-	def displayError(*args)->Any:
+	def displayError(msg:str,showLineNumbers:bool)->None:
 		"""Display an error message."""
 	@staticmethod
-	def clearResult(*args)->Any:
+	def clearResult()->None:
 		"""Clears the command's result."""
 	@staticmethod
-	def setResult(*args)->Any:
+	def setResult(value:bool|int|float|str|Sequence[float]|Sequence[str])->None:
 		"""Set the value of the result to be returned by the command."""
 	@staticmethod
-	def appendToResult(*args)->Any:
+	def appendToResult(value:bool|int|float|str|Sequence[float]|Sequence[str])->None:
 		"""Append a value to the result to be returned by the command."""
 	@staticmethod
-	def currentResultType(*args)->Any:
+	def currentResultType()->int:
 		"""Returns the type of the current result."""
 	@staticmethod
-	def isCurrentResultArray(*args)->Any:
-		"""Returns true if the command's current result is an array of values."""
+	def isCurrentResultArray()->bool:
+		"""Returns True if the command's current result is an array of values."""
 	@staticmethod
-	def currentResult(*args)->Any:
+	def currentResult()->bool|int|float|str|list[int]|list[float]|list[str]:
 		"""Returns the command's current result."""
 class MPxData:
 	"""Base Class for User-defined Dependency Graph Data Types."""
@@ -15772,48 +14414,58 @@ class MQuaternion:
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
 	@staticmethod
-	def slerp(*args)->Any:
-		"""Returns the quaternion at a given interpolation value along the shortest path between two quaternions."""
+	def slerp(p:MQuaternion,q:MQuaternion,t:float,spin:int)->MQuaternion:
+		"""Spherical interpolation of unit quaternions. Returns a quaternion along the shortest path (in quaternion space) between p and q , at interpolation value t . Thus a value of 0.0 will return p while a value of 1.0 will return q . spins gives the number of complete rotations about the axis which must occur when going from p to q ."""
 	@staticmethod
-	def squad(*args)->Any:
-		"""Returns the quaternion at a given interpolation value along a cubic curve segment in quaternion space."""
+	def squad(p:MQuaternion,a:MQuaternion,b:MQuaternion,q:MQuaternion,t:float,spin:int)->MQuaternion:
+		"""Interpolation along a cubic curve segment in quaternion space. Returns a quaternion along the cubic curve segment which interpolates p and q , at interpolation value t . Thus a value of 0.0 will return p while a value of 1.0 will return q . The curve is C1 continuous with a and b as intermediate points. spins gives the number of complete rotations about the axis which must occur when going from p to q ."""
 	@staticmethod
-	def squadPt(*args)->Any:
-		"""Returns a new quaternion representing an intermediate point which when used with squad() will produce a C1 continuous spline."""
-	def asAxisAngle(self,*args)->Any:
-		"""Returns the rotation as a tuple containing an axis vector and an angle in radians about that axis."""
-	def asEulerRotation(self,*args)->Any:
-		"""Returns the rotation as an equivalent MEulerRotation."""
-	def asMatrix(self,*args)->Any:
-		"""Returns the rotation as an equivalent rotation matrix."""
-	def conjugate(self,*args)->Any:
-		"""Returns the conjugate of this quaternion (i.e. x, y and z components negated)."""
-	def conjugateIt(self,*args)->Any:
+	def squadPt(q0:MQuaternion,q1:MQuaternion,q2:MQuaternion)->MQuaternion:
+		"""Returns a new quaternion representing an intermediate point (in quaternion space) which when used with squad() will produce a C1 continuous spline."""
+	def asAxisAngle(self)->tuple[MVector,float]:
+		"""Returns a tuple containing an axis and angle in radians which is equivalent to the rotation represented by the quaternion."""
+	def asEulerRotation(self)->MEulerRotation:
+		"""Returns the quaternion as an equivalent euler rotation."""
+	def asMatrix(self)->MMatrix:
+		"""Returns the quaternion as an equivalent rotation matrix."""
+	def conjugate(self)->MQuaternion:
+		"""Returns a new quaternion containing the conjugate of this one (i.e. x, y and z components negated)."""
+	def conjugateIt(self)->Self:
 		"""In-place conjugation (i.e. negates the x, y and z components)."""
-	def exp(self,*args)->Any:
+	def exp(self)->MQuaternion:
 		"""Returns a new quaternion containing the exponent of this one."""
-	def inverse(self,*args)->Any:
+	def inverse(self)->MQuaternion:
 		"""Returns a new quaternion containing the inverse of this one."""
-	def invertIt(self,*args)->Any:
+	def invertIt(self)->Self:
 		"""In-place inversion."""
-	def isEquivalent(self,*args)->Any:
-		"""Returns True if the distance between the two quaternions (in quaternion space) is less than or equal to the given tolerance."""
-	def log(self,*args)->Any:
+	def isEquivalent(self,other:MQuaternion,tolerance:float)->bool:
+		"""Returns True if the distance between the two quaternions (in quaternion space) is less than or equal to tolerance ."""
+	def log(self)->MQuaternion:
 		"""Returns a new quaternion containing the natural log of this one."""
-	def negateIt(self,*args)->Any:
+	def negateIt(self)->Self:
 		"""In-place negation of the x, y, z and w components."""
-	def normal(self,*args)->Any:
+	def normal(self)->MQuaternion:
 		"""Returns a new quaternion containing the normalized version of this one (i.e. scaled to unit length)."""
-	def normalizeIt(self,*args)->Any:
+	def normalizeIt(self)->Self:
 		"""In-place normalization (i.e. scales the quaternion to unit length)."""
-	def setToXAxis(self,*args)->Any:
-		"""Set this quaternion to be equivalent to a rotation of a given angle, in radians, about the X-axis."""
-	def setToYAxis(self,*args)->Any:
-		"""Set this quaternion to be equivalent to a rotation of a given angle, in radians, about the Y-axis."""
-	def setToZAxis(self,*args)->Any:
-		"""Set this quaternion to be equivalent to a rotation of a given angle, in radians, about the Z-axis."""
-	def setValue(self,*args)->Any:
-		"""Set the value of this quaternion to that of the specified MQuaternion, MEulerRotation, MMatrix or MVector and angle."""
+	def setToXAxis(self,angle:float)->Self:
+		"""Set the value of this quaternion to be equivalent to a rotation of angle radians about the X-axis."""
+	def setToYAxis(self,angle:float)->Self:
+		"""Set the value of this quaternion to be equivalent to a rotation of angle radians about the Y-axis."""
+	def setToZAxis(self,angle:float)->Self:
+		"""Set the value of this quaternion to be equivalent to a rotation of angle radians about the Z-axis."""
+	@overload
+	def setValue(self,quat:MQuaternion)->Self:
+		"""Set the value of this quaternion to be the same as quat ."""
+	@overload
+	def setValue(self,rot:MEulerRotation)->Self:
+		"""Set the value of this quaternion to be equivalent to the rotation rot ."""
+	@overload
+	def setValue(self,mat:MMatrix)->Self:
+		"""Set the value of this quaternion to be equivalent to the rotation derived from decomposing mat ."""
+	@overload
+	def setValue(self,axis:MVector,angle:float)->Self:
+		"""Set the value of this quaternion to be equivalent to a rotation of angle radians about axis ."""
 class MRampAttribute:
 	"""Functionset for creating and working with ramp attributes."""
 	@property
@@ -15829,30 +14481,30 @@ class MRampAttribute:
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@staticmethod
-	def createColorRamp(*args)->Any:
+	def createColorRamp(longName:str,shortName:str)->MObject:
 		"""Creates and returns a new color ramp attribute."""
 	@staticmethod
-	def createCurveRamp(*args)->Any:
+	def createCurveRamp(longName:str,shortName:str)->MObject:
 		"""Creates and returns a new curve ramp attribute."""
 	@staticmethod
 	def createRamp(*args)->Any:
 		"""Creates and returns a new color or curve ramp attribute initialized with values."""
-	def addEntries(self,*args)->Any:
-		"""Adds entries to the ramp."""
-	def deleteEntries(self,*args)->Any:
-		"""Removes from the ramp those entries with the specified indices."""
-	def getEntries(self,*args)->Any:
-		"""Returns a tuple containing all of the entries in the ramp."""
-	def getValueAtPosition(self,*args)->Any:
-		"""Returns the value of the entry at the given position."""
-	def numEntries(self,*args)->Any:
+	def addEntries(self,positions:Sequence[float],values:Sequence[float|MColor],interps:Sequence[int])->Self:
+		"""Adds entries to the ramp. For a curve ramp values must be a sequence of floats, for color ramps it must be a sequence of MColors. A TypeError will be raised if the wrong type of values are supplied."""
+	def deleteEntries(self,indices:Sequence[int])->Self:
+		"""Removes from the ramp those entries with the specified indices . Raises a ValueError if an attempt is made to remove the last remaining entry from the ramp."""
+	def getEntries(self)->tuple[indices,positions,values,interps]:
+		"""Returns a tuple containing all of the entries in the ramp. The first element of the tuple is an MIntArray containing the indices . The second element is an MFloatArray containing the positions . The third element is the values , which is an MFloatArray for a curve ramp or an MColorArray for a color ramp. The fourth and final element of the tuple is an MIntArray containing the interps , which are Interpolation Type constants."""
+	def getValueAtPosition(self,position:float)->float|MColor:
+		"""Returns the value of the entry at the given position . The value will be a float for a curve ramp or an MColor for a color ramp."""
+	def numEntries(self)->int:
 		"""Returns the number of entries in the ramp."""
-	def setInterpolationAtIndex(self,*args)->Any:
-		"""Sets the interpolation of the entry at the given index."""
-	def setPositionAtIndex(self,*args)->Any:
-		"""Sets the position of the entry at the given index."""
-	def setValueAtIndex(self,*args)->Any:
-		"""Sets the value of the entry at the given index."""
+	def setInterpolationAtIndex(self,interp:int,index:int)->Self:
+		"""Sets the interpolation of the entry at the given index ."""
+	def setPositionAtIndex(self,position:float,index:int)->Self:
+		"""Sets the position of the entry at the given index ."""
+	def setValueAtIndex(self,value:float|MColor,index:int)->Self:
+		"""Sets the value of the entry at the given index . The value must be a float for a curve ramp or an MColor for a color ramp. A TypeError will be raised if the wrong type of value is supplied."""
 	def setRamp(self,*args)->Any:
 		"""Set this ramp with one or multiple entries. Current entries are removed before adding the new one(s)."""
 	def pack(self,*args)->Any:
@@ -16223,111 +14875,46 @@ class MSelectionList:
 	kRemoveFromList:int=2
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def add(self,*args)->Any:
-		"""add(pattern, searchChildNamespaces=False) -> self
-		add(item, mergeWithExisting=True) -> self
-
-
-		The first version adds to the list any nodes, DAG paths, components
-		or plugs which match the given the pattern string.
-
-		The second version adds the specific item to the list, where the
-		item can be a plug (MPlug), a node (MObject), a DAG path (MDagPath)
-		or a component (tuple of (MDagPath, MObject) )."""
-	def clear(self)->None:
-		"""clear() -> self
-
-		Empties the selection list."""
-	def copy(self,*args)->Any:
-		"""copy(src) -> self
-
-		Replaces the contents of the selection list with a copy of those from src (MSelectionList)."""
-	def getComponent(self,*args)->Any:
-		"""getComponent(index) -> (MDagPath, MObject)
-
-		Returns the index'th item of the list as a component, represented by
-		a tuple containing an MDagPath and an MObject. If the item is just a
-		DAG path without a component then MObject.kNullObj will be returned
-		in the second element of the tuple. Raises TypeError if the item is
-		neither a DAG path nor a component. Raises IndexError if index is
-		out of range."""
-	def getDagPath(self,*args)->Any:
-		"""getDagPath(index) -> MDagPath
-
-		Returns the DAG path associated with the index'th item of the list.
-		Raises TypeError if the item is neither a DAG path nor a component.
-		Raises IndexError if index is out of range."""
-	def getDependNode(self,*args)->Any:
-		"""getDependNode(index) -> MObject
-
-		Returns the node associated with the index'th item, whether it be a
-		dependency node, DAG path, component or plug.
-		Raises kFailure if there is no dependency node associated with the current item.
-		Raises IndexError if index is out of range."""
-	def getPlug(self,*args)->Any:
-		"""getPlug(index) -> MPluggetPlug(index, convertComponents) -> MPlug
-
-		Returns the index'th item of the list as a plug. Raises TypeError if
-		the item is not a plug. Raises IndexError if index is out of range.
-		If convertComponents is True then components in the selection list that have a corresponding plug will return that instead.
-		Note: This only works if the component selection can be converted into a single plug - single component or all components selected."""
-	def getSelectionStrings(self,*args)->Any:
-		"""getSelectionStrings(index=None) -> (string, string, ...)
-
-		Returns a tuple containing the string representation of the
-		specified item. For nodes, DAG paths, plugs and contiguous
-		components the tuple will only contain a single string, but for non-
-		contiguous components there will be a separate string for each
-		distinct block of contiguous elements. If index is not specified
-		then the string representations of all the items in the selection
-		list are returned. Raises IndexError if index is out of bounds."""
-	def hasItem(self,*args)->Any:
-		"""hasItem(item) -> bool
-
-		Returns True if the given item is on the selection list. For a
-		component this means that all of the elements of the component must
-		be on the list. A component is passed as a tuple containing the
-		MDagPath of the DAG node and an MObject containing the component."""
-	def hasItemPartly(self,*args)->Any:
-		"""hasItemPartly(dagPath, component) -> bool
-
-		Returns True if at least one of the component's elements is on the
-		selection list. Raises TypeError if dagPath is invalid or component
-		does not contain a component."""
-	def isEmpty(self,*args)->Any:
-		"""isEmpty() -> bool
-
-		Returns True if the selection list is empty."""
-	def length(self,*args)->Any:
-		"""length() -> int
-
-		Returns the number of items on the selection list."""
-	def merge(self,*args)->Any:
-		"""merge(other, strategy=kMergeNormal) -> self
-		merge(dagPath, component, strategy=kMergeNormal) -> self
-
-		The first version merges the items from another selection list in
-		with those already on the list, using the given strategy.
-
-		The second version merges the specified component with those already
-		on the list."""
-	def remove(self,item)->None:
-		"""remove(index) -> self
-
-		Removes the index'th item from the list. Raises IndexError if the
-		index is out of range."""
-	def replace(self,*args)->Any:
-		"""replace(index, newItem) -> self
-
-		Replaces the index'th item on the list with a new item. A component
-		is passed as a tuple containing the MDagPath of the DAG node and an
-		MObject containing the component. Raises IndexError if the index is
-		out of range."""
-	def toggle(self,*args)->Any:
-		"""toggle(dagPath, component) -> self
-
-		Removes from the list those elements of the given component which
-		are already on it and adds those which are not."""
+	@overload
+	def add(self,pattern:str,searchChildNamespaces:bool)->Self:
+		"""Adds to the list any nodes, DAG paths, components or plugs which match the given pattern ."""
+	@overload
+	def add(self,item:MObject|MDagPath|MPlug|tuple[MDagPath|MObject,...],mergeWithExisting:bool)->Self:
+		"""Adds a node, DAG path, plug or component to the end of the selection list. A component is passed as a tuple containing the MDagPath of the DAG node and an MObject containing the component. If mergeWithExisting is True and the item is already on the list then those existing instances of the item will be removed, leaving just the newly added instance at the end of the list. For components this applies at the component element level, meaning that any overlapping elements will be removed from the existing components. If mergeWithExisting is False then the new item is added to the end of the list without affecting any existing instances of the item already on the list."""
+	def clear(self)->Self:
+		"""Empties the selection list."""
+	def copy(self,src:MSelectionList)->Self:
+		"""Replaces the contents of the selection list with a copy of those from src ."""
+	def getComponent(self,index:int)->tuple[MDagPath,MObject]:
+		"""Returns the index 'th item of the list as a component, represented by a tuple containing the item's MDagPath and an MObject containing its component. If the item is just a DAG path without a component then MObject.kNullObj will be returned in the second element of the tuple. Raises TypeError if the item is neither a DAG path nor a component. Raises IndexError if index is out of range."""
+	def getDagPath(self,index:int)->MDagPath:
+		"""Returns the DAG path associated with the index'th item of the list. Raises TypeError if the item is neither a DAG path nor a component. Raises IndexError if index is out of range. Release Note : In Maya 2012 Gold this method returned a tuple containing both the DAG path and the component. In Maya 2012 HotFix 1 that functionality is supplied by the getComponent() method and this method returns only the DAG path. Existing code which uses this method will have to be modified accordingly."""
+	def getDependNode(self,index:int)->MObject:
+		"""Returns the node associated with the index 'the item, whether it be a dependency node, DAG path, component or plug. Raises IndexError if index is out of range."""
+	def getPlug(self,index:int)->MPlug:
+		"""Returns the index 'th item of the list as a plug. Raises TypeError if the item is not a plug. Raises IndexError if index is out of range."""
+	def getSelectionStrings(self,index:int)->tuple[str,...]:
+		"""Returns a tuple containing the string representation of the specified item. For nodes, DAG paths, plugs and contiguous components the tuple will only contain a single string, but for non-contiguous components there will be a separate string for each distinct block of contiguous elements. If index is not specified then the string representations of all the items in the selection list are returned. Raises IndexError if index is out of bounds."""
+	def hasItem(self,item:MObject|MDagPath|MPlug|tuple[MDagPath|MObject,...])->bool:
+		"""Returns True if the given item is on the selection list. For a component this means that all of the elements of the component must be on the list. A component is passed as a tuple containing the MDagPath of the DAG node and an MObject containing the component."""
+	def hasItemPartly(self,dagPath:MDagPath,component:MObject)->bool:
+		"""Returns True if at least one of the component's elements is on the selection list. Raises TypeError if dagPath is invalid or component does not contain a component."""
+	def isEmpty(self)->bool:
+		"""Returns True if the selection list is empty."""
+	def length(self)->int:
+		"""Returns the number of items on the selection list."""
+	@overload
+	def merge(self,other:MSelectionList,strategy:int)->Self:
+		"""Merges the items from another selection list in with those already on the list, using the given strategy ."""
+	@overload
+	def merge(self,dagPath:MDagPath,component:MObject,strategy:int)->Self:
+		"""Merges the specified<span> component in with those already on the list, using the given<span> strategy ."""
+	def remove(self,index:int)->Self:
+		"""Removes the index 'th item from the list. Raises IndexError if the index is out of range."""
+	def replace(self,index:int,newItem:MObject|MDagPath|MPlug|tuple[MDagPath|MObject,...])->Self:
+		"""Replaces the index 'th item on the list with newItem . A component is passed as a tuple containing the MDagPath of the DAG node and an MObject containing the component. Raises IndexError if the index is out of range."""
+	def toggle(self,dagPath:MDagPath,component:MObject)->Self:
+		"""Removes from the list those elements of the given component which are already on it and adds those which are not."""
 	def intersect(self,*args)->Any:
 		"""intersect(other, expandToLeaves=False) -> self
 
@@ -16599,26 +15186,26 @@ class MSyntax:
 	kLastObjectFormat:int=4
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addArg(self,*args)->Any:
+	def addArg(self,argType:int)->Self:
 		"""Add a command argument."""
-	def addFlag(self,*args)->Any:
-		"""Add a flag and its arguments."""
-	def makeFlagMultiUse(self,*args)->Any:
+	def addFlag(self,shortName:str,longName:str,argTypes:Any)->Self:
+		"""Add a flag and its arguments. Raises TypeError if more than 6 argument types are provided."""
+	def makeFlagMultiUse(self,flagName:str)->Self:
 		"""Set whether a flag may be used multiple times on the command line."""
-	def makeFlagQueryWithFullArgs(self,*args)->Any:
+	def makeFlagQueryWithFullArgs(self,flagName:str,argsOptional:bool)->Self:
 		"""Set whether a flag requires its args when queried."""
-	def maxObjects(self,*args)->Any:
-		"""Returns the maximum number of objects which can be passed to the command."""
-	def minObjects(self,*args)->Any:
-		"""Returns the minimum number of objects which can be passed to the command."""
-	def setMaxObjects(self,*args)->Any:
-		"""Sets the maximum number of objects which can be passed to the command."""
-	def setMinObjects(self,*args)->Any:
-		"""Sets the minimum number of objects which can be passed to the command."""
-	def setObjectType(self,*args)->Any:
-		"""Set the type and number of objects to be passed to the command."""
-	def useSelectionAsDefault(self,*args)->Any:
-		"""If set to True then when no objects are provided on the command-line Maya will pass the current selection instead."""
+	def maxObjects(self)->int:
+		"""Returns the maximum number of objects which can be passed to the command. If no maximum has been set then the maximum will be unbounded and this method will return 0, which unfortunately is indistinguishable from the situation where the maximum has been set to 0."""
+	def minObjects(self)->int:
+		"""Returns the minimum number of objects which can be passed to the command. If no minimum has been set then the minimum will default to 0."""
+	def setMaxObjects(self,max:int)->Self:
+		"""Sets the maximum number of objects which can be passed to the command. If no maximum has been set then the maximum will be unbounded. Raises ValueError if max is negative."""
+	def setMinObjects(self,min:int)->Self:
+		"""Sets the minimum number of objects which can be passed to the command. If no minimum has been set then the minimum will be 0. Raises ValueError if min is negative."""
+	def setObjectType(self,objType:int,min:Any,max:Any)->Self:
+		"""Set the type and number of objects to be passed to the command. Raises ValueError if min or max is negative, or if max is less than min ."""
+	def useSelectionAsDefault(self,useSelection:bool)->Self:
+		"""If set to True then when no objects are provided on the command-line Maya will pass the current selection instead. Defaults to False."""
 class MTime:
 	"""Manipulate time data."""
 	@property
@@ -16732,16 +15319,16 @@ class MTime:
 	def __itruediv__(self,other)->Any:
 		"""Return self/=value."""
 	@staticmethod
-	def uiUnit(*args)->Any:
-		"""Return the units used to display time in Maya's UI."""
+	def uiUnit()->int:
+		"""Returns the unit type currently used by Maya's UI to display time values."""
 	@staticmethod
-	def setUIUnit(*args)->Any:
-		"""Change the units used to display time in Maya's UI."""
+	def setUIUnit(unit:int)->None:
+		"""Sets the unit type to be used by Maya's UI to display time values."""
 	@staticmethod
 	def ticksPerSecond(*args)->Any:
 		"""Returns the number of ticks per second, the smallest unit of time available."""
-	def asUnits(self,*args)->Any:
-		"""Return the time value, converted to the specified units."""
+	def asUnits(self,unit:int)->float:
+		"""Returns the time value converted to the specified unit ."""
 class MTimeArray:
 	"""Array of MTime values."""
 	@property
@@ -16872,71 +15459,71 @@ class MTransformationMatrix:
 		"""Return self>=value."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def asMatrix(self,*args)->Any:
-		"""Interpolates between the identity transformation and that currently in the object, returning the result as an MMatrix."""
-	def asMatrixInverse(self,*args)->Any:
+	def asMatrix(self,interp:float)->MMatrix:
+		"""Interpolates between the identity transformation and that currently in the object, returning the result as an MMatrix . When interp is 0.0 the result will be the identity matrix. When it is 1.0 the result will be the full transformation. If interp is less than 0.0 or greater than 1.0 the result will properly extrapolated."""
+	def asMatrixInverse(self)->MMatrix:
 		"""Returns the inverse of the matrix representing the transformation."""
-	def asRotateMatrix(self,*args)->Any:
+	def asRotateMatrix(self)->MMatrix:
 		"""Returns the matrix which takes points from object space to the space immediately following the scale/shear/rotation transformations."""
-	def asScaleMatrix(self,*args)->Any:
+	def asScaleMatrix(self)->MMatrix:
 		"""Returns the matrix which takes points from object space to the space immediately following scale and shear transformations."""
-	def isEquivalent(self,*args)->Any:
-		"""Returns true if this transformation's matrix is within tolerance of another's matrix."""
-	def reorderRotation(self,*args)->Any:
-		"""Reorders the transformation's rotate component to give the same overall rotation but using a new order or rotations."""
-	def rotateBy(self,*args)->Any:
-		"""Adds to the transformation's rotation component."""
-	def rotateByComponents(self,*args)->Any:
-		"""Adds to the transformation's rotation component."""
-	def rotatePivot(self,*args)->Any:
+	def isEquivalent(self,other,tolerance:float)->bool:
+		"""Inexact equality test. Returns true if this transformation's matrix is within tolerance of other 's matrix."""
+	def reorderRotation(self,order:int)->Self:
+		"""Reorders the transformation's rotate component to give the same overall rotation but using the new order or rotations."""
+	def rotateBy(self,rot:MQuaternion|MEulerRotation,space:int)->Self:
+		"""Adds rot to the transformation's rotation component."""
+	def rotateByComponents(self,seq:Sequence[float|int],space:int,asQuaternion:bool)->Self:
+		"""Adds the rotation represented by the four parameter values to the transformation's rotate component. If asQuaternion is True then seq must contain four floats representing the x, y, z and w components of a quaternion rotation. If asQuaternion is False then seq must contain three floats representing the x, y and z angles, followed by a Rotation Order constant, which together form an Euler rotation."""
+	def rotatePivot(self,space:int)->MPoint:
 		"""Returns the transformation's rotate pivot component."""
-	def rotatePivotTranslation(self,*args)->Any:
+	def rotatePivotTranslation(self,space:int)->MVector:
 		"""Returns the transformation's rotate pivot translation component."""
-	def rotation(self,*args)->Any:
+	def rotation(self,asQuaternion:bool)->MEulerRotation|MQuaternion:
 		"""Returns the transformation's rotation component as either an Euler rotation or a quaternion."""
-	def rotationComponents(self,*args)->Any:
-		"""Returns a list containing the four components of the transformation's rotate component."""
-	def rotationOrder(self,*args)->Any:
+	def rotationComponents(self,asQuaternion:bool)->list[float|order]|list[float]:
+		"""Returns a list containing the four components of the transformation's rotate component. If asQuaternion is True then the first three elements are the quaternion's unreal x, y, and z components, and the fourth is its real w component. If asQuaternion is False then the first three components are the x, y and z Euler rotation angles and the fourth is a Rotation Order constant."""
+	def rotationOrder(self)->int:
 		"""Returns the order of rotations when the transformation's rotate component is expressed as an euler rotation."""
-	def rotationOrientation(self,*args)->Any:
-		"""Returns a quaternion which orients the local rotation space."""
-	def scale(self,*args)->Any:
+	def rotationOrientation(self)->MQuaternion:
+		"""Returns the rotation which orients the local rotation space."""
+	def scale(self,space:int)->list[float]:
 		"""Returns a list containing the transformation's scale components."""
-	def scaleBy(self,*args)->Any:
-		"""Multiplies the transformation's scale components by the three floats in the provided sequence."""
-	def scalePivot(self,*args)->Any:
+	def scaleBy(self,seq:Sequence[float],space:int)->Self:
+		"""Multiplies the transformation's scale components by the three floats in seq ."""
+	def scalePivot(self,space:int)->MPoint:
 		"""Returns the transformation's scale pivot component."""
-	def scalePivotTranslation(self,*args)->Any:
+	def scalePivotTranslation(self,space:int)->MVector:
 		"""Returns the transformation's scale pivot translation component."""
-	def setRotatePivot(self,*args)->Any:
+	def setRotatePivot(self,pivot:MPoint,space:int,balance:bool)->Self:
 		"""Sets the transformation's rotate pivot component."""
-	def setRotatePivotTranslation(self,*args)->Any:
+	def setRotatePivotTranslation(self,trans:MVector,space:int)->Self:
 		"""Sets the transformation's rotate pivot translation component."""
-	def setRotation(self,*args)->Any:
-		"""Sets the transformation's rotation component."""
-	def setRotationComponents(self,*args)->Any:
-		"""Sets the transformation's rotate component from the four values in the provided sequence."""
-	def setRotationOrientation(self,*args)->Any:
-		"""Sets a quaternion which orients the local rotation space."""
-	def setScale(self,*args)->Any:
-		"""Sets the transformation's scale components to the three floats in the provided sequence."""
-	def setScalePivot(self,*args)->Any:
+	def setRotation(self,rot:MQuaternion|MEulerRotation)->Self:
+		"""Sets the transformation's rotation component to rot ."""
+	def setRotationComponents(self,seq:Sequence[float|int],asQuaternion:bool)->Self:
+		"""Sets the transformation's rotate component. If asQuaternion is True then seq must contain four floats representing the x, y, z and w components of a quaternion rotation. If asQuaternion is False then seq must contain three floats representing the x, y and z angles, followed by a Rotation Order constant, which together form an Euler rotation."""
+	def setRotationOrientation(self,rot:MQuaternion)->Self:
+		"""Sets the rotation which orients the local rotation space."""
+	def setScale(self,seq:Sequence[float],space:int)->Self:
+		"""Sets the transformation's scale components to the three floats in seq ."""
+	def setScalePivot(self,pivot:MPoint,space:int,balance:bool)->Self:
 		"""Sets the transformation's scale pivot component."""
-	def setScalePivotTranslation(self,*args)->Any:
+	def setScalePivotTranslation(self,trans:MVector,space:int)->Self:
 		"""Sets the transformation's scale pivot translation component."""
-	def setShear(self,*args)->Any:
+	def setShear(self,seq:Sequence[float],space:int)->Self:
 		"""Sets the transformation's shear component."""
-	def setTranslation(self,*args)->Any:
+	def setTranslation(self,trans:MVector,space:int)->Self:
 		"""Sets the transformation's translation component."""
-	def setToRotationAxis(self,*args)->Any:
-		"""Sets the transformation's rotate component to be a given axis vector and angle in radians."""
-	def shear(self,*args)->Any:
-		"""Returns a list containing the transformation's shear components."""
-	def shearBy(self,*args)->Any:
-		"""Multiplies the transformation's shear components by the three floats in the provided sequence."""
-	def translateBy(self,*args)->Any:
-		"""Adds a vector to the transformation's translation component."""
-	def translation(self,*args)->Any:
+	def setToRotationAxis(self,axis:MVector,rot:float)->Self:
+		"""Sets the transformation's rotate component to be rot radians around axis ."""
+	def shear(self,space:int)->list[float]:
+		"""Returns a list containing the transformation's shear component."""
+	def shearBy(self,seq:Sequence[float],space:int)->Self:
+		"""Multiplies the transformation's shear components by the elements of seq ."""
+	def translateBy(self,vec:MVector,space:int)->Self:
+		"""Adds vec to the transformation's translation component."""
+	def translation(self,space:int)->MVector:
 		"""Returns the transformation's translation component as a vector."""
 class MTypeId:
 	"""Stores a Maya object type identifier."""
@@ -16955,8 +15542,8 @@ class MTypeId:
 		"""Return self>=value."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def id(self,*args)->Any:
-		"""Returns the type id as a long."""
+	def id(self)->int:
+		"""Returns the object's id."""
 class MURI:
 	"""Manipulate URIs."""
 	__hash__:None=None
@@ -17415,24 +16002,28 @@ class MVector:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
-	def length(self,*args)->Any:
+	def length(self)->float:
 		"""Returns the magnitude of this vector."""
-	def normal(self,*args)->Any:
-		"""Returns a new vector containing the normalized version of this one."""
-	def normalize(self,*args)->Any:
+	def normal(self)->MVector:
+		"""Returns a new vector containing the normalized version of this vector."""
+	def normalize(self)->MVector:
 		"""Normalizes this vector in-place and returns a new reference to it."""
-	def transformAsNormal(self,*args)->Any:
-		"""Returns a new vector which is calculated by postmultiplying this vector by the transpose of the given matrix's inverse and then normalizing the result."""
-	def angle(self,*args)->Any:
-		"""Returns the angle, in radians, between this vector and another."""
-	def isEquivalent(self,*args)->Any:
-		"""Returns True if this vector and another are within a given tolerance of being equal."""
-	def isParallel(self,*args)->Any:
-		"""Returns True if this vector and another are within the given tolerance of being parallel."""
-	def rotateBy(self,*args)->Any:
-		"""Returns the vector resulting from rotating this one by the given amount."""
-	def rotateTo(self,*args)->Any:
-		"""Returns the quaternion which will rotate this vector into another."""
+	def transformAsNormal(self,matrix:MMatrix)->MVector:
+		"""Returns a new vector which is calculated by postmultiplying this vector by the transpose of matrix 's inverse and then normalizing it."""
+	def angle(self,other:MVector)->float:
+		"""Returns the angle, in radians, between this vector and other ."""
+	def isEquivalent(self,other:MVector,tolerance:float)->bool:
+		"""Returns True if this vector and other are within the given tolerance of being equal."""
+	def isParallel(self,other:MVector,tolerance:float)->bool:
+		"""Returns True if this vector and other are within the given tolerance of being parallel."""
+	@overload
+	def rotateBy(self,rot:MQuaternion|MEulerRotation)->MVector:
+		"""Returns a new vector containing the result of rotating this vector by the rotation given by rot ."""
+	@overload
+	def rotateBy(self,axis:int,angle:float)->MVector:
+		"""Returns a new vector containing the result of rotating this vector by angle radians about the specified axis ."""
+	def rotateTo(self,target:MVector)->MQuaternion:
+		"""Returns the quaternion which will rotate this vector into the target vector, about their mutually perpendicular axis."""
 class MVectorArray:
 	"""Array of MVector values."""
 	@property

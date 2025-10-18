@@ -4,7 +4,6 @@
     "value": "float",
     "long": "int",
     "integer": "int",
-    "unsigned int": "int",
 
     "self": "Self",
 
@@ -28,5 +27,6 @@
     "typename": "str",
 
     "dagmessage": "int",
-    "numeric": "float"
+    "numeric": "float",
+    "python callable": "Callable"
 }

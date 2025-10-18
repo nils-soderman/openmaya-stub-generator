@@ -14,4 +14,11 @@ def test_get_python_type_from_desc():
     assert get_python_type_from_desc("string") == "str"
     assert get_python_type_from_desc("MAngle , MDistance or MTime") == "MAngle|MDistance|MTime"
     assert get_python_type_from_desc("Angular unit type constant") == "int"
-    assert get_python_type_from_desc("tuple of strings") == "tuple[str, ...]"
+    assert get_python_type_from_desc("Returns a new reference to self.") == "Self"
+
+    assert get_python_type_from_desc("(String, Float)") == "tuple[str,float]"
+    assert get_python_type_from_desc("[Float, Float, Float, Float]") == "list[float]"
+
+    assert get_python_type_from_desc("tuple of strings") == "tuple[str,...]"
+    assert get_python_type_from_desc("list of floats") == "list[float]"
+    assert get_python_type_from_desc("Sequence of floats") == "Sequence[float]"
