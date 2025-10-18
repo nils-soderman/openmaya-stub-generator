@@ -1,7 +1,7 @@
 {
     "string": "str",
     "dictionary": "dict",
-    "value": "float", // This may be incorrect?
+    "value": "float",
     "long": "int",
     "integer": "int",
     "unsigned int": "int",

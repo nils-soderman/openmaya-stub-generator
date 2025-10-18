@@ -36,12 +36,12 @@ class PatchBase:
         for method in class_.methods:
             self.patch_method(class_, method)
         for property in class_.properties:
-            self.patch_property(property)
+            self.patch_property(class_, property)
 
     def patch_method(self, class_: stub_types.Class, method: stub_types.Method):
         pass
 
-    def patch_property(self, property: stub_types.Property):
+    def patch_property(self, class_: stub_types.Class, property: stub_types.Property):
         pass
 
     def patch_function(self, function: stub_types.Function):

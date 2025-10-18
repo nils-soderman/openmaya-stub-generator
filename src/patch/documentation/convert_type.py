@@ -1,12 +1,14 @@
-
-from typing import Union, List
 import builtins
+import json
 import re
-from ... import resources
+import os
 
-TYPE_CONVERSION = resources.load("type_conversion.jsonc")
 
 BUILTIN_NAMES = {x for x in dir(builtins) if isinstance(getattr(builtins, x), type)}
+
+TYPE_CONVERSION_FILEPATH = os.path.join(os.path.dirname(__file__), 'type_conversion.json')
+with open(TYPE_CONVERSION_FILEPATH, 'r', encoding='utf-8') as f:
+    TYPE_CONVERSION: dict[str, str] = json.load(f)
 
 
 def convert_type(type_str: str) -> str:
@@ -20,11 +22,9 @@ def convert_type(type_str: str) -> str:
     return type_str
 
 
-from typing import Union, List
-
 def split_outside_nested(
     text: str,
-    delimiter: Union[str, List[str]],
+    delimiter: str | list[str],
     open_chars: str = "([",
     close_chars: str = ")]"
 ) -> list[str]:
@@ -85,6 +85,16 @@ def split_outside_nested(
     return parts
 
 
+def guess_python_from_desc_type(type_str: str) -> str:
+    """
+    Using regex patterns, guess the python type from the description type
+    """
+    if re.match(r'^int[A-Z]$', type_str):  # intR, intG, intB
+        return "int"
+
+    return type_str
+
+
 def get_python_type_from_desc(desc: str) -> str:
     """
     Get the Python type from a description (from the online documentation), 
@@ -112,7 +122,7 @@ def get_python_type_from_desc(desc: str) -> str:
         inner_content = inner_content.removesuffix("s").strip()
         inner_type = get_python_type_from_desc(inner_content)
         return f"tuple[{inner_type}, ...]"
-    
+
     # Tuples: "(X, Y, Z)" -> "tuple[X, Y, Z]"
     if desc_lower.startswith("(") and desc_lower.endswith(")"):
         desc_inner = desc[1:-1].strip()
@@ -125,8 +135,12 @@ def get_python_type_from_desc(desc: str) -> str:
     if desc_lower.endswith(" constant"):
         return "int"
 
-    return convert_type(desc)
-                                                                                                                                                                                                                                                                        
+    desc = convert_type(desc)
+    desc = guess_python_from_desc_type(desc)
+
+    return desc
+
+
 def old(desc: str):
     desc = re.sub(r'<[^>]+>', '', desc)  # Remove HTML tags that may be left if the online docs html is broken
     desc = desc.replace('*', '')
@@ -242,4 +256,3 @@ def old(desc: str):
         return "str"
 
     return type_name
-

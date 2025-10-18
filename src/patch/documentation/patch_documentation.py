@@ -41,9 +41,9 @@ class Patch_Documentation(PatchBase):
 
         for property in class_.properties:
             if prop_doc := class_doc.find_property_by_name(property.name):
-                self.patch_property(property, prop_doc)
+                self.patch_property(class_, property, prop_doc)
 
-    def patch_property(self, property_: Property, prop_doc: parser.interface.MemItem):
+    def patch_property(self, class_: Class, property_: Property, prop_doc: parser.interface.MemItem):
         if is_none_or_any(property_.type) and len(prop_doc.data) > 0:
             if len(prop_doc.data) > 1:
                 raise NotImplementedError("Multiple types in documentation not supported yet")
@@ -58,3 +58,5 @@ class Patch_Documentation(PatchBase):
                 # For example: Access: "RW"
                 access = data.get('access', "RW").lower()
                 property_.can_set = "w" in access
+
+        

@@ -1,7 +1,7 @@
 import builtins
 from .. import resources
 
-TYPE_CONVERSION = resources.load("type_conversion.jsonc")
+TYPE_CONVERSION = resources.load_resource("type_conversion.jsonc")
 
 BUILTIN_NAMES = {x for x in dir(builtins) if isinstance(getattr(builtins, x), type)}
 
