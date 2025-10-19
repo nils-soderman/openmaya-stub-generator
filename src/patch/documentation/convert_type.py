@@ -26,7 +26,8 @@ def split_outside_nested(
     text: str,
     delimiter: str | list[str],
     open_chars: str = "([",
-    close_chars: str = ")]"
+    close_chars: str = ")]",
+    maxsplit: int = -1
 ) -> list[str]:
     """
     Split a string on one or more delimiters, ignoring delimiters inside nested pairs.
@@ -36,6 +37,7 @@ def split_outside_nested(
         delimiter: Delimiter(s) to split on. Can be a string or a list of strings.
         open_chars: Opening characters for nesting.
         close_chars: Closing characters for nesting.
+        maxsplit: Maximum number of splits to do. -1 means no limit.
 
     Example:
         split_outside_nested("a, func(b, c) or [x, y]", [",", " or "], "([", ")]")
@@ -51,6 +53,7 @@ def split_outside_nested(
     depth = 0
     i = 0
     n = len(text)
+    splits = 0
     while i < n:
         char = text[i]
         if char in open_chars:
@@ -64,7 +67,7 @@ def split_outside_nested(
             i += 1
             continue
 
-        if depth == 0:
+        if depth == 0 and (maxsplit < 0 or splits < maxsplit):
             matched = False
             for delim in delimiters:
                 if text.startswith(delim, i):
@@ -72,6 +75,7 @@ def split_outside_nested(
                         parts.append(buffer.strip())
                     buffer = ""
                     i += len(delim)
+                    splits += 1
                     matched = True
                     break
             if matched:
@@ -89,8 +93,23 @@ def guess_python_from_desc_type(type_str: str) -> str:
     """
     Using regex patterns, guess the python type from the description type
     """
-    if re.match(r'^int[A-Z]$', type_str):  # intR, intG, intB
+    if re.match(r'^int[A-Z]$', type_str):  # int[X]
         return "int"
+
+    if re.match(r'^[Nn]um[A-Z]$', type_str):  # Num[X] or num[X]
+        return "int"
+
+    if re.match(r'^[a-z]Index$', type_str):  # [x]Index
+        return "int"
+
+    if re.match(r'^index[A-Z]$', type_str):  # index[xX]
+        return "int"
+
+    if re.match(r'^is[A-Z]\w*$', type_str):  # is[Word]
+        return "bool"
+
+    if re.match(r'^[A-z]*Name$', type_str):  # [A-z]Name
+        return "str"
 
     return type_str
 
@@ -120,12 +139,10 @@ def get_python_type_from_desc(desc: str) -> str:
 
     desc_lower = desc.lower()
 
-
-
     # Tuples: "tuple of strings" -> "tuple[str, ...]"
     # Lists: "list of floats" -> "list[float]"
     # Sequence: "Sequence of floats" -> "Sequence[float]"
-    for prefix, py_type, include_elipsis in [
+    for prefix, py_type, is_tuple in [
         ("tuple of ", "tuple", True),
         ("tuples of ", "tuple", True),
         ("tuples containing ", "tuple", True),
@@ -134,18 +151,22 @@ def get_python_type_from_desc(desc: str) -> str:
     ]:
         if desc_lower.startswith(prefix):
             inner_content = desc[len(prefix):].strip()
-            inner_types = inner_content.split(" or ")
-            inner_types = [t.removesuffix("s").removesuffix("'").strip(f" ()") for t in inner_types]
+            if re.match(r'^[\(\[]', inner_content):  # starts with ( or [
+                inner_content = inner_content.strip(" ()[]")
+                inner_types = split_outside_nested(inner_content, ",")
+            else:
+                inner_types = inner_content.split(" or ")
+            inner_types = [t.strip().removesuffix("s").removesuffix("'") for t in inner_types]
             inner_types = [
                 re.sub(r'^(?:[1-9]|two|three|four|five|six|seven|eight)\s+', '', x, flags=re.IGNORECASE) for x in inner_types
             ]
             inner_types = [get_python_type_from_desc(t) for t in inner_types]
-            # inner_content might be "Sequence of three floats"
-            # inner_type = get_python_type_from_desc(inner_content)
-            inner_type_str = "|".join(inner_types)
-            if include_elipsis:
-                return f"{py_type}[{inner_type_str},...]"
-            return f"{py_type}[{inner_type_str}]"
+            if is_tuple:
+                return f"{py_type}[{'|'.join(inner_types)},...]"
+
+            # Make sure there are no duplicates in list types
+            inner_types = list(dict.fromkeys(inner_types))
+            return f"{py_type}[{'|'.join(inner_types)}]"
 
     # Split by delimiters "X , Y or Z"
     if " or " in desc or "," in desc:
@@ -184,10 +205,14 @@ def get_python_type_from_desc(desc: str) -> str:
     if desc_lower.endswith("reference to self"):
         return "Self"
 
+    if "/" in desc:
+        return "|".join(get_python_type_from_desc(x) for x in desc.split("/"))
+
     desc = convert_type(desc)
     desc = guess_python_from_desc_type(desc)
 
-    if " " in desc:
+    # If type contains a illigale character at this point, return Any
+    if any(x in desc for x in (" ", ":")):
         print(f'Could not convert documented type "{desc}" to a Python type')
         desc = "Any"
 

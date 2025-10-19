@@ -11,7 +11,7 @@ DISSALLOWED_CHARS = set("!@#$%^&()-+=[]{}|;:'\",.<>?/\\`~ ")
 
 
 class Patch_SafeParameterName(PatchBase):
-    def patch_method(self, class_, method):
+    def patch_method(self, class_, method, overload=None):
         taken_names = set()
         if method.parameters:
             for parameter in method.parameters:

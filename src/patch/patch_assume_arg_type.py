@@ -34,7 +34,7 @@ def get_type_from_name(name: str) -> str | None:
 class Patch_AssumeParameterType(PatchBase):
     ORDER = 50
 
-    def patch_method(self, class_, method):
+    def patch_method(self, class_, method, overload=None):
         if method.parameters:
             for param in method.parameters:
                 if param.type and param.type != "Any":

@@ -35,10 +35,21 @@ class PatchBase:
     def patch_class(self, class_: stub_types.Class):
         for method in class_.methods:
             self.patch_method(class_, method)
+            for overload in method.overloads:
+                self.patch_method(class_, overload, method)
+
         for property in class_.properties:
             self.patch_property(class_, property)
 
-    def patch_method(self, class_: stub_types.Class, method: stub_types.Method):
+    def patch_method(self, class_: stub_types.Class, method: stub_types.Method, overload: stub_types.Method | None = None):
+        """ 
+        Patch a method or an overload
+
+        Parameters
+            - class_: The class the method belongs to 
+            - method: The method to patch
+            - overload: If this is an overload, overload is the original method
+        """
         pass
 
     def patch_property(self, class_: stub_types.Class, property: stub_types.Property):

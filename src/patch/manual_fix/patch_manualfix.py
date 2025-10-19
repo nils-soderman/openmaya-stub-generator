@@ -21,7 +21,7 @@ class Patch_ManualFix(PatchBase):
             if type_ := class_info.get(property_.name):
                 property_.type = type_
 
-    def patch_method(self, class_: Class, method: Method):
+    def patch_method(self, class_: Class, method: Method, overload: Method | None = None):
         if class_info := self.method_arg_types.get(class_.name):
             if method_info := class_info.get(method.name):
                 if method.parameters:

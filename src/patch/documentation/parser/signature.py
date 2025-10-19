@@ -1,7 +1,12 @@
+""" 
+Parse the function signatures from the docstring
+"""
+
 import typing
 import re
 
 OBSOLETE_TAG = "[obsolete]"
+
 
 class SignatureParameter(typing.NamedTuple):
     name: str
@@ -9,10 +14,39 @@ class SignatureParameter(typing.NamedTuple):
     return_type: str | None = None
     param_type: str | None = None
 
+
 class ParsedSignature(typing.NamedTuple):
     parameters: list[SignatureParameter]
     return_type: str | None
     is_obsolete: bool
+
+
+def extract_signatures_from_docstring(docstring: str, function_name: str) -> list[str]:
+    """
+    Retrieve all signatures of a function from a docstring.
+
+    Args:
+        docstring (str): The docstring containing the function signatures.
+        function_name (str): The name of the function to search for.
+
+    Returns:
+        list[tuple[list[SignatureParameter], str | None]]: A list of tuples, each containing a list of
+        SignatureParameter objects and an optional return type.
+    """
+    pattern = rf'{function_name}\s*\(\s*([^)]*?)\s*\)(?:\s*->\s*(.*?))?(?=\s*{function_name}|\n|$)'
+
+    matches = re.findall(pattern, docstring, re.MULTILINE | re.DOTALL)
+
+    signatures: list[str] = []
+    for match in matches:
+        params_str, return_type = match
+        params_str = re.sub(r'\s+', ' ', params_str.strip())
+
+        return_type = return_type.strip() if return_type else "None"
+
+        signatures.append(f"{function_name}({params_str}) -> {return_type}")
+
+    return signatures
 
 
 def parse_signature(signature: str) -> ParsedSignature:
@@ -24,9 +58,11 @@ def parse_signature(signature: str) -> ParsedSignature:
         signature = signature[:-len(OBSOLETE_TAG)].rstrip()
 
     function_part, _, return_type = signature.partition("->")
-
     function_part = function_part.strip()
-    return_type = return_type.strip() if return_type else None
+    
+    return_type = return_type.strip()
+    if not return_type:
+        return_type = None
 
     match = re.match(r'^[^(]+\((.*)\)$', function_part)
     if not match:
@@ -36,6 +72,9 @@ def parse_signature(signature: str) -> ParsedSignature:
     if not param_str:
         return ParsedSignature([], return_type, obsolete)
     
+    # Replace [arg=] with arg=
+    param_str = re.sub(r'\[\s*([^\]=]+)=\s*', r'\1=', param_str)
+
     # Replace [, with , to make sure we split on it. for optional params e.g. func(arg1[, arg2])
     param_str = re.sub(r'\[\s*,\s*', ',', param_str)
 
@@ -82,33 +121,6 @@ def parse_signature(signature: str) -> ParsedSignature:
     return ParsedSignature(params, return_type or None, obsolete)
 
 
-def extract_signature_from_docstring(docstring: str, function_name: str) -> list[str]:
-    """
-    Parse all signatures of a function from a docstring.
-
-    Args:
-        docstring (str): The docstring containing the function signatures.
-        function_name (str): The name of the function to search for.
-
-    Returns:
-        list[tuple[list[SignatureParameter], str | None]]: A list of tuples, each containing a list of
-        SignatureParameter objects and an optional return type.
-    """
-    pattern = rf'{function_name}\s*\(\s*([^)]*?)\s*\)(?:\s*->\s*(.*?))?(?=\s*{function_name}|\n|$)'
-
-    matches = re.findall(pattern, docstring, re.MULTILINE | re.DOTALL)
-
-    signatures: list[str] = []
-    for match in matches:
-        params_str, return_type = match
-        params_str = re.sub(r'\s+', ' ', params_str.strip())
-
-        return_type = return_type.strip() if return_type else "None"
-
-        signatures.append(f"{function_name}({params_str}) -> {return_type}")
-
-    return signatures
-
 def extract_parameter_types_from_docstring(parameter_name: str, docstring: str) -> str | None:
     # Search for e.g. "* param_name (type) - desc."
     pattern = rf'\*\s*{re.escape(parameter_name)}\s*\(([^)]+)\)'
@@ -122,7 +134,7 @@ def split_on_commas_outside_parentheses(text: str, parentheses_open: str, parent
     parm_split = []
     current_param = ""
     bracket_count = 0
-    
+
     for char in text + ",":  # Add comma to flush last param
         if char == parentheses_open:
             bracket_count += 1
@@ -133,7 +145,7 @@ def split_on_commas_outside_parentheses(text: str, parentheses_open: str, parent
                 parm_split.append(current_param.strip())
             current_param = ""
             continue
-        
+
         current_param += char
-    
+
     return parm_split

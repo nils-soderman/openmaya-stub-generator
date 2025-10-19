@@ -59,7 +59,7 @@ PARAMETERS = {
 class Patch_BuiltinMethods(PatchBase):
     ORDER = 1
 
-    def patch_method(self, class_, method):
+    def patch_method(self, class_, method, overload=None):
         if method.name in RETURN_TYPES:
             method.return_type = RETURN_TYPES[method.name]
 

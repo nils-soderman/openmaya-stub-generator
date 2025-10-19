@@ -1,15 +1,13 @@
 """
 Patch stubs based on the Online Documentation
 """
-import copy
-
-from src.stub_types import Method
-from ...stub_types import Class, Parameter, Property, PropertyGetSet
+from ...stub_types import Class, Parameter, Property, PropertyGetSet, Method
 from ...flags import Flags
 
 from ..base import PatchBase
 
 from . import parser, convert_type
+from .parser import signature
 
 
 def is_none_or_any(s: str | None) -> bool:
@@ -75,13 +73,12 @@ class Patch_Documentation(PatchBase):
         if method_doc.data:
             self.patch_method_from_data(method, method_doc)
         else:
-            ...
+            self.patch_method_from_docstring_signatures(method, method_doc.docstring)
 
     def patch_method_from_data(self, in_method: Method, method_doc: parser.interface.MemItem):
         """
         If method is properly documented, patch based on the parsed data
         """
-
         for i, data in enumerate(method_doc.data):
             if i > 0:
                 # Create a new overload method
@@ -115,9 +112,42 @@ class Patch_Documentation(PatchBase):
             if return_type_desc := data.get('returns'):
                 method.return_type = convert_type.get_python_type_from_desc(return_type_desc)
 
-    def patch_method_from_docstring_signatures(self, method: Method, desc: str):
+    def patch_method_from_docstring_signatures(self, in_method: Method, desc: str):
         """
         Some methods are not properly documented, and only have a docstring with signatures.
         Try to extract type information from those signatures.
         """
-        ...
+        signature_strs = signature.extract_signatures_from_docstring(desc, in_method.name)
+        for index, signature_str in enumerate(signature_strs):
+            signature_info = signature.parse_signature(signature_str)
+            if index > 0:
+                # Create a new overload method
+                method = Method(in_method.ref,
+                                in_method.name,
+                                return_type="Any",
+                                docstring=in_method.docstring,
+                                deprecated=in_method.deprecated,
+                                static=in_method.static)
+                in_method.overloads.append(method)
+            else:
+                method = in_method
+
+            method.deprecated = signature_info.is_obsolete
+
+            if signature_info.return_type:
+                method.return_type = convert_type.get_python_type_from_desc(signature_info.return_type)
+
+            method.parameters = []
+            for param in signature_info.parameters:
+                if param.param_type:
+                    param_type = convert_type.get_python_type_from_desc(param.param_type)
+                else:
+                    param_type = "Any"
+
+                method.parameters.append(
+                    Parameter(
+                        name=param.name,
+                        type=param_type,
+                        default=param.default,
+                    )
+                )
