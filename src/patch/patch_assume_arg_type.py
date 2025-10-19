@@ -9,7 +9,8 @@ from .base import PatchBase
 PRIMITIVE_TYPES = {"int", "float", "str", "bool", "list", "dict", "set", "tuple"}
 
 TYPE_CONVERSION_MAPPING = {
-    "short": "int"
+    "short": "int",
+    "function": "Callable",
 }
 
 PATTERNS = (

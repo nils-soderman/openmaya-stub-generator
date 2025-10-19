@@ -177,7 +177,7 @@ class MArrayDataBuilder:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def addElement(self,index:Any)->MDataHandle:
+	def addElement(self,index:int)->MDataHandle:
 		"""addElement(index) -> MDataHandle
 
 		Adds a new element to the array at the given index.
@@ -185,7 +185,7 @@ class MArrayDataBuilder:
 		* index (int) - the index at which we wish to add the new element
 
 		Returns The handle for the new element"""
-	def addElementArray(self,index:Any)->MArrayDataHandle:
+	def addElementArray(self,index:int)->MArrayDataHandle:
 		"""addElementArray(index) -> MArrayDataHandle
 
 		Adds a new element to the array at the given index.  The added element is also an array.
@@ -205,25 +205,25 @@ class MArrayDataBuilder:
 		Adds a new element to the end of the array.  The added element is also an array.  The index of the element will the current highest index + 1.
 
 		Returns The handle for the new array element"""
-	def copy(self,source:Any)->Self:
+	def copy(self,source:MArrayDataBuilder)->Self:
 		"""copy(source) -> self
 
 		Copy data from source builder.
 
 		* source (MArrayDataBuilder) - The source object to copy from"""
-	def growArray(self,amount:Any)->Self:
+	def growArray(self,amount:int)->Self:
 		"""growArray(amount) -> self
 
 		Grows the array storage by the given amount.
 
 		* amount (int) - the amount to grow the array by"""
-	def removeElement(self,index:Any)->Self:
+	def removeElement(self,index:int)->Self:
 		"""removeElement(index) -> self
 
 		Removes the specified element from the array
 
 		* index (int) - the element of the array to remove"""
-	def setGrowSize(self,size:Any)->Self:
+	def setGrowSize(self,size:int)->Self:
 		"""setGrowSize(size) -> self
 
 		Sets the grow size of the array.  As elements are added to the array, the builder will allocate memory in chunks.  This method tells the builder how many elements to allocate each time it grows the array.
@@ -243,7 +243,7 @@ class MArrayDataHandle:
 		This method will raise an exception if the current array does not support array data builders. This can be changed in a node's initialize routine using the usesArrayDataBuilder attribute in MFnAttribute.
 
 		Do not use with an MArrayDataHandle which was returned by MPlug.asMDataHandle()."""
-	def copy(self,source:Any)->Self:
+	def copy(self,source:MArrayDataHandle)->Self:
 		"""copy(source) -> self
 
 		Copy data from source array.
@@ -271,14 +271,14 @@ class MArrayDataHandle:
 		"""isDone() -> bool
 
 		Specifies whether or not there are more elements to iterate over."""
-	def jumpToPhysicalElement(self,position:Any)->Self:
+	def jumpToPhysicalElement(self,position:int)->Self:
 		"""jumpToPhysicalElement(position) -> self
 
 		Jump to a specific physical element in the array.
 		Since physical elements are contiguous no search is required.
 
 		* position (int) - the array position to jump to"""
-	def jumpToLogicalElement(self,index:Any)->Self:
+	def jumpToLogicalElement(self,index:int)->Self:
 		"""jumpToLogicalElement(index) -> self
 
 		Jump to a specific logical element in the array.
@@ -303,7 +303,7 @@ class MArrayDataHandle:
 		Gets a handle into this data block for the current array element. The element is not evaluated so its data may not be valid. Therefore, this handle should only be used for writing over the data.
 
 		This method can also be used to retrieve handles to individual elements of  non-datablock array handles, such as those returned by MPlug.getValue() and MPlug.asMDataHandle()."""
-	def set(self,builder:Any)->Self:
+	def set(self,builder:MArrayDataBuilder)->Self:
 		"""set(builder) -> self
 
 		Sets the data for this array from the data in the builder object
@@ -342,7 +342,7 @@ class MAttributeIndex:
 		"""Return self>=value."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def copy(self,source:Any)->Self:
+	def copy(self,source:MAttributeIndex)->Self:
 		"""copy(source) -> self
 
 		Copy data from source index.
@@ -385,7 +385,7 @@ class MAttributeIndex:
 		"""setLower(value) -> self
 
 		Sets the lower bound of the index."""
-	def setType(self,type:Any)->Self:
+	def setType(self,type:int)->Self:
 		"""setType(type) -> self
 
 		Sets the type of attribute index.
@@ -464,7 +464,7 @@ class MAttributeSpec:
 		"""Return len(self)."""
 	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def copy(self,source:Any)->Self:
+	def copy(self,source:MAttributeSpec)->Self:
 		"""copy(source) -> self
 
 		Copy data from source specification.
@@ -553,7 +553,7 @@ class MCacheSchema:
 	"""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def add(self,attribute:Any)->Self:
+	def add(self,attribute:MObject)->Self:
 		"""add(attribute) -> self
 
 		Force the attribute to be cached
@@ -609,7 +609,7 @@ class MCallbackIdArray:
 class MCameraMessage(MMessage):
 	"""Class used to register callbacks for Camera Manipulation Begin and End related messages."""
 	@staticmethod
-	def addBeginManipulationCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addBeginManipulationCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addBeginManipulationCallback(node, function, clientData=None) -> id
 
 		Registers callbacks for camera manipulation beginning messages.
@@ -620,7 +620,7 @@ class MCameraMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addEndManipulationCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addEndManipulationCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addEndManipulationCallback(node, function, clientData=None) -> id
 
 		Registers callbacks for camera manipulation ending messages.
@@ -768,7 +768,7 @@ class MCommandMessage(MMessage):
 	kMELProc:int=0
 	kMELCommand:int=1
 	@staticmethod
-	def addCommandCallback(function:Any,clientData:Any|None=None)->int:
+	def addCommandCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addCommandCallback(function, clientData=None) -> id
 
 		This method registers a callback for command messages that are
@@ -786,7 +786,7 @@ class MCommandMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addProcCallback(function:Any,clientData:Any|None=None)->int:
+	def addProcCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addProcCallback(function, clientData=None) -> id
 
 		This method registers a callback that is executed every time a MEL
@@ -814,7 +814,7 @@ class MCommandMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addCommandOutputCallback(function:Any,clientData:Any|None=None)->int:
+	def addCommandOutputCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addCommandOutputCallback(function, clientData=None) -> id
 
 		This method registers a callback for whenever commands generate
@@ -827,7 +827,7 @@ class MCommandMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addCommandOutputFilterCallback(function:Any,clientData:Any|None=None)->int:
+	def addCommandOutputFilterCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addCommandOutputFilterCallback(function, clientData=None) -> id
 
 		This method registers a callback for whenever commands generate
@@ -845,7 +845,7 @@ class MCommandMessage(MMessage):
 class MConditionMessage(MMessage):
 	"""Class used to register callbacks for condition related messages."""
 	@staticmethod
-	def addConditionCallback(conditionName:Any,function:Any,clientData:Any|None=None)->int:
+	def addConditionCallback(conditionName:str,function:Callable,clientData:Any|None=None)->int:
 		"""addConditionCallback(conditionName, function, clientData=None) -> id
 
 		This method registers a callback for condition changed messages.
@@ -867,7 +867,7 @@ class MConditionMessage(MMessage):
 
 		 * return: tuple of available condition names."""
 	@staticmethod
-	def getConditionState(name:Any)->bool:
+	def getConditionState(name:str)->bool:
 		"""getConditionState(name) -> bool
 
 		This method returns the current state of a condition.
@@ -879,7 +879,7 @@ class MConditionMessage(MMessage):
 class MContainerMessage(MMessage):
 	"""Class used to register callbacks for container related messages."""
 	@staticmethod
-	def addPublishAttrCallback(function:Any,clientData:Any|None=None)->int:
+	def addPublishAttrCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addPublishAttrCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever an attribute
@@ -892,7 +892,7 @@ class MContainerMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addBoundAttrCallback(function:Any,clientData:Any|None=None)->int:
+	def addBoundAttrCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addBoundAttrCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever an attribute
@@ -955,7 +955,7 @@ class MDGContext:
 	kManaged:MDGContext
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def copy(self,source:Any)->Self:
+	def copy(self,source:MDGContext)->Self:
 		"""copy(source) -> self
 
 		Copy data from source context.
@@ -979,7 +979,7 @@ class MDGContext:
 class MDGMessage(MMessage):
 	"""Class used to register callbacks for Dependency Graph related messages."""
 	@staticmethod
-	def addTimeChangeCallback(function:Any,clientData:Any|None=None)->int:
+	def addTimeChangeCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addTimeChangeCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever the time
@@ -991,7 +991,7 @@ class MDGMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addDelayedTimeChangeCallback(function:Any,clientData:Any|None=None)->int:
+	def addDelayedTimeChangeCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addDelayedTimeChangeCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever the time
@@ -1003,7 +1003,7 @@ class MDGMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addDelayedTimeChangeRunupCallback(function:Any,clientData:Any|None=None)->int:
+	def addDelayedTimeChangeRunupCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addDelayedTimeChangeRunupCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever the time
@@ -1016,7 +1016,7 @@ class MDGMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addForceUpdateCallback(function:Any,clientData:Any|None=None)->int:
+	def addForceUpdateCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addForceUpdateCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called after the time
@@ -1029,7 +1029,7 @@ class MDGMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNodeAddedCallback(function:Any,nodeType:Any,clientData:Any|None=None)->int:
+	def addNodeAddedCallback(function:Callable,nodeType:str,clientData:Any|None=None)->int:
 		"""addNodeAddedCallback(function, nodeType, clientData=None) -> id
 
 		This method registers a callback that is called whenever a new node
@@ -1045,7 +1045,7 @@ class MDGMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNodeRemovedCallback(function:Any,nodeType:Any,clientData:Any|None=None)->int:
+	def addNodeRemovedCallback(function:Callable,nodeType:str,clientData:Any|None=None)->int:
 		"""addNodeRemovedCallback(function, nodeType, clientData=None) -> id
 
 		This method registers a callback that is called whenever a new node
@@ -1061,7 +1061,7 @@ class MDGMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addPreConnectionCallback(function:Any,clientData:Any|None=None)->int:
+	def addPreConnectionCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addPreConnectionCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever any connection
@@ -1077,7 +1077,7 @@ class MDGMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addConnectionCallback(function:Any,clientData:Any|None=None)->int:
+	def addConnectionCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addConnectionCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a connection
@@ -1093,7 +1093,7 @@ class MDGMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNodeChangeUuidCheckCallback(function:Any,clientData:Any|None=None)->int:
+	def addNodeChangeUuidCheckCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addNodeChangeUuidCheckCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a node
@@ -1479,7 +1479,7 @@ class MDagMessage(MMessage):
 	kRotatePivotTrans:int=14680064
 	kRotateOrient:int=117440512
 	@staticmethod
-	def addParentAddedCallback(function:Any,clientData:Any|None=None)->int:
+	def addParentAddedCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addParentAddedCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a parent is
@@ -1491,7 +1491,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addParentAddedDagPathCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addParentAddedDagPathCallback(node:MDagPath,function:Callable,clientData:Any|None=None)->int:
 		"""addParentAddedDagPathCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a parent is
@@ -1504,7 +1504,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addParentRemovedCallback(function:Any,clientData:Any|None=None)->int:
+	def addParentRemovedCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addParentRemovedCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a parent is
@@ -1516,7 +1516,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addParentRemovedDagPathCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addParentRemovedDagPathCallback(node:MDagPath,function:Callable,clientData:Any|None=None)->int:
 		"""addParentRemovedDagPathCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a parent is
@@ -1529,7 +1529,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addChildAddedCallback(function:Any,clientData:Any|None=None)->int:
+	def addChildAddedCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addChildAddedCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a child is
@@ -1541,7 +1541,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addChildAddedDagPathCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addChildAddedDagPathCallback(node:MDagPath,function:Callable,clientData:Any|None=None)->int:
 		"""addChildAddedDagPathCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a child is
@@ -1554,7 +1554,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addChildRemovedCallback(function:Any,clientData:Any|None=None)->int:
+	def addChildRemovedCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addChildRemovedCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a child is
@@ -1566,7 +1566,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addChildRemovedDagPathCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addChildRemovedDagPathCallback(node:MDagPath,function:Callable,clientData:Any|None=None)->int:
 		"""addChildRemovedDagPathCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a child is
@@ -1579,7 +1579,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addChildReorderedCallback(function:Any,clientData:Any|None=None)->int:
+	def addChildReorderedCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addChildReorderedCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a child is
@@ -1591,7 +1591,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addChildReorderedDagPathCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addChildReorderedDagPathCallback(node:MDagPath,function:Callable,clientData:Any|None=None)->int:
 		"""addChildReorderedDagPathCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a child of
@@ -1604,7 +1604,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addDagCallback(msgType:Any,function:Any,clientData:Any|None=None)->int:
+	def addDagCallback(msgType:int,function:Callable,clientData:Any|None=None)->int:
 		"""addDagCallback(msgType, function, clientData=None) -> id
 
 		This method registers a callback that is called for specified
@@ -1620,7 +1620,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addDagDagPathCallback(node:Any,msgType:Any,function:Any,clientData:Any|None=None)->int:
+	def addDagDagPathCallback(node:MDagPath,msgType:int,function:Callable,clientData:Any|None=None)->int:
 		"""addDagDagPathCallback(node, msgType, function, clientData=None) -> id
 
 		This method registers a callback that is called for specified a DAG
@@ -1638,7 +1638,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addAllDagChangesCallback(function:Any,clientData:Any|None=None)->int:
+	def addAllDagChangesCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addAllDagChangesCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever any
@@ -1652,7 +1652,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addAllDagChangesDagPathCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addAllDagChangesDagPathCallback(node:MDagPath,function:Callable,clientData:Any|None=None)->int:
 		"""addAllDagChangesDagPathCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a DAG
@@ -1667,7 +1667,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addInstanceAddedCallback(function:Any,clientData:Any|None=None)->int:
+	def addInstanceAddedCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addInstanceAddedCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever any node in the DAG
@@ -1679,7 +1679,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addInstanceAddedDagPathCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addInstanceAddedDagPathCallback(node:MDagPath,function:Callable,clientData:Any|None=None)->int:
 		"""addInstanceAddedDagPathCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that is called whenever the specified node
@@ -1692,7 +1692,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addInstanceRemovedCallback(function:Any,clientData:Any|None=None)->int:
+	def addInstanceRemovedCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addInstanceRemovedCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever an instance of any DAG
@@ -1704,7 +1704,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addInstanceRemovedDagPathCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addInstanceRemovedDagPathCallback(node:MDagPath,function:Callable,clientData:Any|None=None)->int:
 		"""addInstanceRemovedDagPathCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that is called whenever an instance of the specified
@@ -1717,7 +1717,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addWorldMatrixModifiedCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addWorldMatrixModifiedCallback(node:Any,function:Callable,clientData:Any|None=None)->int:
 		"""addWorldMatrixModifiedCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that is called when a parent matrix of the
@@ -1768,7 +1768,7 @@ class MDagMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addMatrixModifiedCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addMatrixModifiedCallback(node:Any,function:Callable,clientData:Any|None=None)->int:
 		"""addMatrixModifiedCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that is called when the local matrix
@@ -1955,7 +1955,7 @@ class MDataBlock:
 
 		Returns a copy of the dependecy graph context for which this data block was created. The context is used to specify how a dependency node is going to be evaluated."""
 	@overload
-	def inputArrayValue(self,plug:Any)->MArrayDataHandle:
+	def inputArrayValue(self,plug:MPlug)->MArrayDataHandle:
 		"""inputArrayValue(plug) -> MArrayDataHandle
 		inputArrayValue(attribute) -> MArrayDataHandle
 
@@ -1965,7 +1965,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute whose data you wish to access"""
 	@overload
-	def inputArrayValue(self,attribute:Any)->MArrayDataHandle:
+	def inputArrayValue(self,attribute:MObject)->MArrayDataHandle:
 		"""inputArrayValue(plug) -> MArrayDataHandle
 		inputArrayValue(attribute) -> MArrayDataHandle
 
@@ -1975,7 +1975,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute whose data you wish to access"""
 	@overload
-	def inputValue(self,plug:Any)->MDataHandle:
+	def inputValue(self,plug:MPlug)->MDataHandle:
 		"""inputValue(plug) -> MDataHandle
 		inputValue(attribute) -> MDataHandle
 
@@ -1985,7 +1985,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute of the node that you want to access"""
 	@overload
-	def inputValue(self,attribute:Any)->MDataHandle:
+	def inputValue(self,attribute:MObject)->MDataHandle:
 		"""inputValue(plug) -> MDataHandle
 		inputValue(attribute) -> MDataHandle
 
@@ -1995,7 +1995,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute of the node that you want to access"""
 	@overload
-	def isClean(self,plug:Any)->bool:
+	def isClean(self,plug:MPlug)->bool:
 		"""isClean(plug) -> bool
 		isClean(attribute) -> bool
 
@@ -2005,7 +2005,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute that is to be query."""
 	@overload
-	def isClean(self,attribute:Any)->bool:
+	def isClean(self,attribute:MObject)->bool:
 		"""isClean(plug) -> bool
 		isClean(attribute) -> bool
 
@@ -2015,7 +2015,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute that is to be query."""
 	@overload
-	def outputArrayValue(self,plug:Any)->MArrayDataHandle:
+	def outputArrayValue(self,plug:MPlug)->MArrayDataHandle:
 		"""outputArrayValue(plug) -> MArrayDataHandle
 		outputArrayValue(attribute) -> MArrayDataHandle
 
@@ -2027,7 +2027,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute whose data you wish to access"""
 	@overload
-	def outputArrayValue(self,attribute:Any)->MArrayDataHandle:
+	def outputArrayValue(self,attribute:MObject)->MArrayDataHandle:
 		"""outputArrayValue(plug) -> MArrayDataHandle
 		outputArrayValue(attribute) -> MArrayDataHandle
 
@@ -2039,7 +2039,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute whose data you wish to access"""
 	@overload
-	def outputValue(self,plug:Any)->MDataHandle:
+	def outputValue(self,plug:MPlug)->MDataHandle:
 		"""outputValue(plug) -> MDataHandle
 		outputValue(attribute) -> MDataHandle
 
@@ -2049,7 +2049,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute of the node that you want to access"""
 	@overload
-	def outputValue(self,attribute:Any)->MDataHandle:
+	def outputValue(self,attribute:MObject)->MDataHandle:
 		"""outputValue(plug) -> MDataHandle
 		outputValue(attribute) -> MDataHandle
 
@@ -2059,7 +2059,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute of the node that you want to access"""
 	@overload
-	def setClean(self,plug:Any)->Self:
+	def setClean(self,plug:MPlug)->Self:
 		"""setClean(plug) -> self
 		setClean(attribute) -> self
 
@@ -2069,7 +2069,7 @@ class MDataBlock:
 		 OR
 		* attribute (MObject) - the attribute that is to be marked clean"""
 	@overload
-	def setClean(self,attribute:Any)->Self:
+	def setClean(self,attribute:MObject)->Self:
 		"""setClean(plug) -> self
 		setClean(attribute) -> self
 
@@ -2078,7 +2078,7 @@ class MDataBlock:
 		* plug (MPlug) - the plug that is to be marked clean
 		 OR
 		* attribute (MObject) - the attribute that is to be marked clean"""
-	def setContext(self,ctx:Any)->Self:
+	def setContext(self,ctx:MDGContext)->Self:
 		"""setContext(ctx) -> self
 
 		Set the dependency graph context for this data block. The context is used to specify how a dependency node is going to be evaluated, thus replacing the context for the given datablock. This does not modify the dirty state of the datablock so that they apply to the new context.
@@ -2298,13 +2298,13 @@ class MDataHandle:
 		child(MObject) -> MDataHandle
 
 		Get a handle to a child of this handle.  This is used if you have a handle to a compound attribute."""
-	def copy(self,src:Any)->Self:
+	def copy(self,src:MDataHandle)->Self:
 		"""copy(src) -> self
 
 		Copies the attribute from the src attribute to the attribute referenced by this handle.  This is the only method which can completely copy a compound attribute from one handle to another.  The construct outputHandle.set (inputHandle.data()) will not work for compound or multi attributes.
 
 		* src (MDataHandle) - the handle to the attribute to copy."""
-	def copyWritable(self,src:Any)->Self:
+	def copyWritable(self,src:MDataHandle)->Self:
 		"""copyWritable(src) -> self
 
 		Copies the attribute from the <i>src</i> attribute to the attribute referenced by this handle.  When the copy is made it ensures that the data in this handle is writable. That is, if the src handle has a writable copy of the data then it will be duplicated, otherwise this handle will claim the writer status for the data.
@@ -2782,7 +2782,7 @@ class MEventMessage(MMessage):
 	for Maya to function properly.
 	"""
 	@staticmethod
-	def addEventCallback(eventName:Any,function:Any,clientData:Any|None=None)->int:
+	def addEventCallback(eventName:str,function:Callable,clientData:Any|None=None)->int:
 		"""addEventCallback(eventName, function, clientData=None) -> id
 
 		This method registers a callback for event occurred messages.
@@ -2810,7 +2810,7 @@ class MExternalContentInfoTable:
 		"""Return len(self)."""
 	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def addResolvedEntry(self,key:Any,unresolvedLocation:Any,resolvedLocation:Any,contextNodeFullName:Any,roles:Any)->Self:
+	def addResolvedEntry(self,key:str,unresolvedLocation:str,resolvedLocation:str,contextNodeFullName:str,roles:list[str])->Self:
 		"""addResolvedEntry(key, unresolvedLocation, resolvedLocation, contextNodeFullName, roles) -> self
 
 		Add an entry in the table.
@@ -2820,7 +2820,7 @@ class MExternalContentInfoTable:
 		* resolvedLocation (string) - Full path to the content if it exists at the time of creation of this object.
 		* contextNodeFullName (string) - The fullname of the URI owner (node) if it applies, an empty string otherwise.
 		* roles (list of strings) - An enumeration of all roles this content plays in the context of the node. The actual strings are not rigidly defined as of this writing. This is mostly for offline browsing of the content info: to assist in sorting content by role.  A better content type system may be introduced later on to        formalize this."""
-	def addUnresolvedEntry(self,key:Any,unresolvedLocation:Any,contextNodeFullName:Any,roles:Any|None=None)->Self:
+	def addUnresolvedEntry(self,key:str,unresolvedLocation:str,contextNodeFullName:str,roles:list[str]|None=None)->Self:
 		"""addUnresolvedEntry(key, unresolvedLocation, contextNodeFullName, roles=None) -> self
 
 		Add an entry in the table. The resolved location will be inferred from the application's built-in file resolving for the specified file type. This will automatically add entries into the roles vector that correspond to the search rules for this file type.
@@ -2829,13 +2829,13 @@ class MExternalContentInfoTable:
 		* unresolvedLocation (string) - See documentation of MExternalContentInfoTable.addResolvedEntry().
 		* contextNodeFullName (string) - See documentation of MExternalContentInfoTable.addResolvedEntry().
 		* roles (list of strings) - See documentation of MExternalContentInfoTable.addResolvedEntry()."""
-	def getEntry(self,index:Any)->list[key|unresolvedLocation|resolvedLocation|str|roles]:
+	def getEntry(self,index:int)->list[key|unresolvedLocation|resolvedLocation|str|roles]:
 		"""getEntry(index) -> [key, unresolvedLocation, resolvedLocation, contextNodeFullName, roles]
 
 		Retrieves external content entry based on its position in the table.
 
 		* index (unsigned int) - Position of the entry to retrieve information from."""
-	def getInfo(self,key:Any)->list[unresolvedLocation|resolvedLocation|str|roles]:
+	def getInfo(self,key:str)->list[unresolvedLocation|resolvedLocation|str|roles]:
 		"""getInfo(key) -> [unresolvedLocation, resolvedLocation, contextNodeFullName, roles]
 
 		Retrieves external content information based on its key.
@@ -2849,19 +2849,19 @@ class MExternalContentLocationTable:
 		"""Return len(self)."""
 	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def addEntry(self,key:Any,location:Any)->Self:
+	def addEntry(self,key:str,location:str)->Self:
 		"""addEntry(key, location) -> self
 
 		Adds an external content location and its key to the table.
 
 		* key (string) - An arbitrary string defined by the node. This will typically be an attribute name for situations where the content location is stored verbatim in a plug's value.* location (string) - Full path to the content referenced by the key."""
-	def getEntry(self,index:Any)->list[key|location]:
+	def getEntry(self,index:int)->list[key|location]:
 		"""getEntry(index) -> [key, location]
 
 		Retrieves external content entry based on its position in the table.
 
 		* index (unsigned int) - Position of the entry to retrieve information from."""
-	def getLocation(self,key:Any)->str:
+	def getLocation(self,key:str)->str:
 		"""getLocation(key) -> string
 
 		Retrieves an entry's location based on the associated key.
@@ -2885,13 +2885,13 @@ class MFileObject:
 	kStrict:int=6
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def copy(self,source:Any)->Self:
+	def copy(self,source:MFileObject)->Self:
 		"""copy(source) -> self
 
 		Copy data from source file object.
 
 		* source (MFileObject) - The source file object to copy from"""
-	def exists(self,index:Any|None=None)->bool:
+	def exists(self,index:int|None=None)->bool:
 		"""exists(index=None) -> bool
 
 		Checks to see if the file exists and is readable.
@@ -2911,7 +2911,7 @@ class MFileObject:
 		Returns the raw path element of the unresolved file object with all environment variables expanded. In the case that the path expands to multiple paths, the first expanded path will be returned.
 
 		After expanding environment variables Maya may perform additional modifications to the path in order to resolve it to a valid location on disk. This resolved path can be accessed through resolvedPath()."""
-	def fullName(self,index:Any)->str:
+	def fullName(self,index:int)->str:
 		"""fullName(index) -> string
 
 		Returns the pathname of a file constructed from the indicated portion of the path element and filename element.
@@ -2919,14 +2919,14 @@ class MFileObject:
 
 		* index (int) - the index of the desired path portion."""
 	@staticmethod
-	def getResolvedFullName(rawFullName:Any)->str:
+	def getResolvedFullName(rawFullName:str)->str:
 		"""getResolvedFullName(rawFullName) -> string
 
 		Returns the full path to the resolved file, or an empty string if the resolution was unsuccessful.
 
 		* rawFullName (string) - The fully specified unresolved path."""
 	@staticmethod
-	def getResolvedFullNameAndExistsStatus(rawFullName:Any,method:Any=MFileObject.kNone)->tuple[str,bool]:
+	def getResolvedFullNameAndExistsStatus(rawFullName:str,method:int=MFileObject.kNone)->tuple[str,bool]:
 		"""getResolvedFullNameAndExistsStatus(rawFullName, method=kNone) -> (string, bool)
 
 		Returns the full path to the resolved file, or an empty string if the resolution was unsuccessful, and a boolean that indicate if the resolved path exists or not.
@@ -2965,7 +2965,7 @@ class MFileObject:
 		                           Combination of kInputFile and kReferenceMappings.
 		  kStrict                  Combination of kExact and kDirMap."""
 	@staticmethod
-	def isAbsolutePath(fileName:Any)->bool:
+	def isAbsolutePath(fileName:str)->bool:
 		"""isAbsolutePath(fileName) -> bool
 
 		Checks a file path string and determines if it represents an absolute file path. An absolute path can uniquely identify a directory or file.
@@ -2985,7 +2985,7 @@ class MFileObject:
 		Once the resolved file name is set, it is only guaranteed to be retained in the file object so long as the raw file path is not updated. Once the rawPath, rawName or rawFullName are set, the normal Maya path resolution process will be re-invoked and the resolved path and filename will be updated.
 
 		- fullFileName (string) - the string used to override the path and filename.- reresolveType (bool) - if Maya should re-resolve the file type/translator."""
-	def path(self,index:Any)->str:
+	def path(self,index:int)->str:
 		"""path(index) -> string
 
 		Returns the indicated portion of the path element of the file object.  All variables in the path element are expanded, and the portion indicated by the argument is extracted and returned.
@@ -3034,7 +3034,7 @@ class MFileObject:
 		"""resolvedPath() -> string
 
 		Returns the resolved path element of the file object. In order to build the resolved path, Maya first expands all environment variables and then may perform additional modifications, such as prepending directories to a relative path name, in order to resolve the path to a valid location on disk."""
-	def setRawFullName(self,fullFileName:Any)->Self:
+	def setRawFullName(self,fullFileName:str)->Self:
 		"""setRawFullName(fullFileName) -> self
 
 		This method combines the functions of the setRawName and setRawPath methods in that it sets both the path and filename from the given name.
@@ -3048,13 +3048,13 @@ class MFileObject:
 		Also note that for URI-based file paths (e.g. "arrow:uri_path_to_file"),  setRawFullName will not call setRawName and setRawPath (raw name and path will remain empty). Use resolvedName and resolvedPath to retrieve the resolved file path, or rawFullName to retrieve the unresolved file path.
 
 		* fullFileName (string) - The string used to initialize the path and filename."""
-	def setRawName(self,fileName:Any)->Self:
+	def setRawName(self,fileName:str)->Self:
 		"""setRawName(fileName) -> self
 
 		Set the unresolved filename element of the MFileObject instance.  This name should not contain any '/' characters, it should indicate simply the name of a file.  The directories in which this name will be searched for are specified by setRawPath.
 
 		* fileName (string) - The filename to set."""
-	def setRawPath(self,pathName:Any)->Self:
+	def setRawPath(self,pathName:str)->Self:
 		"""setRawPath(pathName) -> self
 
 		Set the unresolved path element of the MFileObject instance.  This should contain a list of directories, each separated by a single ':' character.  The pathnames can contain Unix environment variables in the form $VARNAME.  These will be expanded when paths to actual filenames are constructed.
@@ -3062,7 +3062,7 @@ class MFileObject:
 		Note that if the specified pathName is relative, contains environment variables, or does not exist, the paths returned by resolvedPath() and expandedPath() may not match the rawPath. See the description of resolvedPath() and expandedPath() for more information.
 
 		* pathName (string) - The path string."""
-	def setRawURI(self,uri:Any)->Self:
+	def setRawURI(self,uri:str|MURI)->Self:
 		"""setRawURI(uri) -> self
 
 		Set the unresolved URI of the MFileObject instance.
@@ -5280,19 +5280,19 @@ class MFnCamera(MFnDagNode):
 		"""aspectRatio() -> float
 
 		Returns the aspect ratio for the camera."""
-	def centerOfInterestPoint(self,space:Any=MSpace.kObject)->MPoint:
+	def centerOfInterestPoint(self,space:int=MSpace.kObject)->MPoint:
 		"""centerOfInterestPoint(space=kObject) -> MPoint
 
 		Returns the center of interest point for the camera.
 
 		* space (int) - Specifies the coordinate system for this operation"""
-	def computeDepthOfField(self,nearLimit:Any|None=None)->Self:
+	def computeDepthOfField(self,nearLimit:float|None=None)->Self:
 		"""computeDepthOfField(nearLimit=None) -> self
 
 		Compute the depth of field
 
 		* nearLimit (float) - the near limit"""
-	def copyViewFrom(self,otherCamera:Any)->Self:
+	def copyViewFrom(self,otherCamera:MDagPath)->Self:
 		"""copyViewFrom(otherCamera) -> self
 
 		Copy the camera settings related to the perspective from the given camera view.
@@ -5300,7 +5300,7 @@ class MFnCamera(MFnDagNode):
 		This method will only work when the world space information for the camera is available, i.e. when the function set has been initialized with a DAG path.
 
 		* otherCamera (MDagPath) - Camera to copy view from"""
-	def create(self,parent:Any|None=None)->MObject:
+	def create(self,parent:MObject|None=None)->MObject:
 		"""create(parent=None) -> MObject
 
 		Creates a perspective camera. A parent can be specified for the new camera, otherwise a transform is created.
@@ -5308,7 +5308,7 @@ class MFnCamera(MFnDagNode):
 		The camera is positioned at (0, 0, 0), its center of interest at (0, 0, -1), which implies that the view-direction is pointing in the direction of the negative z-axis, and its up-direction along the positive Y axis.
 
 		* parent (MObject) - The parent of the new camera"""
-	def eyePoint(self,space:Any=MSpace.kObject)->MPoint:
+	def eyePoint(self,space:int=MSpace.kObject)->MPoint:
 		"""eyePoint(space=kObject) -> MPoint
 
 		Returns the eye point for the camera.
@@ -5322,14 +5322,14 @@ class MFnCamera(MFnDagNode):
 		"""getFilmApertureLimits() -> (float, float)
 
 		Returns the maximum and minimum film aperture limits for the camera."""
-	def getFilmFrustum(self,distance:Any,applyPanZoom:Any=False)->tuple[float,float,float,float]:
+	def getFilmFrustum(self,distance:float,applyPanZoom:bool=False)->tuple[float,float,float,float]:
 		"""getFilmFrustum(distance, applyPanZoom=False) -> (float, float, float, float)
 
 		Returns the film frustum for the camera (horizontal size, vertical size, horizontal offset and vertical offset). The frustum defines the projective transformation.
 
 		* distance (float) - Specifies the focal length
 		* applyPanZoom (bool) - specifies whether to apply 2D pan/zoom"""
-	def getFilmFrustumCorners(self,distance:Any,applyPanZoom:Any=False)->MPointArray:
+	def getFilmFrustumCorners(self,distance:float,applyPanZoom:bool=False)->MPointArray:
 		"""getFilmFrustumCorners(distance, applyPanZoom=False) -> MPointArray
 
 		Returns the film frustum for the camera. The frustum defines the projective transformation.
@@ -5352,14 +5352,14 @@ class MFnCamera(MFnDagNode):
 
 		* width (int) - width of viewport
 		* height (int) - height of viewport"""
-	def getRenderingFrustum(self,windowAspect:Any)->tuple[float,float,float,float]:
+	def getRenderingFrustum(self,windowAspect:float)->tuple[float,float,float,float]:
 		"""getRenderingFrustum(windowAspect) -> (float, float, float, float)
 
 		Returns the rendering frustum (left, right, bottom and top) for the camera.
 		This is the frustum that the maya renderer uses.
 
 		* windowAspect (float) - windowAspect"""
-	def getViewParameters(self,windowAspect:Any,applyOverscan:Any=False,applySqueeze:Any=False,applyPanZoom:Any=False)->tuple[float,float,float,float]:
+	def getViewParameters(self,windowAspect:float,applyOverscan:bool=False,applySqueeze:bool=False,applyPanZoom:bool=False)->tuple[float,float,float,float]:
 		"""getViewParameters(windowAspect, applyOverscan=False, applySqueeze=False, applyPanZoom=False) -> (float, float, float, float)
 
 		Returns the intermediate viewing frustum (apertureX, apertureY, offsetX and offsetY) parameters for the camera. The aperture and offset are used by getViewingFrustum() and getRenderingFrustum() to compute the extent (left, right, top, bottom) of the frustum in the following manner:
@@ -5375,7 +5375,7 @@ class MFnCamera(MFnDagNode):
 		* applyOverscan (bool) - specifies whether to apply overscan
 		* applySqueeze (bool) - specifies whether to apply the lens squeeze ratio of the camera
 		* applyPanZoom (bool) - specifies whether to apply 2D pan/zoom"""
-	def getViewingFrustum(self,windowAspect:Any,applyOverscan:Any=False,applySqueeze:Any=False,applyPanZoom:Any=False)->tuple[float,float,float,float]:
+	def getViewingFrustum(self,windowAspect:float,applyOverscan:bool=False,applySqueeze:bool=False,applyPanZoom:bool=False)->tuple[float,float,float,float]:
 		"""getViewingFrustum(windowAspect, applyOverscan=False, applySqueeze=False, applyPanZoom=False) -> (float, float, float, float)
 
 		Returns the viewing frustum (left, right, bottom and top) for the camera.
@@ -5384,7 +5384,7 @@ class MFnCamera(MFnDagNode):
 		* applyOverscan (bool) - specifies whether to apply overscan
 		* applySqueeze (bool) - specifies whether to apply the lens squeeze ratio of the camera
 		* applyPanZoom (bool) - specifies whether to apply 2D pan/zoom"""
-	def hasSamePerspective(self,otherCamera:Any)->bool:
+	def hasSamePerspective(self,otherCamera:MDagPath)->bool:
 		"""hasSamePerspective(otherCamera) -> bool
 
 		Returns True if the camera has same perspective settings as the given camera.
@@ -5400,26 +5400,26 @@ class MFnCamera(MFnDagNode):
 		"""isOrtho() -> bool
 
 		Returns True if the camera is in orthographic mode."""
-	def postProjectionMatrix(self,context:Any|None=None)->MFloatMatrix:
+	def postProjectionMatrix(self,context:MDGContext|None=None)->MFloatMatrix:
 		"""postProjectionMatrix(context=None) -> MFloatMatrix
 
 		Returns the post projection matrix used to compute film roll on the film back plane.
 
 		* context (MDGContext) - DG time-context to specify time of evaluation"""
-	def projectionMatrix(self,context:Any|None=None)->MFloatMatrix:
+	def projectionMatrix(self,context:MDGContext|None=None)->MFloatMatrix:
 		"""projectionMatrix(context=None) -> MFloatMatrix
 
 		Returns the orthographic or perspective projection matrix for the camera.
 		The projection matrix that maya's software renderer uses is almost identical to the OpenGL projection matrix. The difference is that maya uses a left hand coordinate system and so the entries [2][2] and [3][2] are negated.
 
 		* context (MDGContext) - DG time-context to specify time of evaluation"""
-	def rightDirection(self,space:Any=MSpace.kObject)->MVector:
+	def rightDirection(self,space:int=MSpace.kObject)->MVector:
 		"""rightDirection(space=kObject) -> MVector
 
 		Returns the right direction vector for the camera.
 
 		* space (int) - Specifies the coordinate system for this operation"""
-	def set(self,wsEyeLocation:Any,wsViewDirection:Any,wsUpDirection:Any,horizFieldOfView:Any,aspectRatio:Any)->Self:
+	def set(self,wsEyeLocation:MPoint,wsViewDirection:MVector,wsUpDirection:MVector,horizFieldOfView:float,aspectRatio:float)->Self:
 		"""set(wsEyeLocation, wsViewDirection, wsUpDirection, horizFieldOfView, aspectRatio) -> self
 
 		Convenience routine to set the camera viewing parameters. The specified values should be in world space where applicable.
@@ -5431,13 +5431,13 @@ class MFnCamera(MFnDagNode):
 		* wsUpDirection (MVector) - Up direction to set in world space
 		* horizFieldOfView (float) - The horizontal field of view to set
 		* aspectRatio (float) - The aspect ratio to set"""
-	def setAspectRatio(self,aspectRatio:Any)->Self:
+	def setAspectRatio(self,aspectRatio:float)->Self:
 		"""setAspectRatio(aspectRatio) -> self
 
 		Set the aspect ratio of the View.  The aspect ratio is expressed as width/height.  This also modifies the entity's scale transformation to reflect the new aspect ratio.
 
 		* aspectRatio (float) - The aspect ratio to be set"""
-	def setCenterOfInterestPoint(self,centerOfInterest:Any,space:Any=MSpace.kObject)->Self:
+	def setCenterOfInterestPoint(self,centerOfInterest:MPoint,space:int=MSpace.kObject)->Self:
 		"""setCenterOfInterestPoint(centerOfInterest, space=kObject) -> self
 
 		Positions the center-of-interest of the camera keeping the eye-point fixed in space. This method changed the orientation and translation of the camera's transform attributes as well as the center-of-interest distance.
@@ -5446,7 +5446,7 @@ class MFnCamera(MFnDagNode):
 
 		* centerOfInterest (MPoint) - Center of interest point to be set
 		* space (int) - Specifies the coordinate system for this operation"""
-	def setEyePoint(self,eyeLocation:Any,space:Any=MSpace.kObject)->Self:
+	def setEyePoint(self,eyeLocation:MPoint,space:int=MSpace.kObject)->Self:
 		"""setEyePoint(eyeLocation, space=kObject) -> self
 
 		Positions the eye-point of the camera keeping the center of interest fixed in space. This method changed the orientation and translation of the camera's transform attributes as well as the center-of-interest distance.
@@ -5455,33 +5455,33 @@ class MFnCamera(MFnDagNode):
 
 		* eyeLocation (MPoint) - The eye location to set
 		* space (int) - Specifies the coordinate system for this operation"""
-	def setHorizontalFieldOfView(self,fov:Any)->Self:
+	def setHorizontalFieldOfView(self,fov:float)->Self:
 		"""setHorizontalFieldOfView(fov) -> self
 
 		Sets the horizontal field of view for the camera.
 
 		* fov (float) - The horizontal field of view value to be set"""
-	def setIsOrtho(self,orthoState:Any,useDist:Any|None=None)->Self:
+	def setIsOrtho(self,orthoState:bool,useDist:float|None=None)->Self:
 		"""setIsOrtho(orthoState, useDist=None) -> self
 
 		Switch the camera in and out of orthographic mode.  When the switch happens, the camera has to calculate a new fov or ortho width, each of which is based on the other and a set distance.  The caller can specify the distance; otherwise the center of interest is used.
 
 		* orthoState (bool) - If True then the camera will be orthographic
 		* useDist (float) - distance to use."""
-	def setNearFarClippingPlanes(self,near:Any,far:Any)->Self:
+	def setNearFarClippingPlanes(self,near:float,far:float)->Self:
 		"""setNearFarClippingPlanes(near, far) -> self
 
 		Set the distances to the Near and Far Clipping Planes.
 
 		* near (float) - The near clipping plane value to be set
 		* far (float) - The far clipping plane value to be set"""
-	def setVerticalFieldOfView(self,fov:Any)->Self:
+	def setVerticalFieldOfView(self,fov:float)->Self:
 		"""setVerticalFieldOfView(fov) -> self
 
 		Sets the vertical field of view for the camera.
 
 		* fov (float) - The vertical field of view value to be set"""
-	def upDirection(self,space:Any=MSpace.kObject)->MVector:
+	def upDirection(self,space:int=MSpace.kObject)->MVector:
 		"""upDirection(space=kObject) -> MVector
 
 		Returns the up direction vector for the camera.
@@ -5491,7 +5491,7 @@ class MFnCamera(MFnDagNode):
 		"""verticalFieldOfView() -> float
 
 		Returns the vertical field of view for the camera."""
-	def viewDirection(self,space:Any=MSpace.kObject)->MVector:
+	def viewDirection(self,space:int=MSpace.kObject)->MVector:
 		"""viewDirection(space=kObject) -> MVector
 
 		Returns the view direction for the camera
@@ -5619,7 +5619,7 @@ class MFnContainerNode(MFnDependencyNode):
 		"""isCurrent() -> bool
 
 		Return whether the container node managed by this function set is the current container."""
-	def makeCurrent(self,isCurrent:Any)->Self:
+	def makeCurrent(self,isCurrent:Literal[True]|Literal[False])->Self:
 		"""makeCurrent(isCurrent) -> self
 
 		Set or clear whether the container managed by this function set is denoted as the
@@ -6414,7 +6414,7 @@ class MFnMesh(MFnDagNode):
 	@staticmethod
 	def uniformGridParams(xDiv:int,yDiv:int,zDiv:int)->MMeshIsectAccelParams:
 		"""Creates an object which specifies a uniform voxel grid structure which can be used by the intersection routines to speed up their operation. This object specifies the number of voxel cells to be used in the x, y, and z dimensions. The grid acceleration structure will be cached with the mesh, so that if the same MMeshIsectAccelParams configuration is used on the next intersect call, the acceleration structure will not need to be rebuilt."""
-	def addHoles(self,faceIndex:Any,vertices:Any,loopCounts:Any,mergeVertices:Any=True,pointTolerance:Any=MFnMesh.kPointTolerance)->Self:
+	def addHoles(self,faceIndex:Any,vertices:Any,loopCounts:Any,mergeVertices:Any=True,pointTolerance:float=MFnMesh.kPointTolerance)->Self:
 		"""addHoles(faceIndex, vertices, loopCounts, mergeVertices=True, pointTolerance=kPointTolerance) -> self
 
 		Adds holes to a mesh polygon.
@@ -7108,14 +7108,14 @@ class MFnNurbsCurve(MFnDagNode):
 	kFindParamTolerance:float=1e-06
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def area(self,tolerance:Any=MFnMesh.kPointTolerance)->float:
+	def area(self,tolerance:float=MFnMesh.kPointTolerance)->float:
 		"""area(tolerance=kPointTolerance) -> float
 
 		Returns the area bounded by the curve. The curve must be closed and
 		planar. A value of 0.0 will be returned if area cannot be determined.
 
 		* tolerance (float) - Amount of error allowed in the calculation"""
-	def closestPoint(self,testPoint:Any,guess:Any|None=None,tolerance:Any=MFnMesh.kPointTolerance,space:Any=MSpace.kObject)->tuple[MPoint,float]:
+	def closestPoint(self,testPoint:MPoint,guess:float|None=None,tolerance:float=MFnMesh.kPointTolerance,space:int=MSpace.kObject)->tuple[MPoint,float]:
 		"""closestPoint(testPoint, guess=None, tolerance=kPointTolerance,
 		    space=kObject) -> (MPoint, float)
 
@@ -7133,7 +7133,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* tolerance  (float) - maximum allowed distance between the curve
 		                       and the returned point.
 		* space (MSpace constant) - coordinate space to use for the points"""
-	def copy(self,source:Any,parent:Any=MObject.kNullObj)->MObject:
+	def copy(self,source:Any,parent:MObject=MObject.kNullObj)->MObject:
 		"""copy(source, parent=MObject.kNullObj) -> MObject
 
 		Returns a new NURBS curve which is a copy of 'source' and resets
@@ -7151,7 +7151,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               beneath it as a nurbsCurve node. In this last case it
 		               will be the transform node which is returned."""
 	@overload
-	def create(self,cvs:Any,knots:Any,degree:Any,form:Any,is2D:Any,rational:Any,parent:Any=MObject.kNullObj)->Self:
+	def create(self,cvs:MPointArray|Sequence[MPoint],knots:Any,degree:int,form:int,is2D:Any,rational:bool,parent:MObject=MObject.kNullObj)->Self:
 		"""create(cvs, knots, degree, form, is2D, rational, parent=kNullObj)
 		    -> self
 		create(subCurves, parent=kNullObj) -> self
@@ -7192,7 +7192,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               the previous curve in the array, and the curves must be
 		               be at least C0 continuous (i.e. tangent breaks are okay)."""
 	@overload
-	def create(self,subCurves:Any,parent:Any=MObject.kNullObj)->Self:
+	def create(self,subCurves:MObjectArray|Sequence[MObject],parent:MObject=MObject.kNullObj)->Self:
 		"""create(cvs, knots, degree, form, is2D, rational, parent=kNullObj)
 		    -> self
 		create(subCurves, parent=kNullObj) -> self
@@ -7232,7 +7232,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               curve in the array must be coincident with the end of
 		               the previous curve in the array, and the curves must be
 		               be at least C0 continuous (i.e. tangent breaks are okay)."""
-	def createWithEditPoints(self,eps:Any,degree:Any,form:Any,is2D:Any,rational:Any,uniform:Any,parent:Any=MObject.kNullObj)->MObject:
+	def createWithEditPoints(self,eps:MPointArray|Sequence[MPoint],degree:int,form:int,is2D:Any,rational:bool,uniform:bool,parent:MObject=MObject.kNullObj)->MObject:
 		"""createWithEditPoints(eps, degree, form, is2D, rational, uniform,
 		    parent=kNullObj) -> MObject
 
@@ -7262,7 +7262,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               transform will be created with the new curve parented
 		               beneath it as a nurbsCurve node. In this last case it
 		               will be the transform node which is returned."""
-	def cvPosition(self,index:Any,space:Any=MSpace.kObject)->MPoint:
+	def cvPosition(self,index:int,space:int=MSpace.kObject)->MPoint:
 		"""cvPosition(index, space=kObject) -> MPoint
 
 		Returns the position of a single control vertex.
@@ -7270,14 +7270,14 @@ class MFnNurbsCurve(MFnDagNode):
 		* index (int) - index of the CV to return
 		* space (int) - an MSpace constant giving the coordinate space in
 		                which the point is given"""
-	def cvPositions(self,space:Any=MSpace.kObject)->MPointArray:
+	def cvPositions(self,space:int=MSpace.kObject)->MPointArray:
 		"""cvPositions(space=kObject) -> MPointArray
 
 		Returns the positions of all of the curve's control vertices.
 
 		* space (int) - an MSpace constant giving the coordinate space in
 		                which the point is given"""
-	def cvs(self,startIndex:Any,endIndex:Any=...)->MObject:
+	def cvs(self,startIndex:int,endIndex:int=...)->MObject:
 		"""cvs(startIndex[, endIndex]) -> MObject
 
 		Returns a CV or a range of CVs as a component. MItCurveCV can be
@@ -7290,7 +7290,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* endIndex   (int) - end of the range of CVs to return. If not
 		                     provided then only the CV specified by
 		                     startIndex will be returned."""
-	def distanceToPoint(self,point:Any,space:Any=MSpace.kObject)->float:
+	def distanceToPoint(self,point:MPoint,space:int=MSpace.kObject)->float:
 		"""distanceToPoint(point, space=kObject) -> float
 
 		Returns the distance from the given point to the point on the curve
@@ -7299,7 +7299,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* point (MPoint) - the point to calculate the distance to
 		* space (int)    - an MSpace constant giving the coordinate space in
 		                   which the point is given"""
-	def findParamFromLength(self,length:Any,tolerance:Any=MFnNurbsCurve.kFindParamTolerance)->float:
+	def findParamFromLength(self,length:float,tolerance:float=MFnNurbsCurve.kFindParamTolerance)->float:
 		"""findParamFromLength(length, tolerance=kFindParamTolerance) -> float
 
 		Returns the parameter value corresponding to a given length along
@@ -7308,7 +7308,7 @@ class MFnNurbsCurve(MFnDagNode):
 
 		* length (float) - distance along the curve
 		* tolerance (float) - search tolerance"""
-	def findLengthFromParam(self,param:Any)->float:
+	def findLengthFromParam(self,param:float)->float:
 		"""findLengthFromParam(param) -> float
 
 		Returns the length along the curve corresponding to a given
@@ -7316,7 +7316,7 @@ class MFnNurbsCurve(MFnDagNode):
 		the given parameter value then a length of zero is returned.
 
 		* param (float) - parameter value on the curve"""
-	def getDerivativesAtParam(self,param:Any,space:Any=MSpace.kObject)->tuple[MPoint,Any]:
+	def getDerivativesAtParam(self,param:float,space:int=MSpace.kObject)->tuple[MPoint,Any]:
 		"""getDerivativesAtParam(param, space=kObject) -> (MPoint, MVector[, MVector])
 
 		Evaluates the curve at the given parameter value, returning a tuple
@@ -7328,7 +7328,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* space   (int) - an MSpace constant giving the coordinate space in
 		                  which the point is given
 		* dUU    (bool) - if True include the second derivative in the result."""
-	def getParamAtPoint(self,point:Any,tolerance:Any=MFnMesh.kPointTolerance,space:Any=MSpace.kObject)->float:
+	def getParamAtPoint(self,point:MPoint,tolerance:float=MFnMesh.kPointTolerance,space:int=MSpace.kObject)->float:
 		"""getParamAtPoint(point, tolerance=kPointTolerance, space=kObject) -> float
 
 		Returns the parameter value corresponding to the given point on the
@@ -7339,7 +7339,7 @@ class MFnNurbsCurve(MFnDagNode):
 		                      still be considered to lie on it.
 		* space       (int) - an MSpace constant giving the coordinate space
 		                      in which the point is given"""
-	def getPointAtParam(self,param:Any,space:Any=MSpace.kObject)->MPoint:
+	def getPointAtParam(self,param:float,space:int=MSpace.kObject)->MPoint:
 		"""getPointAtParam(param, space=kObject) -> MPoint
 
 		Returns the point on the curve at the given parameter value.
@@ -7347,14 +7347,14 @@ class MFnNurbsCurve(MFnDagNode):
 		* param (float) - parameter value at which to find the point
 		* space   (int) - an MSpace constant giving the coordinate space in
 		                  which the point should be returned"""
-	def isParamOnCurve(self,param:Any)->bool:
+	def isParamOnCurve(self,param:float)->bool:
 		"""isParamOnCurve(param) -> bool
 
 		Returns True if the given parameter value lies on the curve (i.e. is
 		within the curve's knot domain), False otherwise.
 
 		* param (float) - parameter value to test"""
-	def isPointOnCurve(self,point:Any,tolerance:Any=MFnMesh.kPointTolerance,space:Any=MSpace.kObject)->bool:
+	def isPointOnCurve(self,point:MPoint,tolerance:float=MFnMesh.kPointTolerance,space:int=MSpace.kObject)->bool:
 		"""isPointOnCurve(point, tolerance=kPointTolerance, space=kObject) -> bool
 
 		Returns True if the given point lies on the curve, False otherwise.
@@ -7364,7 +7364,7 @@ class MFnNurbsCurve(MFnDagNode):
 		                      still be considered to lie on it.
 		* space       (int) - an MSpace constant giving the coordinate space
 		                      in which the point is given"""
-	def knot(self,index:Any)->float:
+	def knot(self,index:int)->float:
 		"""knot(index) -> float
 
 		Returns the parameter value of a single knot.
@@ -7375,7 +7375,7 @@ class MFnNurbsCurve(MFnDagNode):
 		"""knots() -> MDoubleArray
 
 		Returns the parameter values for all of the curve's knots."""
-	def length(self,tolerance:Any=MFnMesh.kPointTolerance)->float:
+	def length(self,tolerance:float=MFnMesh.kPointTolerance)->float:
 		"""length(tolerance=kPointTolerance) -> float
 
 		Returns the arc length of this curve or 0.0 if it cannot be computed.
@@ -7388,7 +7388,7 @@ class MFnNurbsCurve(MFnDagNode):
 		that the end points interpolate the first and last CVs (i.e. lie
 		directly on them). It can also be used to convert a periodic curve
 		to a closed curve."""
-	def normal(self,param:Any,space:Any=MSpace.kObject)->MVector:
+	def normal(self,param:float,space:int=MSpace.kObject)->MVector:
 		"""normal(param, space=kObject) -> MVector
 
 		Returns the normal at the given parameter value on the curve. For
@@ -7399,7 +7399,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* param (float) - parameter value at which to find the normal
 		* space   (int) - an MSpace constant giving the coordinate space in
 		                  which the normal should be returned"""
-	def removeKnot(self,param:Any,removeAll:Any=False)->Self:
+	def removeKnot(self,param:float,removeAll:bool=False)->Self:
 		"""removeKnot(param, removeAll=False) -> self
 
 		Removes one or more knots at the given parameter value.
@@ -7414,7 +7414,7 @@ class MFnNurbsCurve(MFnDagNode):
 		"""reverse() -> self
 
 		Reverses the direction of the curve."""
-	def setCVPosition(self,index:Any,point:Any,space:Any=MSpace.kObject)->Self:
+	def setCVPosition(self,index:int,point:MPoint,space:int=MSpace.kObject)->Self:
 		"""setCVPosition(index, point, space=kObject) -> self
 
 		Sets the position of a single control vertex of the curve.
@@ -7423,7 +7423,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* point (MPoint) - new position for the cv
 		* space    (int) - an MSpace constant giving the coordinate space
 		                   in which the point is given"""
-	def setCVPositions(self,points:Any,space:Any=MSpace.kObject)->Self:
+	def setCVPositions(self,points:MPointArray|Sequence[MPoint],space:int=MSpace.kObject)->Self:
 		"""setCVPositions(points, space=kObject) -> self
 
 		Sets the positions of all of the curve's control vertices.
@@ -7434,13 +7434,13 @@ class MFnNurbsCurve(MFnDagNode):
 		                 curve has control vertices.
 		* space  (int) - an MSpace constant giving the coordinate space
 		                 in which the points are given"""
-	def setKnot(self,index:Any,param:Any)->Self:
+	def setKnot(self,index:int,param:float)->Self:
 		"""setKnot(index, param) -> self
 
 		Sets the parameter value of a single knot.
 		* index   (int) - index of the knot
 		* param (float) - new parameter value for the knot"""
-	def setKnots(self,params:Any,startIndex:Any,endIndex:Any)->Self:
+	def setKnots(self,params:Any,startIndex:int,endIndex:int)->Self:
 		"""setKnots(params, startIndex, endIndex) -> self
 
 		Sets the parameter values of a contiguous group of knots.
@@ -7450,7 +7450,7 @@ class MFnNurbsCurve(MFnDagNode):
 		                     the range
 		* startIndex (int) - first knot in the range to be set
 		* endIndex   (int) - last knot in the range to be set"""
-	def tangent(self,param:Any,space:Any=MSpace.kObject)->MVector:
+	def tangent(self,param:float,space:int=MSpace.kObject)->MVector:
 		"""tangent(param, space=kObject) -> MVector
 
 		Returns the normalized tangent vector at the given parameter value
@@ -7717,11 +7717,11 @@ class MFnNurbsSurface(MFnDagNode):
 	kPointTolerance:float=0.001
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def area(self,space:Any=MSpace.kObject,tolerance:Any=MFnMesh.kPointTolerance)->float:
+	def area(self,space:int=MSpace.kObject,tolerance:float=MFnMesh.kPointTolerance)->float:
 		"""area(space=kObject, tolerance=kPointTolerance) -> float
 
 		Returns the surface's area, or 0.0 if the area cannot be determined."""
-	def assignUV(self,patchId:Any,cornerIndex:Any,uvId:Any)->Self:
+	def assignUV(self,patchId:int,cornerIndex:int,uvId:int)->Self:
 		"""assignUV(patchId, cornerIndex, uvId) -> self
 
 		Maps a texture coordinate (uv) to a the specified corner of a patch.
@@ -7736,7 +7736,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* patchId     (int) - Patch to map to.
 		* cornerIndex (int) - Corner of the patch to map to.
 		* uvId        (int) - Index into the uv list of the UV to map."""
-	def assignUVs(self,uvCounts:Any,uvIds:Any)->Self:
+	def assignUVs(self,uvCounts:MIntArray|Sequence[int],uvIds:MIntArray|Sequence[int])->Self:
 		"""assignUVs(uvCounts, uvIds) -> self
 
 		Maps all texture coordinates for the surface. setUV() and setUVs()
@@ -7772,7 +7772,7 @@ class MFnNurbsSurface(MFnDagNode):
 		             - UV counts for each patch in the surface.
 		* uvIds    (MIntArray or seq of int)
 		             - UV indices to be mapped to each patch-corner."""
-	def boundaryType(self,region:Any,boundary:Any)->int:
+	def boundaryType(self,region:int,boundary:int)->int:
 		"""boundaryType(region, boundary) -> int
 
 		Returns the type of the specified boundary. The surface must be a
@@ -7800,7 +7800,7 @@ class MFnNurbsSurface(MFnDagNode):
 		on a shape with no history, the UVs are removed and the attributes
 		are set on the shape. When called on a shape with history, the
 		polyDelMap command is invoked and a polyMapDel node is created."""
-	def closestPoint(self,testPoint:Any,uStart:Any|None=None,vStart:Any|None=None,ignoreTrimBoundaries:Any=False,tolerance:Any=MFnMesh.kPointTolerance,space:Any=MSpace.kObject)->tuple[MPoint,float,float]:
+	def closestPoint(self,testPoint:MPoint,uStart:float|None=None,vStart:float|None=None,ignoreTrimBoundaries:bool=False,tolerance:float=MFnMesh.kPointTolerance,space:int=MSpace.kObject)->tuple[MPoint,float,float]:
 		"""closestPoint(testPoint, uStart=None, vStart=None,
 		    ignoreTrimBoundaries=False, tolerance=kPointTolerance,
 		    space=kObject) -> (MPoint, float, float)
@@ -7840,7 +7840,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* space        (int) - an MSpace constant giving the coordinate
 		                       space which 'testPoint' is in. The returned
 		                       point will be in the same space."""
-	def copy(self,source:Any,parent:Any=MObject.kNullObj)->MObject:
+	def copy(self,source:MObject,parent:MObject=MObject.kNullObj)->MObject:
 		"""copy(source, parent=kNullObj) -> MObject
 
 		Returns a new NURBS surface, which is a copy of the source surface,
@@ -7858,7 +7858,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                    with the new surface parented beneath it as a
 		                    nurbsSurface node. In this last case it will be
 		                    the transform node which is returned."""
-	def create(self,cvs:Any,uKnots:Any,vKnots:Any,uDegree:Any,vDegree:Any,uForm:Any,vForm:Any,rational:Any,parent:Any=MObject.kNullObj)->MObject:
+	def create(self,cvs:MPointArray|Sequence[MPoint],uKnots:MDoubleArray|Sequence[float],vKnots:MDoubleArray|Sequence[float],uDegree:int,vDegree:int,uForm:int,vForm:int,rational:bool,parent:MObject=MObject.kNullObj)->MObject:
 		"""create(cvs, uKnots, vKnots, uDegree, vDegree, uForm, vForm,
 		    rational, parent=kNullObj) -> MObject
 
@@ -7890,14 +7890,14 @@ class MFnNurbsSurface(MFnDagNode):
 		                    with the new surface parented beneath it as a
 		                    nurbsSurface node. In this last case it will be
 		                    the transform node which is returned."""
-	def cv(self,uIndex:Any,vIndex:Any)->MObject:
+	def cv(self,uIndex:int,vIndex:int)->MObject:
 		"""cv(uIndex, vIndex) -> MObject
 
 		Returns a component for the specified control vertex.
 
 		* uIndex (int) - U index of the CV.
 		* vIndex (int) - V index of the CV."""
-	def cvPosition(self,uIndex:Any,vIndex:Any,space:Any=MSpace.kObject)->MPoint:
+	def cvPosition(self,uIndex:int,vIndex:int,space:int=MSpace.kObject)->MPoint:
 		"""cvPosition(uIndex, vIndex, space=kObject) -> MPoint
 
 		Returns the position of the specified control vertex.
@@ -7906,14 +7906,14 @@ class MFnNurbsSurface(MFnDagNode):
 		* vIndex (int) - V index of the CV.
 		* space  (int) - an MSpace constant giving the coordinate
 		                 space which the point should be returned."""
-	def cvPositions(self,space:Any=MSpace.kObject)->MPointArray:
+	def cvPositions(self,space:int=MSpace.kObject)->MPointArray:
 		"""cvPositions(space=kObject) -> MPointArray
 
 		Returns the positions of all the surface's control vertices.
 
 		* space  (int) - an MSpace constant giving the coordinate
 		                 space which the points should be returned."""
-	def cvsInU(self,startUIndex:Any,endUIndex:Any,vIndex:Any)->MObject:
+	def cvsInU(self,startUIndex:int,endUIndex:int,vIndex:int)->MObject:
 		"""cvsInU(startUIndex, endUIndex, vIndex) -> MObject
 
 		Returns a component for a set of control vertices in the U direction.
@@ -7921,7 +7921,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* startUIndex (int) - U index of the first CV to return.
 		* endUIndex   (int) - U index of the last CV to return.
 		* vIndex      (int) - V index for all of the returned CVs."""
-	def cvsInV(self,startVIndex:Any,endVIndex:Any,uIndex:Any)->MObject:
+	def cvsInV(self,startVIndex:int,endVIndex:int,uIndex:int)->MObject:
 		"""cvsInV(startVIndex, endVIndex, uIndex) -> MObject
 
 		Returns a component for a set of control vertices in the V direction.
@@ -7929,7 +7929,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* startVIndex (int) - V index of the first CV to return.
 		* endVIndex   (int) - V index of the last CV to return.
 		* uIndex      (int) - U index for all of the returned CVs."""
-	def distanceToPoint(self,point:Any,space:Any=MSpace.kObject)->float:
+	def distanceToPoint(self,point:MPoint,space:int=MSpace.kObject)->float:
 		"""distanceToPoint(point, space=kObject) -> float
 
 		Returns the distance from the given point to the closest point on
@@ -7938,7 +7938,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* point (MPoint) - Point to calculate distance to.
 		* space  (int)   - An MSpace constant giving the coordinate space in
 		                   which the point has been specified."""
-	def edge(self,region:Any,boundary:Any,edge:Any,paramEdge:Any=False)->MObjectArray:
+	def edge(self,region:int,boundary:int,edge:int,paramEdge:bool=False)->MObjectArray:
 		"""edge(region, boundary, edge, paramEdge=False) -> MObjectArray
 
 		Return the specified edge of a trim boundary.
@@ -7967,7 +7967,7 @@ class MFnNurbsSurface(MFnDagNode):
 		of UVs for each patch in the surface, and a second array containing
 		the indices of the UVs mapped to each corner of those patches. This
 		is the same format as the arrays taken by the assignUVs() method."""
-	def getConnectedShaders(self,instanceNumber:Any)->tuple[MObjectArray,MIntArray]:
+	def getConnectedShaders(self,instanceNumber:int)->tuple[MObjectArray,MIntArray]:
 		"""getConnectedShaders(instanceNumber) -> (MObjectArray, MIntArray)
 
 		Returns a tuple containing an array of all the shaders (sets)
@@ -7985,7 +7985,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* instanceNumber (int) - Determines which instance of the surface to
 		                         query. This will be zero if there is only
 		                         one instance."""
-	def getDerivativesAtParam(self,uParam:Any,vParam:Any,space:Any=MSpace.kObject,secondOrder:Any=False)->tuple[MPoint,MVector,MVector]:
+	def getDerivativesAtParam(self,uParam:float,vParam:float,space:int=MSpace.kObject,secondOrder:bool=False)->tuple[MPoint,MVector,MVector]:
 		"""getDerivativesAtParam(uParam, vParam, space=kObject, secondOrder=False)
 		    -> (MPoint, MVector, MVector)
 		    -> (MPoint, MVector, MVector, MVector, MVector, MVector)
@@ -8007,7 +8007,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                 - If True, second order derivatives will be included
 		                   in the result. Note that this will increase
 		                   computation time."""
-	def getParamAtPoint(self,point:Any,ignoreTrimBoundaries:Any,tolerance:Any=MFnMesh.kPointTolerance,space:Any=MSpace.kObject)->tuple[float,float]:
+	def getParamAtPoint(self,point:MPoint,ignoreTrimBoundaries:bool,tolerance:float=MFnMesh.kPointTolerance,space:int=MSpace.kObject)->tuple[float,float]:
 		"""getParamAtPoint(point, ignoreTrimBoundaries, tolerance=kPointTolerance,
 		    space=kObject) -> (float, float)
 
@@ -8022,7 +8022,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* tolerance (float) - Accuracy to be used in the operation.
 		* space       (int) - An MSpace constant giving the coordinate space
 		                      in which to perform the operation."""
-	def getPatchUV(self,patchId:Any,cornerIndex:Any)->tuple[float,float]:
+	def getPatchUV(self,patchId:int,cornerIndex:int)->tuple[float,float]:
 		"""getPatchUV(patchId, cornerIndex) -> (float, float)
 
 		Returns a tuple containing the texture texture coordinate for a
@@ -8031,14 +8031,14 @@ class MFnNurbsSurface(MFnDagNode):
 		that the u and v values are mapped to.
 		* patchId (int)     - Patch of interest.
 		* cornerIndex (int) - Corner of interest."""
-	def getPatchUVid(self,patchId:Any,cornerIndex:Any)->int:
+	def getPatchUVid(self,patchId:int,cornerIndex:int)->int:
 		"""getPatchUVid(patchId, cornerIndex) -> int
 
 		Returns the id of the texture coordinate for a single corner of a patch.
 
 		* patchId (int)     - Patch of interest.
 		* cornerIndex (int) - Corner of interest."""
-	def getPatchUVs(self,patchId:Any)->tuple[MFloatArray,MFloatArray]:
+	def getPatchUVs(self,patchId:int)->tuple[MFloatArray,MFloatArray]:
 		"""getPatchUVs(patchId) -> (MFloatArray, MFloatArray)
 
 		Returns a tuple containing the values of the texture coordinates on
@@ -8046,9 +8046,9 @@ class MFnNurbsSurface(MFnDagNode):
 		coordinates and an array of V coordinates, both the same length.
 
 		* patchId (int)     - Patch of interest."""
-	def getPointAtParam(self,uParam:Any,vParam:Any,space:Any=MSpace.kObject)->MPoint:
+	def getPointAtParam(self,uParam:Any,vParam:Any,space:int=MSpace.kObject)->MPoint:
 		"""getPointAtParam(uParam, vParam, space=kObject) -> MPoint"""
-	def getUV(self,uvId:Any)->tuple[float,float]:
+	def getUV(self,uvId:int)->tuple[float,float]:
 		"""getUV(uvId) -> (float, float)
 
 		Returns a tuple containing the U and V values for the a texture coordinate
@@ -8059,7 +8059,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		Returns all of the surface's texture coordinates as a tuple containing
 		an array of U values and an array of V values."""
-	def intersect(self,rayStart:Any,rayDir:Any,tolerance:Any=MFnMesh.kPointTolerance,space:Any=MSpace.kObject,distance:Any=False,exactHit:Any=False,all:Any=False)->tuple[MPoint,float,Any]:
+	def intersect(self,rayStart:MPoint,rayDir:MVector,tolerance:float=MFnMesh.kPointTolerance,space:int=MSpace.kObject,distance:bool=False,exactHit:bool=False,all:bool=False)->tuple[MPoint,float,Any]:
 		"""intersect(rayStart, rayDir, tolerance=kPointTolerance, space=kObject,
 		    distance=False, exactHit=False, all=False)
 		    -> (MPoint, float, float[, float][, bool])
@@ -8090,28 +8090,28 @@ class MFnNurbsSurface(MFnDagNode):
 		This method is only valid for trimmed surfaces.
 
 		region (int) - Region to check."""
-	def isKnotU(self,param:Any)->bool:
+	def isKnotU(self,param:float)->bool:
 		"""isKnotU(param) -> bool
 
 		Checks if the specified parameter value is a knot value in the U
 		direction.
 
 		* param (float) - Parameter value to check."""
-	def isKnotV(self,param:Any)->bool:
+	def isKnotV(self,param:float)->bool:
 		"""isKnotV(param) -> bool
 
 		Checks if the specified parameter value is a knot value in the V
 		direction.
 
 		* param (float) - Parameter value to check."""
-	def isParamOnSurface(self,uParam:Any,vParam:Any)->bool:
+	def isParamOnSurface(self,uParam:float,vParam:float)->bool:
 		"""isParamOnSurface(uParam, vParam) -> bool
 
 		Checks if the specified parameter point is on this surface.
 
 		* uParam (float) - U parameter value.
 		* vParam (float) - V parameter value."""
-	def isPointInTrimmedRegion(self,uParam:Any,vParam:Any)->bool:
+	def isPointInTrimmedRegion(self,uParam:float,vParam:float)->bool:
 		"""isPointInTrimmedRegion(uParam, vParam) -> bool
 
 		Checks if the given point is in a trimmed away region of a trimmed
@@ -8120,7 +8120,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* uParam (float) - U parameter of the point to check.
 		* vParam (float) - V parameter of the point to check."""
-	def isPointOnSurface(self,point:Any,tolerance:Any=MFnMesh.kPointTolerance,space:Any=MSpace.kObject)->bool:
+	def isPointOnSurface(self,point:MPoint,tolerance:float=MFnMesh.kPointTolerance,space:int=MSpace.kObject)->bool:
 		"""isPointOnSurface(point, tolerance=kPointTolerance, space=kObject) -> bool
 
 		Checks if the given point is on this surface.
@@ -8129,13 +8129,13 @@ class MFnNurbsSurface(MFnDagNode):
 		* tolerance (float) - Accuracy to be used in the operation.
 		* space       (int) - An MSpace constant giving the coordinate space
 		                      in which to perform the operation"""
-	def knotInU(self,index:Any)->float:
+	def knotInU(self,index:int)->float:
 		"""knotInU(index) -> float
 
 		Returns the knot value at the specified U index. U knots are indexed
 		from 0 to numKnotsInU-1.
 		* index (int) - Index of the U knot to return."""
-	def knotInV(self,index:Any)->float:
+	def knotInV(self,index:int)->float:
 		"""knotInV(index) -> float
 
 		Returns the knot value at the specified V index. V knots are indexed
@@ -8149,7 +8149,7 @@ class MFnNurbsSurface(MFnDagNode):
 		"""knotsInV() -> MDoubleArray
 
 		Returns all of the surface's knots in the V direction."""
-	def normal(self,uParam:Any,vParam:Any,space:Any=MSpace.kObject)->MVector:
+	def normal(self,uParam:float,vParam:float,space:int=MSpace.kObject)->MVector:
 		"""normal(uParam, vParam, space=kObject) -> MVector
 
 		Returns the normal at the given parameter value on the surface.
@@ -8158,7 +8158,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* vParam (float) - V parameter at which to obtain normal.
 		* space    (int) - An MSpace constant giving the coordinate space
 		                   in which to perform the operation"""
-	def numBoundaries(self,region:Any)->int:
+	def numBoundaries(self,region:int)->int:
 		"""numBoundaries(region) -> unsigned int
 
 		Returns the number of boundaries for the specified region. The
@@ -8169,7 +8169,7 @@ class MFnNurbsSurface(MFnDagNode):
 		boundary curves are made up of one or more curves called edges.
 
 		* region (int) - Region of interest."""
-	def numEdges(self,region:Any,boundary:Any)->int:
+	def numEdges(self,region:int,boundary:int)->int:
 		"""numEdges(region, boundary) -> unsigned int
 
 		Returns the number of edges for the specified trim boundary.
@@ -8179,7 +8179,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* region   (int) - Region of interest.
 		* boundary (int) - Boundary of interest"""
-	def projectCurve(self,curve:Any,direction:Any=...,keepHistory:Any=False)->Self:
+	def projectCurve(self,curve:Any,direction:MVector=...,keepHistory:bool=False)->Self:
 		"""projectCurve(curve[, direction], keepHistory=False) -> self
 
 		Projects the given curve onto the surface, creating a curve on surface.
@@ -8188,7 +8188,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                        then surface normals will be used.
 		* keepHistory  (bool) - Determines whether the construction history
 		                        of the projection should be retained."""
-	def removeKnotInU(self,param:Any,removeAll:Any=False)->Self:
+	def removeKnotInU(self,param:float,removeAll:bool=False)->Self:
 		"""removeKnotInU(param, removeAll=False) -> self
 
 		Removes one or more U knots at the specified parameter value from
@@ -8198,7 +8198,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* removeAll (bool) - If True and there are multiple knots at the
 		                     parameter value then they will all be removed.
 		                     Otherwise, all but one will be removed."""
-	def removeKnotInV(self,param:Any,removeAll:Any=False)->Self:
+	def removeKnotInV(self,param:float,removeAll:bool=False)->Self:
 		"""removeKnotInV(param, removeAll=False) -> self
 
 		Removes one or more V knots at the specified parameter value from
@@ -8208,23 +8208,23 @@ class MFnNurbsSurface(MFnDagNode):
 		* removeAll (bool) - If True and there are multiple knots at the
 		                     parameter value then they will all be removed.
 		                     Otherwise, all but one will be removed."""
-	def removeOneKnotInU(self,param:Any)->Self:
+	def removeOneKnotInU(self,param:float)->Self:
 		"""removeOneKnotInU(param) -> self
 
 		Removes one U knot at the specified parameter value. If there are
 		multiple knots at that the value the others are retained.
 
 		* param (float) - U parameter value of the knot to remove."""
-	def removeOneKnotInV(self,param:Any)->Self:
+	def removeOneKnotInV(self,param:float)->Self:
 		"""removeOneKnotInV(param) -> self
 
 		Removes one V knot at the specified parameter value. If there are
 		multiple knots at that the value the others are retained.
 
 		* param (float) - V parameter value of the knot to remove."""
-	def setCVPosition(self,uIndex:Any,vIndex:Any,point:Any,space:Any=MSpace.kObject)->Self:
+	def setCVPosition(self,uIndex:Any,vIndex:Any,point:Any,space:int=MSpace.kObject)->Self:
 		"""setCVPosition(uIndex, vIndex, point, space=kObject) -> self"""
-	def setCVPositions(self,points:Any,space:Any=MSpace.kObject)->Self:
+	def setCVPositions(self,points:MPointArray|Sequence[MPoint],space:int=MSpace.kObject)->Self:
 		"""setCVPositions(points, space=kObject) -> self
 
 		Set the positions of all of the surface's CVs.
@@ -8243,7 +8243,7 @@ class MFnNurbsSurface(MFnDagNode):
 		               - Positions of the CVs.
 		* space  (int) - An MSpace constant giving the coordinate space
 		                 in which to perform the operation"""
-	def setKnotInU(self,index:Any,param:Any)->Self:
+	def setKnotInU(self,index:int,param:float)->Self:
 		"""setKnotInU(index, param) -> self
 
 		Sets the value of an existing U knot. U knots are indexed from 0 to
@@ -8256,7 +8256,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* index   (int) - U index of the knot to set.
 		* param (float) - New parameter value for the knot."""
-	def setKnotInV(self,index:Any,param:Any)->Self:
+	def setKnotInV(self,index:int,param:float)->Self:
 		"""setKnotInV(index, param) -> self
 
 		Sets the value of an existing V knot. V knots are indexed from 0 to
@@ -8269,7 +8269,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* index   (int) - V index of the knot to set.
 		* param (float) - New parameter value for the knot."""
-	def setKnotsInU(self,params:Any,startIndex:Any,endIndex:Any)->Self:
+	def setKnotsInU(self,params:MDoubleArray|Sequence[float],startIndex:int,endIndex:int)->Self:
 		"""setKnotsInU(params, startIndex, endIndex) -> self
 
 		Sets the values of a range of U knots.
@@ -8279,7 +8279,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                     per knot in the range.
 		* startIndex (int) - Index of the first U knot to set.
 		* endIndex   (int) - Index of the last U knot to set."""
-	def setKnotsInV(self,params:Any,startIndex:Any,endIndex:Any)->Self:
+	def setKnotsInV(self,params:MDoubleArray|Sequence[float],startIndex:int,endIndex:int)->Self:
 		"""setKnotsInV(params, startIndex, endIndex) -> self
 
 		Sets the values of a range of V knots.
@@ -8289,7 +8289,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                     per knot in the range.
 		* startIndex (int) - Index of the first V knot to set.
 		* endIndex   (int) - Index of the last V knot to set."""
-	def setUV(self,uvId:Any,u:Any,v:Any)->Self:
+	def setUV(self,uvId:int,u:float,v:float)->Self:
 		"""setUV(uvId, u, v) -> self
 
 		Sets a single texture coordinate. If 'uvId' is greater than or equal
@@ -8305,7 +8305,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* uvId (int) - Index of the element in the surface's uv list to set.
 		* u  (float) - U value to set the uv to.
 		* v  (float) - V value to set the uv to."""
-	def setUVs(self,uList:Any,vList:Any)->Self:
+	def setUVs(self,uList:MFloatArray|Sequence[float],vList:MFloatArray|Sequence[float])->Self:
 		"""setUVs(uList, vList) -> self
 
 		Sets all of the texture coordinates (uvs) for this surface. The
@@ -8325,7 +8325,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* uList (MFloatArray or seq of float) - U values to set
 		* vList (MFloatArray or seq of float) - V values to set"""
-	def tangents(self,uParam:Any,vParam:Any,space:Any=MSpace.kObject)->tuple[MVector,MVector]:
+	def tangents(self,uParam:float,vParam:float,space:int=MSpace.kObject)->tuple[MVector,MVector]:
 		"""tangents(uParam, vParam, space=kObject) -> (MVector, MVector)
 
 		Returns the tangents in the U and V directions at a given parameter
@@ -8339,7 +8339,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* vParam (float) - V parameter value at which to obtain the tangents.
 		* space    (int) - An MSpace constant giving the coordinate space
 		                   in which to perform the operation"""
-	def trim(self,regionsToKeepU:Any,regionsToKeepV:Any,keepHistory:Any=False)->Self:
+	def trim(self,regionsToKeepU:MDoubleArray|Sequence[float],regionsToKeepV:MDoubleArray|Sequence[float],keepHistory:bool=False)->Self:
 		"""trim(regionsToKeepU, regionsToKeepV, keepHistory=False) -> self
 
 		Trims the surface to its curves on surface. Regions which are kept
@@ -8451,7 +8451,7 @@ class MFnPluginData(MFnData):
 		"""data() -> MPxData
 
 		Return the user defined data held in this instance"""
-	def create(self,id:Any)->MObject:
+	def create(self,id:MTypeId)->MObject:
 		"""create(id) -> MObject
 
 		Create an instance of the specified user defined data type and attach it to this functionset.
@@ -8560,20 +8560,20 @@ class MFnSet(MFnDependencyNode):
 	kRenderableOnly:int=5
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,members:Any,restriction:Any=MFileObject.kNone)->MObject:
+	def create(self,members:MSelectionList,restriction:int=MFileObject.kNone)->MObject:
 		"""create(members, restriction=kNone) -> MObject
 
 		Creates a new set dependency node and puts it in the dependency graph.
 
 		* members (MSelectionList) - list of members for new set
 		* restriction (MFnSet.Restriction) - restriction applied to members"""
-	def getUnion(self,otherSet:Any)->MSelectionList:
+	def getUnion(self,otherSet:MObject|MObjectArray|list[set])->MSelectionList:
 		"""getUnion( otherSet ) -> MSelectionList
 
 		This method calculates the union of two sets.  The result will be the union of this set and the set passed into the method.
 
 		* otherSet (MObject or MObjectArray or list of sets) - set(s) to find union of with this set"""
-	def getIntersection(self,otherSet:Any)->MSelectionList:
+	def getIntersection(self,otherSet:MObject|MObjectArray|list[set])->MSelectionList:
 		"""getIntersection( otherSet ) -> MSelectionList
 
 		This method calculates the intersection of two sets.  The result will be the intersection of this set and the set passed into the method.
@@ -8583,7 +8583,7 @@ class MFnSet(MFnDependencyNode):
 		"""clear() -> self
 
 		Removes all elements from this set."""
-	def getMembers(self,flatten:Any)->MSelectionList:
+	def getMembers(self,flatten:bool)->MSelectionList:
 		"""getMembers( flatten ) -> MSelectionList
 
 		Get the members of this set as a selection list.  This information is providedas a selection list so that all of the path information is retained forDAG nodes.
@@ -8637,7 +8637,7 @@ class MFnSet(MFnDependencyNode):
 		"""setAnnotation( annotation ) -> self
 
 		Sets the annotation string for this set.  This allows a description of the set to be stored with it."""
-	def getMemberPaths(self,shading:Any)->MDagPathArray:
+	def getMemberPaths(self,shading:bool)->MDagPathArray:
 		"""getMemberPaths( shading ) -> MDagPathArray
 
 		Get the members of this set as an array of dagPaths.
@@ -9101,7 +9101,7 @@ class MGlobal:
 		  kSelectLeafMode       Selecting the child in a hierarchy will result only in that child being selected.
 		  kSelectTemplateMode   Templated objects are selectable in this mode."""
 	@staticmethod
-	def setActiveSelectionList(MSelectionList:Any,listAdjustment:Any=MGlobal.kReplaceList)->None:
+	def setActiveSelectionList(MSelectionList:Any,listAdjustment:int=MGlobal.kReplaceList)->None:
 		"""setActiveSelectionList(MSelectionList, listAdjustment=kReplaceList) -> None
 
 		Set the active selection list.
@@ -9115,7 +9115,7 @@ class MGlobal:
 		  kAddToHeadOfList  #Add the items to the beginning of the list."""
 	@staticmethod
 	@overload
-	def setAnimSelectionMask(mask:Any)->MGlobal:
+	def setAnimSelectionMask(mask:MSelectionMask)->MGlobal:
 		"""setAnimSelectionMask(mask) -> selfsetAnimSelectionMask(type) -> self
 
 		Set the animation selection mask to the supplied value.
@@ -9124,7 +9124,7 @@ class MGlobal:
 		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
 	@overload
 	@staticmethod
-	def setAnimSelectionMask(type:Any)->MGlobal:
+	def setAnimSelectionMask(type:int)->MGlobal:
 		"""setAnimSelectionMask(mask) -> selfsetAnimSelectionMask(type) -> self
 
 		Set the animation selection mask to the supplied value.
@@ -9133,7 +9133,7 @@ class MGlobal:
 		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
 	@staticmethod
 	@overload
-	def setComponentSelectionMask(mask:Any)->MGlobal:
+	def setComponentSelectionMask(mask:MSelectionMask)->MGlobal:
 		"""setComponentSelectionMask(mask) -> selfsetComponentSelectionMask(type) -> self
 
 		Set the component selection mask to the supplied value.
@@ -9142,7 +9142,7 @@ class MGlobal:
 		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
 	@overload
 	@staticmethod
-	def setComponentSelectionMask(type:Any)->MGlobal:
+	def setComponentSelectionMask(type:int)->MGlobal:
 		"""setComponentSelectionMask(mask) -> selfsetComponentSelectionMask(type) -> self
 
 		Set the component selection mask to the supplied value.
@@ -9151,7 +9151,7 @@ class MGlobal:
 		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
 	@staticmethod
 	@overload
-	def setMiscSelectionMask(mask:Any)->MGlobal:
+	def setMiscSelectionMask(mask:MSelectionMask)->MGlobal:
 		"""setMiscSelectionMask(mask) -> selfsetMiscSelectionMask(type) -> self
 
 		Set the miscellaneous selection mask to the supplied value.
@@ -9160,7 +9160,7 @@ class MGlobal:
 		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
 	@overload
 	@staticmethod
-	def setMiscSelectionMask(type:Any)->MGlobal:
+	def setMiscSelectionMask(type:int)->MGlobal:
 		"""setMiscSelectionMask(mask) -> selfsetMiscSelectionMask(type) -> self
 
 		Set the miscellaneous selection mask to the supplied value.
@@ -9169,7 +9169,7 @@ class MGlobal:
 		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
 	@staticmethod
 	@overload
-	def setObjectSelectionMask(mask:Any)->MGlobal:
+	def setObjectSelectionMask(mask:MSelectionMask)->MGlobal:
 		"""setObjectSelectionMask(mask) -> selfsetObjectSelectionMask(type) -> self
 
 		Set the object selection mask to the supplied value.
@@ -9178,7 +9178,7 @@ class MGlobal:
 		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
 	@overload
 	@staticmethod
-	def setObjectSelectionMask(type:Any)->MGlobal:
+	def setObjectSelectionMask(type:int)->MGlobal:
 		"""setObjectSelectionMask(mask) -> selfsetObjectSelectionMask(type) -> self
 
 		Set the object selection mask to the supplied value.
@@ -9277,7 +9277,7 @@ class MGlobal:
 		If preselection highlighting is not enabled, Maya will still
 		store the list."""
 	@staticmethod
-	def selectCommand(MSelectionList:Any,listAdjustment:Any=MGlobal.kReplaceList)->None:
+	def selectCommand(MSelectionList:Any,listAdjustment:int=MGlobal.kReplaceList)->None:
 		"""selectCommand(MSelectionList, listAdjustment=kReplaceList) -> None
 
 		Set the active selection list, by calling the built in Maya select
@@ -9286,7 +9286,7 @@ class MGlobal:
 		responsible for maintaing the necessary information required for
 		undo, redo, and journaling."""
 	@staticmethod
-	def selectByName(string:Any,listAdjustment:Any=MGlobal.kReplaceList)->None:
+	def selectByName(string:Any,listAdjustment:int=MGlobal.kReplaceList)->None:
 		"""selectByName(string, listAdjustment=kReplaceList) -> None
 
 		Puts objects that match the give name on the active selection list."""
@@ -9321,7 +9321,7 @@ class MGlobal:
 		selection rectangle, it is selected according to listAdjustment."""
 	@staticmethod
 	@overload
-	def selectFromScreen(short:int,short2:int,listAdjustment:Any=MGlobal.kAddToList,selectMethod:Any=MGlobal.kWireframeSelectMethod)->None:
+	def selectFromScreen(short:int,short2:int,listAdjustment:int=MGlobal.kAddToList,selectMethod:int=MGlobal.kWireframeSelectMethod)->None:
 		"""selectFromScreen(short, short, listAdjustment=kAddToList, selectMethod=kWireframeSelectMethod) -> None
 		selectFromScreen(short, short, short, short, listAdjustment=kAddToList, selectMethod=kWireframeSelectMethod) -> None
 
@@ -9329,7 +9329,7 @@ class MGlobal:
 		the click point then it is selected according to listAdjustment."""
 	@overload
 	@staticmethod
-	def selectFromScreen(short:int,short2:int,short3:int,short4:int,listAdjustment:Any=MGlobal.kAddToList,selectMethod:Any=MGlobal.kWireframeSelectMethod)->None:
+	def selectFromScreen(short:int,short2:int,short3:int,short4:int,listAdjustment:int=MGlobal.kAddToList,selectMethod:int=MGlobal.kWireframeSelectMethod)->None:
 		"""selectFromScreen(short, short, listAdjustment=kAddToList, selectMethod=kWireframeSelectMethod) -> None
 		selectFromScreen(short, short, short, short, listAdjustment=kAddToList, selectMethod=kWireframeSelectMethod) -> None
 
@@ -9769,7 +9769,7 @@ class MImage:
 		"""verticalFlip() -> bool
 
 		Flips the image vertically."""
-	def create(self,width:Any,height:Any,channels:Any=4,type:Any=MColor.kByte)->Self:
+	def create(self,width:int,height:int,channels:int=4,type:int=MColor.kByte)->Self:
 		"""create(width, height, channels=4, type=kByte) -> self
 
 		Create a new MImage object. Allocates memory for an RGBA array of pixels
@@ -9783,7 +9783,7 @@ class MImage:
 		"""getSize() -> [width, height]
 
 		Get the width and height of the currently opened image."""
-	def resize(self,width:Any,height:Any,preserveAspectRatio:Any=True)->Self:
+	def resize(self,width:int,height:int,preserveAspectRatio:bool=True)->Self:
 		"""resize(width, height, preserveAspectRatio=True) -> self
 
 		Resize the currently opened image to the specified dimension, or to the closest
@@ -9791,7 +9791,7 @@ class MImage:
 		* height (unsigned int) - the desired image's height in pixels.
 		* preserveAspectRatio (bool) - specifies whether the aspect ratio should be preserved or not.
 		         If this flag is set, the given width and height are interpreted as the maximum dimensions allowable."""
-	def setPixels(self,pixels:Any,width:Any,height:Any)->Self:
+	def setPixels(self,pixels:char,width:int,height:int)->Self:
 		"""setPixels(pixels, width, height) -> self
 
 		Copy the uncompressed pixels array passed in into the MImage.
@@ -9801,7 +9801,7 @@ class MImage:
 		* pixels (unsigned char*) - the variable containing a block of pixels.
 		* width (unsigned int) - the variable that will be set to the image's width in pixels.
 		* height (unsigned int) - the variable that will be set to the image's height in pixels."""
-	def setFloatPixels(self,pixels:Any,width:Any,height:Any,channels:Any=4)->Self:
+	def setFloatPixels(self,pixels:float,width:int,height:int,channels:int=4)->Self:
 		"""setFloatPixels(pixels, width, height, channels=4) -> self
 
 		Copy the uncompressed pixels array passed in into the MImage.
@@ -9820,7 +9820,7 @@ class MImage:
 		"""getDepthMapRange() -> [minValue, maxValue]
 
 		Compute the minimum and maximum depth values (range) for any stored depth buffer."""
-	def setDepthMap(self,depth:Any,width:Any,heigth:Any)->Self:
+	def setDepthMap(self,depth:float,width:int,heigth:Any)->Self:
 		"""setDepthMap(depth, width, heigth) -> self
 
 		Specifies the depth map resolution and data.
@@ -9833,14 +9833,14 @@ class MImage:
 		* width (unsigned int) - the width of the depth buffer.
 		* height (unsigned int) - the height of the depth buffer."""
 	@staticmethod
-	def filterExists(sourceFormat:Any,targetFormat:Any)->bool:
+	def filterExists(sourceFormat:MImageFilterFormat,targetFormat:MImageFilterFormat)->bool:
 		"""filterExists(sourceFormat, targetFormat) -> bool
 
 		Return whether or not a given source format can be directly converted to a given target format.
 
 		* sourceFormat (MImageFilterFormat) - the format of the source image.
 		* targetFormat (MImageFilterFormat) - the format of the resulting image."""
-	def filter(self,sourceFormat:Any,targetFormat:Any,scale:Any=1.0,offset:Any=1.0)->Self:
+	def filter(self,sourceFormat:MImageFilterFormat,targetFormat:MImageFilterFormat,scale:float=1.0,offset:float=1.0)->Self:
 		"""filter(sourceFormat, targetFormat, scale=1.0, offset=1.0) -> self
 
 		Modify the content of the image by applying a filter.
@@ -9852,14 +9852,14 @@ class MImage:
 
 		The scale argument for this filter can vary from -256.0 to 256.0, although typical values range from 1.0 to 10.0.
 		The offset argument is currently ignored and should be left to the default value of 0.0."""
-	def readFromFile(self,pathname:str,type:Any=MColor.kByte)->Self:
+	def readFromFile(self,pathname:str,type:int=MColor.kByte)->Self:
 		"""readFromFile(pathname, type=kByte) -> self
 
 		Attempt to identify and open the specified image file.
 
 		* pathname (string) - the full path of the image file that should be opened.
 		* type (MPixelType) - the desired pixel format. kUnknown attempts to load the native pixel type."""
-	def readFromTextureNode(self,fileTextureObject:Any,type:Any=MColor.kByte)->Self:
+	def readFromTextureNode(self,fileTextureObject:MObject,type:int=MColor.kByte)->Self:
 		"""readFromTextureNode(fileTextureObject, type=kByte) -> self
 
 		Attempt to read the content of the given file texture node.
@@ -9998,7 +9998,7 @@ class MItCurveCV:
 		* curve (MDagPath) - The curve to iterate over
 		* component (MObject) - The CVs of the curve to iterate over"""
 	@overload
-	def reset(self,curve:Any)->Self:
+	def reset(self,curve:MObject)->Self:
 		"""reset() -> self
 		reset(curve) -> self
 		reset(curve, component=None) -> self
@@ -10015,7 +10015,7 @@ class MItCurveCV:
 		* curve (MDagPath) - The curve to iterate over
 		* component (MObject) - The CVs of the curve to iterate over"""
 	@overload
-	def reset(self,curve:Any,component:Any|None=None)->Self:
+	def reset(self,curve:MObject,component:MObject|None=None)->Self:
 		"""reset() -> self
 		reset(curve) -> self
 		reset(curve, component=None) -> self
@@ -10035,7 +10035,7 @@ class MItCurveCV:
 		"""position() -> MPoint
 
 		Returns the position of the current CV."""
-	def setPosition(self,point:Any,space:Any=MSpace.kObject)->Self:
+	def setPosition(self,point:MPoint,space:int=MSpace.kObject)->Self:
 		"""setPosition(point, space=kObject) -> self
 
 		Sets the position of the current CV, in the given transformation
@@ -10044,7 +10044,7 @@ class MItCurveCV:
 
 		* point       (MPoint) - The new position for the specified vertex
 		* space (MSpace constant) - The transformation space"""
-	def translateBy(self,vector:Any,space:Any=MSpace.kObject)->Self:
+	def translateBy(self,vector:MVector,space:int=MSpace.kObject)->Self:
 		"""translateBy(vector, space=kObject) -> self
 
 		Translate the current CV by the amount specified
@@ -10157,7 +10157,7 @@ class MItDag:
 		"""isDone() -> Bool
 
 		Indicates end of iteration path."""
-	def isInstanced(self,indirect:Any=True)->bool:
+	def isInstanced(self,indirect:bool=True)->bool:
 		"""isInstanced(indirect = True) -> Bool
 
 		Determines whether the current item (DAG node) in the iteration is directly
@@ -10768,19 +10768,19 @@ class MItMeshEdge:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def center(self,space:Any=MSpace.kObject)->MPoint:
+	def center(self,space:int=MSpace.kObject)->MPoint:
 		"""center(space=kObject) -> MPoint
 
 		Returns the center point of the edge, in the given transformation space.
 
 		* space (MSpace constant) - The  transformation space"""
-	def connectedToEdge(self,index:Any)->bool:
+	def connectedToEdge(self,index:int)->bool:
 		"""connectedToEdge(index) -> bool
 
 		Determines whether the given edge is connected to the current edge.
 
 		* index (int) - Index of edge to check."""
-	def connectedToFace(self,index:Any)->bool:
+	def connectedToFace(self,index:int)->bool:
 		"""connectedToFace(index) -> bool
 
 		Determines whether the given face contains the current edge.
@@ -10825,7 +10825,7 @@ class MItMeshEdge:
 		"""isDone() -> bool
 
 		Indicates if all of the edges have been traversed yet."""
-	def length(self,space:Any=MSpace.kObject)->float:
+	def length(self,space:int=MSpace.kObject)->float:
 		"""length(space=kObject) -> float
 
 		Returns the length of the edge, in the given transformation space.
@@ -10847,7 +10847,7 @@ class MItMeshEdge:
 		"""onBoundary() -> bool
 
 		Determines if the current edge is a border edge."""
-	def point(self,whichVertex:Any,space:Any=MSpace.kObject)->MPoint:
+	def point(self,whichVertex:Literal[0]|Literal[1],space:int=MSpace.kObject)->MPoint:
 		"""point(whichVertex, space=kObject) -> MPoint
 
 		Returns the position of one of the current edge's vertices, int the
@@ -10873,7 +10873,7 @@ class MItMeshEdge:
 		* mesh (MDagPath) - The mesh to iterate over
 		* component (MObject) - The edges of the mesh to iterate over"""
 	@overload
-	def reset(self,mesh:Any)->Self:
+	def reset(self,mesh:MObject)->Self:
 		"""reset() -> self
 		reset(mesh) -> self
 		reset(mesh, component=None) -> self
@@ -10890,7 +10890,7 @@ class MItMeshEdge:
 		* mesh (MDagPath) - The mesh to iterate over
 		* component (MObject) - The edges of the mesh to iterate over"""
 	@overload
-	def reset(self,mesh:Any,component:Any|None=None)->Self:
+	def reset(self,mesh:MObject,component:MObject|None=None)->Self:
 		"""reset() -> self
 		reset(mesh) -> self
 		reset(mesh, component=None) -> self
@@ -10906,7 +10906,7 @@ class MItMeshEdge:
 
 		* mesh (MDagPath) - The mesh to iterate over
 		* component (MObject) - The edges of the mesh to iterate over"""
-	def setIndex(self,index:Any)->int:
+	def setIndex(self,index:int)->int:
 		"""setIndex(index) -> int
 
 		Sets the index of the current edge to be accessed. The current edge
@@ -10916,7 +10916,7 @@ class MItMeshEdge:
 
 
 		* index (int) - The index of desired edge to access. """
-	def setPoint(self,point:Any,whichVertex:Any,space:Any=MSpace.kObject)->Self:
+	def setPoint(self,point:MPoint,whichVertex:Literal[0]|Literal[1],space:int=MSpace.kObject)->Self:
 		"""setPoint(point, whichVertex, space=kObject) -> self
 
 		Sets the position of one of the current edge's vertices, in the given
@@ -10929,7 +10929,7 @@ class MItMeshEdge:
 		"""updateSurface() -> self
 
 		Tells Maya that mesh has been changed and needs to redraw itself."""
-	def vertexId(self,whichVertex:Any)->int:
+	def vertexId(self,whichVertex:Literal[0]|Literal[1])->int:
 		"""vertexId(whichVertex) -> int
 
 		Returns the global index (as opposed to face-relative index) of one of
@@ -11053,7 +11053,7 @@ class MItMeshFaceVertex:
 		* mesh (MDagPath) - The mesh to iterate over
 		* component (MObject) - The faces of the mesh to iterate over"""
 	@overload
-	def reset(self,mesh:Any)->Self:
+	def reset(self,mesh:MObject)->Self:
 		"""reset() -> self
 		reset(mesh) -> self
 		reset(mesh, component=None) -> self
@@ -11070,7 +11070,7 @@ class MItMeshFaceVertex:
 		* mesh (MDagPath) - The mesh to iterate over
 		* component (MObject) - The faces of the mesh to iterate over"""
 	@overload
-	def reset(self,mesh:Any,component:Any|None=None)->Self:
+	def reset(self,mesh:MObject,component:MObject|None=None)->Self:
 		"""reset() -> self
 		reset(mesh) -> self
 		reset(mesh, component=None) -> self
@@ -11086,7 +11086,7 @@ class MItMeshFaceVertex:
 
 		* mesh (MDagPath) - The mesh to iterate over
 		* component (MObject) - The faces of the mesh to iterate over"""
-	def setIndex(self,faceId:Any,faceVertexId:Any)->tuple[oldFaceId,oldFaceVertexId]:
+	def setIndex(self,faceId:int,faceVertexId:int)->tuple[oldFaceId,oldFaceVertexId]:
 		"""setIndex(faceId, faceVertexId) -> (oldFaceId, oldFaceVertexId)
 
 		Sets the index of the current face vertex to be accessed. The current
@@ -11130,7 +11130,7 @@ class MItMeshPolygon:
 		"""iter() -> self
 
 		Initializes the iterator object for pythonic iteration."""
-	def center(self,space:Any=MSpace.kObject)->MPoint:
+	def center(self,space:int=MSpace.kObject)->MPoint:
 		"""center(space=kObject) -> MPoint
 
 		Return the position of the center of the current polygon
@@ -11151,14 +11151,14 @@ class MItMeshPolygon:
 		"""geomChanged() -> self
 
 		Reset the geom pointer in the MItMeshPolygon. This is now being handled automatically inside the iterator, and users should no longer need to call this method directly to sync up the iterator to changes made by MFnMesh"""
-	def getArea(self,space:Any=MSpace.kObject)->float:
+	def getArea(self,space:int=MSpace.kObject)->float:
 		"""getArea(space=kObject) -> float
 
 		This method gets the area of the face
 
 		* space (int) - World Space or Object Space"""
 	@overload
-	def getColor(self,colorSetName:Any|None=None)->MColor:
+	def getColor(self,colorSetName:str|None=None)->MColor:
 		"""getColor(colorSetName=None) -> MColor
 		getColor(vertexIndex) -> MColor
 
@@ -11181,20 +11181,20 @@ class MItMeshPolygon:
 		Or the average color of the all the vertices in this face
 
 		* colorSetName (string) - Name of the color set."""
-	def getColorIndex(self,vertexIndex:Any,colorSetName:Any|None=None)->int:
+	def getColorIndex(self,vertexIndex:int,colorSetName:str|None=None)->int:
 		"""getColorIndex(vertexIndex, colorSetName=None) -> int
 
 		This method returns the colorIndex for a vertex of the current face.
 
 		* vertexIndex (int) - Face-relative index of vertex.
 		* colorSetName (string) - Name of the color set."""
-	def getColorIndices(self,colorSetName:Any|None=None)->MIntArray:
+	def getColorIndices(self,colorSetName:str|None=None)->MIntArray:
 		"""getColorIndices(colorSetName=None) -> MIntArray
 
 		This method returns the colorIndices for each vertex on the face.
 
 		* colorSetName (string) - Name of the color set."""
-	def getColors(self,colorSetName:Any|None=None)->MColorArray:
+	def getColors(self,colorSetName:str|None=None)->MColorArray:
 		"""getColors(colorSetName=None) -> MColorArray
 
 		This method gets the color of the each vertex in the current face.
@@ -11217,7 +11217,7 @@ class MItMeshPolygon:
 
 		This method gets the indices of the edges contained in the current face."""
 	@overload
-	def getNormal(self,space:Any=MSpace.kObject)->MVector:
+	def getNormal(self,space:int=MSpace.kObject)->MVector:
 		"""getNormal(space=kObject) -> MVector
 		getNormal(vertexIndex, [space=]kObject) -> MVector
 
@@ -11230,7 +11230,7 @@ class MItMeshPolygon:
 		* index (int) - face-relative vertex index of the vertex whose normal to retrieve
 		* space (int) - The transformation space. Defaults to kObject, the keyword 'space' is optional as well."""
 	@overload
-	def getNormal(self,vertexIndex:Any,space:Any=MSpace.kObject)->MVector:
+	def getNormal(self,vertexIndex:Any,space:int=MSpace.kObject)->MVector:
 		"""getNormal(space=kObject) -> MVector
 		getNormal(vertexIndex, [space=]kObject) -> MVector
 
@@ -11242,13 +11242,13 @@ class MItMeshPolygon:
 
 		* index (int) - face-relative vertex index of the vertex whose normal to retrieve
 		* space (int) - The transformation space. Defaults to kObject, the keyword 'space' is optional as well."""
-	def getNormals(self,space:Any=MSpace.kObject)->MVectorArray:
+	def getNormals(self,space:int=MSpace.kObject)->MVectorArray:
 		"""getNormals(space=kObject) -> MVectorArray
 
 		Returns the normals for all vertices in the current face
 
 		* space (int) - The transformation space"""
-	def getPointAtUV(self,uvPoint:Any,space:Any=MSpace.kObject,uvSet:Any|None=None,tolerance:Any=0)->MPoint:
+	def getPointAtUV(self,uvPoint:list[float],space:int=MSpace.kObject,uvSet:str|None=None,tolerance:float=0)->MPoint:
 		"""getPointAtUV(uvPoint, space=kObject, uvSet=None, tolerance=0) -> MPoint
 
 		Return the position of the point at the given UV value in the current polygon.
@@ -11257,39 +11257,39 @@ class MItMeshPolygon:
 		* space (int) - The coordinate system for this operation
 		* uvSet (string) - UV set to work with
 		* tolerance (float) - tolerance value to compare float data type"""
-	def getPoints(self,space:Any=MSpace.kObject)->MPointArray:
+	def getPoints(self,space:int=MSpace.kObject)->MPointArray:
 		"""getPoints(space=kObject) -> MPointArray
 
 		Retrieves the positions of the vertices on the current face/polygon that the iterator is pointing to. Vertex positions will be inserted into the given array and will be indexed using face-relative vertex IDs (ie. ordered from 0 to (vertexCount of the face) - 1), which should not be confused with the vertexIDs of each vertex in relation to the entire mesh object.
 
 		* space (int) - The coordinate system for this operation"""
-	def getTriangle(self,localTriIndex:Any,space:Any=MSpace.kObject)->list[MPointArray|MIntArray]:
+	def getTriangle(self,localTriIndex:int,space:int=MSpace.kObject)->list[MPointArray|MIntArray]:
 		"""getTriangle(localTriIndex, space=kObject) -> [MPointArray, MIntArray]
 
 		Get the vertices and vertex positions of the given triangle in the current face's triangulation.
 
 		* localTriIndex (int) - Local index of the desired triangle in this face
 		* space (int) - World Space or Object Space"""
-	def getTriangles(self,space:Any=MSpace.kObject)->list[MPointArray|MIntArray]:
+	def getTriangles(self,space:int=MSpace.kObject)->list[MPointArray|MIntArray]:
 		"""getTriangles(space=kObject) -> [MPointArray, MIntArray]
 
 		Get the vertices and vertex positions of all the triangles in the current face's triangulation
 
 		* space (int) - World Space or Object Space"""
-	def getUV(self,vertexId:Any,uvSet:Any|None=None)->list[float]:
+	def getUV(self,vertexId:Any,uvSet:str|None=None)->list[float]:
 		"""getUV(vertexId, uvSet=None) -> [float, float]
 
 		Return the texture coordinate for the given vertex.
 
 		* vertex (int) - The face-relative vertex index to get UV for
 		* uvSet (string) - UV set to work with"""
-	def getUVArea(self,uvSet:Any|None=None)->float:
+	def getUVArea(self,uvSet:str|None=None)->float:
 		"""getUVArea(uvSet=None) -> float
 
 		This method gets the UV area of the face
 
 		* uvSet (string) - UV set to work with"""
-	def getUVAtPoint(self,pt:Any,space:Any=MSpace.kObject,uvSet:Any|None=None)->list[float]:
+	def getUVAtPoint(self,pt:MPoint,space:int=MSpace.kObject,uvSet:str|None=None)->list[float]:
 		"""getUVAtPoint(pt, space=kObject, uvSet=None) -> [float, float]
 
 		Find the point closest to the given point in the current polygon, and return the UV value at that point.
@@ -11297,7 +11297,7 @@ class MItMeshPolygon:
 		* pt (MPoint) - The point to try to get UV for
 		* space (int) - The coordinate system for this operation
 		* uvSet (string) - UV set to work with"""
-	def getUVIndex(self,vertex:Any,uvSet:Any|None=None)->int:
+	def getUVIndex(self,vertex:int,uvSet:str|None=None)->int:
 		"""getUVIndex(vertex, uvSet=None) -> int
 
 		Returns the index of the texture coordinate for the given vertex.
@@ -11305,7 +11305,7 @@ class MItMeshPolygon:
 
 		* vertex (int) - The face-relative vertex index of the current polygon
 		* uvSet (string) - UV set to work with"""
-	def getUVIndexAndValue(self,vertex:Any,uvSet:Any|None=None)->list[int|float]:
+	def getUVIndexAndValue(self,vertex:int,uvSet:str|None=None)->list[int|float]:
 		"""getUVIndexAndValue(vertex, uvSet=None) -> [int, float, float]
 
 		Return the index and value of the texture coordinate for the given vertex. This index refers to an element of the texture coordinate array for the polygonal object returned by MFnMesh.getUVs.
@@ -11316,7 +11316,7 @@ class MItMeshPolygon:
 		"""getUVSetNames() -> list of strings
 
 		This method is used to find the UV set names mapped to the current face"""
-	def getUVs(self,uvSet:Any|None=None)->list[MFloatArray]:
+	def getUVs(self,uvSet:str|None=None)->list[MFloatArray]:
 		"""getUVs(uvSet=None) -> [MFloatArray, MFloatArray]
 
 		Return the all the texture coordinates for the vertices of this face (in local vertex order).
@@ -11335,14 +11335,14 @@ class MItMeshPolygon:
 
 		* localVertexIndex (int) - face-relative vertex index to check for color on"""
 	@overload
-	def hasColor(self,localVertexIndex:Any)->bool:
+	def hasColor(self,localVertexIndex:int)->bool:
 		"""hasColor() -> bool
 		hasColor(localVertexIndex) -> bool
 
 		This method determines whether the current face has color-per-vertex set for any or the given vertex
 
 		* localVertexIndex (int) - face-relative vertex index to check for color on"""
-	def hasUVs(self,uvSet:Any|None=None)->bool:
+	def hasUVs(self,uvSet:str|None=None)->bool:
 		"""hasUVs(uvSet=None) -> bool
 
 		Tests whether this face has UV's mapped or not (either all the vertices for a face should have UV's, or none of them do, so the UV count for a face is either 0, or equal to the number of vertices).
@@ -11356,19 +11356,19 @@ class MItMeshPolygon:
 		"""index() -> int
 
 		Returns the index of the current polygon"""
-	def isConnectedToEdge(self,index:Any)->bool:
+	def isConnectedToEdge(self,index:int)->bool:
 		"""isConnectedToEdge(index) -> bool
 
 		This method determines whether the given face is adjacent to the current face
 
 		* index (int) - Index of the face to be tested for"""
-	def isConnectedToFace(self,index:Any)->bool:
+	def isConnectedToFace(self,index:int)->bool:
 		"""isConnectedToFace(index) -> bool
 
 		This method determines whether the given face is adjacent to the current face
 
 		* index (int) - Index of the face to be tested for"""
-	def isConnectedToVertex(self,index:Any)->bool:
+	def isConnectedToVertex(self,index:int)->bool:
 		"""isConnectedToVertex(index) -> bool
 
 		This method determines whether the given vertex shares an edge with a vertex in the current face
@@ -11414,7 +11414,7 @@ class MItMeshPolygon:
 		This index refers to an element in the normal array returned by MFnMesh.getNormals.  These normals are per-polygon per-vertex normals. See the MFnMesh description for more information on normals.
 
 		* localVertexIndex (int) - The face-relative index of the vertex to examine for the current polygon"""
-	def numColors(self,colorSetName:Any|None=None)->int:
+	def numColors(self,colorSetName:str|None=None)->int:
 		"""numColors(colorSetName=None) -> int
 
 		This method checks for the number of colors on vertices in this face
@@ -11436,7 +11436,7 @@ class MItMeshPolygon:
 		"""onBoundary() -> bool
 
 		This method determines whether the current face is on a boundary"""
-	def point(self,index:Any,space:Any=MSpace.kObject)->MPoint:
+	def point(self,index:int,space:int=MSpace.kObject)->MPoint:
 		"""point(index, space=kObject) -> MPoint
 
 		Return the position of the vertex at index in the current polygon.
@@ -11465,7 +11465,7 @@ class MItMeshPolygon:
 		* polyObject (MDagPath) - The surface (mesh) to iterate over
 		* component (MObject) - The polygons (faces) of the polyObject to iterate over"""
 	@overload
-	def reset(self,polyObject:Any)->Self:
+	def reset(self,polyObject:MObject)->Self:
 		"""reset() -> self
 		reset(polyObject) -> self
 		reset(polyObject, component=None) -> self
@@ -11482,7 +11482,7 @@ class MItMeshPolygon:
 		* polyObject (MDagPath) - The surface (mesh) to iterate over
 		* component (MObject) - The polygons (faces) of the polyObject to iterate over"""
 	@overload
-	def reset(self,polyObject:Any,component:Any|None=None)->Self:
+	def reset(self,polyObject:MObject,component:MObject|None=None)->Self:
 		"""reset() -> self
 		reset(polyObject) -> self
 		reset(polyObject, component=None) -> self
@@ -11498,7 +11498,7 @@ class MItMeshPolygon:
 
 		* polyObject (MDagPath) - The surface (mesh) to iterate over
 		* component (MObject) - The polygons (faces) of the polyObject to iterate over"""
-	def setIndex(self,index:Any)->int:
+	def setIndex(self,index:int)->int:
 		"""setIndex(index) -> int
 
 		This method sets the index of the current face to be accessed.
@@ -11506,7 +11506,7 @@ class MItMeshPolygon:
 		Returns the index of the current face in the iteration
 
 		* index (int) - The index of desired face to access."""
-	def setPoint(self,point:Any,index:Any,space:Any=MSpace.kObject)->Self:
+	def setPoint(self,point:MPoint,index:int,space:int=MSpace.kObject)->Self:
 		"""setPoint(point, index, space=kObject) -> self
 
 		Set the vertex at the given index in the current polygon.
@@ -11514,14 +11514,14 @@ class MItMeshPolygon:
 		* point (MPoint) - The new position for the vertex
 		* index (int) - The face-relative index of the vertex in the current polygon
 		* space (int) - The coordinate system for this operation"""
-	def setPoints(self,pointArray:Any,space:Any=MSpace.kObject)->Self:
+	def setPoints(self,pointArray:MPointArray,space:int=MSpace.kObject)->Self:
 		"""setPoints(pointArray, space=kObject) -> self
 
 		Sets new locations for vertices of the current polygon that the iterator is pointing to.
 
 		* pointArray (MPointArray) - The new positions for the vertices.
 		* space (int) - The coordinate system for this operation."""
-	def setUV(self,vertexId:Any,uvPoint:Any,uvSet:Any|None=None)->Self:
+	def setUV(self,vertexId:int,uvPoint:list[float],uvSet:str|None=None)->Self:
 		"""setUV(vertexId, uvPoint, uvSet=None) -> self
 
 		Modify the UV value for the given vertex in the current face.
@@ -11530,7 +11530,7 @@ class MItMeshPolygon:
 		* vertexId (int) - face-relative index of the vertex to set UV for.
 		* uvPoint ([float, float]) - The UV values to set it to
 		* uvSet (string) - UV set to work with"""
-	def setUVs(self,uArray:Any,vArray:Any,uvSet:Any|None=None)->Self:
+	def setUVs(self,uArray:MFloatArray,vArray:MFloatArray,uvSet:str|None=None)->Self:
 		"""setUVs(uArray, vArray, uvSet=None) -> self
 
 		Modify the UV value for all vertices in the current face.
@@ -11539,7 +11539,7 @@ class MItMeshPolygon:
 		* uArray (MFloatArray) - All the U values - in local face order
 		* vArray (MFloatArray) - The corresponding V values
 		* uvSet (string) - UV set to work with"""
-	def tangentIndex(self,localVertexIndex:Any)->int:
+	def tangentIndex(self,localVertexIndex:int)->int:
 		"""tangentIndex(localVertexIndex) -> int
 
 		Returns the tangent (or binormal) index for the specified vertex.
@@ -11551,7 +11551,7 @@ class MItMeshPolygon:
 		"""updateSurface() -> self
 
 		Signal that this polygonal surface has changed and needs to redraw itself."""
-	def vertexIndex(self,index:Any)->int:
+	def vertexIndex(self,index:int)->int:
 		"""vertexIndex(index) -> int
 
 		Returns the object-relative index of the specified vertex of the current polygon.
@@ -11562,7 +11562,7 @@ class MItMeshPolygon:
 		"""zeroArea() -> bool
 
 		This method checks if its a zero area face"""
-	def zeroUVArea(self,uvSet:Any|None=None)->bool:
+	def zeroUVArea(self,uvSet:str|None=None)->bool:
 		"""zeroUVArea(uvSet=None) -> bool
 
 		This method checks if the UV area of the face is zero
@@ -11617,7 +11617,7 @@ class MItMeshVertex:
 
 		This method gets the indices of the vertices surrounding the current vertex."""
 	@overload
-	def getNormal(self,space:Any=MSpace.kObject)->MVector:
+	def getNormal(self,space:int=MSpace.kObject)->MVector:
 		"""getNormal(space=kObject) -> MVector
 		getNormal(faceIndex, space=kObject) -> MVector
 
@@ -11630,7 +11630,7 @@ class MItMeshVertex:
 		* faceIndex (int) - face index to get normal for
 		* space (int) - The transformation space"""
 	@overload
-	def getNormal(self,faceIndex:Any,space:Any=MSpace.kObject)->MVector:
+	def getNormal(self,faceIndex:int,space:int=MSpace.kObject)->MVector:
 		"""getNormal(space=kObject) -> MVector
 		getNormal(faceIndex, space=kObject) -> MVector
 
@@ -11642,7 +11642,7 @@ class MItMeshVertex:
 
 		* faceIndex (int) - face index to get normal for
 		* space (int) - The transformation space"""
-	def getNormals(self,space:Any=MSpace.kObject)->MVectorArray:
+	def getNormals(self,space:int=MSpace.kObject)->MVectorArray:
 		"""getNormals(space=kObject) -> MVectorArray
 
 		Return the normals of the current vertex for all faces
@@ -11654,7 +11654,7 @@ class MItMeshVertex:
 		This method returns the normal indices of the face/vertex associated
 		with the current vertex."""
 	@overload
-	def getUV(self,uvSet:Any|None=None)->list[float]:
+	def getUV(self,uvSet:str|None=None)->list[float]:
 		"""getUV(uvSet=None) -> [float, float]getUV(faceId, uvSet=None) -> [float, float]
 
 		Get the shared UV value at this vertex.
@@ -11666,7 +11666,7 @@ class MItMeshVertex:
 		* faceId (int) - Index of the required face
 		* uvSet (string) - Name of the uv set to work with"""
 	@overload
-	def getUV(self,faceId:Any,uvSet:Any|None=None)->list[float]:
+	def getUV(self,faceId:int,uvSet:str|None=None)->list[float]:
 		"""getUV(uvSet=None) -> [float, float]getUV(faceId, uvSet=None) -> [float, float]
 
 		Get the shared UV value at this vertex.
@@ -11677,14 +11677,14 @@ class MItMeshVertex:
 
 		* faceId (int) - Index of the required face
 		* uvSet (string) - Name of the uv set to work with"""
-	def getUVIndices(self,uvSet:Any|None=None)->MIntArray:
+	def getUVIndices(self,uvSet:str|None=None)->MIntArray:
 		"""getUVIndices(uvSet=None) -> MIntArray
 
 		This method returns the uv indices into the normal array see MFnMesh::getUVs()
 		of the current vertex.
 
 		* uvSet (string) - Name of the uv set."""
-	def getUVs(self,uvSet:Any|None=None)->list[MFloatArray|MIntArray]:
+	def getUVs(self,uvSet:str|None=None)->list[MFloatArray|MIntArray]:
 		"""getUVs(uvSet=None) -> [MFloatArray, MFloatArray, MIntArray]
 
 		Get the UV values for all mapped faces at the current vertex.
@@ -11699,20 +11699,20 @@ class MItMeshVertex:
 		Polygonal objects contain a list of vertices. Faces and edges are
 		specified as indicies from this list, in this way vertices can
 		be shared amoung faces and edges."""
-	def connectedToEdge(self,index:Any)->bool:
+	def connectedToEdge(self,index:int)->bool:
 		"""connectedToEdge(index) -> bool
 
 		This method determines whether the given edge contains the current vertex
 
 		* index (int) - Index of edge to check."""
-	def connectedToFace(self,index:Any)->bool:
+	def connectedToFace(self,index:int)->bool:
 		"""connectedToFace(index) -> bool
 
 		This method determines whether the given face contains the current vertex
 
 		* index (int) - Index of face to check."""
 	@overload
-	def getColor(self,colorSetName:Any|None=None)->MColor:
+	def getColor(self,colorSetName:str|None=None)->MColor:
 		"""getColor(colorSetName=None) -> MColor
 		getColor(faceIndex, colorSetName=None) -> MColor
 
@@ -11724,7 +11724,7 @@ class MItMeshVertex:
 
 		* index (int) - The face to get the color for this vertex for* colorSetName (string) - Name of the color set."""
 	@overload
-	def getColor(self,faceIndex:Any,colorSetName:Any|None=None)->MColor:
+	def getColor(self,faceIndex:Any,colorSetName:str|None=None)->MColor:
 		"""getColor(colorSetName=None) -> MColor
 		getColor(faceIndex, colorSetName=None) -> MColor
 
@@ -11735,14 +11735,14 @@ class MItMeshVertex:
 		This method gets the color of the current vertex in the specified face
 
 		* index (int) - The face to get the color for this vertex for* colorSetName (string) - Name of the color set."""
-	def getColorIndices(self,colorSetName:Any|None=None)->MIntArray:
+	def getColorIndices(self,colorSetName:str|None=None)->MIntArray:
 		"""getColorIndices(colorSetName=None) -> MIntArray
 
 		This method returns the colorIndices into the color array see MFnMesh::getColors()
 		of the current vertex.
 
 		* colorSetName (string) - Name of the color set."""
-	def getColors(self,colorSetName:Any|None=None)->MColorArray:
+	def getColors(self,colorSetName:str|None=None)->MColorArray:
 		"""getColors(colorSetName=None) -> MColorArray
 
 		This method gets the colors of the current vertex for each face it
@@ -11752,7 +11752,7 @@ class MItMeshVertex:
 		been set will be (0, 0, 0, 1).
 
 		* colorSetName (string) - Name of the color set."""
-	def getOppositeVertex(self,edgeId:Any)->int:
+	def getOppositeVertex(self,edgeId:int)->int:
 		"""getOppositeVertex(edgeId) -> int
 
 		This method gets the other vertex of the given edge
@@ -11768,7 +11768,7 @@ class MItMeshVertex:
 
 		* index (int) - Index of face to check"""
 	@overload
-	def hasColor(self,index:Any)->bool:
+	def hasColor(self,index:int)->bool:
 		"""hasColor() -> bool
 		hasColor(index) -> bool
 
@@ -11792,7 +11792,7 @@ class MItMeshVertex:
 		"""numConnectedFaces() -> int
 
 		This Method checks for the number of Connected Faces"""
-	def numUVs(self,uvSet:Any|None=None)->int:
+	def numUVs(self,uvSet:str|None=None)->int:
 		"""numUVs(uvSet=None) -> int
 
 		This method returns the number of unique UVs mapped on this vertex
@@ -11802,7 +11802,7 @@ class MItMeshVertex:
 		"""onBoundary() -> bool
 
 		This method determines whether the current vertex is on a Boundary"""
-	def position(self,space:Any=MSpace.kObject)->MPoint:
+	def position(self,space:int=MSpace.kObject)->MPoint:
 		"""position(space=kObject) -> MPoint
 
 		Return the position of the current vertex in the specified space.
@@ -11828,7 +11828,7 @@ class MItMeshVertex:
 		* polyObject (MDagPath) - The surface (mesh) to iterate over
 		* component (MObject) - The vertices of the polyObject to iterate over"""
 	@overload
-	def reset(self,polyObject:Any)->Self:
+	def reset(self,polyObject:MObject)->Self:
 		"""reset() -> self
 		reset(polyObject) -> self
 		reset(polyObject, component=None) -> self
@@ -11845,7 +11845,7 @@ class MItMeshVertex:
 		* polyObject (MDagPath) - The surface (mesh) to iterate over
 		* component (MObject) - The vertices of the polyObject to iterate over"""
 	@overload
-	def reset(self,polyObject:Any,component:Any|None=None)->Self:
+	def reset(self,polyObject:MObject,component:MObject|None=None)->Self:
 		"""reset() -> self
 		reset(polyObject) -> self
 		reset(polyObject, component=None) -> self
@@ -11861,14 +11861,14 @@ class MItMeshVertex:
 
 		* polyObject (MDagPath) - The surface (mesh) to iterate over
 		* component (MObject) - The vertices of the polyObject to iterate over"""
-	def setIndex(self,index:Any)->int:
+	def setIndex(self,index:int)->int:
 		"""setIndex(index) -> int
 
 		This method sets the index of the current vertex to be accessed.
 		The current vertex will no longer be in sync with any previous iteration.
 
 		* index (int) - The index of desired vertex to access."""
-	def setPosition(self,point:Any,space:Any=MSpace.kObject)->Self:
+	def setPosition(self,point:MPoint,space:int=MSpace.kObject)->Self:
 		"""setPosition(point, space=kObject) -> self
 
 		Set the position of the current vertex in the given space.
@@ -11876,7 +11876,7 @@ class MItMeshVertex:
 		* point (MPoint) - The new position for the current vertex
 		* space (int) - The Transformation space"""
 	@overload
-	def setUV(self,uvPoint:Any,uvSet:Any|None=None)->Self:
+	def setUV(self,uvPoint:list[float],uvSet:str|None=None)->Self:
 		"""setUV(uvPoint, uvSet=None) -> selfsetUV(faceId, uvPoint, uvSet=None) -> self
 
 		Set the shared UV value at this vertex
@@ -11890,7 +11890,7 @@ class MItMeshVertex:
 		* uvPoint ([float, float]) - The UV values to set
 		* uvSet (string) - Name of the UV set to work with"""
 	@overload
-	def setUV(self,faceId:Any,uvPoint:Any,uvSet:Any|None=None)->Self:
+	def setUV(self,faceId:int,uvPoint:list[float],uvSet:str|None=None)->Self:
 		"""setUV(uvPoint, uvSet=None) -> selfsetUV(faceId, uvPoint, uvSet=None) -> self
 
 		Set the shared UV value at this vertex
@@ -11903,7 +11903,7 @@ class MItMeshVertex:
 		* faceId (int) - Index of required face
 		* uvPoint ([float, float]) - The UV values to set
 		* uvSet (string) - Name of the UV set to work with"""
-	def setUVs(self,uArray:Any,vArray:Any,faceIds:Any,uvSet:Any|None=None)->Self:
+	def setUVs(self,uArray:MFloatArray,vArray:MFloatArray,faceIds:MIntArray,uvSet:str|None=None)->Self:
 		"""setUVs(uArray, vArray, faceIds, uvSet=None) -> self
 
 		Set the UV value for the specified faces at the current vertex.
@@ -11915,7 +11915,7 @@ class MItMeshVertex:
 		* vArray (MFloatArray) - The corresponding V values
 		* faceIds (MIntArray) - The corresponding face Ids
 		* uvSet (string) - UV set to work with"""
-	def translateBy(self,vector:Any,space:Any=MSpace.kObject)->Self:
+	def translateBy(self,vector:MVector,space:int=MSpace.kObject)->Self:
 		"""translateBy(vector, space=kObject) -> self
 
 		Translate the current vertex by the amount specified
@@ -12057,7 +12057,7 @@ class MItSurfaceCV:
 
 		Advance to the next row in the iteration.
 		The row can be in the U or V direction depending on what value of useURows has been set in the constructor."""
-	def position(self,space:Any=MSpace.kObject)->MPoint:
+	def position(self,space:int=MSpace.kObject)->MPoint:
 		"""position(space=kObject) -> MPoint
 
 		Returns the position of the current CV in the iteration in the specified space.
@@ -12084,7 +12084,7 @@ class MItSurfaceCV:
 		* component (MObject) - A group of CVs to be iterated on
 		* useURows (bool) - If True then the iterator will iterate in the U direction, otherwise it will be in the V direction."""
 	@overload
-	def reset(self,surface:Any,useURows:Any=True)->Self:
+	def reset(self,surface:MObject,useURows:bool=True)->Self:
 		"""reset() -> self
 		reset(surface, useURows=True) -> self
 		reset(surface, component, useURows=True) -> self
@@ -12104,7 +12104,7 @@ class MItSurfaceCV:
 		* component (MObject) - A group of CVs to be iterated on
 		* useURows (bool) - If True then the iterator will iterate in the U direction, otherwise it will be in the V direction."""
 	@overload
-	def reset(self,surface:Any,component:Any,useURows:Any=True)->Self:
+	def reset(self,surface:MObject,component:MObject,useURows:bool=True)->Self:
 		"""reset() -> self
 		reset(surface, useURows=True) -> self
 		reset(surface, component, useURows=True) -> self
@@ -12123,14 +12123,14 @@ class MItSurfaceCV:
 		* surface (MDagPath) - The surface for the iteration
 		* component (MObject) - A group of CVs to be iterated on
 		* useURows (bool) - If True then the iterator will iterate in the U direction, otherwise it will be in the V direction."""
-	def setPosition(self,point:Any,space:Any=MSpace.kObject)->Self:
+	def setPosition(self,point:MPoint,space:int=MSpace.kObject)->Self:
 		"""setPosition(point, space=kObject) -> self
 
 		Set the position of the current CV in the iteration to the specified point.
 
 		* point (MPoint) - The new position for the current CV in the iteration
 		* space (int) - The coordinate space in which the CV is set"""
-	def translateBy(self,vector:Any,space:Any=MSpace.kObject)->Self:
+	def translateBy(self,vector:MVector,space:int=MSpace.kObject)->Self:
 		"""translateBy(vector, space=kObject) -> self
 
 		Move the current CV in the iteration by the sepcified vector.
@@ -12210,7 +12210,7 @@ class MLockMessage(MMessage):
 	kLockAttr:int=9
 	kLast:int=10
 	@staticmethod
-	def setNodeLockDAGQueryCallback(dagPath:Any,function:Any,clientData:Any|None=None)->int:
+	def setNodeLockDAGQueryCallback(dagPath:MDagPath,function:Callable,clientData:Any|None=None)->int:
 		"""setNodeLockDAGQueryCallback(dagPath, function, clientData=None) -> id
 
 		This methods registers a callback that is invoked in any situation
@@ -12283,7 +12283,7 @@ class MLockMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def setNodeLockQueryCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def setNodeLockQueryCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""setNodeLockQueryCallback(node, function, clientData=None) -> id
 
 		This methods registers a callback that is invoked in any locking
@@ -12379,7 +12379,7 @@ class MLockMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def setPlugLockQueryCallback(plug:Any,function:Any,clientData:Any|None=None)->int:
+	def setPlugLockQueryCallback(plug:MPlug,function:Callable,clientData:Any|None=None)->int:
 		"""setPlugLockQueryCallback(plug, function, clientData=None) -> id
 
 		This method registers a callback that is invoked in any locking
@@ -12679,7 +12679,7 @@ class MMessage:
 		outside of a callback, an invalid MCallbackId and failed status will
 		be returned."""
 	@staticmethod
-	def nodeCallbacks(node:Any)->ids:
+	def nodeCallbacks(node:MObject)->ids:
 		"""nodeCallbacks(node) -> ids
 
 		Returns a list of callback IDs registered to a given node.
@@ -12687,7 +12687,7 @@ class MMessage:
 		 * node (MObject) - Node to query for callbacks.
 		 * ids (MCallbackIdArray) - Array to store the list of callback IDs."""
 	@staticmethod
-	def removeCallback(id:Any)->None:
+	def removeCallback(id:MCallbackId)->None:
 		"""removeCallback(id) -> None
 
 		Removes the specified callback from Maya.
@@ -12711,7 +12711,7 @@ class MModelMessage(MMessage):
 	"""
 	kActiveListModified:int=0
 	@staticmethod
-	def addPostDuplicateNodeListCallback(function:Any,clientData:Any|None=None)->int:
+	def addPostDuplicateNodeListCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addPostDuplicateNodeListCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called after a duplicate
@@ -12723,7 +12723,7 @@ class MModelMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addAfterDuplicateCallback(function:Any,clientData:Any|None=None)->int:
+	def addAfterDuplicateCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addAfterDuplicateCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called after a duplicate
@@ -12735,7 +12735,7 @@ class MModelMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addBeforeDuplicateCallback(function:Any,clientData:Any|None=None)->int:
+	def addBeforeDuplicateCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addBeforeDuplicateCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called whenever a duplicate
@@ -12747,7 +12747,7 @@ class MModelMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addCallback(message:Any,function:Any,clientData:Any|None=None)->int:
+	def addCallback(message:int|Any,function:Callable,clientData:Any|None=None)->int:
 		"""addCallback(message, function, clientData=None) -> id
 
 		Adds a new callback for the specified model message.
@@ -12760,7 +12760,7 @@ class MModelMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNodeAddedToModelCallback(dagNode:Any,function:Any,clientData:Any|None=None)->int:
+	def addNodeAddedToModelCallback(dagNode:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addNodeAddedToModelCallback(dagNode, function, clientData=None) -> id
 
 		This method registers a callback that is called when a dag node is about
@@ -12773,7 +12773,7 @@ class MModelMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNodeRemovedFromModelCallback(dagNode:Any,function:Any,clientData:Any|None=None)->int:
+	def addNodeRemovedFromModelCallback(dagNode:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addNodeRemovedFromModelCallback(dagNode, function, clientData=None) -> id
 
 		This method registers a callback that is called when the
@@ -13110,7 +13110,7 @@ class MNodeMessage(MMessage):
 	kMakeUnkeyable:int=2
 	kKeyChangeLast:int=3
 	@staticmethod
-	def addAttributeAddedOrRemovedCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addAttributeAddedOrRemovedCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addAttributeAddedOrRemovedCallback(node, function, clientData=None) -> id
 
 		Registers callbacks for attribute add/removed messages.
@@ -13126,7 +13126,7 @@ class MNodeMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addAttributeChangedCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addAttributeChangedCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addAttributeChangedCallback(node, function, clientData=None) -> id
 
 		This method registers a callback for attribute changed messages.
@@ -13153,7 +13153,7 @@ class MNodeMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addKeyableChangeOverride(plug:Any,function:Any,clientData:Any|None=None)->int:
+	def addKeyableChangeOverride(plug:MPlug,function:Callable,clientData:Any|None=None)->int:
 		"""addKeyableChangeOverride(plug, function, clientData=None) -> id
 
 		This method registers a callback that is invoked by any class that
@@ -13177,7 +13177,7 @@ class MNodeMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNameChangedCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addNameChangedCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addNameChangedCallback(node, function, clientData=None) -> id
 
 		Registers a callback for name changed messages.
@@ -13191,7 +13191,7 @@ class MNodeMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNodeAboutToDeleteCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addNodeAboutToDeleteCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addNodeAboutToDeleteCallback(node, function, clientData=None) -> id
 
 		Registers a callback which will get called when a node is about to
@@ -13233,7 +13233,7 @@ class MNodeMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNodeDestroyedCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addNodeDestroyedCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addNodeDestroyedCallback(node, function, clientData=None) -> id
 
 		Registers a callback which will get called when a node's destructor is
@@ -13246,7 +13246,7 @@ class MNodeMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNodeDirtyCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addNodeDirtyCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addNodeDirtyCallback(node, function, clientData=None) -> id
 
 		Registers a callback for node dirty messages.
@@ -13258,7 +13258,7 @@ class MNodeMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNodeDirtyPlugCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addNodeDirtyPlugCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addNodeDirtyPlugCallback(node, function, clientData=None) -> id
 
 		Registers a callback for node dirty messages.  This callback provides
@@ -13272,7 +13272,7 @@ class MNodeMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNodePreRemovalCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addNodePreRemovalCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addNodePreRemovalCallback(node, function, clientData=None) -> id
 
 		Registers a callback which will get called before a node is deleted.
@@ -13297,7 +13297,7 @@ class MNodeMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addUuidChangedCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addUuidChangedCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addUuidChangedCallback(node, function, clientData=None) -> id
 
 		Registers a callback for UUID changed messages.
@@ -13396,7 +13396,7 @@ class MObjectHandle:
 		"""Return self>=value."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def assign(self,source:Any)->Self:
+	def assign(self,source:MObject|MObjectHandle)->Self:
 		"""assign(source) -> self
 
 		Assigns this MObjectHandle to an instance of another MObjectHandle, or to a MObject instance.
@@ -13421,7 +13421,7 @@ class MObjectHandle:
 class MObjectSetMessage(MMessage):
 	"""Class used to register callbacks for set modified related messages."""
 	@staticmethod
-	def addSetMembersModifiedCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addSetMembersModifiedCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addSetMembersModifiedCallback(node, function, clientData=None) -> id
 
 		Registers callbacks for set modified messages.
@@ -13441,7 +13441,7 @@ class MPlane:
 		"""distance() -> float
 
 		Returns the distance of the plane along the normal."""
-	def distanceToPoint(self,point:Any,signed:Any=False)->float:
+	def distanceToPoint(self,point:MVector,signed:bool=False)->float:
 		"""distanceToPoint(point, signed=False) -> float
 
 		Returns the distance from the plane to the specified point.
@@ -13453,7 +13453,7 @@ class MPlane:
 
 		Returns the normal of the plane."""
 	@overload
-	def setPlane(self,a:Any,b:Any,c:Any,d:Any)->Self:
+	def setPlane(self,a:float,b:float,c:float,d:float)->Self:
 		"""setPlane(a, b, c, d) -> self
 		setPlane(n, d) -> self
 
@@ -13469,7 +13469,7 @@ class MPlane:
 		* n (MVector) - The plane's normal
 		* d (float) - The offset of the plane along the normal"""
 	@overload
-	def setPlane(self,n:Any,d:Any)->Self:
+	def setPlane(self,n:MVector,d:float)->Self:
 		"""setPlane(a, b, c, d) -> self
 		setPlane(n, d) -> self
 
@@ -13948,7 +13948,7 @@ class MPolyMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addPolyTopologyChangedCallback(node:Any,function:Any,clientData:Any|None=None)->int:
+	def addPolyTopologyChangedCallback(node:MObject,function:Callable,clientData:Any|None=None)->int:
 		"""addPolyTopologyChangedCallback(node, function, clientData=None) -> id
 
 		This method registers a callback that will be called when a node impacting
@@ -14036,14 +14036,14 @@ class MPxData:
 	kLast:int=2
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def readASCII(self,argList:Any,endOfTheLastParsedElement:Any)->int:
+	def readASCII(self,argList:MArgList,endOfTheLastParsedElement:int)->int:
 		"""readASCII(argList, endOfTheLastParsedElement) -> int
 
 		Creates Data in Data Block as specified by input from ASCII file record.
 		Returns the new last argument parsed by this method.
 
 		* argList (MArgList) - List of arguments read from ASCII record* endOfTheLastParsedElement (int) - points to last argument already parsed."""
-	def readBinary(self,in_:Any,length:Any)->int:
+	def readBinary(self,in_:bytearray,length:int)->int:
 		"""readBinary(in, length) -> int
 
 		Creates Data in Data Block as specified by binary data from the given stream.
@@ -14059,7 +14059,7 @@ class MPxData:
 		"""writeBinary() -> bytearray
 
 		Encodes Data in accordance with the binary file format and returns as bytearray."""
-	def copy(self,src:Any)->Self:
+	def copy(self,src:MPxData)->Self:
 		"""copy(src) -> self
 
 		This method initializes an instance of an MPxData derived class from another existing instance.  This method can be thought of as the second half of a copy constructor for the class.  The default constructor has already been called for the instance, and this method is used to set the private data by copying the values from an existing instance.
@@ -14085,7 +14085,7 @@ class MPxGeometryData(MPxData):
 	def matrix(self,value:Any)->None:...
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def deleteComponent(self,compList:Any)->bool:
+	def deleteComponent(self,compList:MObjectArray)->bool:
 		"""deleteComponent(compList) -> bool
 
 		This method should be overridden if this data is to support component deletion. For user defined shapes (MPxSurfaceShape) which support components, this method must be overridden if component deletion is to be supported when the shape has history.
@@ -14093,7 +14093,7 @@ class MPxGeometryData(MPxData):
 		Returns True if the deletion was successfull, False otherwise.
 
 		* compList (MObjectArray) - a list of components that are to be deleted"""
-	def deleteComponentsFromGroups(self,compList:Any,groupIdArray:Any,groupComponentArray:Any)->bool:
+	def deleteComponentsFromGroups(self,compList:MObjectArray,groupIdArray:Any,groupComponentArray:MObjectArray)->bool:
 		"""deleteComponentsFromGroups(compList, groupIdArray, groupComponentArray) -> bool
 
 		This method should be overridden to modify the groups that flows along with the geometry, as part of the data, based on the components being deleted. It should intelligently update the groups based on what gets deleted. The class MFnGeometryData can be used to access and modify grouping information for data.
@@ -14111,7 +14111,7 @@ class MPxGeometryData(MPxData):
 		Gets the matrix associated to MPxGeometryData and retursn True if is identity
 
 		* matrix [OUT] (MMatrix) - the returned matrix that takes a point from local object space to world space."""
-	def iterator(self,componentList:Any,component:Any,useComponents:Any,world:Any|None=None)->MPxGeometryIterator:
+	def iterator(self,componentList:MObjectArray,component:MObject,useComponents:bool,world:bool|None=None)->MPxGeometryIterator:
 		"""iterator(componentList, component, useComponents, world=None) -> MPxGeometryIterator
 
 		Associates a control point based geometry iterator with this data.
@@ -14125,7 +14125,7 @@ class MPxGeometryData(MPxData):
 		* component (MObject) - a component to be iterator over.
 		* useComponents (bool) - if True then componentList is to be iterated over, otherwise the iteration is on component.
 		* world (bool) - specifies whether the iteration is for world space data."""
-	def smartCopy(self,srcGeom:Any)->Self:
+	def smartCopy(self,srcGeom:MPxGeometryData)->Self:
 		"""smartCopy(srcGeom) -> self
 
 		This method is used in conjunction with MPxSurfaceShape classes which support maya's deformations.
@@ -14135,7 +14135,7 @@ class MPxGeometryData(MPxData):
 		This method is not mandatory and only needs to be overridden to improve performance of deformations on shapes.
 
 		* srcGeom (MPxGeometryData) - the data to be copied"""
-	def updateCompleteVertexGroup(self,component:Any)->bool:
+	def updateCompleteVertexGroup(self,component:MObject)->bool:
 		"""updateCompleteVertexGroup(component) -> bool
 
 		This method is used in conjunction with MPxSurfaceShape classes which support maya's deformations.
@@ -14214,19 +14214,19 @@ class MPxGeometryIterator:
 		"""reset() -> self
 
 		Resets the iterator to the start of the components so that another pass over them may be made."""
-	def setObject(self,shape:Any)->Self:
+	def setObject(self,shape:MPxSurfaceShape)->Self:
 		"""setObject(shape) -> self
 
 		Optional method to set a shape object to iterate over to allow tweaking of the shape's history (input geometry).
 
 		* shape (MPxSurfaceShape) - a user defined shape object."""
-	def setPoint(self,point:Any)->Self:
+	def setPoint(self,point:MPoint)->Self:
 		"""setPoint(point) -> self
 
 		Sets the current component's positional data.
 
 		* point (MPoint) - the new positional value to set."""
-	def setPointGetNext(self,point:Any)->int:
+	def setPointGetNext(self,point:MPoint)->int:
 		"""setPointGetNext(point) -> int
 
 		Sets the current component's positional data, and returns the next index value.
@@ -14268,7 +14268,7 @@ class MPxNode:
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@staticmethod
-	def addAttribute(attr:Any)->None:
+	def addAttribute(attr:MObject)->None:
 		"""addAttribute(attr) -> None
 
 		This method adds a new attribute to a user defined node type during the type's initialization.
@@ -14280,7 +14280,7 @@ class MPxNode:
 
 		* attr (MObject) - new attribute to add."""
 	@staticmethod
-	def attributeAffects(whenChanges:Any,isAffected:Any)->None:
+	def attributeAffects(whenChanges:MObject,isAffected:MObject)->None:
 		"""attributeAffects(whenChanges, isAffected) -> None
 
 		This method specifies that a particular input attribute affects a specific output attribute.  This is required to make evaluation efficient.  When an input changes, only the affected outputs will be computed. Output attributes cannot be keyable - if they are keyable, this method will fail.
@@ -14291,7 +14291,7 @@ class MPxNode:
 
 		* whenChanges (MObject) - input attribute - MObject that points to an input attribute that has already been added.
 		* isAffected (MObject) - affected output attribute - MObject that points to an output attribute that has already been added."""
-	def compute(self,plug:Any,dataBlock:Any)->Self:
+	def compute(self,plug:MPlug,dataBlock:Any)->Self:
 		"""compute(plug, dataBlock) -> self
 
 		This method should be overridden in user defined nodes.
@@ -14308,7 +14308,7 @@ class MPxNode:
 
 		* plug (MPlug) - plug representing the attribute that needs to be recomputed.
 		* block (MDataBlock) - data block containing storage for the node's attributes."""
-	def preEvaluation(self,context:Any,evalNode:Any)->None:
+	def preEvaluation(self,context:MDGContext,evalNode:Any)->None:
 		"""preEvaluation(context, evalNode) -> None
 
 		Prepare a node's internal state for threaded evaluation.
@@ -14328,7 +14328,7 @@ class MPxNode:
 		                                     information about the dirty plugs that
 		                                     are about to be evaluated for the context.
 		                                     Should be only used to query information."""
-	def postEvaluation(self,context:Any,evalNode:Any,evalType:Any)->None:
+	def postEvaluation(self,context:MDGContext,evalNode:Any,evalType:PostEvaluationType)->None:
 		"""postEvaluation(context, evalNode, evalType) -> None
 
 		Clean up node's internal state after threaded evaluation.
@@ -14354,7 +14354,7 @@ class MPxNode:
 		                           update any additional internal state based on the new values.
 		  * kLeaveDirty          : Evaluation was performed without updating this node. Internal
 		                           state should be updated to reflect that the node is dirty."""
-	def getCacheSetup(self,evalNode:Any,disablingInfo:Any,setupInfo:Any,objectArray:Any)->None:
+	def getCacheSetup(self,evalNode:MEvaluationNode,disablingInfo:MNodeCacheDisablingInfo,setupInfo:Any,objectArray:Any)->None:
 		"""getCacheSetup(evalNode, disablingInfo, setupInfo, objectArray) -> None
 
 		Provide node-specific setup info for the Cached Playback system.
@@ -14373,7 +14373,7 @@ class MPxNode:
 		* disablingInfo (MNodeCacheDisablingInfo) - Information about why the node disables Cached Playback to be reported to the user
 		* cacheSetupInfo (MNodeCacheSetupInfo)    - Preferences and requirements this node has for Cached Playback
 		* monitoredAttributes (MObjectArray)      - Attributes impacting the behavior of this method that will be monitored for change"""
-	def configCache(self,evalNode:Any,schema:Any)->None:
+	def configCache(self,evalNode:MEvaluationNode,schema:MCacheSchema)->None:
 		"""configCache(evalNode, schema) -> None
 
 		Defines the node's behavior when participating in Cached Playback.
@@ -14382,7 +14382,7 @@ class MPxNode:
 
 		* evalNode (MEvaluationNode)  - This node's evaluation node, contains animated plug information
 		* schema (MCacheSchema)       - Specification about what attributes to cache"""
-	def transformInvalidationRange(self,plug:Any,timeRange:Any)->timeRange:
+	def transformInvalidationRange(self,plug:Any,timeRange:Any)->MTimeRange:
 		"""transformInvalidationRange(plug, timeRange) -> timeRange
 
 		Override this method to register this node as an Invalidation-Range-Transformation kernel (IRT kernel) An IRT kernel node will change the invalidation time range for its downstream nodes For example, Dynamics-solver will transform invalidation time range [a,b] to [a,+inf) And Clip-Time-Editor will send out the invalidation range for each of the clip [a,b] to ( [t0+a,t0+b] U [t1+a,t1+b] U [t2+a,t2+b] U ... )
@@ -14400,7 +14400,7 @@ class MPxNode:
 		"""hasInvalidationRangeTransformation() -> bool
 
 		Checks if this MPxNode derived node overrides the MPxNode::transformInvalidationRange method"""
-	def connectionBroken(self,plug:Any,otherPlug:Any,asSrc:Any)->Self:
+	def connectionBroken(self,plug:MPlug,otherPlug:MPlug,asSrc:bool)->Self:
 		"""connectionBroken( plug, otherPlug, asSrc) -> self
 
 		This method gets called when connections are broken with attributes of this node.
@@ -14408,7 +14408,7 @@ class MPxNode:
 		* plug (MPlug) - attribute on this node.
 		* otherPlug (MPlug) - attribute on other node.
 		* asSrc (bool) - is this plug a source of the connection."""
-	def connectionMade(self,plug:Any,otherPlug:Any,asSrc:Any)->Self:
+	def connectionMade(self,plug:MPlug,otherPlug:MPlug,asSrc:bool)->Self:
 		"""connectionMade(plug, otherPlug, asSrc) -> self
 
 		This method gets called when connections are made to attributes of this node.
@@ -14416,7 +14416,7 @@ class MPxNode:
 		* plug (MPlug) - attribute on this node.
 		* otherPlug (MPlug) - attribute on other node.
 		* asSrc (bool) - is this plug a source of the connection."""
-	def copyInternalData(self,node:Any)->Self:
+	def copyInternalData(self,node:MPxNode)->Self:
 		"""copyInternalData(node) -> self
 
 		This method is overriden by nodes that store attribute data in some internal format.
@@ -14424,7 +14424,7 @@ class MPxNode:
 		On duplication this method is called on the duplicated node with the node being duplicated passed as the parameter.  Overriding this method gives your node a chance to duplicate any internal data you've been storing and manipulating outside of normal attribute data.
 
 		* node (MPxNode) - the node that is being duplicated."""
-	def dependsOn(self,plug:Any,otherPlug:Any)->bool|None:
+	def dependsOn(self,plug:MPlug,otherPlug:MPlug)->bool|None:
 		"""dependsOn( plug, otherPlug) -> bool/None
 
 		This method may be overridden by the user defined node. It should only be required to override this on rare occasions.
@@ -14470,7 +14470,7 @@ class MPxNode:
 		NOTE: This should be used only in places where fast access to the datablock outside of a compute is critical such as the transformUsing method of MPxSurfaceShape.
 
 		* ctx (MDGContext) - The context in which the datablock will be retrieved."""
-	def getFilesToArchive(self,shortName:Any=False,unresolvedName:Any=False,markCouldBeImageSequence:Any=False)->list[str]:
+	def getFilesToArchive(self,shortName:bool=False,unresolvedName:bool=False,markCouldBeImageSequence:bool=False)->list[str]:
 		"""getFilesToArchive(shortName=False, unresolvedName=False, markCouldBeImageSequence=False) -> list of strings
 
 		Use this method to return all external files used by this node. This file list will be used by the File > Archive zip feature, maya.exe -archive and the `file -q -list` mel command.
@@ -14484,7 +14484,7 @@ class MPxNode:
 		* shortName (bool) - If True, only add the filename of the path.
 		* unresolvedName (bool) - If True, add paths before any resolution, rather than absolute paths.
 		* markCouldBeImageSequence (bool) - If True, append an asterisk after any file path that could be an image sequence (note: only used by maya.exe -archive)."""
-	def getInternalValue(self,plug:Any,dataHandle:Any)->bool:
+	def getInternalValue(self,plug:MPlug,dataHandle:Any)->bool:
 		"""getInternalValue(plug, dataHandle) -> bool
 
 		This method is overridden by nodes that store attribute data in some internal format.
@@ -14497,7 +14497,7 @@ class MPxNode:
 
 		* plug (MPlug) - the attribute that is being queried.
 		* dataHandle [OUT] (MDataHandle) - the dataHandle to store the attribute value."""
-	def getInternalValueInContext(self,plug:Any,dataHandle:Any,ctx:Any)->bool:
+	def getInternalValueInContext(self,plug:MPlug,dataHandle:Any,ctx:MDGContext)->bool:
 		"""getInternalValueInContext(plug, dataHandle, ctx) -> bool [OBSOLETE]
 
 		This method is obsolete. Override MPxNode.getInternalValue instead.
@@ -14506,7 +14506,7 @@ class MPxNode:
 		* dataHandle [OUT] (MDataHandle) - the dataHandle to store the attribute value.
 		* ctx (MDGContext) - the context the method is being evaluated in."""
 	@staticmethod
-	def inheritAttributesFrom(parentClassName:Any)->None:
+	def inheritAttributesFrom(parentClassName:str)->None:
 		"""inheritAttributesFrom(parentClassName) -> None
 
 		This method allows a class of plugin node to inherit all of the attributes of a second class of plugin node.
@@ -14519,7 +14519,7 @@ class MPxNode:
 
 		* parentClassName (string) - class of node to inherit attributes from."""
 	@overload
-	def internalArrayCount(self,plug:Any)->int:
+	def internalArrayCount(self,plug:MPlug)->int:
 		"""internalArrayCount(plug) -> int
 		internalArrayCount(plug, ctx) -> int  [OBSOLETE]
 
@@ -14534,7 +14534,7 @@ class MPxNode:
 		* plug (MPlug) - the array plug.
 		* ctx (MDGContext) - the context, default to MDGContext.current()."""
 	@overload
-	def internalArrayCount(self,plug:Any,ctx:Any)->int:
+	def internalArrayCount(self,plug:MPlug,ctx:MDGContext)->int:
 		"""internalArrayCount(plug) -> int
 		internalArrayCount(plug, ctx) -> int  [OBSOLETE]
 
@@ -14554,13 +14554,13 @@ class MPxNode:
 		Override this class to return True if this node is an abstract node. An abstract node can only be used as a base class.  It cannot be created using the 'createNode' command.
 
 		It is not necessary to override this method."""
-	def isPassiveOutput(self,plug:Any)->bool:
+	def isPassiveOutput(self,plug:MPlug)->bool:
 		"""isPassiveOutput(plug) -> bool
 
 		This method may be overridden by the user defined node if it wants to provide output attributes which do not prevent value modifications to the destination attribute. For example, output plugs on animation curve nodes are passive. This allows the attributes driven by the animation curves to be set to new values by the user.
 
 		* plug (MPlug) - plug representing output in question."""
-	def legalConnection(self,plug:Any,otherPlug:Any,asSrc:Any)->bool|None:
+	def legalConnection(self,plug:MPlug,otherPlug:MPlug,asSrc:bool)->bool|None:
 		"""legalConnection(plug, otherPlug, asSrc) -> bool/None
 
 		This method allows you to check for legal connections being made to attributes of this node.
@@ -14570,7 +14570,7 @@ class MPxNode:
 		* plug (MPlug) - attribute on this node.
 		* otherPlug (MPlug) - attribute on other node.
 		* asSrc (bool) - is this plug a source of the connection."""
-	def legalDisconnection(self,plug:Any,otherPlug:Any,arsSrc:Any)->bool|None:
+	def legalDisconnection(self,plug:MPlug,otherPlug:MPlug,arsSrc:Any)->bool|None:
 		"""legalDisconnection(plug, otherPlug, arsSrc) -> bool/None
 
 		This method allows you to check for legal disconnections being made to attributes of this node.
@@ -14580,7 +14580,7 @@ class MPxNode:
 		* plug (MPlug) - attribute on this node.
 		* otherPlug (MPlug) - attribute on other node.
 		* asSrc (boool) - is this plug a source of the connection."""
-	def passThroughToMany(self,plug:Any,plugArray:Any)->bool:
+	def passThroughToMany(self,plug:MPlug,plugArray:MPlugArray)->bool:
 		"""passThroughToMany(plug, plugArray) -> bool
 
 		This method is overriden by nodes that want to control the traversal behavior of some Maya search algorithms which traverse the history/future of shape nodes looking for directly related nodes. In particular, the Artisan paint code uses this method when searching for paintable nodes, and the disk cache code uses this method when searching for upstream cacheFile nodes.
@@ -14589,7 +14589,7 @@ class MPxNode:
 
 		* plug (MPlug) - the plug.
 		* plugArray (MPlugArray) - the corresponding plugs."""
-	def passThroughToOne(self,plug:Any)->plug:
+	def passThroughToOne(self,plug:MPlug)->plug:
 		"""passThroughToOne(plug) -> plug
 
 		This method may be overriden by nodes that have a one-to-one relationship between an input attribute and a corresponding output attribute. This method is used by Maya to perform the following capabilities:
@@ -14605,7 +14605,7 @@ class MPxNode:
 		Internally maya creates two objects when a user defined node is created, the internal MObject and the user derived object.
 		The association between the these two objects is not made until after the MPxNode constructor is called. This implies that no MPxNode member function can be called from the MPxNode constructor.
 		The postConstructor will get called immediately after the constructor when it is safe to call any MPxNode member function."""
-	def setDependentsDirty(self,plug:Any,plugArray:Any)->Self:
+	def setDependentsDirty(self,plug:MPlug,plugArray:Any)->Self:
 		"""setDependentsDirty(plug, plugArray) -> self
 
 		This method can be overridden in user defined nodes to specify which plugs should be set dirty based upon an input plug which Maya is marking dirty. The list of plugs for Maya to mark dirty is returned by the plug array. This method handles both dynamic as well as non-dynamic plugs and is useful in the following ways:
@@ -14656,7 +14656,7 @@ class MPxNode:
 		Do not override this method.
 
 		* flag (bool) true if this node can exist without output connections, false otherwise"""
-	def setInternalValue(self,plug:Any,dataHandle:Any)->bool:
+	def setInternalValue(self,plug:MPlug,dataHandle:MDataHandle)->bool:
 		"""setInternalValue(plug, dataHandle) -> bool
 
 
@@ -14672,7 +14672,7 @@ class MPxNode:
 
 		* plug (MPlug) - the attribute that is being set.
 		* dataHandle (MDataHandle) - the dataHandle containing the value to set."""
-	def setInternalValueInContext(self,plug:Any,dataHandle:Any,ctx:Any)->bool:
+	def setInternalValueInContext(self,plug:MPlug,dataHandle:MDataHandle,ctx:MDGContext)->bool:
 		"""setInternalValueInContext(plug, dataHandle, ctx) -> bool  [OBSOLETE]
 
 		This method is obsolete. Override MPxNode.setInternalValue instead.
@@ -14688,7 +14688,7 @@ class MPxNode:
 		Set a flag to specify if a user defined shading node is safe for multi-processor rendering. For a shading node to be MP safe, it cannot access any shared global data and should only use attributes in the datablock to get input data and store output data.
 
 		NOTE: This should be called from the postConstructor() method for shading node plug-ins only. If a shading node is non-safe, then it will only be useful during single processor rendering."""
-	def shouldSave(self,plug:Any)->bool|None:
+	def shouldSave(self,plug:MPlug)->bool|None:
 		"""shouldSave(plug) -> bool/None
 
 		This method may be overridden by the user defined node.  It should only be required to override this on rare occasions.
@@ -14749,7 +14749,7 @@ class MPxNode:
 		It is not necessary to override this method.
 
 		Returns the name of the node"""
-	def addExternalContentForFileAttr(self,table:Any,attr:Any)->bool:
+	def addExternalContentForFileAttr(self,table:Any,attr:MObject)->bool:
 		"""addExternalContentForFileAttr(table, attr) -> bool
 
 		This method is a helper for derived clases implementing getExternalContent().  It augments the external content info table passed in with an entry describing external content whose location is described by the specified attribute.
@@ -14784,7 +14784,7 @@ class MPxNode:
 		The default implementation does nothing.
 
 		* table Key->location table with new content locations."""
-	def setExternalContentForFileAttr(self,attr:Any,table:Any)->bool:
+	def setExternalContentForFileAttr(self,attr:MObject,table:MExternalContentLocationTable)->bool:
 		"""setExternalContentForFileAttr(attr, table) -> bool
 
 		This method is a helper for derived clases implementing setExternalContent().  It assigns a value to a plug with the one from the table whose key is the same as the passed in attribute name.
@@ -14862,7 +14862,7 @@ class MPxSurfaceShape(MPxNode):
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@overload
-	def acceptsGeometryIterator(self,component:Any,writeable:Any=True,forReadOnly:Any=False)->bool:
+	def acceptsGeometryIterator(self,component:MObject,writeable:bool=True,forReadOnly:bool=False)->bool:
 		"""acceptsGeometryIterator(component, writeable=True, forReadOnly=False) -> bool
 		acceptsGeometryIterator(writeable=True) -> boolboundingBox() -> MBoundingBox
 
@@ -14873,7 +14873,7 @@ class MPxSurfaceShape(MPxNode):
 		* writeable (bool) - is this component type writable by an iterator
 		* forReadOnly (bool) - is this component type readable by an iterator"""
 	@overload
-	def acceptsGeometryIterator(self,writeable:Any=True)->Any:
+	def acceptsGeometryIterator(self,writeable:bool=True)->Any:
 		"""acceptsGeometryIterator(component, writeable=True, forReadOnly=False) -> bool
 		acceptsGeometryIterator(writeable=True) -> boolboundingBox() -> MBoundingBox
 
@@ -14900,7 +14900,7 @@ class MPxSurfaceShape(MPxNode):
 		"""canMakeLive() -> bool
 
 		This method is used by Maya to determine whether a surface can be made live. It can be overridden to return True if you wish to allow your surface to be made live. If you return True, you will also need to implement both closestPoint() overloads. The default is to return False."""
-	def childChanged(self,state:Any=MPxSurfaceShape.kObjectChanged)->Self:
+	def childChanged(self,state:int=MPxSurfaceShape.kObjectChanged)->Self:
 		"""childChanged(state=kObjectChanged) -> self
 
 		This method can be used to trigger the shape to recalculate its bounding box.
@@ -14912,7 +14912,7 @@ class MPxSurfaceShape(MPxNode):
 		  kBoundingBoxChanged    Object geometry is unchanged but its bounding box has changed.
 		                         This might happen if the object was moved or an offset changed."""
 	@overload
-	def closestPoint(self,toThisPoint:Any,theClosestPoint:Any,tolerance:Any=MPoint.kTolerance)->Self:
+	def closestPoint(self,toThisPoint:MPoint,theClosestPoint:Any,tolerance:float=MPoint.kTolerance)->Self:
 		"""closestPoint(toThisPoint, theClosestPoint, tolerance=MPoint.kTolerance) -> self
 		closestPoint(raySource, rayDirection, theClosestPoint, theClosestNormal, findClosestOnMiss, tolerance=MPoint.kTolerance) -> bool
 
@@ -14943,7 +14943,7 @@ class MPxSurfaceShape(MPxNode):
 		* findClosestOnMiss (bool) - when True, you should calculate theClosestPoint and theClosestNormal even if the ray misses your surface.
 		* tolerance (float) - tolerance to use in your calculations"""
 	@overload
-	def closestPoint(self,raySource:Any,rayDirection:Any,theClosestPoint:Any,theClosestNormal:Any,findClosestOnMiss:Any,tolerance:Any=MPoint.kTolerance)->bool:
+	def closestPoint(self,raySource:MPoint,rayDirection:MVector,theClosestPoint:Any,theClosestNormal:Any,findClosestOnMiss:bool,tolerance:float=MPoint.kTolerance)->bool:
 		"""closestPoint(toThisPoint, theClosestPoint, tolerance=MPoint.kTolerance) -> self
 		closestPoint(raySource, rayDirection, theClosestPoint, theClosestNormal, findClosestOnMiss, tolerance=MPoint.kTolerance) -> bool
 
@@ -14973,7 +14973,7 @@ class MPxSurfaceShape(MPxNode):
 		* theClosestNormal [OUT] (MVector) - the normal at the closest point on your surface
 		* findClosestOnMiss (bool) - when True, you should calculate theClosestPoint and theClosestNormal even if the ray misses your surface.
 		* tolerance (float) - tolerance to use in your calculations"""
-	def componentToPlugs(self,component:Any,selectionList:Any)->Self:
+	def componentToPlugs(self,component:MObject,selectionList:Any)->Self:
 		"""componentToPlugs(component, selectionList) -> self
 
 		Converts the given component into a selection list of plugs.
@@ -14983,7 +14983,7 @@ class MPxSurfaceShape(MPxNode):
 
 		* component (MObject) - the component to be converted
 		* list (MSelectionList) - a selection list where the plug should be added"""
-	def convertToTweakNodePlug(self,plug:Any)->bool:
+	def convertToTweakNodePlug(self,plug:MPlug)->bool:
 		"""convertToTweakNodePlug(plug) -> bool
 
 		Check if a tweak node is connected to this node. If it is, then reset the supplied plug to contain the controlPoints attribute on the tweak node.
@@ -15004,7 +15004,7 @@ class MPxSurfaceShape(MPxNode):
 		This method is used to create a component containing every vertex/CV in the object.
 
 		This method is supposed to return non-null object only if the dag object contains vertices/CVs (control points), so derived classes that do should override this method."""
-	def deleteComponents(self,componentList:Any,undoInfo:Any)->bool:
+	def deleteComponents(self,componentList:MObjectArray,undoInfo:MDoubleArray)->bool:
 		"""deleteComponents(componentList, undoInfo) -> bool
 
 		Returns True if this method was successful, False otherwise.
@@ -15024,7 +15024,7 @@ class MPxSurfaceShape(MPxNode):
 		Returns the geometry data of the shape. The geometry data must be derived from the MPxGeometryData class.
 
 		The data is used by Maya to add, edit and query component grouping (set) information for the shape. This set information is stored and managed by Maya's shape base class, geometryShape."""
-	def geometryIteratorSetup(self,componentList:Any,components:Any,forReadOnly:Any=False)->MPxGeometryIterator:
+	def geometryIteratorSetup(self,componentList:MObjectArray,components:MObject,forReadOnly:bool=False)->MPxGeometryIterator:
 		"""geometryIteratorSetup(componentList, components, forReadOnly=False) -> MPxGeometryIterator
 
 		This method should be overridden by the user to return a geometry iterator compatible with the user's geometry.
@@ -15046,7 +15046,7 @@ class MPxSurfaceShape(MPxNode):
 
 		Returns the selection mask of the shape.
 		This routine must be overridden if the shape is to support interactive object selection in Viewport 2.0 and should provide information about the selection mask of the shape."""
-	def getWorldMatrix(self,block:Any,instanceGeom:Any)->MMatrix:
+	def getWorldMatrix(self,block:MDataBlock,instanceGeom:int)->MMatrix:
 		"""getWorldMatrix(block, instanceGeom) -> MMatrix
 
 		Returns MMatrix which takes a point from local object space to world space.
@@ -15074,7 +15074,7 @@ class MPxSurfaceShape(MPxNode):
 		Returns the attribute containing the shape's output geometry in local space.
 
 		This method must be overridden if the shape is to support deformers."""
-	def match(self,mask:Any,componentList:Any)->bool:
+	def match(self,mask:MSelectionMask,componentList:MObjectArray)->bool:
 		"""match(mask, componentList) -> bool
 
 		This method is used to check for matches between a selection type (or mask) and a given component. If your shape has components representing attributes then this method is used to match up your components with selection masks.
@@ -15083,7 +15083,7 @@ class MPxSurfaceShape(MPxNode):
 
 		* mask (MSelectionMask) - the selection mask to test against
 		* componentList (MObjectArray) - a list of components to be tested"""
-	def matchComponent(self,item:Any,spec:Any,list:list)->int:
+	def matchComponent(self,item:MSelectionList,spec:MAttributeSpecArray,list:MSelectionList)->int:
 		"""matchComponent(item, spec, list) -> int
 
 		This method is used to convert the string representation of a component into a component object and to validate that the indices.
@@ -15109,7 +15109,7 @@ class MPxSurfaceShape(MPxNode):
 		The default action of this method is to return an MFnSingleIndexedComponent (of type MFn::kMeshVertComponent) in order to support rigid skinning binds.
 
 		This method can be overridden to support other types of components such as MFnDoubleIndexedComponent and MFnTripleIndexedComponent      and should return a new component of that type.  The types allowed are those listed in the create() method docs for each MFn*IndexedComponent."""
-	def pointAtParm(self,atThisParm:Any,evaluatedPoint:Any)->bool:
+	def pointAtParm(self,atThisParm:MPoint,evaluatedPoint:Any)->bool:
 		"""pointAtParm(atThisParm, evaluatedPoint) -> bool
 
 		This method is used by Maya in functions (such as select) that require point at parameter values. This only makes sense for parametric surfaces such as NURBS.
@@ -15124,7 +15124,7 @@ class MPxSurfaceShape(MPxNode):
 
 		Returns the type of renderable components for this shape.
 		See MFnSet.addMember()"""
-	def transformUsing(self,matrix:Any,componentList:Any,cachingMode:Any|None=None,pointCache:Any|None=None)->Self:
+	def transformUsing(self,matrix:MMatrix,componentList:MObjectArray,cachingMode:int|None=None,pointCache:MPointArray|None=None)->Self:
 		"""transformUsing(matrix, componentList, cachingMode=None, pointCache=None) -> self
 
 		Transform the given components using the specified transformation matrix.
@@ -15141,7 +15141,7 @@ class MPxSurfaceShape(MPxNode):
 		  kRestorePoints              Points should be restored from the point cache.
 		  kUpdatePoints               Transform and update the points in the point cache.
 		  kTransformOriginalPoints    Transform using use the original pre-transformation values stored in the pointCache."""
-	def tweakUsing(self,matrix:Any,componentList:Any,cachingMode:Any,pointCache:Any,handle:Any)->Self:
+	def tweakUsing(self,matrix:MMatrix,componentList:MObjectArray,cachingMode:int,pointCache:MPointArray,handle:MArrayDataHandle)->Self:
 		"""tweakUsing(matrix, componentList, cachingMode, pointCache, handle) -> self
 
 		Transform the given components using the specified transformation matrix.
@@ -15154,7 +15154,7 @@ class MPxSurfaceShape(MPxNode):
 		* handle (MArrayDataHandle) - array data handle where the tweaks are stored
 
 		See transformUsing() for a list of valid caching mode"""
-	def undeleteComponents(self,componentList:Any,undoInfo:Any)->bool:
+	def undeleteComponents(self,componentList:MObjectArray,undoInfo:MDoubleArray)->bool:
 		"""undeleteComponents(componentList, undoInfo) -> bool
 
 		This method should be overridden if the shape is to support undeletion of components. A list of components to be deleted will be passed in as well as an array of doubles where information about each deleted component is stored for undo purposes. A typical use for this array is to store knot values or weights for control points that are deleted.
@@ -15162,7 +15162,7 @@ class MPxSurfaceShape(MPxNode):
 
 		* componentList (MObjectArray) - List of components that were deleted
 		* undoInfo (MDoubleArray) - Values used for undo purposes"""
-	def vertexOffsetDirection(self,component:Any,direction:Any,mode:Any,normalize:Any)->bool:
+	def vertexOffsetDirection(self,component:MObject,direction:MVectorArray,mode:int,normalize:bool)->bool:
 		"""vertexOffsetDirection(component, direction, mode, normalize) -> bool
 
 		This method should be overridden if the shape supports components that can be moved in the direction of the normal or UV's using the move vertex normal tool.
@@ -15182,7 +15182,7 @@ class MPxSurfaceShape(MPxNode):
 		  kUTangent     Move in u tangent direction.
 		  kVTangent     Move in v tangent direction.
 		  kUVNTriad     Calculate u, v, and normal offsets."""
-	def weightedTransformUsing(self,xform:Any,space:Any,componentList:Any,cachingMode:Any,pointCache:Any,freezePlane:Any)->Self:
+	def weightedTransformUsing(self,xform:MTransformationMatrix,space:MMatrix,componentList:MObjectArray,cachingMode:int,pointCache:MPointArray,freezePlane:MPlane)->Self:
 		"""weightedTransformUsing(xform, space, componentList, cachingMode, pointCache, freezePlane) -> self
 
 		Transform the given components with interpolation using the specified transformation matrix.
@@ -15197,7 +15197,7 @@ class MPxSurfaceShape(MPxNode):
 		* freezePlane (MPlane) - used for symmetric transformation of components. A value of None indicates it is not used and there is no symmetric transformation.
 
 		See transformUsing() for a list of valid caching mode"""
-	def weightedTweakUsing(self,xform:Any,space:Any,componentList:Any,cachingMode:Any,pointCache:Any,freezePlane:Any,handle:Any)->Self:
+	def weightedTweakUsing(self,xform:MTransformationMatrix,space:MMatrix,componentList:MObjectArray,cachingMode:int,pointCache:MPointArray,freezePlane:MPlane,handle:MArrayDataHandle)->Self:
 		"""weightedTweakUsing(xform, space, componentList, cachingMode, pointCache, freezePlane, handle) -> self
 
 		Transform the given components with interpolation using the specified transformation matrix.
@@ -15499,7 +15499,7 @@ class MSceneMessage(MMessage):
 	kAfterCreateReferenceAndRecordEdits:int=50
 	kLast:int=51
 	@staticmethod
-	def addCallback(message:Any,function:Any,clientData:Any|None=None)->int:
+	def addCallback(message:Any,function:Callable,clientData:Any|None=None)->int:
 		"""addCallback(message, function, clientData=None) -> id
 
 		Adds a new callback for the specified scene message.
@@ -15582,7 +15582,7 @@ class MSceneMessage(MMessage):
 		 * function - callable which will be passed the clientData object
 		 * clientData - user data that will be passed to the callback function"""
 	@staticmethod
-	def addCheckCallback(message:Any,function:Any,clientData:Any|None=None)->int:
+	def addCheckCallback(message:Any,function:Callable,clientData:Any|None=None)->int:
 		"""addCheckCallback(message, function, clientData=None) -> id
 
 		This function adds a new callback for the specified scene message.
@@ -15605,7 +15605,7 @@ class MSceneMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addCheckFileCallback(message:Any,function:Any,clientData:Any|None=None)->int:
+	def addCheckFileCallback(message:Any,function:Callable,clientData:Any|None=None)->int:
 		"""addCheckFileCallback(message, function, clientData=None) -> id
 
 		This function adds a new callback for the specified scene message. This
@@ -15631,7 +15631,7 @@ class MSceneMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addCheckReferenceCallback(message:Any,function:Any,clientData:Any|None=None)->int:
+	def addCheckReferenceCallback(message:Any,function:Callable,clientData:Any|None=None)->int:
 		"""addCheckReferenceCallback(message, function, clientData=None) -> id
 
 		This function adds a new callback for the specified scene message.
@@ -15650,7 +15650,7 @@ class MSceneMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addConnectionFailedCallback(function:Any,clientData:Any|None=None)->int:
+	def addConnectionFailedCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addConnectionFailedCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called when a connection was
@@ -15671,7 +15671,7 @@ class MSceneMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addNamespaceRenamedCallback(function:Any,clientData:Any|None=None)->int:
+	def addNamespaceRenamedCallback(function:Callable,clientData:Any|None=None)->int:
 		"""addNamespaceRenamedCallback(function, clientData=None) -> id
 
 		This method registers a callback that is called when a namespace is renamed.
@@ -15684,7 +15684,7 @@ class MSceneMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addReferenceCallback(message:Any,function:Any,clientData:Any|None=None)->int:
+	def addReferenceCallback(message:Any,function:Callable,clientData:Any|None=None)->int:
 		"""addReferenceCallback(message, function, clientData=None) -> id
 
 		This function adds a new callback for the specified scene message.
@@ -15709,7 +15709,7 @@ class MSceneMessage(MMessage):
 
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
-	def addStringArrayCallback(message:Any,function:Any,clientData:Any|None=None)->int:
+	def addStringArrayCallback(message:Any,function:Callable,clientData:Any|None=None)->int:
 		"""addStringArrayCallback(message, function, clientData=None) -> id
 
 		Adds a new callback which takes a string array argument, in addition to
@@ -15878,7 +15878,7 @@ class MSelectionMask:
 	kSelectNParticles:int=83
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addMask(self,selType:Any)->Self:
+	def addMask(self,selType:int)->Self:
 		"""addMask(selType) -> self
 
 		Add the specified selection type to this mask.
@@ -15969,28 +15969,28 @@ class MSelectionMask:
 		  kSelectNRigids
 		  kSelectDynamicConstraints
 		  kSelectNParticles"""
-	def copy(self,source:Any)->Self:
+	def copy(self,source:MSelectionMask)->Self:
 		"""copy(source) -> self
 
 		Copy data from source selection mask.
 
 		* source (MSelectionMask) - The source selection mask to copy from"""
 	@staticmethod
-	def deregisterSelectionType(selTypeName:Any)->bool:
+	def deregisterSelectionType(selTypeName:str)->bool:
 		"""deregisterSelectionType(selTypeName) -> bool
 
 		Unregisters a previously registered selection type.
 
 		* selTypeName (string) - Name of the selection type."""
 	@staticmethod
-	def getSelectionTypePriority(selTypeName:Any)->int:
+	def getSelectionTypePriority(selTypeName:str)->int:
 		"""getSelectionTypePriority(selTypeName) -> int
 
 		Gets the selection priority corresponding to a given selection type.
 
 		* selTypeName (string) - Name of the selection type."""
 	@overload
-	def intersects(self,mask:Any)->bool:
+	def intersects(self,mask:MSelectionMask)->bool:
 		"""intersects(mask) -> bool
 		intersects(selType) -> bool
 
@@ -15999,7 +15999,7 @@ class MSelectionMask:
 		* mask (MSelectionMask) - the selection mask to test.
 		* selType (int) - the selection type to test.  See addMask() for a list of valid selection masks."""
 	@overload
-	def intersects(self,selType:Any)->bool:
+	def intersects(self,selType:int)->bool:
 		"""intersects(mask) -> bool
 		intersects(selType) -> bool
 
@@ -16008,7 +16008,7 @@ class MSelectionMask:
 		* mask (MSelectionMask) - the selection mask to test.
 		* selType (int) - the selection type to test.  See addMask() for a list of valid selection masks."""
 	@staticmethod
-	def registerSelectionType(selTypeName:Any,priority:Any=0)->bool:
+	def registerSelectionType(selTypeName:str,priority:int=0)->bool:
 		"""registerSelectionType(selTypeName, priority=0) -> bool
 
 		Registers a new selection type. It is perfectly legal for 2 plug-ins to register the same selection type.
@@ -16020,7 +16020,7 @@ class MSelectionMask:
 		* selTypeName (string) - Name of the selection type.
 		* priority (int) - Priority of the selection type."""
 	@overload
-	def setMask(self,mask:Any)->Self:
+	def setMask(self,mask:MSelectionMask)->Self:
 		"""setMask(mask) -> self
 		setMask(selType) -> self
 
@@ -16029,7 +16029,7 @@ class MSelectionMask:
 		* mask (MSelectionMask) - the selection mask to be set.
 		* selType (int) - the selection type to be set.  See addMask() for a list of valid selection masks."""
 	@overload
-	def setMask(self,selType:Any)->Self:
+	def setMask(self,selType:int)->Self:
 		"""setMask(mask) -> self
 		setMask(selType) -> self
 
@@ -16303,7 +16303,7 @@ class MTimeRange:
 class MTimerMessage(MMessage):
 	"""Class used to register callbacks for timer related messages."""
 	@staticmethod
-	def addTimerCallback(period:Any,function:Any,clientData:Any|None=None)->int:
+	def addTimerCallback(period:float,function:Callable,clientData:Any|None=None)->int:
 		"""addTimerCallback(period, function, clientData=None) -> id
 
 		This method registers a callback which is called repeatedly with a
@@ -16591,7 +16591,7 @@ class MURI:
 		"""removeAllQueryItems(int) -> self
 
 		Removes all query string pairs having a given key from the URI."""
-	def copy(self,source:Any)->Self:
+	def copy(self,source:MURI)->Self:
 		"""copy(source) -> self
 
 		Copy method. Assigns the value of one MURI to another.
@@ -16726,7 +16726,7 @@ class MUserData:
 class MUserEventMessage(MMessage):
 	"""Class used to register callbacks for user event messages."""
 	@staticmethod
-	def registerUserEvent(eventName:Any)->None:
+	def registerUserEvent(eventName:str)->None:
 		"""registerUserEvent(eventName)
 
 		Adds a new event type with the given string identifier.  The string
@@ -16736,14 +16736,14 @@ class MUserEventMessage(MMessage):
 		 * eventName (string) - the name of the new event to register.  Any
 		   non-empty string may be used as an event name."""
 	@staticmethod
-	def isUserEvent(eventName:Any)->bool:
+	def isUserEvent(eventName:str)->bool:
 		"""isUserEvent(eventName) -> bool
 
 		Checks if an event type exists with the given event name.
 
 		 * eventName (string) - the name of the new event to check. """
 	@staticmethod
-	def deregisterUserEvent(eventName:Any)->None:
+	def deregisterUserEvent(eventName:str)->None:
 		"""deregisterUserEvent(eventName)
 
 		Removes the event type with the given event name.  If callbacks have been
@@ -16752,7 +16752,7 @@ class MUserEventMessage(MMessage):
 
 		 * eventName (string) - the name of the new event to deregister."""
 	@staticmethod
-	def postUserEvent(eventName:Any,clientData:Any|None=None)->None:
+	def postUserEvent(eventName:str,clientData:Any|None=None)->None:
 		"""postUserEvent(eventName, clientData=None)
 
 		Notifies all callbacks attached to the given event type of the occurence
@@ -16766,7 +16766,7 @@ class MUserEventMessage(MMessage):
 		 * eventName (string) - the name of the new event.
 		 * clientData - User defined data."""
 	@staticmethod
-	def addUserEventCallback(eventName:Any,function:Any,clientData:Any|None=None)->int:
+	def addUserEventCallback(eventName:str,function:Callable,clientData:Any|None=None)->int:
 		"""addUserEventCallback(eventName, function, clientData=None) -> id
 
 		This method registers a callback for user-defined messages.
@@ -16802,7 +16802,7 @@ class MUuid:
 		"""asString() -> string
 
 		Return the UUID as a string."""
-	def copy(self,source:Any)->Self:
+	def copy(self,source:MUuid)->Self:
 		"""copy(source) -> self
 
 		Copy method. Assigns the value of one MUuid to another.

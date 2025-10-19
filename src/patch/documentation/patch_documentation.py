@@ -144,6 +144,10 @@ class Patch_Documentation(PatchBase):
                 else:
                     param_type = "Any"
 
+                if is_none_or_any(param_type):
+                    if new_type := signature.extract_param_type_from_docstring(param.name, desc):
+                        param_type = convert_type.get_python_type_from_desc(new_type)
+
                 method.parameters.append(
                     Parameter(
                         name=param.name,

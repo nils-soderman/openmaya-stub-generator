@@ -5,6 +5,7 @@ import os
 
 
 BUILTIN_NAMES = {x for x in dir(builtins) if isinstance(getattr(builtins, x), type)}
+LITERAL_VALUES = {"True", "False", "0", "1", "-1", "2", "3"}
 
 TYPE_CONVERSION_FILEPATH = os.path.join(os.path.dirname(__file__), 'type_conversion.json')
 with open(TYPE_CONVERSION_FILEPATH, 'r', encoding='utf-8') as f:
@@ -147,7 +148,8 @@ def get_python_type_from_desc(desc: str) -> str:
         ("tuples of ", "tuple", True),
         ("tuples containing ", "tuple", True),
         ("list of ", "list", False),
-        ("sequence of ", "Sequence", False)
+        ("sequence of ", "Sequence", False),
+        ("seq of ", "Sequence", False),
     ]:
         if desc_lower.startswith(prefix):
             inner_content = desc[len(prefix):].strip()
@@ -215,6 +217,9 @@ def get_python_type_from_desc(desc: str) -> str:
     if any(x in desc for x in (" ", ":")):
         print(f'Could not convert documented type "{desc}" to a Python type')
         desc = "Any"
+
+    if desc in LITERAL_VALUES:
+        desc = f"Literal[{desc}]"
 
     return desc
 

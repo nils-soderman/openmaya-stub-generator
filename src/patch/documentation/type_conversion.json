@@ -28,5 +28,7 @@
 
     "dagmessage": "int",
     "numeric": "float",
-    "python callable": "Callable"
+    "python callable": "Callable",
+
+    "timerange": "MTimeRange"
 }
