@@ -29,7 +29,7 @@ class Patch_DefaultValueEnum(PatchBase):
     def __init__(self, module_name: str, version: int, flags: Flags) -> None:
         main_module_name = "maya.api.OpenMaya" if "api" in module_name else "maya.OpenMaya"
         self.main_module = importlib.import_module(main_module_name)
-        self.current_module = importlib.import_module(f"maya.{module_name}")
+        self.current_module = importlib.import_module(module_name)
 
     def patch_method(self, class_, method, overload=None):
         if method.parameters:

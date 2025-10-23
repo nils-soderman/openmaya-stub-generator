@@ -26,8 +26,13 @@ class Patch_Documentation(PatchBase):
 
         self.parser = parser.get_parser(api2, self.use_cache)
         self.index = None
-        if namespace := self.parser.get_namespace(module_name, version):
+        if namespace := self.parser.get_namespace(module_name.rpartition('.')[-1], version):
             self.index = self.parser.get_index(namespace)
+
+        convert_type.g_current_module_name = module_name
+
+    def is_valid(self) -> bool:
+        return self.index is not None
 
     def patch_class(self, class_: Class):
         if not self.index:

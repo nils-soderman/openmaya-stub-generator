@@ -1,23 +1,11 @@
 """
-api.OpenMaya stub file generated for Maya 2026 using:
+maya.api.OpenMaya stub file generated for Maya 2026 using:
 https://github.com/nils-soderman/openmaya-stub-generator
 """
 from __future__ import annotations
 
 import sys
-
-from warnings import deprecated
-from typing import (
-    TypeVar,
-    TypeAlias,
-    Sequence,
-    Callable,
-    Literal,
-    Any,
-    overload,
-    Self
-)
-
+from typing import Any, Callable, Literal, Self, Sequence, overload
 
 class MAngle:
 	"""Manipulate angular data."""
@@ -9442,7 +9430,7 @@ class MGlobal:
 
 		This method is used to get the option variable value of int type"""
 	@staticmethod
-	def optionVarDoubleValue(string:Any)->double:
+	def optionVarDoubleValue(string:Any)->float:
 		"""optionVarDoubleValue(string) -> double
 
 		This method is used to get the option variable value of type double"""
@@ -9833,14 +9821,14 @@ class MImage:
 		* width (unsigned int) - the width of the depth buffer.
 		* height (unsigned int) - the height of the depth buffer."""
 	@staticmethod
-	def filterExists(sourceFormat:MImageFilterFormat,targetFormat:MImageFilterFormat)->bool:
+	def filterExists(sourceFormat:Any,targetFormat:Any)->bool:
 		"""filterExists(sourceFormat, targetFormat) -> bool
 
 		Return whether or not a given source format can be directly converted to a given target format.
 
 		* sourceFormat (MImageFilterFormat) - the format of the source image.
 		* targetFormat (MImageFilterFormat) - the format of the resulting image."""
-	def filter(self,sourceFormat:MImageFilterFormat,targetFormat:MImageFilterFormat,scale:float=1.0,offset:float=1.0)->Self:
+	def filter(self,sourceFormat:Any,targetFormat:Any,scale:float=1.0,offset:float=1.0)->Self:
 		"""filter(sourceFormat, targetFormat, scale=1.0, offset=1.0) -> self
 
 		Modify the content of the image by applying a filter.
@@ -10687,7 +10675,7 @@ class MItGeometry:
 		"""normal() -> MVector
 
 		Return the normal of the current point/CV/vertex component."""
-	def setPosition(self)->MStatus:
+	def setPosition(self)->Any:
 		"""setPosition() -> MStatus
 
 		Set the position of the current point/CV/vertex."""
@@ -10733,14 +10721,14 @@ class MItGeometry:
 
 
 		Resets the iterator."""
-	def allPositions(self)->MStatus:
+	def allPositions(self)->Any:
 		"""allPositions() -> MStatus
 
 		Return the position of all the points/CVs/vertices.  This
 		operation is faster than using the iterator to get values one by
 		one, but uses more memory as it requires an array to hold all the
 		values to be returned."""
-	def setAllPositions(self)->MStatus:
+	def setAllPositions(self)->Any:
 		"""setAllPositions() -> MStatus
 
 		Set the position of all the points/CVs/vertices at once. This
@@ -12687,7 +12675,7 @@ class MMessage:
 		 * node (MObject) - Node to query for callbacks.
 		 * ids (MCallbackIdArray) - Array to store the list of callback IDs."""
 	@staticmethod
-	def removeCallback(id:MCallbackId)->None:
+	def removeCallback(id:Any)->None:
 		"""removeCallback(id) -> None
 
 		Removes the specified callback from Maya.

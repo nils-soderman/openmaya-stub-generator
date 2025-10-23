@@ -1,4 +1,6 @@
+import importlib
 import builtins
+import inspect
 import json
 import re
 import os
@@ -6,6 +8,8 @@ import os
 
 BUILTIN_NAMES = {x for x in dir(builtins) if isinstance(getattr(builtins, x), type)}
 LITERAL_VALUES = {"True", "False", "0", "1", "-1", "2", "3"}
+
+MAYA_OBJECT_PREFIX_REGEX = re.compile(r"^M[A-Z]")
 
 TYPE_CONVERSION_FILEPATH = os.path.join(os.path.dirname(__file__), 'type_conversion.json')
 with open(TYPE_CONVERSION_FILEPATH, 'r', encoding='utf-8') as f:
@@ -221,131 +225,45 @@ def get_python_type_from_desc(desc: str) -> str:
     if desc in LITERAL_VALUES:
         desc = f"Literal[{desc}]"
 
+    if MAYA_OBJECT_PREFIX_REGEX.search(desc):
+        desc = add_maya_module_prefix(desc)
+
     return desc
 
 
-def extract_collection_type(desc: str, prefix: str, py_type: str) -> str | None:
-    desc_lower = desc.lower()
-    if desc_lower.startswith(prefix):
-        inner_content = desc.removeprefix(prefix).strip()
-        inner_content = inner_content.removesuffix("s").strip()
-        inner_type = get_python_type_from_desc(inner_content)
-        return f"{py_type}[{inner_type}{',...' if py_type == 'tuple' else ''}]"
-    return None
+g_current_module_name: str | None = None
 
 
-def old(desc: str):
-    desc = re.sub(r'<[^>]+>', '', desc)  # Remove HTML tags that may be left if the online docs html is broken
-    desc = desc.replace('*', '')
-    desc = desc.strip()
+def add_maya_module_prefix(type_str: str):
+    """ 
+    """
+    if g_current_module_name is None:
+        raise RuntimeError("g_current_module_name is not set")
+    
+    if "." in type_str:
+        cls_name = type_str.partition(".")[0]
+    else:
+        cls_name = type_str
 
-    bracket_list_pattern = r'(?<!list)\[(?!,)([^\[\]]+)\]'
-    if re.search(bracket_list_pattern, desc):
-        def __replace_bracket_list(match):
-            inner_content = match.group(1)
-            types = []
-            for x in inner_content.split(','):
-                if x.strip() == "...":
-                    continue
-                converted_type = get_python_type_from_desc(x)
-                if converted_type not in types:
-                    types.append(converted_type)
+    current_module = importlib.import_module(g_current_module_name)
+    if hasattr(current_module, cls_name):
+        return type_str
 
-            return f"list[{'|'.join(types)}]"
+    if "api" in g_current_module_name.lower():
+        other_modules = (("maya.api.OpenMaya", "om"),
+                         ("maya.api.OpenMayaAnim", "oma"),
+                         ("maya.api.OpenMayaRender", "omr"),
+                         ("maya.api.OpenMayaUI", "omu"))
+    else:
+        other_modules = ()
 
-        desc = re.sub(bracket_list_pattern, __replace_bracket_list, desc)
+    for module_name, module_alias in other_modules:
+        if module_name == g_current_module_name:
+            continue
 
-    if " or " in desc:
-        types = re.split(r"\sor\s|,\s*", desc)
-        return "|".join(get_python_type_from_desc(t) for t in types)
+        module = importlib.import_module(module_name)
+        if hasattr(module, cls_name):
+            return f"{module_alias}.{type_str}"
 
-    if "/" in desc:
-        types = desc.split("/")
-        return_type = "|".join(get_python_type_from_desc(t) for t in types)
-        if return_type == "True|False":
-            return "bool"
-        return return_type
-
-    if desc.startswith("(") and desc.endswith(")"):
-        # Only split on commas that are not inside parentheses
-        # [, x]
-
-        # types = desc[1:-1].split(",")
-        types = split_outside_nested(desc[1:-1], ',', '(', ')')
-
-        all_types: list[str] = []
-        optionals_indices = []
-        for x in types:
-            t = x.removesuffix("[")
-            if t.endswith("]") and "[" not in t:
-                t = t[:-1]
-                optionals_indices.append(len(all_types))
-
-            t = get_python_type_from_desc(t)
-
-            all_types.append(t)
-
-        if all_types and all_types[-1] == "...":
-            types = set(all_types)
-            types.discard("...")
-
-            all_types = list(types)
-            types_str = "|".join(all_types) + ',...'
-        elif optionals_indices:
-            types_str = ",".join(all_types)
-            other_version = ",".join(x for i, x in enumerate(all_types) if i not in optionals_indices)
-            return f"tuple[{types_str}]|tuple[{other_version}]"
-        else:
-            types_str = ",".join(all_types)
-
-        return f"tuple[{types_str}]"
-
-    desc_processed = desc.strip()
-    if desc_processed.endswith(".") and not desc_processed.endswith("..."):
-        desc_processed = desc_processed[:-1].strip()
-
-    if desc_processed.lower().startswith("the new "):
-        desc_processed = desc_processed[len("the new "):].strip()
-
-    if desc_processed.lower().endswith(" constant"):
-        return "int"  # This is an "enum" type
-
-    tuple_pattern = r'^(?:tuple of |tuples containing )(.+)$'
-    if match := re.match(tuple_pattern, desc_processed.lower()):
-        inner_type = match.group(1).strip()
-        inner_type = inner_type.removesuffix("s")
-        inner_type_name = get_python_type_from_desc(inner_type)
-        if inner_type_name.startswith("tuple[") and inner_type_name.endswith("]"):
-            return inner_type_name
-        return f"tuple[{inner_type_name}, ...]"
-
-    if desc_processed.lower().startswith("list of "):
-        inner_type = desc_processed[len("list of "):].strip()
-        inner_type = inner_type.removesuffix("s")
-        inner_type_name = get_python_type_from_desc(inner_type)
-        return f"list[{inner_type_name}]"
-
-    if desc_processed.lower().startswith("sequence of ") or desc_processed.lower().startswith("seq of "):
-        inner_type = desc_processed.partition(" of ")[2].strip()
-        inner_type = inner_type.removesuffix("s").removesuffix("'").strip()
-        inner_type_name = get_python_type_from_desc(inner_type)
-        return f"Sequence[{inner_type_name}]"
-
-    if desc_processed.lower().endswith("reference to self"):
-        return "Self"
-
-    type_name = convert_type(desc_processed)
-
-    if any(x in type_name for x in {" ", "::"}):
-        return "Any"
-
-    if re.match(r'^([a-z]Index|index[A-Z])$', type_name):
-        return "int"
-
-    if re.match(r'^num[A-Z]$', type_name):
-        return "int"
-
-    if desc_processed.lower().endswith("name"):
-        return "str"
-
-    return type_name
+    print(f'Could not find maya type: "{type_str}", defaulting to Any')
+    return "Any"

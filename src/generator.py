@@ -7,13 +7,13 @@ from . import maya_info
 from .patch import ALL_PATCHES
 
 from .flags import Flags
-from . import header
+from . import header, collect_required_imports
 
 MODULES = [
-    "api.OpenMaya",
-    "api.OpenMayaAnim",
-    "api.OpenMayaFX",
-    "api.OpenMayaUI"
+    "maya.api.OpenMaya",
+    "maya.api.OpenMayaAnim",
+    "maya.api.OpenMayaRender",
+    "maya.api.OpenMayaUI"
 ]
 
 def generate_string(module: str, flags: Flags) -> str:
@@ -28,7 +28,13 @@ def generate_string(module: str, flags: Flags) -> str:
     for patch in ALL_PATCHES:
         patch(module, version, flags).apply_patch(variables, classes, functions)
 
+    import_collector = collect_required_imports.ImportCollector()
+    import_collector.collect_from_classes(classes)
+
     out_str = header_str
+
+    out_str += "\n"
+    out_str += str(import_collector)
 
     # OpenMaya currently does not have any module-level variables that are meant to be accessed
     # if variables:
@@ -56,9 +62,12 @@ def generate_file(module: str, out_path: str, flags: Flags = Flags.NONE) -> None
 
 def generate_stubs(out_dir: str, flags: Flags = Flags.NONE) -> None:
     for module in MODULES:
+
+        print(f"Generating stubs for maya.{module}...")
+
         relative_path = module.replace('.', os.sep) + '.pyi'
         out_filepath_abs = os.path.join(out_dir, relative_path)
         generate_file(module, out_filepath_abs, flags=flags)
 
-        if module == "api.OpenMaya":  # TEMP DEV
-            break
+        # if module == "api.OpenMaya":  # TEMP DEV
+        #     break

@@ -2,8 +2,10 @@
     "string": "str",
     "dictionary": "dict",
     "value": "float",
+    "double": "float",
     "long": "int",
     "integer": "int",
+    "boolean": "bool",
 
     "self": "Self",
 

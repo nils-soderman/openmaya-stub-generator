@@ -11,7 +11,14 @@ class PatchBase:
         self.module_name = module_name
         self.flags = flags
 
+    def is_valid(self) -> bool:
+        return True
+
     def apply_patch(self, variables: list[stub_types.Variable], classes: list[stub_types.Class], functions: list[stub_types.Function]):
+        if not self.is_valid():
+            print(f"Skipping patch {self.__class__.__name__} [{self.ORDER}] as it is not valid for module '{self.module_name}'")
+            return
+
         print(f"Applying patch {self.__class__.__name__} [{self.ORDER}]:")
 
         start_time = time.perf_counter()
