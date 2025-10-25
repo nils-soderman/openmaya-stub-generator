@@ -49,7 +49,7 @@ def generate_class(class_ref: type) -> stub_types.Class:
     methods: list[stub_types.Method] = []
     properties: list[stub_types.Property] = []
     for member_name, member in class_ref.__dict__.items():
-        if member_name in {"__class__", "__doc__", "__module__", "__weakref__", "__dict__", "__repr__", "__str__", "__new__", "__eq__"}:
+        if member_name in {"__class__", "__doc__", "__module__", "__weakref__", "__dict__", "__repr__", "__str__", "__new__"}:
             continue
 
         if (
