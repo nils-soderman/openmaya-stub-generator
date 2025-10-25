@@ -320,8 +320,6 @@ class MAttributeIndex:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -438,8 +436,6 @@ class MAttributeSpec:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -653,8 +649,6 @@ class MColor:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -1817,8 +1811,6 @@ class MDagPath:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -2598,8 +2590,6 @@ class MEulerRotation:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -3105,8 +3095,6 @@ class MFloatMatrix:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -3192,8 +3180,6 @@ class MFloatPoint:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -3314,8 +3300,6 @@ class MFloatVector:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -12454,8 +12438,6 @@ class MMatrix:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -13309,8 +13291,6 @@ class MObject:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -13374,8 +13354,6 @@ class MObjectHandle:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -13553,8 +13531,6 @@ class MPlug:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -13763,8 +13739,6 @@ class MPoint:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -15238,8 +15212,6 @@ class MQuaternion:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -16163,8 +16135,6 @@ class MTime:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -16256,8 +16226,6 @@ class MTimeRange:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -16334,8 +16302,6 @@ class MTransformationMatrix:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -16417,8 +16383,6 @@ class MTypeId:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -16436,8 +16400,6 @@ class MURI:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -16776,8 +16738,6 @@ class MUuid:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -16839,8 +16799,6 @@ class MVector:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:

@@ -873,8 +873,6 @@ class MCursor:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
