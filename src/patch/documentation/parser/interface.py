@@ -64,6 +64,14 @@ class MemItem(typing.NamedTuple):
     docstring: str
     data: list[dict]
 
+class Constructor(typing.NamedTuple):
+    signature: str
+    parameters: list[str]
+    description: str
+
+class NumberSupport(typing.NamedTuple):
+    operation: str
+    description: str
 
 class Parameter(typing.NamedTuple):
     name: str
@@ -73,12 +81,16 @@ class Parameter(typing.NamedTuple):
 
 class DetailedDescription(typing.NamedTuple):
     description: str
+    constructors: list[Constructor]
+    sequence_support: str
+    number_support: list[NumberSupport]
+    comparison_support: list[NumberSupport]
 
 
 @dataclasses.dataclass
 class Page:
     url: str
-    detailed_description: str | None
+    detailed_description: DetailedDescription | None
     functions: list[MemItem]
     member_data: list[MemItem]
     properties: list[MemItem]

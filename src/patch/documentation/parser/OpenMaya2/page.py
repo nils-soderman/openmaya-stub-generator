@@ -53,7 +53,96 @@ def parse_detailed_description(soup: bs4.BeautifulSoup) -> interface.DetailedDes
     if fragment := div_textblock.find('pre', class_='fragment'):
         desc = fragment.get_text(strip=True)
 
-    return interface.DetailedDescription(desc)
+    # Constructors
+    constructors: list[interface.Constructor] = []
+    constructors_header = soup.find('h2', string='Constructors')
+    if isinstance(constructors_header, bs4.element.Tag):
+        # Get the next sibling element
+        constructors_table = constructors_header.find_next_sibling()
+        if isinstance(constructors_table, bs4.element.Tag) and constructors_table.name == 'table':
+            for tr in constructors_table.find_all('tr')[1:]:  # First row is header
+                if not isinstance(tr, bs4.element.Tag):
+                    continue
+
+                if tds := tr.find_all('td'):
+                    signature = tds[0].get_text(strip=True, separator=" ")
+                    description = tds[-1].get_text(strip=True, separator=" ")
+                    if len(tds) == 3:
+                        param_td = tds[1]
+                    elif len(tds) == 5:
+                        param_td = tds[2]
+                    elif len(tds) == 1:
+                        continue
+                    else:
+                        raise ValueError(f"Unexpected number of td elements in tr: {len(tds)}")
+
+                    # Parameters
+                    parameters: list[str] = []
+                    if isinstance(param_td, bs4.element.Tag):
+                        for br in param_td.find_all("br"):
+                            br.replace_with(RANDOM_UUID)
+                        param_text = param_td.get_text(strip=True, separator=" ")
+                        parameters = [x.strip() for x in param_text.split(RANDOM_UUID) if x.strip()]
+
+                    constructors.append(interface.Constructor(signature, parameters, description))
+
+    # Sequence Support
+    sequence_support_text = ""
+    sequence_support_header = soup.find('h2', string='Sequence Support')
+    if isinstance(sequence_support_header, bs4.element.Tag):
+        current = sequence_support_header.next_sibling
+        while current:
+            if isinstance(current, bs4.element.Tag) and current.name == 'h2':
+                break
+            if isinstance(current, bs4.element.Tag):
+                sequence_support_text += current.get_text(separator=" ", strip=True) + "\n"
+            elif isinstance(current, bs4.element.NavigableString):
+                sequence_support_text += str(current).strip() + "\n"
+            current = current.next_sibling
+
+    # Number support
+    number_support: list[interface.NumberSupport] = []
+    number_support_header = soup.find('h2', string='Number Support')
+    if isinstance(number_support_header, bs4.element.Tag):
+        numbers_table = number_support_header.find_next_sibling()
+        if not isinstance(numbers_table, bs4.element.Tag) or numbers_table.name != 'table':
+            raise ValueError("Expected numbers_table to be a Tag")
+
+        for tr in numbers_table.find_all('tr')[1:]:  # First row is header
+            if not isinstance(tr, bs4.element.Tag):
+                continue
+
+            tds = tr.find_all('td')
+            if len(tds) == 2:
+                operation = tds[0].get_text(strip=True, separator=" ")
+                description = tds[1].get_text(strip=True, separator=" ")
+
+                number_support.append(interface.NumberSupport(operation, description))
+
+    # Comparison Support
+    comparison_support: list[interface.NumberSupport] = []
+    comparison_support_header = soup.find('h2', string='Comparison Support')
+    if isinstance(comparison_support_header, bs4.element.Tag):
+        comparison_table = comparison_support_header.find_next_sibling()
+        if isinstance(comparison_table, bs4.element.Tag) and comparison_table.name != 'table':
+            for tr in comparison_table.find_all('tr'):  # First row is header
+                if not isinstance(tr, bs4.element.Tag):
+                    continue
+
+                tds = tr.find_all('td')
+                if len(tds) != 2:
+                    raise ValueError(f"Expected 2 td elements in tr, got {len(tds)}")
+
+                operation = tds[0].get_text(strip=True, separator=" ")
+                description = tds[1].get_text(strip=True, separator=" ")
+
+                comparison_support.append(interface.NumberSupport(operation, description))
+
+    return interface.DetailedDescription(desc,
+                                         constructors,
+                                         sequence_support_text,
+                                         number_support,
+                                         comparison_support)
 
 
 def parse_memitem(memitem: bs4.element.Tag):
@@ -125,7 +214,7 @@ def parse_memitem_value_parameters(td: bs4.element.Tag) -> list[interface.Parame
         for tr in td.find_all("tr")[1:]:
             if not isinstance(tr, bs4.element.Tag):
                 raise ValueError("Expected tr to be a Tag")
-                
+
             tds = tr.find_all("td")
             if len(tds) < 3:
                 print(td)
@@ -138,7 +227,7 @@ def parse_memitem_value_parameters(td: bs4.element.Tag) -> list[interface.Parame
             parms.append(interface.Parameter(name=name, type=type_, description=description))
 
         return parms
-    
+
     else:  # Parameters in a single tag split by <br> tags
         for br in td.find_all("br"):
             br.replace_with(RANDOM_UUID)
