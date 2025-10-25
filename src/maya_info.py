@@ -7,7 +7,7 @@ import importlib
 
 
 def get_version() -> int:
-    return om.MGlobal.mayaVersion()
+    return int(om.MGlobal.mayaVersion())
 
 
 def get_functions(module_name: str) -> list[typing.Callable]:
