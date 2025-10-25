@@ -6,6 +6,7 @@
     "long": "int",
     "integer": "int",
     "boolean": "bool",
+    "byterray": "bytearray",
 
     "self": "Self",
 
@@ -31,6 +32,7 @@
     "dagmessage": "int",
     "numeric": "float",
     "python callable": "Callable",
+    "numeric value": "float",
 
     "timerange": "MTimeRange"
 }
