@@ -216,6 +216,7 @@ def get_python_type_from_desc(desc: str) -> str:
 
     desc = convert_type(desc)
     desc = guess_python_from_desc_type(desc)
+    desc = add_maya_module_prefix(desc)
 
     # If type contains a illigale character at this point, return Any
     if any(x in desc for x in (" ", ":")):
@@ -225,21 +226,19 @@ def get_python_type_from_desc(desc: str) -> str:
     if desc in LITERAL_VALUES:
         desc = f"Literal[{desc}]"
 
-    if MAYA_OBJECT_PREFIX_REGEX.search(desc):
-        desc = add_maya_module_prefix(desc)
-
     return desc
 
 
 g_current_module_name: str | None = None
 
 
-def add_maya_module_prefix(type_str: str):
-    """ 
-    """
+def add_maya_module_prefix(type_str: str) -> str:
+    if MAYA_OBJECT_PREFIX_REGEX.search(type_str) is None:
+        return type_str
+
     if g_current_module_name is None:
         raise RuntimeError("g_current_module_name is not set")
-    
+
     if "." in type_str:
         cls_name = type_str.partition(".")[0]
     else:

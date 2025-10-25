@@ -508,7 +508,7 @@ class M3dView:
 
 		* image (MImage) - The image contains the frame buffer pixels.
 		* readRGBA (bool) - Read the image back in RGBA format. By default the format is BGRA."""
-	def readDepthMap(self,x:int,y:int,width:int,heigth:Any,bufferPtr:byterray,depthMapPrecision:int)->Self:
+	def readDepthMap(self,x:int,y:int,width:int,heigth:Any,bufferPtr:bytearray,depthMapPrecision:int)->Self:
 		"""(Deprecated: Please use MHWRender::MRenderTargetManager::acquireRenderTarget() instead.) readDepthMap(x, y, width, heigth, bufferPtr, depthMapPrecision) -> self
 
 		Read the depth values from the frame buffer for a given view.
@@ -1573,7 +1573,7 @@ class MFnFreePointTriadManip(MFnManip3D):
 		Set the point manipulator value to the given vector.  This method can be called in the MPxManipContainer.connectToDependNode() method to set the initial position for the manipulator.
 
 		* pointValue (MPoint) - The new value of the point manipValue"""
-class MFnManip3D(MFnTransform):
+class MFnManip3D(om.MFnTransform):
 	"""MFnManip3D allows the creation and manipulation of 3D manipulators."""
 	@property
 	def isVisible(self)->Any:
@@ -2018,7 +2018,7 @@ class MFnToggleManip(MFnManip3D):
 		"""toggleIndex() -> int
 
 		Returns the index of the toggle of the ToggleManip. The data type corresponding to this index is a boolean."""
-class MHWShaderSwatchGenerator(MSwatchRenderBase):
+class MHWShaderSwatchGenerator(omr.MSwatchRenderBase):
 	"""Hardware shader swatch generator utility class."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
@@ -2327,7 +2327,7 @@ class MMaterialArray:
 		Set the length of the array. This will grow and shrink the array as desired. Elements that are grown have uninitialized values, while those which are shrunk will lose the data contained in the deleted elements
 
 		* length (int) - the new size of the array."""
-class MPaintMessage(MMessage):
+class MPaintMessage(om.MMessage):
 	"""Class used to register callbacks for paint related messages."""
 	@staticmethod
 	def addVertexColorCallback(function:Callable,clientData:Any|None=None)->int:
@@ -3099,15 +3099,15 @@ class MPxDragAndDropBehavior:
 		* sourceNode (MObject) - Source node in the connection.
 		* destinationNode (MObject) - Destination node for the connection.
 		* force (bool) - Tells whether or not to break any existing connections to the destination node."""
-class MPxHardwareShader(MPxNode):
+class MPxHardwareShader(om.MPxNode):
 	"""Base class for user defined hardware shaders."""
 	kIsTransparent:int=1
 	kNoTransparencyFrontBackCull:int=2
 	kNoTransparencyPolygonSort:int=4
-	outColor:MObject
-	outColorR:MObject
-	outColorG:MObject
-	outColorB:MObject
+	outColor:om.MObject
+	outColorR:om.MObject
+	outColorG:om.MObject
+	outColorB:om.MObject
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@staticmethod
@@ -3240,7 +3240,7 @@ class MPxHardwareShader(MPxNode):
 		  - kIsTransparent : Draw as a transparent object. If no transparency overrides are specified, then control of how to draw during a given pass is determined internally by Maya's refresh algorithm, and options the user can set per modelling viewport.
 		  - kNoTransparencyFrontBackCull : When kisTransparent is set and this flag is set, do not perform transparency drawing using the internal 2-pass front-face + back-face culling algorithm.
 		  - kNoTransparencyPolygonSort : When kisTransparent is set and this flag is set, do not perform transparency drawing using the internal 2-pass drawing of back-to-front sorted triangles."""
-class MPxHwShaderNode(MPxNode):
+class MPxHwShaderNode(om.MPxNode):
 	"""Base class for user defined hardware shaders."""
 	kWriteNone:int=0
 	kWriteVertexArray:int=1
@@ -3257,22 +3257,22 @@ class MPxHwShaderNode(MPxNode):
 	kIsTransparent:int=1
 	kNoTransparencyFrontBackCull:int=2
 	kNoTransparencyPolygonSort:int=4
-	outColor:MObject
-	outColorR:MObject
-	outColorG:MObject
-	outColorB:MObject
-	outTransparency:MObject
-	outTransparencyR:MObject
-	outTransparencyG:MObject
-	outTransparencyB:MObject
-	outMatteOpacity:MObject
-	outMatteOpacityR:MObject
-	outMatteOpacityG:MObject
-	outMatteOpacityB:MObject
-	outGlowColor:MObject
-	outGlowColorR:MObject
-	outGlowColorG:MObject
-	outGlowColorB:MObject
+	outColor:om.MObject
+	outColorR:om.MObject
+	outColorG:om.MObject
+	outColorB:om.MObject
+	outTransparency:om.MObject
+	outTransparencyR:om.MObject
+	outTransparencyG:om.MObject
+	outTransparencyB:om.MObject
+	outMatteOpacity:om.MObject
+	outMatteOpacityR:om.MObject
+	outMatteOpacityG:om.MObject
+	outMatteOpacityB:om.MObject
+	outGlowColor:om.MObject
+	outGlowColorR:om.MObject
+	outGlowColorG:om.MObject
+	outGlowColorB:om.MObject
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def bind(self,request:MDrawRequest,view:M3dView)->Self:
@@ -3614,54 +3614,54 @@ class MPxHwShaderNode(MPxNode):
 
 		* request (MDrawRequest) - the draw request.
 		* view (M3dView) - the view in which to draw."""
-class MPxLocatorNode(MPxNode):
+class MPxLocatorNode(om.MPxNode):
 	"""Base class for user defined locators."""
-	underWorldObject:MObject
-	localPosition:MObject
-	localPositionX:MObject
-	localPositionY:MObject
-	localPositionZ:MObject
-	worldPosition:MObject
-	worldPositionX:MObject
-	worldPositionY:MObject
-	worldPositionZ:MObject
-	localScale:MObject
-	localScaleX:MObject
-	localScaleY:MObject
-	localScaleZ:MObject
-	nodeBoundingBox:MObject
-	nodeBoundingBoxMin:MObject
-	nodeBoundingBoxMinX:MObject
-	nodeBoundingBoxMinY:MObject
-	nodeBoundingBoxMinZ:MObject
-	nodeBoundingBoxMax:MObject
-	nodeBoundingBoxMaxX:MObject
-	nodeBoundingBoxMaxY:MObject
-	nodeBoundingBoxMaxZ:MObject
-	nodeBoundingBoxSize:MObject
-	nodeBoundingBoxSizeX:MObject
-	nodeBoundingBoxSizeY:MObject
-	nodeBoundingBoxSizeZ:MObject
-	center:MObject
-	boundingBoxCenterX:MObject
-	boundingBoxCenterY:MObject
-	boundingBoxCenterZ:MObject
-	matrix:MObject
-	inverseMatrix:MObject
-	worldMatrix:MObject
-	worldInverseMatrix:MObject
-	parentMatrix:MObject
-	parentInverseMatrix:MObject
-	visibility:MObject
-	intermediateObject:MObject
-	isTemplated:MObject
-	instObjGroups:MObject
-	objectGroups:MObject
-	objectGrpCompList:MObject
-	objectGroupId:MObject
-	objectGroupColor:MObject
-	useObjectColor:MObject
-	objectColor:MObject
+	underWorldObject:om.MObject
+	localPosition:om.MObject
+	localPositionX:om.MObject
+	localPositionY:om.MObject
+	localPositionZ:om.MObject
+	worldPosition:om.MObject
+	worldPositionX:om.MObject
+	worldPositionY:om.MObject
+	worldPositionZ:om.MObject
+	localScale:om.MObject
+	localScaleX:om.MObject
+	localScaleY:om.MObject
+	localScaleZ:om.MObject
+	nodeBoundingBox:om.MObject
+	nodeBoundingBoxMin:om.MObject
+	nodeBoundingBoxMinX:om.MObject
+	nodeBoundingBoxMinY:om.MObject
+	nodeBoundingBoxMinZ:om.MObject
+	nodeBoundingBoxMax:om.MObject
+	nodeBoundingBoxMaxX:om.MObject
+	nodeBoundingBoxMaxY:om.MObject
+	nodeBoundingBoxMaxZ:om.MObject
+	nodeBoundingBoxSize:om.MObject
+	nodeBoundingBoxSizeX:om.MObject
+	nodeBoundingBoxSizeY:om.MObject
+	nodeBoundingBoxSizeZ:om.MObject
+	center:om.MObject
+	boundingBoxCenterX:om.MObject
+	boundingBoxCenterY:om.MObject
+	boundingBoxCenterZ:om.MObject
+	matrix:om.MObject
+	inverseMatrix:om.MObject
+	worldMatrix:om.MObject
+	worldInverseMatrix:om.MObject
+	parentMatrix:om.MObject
+	parentInverseMatrix:om.MObject
+	visibility:om.MObject
+	intermediateObject:om.MObject
+	isTemplated:om.MObject
+	instObjGroups:om.MObject
+	objectGroups:om.MObject
+	objectGrpCompList:om.MObject
+	objectGroupId:om.MObject
+	objectGroupColor:om.MObject
+	useObjectColor:om.MObject
+	objectColor:om.MObject
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def boundingBox(self)->om.MBoundingBox:
@@ -3750,7 +3750,7 @@ class MPxLocatorNode(MPxNode):
 		"""getShapeSelectionMask() -> MSelectionMask
 
 		This routine can be overridden to provide information aboutthe selection mask of the locator. By default the selection maskfor locators is returned."""
-class MPxManipContainer(MPxNode):
+class MPxManipContainer(om.MPxNode):
 	"""Parent class of all user defined manipulators."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
@@ -4208,7 +4208,7 @@ class MPxManipContainer(MPxNode):
 		node has to be the name of the plug-in node appended with 'Manip'.
 
 		* mid (MTypeId) - Id of the user defined node"""
-class MPxManipulatorNode(MPxNode):
+class MPxManipulatorNode(om.MPxNode):
 	"""Parent class of all user defined manipulators."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
@@ -4941,7 +4941,7 @@ class MPxSurfaceShapeUI:
 		This function can only be used for custom surface shapes and the function will return NULL if the provided path is not a custom surface shape.
 
 		* path (MDagPath) - The full path to a surface shape, including the shape."""
-class MPxToolCommand(MPxCommand):
+class MPxToolCommand(om.MPxCommand):
 	"""Base class for custom tool commands."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
@@ -5179,7 +5179,7 @@ class MTimeSliderDrawPrimitive:
 	kMoveEndTime:int=3
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-class MUiMessage(MMessage):
+class MUiMessage(om.MMessage):
 	"""Class used to register callbacks for UI related messages."""
 	@staticmethod
 	def addUiDeletedCallback(uiName:str,function:Callable,clientData:Any|None=None)->int:

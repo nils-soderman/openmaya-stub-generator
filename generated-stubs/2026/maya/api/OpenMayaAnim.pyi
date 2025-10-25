@@ -347,7 +347,7 @@ class MAnimCurveClipboardItemArray:
 		"""Remove an element from the array."""
 	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
-class MAnimMessage(MMessage):
+class MAnimMessage(om.MMessage):
 	"""Class used to register callbacks for anim related messages."""
 	@staticmethod
 	def addAnimCurveEditedCallback(function:Callable,clientData:Any|None=None)->int:
@@ -592,7 +592,7 @@ class MAnimUtil:
 		In addition to normal objects, components such as mesh vertices or
 		faces can be easily described on an MSelectionList, making this a
 		good way to determine if parts of a shape are animatable or not."""
-class MFnAnimCurve(MFnDependencyNode):
+class MFnAnimCurve(om.MFnDependencyNode):
 	"""Function set for operations on anim curves.
 
 	__init__()
@@ -921,7 +921,7 @@ class MFnAnimCurve(MFnDependencyNode):
 		"""setPostInfinityType(infinityType, change=None) -> self
 
 		Sets the behaviour of the curve for the range occurring after the last key."""
-class MFnGeometryFilter(MFnDependencyNode):
+class MFnGeometryFilter(om.MFnDependencyNode):
 	"""Function set for operating on geometryFilter nodes.
 	geometryFilter is the abstract node type from which all
 	deformer node types derive.
@@ -1025,7 +1025,7 @@ class MFnGeometryFilter(MFnDependencyNode):
 
 		Returns the component which contains the members of the deformer
 		at the given index."""
-class MFnIkJoint(MFnTransform):
+class MFnIkJoint(om.MFnTransform):
 	"""Function set joints.
 
 	__init__()

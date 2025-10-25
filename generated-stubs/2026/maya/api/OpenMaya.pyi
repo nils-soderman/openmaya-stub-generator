@@ -6276,10 +6276,10 @@ class MFnMatrixArrayData(MFnData):
 class MFnMatrixAttribute(MFnAttribute):
 	"""Functionset for creating and working with matrix attributes."""
 	@property
-	def default(self)->MMatrix|MFloatMatrix:
+	def default(self)->Any:
 		"""Default value"""
 	@default.setter
-	def default(self,value:MMatrix|MFloatMatrix)->None:...
+	def default(self,value:Any)->None:...
 	kFloat:int=0
 	kDouble:int=1
 	def __init__(self,*args)->None:
@@ -8939,10 +8939,10 @@ class MFnUInt64ArrayData(MFnData):
 class MFnUnitAttribute(MFnAttribute):
 	"""Functionset for creating and working with angle, distance and time attributes."""
 	@property
-	def default(self)->MAngle|MDistance|MTime:
+	def default(self)->Any:
 		"""Default value"""
 	@default.setter
-	def default(self,value:MAngle|MDistance|MTime)->None:...
+	def default(self,value:Any)->None:...
 	kInvalid:int=0
 	kAngle:int=1
 	kDistance:int=2
