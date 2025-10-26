@@ -25,8 +25,15 @@ class MAngle:
 	kAngMinutes:int=3
 	kAngSeconds:int=4
 	kLast:int=5
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MAngle with a value of 0.0 radians."""
+	@overload
+	def __init__(self,src:MAngle)->None:
+		"""Copy constructor. Returns a new MAngle having the same value and unit as src ."""
+	@overload
+	def __init__(self,value:float,unit:int)->None:
+		"""Returns a new MAngle having the specified value and unit ."""
 	def asUnits(self,unit:int)->float:
 		"""Returns the angular value converted to the specified unit ."""
 	def asRadians(self)->float:
@@ -55,8 +62,8 @@ class MAngle:
 class MArgDatabase(MArgParser):
 	"""Command argument list parser which extends MArgParser with the
 	ability to return arguments and objects as MSelectionLists"""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,syntax:MSyntax,args:MArgList)->None:
+		"""Creates a new MArgDatabase object which will parse args using the provided syntax ."""
 	def commandArgumentMSelectionList(self,index:int)->MSelectionList:
 		"""Returns the specified command argument in an MSelectionList . Raises TypeError if the argument cannot be placed in an MSelectionList . Raises IndexError if index is out of range."""
 	def flagArgumentMSelectionList(self,flag:str,index:int)->MSelectionList:
@@ -66,8 +73,12 @@ class MArgDatabase(MArgParser):
 class MArgList:
 	"""Argument list for passing to commands."""
 	kInvalidArgIndex:int=-1
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MArgList object."""
+	@overload
+	def __init__(self,src:MArgList)->None:
+		"""Copy constructor. Returns a new MArgList object with the same args as src ."""
 	def __len__(self)->int:
 		"""Return len(self)."""
 	def addArg(self,arg:bool|int|float|str|MAngle|MDistance|MPoint|MTime|MVector)->Any:
@@ -115,8 +126,8 @@ class MArgParser:
 	@property
 	def numberOfFlagsUsed(self)->int:
 		"""Number of different flags used on the command line. If the same flag appears multiple times it is only counted once."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,syntax:MSyntax,args:MArgList)->None:
+		"""Creates a new MArgParser object which will parse args using the provided syntax ."""
 	def commandArgumentBool(self,index:int)->bool:
 		"""Returns the specified command argument as a bool."""
 	def commandArgumentDouble(self,index:int)->float:
@@ -320,6 +331,8 @@ class MAttributeIndex:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -436,6 +449,8 @@ class MAttributeSpec:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -515,8 +530,15 @@ class MBoundingBox:
 	@property
 	def depth(self)->float:
 		"""Size in Z"""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty bounding box with, with both corners set to (0, 0, 0)."""
+	@overload
+	def __init__(self,src:MBoundingBox)->None:
+		"""Copy constructor. Returns a new bounding box with the same corners as src"""
+	@overload
+	def __init__(self,min:MPoint,max:MPoint)->None:
+		"""Returns a new bounding box whose minimum and maximum values are specified by min and max , respectively."""
 	def clear(self)->Self:
 		"""Empties bounding box, setting its corners to (0, 0, 0)."""
 	def transformUsing(self,matrix:MMatrix)->Self:
@@ -649,14 +671,23 @@ class MColor:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MColor with red, blue and green set to 0.0 and alpha set to 1.0."""
+	@overload
+	def __init__(self,src:MColor)->None:
+		"""Copy constructor. Returns a new MColor with the same color components as src ."""
+	@overload
+	def __init__(self,components:Sequence[Literal[3]|float],model:int,dataType:int)->None:
+		"""Returns a new MColor using the specified color components . The interpretation of the components depends upon the color model specified. For example, if model is kHSV then the values of components are interpreted as hue, saturation, value and alpha, respectively. The normal range of values for each component is determined by the specified component dataType , although values may exceed that range. If only 3 component values are provided then the fourth will be set to the maximum value of the range for dataType . The resulting color is converted to the kRGB model before being stored. If dataType was other than kFloat then the components will be converted to Float by dividing by the maximum value of dataType 's range. For example, if the red component was given as a value of 100 and dataType was kByte then the stored red value will be approximately 0.39215 (100 divided by 255)."""
 	def __add__(self,other)->Any:
 		"""Return self+value."""
 	def __radd__(self,*args)->Any:
@@ -935,8 +966,15 @@ class MDGContext:
 	kNormal:MDGContext
 	kTimed:MDGContext
 	kManaged:MDGContext
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MDGContext object using the default context."""
+	@overload
+	def __init__(self,src:MDGContext)->None:
+		"""Copy constructor. Returns a new MDGContext object with the same value as src ."""
+	@overload
+	def __init__(self,time:MTime)->None:
+		"""Returns a new MDGContext object which will evaluate at the given time ."""
 	def copy(self,source:MDGContext)->Self:
 		"""copy(source) -> self
 
@@ -1794,8 +1832,8 @@ class MDagMessage(MMessage):
 		 * return: Identifier used for removing the callback."""
 class MDagModifier(MDGModifier):
 	"""Used to change the structure of the DAG"""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MDagModifier object."""
 	@overload
 	def createNode(self,typeName:str,parent:MObject)->MObject:
 		"""Adds an operation to the modifier to create a DAG node of the specified type. If a parent DAG node is provided the new node will be parented under it. If no parent is provided and the new DAG node is a transform type then it will be parented under the world. In both of these cases the method returns the new DAG node<br> If no parent is provided and the new DAG node is not a transform type then a transform node will be created and the child parented under that. The new transform will be parented under the world and it is the transform node which will be returned by the method, not the child. None of the newly created nodes will be added to the DAG until the modifier's doIt() method is called. Raises TypeError if the node type does not exist or if the parent is not a transform type."""
@@ -1811,14 +1849,20 @@ class MDagPath:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MDagPath object."""
+	@overload
+	def __init__(self,src:MDagPath)->None:
+		"""Copy constructor. Returns a new MDagPath object with the same value as src ."""
 	@staticmethod
 	def getAllPathsTo(node:MObject)->MDagPathArray:
 		"""Returns all paths to the given node ."""
@@ -2479,8 +2523,15 @@ class MDistance:
 	kKilometers:int=7
 	kMeters:int=8
 	kLast:int=9
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MDistance with a value of 0.0 centimeters."""
+	@overload
+	def __init__(self,src:MDistance)->None:
+		"""Copy constructor. Returns a new MDistance with the same value and unit type as src ."""
+	@overload
+	def __init__(self,value:float,unit:int)->None:
+		"""Returns a new MDistance using the given value and unit ."""
 	@staticmethod
 	def uiUnit()->int:
 		"""Returns the type of units currently being used to enter and display distances in Maya's UI."""
@@ -2590,14 +2641,29 @@ class MEulerRotation:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MEulerRotation object, initialized to the identity rotation."""
+	@overload
+	def __init__(self,src:MEulerRotation)->None:
+		"""Copy constructor. Returns a new MEulerRotation object with the same value as src ."""
+	@overload
+	def __init__(self,vec:MVector,order:int)->None:
+		"""Returns a new MEulerRotation with the given order and its X, Y and Z rotations set to the corresponding elements of vec ."""
+	@overload
+	def __init__(self,seq:Sequence[float],order:int)->None:
+		"""Returns a new MEulerRotation with the given order and its X, Y and Z rotations set to the corresponding elements of seq ."""
+	@overload
+	def __init__(self,x:float,y:float,z:float,order:int)->None:
+		"""Returns a new MEulerRotation with the specified x , y and z rotations and the given rotation order ."""
 	def __add__(self,other)->Any:
 		"""Return self+value."""
 	def __radd__(self,*args)->Any:
@@ -3095,14 +3161,23 @@ class MFloatMatrix:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new matrix set to the identity matrix."""
+	@overload
+	def __init__(self,src:MFloatMatrix)->None:
+		"""Copy constructor. Returns a new matrix with the same value as src ."""
+	@overload
+	def __init__(self,values:Sequence[Any|tuple[Any,...]])->None:
+		"""Returns a new matrix whose elements are set to those given by values . Values are interpreted in row order, so the first four values make up the first row of the matrix, the second four values the second row of the matrix, and so on."""
 	def __add__(self,other)->Any:
 		"""Return self+value."""
 	def __radd__(self,*args)->Any:
@@ -3180,14 +3255,26 @@ class MFloatPoint:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MFloatPoint object, initialized to the origin."""
+	@overload
+	def __init__(self,src:MFloatPoint|MPoint|MFloatVector|MVector)->None:
+		"""Copy constructor. Returns a new MFloatPoint object with its x, y, z and w coords set to the same values as src . If src is a vector then the new MFloatPoint 's w coordinate is set to 1.0."""
+	@overload
+	def __init__(self,seq:Sequence[two|three|float])->None:
+		"""Returns a new MFloatPoint object whose x, y, z and w coordinates are set to the elements of seq . If the sequence contains fewer than four values w will be set to 1.0. If the sequence contains fewer than three values z will be set to 0.0."""
+	@overload
+	def __init__(self,x:float,y:float,z:float,w:float)->None:
+		"""Returns a new MFloatPoint object with the specified x , y , z and w coordinates."""
 	def __add__(self,other)->Any:
 		"""Return self+value."""
 	def __radd__(self,*args)->Any:
@@ -3300,14 +3387,26 @@ class MFloatVector:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MFloatVector object initialized to the zero vector."""
+	@overload
+	def __init__(self,src:MVector|MFloatVector|MPoint|MFloatPoint)->None:
+		"""Copy constructor. Returns a new MFloatVector object whose x, y and z coordinates are set to the x, y and z coordinates of src ."""
+	@overload
+	def __init__(self,seq:Sequence[Any])->None:
+		"""Returns a new MFloatVector object whose x, y and z coordinates are set to the elements of seq . If the sequence only contains two values, z will be set to 0.0."""
+	@overload
+	def __init__(self,x:float,y:float,z:float)->None:
+		"""Returns a new MFloatVector object with the specified x , y and z coordinates."""
 	def __add__(self,other)->Any:
 		"""Return self+value."""
 	def __radd__(self,*args)->Any:
@@ -5495,8 +5594,12 @@ class MFnComponent(MFnBase):
 	@property
 	def isEmpty(self)->bool:
 		"""True if the component contains no elements."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MFnComponent object."""
+	@overload
+	def __init__(self,component:MObject)->None:
+		"""Returns a new MFnComponent function set, attached to the specified component ."""
 	def isEqual(self,other:MObject)->bool:
 		"""Returns true if other refers to the same component as the one to which the function set is currently attached."""
 	def weight(self,index:int)->MWeight:
@@ -5511,8 +5614,12 @@ class MFnComponentListData(MFnData):
 	__init__(MObject)
 	Initializes a new MFnComponentListData function set, attached
 	to the specified object."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MFnComponentListData object."""
+	@overload
+	def __init__(self,object:MObject)->None:
+		"""Returns a new MFnComponentListData function set, with the specified Maya object attached."""
 	def add(self,component:MObject)->Self:
 		"""Adds the specified component to the end of the list."""
 	def clear(self)->Self:
@@ -5658,8 +5765,15 @@ class MFnDagNode(MFnDependencyNode):
 	@objectColorType.setter
 	def objectColorType(self,value:Any)->None:...
 	kNextPos:int=255
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MFnDagNode function set with no Maya object attached."""
+	@overload
+	def __init__(self,object:MObject)->None:
+		"""Returns a new MFnDagNode function set, attached to the specified Maya object ."""
+	@overload
+	def __init__(self,path:MDagPath)->None:
+		"""Returns a new MFnDagNode function set, attached to the object at the end of the specified DAG path ."""
 	def addChild(self,node:MObject,index:int,keepExistingParents:bool)->Self:
 		"""Parent's node under this node, making it the index 'th child and moving other children down to make room, if necessary. If index is kNextPos then it is added to the end of the list of children. If keepExistingParents is False the child node will be removed from its existing parents, otherwise they will be retained."""
 	def child(self,index:int)->MObject:
@@ -5798,8 +5912,12 @@ class MFnDependencyNode(MFnBase):
 	kTimerType_inclusive:int=1
 	kTimerType_count:int=2
 	kTimerTypes:int=3
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MFnDependencyNode function set with no node attached."""
+	@overload
+	def __init__(self,object:MObject)->None:
+		"""Returns a new MFnDependencyNode function set, attached to the specified Maya node ."""
 	@staticmethod
 	def allocateFlag(plugin:str)->int:
 		"""Allocates a flag on all nodes for use by the named plugin . Returns the flag's index. Raises a ValueError if there are no unallocated node flags available."""
@@ -6123,8 +6241,12 @@ class MFnGeometryData(MFnData):
 	kEmptyGroup:int=1
 	kCompleteGroup:int=2
 	kPartialGroup:int=3
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MFnGeometryData object."""
+	@overload
+	def __init__(self,obj:MObject)->None:
+		"""Returns a new MFnGeometryData function set, attached to the specified object."""
 	def addObjectGroup(self,id:int)->Self:
 		"""Adds an object group with the given id to the object."""
 	def addObjectGroupComponent(self,id:int,component:MObject)->Self:
@@ -6372,8 +6494,15 @@ class MFnMesh(MFnDagNode):
 	kInstanceUnspecified:int=-1
 	kIntersectTolerance:float=1e-06
 	kPointTolerance:float=1e-10
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MFnMesh functionset with no Maya object attached."""
+	@overload
+	def __init__(self,MObject:Any)->None:
+		"""Returns a new MFnMesh object attached to the given mesh node or mesh geometry data."""
+	@overload
+	def __init__(self,MDagPath:Any)->None:
+		"""Returns a new MFnMesh object attached to the given mesh node."""
 	@staticmethod
 	def autoUniformGridParams(arg)->MMeshIsectAccelParams:
 		"""Creates an object which specifies a uniform voxel grid structure which can be used by the intersection routines to speed up their operation. The number of voxel cells to use will be determined automatically based on the density of triangles in the mesh. The grid acceleration structure will be cached with the mesh, so that if the same MMeshIsectAccelParams configuration is used on the next intersect call, the acceleration structure will not need to be rebuilt."""
@@ -6857,8 +6986,12 @@ class MFnMeshData(MFnGeometryData):
 	__init__(MObject)
 	Initializes a new MFnMeshData function set, attached
 	to the specified object."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MFnMeshData object."""
+	@overload
+	def __init__(self,obj:MObject)->None:
+		"""Returns a new MFnMeshData function set, attached to the specified object."""
 	def create(self)->MObject:
 		"""Creates a new mesh data object, attaches it to this function set and returns an MObject which references it."""
 class MFnMessageAttribute(MFnAttribute):
@@ -7446,8 +7579,12 @@ class MFnNurbsCurveData(MFnGeometryData):
 	__init__(MObject)
 	Initializes a new MFnNurbsCurveData function set, attached
 	to the specified object."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MFnNurbsCurveData object."""
+	@overload
+	def __init__(self,obj:MObject)->None:
+		"""Returns a new MFnNurbsCurveData function set, attached to the specified object."""
 	def create(self)->MObject:
 		"""Creates a new nurbs curve data object, attaches it to this function set and returns an MObject which references it."""
 class MFnNurbsSurface(MFnDagNode):
@@ -8347,8 +8484,12 @@ class MFnNurbsSurfaceData(MFnGeometryData):
 	__init__(MObject)
 	Initializes a new MFnNurbsSurfaceData function set, attached
 	to the specified object."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MFnNurbsSurfaceData object."""
+	@overload
+	def __init__(self,obj:MObject)->None:
+		"""Returns a new MFnNurbsSurfaceData function set, attached to the specified object."""
 	def create(self)->MObject:
 		"""Creates a new nurbs surface data object, attaches it to this function set and returns an MObject which references it."""
 class MFnPlugin(MFnBase):
@@ -8358,8 +8499,12 @@ class MFnPlugin(MFnBase):
 		"""Plug-in version string."""
 	@version.setter
 	def version(self,value:str)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MFnPlugin function set with no Maya object attached."""
+	@overload
+	def __init__(self,plugin:MObject,vendor:str,version:str,apiVersion:str)->None:
+		"""Attaches the function set to the specified plugin object, which is provided as a parameter to the plugin's initializePlugin() and uninitializePlugin() functions, and specifies an optional vendor name, plugin version string and minimal required Maya apiVersion (which is currently ignored)."""
 	def apiVersion(self)->str:
 		"""Return the API version required by the plug-in."""
 	def deregisterAttributePatternFactory(self,*args)->Any:
@@ -12438,14 +12583,23 @@ class MMatrix:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new matrix set to the identity matrix."""
+	@overload
+	def __init__(self,src:MMatrix)->None:
+		"""Copy constructor. Returns a new matrix with the same value as src ."""
+	@overload
+	def __init__(self,values:Sequence[Any|tuple[Any,...]])->None:
+		"""Returns a new matrix whose elements are set to those given by values . Values are interpreted in row order, so the first four values make up the first row of the matrix, the second four values the second row of the matrix, and so on."""
 	def __add__(self,other)->Any:
 		"""Return self+value."""
 	def __radd__(self,*args)->Any:
@@ -12580,8 +12734,8 @@ class MMeshIsectAccelParams:
 	uniformGridParams() or autoUniformGridParams() to create one
 	of these to pass into the allIntersections(),
 	closestIntersection(), and anyIntersection() methods"""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MMeshIsectAccelParams object."""
 class MMeshSmoothOptions:
 	"""Options for control of smooth mesh generation."""
 	@property
@@ -12634,8 +12788,8 @@ class MMeshSmoothOptions:
 	kOpenSubdivCatmullClarkUniform:int=2
 	kOpenSubdivCatmullClarkAdaptive:int=3
 	kLastSubdivision:int=4
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MMeshSmoothOptions object."""
 class MMessage:
 	"""Base class for message callbacks."""
 	kDefaultAction:int=0
@@ -13012,8 +13166,12 @@ class MNodeClass:
 	@property
 	def typeName(self)->str:
 		"""Name of the node class. This is the name that is given to the createNode command to create nodes of this type."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self,arg:Any)->None:
+		"""Returns a new MNodeClass object which will operate on the named node class."""
+	@overload
+	def __init__(self,nodeTypeId:MTypeId)->None:
+		"""Returns a new MNodeClass object which will operate on the node class having the given nodeTypeId ."""
 	def addExtensionAttribute(self,attr:MObject)->Self:
 		"""Adds an extension attribute to the node class. An extension attribute is a class-level attribute which has been added dynamically to a node class. Because it is added at the class level, all nodes of that class will have the given attribute, and will only store the attribute's value if it differs from the default."""
 	@overload
@@ -13291,14 +13449,20 @@ class MObject:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns an empty MObject instance (i.e. one which contains kNullObj)."""
+	@overload
+	def __init__(self,src:MObject)->None:
+		"""Copy constructor. Returns a new MObject instance which references the same internal Maya object as src , which must be another MObject instance."""
 	def hasFn(self,fn:int)->bool:
 		"""Returns True if the internal Maya object supports the specified function set specified by fn ."""
 	def isNull(self)->bool:
@@ -13354,6 +13518,8 @@ class MObjectHandle:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -13531,14 +13697,23 @@ class MPlug:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MPlug object."""
+	@overload
+	def __init__(self,src:MPlug)->None:
+		"""Copy constructor. Returns a new MPlug object referencing the same plug as src ."""
+	@overload
+	def __init__(self,node:MObject,attribute:MObject)->None:
+		"""Returns a new plug for the given attribute of the given node ."""
 	def array(self)->MPlug:
 		"""Returns a plug for the array of plugs of which this plug is an element. Raises a TypeError if this plug is not an element of an array of plugs."""
 	def asBool(self,context:MDGContext)->bool:
@@ -13739,14 +13914,26 @@ class MPoint:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MPoint object, initialized to the origin."""
+	@overload
+	def __init__(self,src:MPoint|MFloatPoint|MVector|MFloatVector)->None:
+		"""Copy constructor. Returns a new MPoint object with its x, y, z and w coords set to the same values as src . If src is a vector then the new MPoint 's w coordinate is set to 1.0."""
+	@overload
+	def __init__(self,seq:Sequence[two|three|float])->None:
+		"""Returns a new MPoint object whose x, y, z and w coordinates are set to the elements of seq . If the sequence contains fewer than four values w will be set to 1.0. If the sequence contains fewer than three values z will be set to 0.0."""
+	@overload
+	def __init__(self,x:float,y:float,z:float,w:float)->None:
+		"""Returns a new MPoint object with the specified x , y , z and w coordinates."""
 	def __add__(self,other)->Any:
 		"""Return self+value."""
 	def __radd__(self,*args)->Any:
@@ -13950,8 +14137,8 @@ class MPxCommand:
 	kDouble:int=1
 	kString:int=2
 	kNoArg:int=3
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MPxCommand object."""
 	def doIt(self,args:MArgList)->None:
 		"""Called by Maya to execute the command."""
 	def undoIt(self)->None:
@@ -15212,14 +15399,32 @@ class MQuaternion:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MQuaternion object, initialized to the multiplicative identity."""
+	@overload
+	def __init__(self,src:MQuaternion)->None:
+		"""Copy constructor. Returns a new MQuaternion object with the same value as src ."""
+	@overload
+	def __init__(self,x:float,y:float,z:float,w:float)->None:
+		"""Returns a new MQuaternion object with its imaginary components set to x , y and z and its real component set to w ."""
+	@overload
+	def __init__(self,seq:Sequence[float])->None:
+		"""Returns a new MQuaternion object with its x, y, z, and w components set to the elements of seq ."""
+	@overload
+	def __init__(self,a:MVector,b:MVector,factor:float)->None:
+		"""Returns a new MQuaternion which will rotate vector a into vector b , about their mutually perpendicular axis. If factor is less than 1 then it will rotate only part of the way into b . If factor is greater than 1 then it will overshoot b ."""
+	@overload
+	def __init__(self,angle:float,axis:MVector)->None:
+		"""Returns a new MQuaternion representing a rotation of angle radians about axis ."""
 	def __add__(self,other)->Any:
 		"""Return self+value."""
 	def __radd__(self,*args)->Any:
@@ -15309,8 +15514,18 @@ class MRampAttribute:
 	kLinear:int=1
 	kSmooth:int=2
 	kSpline:int=3
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MRampAttribute object."""
+	@overload
+	def __init__(self,src:MRampAttribute)->None:
+		"""Copy constructor. Returns a new MRampAttribute referencing the same attribute as src ."""
+	@overload
+	def __init__(self,plug:MPlug)->None:
+		"""Returns a new MRampAttribute referencing the same attribute as plug . Raises a TypeError if plug 's attribute is not a ramp."""
+	@overload
+	def __init__(self,node:MObject,attribute:MObject)->None:
+		"""Returns a new MRampAttribute referencing the specified attribute of the given node . Raises a TypeError if attribute is not a ramp."""
 	@staticmethod
 	def createColorRamp(longName:str,shortName:str)->MObject:
 		"""Creates and returns a new color ramp attribute."""
@@ -15704,8 +15919,12 @@ class MSelectionList:
 	kMergeNormal:int=0
 	kXORWithList:int=1
 	kRemoveFromList:int=2
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MSelectionList object."""
+	@overload
+	def __init__(self,src:MSelectionList)->None:
+		"""Copy constructor. Returns a new MSelectionList with the same contents as src ."""
 	@overload
 	def add(self,pattern:str,searchChildNamespaces:bool)->Self:
 		"""Adds to the list any nodes, DAG paths, components or plugs which match the given pattern ."""
@@ -16035,8 +16254,12 @@ class MSyntax:
 	kStringObjects:int=2
 	kSelectionList:int=3
 	kLastObjectFormat:int=4
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MSyntax object."""
+	@overload
+	def __init__(self,src:MSyntax)->None:
+		"""Copy constructor. Returns a new MSyntax object with the same value as src ."""
 	def addArg(self,argType:int)->Self:
 		"""Add a command argument."""
 	def addFlag(self,shortName:str,longName:str,argTypes:Any)->Self:
@@ -16135,14 +16358,23 @@ class MTime:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MTime object with value 1.0 and unit set to the current UI unit."""
+	@overload
+	def __init__(self,src:MTime)->None:
+		"""Copy constructor. Returns a new MTime object with the same value and unit as src ."""
+	@overload
+	def __init__(self,value:float,unit:int)->None:
+		"""Returns a new MTime object with the given value and unit ."""
 	def __add__(self,other)->Any:
 		"""Return self+value."""
 	def __radd__(self,*args)->Any:
@@ -16226,6 +16458,8 @@ class MTimeRange:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -16302,14 +16536,20 @@ class MTransformationMatrix:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MTransformationMatrix object, set to the identity transformation."""
+	@overload
+	def __init__(self,src:MTransformationMatrix|MMatrix)->None:
+		"""Returns a new MTransformationMatrix object with the same value as src ."""
 	def asMatrix(self,interp:float)->MMatrix:
 		"""Interpolates between the identity transformation and that currently in the object, returning the result as an MMatrix . When interp is 0.0 the result will be the identity matrix. When it is 1.0 the result will be the full transformation. If interp is less than 0.0 or greater than 1.0 the result will properly extrapolated."""
 	def asMatrixInverse(self)->MMatrix:
@@ -16383,14 +16623,26 @@ class MTypeId:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new, empty MTypeId object."""
+	@overload
+	def __init__(self,src:MTypeId)->None:
+		"""Copy constructor. Returns a new MTypeId object with the same value as src ."""
+	@overload
+	def __init__(self,id:int)->None:
+		"""Returns a new MTypeId object with the given id ."""
+	@overload
+	def __init__(self,prefix:int,id:int)->None:
+		"""Returns a new MTypeId object whose id uses prefix for its upper 24 bits and id for its lower 8. Note that only the lower 24 bits of prefix and the lower 8 of id are significant. All higher order bits are ignored."""
 	def id(self)->int:
 		"""Returns the object's id."""
 class MURI:
@@ -16400,6 +16652,8 @@ class MURI:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -16738,6 +16992,8 @@ class MUuid:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
@@ -16799,14 +17055,26 @@ class MVector:
 		"""Return self<value."""
 	def __le__(self,other)->bool:
 		"""Return self<=value."""
+	def __eq__(self,other)->bool:
+		"""Return self==value."""
 	def __ne__(self,other)->bool:
 		"""Return self!=value."""
 	def __gt__(self,other)->bool:
 		"""Return self>value."""
 	def __ge__(self,other)->bool:
 		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MVector object initialized to the zero vector."""
+	@overload
+	def __init__(self,src:MVector|MFloatVector|MPoint|MFloatPoint)->None:
+		"""Copy constructor. Returns a new MVector object whose x, y and z coordinates are set to the x, y and z coordinates of src ."""
+	@overload
+	def __init__(self,seq:Sequence[two|float])->None:
+		"""Returns a new MVector object whose x, y and z coordinates are set to the elements of seq . If the sequence only contains two values z will be set to 0.0."""
+	@overload
+	def __init__(self,x:float,y:float,z:float)->None:
+		"""Returns a new MVector object with the specified x , y and z coordinates."""
 	def __add__(self,other)->Any:
 		"""Return self+value."""
 	def __radd__(self,*args)->Any:
@@ -16938,8 +17206,12 @@ class MWeight:
 		symmetry. This value is only relevant when symmetry is enabled."""
 	@seam.setter
 	def seam(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Default constructor. Returns a new MWeight object with influence weight of 1 and seam weight of 0."""
+	@overload
+	def __init__(self,src:MWeight)->None:
+		"""Copy constructor. Returns a new MWeight object with the same value as src ."""
 
 def getStringResource(*args)->Any:...
 def registerStringResource(*args)->Any:...

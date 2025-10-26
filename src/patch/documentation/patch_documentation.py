@@ -49,7 +49,9 @@ class Patch_Documentation(PatchBase):
                 self.patch_property(class_, property, prop_doc)
 
         for method in class_.methods:
-            if method_doc := class_doc.find_function_by_name(method.name):
+            if method.name.startswith("__") and method.name.endswith("__"):
+                self.patch_builtin_method(class_, method, class_doc)
+            elif method_doc := class_doc.find_function_by_name(method.name):
                 self.patch_method(class_, method, method_doc)
 
     def patch_property(self, class_: Class, property_: Property, prop_doc: parser.interface.MemItem):
@@ -68,13 +70,48 @@ class Patch_Documentation(PatchBase):
                 access = data.get('access', "RW").lower()
                 property_.can_set = "w" in access
 
-    def patch_builtin_method(self, method: Method, method_doc: parser.interface.MemItem):
-        ...
+    def patch_init_method(self, class_: Class, method: Method, class_doc: parser.interface.Page):
+        if not class_doc.detailed_description:
+            return
+
+        for i, constructor in enumerate(class_doc.detailed_description.constructors):
+            if i > 0:
+                # Create a new overload method
+                new_method = Method(method.ref,
+                                    method.name,
+                                    return_type="None",
+                                    docstring=method.docstring,
+                                    deprecated=method.deprecated,
+                                    static=method.static)
+                method.overloads.append(new_method)
+            else:
+                new_method = method
+
+            new_method.docstring = constructor.description
+            new_method.return_type = "None"
+            new_method.parameters = []
+            
+            for param in constructor.parameters:
+                if " - " in param:
+                    param_name, _, param_type_desc = param.partition(" - ")
+                    param_type = convert_type.get_python_type_from_desc(param_type_desc)
+                else:
+                    param_name = param
+                    param_type = "Any"
+
+                new_method.parameters.append(
+                    Parameter(
+                        name=param_name,
+                        type=param_type
+                    )
+                )
+
+
+    def patch_builtin_method(self, class_: Class, method: Method, class_doc: parser.interface.Page):
+        if method.name == "__init__":
+            return self.patch_init_method(class_, method, class_doc)
 
     def patch_method(self, class_: Class, method: Method, method_doc: parser.interface.MemItem):
-        if method.name.startswith("__") and method.name.endswith("__"):
-            return self.patch_builtin_method(method, method_doc)
-
         if method_doc.data:
             self.patch_method_from_data(method, method_doc)
         else:

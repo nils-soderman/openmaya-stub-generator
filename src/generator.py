@@ -63,7 +63,9 @@ def generate_file(module: str, out_path: str, flags: Flags = Flags.NONE) -> None
 def generate_stubs(out_dir: str, flags: Flags = Flags.NONE) -> None:
     for module in MODULES:
 
-        print(f"Generating stubs for maya.{module}...")
+        print(f"################################################")
+        print(f"Generating stubs for '{module}'")
+        print(f"################################################")
 
         relative_path = module.replace('.', os.sep) + '.pyi'
         out_filepath_abs = os.path.join(out_dir, relative_path)
