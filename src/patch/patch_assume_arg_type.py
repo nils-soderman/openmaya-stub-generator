@@ -3,6 +3,8 @@ Static methods cannot return 'Self', make them return the class instead
 """
 import re
 
+from src.stub_types import Class, Property
+
 from .base import PatchBase
 
 
@@ -15,6 +17,10 @@ TYPE_CONVERSION_MAPPING = {
 
 PATTERNS = (
     (re.compile(r".*name$"), "str"),
+)
+
+PROPERTY_PATTERNS = (
+    (re.compile(r"Name$"), "str"),
 )
 
 
@@ -34,6 +40,15 @@ def get_type_from_name(name: str) -> str | None:
 
 class Patch_AssumeParameterType(PatchBase):
     ORDER = 50
+
+    def patch_property(self, class_: Class, property: Property):
+        if property.type and property.type != "Any":
+            return
+
+        for pattern, type_ in PROPERTY_PATTERNS:
+            if pattern.match(property.name, re.IGNORECASE):
+                property.type = type_
+                return
 
     def patch_method(self, class_, method, overload=None):
         if method.parameters:

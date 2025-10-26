@@ -1354,8 +1354,13 @@ class MGeometryExtractor:
 	kPolyGeom_Normal:int=0
 	kPolyGeom_NotSharing:int=1
 	kPolyGeom_BaseMesh:int=2
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self,MGeometryRequirements:Any,MDagObject:Any,MPolyGeomOptions:Any)->None:
+		"""Initializes a new MGeometryExtractor attached to a MDagObject mesh shape."""
+	@overload
+	def __init__(self,MGeometryRequirements:Any,MObject:Any,MPolyGeomOptions:Any)->None:
+		"""Initializes a new MGeometryExtractor attached to a mesh data MObject
+		    of type MFn::kMeshData or MFn::kMeshGeom."""
 	@staticmethod
 	def minimumBufferSize(primitiveCount:int,primitive:int,primitiveStride:int=0)->int:
 		"""minimumBufferSize(primitiveCount, primitive, primitiveStride=0) -> int
@@ -1549,40 +1554,7 @@ class MIndexBuffer:
 
 		Returns true if this index buffer is using a custom resource handle set
 		by the plugin using MIndexBuffer.setResourceHandle(long, int)."""
-	@overload
 	def lockResourceHandle(self)->Self:
-		"""lockResourceHandle() -> self
-
-		Lock the resource handle. The pointer returned from resourceHandle() is
-		guaranteed to exist between lockResourceHandle() and unlockResourceHandle().
-
-		MIndexBuffer may store data in system memory, GPU memory or both. Direct
-		access to the GPU representation of the data is possible through the
-		buffer's resourceHandle(). If the GPU representation of the data is to be
-		directly modified using an external graphics or compute API, then
-		lockResourceHandle() must be called on the MIndexBuffer once, before any
-		modifications to the buffer are made.
-
-		While a resource handle is locked, any external modifications to the GPU
-		buffer will be recognized by Maya.
-
-		While a resource handle is locked, consolidated world will take longer to
-		consolidate the corresponding object. After unlocking a resource handle,
-		consolidated world will take longer to consolidate the corresponding object
-		one more time, the first time the unlocked resource handle is consolidated.
-
-		Calling lockResourceHandle() and unlockResourceHandle() on a custom resource
-		handle has no effect.
-
-		Reallocating or deleting the GPU representation of the data between
-		lockResourceHandle() and unlockResourceHandle() will result in undefined
-		behavior. acquire(), commit() and update() may reallocate the GPU representation.
-		unload() may delete the GPU representation.
-
-		map() and unmap() will work if they are called between lockResourceHandle()
-		and unlockResourceHandle(). They operate on the GPU representation."""
-	@overload
-	def lockResourceHandle(self)->None:
 		"""lockResourceHandle() -> self
 
 		Lock the resource handle. The pointer returned from resourceHandle() is
@@ -7387,7 +7359,7 @@ class MUIDrawManager:
 
 		* mask (int) - The channel mask which will affect the later drawing.
 		        Currently, only MBlendState.kRGBAChannels, MBlendState.kRGBChannels and MBlendState.kAlphaChannel are supported."""
-	def icon(self,*args)->Any:
+	def icon(self,position:om.MPoint,name:str,scale:float)->None:
 		"""icon(position, name, scale)) -> self
 
 		Draw an icon at a given 3d position.
@@ -7934,40 +7906,7 @@ class MVertexBuffer:
 
 		Returns true if this vertex buffer is using a custom resource handle set
 		by the plugin using MVertexBuffer.setResourceHandle(long, int)."""
-	@overload
 	def lockResourceHandle(self)->Self:
-		"""lockResourceHandle() -> self
-
-		Lock the resource handle. The pointer returned from resourceHandle() is
-		guaranteed to exist between lockResourceHandle() and unlockResourceHandle().
-
-		MVertexBuffer may store data in system memory, GPU memory or both. Direct
-		access to the GPU representation of the data is possible through the
-		buffer's resourceHandle(). If the GPU representation of the data is to be
-		directly modified using an external graphics or compute API, then
-		lockResourceHandle() must be called on the MVertexBuffer once, before any
-		modifications to the buffer are made.
-
-		While a resource handle is locked, any external modifications to the GPU
-		buffer will be recognized by Maya.
-
-		While a resource handle is locked, consolidated world will take longer to
-		consolidate the corresponding object. After unlocking a resource handle,
-		consolidated world will take longer to consolidate the corresponding object
-		one more time, the first time the unlocked resource handle is consolidated.
-
-		Calling lockResourceHandle() and unlockResourceHandle() on a custom resource
-		handle has no effect.
-
-		Reallocating or deleting the GPU representation of the data between
-		lockResourceHandle() and unlockResourceHandle() will result in undefined
-		behavior. acquire(), commit() and update() may reallocate the GPU representation.
-		unload() may delete the GPU representation.
-
-		map() and unmap() will work if they are called between lockResourceHandle()
-		and unlockResourceHandle(). They operate on the GPU representation."""
-	@overload
-	def lockResourceHandle(self)->None:
 		"""lockResourceHandle() -> self
 
 		Lock the resource handle. The pointer returned from resourceHandle() is

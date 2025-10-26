@@ -3,7 +3,7 @@ Make sure Maya objects have their correct module prefixes
 E.g. "MObject" -> "om.MObject" if outside of "OpenMaya" module. 
 """
 
-from src.stub_types import Property
+from src.stub_types import Method, Property
 from ..stub_types import Class
 
 from .base import PatchBase
@@ -24,3 +24,10 @@ class Patch_MayaTypes(PatchBase):
 
     def patch_property(self, class_: Class, property: Property):
         property.type = convert_type.add_maya_module_prefix(property.type)
+
+    def patch_method(self, class_: Class, method: Method, overload: Method | None = None):
+        super().patch_method(class_, method, overload)
+        if method.parameters:
+            for parameter in method.parameters:
+                if parameter.default:
+                    parameter.default = convert_type.add_maya_module_prefix(parameter.default)

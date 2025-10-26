@@ -21,30 +21,82 @@ class ParsedSignature(typing.NamedTuple):
     is_obsolete: bool
 
 
-def extract_signatures_from_docstring(docstring: str, function_name: str) -> list[str]:
+def extract_signatures_from_docstring(docstring: str, function_name: str, stop_search_at_text: bool = True) -> list[str]:
     """
     Retrieve all signatures of a function from a docstring.
 
     Args:
         docstring (str): The docstring containing the function signatures.
         function_name (str): The name of the function to search for.
+        stop_search_at_text (bool): If True, only consider signatures at the top of the docstring.
 
     Returns:
         list[tuple[list[SignatureParameter], str | None]]: A list of tuples, each containing a list of
         SignatureParameter objects and an optional return type.
     """
-    pattern = rf'{function_name}\s*\(\s*([^)]*?)\s*\)(?:\s*->\s*(.*?))?(?=\s*{function_name}|\n|$)'
+    # Handle e.g. (Deprecated) at the start of the docstring
+    if docstring.lstrip().startswith("("):
+        docstring = re.sub(r'^\s*\([^)]+\)\s*', '', docstring)
 
-    matches = re.findall(pattern, docstring, re.MULTILINE | re.DOTALL)
+    # Keep only the initial contiguous block of signatures (supports multi-line signatures)
+    start_sig_re = re.compile(rf'^\s*{re.escape(function_name)}\s*\(')
 
-    signatures: list[str] = []
+    lines = docstring.splitlines()
+    kept_lines: list[str] = []
+    started = False
+    paren_open = 0  # track '(' vs ')' while inside a signature
+
+    for line in lines:
+        if not started:
+            if start_sig_re.match(line):
+                started = True
+                kept_lines.append(line)
+                paren_open = line.count('(') - line.count(')')
+            else:
+                # ignore any preamble before first signature
+                continue
+        else:
+            if paren_open > 0:
+                kept_lines.append(line)
+                paren_open += line.count('(') - line.count(')')
+            else:
+                if not line.strip():
+                    # allow blank lines within the signatures block
+                    kept_lines.append(line)
+                    continue
+                if start_sig_re.match(line):
+                    kept_lines.append(line)
+                    paren_open = line.count('(') - line.count(')')
+                elif line.strip().startswith("->"):
+                    # allow return type on a new line
+                    kept_lines.append(line)
+                elif stop_search_at_text:
+                    # first normal text line after signatures -> stop
+                    break
+
+    truncated = "\n".join(kept_lines)
+
+    pattern = rf'{re.escape(function_name)}\s*\([^\)]*?\)(?:\s*->\s*[^\n]+)?'
+    matches = re.findall(pattern, truncated, re.MULTILINE | re.DOTALL)
+
+    signatures = []
     for match in matches:
-        params_str, return_type = match
-        params_str = re.sub(r'\s+', ' ', params_str.strip())
+        # The regex can match multiple signatures if they are on the same line without separation
+        # We need to split them up.
+        # We can't just split by function name, as it might be an argument.
+        # Instead we find all occurrences of the function name that are followed by an opening parenthesis
+        sub_matches = re.finditer(rf'{re.escape(function_name)}\s*\(', match)
+        
+        positions = [m.start() for m in sub_matches]
+        if not positions:
+            if match.strip():
+                signatures.append(match.replace("\n", " ").strip())
+            continue
 
-        return_type = return_type.strip() if return_type else "None"
-
-        signatures.append(f"{function_name}({params_str}) -> {return_type}")
+        for i, start in enumerate(positions):
+            end = positions[i + 1] if i + 1 < len(positions) else len(match)
+            sig = match[start:end]
+            signatures.append(sig.replace("\n", "").strip())
 
     return signatures
 

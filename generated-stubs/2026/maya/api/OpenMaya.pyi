@@ -5690,7 +5690,7 @@ class MFnContainerNode(MFnDependencyNode):
 		"""getRootTransform() -> MObject
 
 		Return the root transform, if there is one. Otherwise return an empty MObject."""
-	def getPublishedNodes(self,publishNodeType:Any=MPublishNodeType)->tuple[Any,Any]:
+	def getPublishedNodes(self,publishNodeType:Any=Any)->tuple[Any,Any]:
 		"""getPublishedNodes(publishNodeType=MPublishNodeType) -> ([MString] publishedNames, MObjectArray publishedNodes)
 
 		Return a list of the published nodes of a given type. For any names that have assigned nodes, return the node at the corresponding array index. For any names that do not have assigned nodes, a NULL MObject will be at the corresponding array index."""
@@ -6033,8 +6033,8 @@ class MFnDisplayLayer(MFnDependencyNode):
 	Initializes a new, empty MFnDisplayLayer object.
 
 	"""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnDisplayLayer object."""
 	def getMembers(self,members:Any)->status:
 		"""getMembers(members) -> status
 		Get the members of the display layer"""
@@ -6061,8 +6061,8 @@ class MFnDisplayLayerManager(MFnDependencyNode):
 	Initializes a new, empty MFnDisplayLayerManager object.
 
 	"""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnDisplayLayerManager object."""
 	@staticmethod
 	def currentDisplayLayerManager()->MObject:
 		"""currentDisplayLayerManager() -> MObject
@@ -6117,8 +6117,13 @@ class MFnDoubleIndexedComponent(MFnComponent):
 	__init__(MObject component)
 	Initializes a new MFnDoubleIndexedComponent function set, attached
 	to the specified component."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnDoubleIndexedComponent object"""
+	@overload
+	def __init__(self,component:MObject)->None:
+		"""Initializes a new MFnDoubleIndexedComponent function set, attached
+		to the specified component."""
 	@overload
 	def addElement(self,uIndex:Any,vIndex:Any)->Self:
 		"""addElement(uIndex, vIndex) -> self
@@ -8558,8 +8563,13 @@ class MFnPluginData(MFnData):
 	__init__(MObject)
 	Initializes a new MFnPluginData function set, attached
 	to the specified object."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnPluginData object"""
+	@overload
+	def __init__(self,MObject:Any)->None:
+		"""Initializes a new MFnPluginData function set, attached
+		to the specified object."""
 	def typeId(self)->MTypeId:
 		"""typeId() -> MTypeId
 
@@ -8776,8 +8786,12 @@ class MFnSingleIndexedComponent(MFnComponent):
 		"""Biggest element plus 1 in the component."""
 	@elementMax.setter
 	def elementMax(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnSingleIndexedComponent object"""
+	@overload
+	def __init__(self,component:MObject)->None:
+		"""Initializes a new MFnSingleIndexedComponent function set, attached to the specified component."""
 	def addElement(self,element:int)->Self:
 		"""addElement(int element) -> self
 
@@ -8977,8 +8991,13 @@ class MFnTripleIndexedComponent(MFnComponent):
 	__init__(MObject component)
 	Initializes a new MFnTripleIndexedComponent function set, attached
 	to the specified component."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnTripleIndexedComponent object"""
+	@overload
+	def __init__(self,component:MObject)->None:
+		"""Initializes a new MFnTripleIndexedComponent function set, attached
+		to the specified component."""
 	@overload
 	def addElement(self,sIndex:Any,tIndex:Any,uIndex:Any)->Self:
 		"""addElement(sIndex, tIndex, uIndex) -> self
@@ -13754,7 +13773,7 @@ class MPlug:
 		"""If this plug is a destination, return the source plug connected to it.
 		If this plug is not a destination, a null plug is returned.
 		This method will produce the networked version of the connectedplug."""
-	def sourceWithConversion(self,*args)->Any:
+	def sourceWithConversion(self)->None:
 		"""If this plug is a destination, return the source plug connected to it.
 		This method is very similar to the source() method.  The only difference is that the source() method skips over any unit conversionnode connected to this destination, and returns the source of the unit conversion node.
 		sourceWithConversion() does not skip over unitconversion nodes, and returns the source plug on a unit conversionnode, if present.
@@ -14055,7 +14074,7 @@ class MPointOnMesh:
 class MPolyMessage(MMessage):
 	"""Class used to register callbacks for poly related messages."""
 	@staticmethod
-	def addPolyComponentIdChangedCallback(*args)->Any:
+	def addPolyComponentIdChangedCallback(node:MObject,arg:Any,wantEdgeIds:Any,wantFaceIds:Any)->None:
 		"""addPolyComponentIdChangedCallback(node, (wantVertIds, wantEdgeIds, wantFaceIds), function, clientData=None) -> id
 
 		This method registers a callback that should be called whenever a poly
@@ -14612,7 +14631,7 @@ class MPxNode:
 		Do not override this method.
 
 		Returns true if this node can exist without output connections, false otherwise"""
-	def forceCache(self,*args)->Any:
+	def forceCache(self,ctx:MDGContext=...)->None:
 		"""forceCache(ctx=MDGContext::current()) -> MDataBlock
 
 		Get the datablock for this node. If there is no datablock then one will be created.
@@ -15578,8 +15597,13 @@ class MRichSelection:
 	__init__(MRichSelection other)
 	Initializes a new MRichSelection object containing the same
 	items as another rich selection."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Initializes a new, empty MRichSelection object."""
+	@overload
+	def __init__(self,other:MRichSelection)->None:
+		"""Initializes a new MRichSelection object containing the same
+		items as another rich selection."""
 	def clear(self)->Self:
 		"""clear() -> self
 

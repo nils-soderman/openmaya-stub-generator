@@ -224,8 +224,8 @@ class MAnimCurveClipboard:
 	@endUnitlessInput.setter
 	def endUnitlessInput(self,value:Any)->None:...
 	theAPIClipboard:MAnimCurveClipboard
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self)->None:
+		"""Initializes a new, empty MAnimCurveClipboard object."""
 	def clear(self)->Self:
 		"""clear() -> self
 
@@ -283,8 +283,8 @@ class MAnimCurveClipboardItem:
 		"""The node name."""
 	@nodeName.setter
 	def nodeName(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self)->None:
+		"""Initializes a new, empty MAnimCurveClipboardItem object."""
 	def getAddressingInfo(self)->tuple[int,int,int]:
 		"""getAddressingInfo() -> (unsigned int, unsigned int, unsigned int)
 
@@ -685,8 +685,17 @@ class MFnAnimCurve(om.MFnDependencyNode):
 	kCycle:int=3
 	kCycleRelative:int=4
 	kOscillate:int=5
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnAnimCurve object."""
+	@overload
+	def __init__(self,object:om.MObject)->None:
+		"""Initializes a new MFnAnimCurve and attaches it
+		to an animCurve object."""
+	@overload
+	def __init__(self,plug:om.MPlug)->None:
+		"""Initializes a new MFnAnimCurve and attaches it
+		to the single animCurve node connected to the given MPlug."""
 	@overload
 	def create(self,node:Any,attribute:Any,animCurveType:int=MFnAnimCurve.kAnimCurveUnknown,modifier:Any=...)->om.MObject:
 		"""create(node, attribute, animCurveType=kAnimCurveUnknown [, modifier] ) -> MObject
@@ -950,8 +959,13 @@ class MFnGeometryFilter(om.MFnDependencyNode):
 		"""A global scale factor that is applied to all the values."""
 	@envelope.setter
 	def envelope(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnGeometryFilter functionset."""
+	@overload
+	def __init__(self,MObject:Any)->None:
+		"""Initializes a new MFnGeometryFilter functionset and attaches it
+		to a geometryFilter node."""
 	def getInputGeometry(self)->om.MObjectArray:
 		"""getInputGeometry() -> MObjectArray
 
@@ -1032,9 +1046,9 @@ class MFnIkJoint(om.MFnTransform):
 	Initializes a new, empty MFnIKJoint object.
 
 	"""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def create(self,parent:Any=MObject.kNullObj)->Any:
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnIKJoint object."""
+	def create(self,parent:Any=om.MObject.kNullObj)->Any:
 		"""create(parent=MObject.kNullObj) -> new joint node MObject
 
 
@@ -1181,8 +1195,13 @@ class MFnSkinCluster(MFnGeometryFilter):
 	__init__(MObject)
 	Initializes a new MFnSkinCluster functionset and attaches it to
 	a skinCluster node."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnSkinCluster functionset."""
+	@overload
+	def __init__(self,MObject:Any)->None:
+		"""Initializes a new MFnSkinCluster functionset and attaches it to
+		a skinCluster node."""
 	def getBlendWeights(self,shape:om.MDagPath,components:om.MObject)->om.MDoubleArray:
 		"""getBlendWeights(shape, components) -> MDoubleArray
 
@@ -1410,8 +1429,13 @@ class MFnWeightGeometryFilter(MFnGeometryFilter):
 	__init__(MObject)
 	Initializes a new MFnWeightGeometryFilter functionset and attaches it
 	to a geometryFilter node."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	@overload
+	def __init__(self)->None:
+		"""Initializes a new, empty MFnWeightGeometryFilter functionset."""
+	@overload
+	def __init__(self,MObject:Any)->None:
+		"""Initializes a new MFnWeightGeometryFilter functionset and attaches it
+		to a geometryFilter node."""
 	@overload
 	def getWeights(self,index:Any,components:om.MObject)->om.MFloatArray:
 		"""getWeights(index, components) -> MFloatArray

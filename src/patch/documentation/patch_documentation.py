@@ -71,41 +71,74 @@ class Patch_Documentation(PatchBase):
                 property_.can_set = "w" in access
 
     def patch_init_method(self, class_: Class, method: Method, class_doc: parser.interface.Page):
-        if not class_doc.detailed_description:
-            return
-
-        for i, constructor in enumerate(class_doc.detailed_description.constructors):
-            if i > 0:
-                # Create a new overload method
-                new_method = Method(method.ref,
-                                    method.name,
-                                    return_type="None",
-                                    docstring=method.docstring,
-                                    deprecated=method.deprecated,
-                                    static=method.static)
-                method.overloads.append(new_method)
-            else:
-                new_method = method
-
-            new_method.docstring = constructor.description
-            new_method.return_type = "None"
-            new_method.parameters = []
-            
-            for param in constructor.parameters:
-                if " - " in param:
-                    param_name, _, param_type_desc = param.partition(" - ")
-                    param_type = convert_type.get_python_type_from_desc(param_type_desc)
+        if class_doc.detailed_description and class_doc.detailed_description.constructors:
+            for i, constructor in enumerate(class_doc.detailed_description.constructors):
+                if i > 0:
+                    # Create a new overload method
+                    new_method = Method(method.ref,
+                                        method.name,
+                                        return_type="None",
+                                        docstring=method.docstring,
+                                        deprecated=method.deprecated,
+                                        static=method.static)
+                    method.overloads.append(new_method)
                 else:
-                    param_name = param
-                    param_type = "Any"
+                    new_method = method
 
-                new_method.parameters.append(
-                    Parameter(
-                        name=param_name,
-                        type=param_type
+                new_method.docstring = constructor.description
+                new_method.return_type = "None"
+                new_method.parameters = []
+
+                for param in constructor.parameters:
+                    if " - " in param:
+                        param_name, _, param_type_desc = param.partition(" - ")
+                        param_type = convert_type.get_python_type_from_desc(param_type_desc)
+                    else:
+                        param_name = param
+                        param_type = "Any"
+
+                    new_method.parameters.append(
+                        Parameter(
+                            name=param_name,
+                            type=param_type
+                        )
                     )
-                )
+        elif class_.docstring:
+            for i, signature_str in enumerate(signature.extract_signatures_from_docstring(class_.docstring, method.name, stop_search_at_text=False)):
+                signature_info = signature.parse_signature(signature_str)
+                if i > 0:
+                    # Create a new overload method
+                    new_method = Method(method.ref,
+                                        method.name,
+                                        return_type="None",
+                                        docstring=method.docstring,
+                                        deprecated=method.deprecated,
+                                        static=method.static)
+                    method.overloads.append(new_method)
+                else:
+                    new_method = method
 
+                new_method.deprecated = signature_info.is_obsolete
+                new_method.return_type = "None"
+                new_method.parameters = []
+
+                before, _, after = class_.docstring.partition(signature_str.strip())
+                if after:
+                    new_method.docstring = after.partition('\n\n')[0].strip()
+
+                for param in signature_info.parameters:
+                    if param.param_type:
+                        param_type = convert_type.get_python_type_from_desc(param.param_type)
+                    else:
+                        param_type = "Any"
+
+                    new_method.parameters.append(
+                        Parameter(
+                            name=param.name,
+                            type=param_type,
+                            default=param.default,
+                        )
+                    )
 
     def patch_builtin_method(self, class_: Class, method: Method, class_doc: parser.interface.Page):
         if method.name == "__init__":
@@ -176,8 +209,7 @@ class Patch_Documentation(PatchBase):
 
             method.deprecated = signature_info.is_obsolete
 
-            if signature_info.return_type:
-                method.return_type = convert_type.get_python_type_from_desc(signature_info.return_type)
+            method.return_type = convert_type.get_python_type_from_desc(signature_info.return_type or "None")
 
             method.parameters = []
             for param in signature_info.parameters:
@@ -190,10 +222,17 @@ class Patch_Documentation(PatchBase):
                     if new_type := signature.extract_param_type_from_docstring(param.name, desc):
                         param_type = convert_type.get_python_type_from_desc(new_type)
 
+                default = None
+                if param.default:
+                    if ":" in param.default:
+                        default = "..."
+                    else:
+                        default = param.default
+
                 method.parameters.append(
                     Parameter(
                         name=param.name,
                         type=param_type,
-                        default=param.default,
+                        default=default,
                     )
                 )

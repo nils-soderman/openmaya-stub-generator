@@ -147,7 +147,7 @@ class M3dView:
 
 		* buffer (bytearray) - OpenGl pick buffer
 		* size (int) - Buffer size"""
-	def beginXorDrawing(self,*args)->Any:
+	def beginXorDrawing(self,drawOrthographic:bool=True,disableDepthTesting:bool=True,lineWidth:float=1.0,stipplePattern:int=M3dView.kStippleNone,lineColor:om.MColor=Any,1:Any,12:Any)->None:
 		"""beginXorDrawing(drawOrthographic=True, disableDepthTesting=True, lineWidth=1.0, stipplePattern=kStippleNone, lineColor=MColor(1, 1, 1)) -> self
 
 		Setup the context for exclusive-or (XOR) drawing.
@@ -500,7 +500,7 @@ class M3dView:
 		* y  (int) - Start position y to read.
 		* width (int) - Number of pixels in x to read.
 		* height (int) - Number of pixels in y to read."""
-	def readColorBuffer(self,image:om.MImage,readRGBA:bool=False)->Self:
+	def readColorBuffer(self,*args)->Any:
 		"""(Deprecated: Please use MHWRender::MRenderTargetManager::acquireRenderTarget() instead.)readColorBuffer(image, readRGBA=False) -> self
 
 		Read the RGB values from the frame buffer for a given view.
@@ -508,7 +508,7 @@ class M3dView:
 
 		* image (MImage) - The image contains the frame buffer pixels.
 		* readRGBA (bool) - Read the image back in RGBA format. By default the format is BGRA."""
-	def readDepthMap(self,x:int,y:int,width:int,heigth:Any,bufferPtr:bytearray,depthMapPrecision:int)->Self:
+	def readDepthMap(self,*args)->Any:
 		"""(Deprecated: Please use MHWRender::MRenderTargetManager::acquireRenderTarget() instead.) readDepthMap(x, y, width, heigth, bufferPtr, depthMapPrecision) -> self
 
 		Read the depth values from the frame buffer for a given view.
@@ -1117,7 +1117,7 @@ class MEvent:
 
 
 		Returns a tuple containing the x and y position of the event."""
-	def mouseButton(self)->None:
+	def mouseButton(self)->mouseButtonType:
 		"""mouseButton() -> mouseButtonType
 
 		Get the mouse button of the last event.
@@ -2364,8 +2364,8 @@ class MPanelCanvas:
 	kGraphEditorRetimeToolText:int=5000
 	kGraphEditorLastDefaultDraw:int=10000
 	kGraphEditorOverlayTexture:int=10000
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self)->None:
+		"""Initializes a new MPanelCanvas."""
 	def addPrimitive(self,int:int,int2:int)->None:
 		"""addPrimitive( int, int )
 
@@ -2477,8 +2477,8 @@ class MPanelCanvasInfo:
 
 	__init__()
 	Initializes a new MPanelCanvasInfo."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self)->None:
+		"""Initializes a new MPanelCanvasInfo."""
 	def getViewportBounds(self)->None:
 		"""getViewportBounds()
 
@@ -2934,27 +2934,7 @@ class MPxContext:
 		registered along with the context command in.
 
 		Returns a new instance of the MPxToolCommand."""
-	@overload
 	def stringClassName(self)->str:
-		"""stringClassName() -> string
-
-		This method is called to determine the name that uniquely identifies
-		the context.  Either this method, or the getClassName method, should
-		be overridden such that the name is set to the appropriate string.
-		For example:
-
-		def stringClassName(self)
-		    return 'exampleTool'
-
-		This name is used by Maya to call the appropriate
-		tool property sheet MEL scripts, specifically:
-		    <b>name</b>Properties.mel
-		    <b>name</b>Values.mel
-		If this method is not overriden, by default it will set
-		the string to 'defaultTool'.  The method returns a string
-		that uniquely identifies the context."""
-	@overload
-	def stringClassName(self,self:Any)->None:
 		"""stringClassName() -> string
 
 		This method is called to determine the name that uniquely identifies
@@ -3004,19 +2984,7 @@ class MPxContextCommand:
 		parser method.
 		If the command is called with both the edit flag and
 		the query flag, then the query flag will be ignored."""
-	@overload
 	def makeObj(self)->MPxContext:
-		"""makeObj() -> MPxContext
-
-		This function is used to instantiate a proxy context.
-		In your derived class, declare this function:
-
-		def makeObj(self)
-		    return userContextClass()
-
-		where userContextClass is derived from MPxContext."""
-	@overload
-	def makeObj(self,self:Any)->None:
 		"""makeObj() -> MPxContext
 
 		This function is used to instantiate a proxy context.
