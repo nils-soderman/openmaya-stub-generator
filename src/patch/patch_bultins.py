@@ -21,12 +21,14 @@ RETURN_TYPES = {
     "clear": "None",
     "insert": "None",
     "remove": "None",
+    "__neg__": "Self"
 }
 
 PARAMETERS = {
     "__len__": [],
     "__iter__": [],
     "__next__": [],
+    "__neg__": [],
     "__ge__": ["other"],
     "__gt__": ["other"],
     "__le__": ["other"],
