@@ -6573,13 +6573,13 @@ class MFnMesh(MFnDagNode):
 	def __init__(self,MDagPath:Any)->None:
 		"""Returns a new MFnMesh object attached to the given mesh node."""
 	@staticmethod
-	def autoUniformGridParams(arg)->MMeshIsectAccelParams:
+	def autoUniformGridParams()->MMeshIsectAccelParams:
 		"""Creates an object which specifies a uniform voxel grid structure which can be used by the intersection routines to speed up their operation. The number of voxel cells to use will be determined automatically based on the density of triangles in the mesh. The grid acceleration structure will be cached with the mesh, so that if the same MMeshIsectAccelParams configuration is used on the next intersect call, the acceleration structure will not need to be rebuilt."""
 	@staticmethod
-	def clearGlobalIntersectionAcceleratorInfo(arg)->Any:
+	def clearGlobalIntersectionAcceleratorInfo()->Any:
 		"""Clears the "total count", "total build time", and "peak memory" fields from the information string returned by globalIntersectionAcceleratorsInfo() . It will not cause information about currently existing accelerators to be lost."""
 	@staticmethod
-	def globalIntersectionAcceleratorsInfo(arg)->str:
+	def globalIntersectionAcceleratorsInfo()->str:
 		"""Returns a string that describes the systemwide resource usage for cached mesh intersection accelerators. The string will be of the following form: total 10 accelerators created (2 currently active - total current memory = 10000KB), total build time = 10.2s, peak memory = 14567.1KB This means that: a total of 10 intersection accelerators have been created as instructed by calls to closestIntersection() , allIntersections() , or anyIntersection() with non-NULL accelParams values. These structures are destroyed and re-created when intersection requests with differing acceleration parameters are passed in for the same mesh, so it is useful to see this value, which is the total count of how many have been created. In this case, 8 of the 10 created have been destroyed, either automatically or via calls to the freeCachedIntersectionAccelerator() method the total memory footprint for the 2 accelerators currently in existence is 10,000KB the total build time for all 10 structures that have been created is 10.2 seconds the peak of total memory usage for all accelerators in the system was 14567.1KB Calling clearGlobalIntersectionAcceleratorInfo() will clear the "total count", "total build time", and "peak memory" fields from this information. It will not cause information about currently existing accelerators to be lost."""
 	@staticmethod
 	def uniformGridParams(xDiv:int,yDiv:int,zDiv:int)->MMeshIsectAccelParams:
@@ -6623,9 +6623,9 @@ class MFnMesh(MFnDagNode):
 
 		Replaces this mesh's geometry with the result of a boolean operation
 		on the specified meshes."""
-	def cachedIntersectionAcceleratorInfo(self,arg)->str:
+	def cachedIntersectionAcceleratorInfo(self)->str:
 		"""Retrieves a string that describes the intersection acceleration structure for this object, if any. The string will be of the following form: 10x10x10 uniform grid, (build time 0.5s), (memory footprint 2000KB) It describes the configuration of the cached intersection accelerator, as well as how long it took to build it, and how much memory it is currently occupying. If the mesh has no cached intersection accelerator, the empty string is returned."""
-	def cleanupEdgeSmoothing(self,arg)->Self:
+	def cleanupEdgeSmoothing(self)->Self:
 		"""Updates the mesh after setEdgeSmoothing has been done. This should be called only once, after all the desired edges have been had their smoothing set. If you don't call this method, the normals may not be correct, and the object will look odd in shaded mode"""
 	@overload
 	def clearBlindData(self,compType:int)->Self:
@@ -6681,7 +6681,7 @@ class MFnMesh(MFnDagNode):
 		"""Extrude the given edges along a vector. The resulting mesh will have extra parallelograms coming out of the given edges and going to the new extruded edges. The length of the new polygon is determined by the length of the vector. The extrusionCount parameter is the number of subsequent extrusions per edges and represents the number of polygons that will be created from each given edge to the extruded edges."""
 	def extrudeFaces(self,faces:Sequence[int],extrusionCount:int=1,translation:MFloatVector|None=None,extrudeTogether:bool=True)->Self:
 		"""Extrude the given faces along a vector. The resulting mesh will have extra parallelograms coming out of the given faces and going to the new extruded faces. The length of the new polygon is determined by the length of the vector. The extrusionCount parameter is the number of subsequent extrusions per faces and represents the number of polygons that will be created from each given face to the extruded faces."""
-	def freeCachedIntersectionAccelerator(self,arg)->Self:
+	def freeCachedIntersectionAccelerator(self)->Self:
 		"""If the mesh has a cached intersection accelerator structure, then this routine forces it to be deleted. Ordinarily, these structures are cached so that series of calls to the closestIntersection() , allIntersections() , and anyIntersection() methods can reuse the same structure. Once the client is finished with these intersection operations, however, they are responsible for freeing the acceleration structure, which is what this method does."""
 	def generateSmoothMesh(self,parent:MObject=MObject.kNullObj,options:MMeshSmoothOptions|None=None)->MObject:
 		"""Creates a new polygonal mesh which is a smoothed version of the one to which the functionset is attached. If an options object is supplied it will be used to direct the smoothing operation, otherwise the mesh's Smooth Mesh Preview attributes will be used. If the parent is a kMeshData wrapper (e.g. from MFnMeshData.create() ) then a mesh data object will be created and returned. If the parent is a transform type node then a mesh node will be created and parented beneath it and the return value will be the mesh node. If the parent is any other type of node a TypeError will be raised. If no parent is provided then a transform node will be created and returned and a mesh node will be created and parented under the transform. Note that, unlike the create functions, this function does not set the functionset to operate on the new mesh, but leaves it attached to the original mesh."""
@@ -6739,17 +6739,17 @@ class MFnMesh(MFnDagNode):
 		"""Returns the Color Representation used by the specified color set."""
 	def getColors(self,colorSet:str='')->MColorArray:
 		"""Returns all of the colors in a colorSet. If no colorSet is specified then the default colorSet is used. Use the index returned by getColorIndex() to access the returned array."""
-	def getColorSetFamilyNames(self,arg)->tuple[str,...]:
+	def getColorSetFamilyNames(self)->tuple[str,...]:
 		"""Returns the names of all of the color set families on this object. A color set family is a set of per-instance sets with the same name with each individual set applying to one or more instances. A set which is shared across all instances will be the sole member of its family. Given a color set family name, getColorSetsInFamily() may be used to determine the names of the associated individual sets."""
-	def getColorSetNames(self,arg)->tuple[str,...]:
+	def getColorSetNames(self)->tuple[str,...]:
 		"""Returns the names of all the color sets on this object."""
 	def getColorSetsInFamily(self,familyName:str)->tuple[str,...]:
 		"""Returns the names of all of the color sets that belong to the specified family. Per-instance sets will have multiple sets in a family, with each individual set applying to one or more instances. A set which is shared across all instances will be the sole member of its family and will share the same name as its family."""
 	def getConnectedShaders(self,instance:int)->tuple[MObjectArray,MIntArray]:
 		"""Returns a tuple containing an array of shaders (sets) and an array of ints mapping the mesh's polygons onto those shaders. For each polygon in the mesh there will be corresponding value in the second array. If it is -1 that means that the polygon is not assigned to a shader, otherwise it indicates the index into the first array of the shader to which that polygon is assigned. This method will only work if the functionset is attached to a mesh node. It will raise RuntimeError if the functionset is attached to mesh data."""
-	def getCreaseEdges(self,arg)->tuple[MUintArray,MDoubleArray]:
+	def getCreaseEdges(self)->tuple[MUintArray,MDoubleArray]:
 		"""Returns a tuple containing two arrays. The first contains the mesh-relative/global IDs of the mesh's creased edges and the second contains the associated crease data. Please note that to make effective use of the creasing variable in software outside of Maya may require a license under patents owned by Pixar(R)."""
-	def getCreaseVertices(self,arg)->tuple[MUintArray,MDoubleArray]:
+	def getCreaseVertices(self)->tuple[MUintArray,MDoubleArray]:
 		"""Returns a tuple containing two arrays. The first contains the mesh-relative/global IDs of the mesh's creased vertices and the second contains the associated crease data. Please note that to make effective use of the creasing variable in software outside of Maya may require a license under patents owned by Pixar(R)."""
 	@overload
 	def getDoubleBlindData(self,compId:int,compType:int,blindDataId:int,attr:str)->float:
@@ -6789,7 +6789,7 @@ class MFnMesh(MFnDagNode):
 		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "float" type."""
 	def getFloatPoints(self,space:int=MSpace.kObject)->MFloatPointArray:
 		"""Returns a copy of the mesh's vertex positions as an MFloatPointArray ."""
-	def getHoles(self,arg)->tuple[tuple[face,tuple[v1,...]],...]:
+	def getHoles(self)->tuple[tuple[face,tuple[v1,...]],...]:
 		"""Returns a tuple describing the holes in the mesh. Each element of the tuple is itself a tuple. The first element of the sub-tuple is the integer ID of the face in which the hole occurs. The second element of the sub-tuple is another tuple containing the mesh-relative/global IDs of the vertices which make up the hole. Take the following return value as an example: ((3, (7, 2, 6)), (5, (11, 10, 3, 4))) This says that the mesh has two holes. The first hole is in face 3 and consists of vertices 7, 2 and 6. The second hole is in face 5 and consists of vertices 11, 10, 3 and 4."""
 	@overload
 	def getIntBlindData(self,compId:int,compType:int,blindDataId:int,attr:str)->int:
@@ -6797,9 +6797,9 @@ class MFnMesh(MFnDagNode):
 	@overload
 	def getIntBlindData(self,compType:int,blindDataId:int,attr:str)->tuple[MIntArray,MIntArray]:
 		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "int" type."""
-	def getInvisibleFaces(self,arg)->MUintArray:
+	def getInvisibleFaces(self)->MUintArray:
 		"""Returns the invisible faces of the mesh. Invisible faces are like lightweight holes in that they are not rendered but do not require additional geometry the way that holes do. They have the advantage over holes that if the mesh is smoothed then their edges will be smoothed as well, while holes will retain their hard edges. Invisible faces can be set using the setInvisibleFaces() method or the polyHole command."""
-	def getNormalIds(self,arg)->tuple[MIntArray,MIntArray]:
+	def getNormalIds(self)->tuple[MIntArray,MIntArray]:
 		"""Returns the normal IDs for all of the mesh's polygons as a tuple of two int arrays. The first array contains the number of vertices for each polygon and the second contains the normal IDs for each polygon-vertex. These IDs can be used to index into the array returned by getNormals() ."""
 	def getNormals(self,space:int=MSpace.kObject)->MFloatVectorArray:
 		"""Returns a copy of the mesh's normals. The normals are the per-polygon per-vertex normals. To find the normal for a particular vertex-face, use getFaceNormalIds() to get the index into the array. This method is not threadsafe."""
@@ -6823,7 +6823,7 @@ class MFnMesh(MFnDagNode):
 		"""Returns the ID of the UV at a specified vertex of a specified polygon. This method is not threadsafe."""
 	def getPolygonVertices(self,polygonId:int)->MIntArray:
 		"""Returns the mesh-relative/global vertex IDs the specified polygon. These IDs can be used to index into the arrays returned by getPoints() and getFloatPoints() ."""
-	def getSmoothMeshDisplayOptions(self,arg)->MMeshSmoothOptions:
+	def getSmoothMeshDisplayOptions(self)->MMeshSmoothOptions:
 		"""Returns the options currently in use when smoothing the mesh for display."""
 	@overload
 	def getStringBlindData(self,compId:int,compType:int,blindDataId:int,attr:str)->str:
@@ -6835,7 +6835,7 @@ class MFnMesh(MFnDagNode):
 		"""Returns the ID of the tangent for a given face and vertex."""
 	def getTangents(self,space:int=MSpace.kObject,uvSet:str='')->MFloatVectorArray:
 		"""Return the tangent vectors for all face vertices. The tangent is defined as the surface tangent of the polygon running in the U direction defined by the uv map. This method is not threadsafe."""
-	def getTriangles(self,arg)->tuple[MIntArray,MIntArray]:
+	def getTriangles(self)->tuple[MIntArray,MIntArray]:
 		"""Returns a tuple describing the mesh's triangulation. The first element of the tuple is an array giving the number of triangles for each of the mesh's polygons. The second tuple gives the ids of the vertices of all the triangles."""
 	def getUV(self,uvId:int,uvSet:str='')->tuple[float,float]:
 		"""Returns a tuple containing the u and v values of the specified UV."""
@@ -6843,9 +6843,9 @@ class MFnMesh(MFnDagNode):
 		"""Returns a tuple containing the u and v coordinates of the point on the mesh closest to the given point, and the ID of the face containing that closest point. This method is not threadsafe."""
 	def getUVs(self,uvSet:str='')->tuple[MFloatArray,MFloatArray]:
 		"""Returns a tuple containing an array of U values and an array of V values, representing all of the UVs for the given UV set."""
-	def getUVSetFamilyNames(self,arg)->tuple[str,...]:
+	def getUVSetFamilyNames(self)->tuple[str,...]:
 		"""Returns the names of all of the uv set families on this object. A uv set family is a set of per-instance sets with the same name with each individual set applying to one or more instances. A set which is shared across all instances will be the sole member of its family. Given a uv set family name, getUVSetsInFamily() may be used to determine the names of the associated individual sets."""
-	def getUVSetNames(self,arg)->tuple[str,...]:
+	def getUVSetNames(self)->tuple[str,...]:
 		"""Returns the names of all the uv sets on this object."""
 	def getUVSetsInFamily(self,familyName:str)->tuple[str,...]:
 		"""Returns the names of all of the uv sets that belong to the specified family. Per-instance sets will have multiple sets in a family, with each individual set applying to one or more instances. A set which is shared across all instances will be the sole member of its family and will share the same name as its family."""
@@ -6864,7 +6864,7 @@ class MFnMesh(MFnDagNode):
 		"""Returns the normal at the given vertex. The returned normal is a single per-vertex normal, so unshared normals at a vertex will be averaged. If angleWeighted is set to true, the normals are computed by an average of surrounding face normals weighted by the angle subtended by the face at the vertex. If angleWeighted is set to false, a simple average of surround face normals is returned. The simple average evaluation is significantly faster than the angle-weighted average. This method is not threadsafe."""
 	def getVertexNormals(self,angleWeighted:bool,space:int=MSpace.kObject)->MFloatVectorArray:
 		"""Returns all the vertex normals. The returned normals are per-vertex normals, so unshared normals at a vertex will be averaged. If angleWeighted is set to True, the normals are computed by an average of surrounding face normals weighted by the angle subtended by the face at the vertex. If angleWeighted is set to false, a simple average of surround face normals is returned. The simple average evaluation is significantly faster than the angle-weighted average. This method is not threadsafe."""
-	def getVertices(self,arg)->tuple[MIntArray,MIntArray]:
+	def getVertices(self)->tuple[MIntArray,MIntArray]:
 		"""Returns the mesh-relative/global vertex IDs for all of the mesh's polygons as a tuple of two int arrays. The first array contains the number of vertices for each polygon and the second contains the mesh-relative IDs for each polygon-vertex. These IDs can be used to index into the arrays returned by getPoints() and getFloatPoints() ."""
 	def getTriangleOffsets(self)->tuple[MIntArray,MIntArray]:
 		"""getTriangleOffsets() -> (MIntArray, MIntArray)
@@ -7037,13 +7037,13 @@ class MFnMesh(MFnDagNode):
 		"""Subdivides edges at regular intervals. For example, if numDivisions is 2 then two equally-spaced vertices will be added to each of the specified edges: one 1/3 of the way along the edge and a second 2/3 of the way along the edge."""
 	def subdivideFaces(self,faces:Sequence[int],numDivisions:int)->Self:
 		"""Subdivides each specified face into a grid of smaller faces. Triangles are subdivided into a grid of smaller triangles and quads are subdivided into a grid of smaller quads. Faces with more than four edges are ignored. The numDivisions parameter tells how many times to subdivide each edge of the face. Internal points and edges are introduced as needed to create a grid of smaller faces."""
-	def syncObject(self,arg)->Self:
+	def syncObject(self)->Self:
 		"""If a non-api operation happens that many have changed the underlying Maya object attached to this functionset, calling this method will make sure that the functionset picks up those changes. In particular this call should be used after calling mel commands which might affect the mesh. Note that this only applies when the functionset is attached to a mesh node. If it's attached to mesh data the it is not necessary to call this method."""
 	def unlockFaceVertexNormals(self,faceIds:Sequence[int],vertexIds:Sequence[int])->Self:
 		"""Unlocks the normals for the given face/vertex pairs."""
 	def unlockVertexNormals(self,vertexIdx:Sequence[int])->Self:
 		"""Unlocks the shared normals for the specified vertices."""
-	def updateSurface(self,arg)->Self:
+	def updateSurface(self)->Self:
 		"""Signal that this polygonal mesh has changed and needs to be redrawn."""
 class MFnMeshData(MFnGeometryData):
 	"""MFnMeshData allows the creation and manipulation of Mesh

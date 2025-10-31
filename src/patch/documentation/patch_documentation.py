@@ -171,7 +171,19 @@ class Patch_Documentation(PatchBase):
                 method.docstring = docstring
 
             method.parameters = []
-            for param_doc in data.get('parameters', []):
+
+            params_info = data.get('parameters', [])
+
+            # Check if the params is documented as "None."
+            # If so empty the params list
+            if len(params_info) == 1:
+                first_param_info = params_info[0]
+                if isinstance(first_param_info, parser.interface.Parameter):
+                    param_name_lower = first_param_info.name.lower()
+                    if param_name_lower.strip(".") == "none" and not first_param_info.type:
+                        params_info = []
+
+            for i, param_doc in enumerate(params_info):
                 if not isinstance(param_doc, parser.interface.Parameter):
                     raise TypeError("Expected Parameter instance")
 
