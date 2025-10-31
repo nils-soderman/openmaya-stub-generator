@@ -6,6 +6,7 @@ from .patch_safe_arg_name import Patch_SafeParameterName
 from .patch_static_self_return import Patch_StaticSelfReturn
 from .patch_default_value_enum import Patch_DefaultValueEnum
 from .patch_maya_types import Patch_MayaTypes
+from .patch_sequences import Patch_Sequences
 
 
 ALL_PATCHES = sorted(
@@ -18,6 +19,7 @@ ALL_PATCHES = sorted(
         Patch_StaticSelfReturn,
         Patch_DefaultValueEnum,
         Patch_MayaTypes,
+        Patch_Sequences,
     ],
     key=lambda x: x.ORDER
 )

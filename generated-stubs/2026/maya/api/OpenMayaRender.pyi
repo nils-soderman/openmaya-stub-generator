@@ -4,6 +4,7 @@ https://github.com/nils-soderman/openmaya-stub-generator
 """
 from __future__ import annotations
 
+import collections.abc
 import maya.api.OpenMaya as om
 from typing import Any, Self, Sequence, overload
 
@@ -7980,13 +7981,13 @@ class MVertexBuffer:
 		"""vertexCount() -> int
 
 		Get the size of the vertex buffer."""
-class MVertexBufferArray:
+class MVertexBufferArray(collections.abc.Sequence[MVertexBuffer]):
 	"""Array of Vertex buffers."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MVertexBuffer:
 		"""Return self[key]."""
 	def append(self,MVertexBuffer:Any,name:Any)->Self:
 		"""append(MVertexBuffer, name) -> self

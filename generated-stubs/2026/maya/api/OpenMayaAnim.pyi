@@ -4,8 +4,9 @@ https://github.com/nils-soderman/openmaya-stub-generator
 """
 from __future__ import annotations
 
+import collections.abc
 import maya.api.OpenMaya as om
-from typing import Any, Callable, Self, overload
+from typing import Any, Callable, Self, Sequence, overload
 
 class MAnimControl:
 	"""Control over animation playback and values"""
@@ -306,7 +307,7 @@ class MAnimCurveClipboardItem:
 		"""animCurveType() -> MFnAnimCurve.AnimCurveType
 
 		Returns the type of the item's anim curve."""
-class MAnimCurveClipboardItemArray:
+class MAnimCurveClipboardItemArray(collections.abc.Sequence[MAnimCurveClipboardItem]):
 	"""Array of MAnimCurveClipboardItem values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -317,9 +318,9 @@ class MAnimCurveClipboardItemArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MAnimCurveClipboardItem:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MAnimCurveClipboardItem)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""

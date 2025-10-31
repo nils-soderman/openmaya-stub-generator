@@ -2,7 +2,8 @@ from . import stub_types
 
 
 BUILTIN_MODULES = {
-    "sys.": "import sys"
+    "sys.": "import sys",
+    "collections.abc.": "import collections.abc",
 }
 
 MAYA_MODULES = {

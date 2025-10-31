@@ -4,9 +4,10 @@ https://github.com/nils-soderman/openmaya-stub-generator
 """
 from __future__ import annotations
 
+import collections.abc
 import maya.api.OpenMaya as om
 import maya.api.OpenMayaRender as omr
-from typing import Any, Callable, Self, overload
+from typing import Any, Callable, Self, Sequence, overload
 
 class M3dView:
 	"""M3dView provides methods for working with 3D model views."""
@@ -2272,7 +2273,7 @@ class MMaterial:
 		  kSpecularColor       Blinn and Phong(E) only
 		  kReflectivity        Blinn and Phong(E) only
 		  kReflectedColor      Blinn and Phong(E) only"""
-class MMaterialArray:
+class MMaterialArray(collections.abc.Sequence[MMaterial]):
 	"""An array of MMaterial."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -2283,7 +2284,7 @@ class MMaterialArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MMaterial:
 		"""Return self[key]."""
 	def append(self,element:MMaterial)->Self:
 		"""append(element) -> self

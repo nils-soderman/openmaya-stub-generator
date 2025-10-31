@@ -4,6 +4,7 @@ https://github.com/nils-soderman/openmaya-stub-generator
 """
 from __future__ import annotations
 
+import collections.abc
 import sys
 from typing import Any, Callable, Literal, Self, Sequence, overload
 
@@ -469,7 +470,7 @@ class MAttributeSpec:
 		Copy data from source specification.
 
 		* source (MAttributeSpec) - The source specification to copy from"""
-class MAttributeSpecArray:
+class MAttributeSpecArray(collections.abc.Sequence[MAttributeSpec]):
 	"""Array of MAttributeSpec values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -480,9 +481,9 @@ class MAttributeSpecArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MAttributeSpec:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MAttributeSpec)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -571,7 +572,7 @@ class MCacheSchema:
 		"""reset()
 
 		Reset this schema to the minimal."""
-class MCallbackIdArray:
+class MCallbackIdArray(collections.abc.Sequence[int]):
 	"""Array of MCallbackId values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -582,9 +583,9 @@ class MCallbackIdArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->int:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:int)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -636,7 +637,7 @@ class MCameraMessage(MMessage):
 		 * clientData - User defined data passed to the callback function
 
 		 * return: Identifier used for removing the callback."""
-class MColor:
+class MColor(collections.abc.Sequence[float]):
 	"""Manipulate color data."""
 	@property
 	def r(self)->float:
@@ -720,9 +721,9 @@ class MColor:
 		"""Divides the given MColor 's RGB values in-place by the float and returns a new reference to the given MColor . Alpha is unchanged."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -730,7 +731,7 @@ class MColor:
 		"""Returns a list containing the color's components, in the specified color model ."""
 	def setColor(self,components:Sequence[float],model:int=MColor.kRGB,dataType:int=MAttributeIndex.kFloat)->Self:
 		"""Sets the color. The interpretation of the parameters is the same as for the MColor(components,model,dataType) constructor."""
-class MColorArray:
+class MColorArray(collections.abc.Sequence[MColor]):
 	"""Array of MColor values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -741,9 +742,9 @@ class MColorArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MColor:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MColor)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -1941,7 +1942,7 @@ class MDagPath:
 		"""Replaces the current path held by this object with that of path ."""
 	def transform(self)->MObject:
 		"""Returns the last transform node on the path."""
-class MDagPathArray:
+class MDagPathArray(collections.abc.Sequence[MDagPath]):
 	"""Array of MDagPath values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -1952,9 +1953,9 @@ class MDagPathArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MDagPath:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MDagPath)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -2577,7 +2578,7 @@ class MDistance:
 		"""Returns the distance value, converted to kilometers."""
 	def asMeters(self)->float:
 		"""Returns the distance value, converted to meters."""
-class MDoubleArray:
+class MDoubleArray(collections.abc.Sequence[float]):
 	"""Array of double values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -2588,9 +2589,9 @@ class MDoubleArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -2618,7 +2619,7 @@ class MDoubleArray:
 		"""Remove an element from the array."""
 	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
-class MEulerRotation:
+class MEulerRotation(collections.abc.Sequence[float]):
 	"""X, Y and Z rotations, applied in a specified order."""
 	@property
 	def x(self)->float:
@@ -2712,9 +2713,9 @@ class MEulerRotation:
 		"""In-place multiplication by a scalar. Returns a new reference to the rotation."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -3138,7 +3139,7 @@ class MFileObject:
 		Set the unresolved URI of the MFileObject instance.
 
 		* uri (string or MURI) - The unresolved URI."""
-class MFloatArray:
+class MFloatArray(collections.abc.Sequence[float]):
 	"""Array of float values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -3149,9 +3150,9 @@ class MFloatArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -3179,7 +3180,7 @@ class MFloatArray:
 		"""Remove an element from the array."""
 	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
-class MFloatMatrix:
+class MFloatMatrix(collections.abc.Sequence[float]):
 	"""4x4 matrix with single-precision elements."""
 	__hash__:None=None
 	kTolerance:float=9.999999747378752e-06
@@ -3236,9 +3237,9 @@ class MFloatMatrix:
 		"""Multiplies all the elements of the matrix by the Float and returns a new reference to the matrix."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -3264,7 +3265,7 @@ class MFloatMatrix:
 		"""Returns the determinant of the 3x3 matrix formed by the first 3 elements of the first 3 rows of this matrix."""
 	def isEquivalent(self,other:MFloatMatrix,tol:float=MEulerRotation.kTolerance)->bool:
 		"""Inexact equality test. Returns True if each element of this matrix is within tolerance of the corresponding element of other ."""
-class MFloatPoint:
+class MFloatPoint(collections.abc.Sequence[float]):
 	"""3D point with single-precision coordinates."""
 	@property
 	def x(self)->float:
@@ -3345,9 +3346,9 @@ class MFloatPoint:
 		"""Return value/self."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -3361,7 +3362,7 @@ class MFloatPoint:
 		"""Returns the distance between this point and other ."""
 	def isEquivalent(self,other:MFloatPoint,tol:float=MEulerRotation.kTolerance)->bool:
 		"""Returns True if the coordinates of this point and other are equal to within a tolerance of tol ."""
-class MFloatPointArray:
+class MFloatPointArray(collections.abc.Sequence[MFloatPoint]):
 	"""Array of MFloatPoint values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -3372,9 +3373,9 @@ class MFloatPointArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MFloatPoint:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MFloatPoint)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -3402,7 +3403,7 @@ class MFloatPointArray:
 		"""Remove an element from the array."""
 	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
-class MFloatVector:
+class MFloatVector(collections.abc.Sequence[float]):
 	"""3D vector with single-precision coordinates."""
 	@property
 	def x(self)->float:
@@ -3503,9 +3504,9 @@ class MFloatVector:
 		"""Divides each component of the vector by scalar , which can be of any type which is convertable to float, and returns a new reference to the vector."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -3523,7 +3524,7 @@ class MFloatVector:
 		"""Returns True if this vector and other are within the given tolerance of being equal."""
 	def isParallel(self,other:MFloatVector,tolerance:float=MEulerRotation.kTolerance)->bool:
 		"""Returns True if this vector and other are within the given tolerance of being parallel."""
-class MFloatVectorArray:
+class MFloatVectorArray(collections.abc.Sequence[MFloatVector]):
 	"""Array of MFloatVector values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -3534,9 +3535,9 @@ class MFloatVectorArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MFloatVector:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MFloatVector)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -6143,15 +6144,15 @@ class MFnDisplayLayerManager(MFnDependencyNode):
 		"""getAncestorLayersInclusive(item) -> status
 		Finds the layers the item and it's ancestors are in, where item can be a Ufe
 		path string (MString) or a Maya object (MObject)."""
-class MFnDoubleArrayData(MFnData):
+class MFnDoubleArrayData(MFnData,collections.abc.Sequence[float]):
 	"""Function set for node data consisting of an array of doubles."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -6387,15 +6388,15 @@ class MFnGeometryData(MFnData):
 
 		Returns a component which is the result of the resolved componentTag expression
 		with the given key."""
-class MFnIntArrayData(MFnData):
+class MFnIntArrayData(MFnData,collections.abc.Sequence[int]):
 	"""Function set for node data consisting of an array of ints."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->int:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:int)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -6428,15 +6429,15 @@ class MFnLightDataAttribute(MFnAttribute):
 		"""Returns the specified child attribute."""
 	def create(self,longName:str,shortName:str,direction:MObject,intensity:MObject,ambient:MObject,diffuse:MObject,specular:MObject,shadowFraction:MObject,preShadowIntensity:MObject,blindData:MObject)->MObject:
 		"""Creates a new light data attribute having the child attributes provided, attaches it to the function set and returns it in an MObject ."""
-class MFnMatrixArrayData(MFnData):
+class MFnMatrixArrayData(MFnData,collections.abc.Sequence[MMatrix]):
 	"""Function set for node data consisting of an array of MMatrix."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MMatrix:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MMatrix)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -8648,15 +8649,15 @@ class MFnPluginData(MFnData):
 		Create an instance of the specified user defined data type and attach it to this functionset.
 
 		* id (MTypeId) - the unique MTypeId of the user defined data class derived from MPxData."""
-class MFnPointArrayData(MFnData):
+class MFnPointArrayData(MFnData,collections.abc.Sequence[MPoint]):
 	"""Function set for node data consisting of an array of MPoints."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MPoint:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MPoint)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -8894,15 +8895,15 @@ class MFnSingleIndexedComponent(MFnComponent):
 
 		Marks the component as complete (i.e. contains all possible elements).
 		numElements indicates the number of elements in the complete component."""
-class MFnStringArrayData(MFnData):
+class MFnStringArrayData(MFnData,collections.abc.Sequence[MString]):
 	"""Function set for node data consisting of an array of string."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MString:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MString)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -9120,15 +9121,15 @@ class MFnTypedAttribute(MFnAttribute):
 		"""Returns the type of data handled by the attribute."""
 	def create(self,longName:str,shortName:str,type:MTypeId|int,defaultValue:MObject=MObject.kNullObj)->MObject:
 		"""Creates a new attribute of the given type with the given longName , shortName and defaultValue , attaches it to the function set and returns it in an MObject ."""
-class MFnUInt64ArrayData(MFnData):
+class MFnUInt64ArrayData(MFnData,collections.abc.Sequence[MUInt64]):
 	"""Function set for node data consisting of an array of MUint64."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MUInt64:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MUInt64)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -9194,15 +9195,15 @@ class MFnUnitAttribute(MFnAttribute):
 		"""Sets the attribute's soft minimum to minValue ."""
 	def unitType(self)->int:
 		"""Returns the type of data handled by the attribute."""
-class MFnVectorArrayData(MFnData):
+class MFnVectorArrayData(MFnData,collections.abc.Sequence[MVector]):
 	"""Function set for node data consisting of an array of MVectors."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MVector:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MVector)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -10082,7 +10083,7 @@ class MImage:
 		Save the content of this image in a file. By default, the file is saved in IFF format.
 		Optionally, the file can also be converted in a variety of image formats.
 		If the writeDepth parameter is True then any depth information stored in MImage will be written to file."""
-class MInt64Array:
+class MInt64Array(collections.abc.Sequence[int]):
 	"""Array of MInt64 values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -10093,9 +10094,9 @@ class MInt64Array:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->int:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:int)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -10123,7 +10124,7 @@ class MInt64Array:
 		"""Remove an element from the array."""
 	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
-class MIntArray:
+class MIntArray(collections.abc.Sequence[int]):
 	"""Array of int values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -10134,9 +10135,9 @@ class MIntArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->int:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:int)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -12657,7 +12658,7 @@ class MLockMessage(MMessage):
 		 * clientData - User defined data passed to the callback function
 
 		 * return: Identifier used for removing the callback."""
-class MMatrix:
+class MMatrix(collections.abc.Sequence[float]):
 	"""4x4 matrix with double-precision elements."""
 	__hash__:None=None
 	kIdentity:MMatrix
@@ -12715,9 +12716,9 @@ class MMatrix:
 		"""Multiplies all the elements of the matrix by the float and returns a new reference to the matrix."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -12745,7 +12746,7 @@ class MMatrix:
 		"""Inexact equality test. Returns True if each element of this matrix is within tolerance of the corresponding element of other ."""
 	def isSingular(self)->bool:
 		"""Returns True if this matrix is singular."""
-class MMatrixArray:
+class MMatrixArray(collections.abc.Sequence[MMatrix]):
 	"""Array of MMatrix values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -12756,9 +12757,9 @@ class MMatrixArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MMatrix:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MMatrix)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -13564,7 +13565,7 @@ class MObject:
 		"""Returns True if the MObject is not referring to any Maya internal internal object (i.e. it is equivalent to kNullObj)."""
 	def apiType(self)->int:
 		"""Returns a constant indicating the type of the internal Maya object. If the MObject is null MFn.kInvalid will be returned."""
-class MObjectArray:
+class MObjectArray(collections.abc.Sequence[MObject]):
 	"""Array of MObject values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -13575,9 +13576,9 @@ class MObjectArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MObject:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MObject)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -13939,7 +13940,7 @@ class MPlug:
 		"""Sets the plug's value as a string."""
 	def isExactlyEqual(self,*args)->Any:
 		"""Returns true if both plugs refer to the same node, attribute and multi-index. If either or both plugs are null, the plugs are not considered equal."""
-class MPlugArray:
+class MPlugArray(collections.abc.Sequence[MPlug]):
 	"""Array of MPlug values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -13950,9 +13951,9 @@ class MPlugArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MPlug:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MPlug)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -13980,7 +13981,7 @@ class MPlugArray:
 		"""Remove an element from the array."""
 	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
-class MPoint:
+class MPoint(collections.abc.Sequence[float]):
 	"""3D point with double-precision coordinates."""
 	@property
 	def x(self)->float:
@@ -14061,9 +14062,9 @@ class MPoint:
 		"""Return value/self."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -14077,7 +14078,7 @@ class MPoint:
 		"""Returns the distance between this point and other ."""
 	def isEquivalent(self,other:MPoint,tol:float=MEulerRotation.kTolerance)->bool:
 		"""Returns True if the coordinates of this point and other are equal to within a tolerance of tol ."""
-class MPointArray:
+class MPointArray(collections.abc.Sequence[MPoint]):
 	"""Array of MPoint values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -14088,9 +14089,9 @@ class MPointArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MPoint:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MPoint)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -15473,7 +15474,7 @@ class MPxSurfaceShape(MPxNode):
 		Returns the attribute containing the shape's output geometry in world space.
 
 		This method must be overridden if the shape is to support deformers."""
-class MQuaternion:
+class MQuaternion(collections.abc.Sequence[float]):
 	"""Quaternion math."""
 	@property
 	def x(self)->float:
@@ -15550,9 +15551,9 @@ class MQuaternion:
 		"""In-place multiplication by another quaternion. Returns a reference to the left operand."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -16530,7 +16531,7 @@ class MTime:
 		"""Returns the number of ticks per second, the smallest unit of time available."""
 	def asUnits(self,unit:int)->float:
 		"""Returns the time value converted to the specified unit ."""
-class MTimeArray:
+class MTimeArray(collections.abc.Sequence[MTime]):
 	"""Array of MTime values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -16541,9 +16542,9 @@ class MTimeArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MTime:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MTime)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -16937,7 +16938,7 @@ class MURI:
 		"""clear() -> self
 
 		Clears the contents of the MURI object."""
-class MUint64Array:
+class MUint64Array(collections.abc.Sequence[int]):
 	"""Array of MUint64 values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -16948,9 +16949,9 @@ class MUint64Array:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->int:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:int)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -16978,7 +16979,7 @@ class MUint64Array:
 		"""Remove an element from the array."""
 	def setLength(self,*args)->Any:
 		"""Grow or shrink the array to contain a specific number of elements."""
-class MUintArray:
+class MUintArray(collections.abc.Sequence[int]):
 	"""Array of unsigned int values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -16989,9 +16990,9 @@ class MUintArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->int:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:int)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -17140,7 +17141,7 @@ class MUuid:
 		"""generate() -> self
 
 		Generate a new UUID."""
-class MVector:
+class MVector(collections.abc.Sequence[float]):
 	"""3D vector with double-precision coordinates."""
 	@property
 	def x(self)->float:
@@ -17245,9 +17246,9 @@ class MVector:
 		"""Divides each component of the vector by scalar , which can be of any type which is convertable to float, and returns a new reference to the vector."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->float:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:float)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -17273,7 +17274,7 @@ class MVector:
 		"""Returns a new vector containing the result of rotating this vector by angle radians about the specified axis ."""
 	def rotateTo(self,target:MVector)->MQuaternion:
 		"""Returns the quaternion which will rotate this vector into the target vector, about their mutually perpendicular axis."""
-class MVectorArray:
+class MVectorArray(collections.abc.Sequence[MVector]):
 	"""Array of MVector values."""
 	@property
 	def sizeIncrement(self)->Any:
@@ -17284,9 +17285,9 @@ class MVectorArray:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
+	def __getitem__(self,index:int)->MVector:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value)->None:
+	def __setitem__(self,index:int,value:MVector)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
