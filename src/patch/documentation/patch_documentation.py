@@ -172,6 +172,11 @@ class Patch_Documentation(PatchBase):
             if docstring := data.get('description'):
                 method.docstring = docstring
 
+            signature_info = None
+            signature_str = data.get('signature') or data.get('name')
+            if signature_str:
+                signature_info = signature.parse_signature(signature_str)
+
             method.parameters = []
 
             params_info = data.get('parameters', [])
@@ -189,11 +194,19 @@ class Patch_Documentation(PatchBase):
                 if not isinstance(param_doc, parser.interface.Parameter):
                     raise TypeError("Expected Parameter instance")
 
+                default = param_doc.default
+                if signature_info:
+                    if not default and i < len(signature_info.parameters):
+                        default = signature_info.parameters[i].default
+
+                if default:
+                    default = default.replace(" ", "")
+
                 method.parameters.append(
                     Parameter(
                         name=param_doc.name,
                         type=convert_type.get_python_type_from_desc(param_doc.type),
-                        default=param_doc.default,
+                        default=default,
                     )
                 )
 

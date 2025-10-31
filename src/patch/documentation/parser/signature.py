@@ -10,15 +10,14 @@ OBSOLETE_TAG = "[obsolete]"
 
 class SignatureParameter(typing.NamedTuple):
     name: str
-    default: str | None
-    return_type: str | None = None
     param_type: str | None = None
+    default: str | None = None
 
 
 class ParsedSignature(typing.NamedTuple):
     parameters: list[SignatureParameter]
     return_type: str | None
-    is_obsolete: bool
+    is_obsolete: bool = False
 
 
 def extract_signatures_from_docstring(docstring: str, function_name: str, stop_search_at_text: bool = True) -> list[str]:
@@ -168,7 +167,7 @@ def parse_signature(signature: str) -> ParsedSignature:
         if default.startswith("]"):
             default = default[1:].strip()
 
-        params.append(SignatureParameter(name=name.strip(), default=default.strip() or None, param_type=param_type))
+        params.append(SignatureParameter(name=name.strip(), param_type=param_type, default=default.strip() or None))
 
     return ParsedSignature(params, return_type or None, obsolete)
 

@@ -1,5 +1,5 @@
 
-from src.patch.documentation.parser.signature import extract_signatures_from_docstring
+from src.patch.documentation.parser.signature import extract_signatures_from_docstring, parse_signature, ParsedSignature, SignatureParameter
 
 
 def test_extract_signatures_from_docstring():
@@ -63,3 +63,14 @@ create(subCurves, parent=kNullObj) -> self"""
         "create(cvs, knots, degree, form, is2D, rational, parent=kNullObj)-> self",
         "create(subCurves, parent=kNullObj) -> self"
     ]
+
+
+def test_parse_signature():
+    result = parse_signature("reparentNode(node, newParent=MObject.kNullObj)")
+    assert result == ParsedSignature(
+        return_type=None,
+        parameters=[
+            SignatureParameter("node", None, None),
+            SignatureParameter("newParent", None, "MObject.kNullObj"),
+        ]
+    )
