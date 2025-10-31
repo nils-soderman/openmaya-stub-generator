@@ -6,7 +6,7 @@ from ...flags import Flags
 
 from ..base import PatchBase
 
-from . import parser, convert_type
+from . import parser, convert_type, operator_overloads
 from .parser import signature
 
 
@@ -143,6 +143,8 @@ class Patch_Documentation(PatchBase):
     def patch_builtin_method(self, class_: Class, method: Method, class_doc: parser.interface.Page):
         if method.name == "__init__":
             return self.patch_init_method(class_, method, class_doc)
+
+        operator_overloads.process_operator_overloads(class_, method, class_doc)
 
     def patch_method(self, class_: Class, method: Method, method_doc: parser.interface.MemItem):
         if method_doc.data:
