@@ -13,11 +13,13 @@ PRIMITIVE_TYPES = {"int", "float", "str", "bool", "list", "dict", "set", "tuple"
 TYPE_CONVERSION_MAPPING = {
     "short": "int",
     "function": "Callable",
+    "string": "str",
+    "index": "int",
+    "text": "str",
 }
 
 PATTERNS = (
     (re.compile(r".*name$", re.IGNORECASE), "str"),
-    (re.compile(r"^index$"), "int"),
 )
 
 PROPERTY_PATTERNS = (

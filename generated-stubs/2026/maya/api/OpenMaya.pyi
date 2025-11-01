@@ -2497,7 +2497,7 @@ class MDataHandle:
 		"""setShort(int) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setString(self,string:Any)->Self:
+	def setString(self,string:str)->Self:
 		"""setString(string) -> self
 
 		Set the data that this handle represents in the data block."""
@@ -9487,12 +9487,12 @@ class MGlobal:
 		responsible for maintaing the necessary information required for
 		undo, redo, and journaling."""
 	@staticmethod
-	def selectByName(string:Any,listAdjustment:int=MGlobal.kReplaceList)->None:
+	def selectByName(string:str,listAdjustment:int=MGlobal.kReplaceList)->None:
 		"""selectByName(string, listAdjustment=kReplaceList) -> None
 
 		Puts objects that match the give name on the active selection list."""
 	@staticmethod
-	def unselectByName(string:Any)->None:
+	def unselectByName(string:str)->None:
 		"""unselectByName(string) -> None
 
 		Removes objects matching the pattern from the active selection list."""
@@ -9603,7 +9603,7 @@ class MGlobal:
 
 		Delete the given dag node or dependency graph node."""
 	@staticmethod
-	def executeCommandOnIdle(string:Any,displayEnabled:bool=False)->None:
+	def executeCommandOnIdle(string:str,displayEnabled:bool=False)->None:
 		"""executeCommandOnIdle(string, bool displayEnabled=False) -> None
 
 		Sets a MEL command to execute on the next idle event. Since the command
@@ -9615,7 +9615,7 @@ class MGlobal:
 		process. Calling this method from a completely separate process will
 		not work and may lead to unpredictable behaviour."""
 	@staticmethod
-	def executeCommandOnIdleWithPriority(string:Any,priority:int,displayEnabled:bool=False)->None:
+	def executeCommandOnIdleWithPriority(string:str,priority:int,displayEnabled:bool=False)->None:
 		"""executeCommandOnIdleWithPriority(string, int priority, bool displayEnabled=False) -> None
 
 		Sets a MEL command to execute on the next idle event with the given priority.
@@ -9627,7 +9627,7 @@ class MGlobal:
 		process. Calling this method from a completely separate process will
 		not work and may lead to unpredictable behaviour."""
 	@staticmethod
-	def executeCommandStringResult(string:Any,displayEnabled:bool=False,undoEnabled:bool=False)->str|list[str]:
+	def executeCommandStringResult(string:str,displayEnabled:bool=False,undoEnabled:bool=False)->str|list[str]:
 		"""executeCommandStringResult(string, bool displayEnabled=False, bool undoEnabled=False) -> string or [string, string, ...]
 
 		Executes a MEL command that returns a string or an array of strings
@@ -9638,23 +9638,23 @@ class MGlobal:
 
 		Note: This is not thread safe; you may use executeCommandOnIdle instead"""
 	@staticmethod
-	def optionVarIntValue(string:Any)->int:
+	def optionVarIntValue(string:str)->int:
 		"""optionVarIntValue(string) -> int
 
 		This method is used to get the option variable value of int type"""
 	@staticmethod
-	def optionVarDoubleValue(string:Any)->float:
+	def optionVarDoubleValue(string:str)->float:
 		"""optionVarDoubleValue(string) -> double
 
 		This method is used to get the option variable value of type double"""
 	@staticmethod
-	def optionVarStringValue(string:Any)->str:
+	def optionVarStringValue(string:str)->str:
 		"""optionVarStringValue(string) -> MString
 
 		This method is used to get the option variable value of type string"""
 	@staticmethod
 	@overload
-	def setOptionVarValue(string:Any,int:int)->bool:
+	def setOptionVarValue(string:str,int:int)->bool:
 		"""setOptionVarValue(string, int) -> bool
 		setOptionVarValue(string name, double) -> bool
 		setOptionVarValue(string name, string) -> bool
@@ -9672,7 +9672,7 @@ class MGlobal:
 		This method is used to set the option variable value of int, bool, string type"""
 	@overload
 	@staticmethod
-	def setOptionVarValue(name:str,string:Any)->bool:
+	def setOptionVarValue(name:str,string:str)->bool:
 		"""setOptionVarValue(string, int) -> bool
 		setOptionVarValue(string name, double) -> bool
 		setOptionVarValue(string name, string) -> bool
@@ -9703,7 +9703,7 @@ class MGlobal:
 		and category."""
 	@overload
 	@staticmethod
-	def initOptionVar(name:str,string:Any,category:str)->bool:
+	def initOptionVar(name:str,string:str,category:str)->bool:
 		"""initOptionVar(string name, int, string category) -> bool
 		initOptionVar(string name, double, string category) -> bool
 		initOptionVar(string name, string, string category) -> bool
@@ -9713,12 +9713,12 @@ class MGlobal:
 		This method will create the option var if it doesn't exist and set the default value
 		and category."""
 	@staticmethod
-	def removeOptionVar(string:Any)->None:
+	def removeOptionVar(string:str)->None:
 		"""removeOptionVar(string) -> None
 
 		This method is used to remove the option variable"""
 	@staticmethod
-	def optionVarExists(string:Any)->bool:
+	def optionVarExists(string:str)->bool:
 		"""optionVarExists(string) -> bool
 
 		This method is used to check if the option variable exists"""
@@ -9743,7 +9743,7 @@ class MGlobal:
 		Determines the default path name of the error log file.
 		Returns an empty string on failure."""
 	@staticmethod
-	def setErrorLogPathName(string:Any)->None:
+	def setErrorLogPathName(string:str)->None:
 		"""setErrorLogPathName(string) -> None
 
 		Determines the default path name of the error log file.
@@ -9774,7 +9774,7 @@ class MGlobal:
 		that logging is enabled, but no other action is taken."""
 	@overload
 	@staticmethod
-	def startErrorLogging(string:Any)->None:
+	def startErrorLogging(string:str)->None:
 		"""startErrorLogging() -> None
 		startErrorLogging(string)
 
@@ -9804,7 +9804,7 @@ class MGlobal:
 		Note that if a log is reopened after it is closed, all information previously
 		logged to it is lost."""
 	@staticmethod
-	def doErrorLogEntry(string:Any)->bool:
+	def doErrorLogEntry(string:str)->bool:
 		"""doErrorLogEntry(string) -> bool
 
 		Logs an entry in the currently open log file.  It is not necessary for error
@@ -9830,7 +9830,7 @@ class MGlobal:
 		If set to true, it disables any attempts to change the visiblity of any window.
 		In addition, all popup windows will be supressed."""
 	@staticmethod
-	def sourceFile(string:Any)->None:
+	def sourceFile(string:str)->None:
 		"""sourceFile(string) -> None
 
 		Causes the MEL command engine to open the named file and execute
@@ -16856,43 +16856,43 @@ class MURI:
 		"""getQueryPairDelimiter() -> string
 
 		Returns the character used to delimit between key-value pairs in the query string of the URI."""
-	def setScheme(self,string:Any)->Self:
+	def setScheme(self,string:str)->Self:
 		"""setScheme(string) -> self
 
 		Sets the scheme component of the URI."""
-	def setPath(self,string:Any)->Self:
+	def setPath(self,string:str)->Self:
 		"""setPath(string) -> self
 
 		Sets the path component of the URI."""
-	def setFragment(self,string:Any)->Self:
+	def setFragment(self,string:str)->Self:
 		"""setFragment(string) -> self
 
 		Sets the fragment component of the URI."""
-	def setFileName(self,string:Any)->Self:
+	def setFileName(self,string:str)->Self:
 		"""setFileName(string) -> self
 
 		Sets just the filename portion of the URI (i.e. not including the directory)."""
-	def setDirectory(self,string:Any)->Self:
+	def setDirectory(self,string:str)->Self:
 		"""setDirectory(string) -> self
 
 		Sets just the directory portion of the URI (i.e. not including the filename)."""
-	def setAuthority(self,string:Any)->Self:
+	def setAuthority(self,string:str)->Self:
 		"""setAuthority(string) -> self
 
 		Set the authority portion of the URI."""
-	def setUserInfo(self,string:Any)->Self:
+	def setUserInfo(self,string:str)->Self:
 		"""setUserInfo(string) -> self
 
 		Decomposes the userInfo string to fill out the userInfo-related component values."""
-	def setUserName(self,string:Any)->Self:
+	def setUserName(self,string:str)->Self:
 		"""setUserName(string) -> self
 
 		Sets the user name part of the user info component."""
-	def setPassword(self,string:Any)->Self:
+	def setPassword(self,string:str)->Self:
 		"""setPassword(string) -> self
 
 		Sets the password part of the user info component."""
-	def setHost(self,string:Any)->Self:
+	def setHost(self,string:str)->Self:
 		"""setHost(string) -> self
 
 		Set the host component of the URI."""

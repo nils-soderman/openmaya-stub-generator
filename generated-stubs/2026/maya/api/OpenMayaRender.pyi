@@ -519,13 +519,13 @@ class MDrawContext(MFrameContext):
 		"""getPassContext() -> MPassContext
 
 		Access the current pass context."""
-	def copyCurrentColorRenderTarget(self,string:Any)->MRenderTarget:
+	def copyCurrentColorRenderTarget(self,string:str)->MRenderTarget:
 		"""copyCurrentColorRenderTarget(string) -> MRenderTarget
 
 		Get a copy of the current color render target.
 		When the object is no longer needed, MRenderTargetManager::releaseRenderTarget() should be called
 		to notify the target manager that the caller is done with the render target."""
-	def copyCurrentDepthRenderTarget(self,string:Any)->MRenderTarget:
+	def copyCurrentDepthRenderTarget(self,string:str)->MRenderTarget:
 		"""copyCurrentDepthRenderTarget(string) -> MRenderTarget
 
 		Get a copy of the current depth render target.
@@ -752,7 +752,7 @@ class MFragmentManager:
 		"""getIntermediateGraphOutputDirectory() -> string
 
 		Get the directory to be used for intermediate fragment graph output."""
-	def hasFragment(self,string:Any)->bool:
+	def hasFragment(self,string:str)->bool:
 		"""hasFragment(string) -> bool
 
 		Returns True if a fragment of the given name has been registered with the fragment manager."""
@@ -770,15 +770,15 @@ class MFragmentManager:
 		default Maya fragment is removed without replacing it.
 
 		Returns True if the fragment was successfuly removed from the fragment manager."""
-	def setEffectOutputDirectory(self,string:Any)->Self:
+	def setEffectOutputDirectory(self,string:str)->Self:
 		"""setEffectOutputDirectory(string) -> self
 
 		Set the path to use for dumping final effect files."""
-	def setIntermediateGraphOutputDirectory(self,string:Any)->Self:
+	def setIntermediateGraphOutputDirectory(self,string:str)->Self:
 		"""setIntermediateGraphOutputDirectory(string) -> self
 
 		Set the path to use for dumping intermediate fragment graph XML files."""
-	def addAutomaticShaderStageInput(self,int:int,string:Any,string2:Any,int2:int,bool:bool)->bool:
+	def addAutomaticShaderStageInput(self,int:int,string:str,string2:str,int2:int,bool:bool)->bool:
 		"""addAutomaticShaderStageInput(int, string, string, int, bool) -> bool
 
 		Add a parameter to the list of automatic input parameters for a specified
@@ -796,7 +796,7 @@ class MFragmentManager:
 		- semantic (string) - Semantic of the parameter
 		- parameterType (int) - Type of the parameter
 		- isVaryingInput (bool) - Whether or not the parameter is a varying input"""
-	def removeAutomaticShaderStageInput(self,int:int,string:Any)->bool:
+	def removeAutomaticShaderStageInput(self,int:int,string:str)->bool:
 		"""removeAutomaticShaderStageInput(int, string) -> bool
 
 		Remove a parameter from the list of automatic input parameters for a
@@ -808,7 +808,7 @@ class MFragmentManager:
 
 		- shaderStage (int) - Shader stage
 		- parameterName (string) - Name of the parameter"""
-	def addDomainShaderInputNameMapping(self,string:Any,string2:Any)->bool:
+	def addDomainShaderInputNameMapping(self,string:str,string2:str)->bool:
 		"""addDomainShaderInputNameMapping(string, string) -> bool
 
 		Add a mapping between a parameter name (realParamName) and a transient
@@ -823,7 +823,7 @@ class MFragmentManager:
 
 		- realParamName (string) - Real name of the parameter
 		- domainParamName (string) - Transient name of the parameter in domain shader"""
-	def removeDomainShaderInputNameMapping(self,string:Any)->bool:
+	def removeDomainShaderInputNameMapping(self,string:str)->bool:
 		"""removeDomainShaderInputNameMapping(string) -> bool
 
 		Remove a mapping between a parameter name (realParamName) and a transient
@@ -832,7 +832,7 @@ class MFragmentManager:
 		The method will fail if a mapping hasn't been added for realParamName yet.
 
 		- realParamName (string) - Real name of the parameter"""
-	def findDomainShaderInputName(self,string:Any)->str:
+	def findDomainShaderInputName(self,string:str)->str:
 		"""findDomainShaderInputName(string) -> string
 
 		Find the transient name which is used in domain shader.
@@ -840,7 +840,7 @@ class MFragmentManager:
 		Returns transient name of the parameter, or empty string on failure.
 
 		- realParamName (string) - Real name of the parameter"""
-	def getColorManagementFragmentInfo(self,string:Any)->Any:
+	def getColorManagementFragmentInfo(self,string:str)->Any:
 		"""getColorManagementFragmentInfo(string) -> tuple(string, string, string)
 
 		Returns the name and parameters of a shader fragment that converts a color from the
@@ -971,7 +971,7 @@ class MFrameContext:
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@staticmethod
-	def semanticToMatrixType(string:Any)->int:
+	def semanticToMatrixType(string:str)->int:
 		"""semanticToMatrixType(string) -> int
 
 		Given a semantic name return the corresponding matrix enumeration that can be used to retrieve a matrix value via the getMatrix() method.
@@ -1008,7 +1008,7 @@ class MFrameContext:
 		Return None if matrix type not available from MFrameContext.
 		For a list of matrix type, see MDrawContext.semanticToMatrixType() description."""
 	@staticmethod
-	def semanticToTupleType(string:Any)->int:
+	def semanticToTupleType(string:str)->int:
 		"""semanticToTupleType(string) -> int
 
 		Given a semantic name return the corresponding tuple enumeration that can be used to retrieve a value via the getTuple() method.
@@ -1539,7 +1539,7 @@ class MIndexBuffer:
 		* size (int) - The size of the buffer to acquire.
 		* writeOnly (bool) - Specified if the returned memory should be uninitialized or filled with actual buffer content.
 		                     When the current buffer content is not needed, it is preferable to set the writeOnly flag to true for better performance."""
-	def commit(self,long:Any)->Self:
+	def commit(self,long:int)->Self:
 		"""commit(long) -> self
 
 		Commit the data stored in the memory given by acquire() to the buffer.
@@ -1595,7 +1595,7 @@ class MIndexBuffer:
 		"""resourceHandle() -> long
 
 		Returns a long containing a C++ 'float' pointer which points to the graphics device dependent handle to the vertex indexing data."""
-	def setResourceHandle(self,long:Any,int:int)->Any:
+	def setResourceHandle(self,long:int,int:int)->Any:
 		"""setResourceHandle(long, int) -> selfset the graphics-device-dependent hardware buffer resource handle."""
 	def size(self)->int:
 		"""size() -> int
@@ -1820,7 +1820,7 @@ class MLightParameterInformation:
 		"""parameterList() -> list of string
 
 		Get the names of all light parameters that are accessible."""
-	def parameterType(self,string:Any)->int:
+	def parameterType(self,string:str)->int:
 		"""parameterType(string) -> int
 
 		Get the type of the named parameter, returns kInvalid if parameter is not found.
@@ -1836,7 +1836,7 @@ class MLightParameterInformation:
 		  MDrawContext.kFloat4x4Col    IEEE single precision floating point column-major matrix (4x4)
 		  MDrawContext.kTexture2       2D texture
 		  MDrawContext.kSampler        Sampler"""
-	def parameterSemantic(self,string:Any)->int:
+	def parameterSemantic(self,string:str)->int:
 		"""parameterSemantic(string) -> int
 
 		Get the stock semantic for a named parameter:
@@ -1865,7 +1865,7 @@ class MLightParameterInformation:
 		"""parameterNames(int) -> list of string
 
 		Get the name of all parameters on the light which are tagged with the stock semantic."""
-	def arrayParameterCount(self,string:Any)->int:
+	def arrayParameterCount(self,string:str)->int:
 		"""arrayParameterCount(string) -> int
 
 		Return the array size of a parameter. If the parameter is not an array then a value of 0 is returned."""
@@ -1900,31 +1900,31 @@ class MLightParameterInformation:
 		Get parameter value by name or by semantic.
 		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
 	@overload
-	def getParameter(self,string:Any)->om.MIntArray:
+	def getParameter(self,string:str)->om.MIntArray:
 		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
 
 		Get parameter value by name or by semantic.
 		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
 	@overload
-	def getParameter(self,string:Any)->om.MFloatArray:
+	def getParameter(self,string:str)->om.MFloatArray:
 		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
 
 		Get parameter value by name or by semantic.
 		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
 	@overload
-	def getParameter(self,string:Any)->om.MMatrix:
+	def getParameter(self,string:str)->om.MMatrix:
 		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
 
 		Get parameter value by name or by semantic.
 		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
 	@overload
-	def getParameter(self,string:Any)->MSamplerStateDesc:
+	def getParameter(self,string:str)->MSamplerStateDesc:
 		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
 
 		Get parameter value by name or by semantic.
 		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
 	@overload
-	def getParameter(self,string:Any)->MTexture:
+	def getParameter(self,string:str)->MTexture:
 		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
 
 		Get parameter value by name or by semantic.
@@ -1936,7 +1936,7 @@ class MLightParameterInformation:
 		Get a resource handle for a texture parameter by name or by semantic.
 		Returns a long containing a C++ 'void' pointer which points to the resource handle."""
 	@overload
-	def getParameterTextureHandle(self,string:Any)->int:
+	def getParameterTextureHandle(self,string:str)->int:
 		"""getParameterTextureHandle(int) -> longgetParameterTextureHandle(string) -> long
 
 		Get a resource handle for a texture parameter by name or by semantic.
@@ -3781,7 +3781,7 @@ class MRenderItem:
 
 		Query the bit flag which is used in display filtering based on object types.
 		See setObjectTypeExclusionFlag() for details."""
-	def setObjectTypeExclusionFlag(self,long:Any)->Self:
+	def setObjectTypeExclusionFlag(self,long:int)->Self:
 		"""setObjectTypeExclusionFlag(long) -> self
 
 		Set a bit flag for use in display filtering based on object types. The
@@ -3965,7 +3965,7 @@ class MRenderParameters:
 	"""Base class for render operation functionsets."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def isArrayParameter(self,string:Any)->bool:
+	def isArrayParameter(self,string:str)->bool:
 		"""isArrayParameter(string) -> bool
 
 		Determine whether the named parameter is an array."""
@@ -3973,11 +3973,11 @@ class MRenderParameters:
 		"""parameterList() -> list of string
 
 		Get the names of all parameters that are settable on this shader instance."""
-	def parameterType(self,string:Any)->int:
+	def parameterType(self,string:str)->int:
 		"""parameterType(string) -> int
 
 		Get the type of the named parameter, returns kInvalid if parameter is not found."""
-	def semantic(self,string:Any)->str:
+	def semantic(self,string:str)->str:
 		"""semantic(string) -> string
 
 		Return the semantic for a named parameter."""
@@ -4381,7 +4381,7 @@ class MRenderTarget:
 		* rowPitch [OUT] (int) - The row pitch of the data. It represents the number of bytes of one line of the target data.
 		* slicePitch [OUT] (int) - The slice pitch of the data. It represents the number of bytes of the whole target data."""
 	@staticmethod
-	def freeRawData(long:Any)->None:
+	def freeRawData(long:int)->None:
 		"""freeRawData(long) -> None
 		Deallocate system memory - retrieved from rawData()."""
 class MRenderTargetAssignment:
@@ -4429,7 +4429,7 @@ class MRenderTargetDescription:
 		"""allowsUnorderedAccess() -> bool
 
 		Query whether unordered access is supported."""
-	def setName(self,string:Any)->Self:
+	def setName(self,string:str)->Self:
 		"""setName(string) -> self
 
 		Set name of the target."""
@@ -4474,7 +4474,7 @@ class MRenderTargetManager:
 		Acquire an instance of a render target.
 		When the object is no longer needed, releaseRenderTarget() should be called
 		to notify the target manager that the caller is done with the render target."""
-	def acquireRenderTargetFromScreen(self,string:Any)->MRenderTarget:
+	def acquireRenderTargetFromScreen(self,string:str)->MRenderTarget:
 		"""acquireRenderTargetFromScreen(string) -> MRenderTarget
 		Acquire an instance of a render target with the same characteristics as the current on-screen target.
 		When the object is no longer needed, releaseRenderTarget() should be called
@@ -4795,7 +4795,7 @@ class MRenderer:
 
 		Returns the version of drawing API."""
 	@staticmethod
-	def findRenderOverride(string:Any)->MRenderOverride:
+	def findRenderOverride(string:str)->MRenderOverride:
 		"""findRenderOverride(string) -> MRenderOverride
 
 		Returns a reference to an existing render override registered with the renderer."""
@@ -4890,7 +4890,7 @@ class MRenderer:
 
 		Notify the Viewport 2.0 renderer that something has changed which requires re-evaluation of lighting and shadows."""
 	@staticmethod
-	def setRenderOverrideName(string:Any)->bool:
+	def setRenderOverrideName(string:str)->bool:
 		"""setRenderOverrideName(string) -> bool
 
 		Set the name of a render override (MRenderOverride) for batch rendering."""
@@ -5516,11 +5516,11 @@ class MShaderInstance:
 		"""getPassCount(MDrawContext) -> int
 		Returns the number of draw passes defined by the shader.
 		None if the shader instance or draw context was invalid."""
-	def isArrayParameter(self,string:Any)->bool:
+	def isArrayParameter(self,string:str)->bool:
 		"""isArrayParameter(string) -> bool
 
 		Determine whether the named parameter is an array."""
-	def getArraySize(self,string:Any)->int:
+	def getArraySize(self,string:str)->int:
 		"""getArraySize(string) -> int
 
 		Return the size of an array if it is an array. Returns 0 if it is not an array"""
@@ -5540,7 +5540,7 @@ class MShaderInstance:
 		"""parameterSemantic(parameterName) -> string
 
 		Returns the semantic associated to a named parameter."""
-	def parameterType(self,string:Any)->int:
+	def parameterType(self,string:str)->int:
 		"""parameterType(string) -> int
 
 		Get the type of the named parameter, returns kInvalid if parameter is not found."""
@@ -5568,11 +5568,11 @@ class MShaderInstance:
 		The resource name of a texture parameter can be specified in the effect file using the 'ResourceName' annotation.
 		It allows users to define a default texture using an external file.
 		If no resource was defined for a texture, this function returns an empty string."""
-	def semantic(self,string:Any)->str:
+	def semantic(self,string:str)->str:
 		"""semantic(string) -> string
 
 		Return the semantic for a named parameter."""
-	def isVaryingParameter(self,string:Any)->bool:
+	def isVaryingParameter(self,string:str)->bool:
 		"""isVaryingParameter(string) -> bool
 
 		Return the true if a named parameter's values vary per vertex."""
@@ -5616,11 +5616,11 @@ class MShaderInstance:
 		"""setAsVarying(parameterName, bool) -> self
 
 		Set whether the named parameter's values will vary per vertex."""
-	def setSemantic(self,parameterName:str,string:Any)->Self:
+	def setSemantic(self,parameterName:str,string:str)->Self:
 		"""setSemantic(parameterName, string) -> self
 
 		Set the semantic of a named parameter."""
-	def renameParameter(self,parameterName:str,string:Any)->Self:
+	def renameParameter(self,parameterName:str,string:str)->Self:
 		"""renameParameter(parameterName, string) -> self
 
 		Rename a named parameter."""
@@ -5837,11 +5837,11 @@ class MShaderManager:
 	k3dCPVShader:int=4
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addShaderIncludePath(self,string:Any)->Self:
+	def addShaderIncludePath(self,string:str)->Self:
 		"""addShaderIncludePath(string) -> self
 
 		Add a path to the list of paths used for searching for shader include files."""
-	def addShaderPath(self,string:Any)->Self:
+	def addShaderPath(self,string:str)->Self:
 		"""addShaderPath(string) -> self
 
 		Add a path to the list of shader search paths."""
@@ -5949,7 +5949,7 @@ class MShaderManager:
 		  k3dFloat3NumericShader          An instance of a stock shader for drawing 3 float values per vertex for 3d rendering.
 		  k3dPointVectorShader            An instance of a stock shader that can be used for 3d rendering of lines based on a point and a vector stream"""
 	@staticmethod
-	def isSupportedShaderSemantic(string:Any)->bool:
+	def isSupportedShaderSemantic(string:str)->bool:
 		"""isSupportedShaderSemantic(string) -> bool
 		Return if a given string is a supported shader semantic."""
 	def releaseShader(self,MShaderInstance:Any)->None:
@@ -6333,7 +6333,7 @@ class MTexture:
 		* rowPitch [OUT] (int) - The row pitch of the data. It represents the number of bytes of one line of the texture data.
 		* slicePitch [OUT] (int) - The slice pitch of the data. It represents the number of bytes of the whole texture data."""
 	@staticmethod
-	def freeRawData(long:Any)->None:
+	def freeRawData(long:int)->None:
 		"""freeRawData(long) -> None
 		Deallocate system memory - retrieved from rawData()."""
 	@overload
@@ -6474,7 +6474,7 @@ class MTextureManager:
 	"""Class which manages texture."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addImagePath(self,string:Any)->Self:
+	def addImagePath(self,string:str)->Self:
 		"""addImagePath(string) -> self
 
 		Adds an additional search path for looking up images on disk."""
@@ -6724,7 +6724,7 @@ class MTextureManager:
 		"""releaseTexture(MTexture) -> self
 
 		Deletes the MTexture and releases the reference to the underlying texture which is held by the MTexture object."""
-	def saveTexture(self,MTexture:Any,string:Any)->Self:
+	def saveTexture(self,MTexture:Any,string:str)->Self:
 		"""saveTexture(MTexture, string) -> self
 
 		Ask the renderer to save a hardware texture to disk."""
@@ -7307,7 +7307,7 @@ class MUIDrawManager:
 		         If the text draw is not changed frequently, we can leave it as default value false.
 		                        If the text draw is changing very often like it is showing some dynamic numbers,
 		         in this case making dynamic true will give better performance."""
-	def text2d(self,position:om.MPoint,text:Any,alignment:TextAlignment=MUIDrawManager.kLeft,backgroundSize:list[int]|None=None,backgroundColor:om.MColor|None=None,dynamic:bool=False)->Self:
+	def text2d(self,position:om.MPoint,text:str,alignment:TextAlignment=MUIDrawManager.kLeft,backgroundSize:list[int]|None=None,backgroundColor:om.MColor|None=None,dynamic:bool=False)->Self:
 		"""text2d(position, text, alignment=kLeft, backgroundSize=None, backgroundColor=None, dynamic=False) -> self
 
 		Draw a text on the screen.
@@ -7892,7 +7892,7 @@ class MVertexBuffer:
 		* size (int) - The size of the buffer to acquire.
 		* writeOnly (bool) - Specified if the returned memory should be uninitialized or filled with actual buffer content.
 		                     When the current buffer content is not needed, it is preferable to set the writeOnly flag to true for better performance."""
-	def commit(self,long:Any)->Self:
+	def commit(self,long:int)->Self:
 		"""commit(long) -> self
 
 		Commit the data stored in the memory given by acquire() to the buffer.
@@ -7947,7 +7947,7 @@ class MVertexBuffer:
 		"""resourceHandle() -> long
 
 		Returns a long containing a C++ 'float' pointer which points to the graphics device dependent handle to the vertex buffer."""
-	def setResourceHandle(self,long:Any,int:int)->Self:
+	def setResourceHandle(self,long:int,int:int)->Self:
 		"""setResourceHandle(long, int) -> self
 
 		Set the graphics-device-dependent hardware buffer resource handle."""
@@ -7997,7 +7997,7 @@ class MVertexBufferArray(collections.abc.Sequence[MVertexBuffer]):
 		"""clear() -> self
 
 		Clear the array."""
-	def getBuffer(self,string:Any)->MVertexBuffer:
+	def getBuffer(self,string:str)->MVertexBuffer:
 		"""getBuffer(string) -> MVertexBuffer
 
 		Get vertex buffer by name."""
