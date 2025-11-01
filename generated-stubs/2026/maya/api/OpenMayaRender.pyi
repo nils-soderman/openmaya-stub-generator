@@ -54,12 +54,12 @@ class MAttributeParameterMappingList:
 		"""clear() -> self
 
 		Clear all mappings from the list."""
-	def findByAttributeName(self,attributeName:Any)->MAttributeParameterMapping:
+	def findByAttributeName(self,attributeName:str)->MAttributeParameterMapping:
 		"""findByAttributeName(attributeName) -> MAttributeParameterMapping
 
 		Find a mapping by attribute name.
 		This will return the first mapping found with a matching attribute name."""
-	def findByParameterName(self,parameterName:Any)->MAttributeParameterMapping:
+	def findByParameterName(self,parameterName:str)->MAttributeParameterMapping:
 		"""findByParameterName(parameterName) -> MAttributeParameterMapping
 
 		Find a mapping by parameter name.
@@ -359,7 +359,7 @@ class MComponentDataIndexingList:
 		"""append(MComponentDataIndexing) -> bool
 
 		Add a MComponentDataIndexing to the list. Creates and stores a copy which is owned by the list."""
-	def remove(self,index:Any)->bool:
+	def remove(self,index:int)->bool:
 		"""remove(index) -> bool
 
 		Remove a MComponentDataIndexing from the list."""
@@ -544,7 +544,7 @@ class MDrawContext(MFrameContext):
 class MDrawRegistry:
 	"""Access the registry associating node types with custom draw classes"""
 	@staticmethod
-	def deregisterComponentConverter(renderItemName:Any)->None:
+	def deregisterComponentConverter(renderItemName:str)->None:
 		"""deregisterComponentConverter(renderItemName) -> None
 
 		Deregister an implementation of MPxComponentConverter."""
@@ -594,17 +594,17 @@ class MDrawRegistry:
 
 		Deregister an implementation of MPxSurfaceShadingNodeOverride."""
 	@staticmethod
-	def deregisterVertexBufferGenerator(bufferName:Any)->None:
+	def deregisterVertexBufferGenerator(bufferName:str)->None:
 		"""deregisterVertexBufferGenerator(bufferName) -> None
 
 		Deregister an implementation of MPxVertexBufferGenerator."""
 	@staticmethod
-	def deregisterVertexBufferMutator(bufferName:Any)->None:
+	def deregisterVertexBufferMutator(bufferName:str)->None:
 		"""deregisterVertexBufferMutator(bufferName) -> None
 
 		Deregister an implementation of MPxVertexBufferMutator."""
 	@staticmethod
-	def registerComponentConverter(renderItemName:Any,creator:Any)->None:
+	def registerComponentConverter(renderItemName:str,creator:Any)->None:
 		"""registerComponentConverter(renderItemName, creator) -> None
 
 		Register an implementation of MPxComponentConverter to use with render items that have the specified name."""
@@ -654,12 +654,12 @@ class MDrawRegistry:
 
 		Register an implementation of MPxSurfaceShadingNodeOverride to use with surface shaders that have the specified, draw-specific classification string."""
 	@staticmethod
-	def registerVertexBufferGenerator(bufferName:Any,creator:Any)->None:
+	def registerVertexBufferGenerator(bufferName:str,creator:Any)->None:
 		"""registerVertexBufferGenerator(bufferName, creator) -> None
 
 		Register an implementation of MPxVertexBufferGenerator to provide custom vertex streams for shapes."""
 	@staticmethod
-	def registerVertexBufferMutator(bufferName:Any,creator:Any)->None:
+	def registerVertexBufferMutator(bufferName:str,creator:Any)->None:
 		"""registerVertexBufferMutator(bufferName, creator) -> None
 
 		Register an implementation of MPxVertexBufferMutator to provide custom vertex streams for shapes."""
@@ -680,7 +680,7 @@ class MFragmentManager:
 		The fragment graph is defined as XML stored in a string buffer.Returns name of the registered fragment graph, or empty string on failure.
 
 		- buffer (string) - String containing an XML description of the fragment graph."""
-	def addFragmentGraphFromFile(self,fileName:Any)->str:
+	def addFragmentGraphFromFile(self,fileName:str)->str:
 		"""addFragmentGraphFromFile(fileName) -> string
 
 		Add a new fragment graph to the manager.
@@ -702,7 +702,7 @@ class MFragmentManager:
 		- buffer (string) - String containing an XML description of the fragment.
 		- hidden (bool) - If True, this fragment will not appear in the list returned by fragmentList()
 		                  and it will not be possible to query the XML for it using getFragmentXML()."""
-	def addShadeFragmentFromFile(self,fileName:Any,hidden:Any)->str:
+	def addShadeFragmentFromFile(self,fileName:str,hidden:Any)->str:
 		"""addShadeFragmentFromFile(fileName, hidden) -> string
 
 		Add a new fragment to the manager.
@@ -721,7 +721,7 @@ class MFragmentManager:
 
 		Get the directory to be used for effect file output."""
 	@overload
-	def getFragmentXML(self,fragmentName:Any)->str:
+	def getFragmentXML(self,fragmentName:str)->str:
 		"""getFragmentXML(fragmentName) -> string
 		getFragmentXML(shadingNode, includeUpstreamNodes=False, objectContext=None) -> string
 
@@ -756,7 +756,7 @@ class MFragmentManager:
 		"""hasFragment(string) -> bool
 
 		Returns True if a fragment of the given name has been registered with the fragment manager."""
-	def removeFragment(self,fragmentName:Any)->bool:
+	def removeFragment(self,fragmentName:str)->bool:
 		"""removeFragment(fragmentName) -> bool
 
 		Remove a named fragment or fragment graph from the fragment manager. This
@@ -1710,7 +1710,7 @@ class MIndexBufferDescriptorList:
 		"""clear() -> self
 
 		Clear the list."""
-	def remove(self,index:Any)->bool:
+	def remove(self,index:int)->bool:
 		"""remove(index) -> bool
 
 		Remove a descriptor from the list and delete it."""
@@ -3562,7 +3562,7 @@ class MRenderItem:
 
 		Get the shader used by this render item.
 		The return value may be None if no shader is set on the render item."""
-	def getShaderParameters(self,name:Any)->bool|int|float|tuple[float,...]:
+	def getShaderParameters(self,name:str)->bool|int|float|tuple[float,...]:
 		"""getShaderParameters(name) -> bool / int / float / tuple of floats
 
 		Get the value of a shader parameter.
@@ -3866,7 +3866,7 @@ class MRenderItemList:
 		See MRenderItem.type() for a list of valid render item types.
 		See MGeometry.primitiveString() for a list of valid primitive types.
 		See MGeometry.drawModeString() for a list of valid draw modes."""
-	def remove(self,index:Any)->bool:
+	def remove(self,index:int)->bool:
 		"""remove(index) -> bool
 
 		Remove the item at the specified index. Item is deleted."""
@@ -3982,7 +3982,7 @@ class MRenderParameters:
 
 		Return the semantic for a named parameter."""
 	@overload
-	def setArrayParameter(self,parameterName:Any,arg:Sequence[bool],int:int)->Self:
+	def setArrayParameter(self,parameterName:str,arg:Sequence[bool],int:int)->Self:
 		"""setArrayParameter(parameterName, sequence of bool, int) -> self
 		setArrayParameter(parameterName, sequence of int, int) -> self
 		setArrayParameter(parameterName, sequence of float, int) -> self
@@ -3990,7 +3990,7 @@ class MRenderParameters:
 
 		Set the value of a named array parameter."""
 	@overload
-	def setArrayParameter(self,parameterName:Any,arg:Sequence[int],int:int)->Self:
+	def setArrayParameter(self,parameterName:str,arg:Sequence[int],int:int)->Self:
 		"""setArrayParameter(parameterName, sequence of bool, int) -> self
 		setArrayParameter(parameterName, sequence of int, int) -> self
 		setArrayParameter(parameterName, sequence of float, int) -> self
@@ -3998,7 +3998,7 @@ class MRenderParameters:
 
 		Set the value of a named array parameter."""
 	@overload
-	def setArrayParameter(self,parameterName:Any,arg:Sequence[float],int:int)->Self:
+	def setArrayParameter(self,parameterName:str,arg:Sequence[float],int:int)->Self:
 		"""setArrayParameter(parameterName, sequence of bool, int) -> self
 		setArrayParameter(parameterName, sequence of int, int) -> self
 		setArrayParameter(parameterName, sequence of float, int) -> self
@@ -4006,7 +4006,7 @@ class MRenderParameters:
 
 		Set the value of a named array parameter."""
 	@overload
-	def setArrayParameter(self,parameterName:Any,arg:Sequence[om.MMatrix],int:int)->Self:
+	def setArrayParameter(self,parameterName:str,arg:Sequence[om.MMatrix],int:int)->Self:
 		"""setArrayParameter(parameterName, sequence of bool, int) -> self
 		setArrayParameter(parameterName, sequence of int, int) -> self
 		setArrayParameter(parameterName, sequence of float, int) -> self
@@ -4014,7 +4014,7 @@ class MRenderParameters:
 
 		Set the value of a named array parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,bool:bool)->Self:
+	def setParameter(self,parameterName:str,bool:bool)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4028,7 +4028,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,int:int)->Self:
+	def setParameter(self,parameterName:str,int:int)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4042,7 +4042,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,float:float)->Self:
+	def setParameter(self,parameterName:str,float:float)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4056,7 +4056,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,arg:list[float])->Self:
+	def setParameter(self,parameterName:str,arg:list[float])->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4070,7 +4070,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MFloatVector:Any)->Self:
+	def setParameter(self,parameterName:str,MFloatVector:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4084,7 +4084,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MMatrix:Any)->Self:
+	def setParameter(self,parameterName:str,MMatrix:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4098,7 +4098,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MFloatMatrix:Any)->Self:
+	def setParameter(self,parameterName:str,MFloatMatrix:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4112,7 +4112,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MTextureAssignment:Any)->Self:
+	def setParameter(self,parameterName:str,MTextureAssignment:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4126,7 +4126,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MRenderTargetAssignment:Any)->Self:
+	def setParameter(self,parameterName:str,MRenderTargetAssignment:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4140,7 +4140,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MSamplerState:Any)->Self:
+	def setParameter(self,parameterName:str,MSamplerState:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4154,7 +4154,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:Any,bool:bool)->Self:
+	def getParameter(self,parameterName:str,bool:bool)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4168,7 +4168,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:Any,int:int)->Self:
+	def getParameter(self,parameterName:str,int:int)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4182,7 +4182,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:Any,float:float)->Self:
+	def getParameter(self,parameterName:str,float:float)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4196,7 +4196,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:Any,arg:list[float])->Self:
+	def getParameter(self,parameterName:str,arg:list[float])->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4210,7 +4210,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:Any,MFloatVector:Any)->Self:
+	def getParameter(self,parameterName:str,MFloatVector:Any)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4224,7 +4224,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:Any,MMatrix:Any)->Self:
+	def getParameter(self,parameterName:str,MMatrix:Any)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4238,7 +4238,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:Any,MFloatMatrix:Any)->Self:
+	def getParameter(self,parameterName:str,MFloatMatrix:Any)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4252,7 +4252,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:Any,MTextureAssignment:Any)->Self:
+	def getParameter(self,parameterName:str,MTextureAssignment:Any)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4266,7 +4266,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:Any,MRenderTargetAssignment:Any)->Self:
+	def getParameter(self,parameterName:str,MRenderTargetAssignment:Any)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4280,7 +4280,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:Any,MSamplerStateDesc:Any)->Self:
+	def getParameter(self,parameterName:str,MSamplerStateDesc:Any)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -5528,7 +5528,7 @@ class MShaderInstance:
 		"""isTransparent() -> bool
 
 		Return whether the shader will render with transparency."""
-	def parameterDefaultValue(self,parameterName:Any)->bool|int|float|tuple[float,...]:
+	def parameterDefaultValue(self,parameterName:str)->bool|int|float|tuple[float,...]:
 		"""parameterDefaultValue(parameterName) -> bool / int / float / tuple of float
 
 		Returns the default value of named parameter, None if no default value."""
@@ -5536,7 +5536,7 @@ class MShaderInstance:
 		"""parameterList() -> list of string
 
 		Get the names of all parameters that are settable on this shader instance."""
-	def parameterSemantic(self,parameterName:Any)->str:
+	def parameterSemantic(self,parameterName:str)->str:
 		"""parameterSemantic(parameterName) -> string
 
 		Returns the semantic associated to a named parameter."""
@@ -5561,7 +5561,7 @@ class MShaderInstance:
 
 		Returns the pre-draw callback function set for the this shader instance.
 		Returns None if the callback function is not set or is not a python function."""
-	def resourceName(self,parameterName:Any)->str:
+	def resourceName(self,parameterName:str)->str:
 		"""resourceName(parameterName) -> string
 
 		Returns the resource name of a named texture parameter.
@@ -5577,7 +5577,7 @@ class MShaderInstance:
 
 		Return the true if a named parameter's values vary per vertex."""
 	@overload
-	def setArrayParameter(self,parameterName:Any,arg:Sequence[bool],int:int)->Self:
+	def setArrayParameter(self,parameterName:str,arg:Sequence[bool],int:int)->Self:
 		"""setArrayParameter(parameterName, sequence of bool, int) -> self
 		setArrayParameter(parameterName, sequence of int, int) -> self
 		setArrayParameter(parameterName, sequence of float, int) -> self
@@ -5585,7 +5585,7 @@ class MShaderInstance:
 
 		Set the value of a named array parameter."""
 	@overload
-	def setArrayParameter(self,parameterName:Any,arg:Sequence[int],int:int)->Self:
+	def setArrayParameter(self,parameterName:str,arg:Sequence[int],int:int)->Self:
 		"""setArrayParameter(parameterName, sequence of bool, int) -> self
 		setArrayParameter(parameterName, sequence of int, int) -> self
 		setArrayParameter(parameterName, sequence of float, int) -> self
@@ -5593,7 +5593,7 @@ class MShaderInstance:
 
 		Set the value of a named array parameter."""
 	@overload
-	def setArrayParameter(self,parameterName:Any,arg:Sequence[float],int:int)->Self:
+	def setArrayParameter(self,parameterName:str,arg:Sequence[float],int:int)->Self:
 		"""setArrayParameter(parameterName, sequence of bool, int) -> self
 		setArrayParameter(parameterName, sequence of int, int) -> self
 		setArrayParameter(parameterName, sequence of float, int) -> self
@@ -5601,7 +5601,7 @@ class MShaderInstance:
 
 		Set the value of a named array parameter."""
 	@overload
-	def setArrayParameter(self,parameterName:Any,arg:Sequence[om.MMatrix],int:int)->Self:
+	def setArrayParameter(self,parameterName:str,arg:Sequence[om.MMatrix],int:int)->Self:
 		"""setArrayParameter(parameterName, sequence of bool, int) -> self
 		setArrayParameter(parameterName, sequence of int, int) -> self
 		setArrayParameter(parameterName, sequence of float, int) -> self
@@ -5612,20 +5612,20 @@ class MShaderInstance:
 		"""setIsTransparent(bool) -> self
 
 		Set whether the shader will render with transparency."""
-	def setAsVarying(self,parameterName:Any,bool:bool)->Self:
+	def setAsVarying(self,parameterName:str,bool:bool)->Self:
 		"""setAsVarying(parameterName, bool) -> self
 
 		Set whether the named parameter's values will vary per vertex."""
-	def setSemantic(self,parameterName:Any,string:Any)->Self:
+	def setSemantic(self,parameterName:str,string:Any)->Self:
 		"""setSemantic(parameterName, string) -> self
 
 		Set the semantic of a named parameter."""
-	def renameParameter(self,parameterName:Any,string:Any)->Self:
+	def renameParameter(self,parameterName:str,string:Any)->Self:
 		"""renameParameter(parameterName, string) -> self
 
 		Rename a named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,bool:bool)->Self:
+	def setParameter(self,parameterName:str,bool:bool)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5639,7 +5639,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,int:int)->Self:
+	def setParameter(self,parameterName:str,int:int)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5653,7 +5653,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,float:float)->Self:
+	def setParameter(self,parameterName:str,float:float)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5667,7 +5667,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,arg:list[float])->Self:
+	def setParameter(self,parameterName:str,arg:list[float])->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5681,7 +5681,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MFloatVector:Any)->Self:
+	def setParameter(self,parameterName:str,MFloatVector:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5695,7 +5695,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MMatrix:Any)->Self:
+	def setParameter(self,parameterName:str,MMatrix:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5709,7 +5709,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MFloatMatrix:Any)->Self:
+	def setParameter(self,parameterName:str,MFloatMatrix:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5723,7 +5723,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MTexture:Any)->Self:
+	def setParameter(self,parameterName:str,MTexture:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5737,7 +5737,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MRenderTarget:Any)->Self:
+	def setParameter(self,parameterName:str,MRenderTarget:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5751,7 +5751,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:Any,MSamplerState:Any)->Self:
+	def setParameter(self,parameterName:str,MSamplerState:Any)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5774,13 +5774,13 @@ class MShaderInstance:
 		Returns the value of the current technique annotation.
 
 		 * annotationName (string) - The name of the technique annotation."""
-	def uiName(self,parameterName:Any)->str:
+	def uiName(self,parameterName:str)->str:
 		"""uiName(parameterName) -> string
 
 		Returns the UI name associated with a named parameter.
 		The UI name can be specified in shader using the 'UIName' annotation.
 		The UI name can be used to specify the name that will be displayed in the Attribute Editor."""
-	def uiWidget(self,parameterName:Any)->str:
+	def uiWidget(self,parameterName:str)->str:
 		"""uiWidget(parameterName) -> string
 
 		Returns the UI widget type associated with a named parameter.
@@ -5858,7 +5858,7 @@ class MShaderManager:
 		* preCb (function) - A function, or other Python callable, to be called before render items are drawn with this shader.
 		* postCb (function) - A function, or other Python callable, to be called after render items are drawn with this shader.
 		      see MShaderManager.getEffectsFileShader() for details on the preCb and postCb functions"""
-	def getEffectsFileShader(self,effecsFileName:Any,techniqueName:str,macros:Sequence[MShaderCompileMacro]|None=None,useEffectCache:bool=True,preCb:function|None=None,postCb:function|None=None)->MShaderInstance:
+	def getEffectsFileShader(self,effecsFileName:str,techniqueName:str,macros:Sequence[MShaderCompileMacro]|None=None,useEffectCache:bool=True,preCb:function|None=None,postCb:function|None=None)->MShaderInstance:
 		"""getEffectsFileShader(effecsFileName, techniqueName, macros=None, useEffectCache=True, preCb=None, postCb=None) -> MShaderInstance
 
 		Get a new instance of a shader generated from an effects file stored on disk.
@@ -5871,7 +5871,7 @@ class MShaderManager:
 		          def preCb(MDrawContext, MRenderItemList, MShaderInstance)
 		* postCb (function) - A function, or other Python callable, to be called after render items are drawn with this shader.
 		          def postCb(MDrawContext, MRenderItemList, MShaderInstance)"""
-	def getEffectsTechniques(self,effecsFileName:Any,macros:Sequence[MShaderCompileMacro]|None=None,useEffectCache:bool=True)->tuple[str,...]:
+	def getEffectsTechniques(self,effecsFileName:str,macros:Sequence[MShaderCompileMacro]|None=None,useEffectCache:bool=True)->tuple[str,...]:
 		"""getEffectsTechniques(effecsFileName, macros=None, useEffectCache=True) -> tuple of strings
 
 		Analyzes a given effect file to extract the names of the techniques that are defined.
@@ -5959,7 +5959,7 @@ class MShaderManager:
 		"""clearEffectCache() -> self
 		Clear the effect cache.
 		This will allow all relevant effects to be updated when the implementation of a shader fragment or fragment graph has been modified."""
-	def removeEffectFromCache(self,effecsFileName:Any,techniqueName:str,macros:Sequence[MShaderCompileMacro]|None=None)->Self:
+	def removeEffectFromCache(self,effecsFileName:str,techniqueName:str,macros:Sequence[MShaderCompileMacro]|None=None)->Self:
 		"""removeEffectFromCache(effecsFileName, techniqueName, macros=None) -> self
 		Remove an effect from the cache.
 		This is particulary useful when calling the getEffectsTechniques() and/or getEffectsFileShader() with the flag useEffectCache set to True for maximum performance, and will allow reloading the effect from the disk when the shader file has been modified.
@@ -7989,7 +7989,7 @@ class MVertexBufferArray(collections.abc.Sequence[MVertexBuffer]):
 		"""Return len(self)."""
 	def __getitem__(self,index:int)->MVertexBuffer:
 		"""Return self[key]."""
-	def append(self,MVertexBuffer:Any,name:Any)->Self:
+	def append(self,MVertexBuffer:Any,name:str)->Self:
 		"""append(MVertexBuffer, name) -> self
 
 		Add a new vertex buffer to the list."""
@@ -8072,7 +8072,7 @@ class MVertexBufferDescriptorList:
 		"""clear() -> self
 
 		Clear the list."""
-	def remove(self,index:Any)->bool:
+	def remove(self,index:int)->bool:
 		"""remove(index) -> bool
 
 		Remove a descriptor from the list and delete it."""

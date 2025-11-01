@@ -1213,7 +1213,7 @@ class MDGModifier:
 		Plugs can either be specified with node and attribute MObjects or with
 		MPlugs."""
 	@overload
-	def createNode(self,typeName:Any)->MObject:
+	def createNode(self,typeName:str)->MObject:
 		"""createNode(typeName) -> MObject
 		createNode(MTypeId typeId) -> MObject
 
@@ -3046,7 +3046,7 @@ class MFileObject:
 		"""isSet() -> bool
 
 		Checks to see if both file and path elements of the file object have been set."""
-	def overrideResolvedFullName(self,fullFileName:Any,reresolveType:Any=False)->Self:
+	def overrideResolvedFullName(self,fullFileName:str,reresolveType:Any=False)->Self:
 		"""overrideResolvedFullName(fullFileName, reresolveType=False) -> self
 
 		Normally when a raw file name is set, Maya will perform a series of operations on it in an attempt to resolve it to a valid file name. This final resolved file name can be accessed through the resolvedName(), resolvedPath(), and resolvedFullFileName() methods and can be quite different from the originally specified raw file name.
@@ -4885,7 +4885,7 @@ class MFnAssembly(MFnDagNode):
 		Get the label of the specified representation. The label of a representation is a string that is meant to be shown in the UI and identify the representation meaningfully to a user. The representation label should support localization requirements. If the specified representation is not found in this assembly, an empty string is returned.
 
 		* representation - Representation whose label must be returned."""
-	def setRepName(self,representation:Any,newName:Any)->str:
+	def setRepName(self,representation:Any,newName:str)->str:
 		"""setRepName(representation, newName) -> MString
 
 		Rename a representation. The newName argument is used as a starting point for the new representation name. This string value can be modified by the derived implementation to meet representation name uniqueness, or other constraints. This method returns the final representation name.
@@ -4949,7 +4949,7 @@ class MFnAssembly(MFnDagNode):
 		Get the representations namespace of this assembly node. This is the namespace where nodes created by the activation of a representation will be added. This namespace is shared by all representations. The name can be updated by Maya if a name clash occurs when the namespace is added to its parent namespace (see MPxAssembly::updateRepNamespace() for details).
 
 		Returns the namespace for representations."""
-	def importFile(self,fileName:Any,type:Any=...,preserveReferences:Any=...,nameSpace:Any=...,ignoreVersion:Any=...)->Self:
+	def importFile(self,fileName:str,type:Any=...,preserveReferences:Any=...,nameSpace:Any=...,ignoreVersion:Any=...)->Self:
 		"""importFile(fileName[, type][, preserveReferences][, nameSpace][, ignoreVersion]) -> self
 
 		Import the scene elements from the given file into this assembly. See MFileIO::importFile() for more information.  All elements imported from the file become members of the assembly. DAG nodes in the imported file that are parented to world are parented to the assembly. DAG nodes in the imported file whose parent is not world keep their existing parenting relationship.
@@ -6217,7 +6217,7 @@ class MFnDoubleIndexedComponent(MFnComponent):
 
 		Returns a tuple containing the number of U and V indices in the complete
 		component, or (0,0) if the component is not complete."""
-	def getElement(self,index:Any)->tuple[int,int]:
+	def getElement(self,index:int)->tuple[int,int]:
 		"""getElement(index) -> (uIndex, vIndex)
 
 		Returns the index'th element of the component as a tuple containing the
@@ -8878,7 +8878,7 @@ class MFnSingleIndexedComponent(MFnComponent):
 
 		Creates a new, empty component, attaches it to the function set and
 		returns an MObject which references it."""
-	def element(self,index:Any)->int:
+	def element(self,index:int)->int:
 		"""element(index) -> int
 
 		Returns the index'th element of the component."""
@@ -9091,7 +9091,7 @@ class MFnTripleIndexedComponent(MFnComponent):
 
 		Returns a tuple containing the number of S, T and U indices in
 		the complete component, or (0,0,0) if the component is not complete."""
-	def getElement(self,index:Any)->tuple[int,int,int]:
+	def getElement(self,index:int)->tuple[int,int,int]:
 		"""getElement(index) -> (sIndex, tIndex, uIndex)
 
 		Returns the index'th element of the component as a tuple containing the
@@ -11181,11 +11181,11 @@ class MItMeshFaceVertex:
 		"""getBinormal(space=MSpace.kObject, uvSet='') -> MVector
 
 		Returns the face vertex binormal associated with the UV set."""
-	def getColor(self,colorSetName:Any='')->MColor:
+	def getColor(self,colorSetName:str='')->MColor:
 		"""getColor(colorSetName='') -> MColor
 
 		Returns a color of the current face vertex."""
-	def getColorIndex(self,colorSetName:Any='')->int:
+	def getColorIndex(self,colorSetName:str='')->int:
 		"""getColorIndex(colorSetName='') -> int
 
 		Return a color index of the current face vertex."""

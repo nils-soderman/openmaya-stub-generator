@@ -1,5 +1,5 @@
 """ 
-Static methods cannot return 'Self', make them return the class instead
+Assume parameter types based on their names
 """
 import re
 
@@ -16,7 +16,8 @@ TYPE_CONVERSION_MAPPING = {
 }
 
 PATTERNS = (
-    (re.compile(r".*name$"), "str"),
+    (re.compile(r".*name$", re.IGNORECASE), "str"),
+    (re.compile(r"^index$"), "int"),
 )
 
 PROPERTY_PATTERNS = (
@@ -32,7 +33,7 @@ def get_type_from_name(name: str) -> str | None:
         return TYPE_CONVERSION_MAPPING[name]
 
     for pattern, type_ in PATTERNS:
-        if pattern.match(name, re.IGNORECASE):
+        if pattern.match(name):
             return type_
 
     return None
@@ -56,5 +57,10 @@ class Patch_AssumeParameterType(PatchBase):
                 if param.type and param.type != "Any":
                     continue
 
+                if param.name == "index":
+                    print(f"!!Assuming type 'int' for parameter '{param.name}'")
+
                 if type_ := get_type_from_name(param.name):
+                    if param.name == "index":
+                        print(f"!!!! Result: ", type_)
                     param.type = type_

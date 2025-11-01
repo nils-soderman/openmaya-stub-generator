@@ -4090,7 +4090,7 @@ class MPxManipContainer(om.MPxNode):
 
 		Return: Status of the operation.
 		The base class always returns MS::kSuccess."""
-	def isManipActive(self,manipName:Any,stateName:Any)->om.MDagPath:
+	def isManipActive(self,manipName:str,stateName:str)->om.MDagPath:
 		"""isManipActive(manipName, stateName) -> MDagPath
 
 		This method returns if custom manip is active & gets the
@@ -4277,7 +4277,7 @@ class MPxManipulatorNode(om.MPxNode):
 		converter in the manipulator can be initialized. The converter
 		cannot be initialized until all the connections from the manip
 		values to the plug values have been specified."""
-	def colorAndName(self,view:M3dView,glName:Any,glNameIsPickable:bool,colorIndex:half)->None:
+	def colorAndName(self,view:M3dView,glName:str,glNameIsPickable:bool,colorIndex:half)->None:
 		"""colorAndName(view, glName, glNameIsPickable, colorIndex) -> None
 
 		This method is used to set the color of the GL component that is
@@ -4289,7 +4289,7 @@ class MPxManipulatorNode(om.MPxNode):
 		* glNameIsPickable (bool) - If true, the component will be pickable
 		* colorIndex (half) - Color to use, as provided by one of the *Color()
 		                      methods in this class."""
-	def setHandleColor(self,drawManager:omr.MUIDrawManager,handleName:Any,colorIndex:half)->None:
+	def setHandleColor(self,drawManager:omr.MUIDrawManager,handleName:str,colorIndex:half)->None:
 		"""setHandleColor(drawManager, handleName, colorIndex) -> None
 
 		This method is used to set the color of component that is being drawn next.

@@ -299,7 +299,7 @@ class MAnimCurveClipboardItem:
 		"""setAddressingInfo(rowCount, childCount, attributeCount) -> self
 
 		Sets the addressing information for this clipboard item."""
-	def setNameInfo(self,nodeName:Any,fullName:Any,leafName:Any)->Self:
+	def setNameInfo(self,nodeName:str,fullName:str,leafName:str)->Self:
 		"""setNameInfo(nodeName, fullName, leafName) -> self
 
 		Sets the name information for this clipboard item."""
@@ -771,7 +771,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		Evalutes the curve.
 		For curves of type kAnimCurveTA, kAnimCurveTL and kAnimCurveTU,the at parameter is an MTime, otherwise it is a double.
 		For curves of type kAnimCurveTT and kAnimCurveUT,the value is an MTime, otherwise it is a double."""
-	def remove(self,index:Any,change:Any|None=None)->Self:
+	def remove(self,index:int,change:Any|None=None)->Self:
 		"""remove(index, change=None) -> self
 
 		Removes the key at the specified index.
@@ -808,39 +808,39 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		"""findClosest(at) -> unsigned int
 
 		Determines the index of the key which is set at theMTime (time-input curves) or double (unitless-input curves)closest to the specified time."""
-	def input(self,index:Any)->om.MTime|float:
+	def input(self,index:int)->om.MTime|float:
 		"""input(index) -> MTime or double
 
 		Determines the input (MTime for T* curves or double for U* curves) of the key at the specified index."""
-	def value(self,index:Any)->float:
+	def value(self,index:int)->float:
 		"""value(index) -> double
 
 		Determines the value of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurve*A, kAnimCurve*Lor kAnimCurve*U."""
-	def quaternionW(self,index:Any)->float:
+	def quaternionW(self,index:int)->float:
 		"""quaternionW(index) -> double
 
 		Returns the quaternionW of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurveTA."""
-	def setValue(self,index:Any,value:Any,change:Any|None=None)->Self:
+	def setValue(self,index:int,value:Any,change:Any|None=None)->Self:
 		"""setValue(index, value, change=None) -> self
 
 		Sets the value of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurve*A, kAnimCurve*Lor kAnimCurve*U."""
-	def setQuaternionW(self,index:Any,quaternionW:Any,change:Any|None=None)->Self:
+	def setQuaternionW(self,index:int,quaternionW:Any,change:Any|None=None)->Self:
 		"""setQuaternionW(index, quaternionW, change=None) -> self
 
 		Sets the quaternionW of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurve*A."""
-	def setInput(self,index:Any,at:Any,change:Any|None=None)->Self:
+	def setInput(self,index:int,at:Any,change:Any|None=None)->Self:
 		"""setInput(index, at, change=None) -> self
 
 		Sets the input (MTime for T* curves or double for U* curves) of the key at the specified index.  This will fail ifsetting the input would require re-ordering of the keys."""
-	def inTangentType(self,index:Any)->int:
+	def inTangentType(self,index:int)->int:
 		"""inTangentType(index) -> TangentType
 
 		Determines the type of the tangent to the curve entering the current key."""
-	def outTangentType(self,index:Any)->int:
+	def outTangentType(self,index:int)->int:
 		"""outTangentType(index) -> TangentType
 
 		Determines the type of the tangent to the curve leaving the current key."""
-	def setInTangentType(self,index:Any,tangentType:Any,change:Any|None=None)->Self:
+	def setInTangentType(self,index:int,tangentType:Any,change:Any|None=None)->Self:
 		"""setInTangentType(index, tangentType, change=None) -> self
 
 		Sets the type of the tangent to the curve entering the key at thespecified index.
@@ -857,7 +857,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		kTangentPlateau Plateau
 		kTangentStepNext        StepNext
 		kTangentAuto            AutokTangentAutoMix             AutoMixkTangentAutoEase         AutoEasekTangentAutoCustom              AutoCustom"""
-	def setOutTangentType(self,index:Any,tangentType:Any,change:Any|None=None)->Self:
+	def setOutTangentType(self,index:int,tangentType:Any,change:Any|None=None)->Self:
 		"""setOutTangentType(index, tangentType, change=None) -> self
 
 		Sets the type of the tangent to the curve leaving the key at thespecified index."""
@@ -865,43 +865,43 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		"""setTangentTypes(indexArray, tangentInType=kTangentGlobal, tangentOutType=kTangentGlobal, change=None) -> self
 
 		Sets the tangent types for multiple keys."""
-	def getTangentXY(self,index:Any,isInTangent:Any)->tuple[float,float]:
+	def getTangentXY(self,index:int,isInTangent:Any)->tuple[float,float]:
 		"""getTangentXY(index, isInTangent) -> (x,y)
 
 		Determines the x,y value representing the vector of the in- orout-tangent (depending on the value of the isInTangent parameter) tothe curve for the key at the specified index.  The values returnedwill be in Maya's internal units (seconds for time, centimeters forlinear, radians for angles)."""
-	def getTangentAngleWeight(self,index:Any,isInTangent:Any)->tuple[om.MAngle,float]:
+	def getTangentAngleWeight(self,index:int,isInTangent:Any)->tuple[om.MAngle,float]:
 		"""getTangentAngleWeight(index, isInTangent) -> (MAngle,double)
 
 		Determines the angle and weight of the in- or out-tangent to the curvefor the key at the specified index"""
-	def setTangent(self,index:Any,xOrAngle:Any,yOrWeight:Any,isInTangent:Any,change:Any|None=None,convertUnits:Any=True)->Self:
+	def setTangent(self,index:int,xOrAngle:Any,yOrWeight:Any,isInTangent:Any,change:Any|None=None,convertUnits:Any=True)->Self:
 		"""setTangent(index, xOrAngle, yOrWeight, isInTangent, change=None, convertUnits=True) -> self
 
 		Sets the tangent for the key at the specified index.
 		The tangent can be specified as an x/y pair, oras an MAngle and a weight.
 		isInTangent is True to modify the inTangent or False to modify the outTangent."""
-	def setAngle(self,index:Any,setAngle:Any,isInTangent:Any,change:Any|None=None)->Self:
+	def setAngle(self,index:int,setAngle:Any,isInTangent:Any,change:Any|None=None)->Self:
 		"""setAngle(index, setAngle, isInTangent, change=None) -> self
 
 		Sets the in- or out-angle of the tangent for the key at the given index.
 		isInTangent is True to modify the inTangent or False to modify the outTangent."""
-	def setWeight(self,index:Any,weight:Any,isInTangent:Any,change:Any|None=None)->Self:
+	def setWeight(self,index:int,weight:Any,isInTangent:Any,change:Any|None=None)->Self:
 		"""setWeight(index, weight, isInTangent, change=None) -> self
 
 		Sets the in- or out-weight of the tangent for the key at the given index.
 		isInTangent is True to modify the inTangent or False to modify the outTangent."""
-	def weightsLocked(self,index:Any)->bool:
+	def weightsLocked(self,index:int)->bool:
 		"""weightsLocked(index) -> bool
 
 		Determines whether the weights are locked at the given key."""
-	def tangentsLocked(self,index:Any)->bool:
+	def tangentsLocked(self,index:int)->bool:
 		"""tangentsLocked(index) -> bool
 
 		Determines whether the tangents are locked at the given key."""
-	def setWeightsLocked(self,index:Any,locked:Any,change:Any|None=None)->Self:
+	def setWeightsLocked(self,index:int,locked:Any,change:Any|None=None)->Self:
 		"""setWeightsLocked(index, locked, change=None) -> self
 
 		Lock or unlock the weights at the given key."""
-	def setTangentsLocked(self,index:Any,locked:Any,change:Any|None=None)->Self:
+	def setTangentsLocked(self,index:int,locked:Any,change:Any|None=None)->Self:
 		"""setTangentsLocked(index, locked, change=None) -> self
 
 		Lock or unlock the tangents at the given key."""
@@ -909,11 +909,11 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		"""setIsWeighted(isWeighted, change=None) -> self
 
 		Sets whether or not the curve has weighted tangents."""
-	def isBreakdown(self,index:Any)->bool:
+	def isBreakdown(self,index:int)->bool:
 		"""isBreakdown(index) -> bool
 
 		Determines whether or not a key is a breakdown."""
-	def setIsBreakdown(self,index:Any,isBreakdown:Any,change:Any|None=None)->Self:
+	def setIsBreakdown(self,index:int,isBreakdown:Any,change:Any|None=None)->Self:
 		"""setIsBreakdown(index, isBreakdown, change=None) -> self
 
 		Sets the breakdown state of a key at a given index."""
@@ -1031,11 +1031,11 @@ class MFnGeometryFilter(om.MFnDependencyNode):
 
 		This method is useful in conjunction with indexForOutputConnection()
 		to iterate through the affected objects."""
-	def outputShapeAtIndex(self,index:Any)->om.MObject:
+	def outputShapeAtIndex(self,index:int)->om.MObject:
 		"""outputShapeAtIndex(index) -> MObject
 
 		Returns the DAG path to which this function set is attached, or the first path to the node if the function set is attached to an MObject."""
-	def getComponentAtIndex(self,index:Any)->om.MObject:
+	def getComponentAtIndex(self,index:int)->om.MObject:
 		"""getComponentAtIndex(index) -> MObject
 
 		Returns the component which contains the members of the deformer
@@ -1438,7 +1438,7 @@ class MFnWeightGeometryFilter(MFnGeometryFilter):
 		"""Initializes a new MFnWeightGeometryFilter functionset and attaches it
 		to a geometryFilter node."""
 	@overload
-	def getWeights(self,index:Any,components:om.MObject)->om.MFloatArray:
+	def getWeights(self,index:int,components:om.MObject)->om.MFloatArray:
 		"""getWeights(index, components) -> MFloatArray
 		getWeights(path, components) -> MFloatArray
 
