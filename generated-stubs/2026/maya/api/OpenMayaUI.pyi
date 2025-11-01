@@ -2387,7 +2387,7 @@ class MPanelCanvas:
 		An id referring to the created buffer is returned. The values
 		are passed as arrays of OpenMaya.MTime values
 		Return: int"""
-	def createPrimitive(self,primType:Any,bufferId:Any,startIndex:Any,numVertices:Any,props:Any)->int:
+	def createPrimitive(self,primType:Any,bufferId:Any,startIndex:int,numVertices:int,props:Any)->int:
 		"""createPrimitive( primType, bufferId, startIndex, numVertices, props ) -> int
 
 		Create a primitive of the given type using the vertex buffer
@@ -4134,7 +4134,7 @@ class MPxManipContainer(om.MPxNode):
 		and the manipulator node.
 
 		* manipName (string) - manipulator name"""
-	def plugToManipConversion(self,manipIndex:Any)->MManipData:
+	def plugToManipConversion(self,manipIndex:int)->MManipData:
 		"""plugToManipConversion(manipIndex) -> MManipData
 
 		This virtual method calculates and returns the requested

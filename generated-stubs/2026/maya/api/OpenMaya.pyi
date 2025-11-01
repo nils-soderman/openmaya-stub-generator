@@ -6190,7 +6190,7 @@ class MFnDoubleIndexedComponent(MFnComponent):
 		"""Initializes a new MFnDoubleIndexedComponent function set, attached
 		to the specified component."""
 	@overload
-	def addElement(self,uIndex:Any,vIndex:Any)->Self:
+	def addElement(self,uIndex:int,vIndex:int)->Self:
 		"""addElement(uIndex, vIndex) -> self
 		addElement([uIndex, vIndex]) -> self
 
@@ -6227,7 +6227,7 @@ class MFnDoubleIndexedComponent(MFnComponent):
 
 		Returns all of the component's elements as a list of tuples with each
 		tuple containing the U and V indices of a single element."""
-	def setCompleteData(self,numU:Any,numV:Any)->Self:
+	def setCompleteData(self,numU:int,numV:int)->Self:
 		"""setCompleteData(numU, numV) -> self
 
 		Marks the component as complete (i.e. contains all possible elements).
@@ -6585,7 +6585,7 @@ class MFnMesh(MFnDagNode):
 	@staticmethod
 	def uniformGridParams(xDiv:int,yDiv:int,zDiv:int)->MMeshIsectAccelParams:
 		"""Creates an object which specifies a uniform voxel grid structure which can be used by the intersection routines to speed up their operation. This object specifies the number of voxel cells to be used in the x, y, and z dimensions. The grid acceleration structure will be cached with the mesh, so that if the same MMeshIsectAccelParams configuration is used on the next intersect call, the acceleration structure will not need to be rebuilt."""
-	def addHoles(self,faceIndex:Any,vertices:Any,loopCounts:Any,mergeVertices:Any=True,pointTolerance:float=MFnMesh.kPointTolerance)->Self:
+	def addHoles(self,faceIndex:int,vertices:Any,loopCounts:Any,mergeVertices:Any=True,pointTolerance:float=MFnMesh.kPointTolerance)->Self:
 		"""addHoles(faceIndex, vertices, loopCounts, mergeVertices=True, pointTolerance=kPointTolerance) -> self
 
 		Adds holes to a mesh polygon.
@@ -8401,7 +8401,7 @@ class MFnNurbsSurface(MFnDagNode):
 		multiple knots at that the value the others are retained.
 
 		* param (float) - V parameter value of the knot to remove."""
-	def setCVPosition(self,uIndex:Any,vIndex:Any,point:Any,space:int=MSpace.kObject)->Self:
+	def setCVPosition(self,uIndex:int,vIndex:int,point:Any,space:int=MSpace.kObject)->Self:
 		"""setCVPosition(uIndex, vIndex, point, space=kObject) -> self"""
 	def setCVPositions(self,points:MPointArray|Sequence[MPoint],space:int=MSpace.kObject)->Self:
 		"""setCVPositions(points, space=kObject) -> self
@@ -8890,7 +8890,7 @@ class MFnSingleIndexedComponent(MFnComponent):
 		"""getElements() -> MIntArray
 
 		Returns all of the component's elements."""
-	def setCompleteData(self,numElements:Any)->Self:
+	def setCompleteData(self,numElements:int)->Self:
 		"""setCompleteData(numElements) -> self
 
 		Marks the component as complete (i.e. contains all possible elements).
@@ -9064,7 +9064,7 @@ class MFnTripleIndexedComponent(MFnComponent):
 		"""Initializes a new MFnTripleIndexedComponent function set, attached
 		to the specified component."""
 	@overload
-	def addElement(self,sIndex:Any,tIndex:Any,uIndex:Any)->Self:
+	def addElement(self,sIndex:int,tIndex:int,uIndex:int)->Self:
 		"""addElement(sIndex, tIndex, uIndex) -> self
 		addElement([sIndex, tIndex, uIndex]) -> self
 
@@ -9101,7 +9101,7 @@ class MFnTripleIndexedComponent(MFnComponent):
 
 		Returns all of the component's elements as a list of tuples with each
 		tuple containing the S, T and U indices of a single element."""
-	def setCompleteData(self,numS:Any,numT:Any,numU:Any)->Self:
+	def setCompleteData(self,numS:int,numT:int,numU:int)->Self:
 		"""setCompleteData(numS, numT, numU) -> self
 
 		Marks the component as complete (i.e. contains all possible elements).
@@ -11371,7 +11371,7 @@ class MItMeshPolygon:
 
 		* colorSetName (string) - Name of the color set."""
 	@overload
-	def getColor(self,vertexIndex:Any)->MColor:
+	def getColor(self,vertexIndex:int)->MColor:
 		"""getColor(colorSetName=None) -> MColor
 		getColor(vertexIndex) -> MColor
 
@@ -11431,7 +11431,7 @@ class MItMeshPolygon:
 		* index (int) - face-relative vertex index of the vertex whose normal to retrieve
 		* space (int) - The transformation space. Defaults to kObject, the keyword 'space' is optional as well."""
 	@overload
-	def getNormal(self,vertexIndex:Any,space:int=MSpace.kObject)->MVector:
+	def getNormal(self,vertexIndex:int,space:int=MSpace.kObject)->MVector:
 		"""getNormal(space=kObject) -> MVector
 		getNormal(vertexIndex, [space=]kObject) -> MVector
 
@@ -11925,7 +11925,7 @@ class MItMeshVertex:
 
 		* index (int) - The face to get the color for this vertex for* colorSetName (string) - Name of the color set."""
 	@overload
-	def getColor(self,faceIndex:Any,colorSetName:str|None=None)->MColor:
+	def getColor(self,faceIndex:int,colorSetName:str|None=None)->MColor:
 		"""getColor(colorSetName=None) -> MColor
 		getColor(faceIndex, colorSetName=None) -> MColor
 

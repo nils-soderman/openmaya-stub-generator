@@ -24,6 +24,8 @@ TYPE_CONVERSION_MAPPING = {
 PATTERNS = (
     (re.compile(r".*name$", re.IGNORECASE), "str"),
     (re.compile(r"[A-z]+Count$"), "int"),
+    (re.compile(r"[A-z]+Index$"), "int"),
+    (re.compile(r"^num[A-z]"), "int"),
 )
 
 PROPERTY_PATTERNS = (

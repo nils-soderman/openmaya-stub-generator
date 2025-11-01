@@ -7060,7 +7060,7 @@ class MUIDrawManager:
 		* numSubdivision (int) - Number of Subdivisions for the circle.
 		* filled (bool) - If true the circle will be filled otherwise it will just be drawn as an outline."""
 	@overload
-	def arc(self,center:om.MPoint,start:om.MVector,end:om.MVector,normal:om.MVector,radius:float,numSubdivisions:Any,filled:bool)->Self:
+	def arc(self,center:om.MPoint,start:om.MVector,end:om.MVector,normal:om.MVector,radius:float,numSubdivisions:int,filled:bool)->Self:
 		"""arc(center, start, end, normal, radius, numSubdivisions, filled) -> selfarc(center, start, end, normal, radius, filled=False) -> self
 
 		Draw an arc. The arc is within the plane determined by a normal vector.
@@ -7090,7 +7090,7 @@ class MUIDrawManager:
 		* subdivisions (int) - Number of subdivisions of the arc.
 		* filled (bool) - If true the arc will be filled otherwise it will just be drawn as an outline."""
 	@overload
-	def arc2d(self,center:om.MPoint,start:om.MVector,end:om.MVector,radius:float,numSubdivisions:Any,filled:bool)->Self:
+	def arc2d(self,center:om.MPoint,start:om.MVector,end:om.MVector,radius:float,numSubdivisions:int,filled:bool)->Self:
 		"""arc2d(center, start, end, radius, numSubdivisions, filled) -> selfarc2d(center, start, end, radius, filled=False) -> self
 
 		Draw a 2D arc on the screen. The arc is always facing the camera.
