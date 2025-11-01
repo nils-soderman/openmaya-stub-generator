@@ -6760,7 +6760,7 @@ class MFnMesh(MFnDagNode):
 		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "double" type."""
 	def getEdgeVertices(self,edgeId:int)->tuple[int,int]:
 		"""Returns a tuple containing the mesh-relative/global IDs of the edge's two vertices. The indices can be used to refer to the elements in the array returned by the getPoints() method."""
-	def getFaceAndVertexIndices(self,faceVertexIndex:int,localVertex:bool=True)->tuple[faceId,vertexIndex]:
+	def getFaceAndVertexIndices(self,faceVertexIndex:int,localVertex:bool=True)->tuple[faceId,int]:
 		"""Returns a tuple containg the faceId and vertexIndex represented by the given face-vertex index. This is the reverse of the operation performed by getFaceVertexIndex() . If localVertex is True then the returned vertexIndex is the face-relative/local index, otherwise it is the mesh-relative/global index."""
 	def getFaceNormalIds(self,faceId:int)->MIntArray:
 		"""Returns the IDs of the normals for all the vertices of a given face. These IDs can be used to index into the arrays returned by getNormals() ."""
@@ -10467,7 +10467,7 @@ class MItDag:
 		Returns the root (start node) of the current traversal.
 		The constructor sets the root of traversal to the world node.
 		The root can be changed by the reset() method."""
-	def traversalType(self)->MItDag.TraversalType:
+	def traversalType(self)->int:
 		"""traversalType() -> MItDag.TraversalType
 
 		Returns the direction of the traversal."""
@@ -14581,7 +14581,7 @@ class MPxNode:
 		                                     information about the dirty plugs that
 		                                     are about to be evaluated for the context.
 		                                     Should be only used to query information."""
-	def postEvaluation(self,context:MDGContext,evalNode:Any,evalType:PostEvaluationType)->None:
+	def postEvaluation(self,context:MDGContext,evalNode:Any,evalType:int)->None:
 		"""postEvaluation(context, evalNode, evalType) -> None
 
 		Clean up node's internal state after threaded evaluation.

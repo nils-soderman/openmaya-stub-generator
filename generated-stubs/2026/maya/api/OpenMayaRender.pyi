@@ -339,7 +339,7 @@ class MComponentDataIndexing:
 		"""indices() -> MUintArray
 
 		Get the array of vertex indices for the component."""
-	def componentType(self)->Any:
+	def componentType(self)->int:
 		"""componentType() -> MComponentType
 
 		Get the component type that the vertex indices represent."""
@@ -6070,14 +6070,14 @@ class MStateManager:
 		"""releaseSamplerState(MSamplerState) -> None
 
 		Deletes the MSamplerState and releases the reference to the underlying state object which is held by the MSamplerState object."""
-	def setSamplerState(self,shader:ShaderType,samplerIndex:int,samplerState:MSamplerState)->Self:
+	def setSamplerState(self,shader:int,samplerIndex:int,samplerState:MSamplerState)->Self:
 		"""setSamplerState(shader, samplerIndex, samplerState) -> self
 
 		Sets the active sampler state for any of the texture samplers on the device.
 		* shader (ShaderType) - The shader this sampler will apply to, e.g. kPixelShader.
 		* samplerIndex (int) - The index of the sampler to set with the given shader state.
 		* samplerState (MSamplerState) - The sampler state container object that was previously acquired."""
-	def getSamplerState(self,shader:ShaderType,samplerIndex:int)->MSamplerState:
+	def getSamplerState(self,shader:int,samplerIndex:int)->MSamplerState:
 		"""getSamplerState(shader, samplerIndex) -> MSamplerState
 
 		Gets the current active sampler state from the device.

@@ -1118,7 +1118,7 @@ class MEvent:
 
 
 		Returns a tuple containing the x and y position of the event."""
-	def mouseButton(self)->mouseButtonType:
+	def mouseButton(self)->int:
 		"""mouseButton() -> mouseButtonType
 
 		Get the mouse button of the last event.
@@ -2866,7 +2866,7 @@ class MPxContext:
 		methods in MFeedbackLine, specifically setFormat and setValue.
 		The return value should indicate whether or not the numerical feedback
 		has been provided.  The default return value is false."""
-	def argTypeNumericalInput(self,index:int)->om.MSyntax.MArgType:
+	def argTypeNumericalInput(self,index:int)->int:
 		"""argTypeNumericalInput(index) -> MSyntax.MArgType
 
 		This method is used by the feedback line to determine what units to display.
@@ -4763,7 +4763,7 @@ class MPxSelectionContext(MPxContext):
 		methods in MFeedbackLine, specifically setFormat and setValue.
 		The return value should indicate whether or not the numerical feedback
 		has been provided.  The default return value is false."""
-	def argTypeNumericalInput(self,index:int)->om.MSyntax.MArgType:
+	def argTypeNumericalInput(self,index:int)->int:
 		"""argTypeNumericalInput(index) -> MSyntax.MArgType
 
 		This method is used by the feedback line to determine what units to display.

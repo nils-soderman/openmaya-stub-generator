@@ -104,10 +104,13 @@ def guess_python_from_desc_type(type_str: str) -> str:
     if re.match(r'^[Nn]um[A-Z]$', type_str):  # Num[X] or num[X]
         return "int"
 
-    if re.match(r'^[a-z]Index$', type_str):  # [x]Index
+    if re.match(r'^[a-z]+Index$', type_str):  # [x]Index
         return "int"
 
     if re.match(r'^index[A-Z]$', type_str):  # index[xX]
+        return "int"
+
+    if re.match(r'^.*Type$', type_str):  # [anything]Type
         return "int"
 
     if re.match(r'^is[A-Z]\w*$', type_str):  # is[Word]

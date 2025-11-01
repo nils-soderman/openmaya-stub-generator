@@ -303,7 +303,7 @@ class MAnimCurveClipboardItem:
 		"""setNameInfo(nodeName, fullName, leafName) -> self
 
 		Sets the name information for this clipboard item."""
-	def animCurveType(self)->MFnAnimCurve.AnimCurveType:
+	def animCurveType(self)->int:
 		"""animCurveType() -> MFnAnimCurve.AnimCurveType
 
 		Returns the type of the item's anim curve."""
@@ -757,11 +757,11 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		kAnimCurveUT            Unitless to Time
 		kAnimCurveUU            Unitless to Unitless
 		kAnimCurveUnknown       Unknown type"""
-	def timedAnimCurveTypeForPlug(self,plug:Any)->AnimCurveType:
+	def timedAnimCurveTypeForPlug(self,plug:Any)->int:
 		"""timedAnimCurveTypeForPlug(plug) -> AnimCurveType
 
 		Returns the timed animCurve type appropriate for the specified plug."""
-	def unitlessAnimCurveTypeForPlug(self,plug:Any)->AnimCurveType:
+	def unitlessAnimCurveTypeForPlug(self,plug:Any)->int:
 		"""unitlessAnimCurveTypeForPlug(plug) -> AnimCurveType
 
 		Returns the unitless animCurve type appropriate for the specified plug."""
@@ -832,11 +832,11 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		"""setInput(index, at, change=None) -> self
 
 		Sets the input (MTime for T* curves or double for U* curves) of the key at the specified index.  This will fail ifsetting the input would require re-ordering of the keys."""
-	def inTangentType(self,index:Any)->TangentType:
+	def inTangentType(self,index:Any)->int:
 		"""inTangentType(index) -> TangentType
 
 		Determines the type of the tangent to the curve entering the current key."""
-	def outTangentType(self,index:Any)->TangentType:
+	def outTangentType(self,index:Any)->int:
 		"""outTangentType(index) -> TangentType
 
 		Determines the type of the tangent to the curve leaving the current key."""
@@ -994,13 +994,13 @@ class MFnGeometryFilter(om.MFnDependencyNode):
 		Returns the groupId associated with the specified geometry.
 
 		* plugIndex (unsigned int) - Plug index of the desired geometry."""
-	def indexForGroupId(self,groupId:int)->plugIndex:
+	def indexForGroupId(self,groupId:int)->int:
 		"""indexForGroupId(groupId) -> plugIndex
 
 		Returns the plug index of the geometry associated with the specified groupId.
 
 		* groupId (unsigned int) - groupId of the desired geometry."""
-	def indexForOutputConnection(self,connIndex:int)->plugIndex:
+	def indexForOutputConnection(self,connIndex:int)->int:
 		"""indexForOutputConnection(connIndex) -> plugIndex
 
 		Returns the plug index corresponding to a connection index. The
@@ -1009,7 +1009,7 @@ class MFnGeometryFilter(om.MFnDependencyNode):
 		index is the sparse (logical) index of the connection.
 
 		* connIndex (unsigned int) - Connection index of the desired geometry."""
-	def indexForOutputShape(self,shape:om.MObject)->plugIndex:
+	def indexForOutputShape(self,shape:om.MObject)->int:
 		"""indexForOutputShape(shape) -> plugIndex
 
 		Returns the plug index for the specified output shape.
