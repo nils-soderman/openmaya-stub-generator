@@ -4277,7 +4277,7 @@ class MPxManipulatorNode(om.MPxNode):
 		converter in the manipulator can be initialized. The converter
 		cannot be initialized until all the connections from the manip
 		values to the plug values have been specified."""
-	def colorAndName(self,view:M3dView,glName:str,glNameIsPickable:bool,colorIndex:half)->None:
+	def colorAndName(self,view:M3dView,glName:str,glNameIsPickable:bool,colorIndex:float)->None:
 		"""colorAndName(view, glName, glNameIsPickable, colorIndex) -> None
 
 		This method is used to set the color of the GL component that is
@@ -4289,7 +4289,7 @@ class MPxManipulatorNode(om.MPxNode):
 		* glNameIsPickable (bool) - If true, the component will be pickable
 		* colorIndex (half) - Color to use, as provided by one of the *Color()
 		                      methods in this class."""
-	def setHandleColor(self,drawManager:omr.MUIDrawManager,handleName:str,colorIndex:half)->None:
+	def setHandleColor(self,drawManager:omr.MUIDrawManager,handleName:str,colorIndex:float)->None:
 		"""setHandleColor(drawManager, handleName, colorIndex) -> None
 
 		This method is used to set the color of component that is being drawn next.
@@ -4342,21 +4342,21 @@ class MPxManipulatorNode(om.MPxNode):
 		space.
 
 		Returns a tuple consisting the world space point and direction."""
-	def mousePosition(self)->tuple[half,half]:
+	def mousePosition(self)->tuple[float,float]:
 		"""mousePosition() -> (half, half)
 
 		This method returns the current mouse position within
 		a view. The position is in port coordinates.
 
 		Returns a tuple consisting of the x and y port coodinates."""
-	def mouseDown(self)->tuple[half,half]:
+	def mouseDown(self)->tuple[float,float]:
 		"""mouseDown() -> (half, half)
 
 		This method returns the mouse down position within
 		a view. The position is in port coordinates.
 
 		Returns a tuple consisting of the x and y port coodinates."""
-	def mouseUp(self)->tuple[half,half]:
+	def mouseUp(self)->tuple[float,float]:
 		"""mouseUp() -> (half, half)
 
 		This method returns the mouse up position within
@@ -4503,43 +4503,43 @@ class MPxManipulatorNode(om.MPxNode):
 		This method resets the list of dependent plugs for this manipulator.
 		Call this method prior to adding plugs via addDependentPlug() such as
 		from your doPress() method."""
-	def mainColor(self)->half:
+	def mainColor(self)->float:
 		"""mainColor() -> half
 
 		This method returns the main color index."""
-	def xColor(self)->half:
+	def xColor(self)->float:
 		"""xColor() -> half
 
 		This method returns the color index of the x axis."""
-	def yColor(self)->half:
+	def yColor(self)->float:
 		"""yColor() -> half
 
 		This method returns the color index of the y axis."""
-	def zColor(self)->half:
+	def zColor(self)->float:
 		"""zColor() -> half
 
 		This method returns the color index of the z axis."""
-	def prevColor(self)->half:
+	def prevColor(self)->float:
 		"""prevColor() -> half
 
 		This method returns the previously color used by the colorAndName() method."""
-	def lineColor(self)->half:
+	def lineColor(self)->float:
 		"""lineColor() -> half
 
 		This method returns the color index of a line"""
-	def dimmedColor(self)->half:
+	def dimmedColor(self)->float:
 		"""dimmedColor() -> half
 
 		This method returns the color index for a dimmed or unselectable component."""
-	def selectedColor(self)->half:
+	def selectedColor(self)->float:
 		"""selectedColor() -> half
 
 		This method returns the color index of a selected component."""
-	def labelColor(self)->half:
+	def labelColor(self)->float:
 		"""labelColor() -> half
 
 		This method returns the color index of a label."""
-	def labelBackgroundColor(self)->half:
+	def labelBackgroundColor(self)->float:
 		"""labelBackgroundColor() -> half
 
 		This method returns the color index of a label background."""
