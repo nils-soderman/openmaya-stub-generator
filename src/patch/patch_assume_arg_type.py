@@ -11,11 +11,14 @@ from .base import PatchBase
 PRIMITIVE_TYPES = {"int", "float", "str", "bool", "list", "dict", "set", "tuple"}
 
 TYPE_CONVERSION_MAPPING = {
-    "short": "int",
     "function": "Callable",
+
     "string": "str",
-    "index": "int",
     "text": "str",
+
+    "index": "int",
+    "long": "int",
+    "short": "int",
 }
 
 PATTERNS = (
