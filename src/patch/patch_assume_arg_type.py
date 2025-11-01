@@ -23,6 +23,7 @@ TYPE_CONVERSION_MAPPING = {
 
 PATTERNS = (
     (re.compile(r".*name$", re.IGNORECASE), "str"),
+    (re.compile(r"[A-z]+Count$"), "int"),
 )
 
 PROPERTY_PATTERNS = (

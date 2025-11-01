@@ -3405,7 +3405,7 @@ class MPxHwShaderNode(om.MPxNode):
 		This method will be invoked once per frame and should be overridden to allocate any resources needed for the draw. For example, binding vertex programs, fragment programs, or allocating textures. A status code of MS::kSuccess should be returned unless there was a problem such as insufficient memory or required input data is missing or        invalid.
 
 		* shapePath (MDagPath) - Path to the surface being drawn."""
-	def glGeometry(self,shapePath:om.MDagPath,prim:Any,writable:Any,indexCount:Any,indexArray:Any,vertexCount:Any,vertexIDs:Any,vertexArray:Any,normalCount:Any,normalArrays:Any,colorCount:Any,colorArrays:Any,texCoordCount:Any,texCoordArrays:Any)->Self:
+	def glGeometry(self,shapePath:om.MDagPath,prim:Any,writable:Any,indexCount:int,indexArray:Any,vertexCount:int,vertexIDs:Any,vertexArray:Any,normalCount:int,normalArrays:Any,colorCount:int,colorArrays:Any,texCoordCount:int,texCoordArrays:Any)->Self:
 		"""glGeometry(shapePath, prim, writable, indexCount, indexArray, vertexCount, vertexIDs, vertexArray, normalCount, normalArrays, colorCount, colorArrays, texCoordCount, texCoordArrays) -> self
 
 		This method should only be overridden for hardware rendering.

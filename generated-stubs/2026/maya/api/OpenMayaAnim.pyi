@@ -295,7 +295,7 @@ class MAnimCurveClipboardItem:
 		"""setAnimCurve(object) -> self
 
 		Sets the anim curve MObject."""
-	def setAddressingInfo(self,rowCount:Any,childCount:Any,attributeCount:Any)->Self:
+	def setAddressingInfo(self,rowCount:int,childCount:int,attributeCount:int)->Self:
 		"""setAddressingInfo(rowCount, childCount, attributeCount) -> self
 
 		Sets the addressing information for this clipboard item."""
