@@ -9121,15 +9121,15 @@ class MFnTypedAttribute(MFnAttribute):
 		"""Returns the type of data handled by the attribute."""
 	def create(self,longName:str,shortName:str,type:MTypeId|int,defaultValue:MObject=MObject.kNullObj)->MObject:
 		"""Creates a new attribute of the given type with the given longName , shortName and defaultValue , attaches it to the function set and returns it in an MObject ."""
-class MFnUInt64ArrayData(MFnData,collections.abc.Sequence[MUInt64]):
+class MFnUInt64ArrayData(MFnData,collections.abc.Sequence[int]):
 	"""Function set for node data consisting of an array of MUint64."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->MUInt64:
+	def __getitem__(self,index:int)->int:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value:MUInt64)->None:
+	def __setitem__(self,index:int,value:int)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""

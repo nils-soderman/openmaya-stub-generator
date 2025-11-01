@@ -25,6 +25,7 @@ CONVERT_TABLE = {
     "MInt64": "int",
     "MUint": "int",
     "MUint64": "int",
+    "MUInt64": "int",
     "MCallbackId": "int",
 }
 
