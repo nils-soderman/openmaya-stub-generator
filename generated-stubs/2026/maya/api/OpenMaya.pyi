@@ -8164,7 +8164,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* instanceNumber (int) - Determines which instance of the surface to
 		                         query. This will be zero if there is only
 		                         one instance."""
-	def getDerivativesAtParam(self,uParam:float,vParam:float,space:int=MSpace.kObject,secondOrder:bool=False)->tuple[MPoint,MVector,MVector]:
+	def getDerivativesAtParam(self,uParam:float,vParam:float,space:int=MSpace.kObject,secondOrder:bool=False)->tuple[MPoint,MVector,Any]:
 		"""getDerivativesAtParam(uParam, vParam, space=kObject, secondOrder=False)
 		    -> (MPoint, MVector, MVector)
 		    -> (MPoint, MVector, MVector, MVector, MVector, MVector)
@@ -8238,7 +8238,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		Returns all of the surface's texture coordinates as a tuple containing
 		an array of U values and an array of V values."""
-	def intersect(self,rayStart:MPoint,rayDir:MVector,tolerance:float=MFnMesh.kPointTolerance,space:int=MSpace.kObject,distance:bool=False,exactHit:bool=False,all:bool=False)->tuple[MPoint,float,Any]:
+	def intersect(self,rayStart:MPoint,rayDir:MVector,tolerance:float=MFnMesh.kPointTolerance,space:int=MSpace.kObject,distance:bool=False,exactHit:bool=False,all:bool=False)->Any:
 		"""intersect(rayStart, rayDir, tolerance=kPointTolerance, space=kObject,
 		    distance=False, exactHit=False, all=False)
 		    -> (MPoint, float, float[, float][, bool])
@@ -14159,7 +14159,7 @@ class MPointOnMesh:
 class MPolyMessage(MMessage):
 	"""Class used to register callbacks for poly related messages."""
 	@staticmethod
-	def addPolyComponentIdChangedCallback(node:MObject,arg:Any,wantEdgeIds:Any,wantFaceIds:Any)->None:
+	def addPolyComponentIdChangedCallback(node:MObject,arg:tuple[wantVertIds,wantEdgeIds,wantFaceIds],function:Callable,clientData:Any|None=None)->int:
 		"""addPolyComponentIdChangedCallback(node, (wantVertIds, wantEdgeIds, wantFaceIds), function, clientData=None) -> id
 
 		This method registers a callback that should be called whenever a poly
@@ -14716,7 +14716,7 @@ class MPxNode:
 		Do not override this method.
 
 		Returns true if this node can exist without output connections, false otherwise"""
-	def forceCache(self,ctx:MDGContext=...)->None:
+	def forceCache(self,ctx:MDGContext=...)->MDataBlock:
 		"""forceCache(ctx=MDGContext::current()) -> MDataBlock
 
 		Get the datablock for this node. If there is no datablock then one will be created.

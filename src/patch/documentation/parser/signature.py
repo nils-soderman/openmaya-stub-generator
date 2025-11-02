@@ -5,6 +5,8 @@ Parse the function signatures from the docstring
 import typing
 import re
 
+from .. import convert_type
+
 OBSOLETE_TAG = "[obsolete]"
 
 
@@ -73,31 +75,9 @@ def extract_signatures_from_docstring(docstring: str, function_name: str, stop_s
                     # first normal text line after signatures -> stop
                     break
 
-    truncated = "\n".join(kept_lines)
+    truncated = "".join(kept_lines)
 
-    pattern = rf'{re.escape(function_name)}\s*\([^\)]*?\)(?:\s*->\s*[^\n]+)?'
-    matches = re.findall(pattern, truncated, re.MULTILINE | re.DOTALL)
-
-    signatures = []
-    for match in matches:
-        # The regex can match multiple signatures if they are on the same line without separation
-        # We need to split them up.
-        # We can't just split by function name, as it might be an argument.
-        # Instead we find all occurrences of the function name that are followed by an opening parenthesis
-        sub_matches = re.finditer(rf'{re.escape(function_name)}\s*\(', match)
-        
-        positions = [m.start() for m in sub_matches]
-        if not positions:
-            if match.strip():
-                signatures.append(match.replace("\n", " ").strip())
-            continue
-
-        for i, start in enumerate(positions):
-            end = positions[i + 1] if i + 1 < len(positions) else len(match)
-            sig = match[start:end]
-            signatures.append(sig.replace("\n", "").strip())
-
-    return signatures
+    return [function_name + "(" + x for x in convert_type.split_outside_nested(truncated, function_name + "(")]
 
 
 def parse_signature(signature: str) -> ParsedSignature:
@@ -119,7 +99,7 @@ def parse_signature(signature: str) -> ParsedSignature:
     if not match:
         return ParsedSignature([], return_type, obsolete)
 
-    param_str = match.group(1).strip().rstrip(")")
+    param_str = match.group(1).strip()
     if not param_str:
         return ParsedSignature([], return_type, obsolete)
     
@@ -130,7 +110,7 @@ def parse_signature(signature: str) -> ParsedSignature:
     param_str = re.sub(r'\[\s*,\s*', ',', param_str)
 
     # Split on commas that are not within brackets
-    parm_split = split_on_commas_outside_parentheses(param_str, '[', ']')
+    parm_split = convert_type.split_outside_nested(param_str, ",")
 
     params: list[SignatureParameter] = []
     for p in parm_split:
@@ -184,25 +164,3 @@ def extract_parameter_types_from_docstring(parameter_name: str, docstring: str) 
     match = re.search(pattern, docstring, re.IGNORECASE)
     if match:
         return match.group(1).strip()
-
-
-def split_on_commas_outside_parentheses(text: str, parentheses_open: str, parentheses_close: str) -> list[str]:
-    """Split text on commas that are not inside parentheses."""
-    parm_split = []
-    current_param = ""
-    bracket_count = 0
-
-    for char in text + ",":  # Add comma to flush last param
-        if char == parentheses_open:
-            bracket_count += 1
-        elif char == parentheses_close:
-            bracket_count = max(0, bracket_count - 1)
-        elif char == "," and bracket_count == 0:
-            if current_param.strip():
-                parm_split.append(current_param.strip())
-            current_param = ""
-            continue
-
-        current_param += char
-
-    return parm_split

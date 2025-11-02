@@ -7360,7 +7360,7 @@ class MUIDrawManager:
 
 		* mask (int) - The channel mask which will affect the later drawing.
 		        Currently, only MBlendState.kRGBAChannels, MBlendState.kRGBChannels and MBlendState.kAlphaChannel are supported."""
-	def icon(self,position:om.MPoint,name:str,scale:float)->None:
+	def icon(self,position:om.MPoint,name:str,arg:Any)->Self:
 		"""icon(position, name, scale)) -> self
 
 		Draw an icon at a given 3d position.

@@ -148,7 +148,7 @@ class M3dView:
 
 		* buffer (bytearray) - OpenGl pick buffer
 		* size (int) - Buffer size"""
-	def beginXorDrawing(self,drawOrthographic:bool=True,disableDepthTesting:bool=True,lineWidth:float=1.0,stipplePattern:int=M3dView.kStippleNone,lineColor:om.MColor=Any,1:Any,12:Any)->None:
+	def beginXorDrawing(self,drawOrthographic:bool=True,disableDepthTesting:bool=True,lineWidth:float=1.0,stipplePattern:int=M3dView.kStippleNone,lineColor:om.MColor=Any)->Self:
 		"""beginXorDrawing(drawOrthographic=True, disableDepthTesting=True, lineWidth=1.0, stipplePattern=kStippleNone, lineColor=MColor(1, 1, 1)) -> self
 
 		Setup the context for exclusive-or (XOR) drawing.

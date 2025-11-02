@@ -64,6 +64,12 @@ create(subCurves, parent=kNullObj) -> self"""
         "create(subCurves, parent=kNullObj) -> self"
     ]
 
+    docstring = """addPolyComponentIdChangedCallback(node, (wantVertIds, wantEdgeIds, wantFaceIds), function, clientData=None) -> id"""
+    signatures = extract_signatures_from_docstring(docstring, "addPolyComponentIdChangedCallback")
+    assert signatures == [
+        "addPolyComponentIdChangedCallback(node, (wantVertIds, wantEdgeIds, wantFaceIds), function, clientData=None) -> id"
+    ]
+
 
 def test_parse_signature():
     result = parse_signature("reparentNode(node, newParent=MObject.kNullObj)")
@@ -72,5 +78,25 @@ def test_parse_signature():
         parameters=[
             SignatureParameter("node", None, None),
             SignatureParameter("newParent", None, "MObject.kNullObj"),
+        ]
+    )
+
+    result = parse_signature("example(node, lineColor=MColor(1, 1, 1))")
+    assert result == ParsedSignature(
+        return_type=None,
+        parameters=[
+            SignatureParameter("node", None, None),
+            SignatureParameter("lineColor", None, "MColor(1, 1, 1)"),
+        ]
+    )
+
+    result = parse_signature("addPolyComponentIdChangedCallback(node, (wantVertIds, wantEdgeIds, wantFaceIds), function, clientData=None) -> id")
+    assert result == ParsedSignature(
+        return_type="id",
+        parameters=[
+            SignatureParameter("node", None, None),
+            SignatureParameter("arg", "(wantVertIds, wantEdgeIds, wantFaceIds)", None),
+            SignatureParameter("function", None, None),
+            SignatureParameter("clientData", None, "None"),
         ]
     )
