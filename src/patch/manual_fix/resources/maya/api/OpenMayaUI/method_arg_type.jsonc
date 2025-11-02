@@ -1,0 +1,29 @@
+{
+    "MPxHardwareShader": {
+        "renderImage": {
+            "region": "Sequence[Sequence[float]]",
+            "parameters": "Any"
+        },
+        "setColor": {
+            "components": "Sequence[float]"
+        }
+    },
+    "MPxHwShaderNode": {
+        "renderImage": {
+            "region": "Sequence[Sequence[float]]",
+            "parameters": "Any"
+        }
+    },
+    "MPxManipContainer": {
+        "draw": {
+            "style": "int",
+            "status": "int"
+        }
+    },
+    "MPxManipulatorNode": {
+        "draw": {
+            "style": "int",
+            "status": "int"
+        }
+    }
+}

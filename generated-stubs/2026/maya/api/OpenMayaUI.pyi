@@ -2418,7 +2418,7 @@ class MPanelCanvas:
 
 		Return whether the given layer is visible.
 		Return: bool"""
-	def registerDrawUICallback(self,layer:Any,cb:Any,clientData:Any)->callbackId:
+	def registerDrawUICallback(self,layer:Any,cb:Any,clientData:Any)->int:
 		"""registerDrawUICallback( layer, cb, clientData ) -> callbackId
 
 		Register a callback to be called when the given panel is drawing
@@ -2918,7 +2918,7 @@ class MPxContext:
 		the beginMarquee method.
 
 		* event (MEvent) - current event information."""
-	def releaseMarquee(self,event:MEvent)->tuple[top,left,bottom,right]:
+	def releaseMarquee(self,event:MEvent)->tuple[float, float, float, float]:
 		"""releaseMarquee(event) -> (top, left, bottom, right)
 
 		End the marquee drawing cycle and return the coordinates corresponding to
@@ -3101,7 +3101,7 @@ class MPxHardwareShader(om.MPxNode):
 		Returns the names of the images this shader defines which are valid for the uvSetName specified.
 		Returns None if method is not implemented : Use the default behaviour."""
 	@staticmethod
-	def getHardwareShader(object:om.MObject)->TODO:
+	def getHardwareShader(object:om.MObject)->MPxHardwareShader | None:
 		"""getHardwareShader(object) -> TODO
 
 		This is a static convenience method to be able to get an MPxHardwareShader from an MObject provided by a swatch generator class (Class derived from MSwatchRenderRegister).
@@ -3118,7 +3118,7 @@ class MPxHardwareShader(om.MPxNode):
 
 		Return a reference to the render profile for this Shader. Your shader class should create this once (usually for the whole class) and return the same object each time this method is called."""
 	@overload
-	def renderImage(self,context:ShaderContext,imageName:str,region:float[2][2],parameters:RenderParamters)->list[int]|None:
+	def renderImage(self,context:ShaderContext,imageName:str,region:Sequence[Sequence[float]],parameters:Any)->list[int]|None:
 		"""renderImage(context, imageName, region, parameters) -> [int, int]/None
 		renderImage(context, uiDrawManager, imageName, region, parameters) -> [int, int]/None
 
@@ -3141,7 +3141,7 @@ class MPxHardwareShader(om.MPxNode):
 
 		Returns None if method is not implemented : No rendering will occur."""
 	@overload
-	def renderImage(self,context:ShaderContext,uiDrawManager:omr.MUIDrawManager,imageName:str,region:float[2][2],parameters:RenderParamters)->list[int]|None:
+	def renderImage(self,context:ShaderContext,uiDrawManager:omr.MUIDrawManager,imageName:str,region:Sequence[Sequence[float]],parameters:Any)->list[int]|None:
 		"""renderImage(context, imageName, region, parameters) -> [int, int]/None
 		renderImage(context, uiDrawManager, imageName, region, parameters) -> [int, int]/None
 
@@ -3475,7 +3475,7 @@ class MPxHwShaderNode(om.MPxNode):
 
 		Returns True if vertex IDs should be provided to the geometry method."""
 	@overload
-	def renderImage(self,imageName:str,region:float[2][2],parameters:RenderParamters)->list[int]|None:
+	def renderImage(self,imageName:str,region:Sequence[Sequence[float]],parameters:Any)->list[int]|None:
 		"""renderImage(imageName, region, parameters) -> [int, int]/None
 		renderImage(uiDrawManager, imageName, region, parameters) -> [int, int]/None
 
@@ -3497,7 +3497,7 @@ class MPxHwShaderNode(om.MPxNode):
 
 		Returns None if method is not implemented : No rendering will occur."""
 	@overload
-	def renderImage(self,uiDrawManager:omr.MUIDrawManager,imageName:str,region:float[2][2],parameters:RenderParamters)->list[int]|None:
+	def renderImage(self,uiDrawManager:omr.MUIDrawManager,imageName:str,region:Sequence[Sequence[float]],parameters:Any)->list[int]|None:
 		"""renderImage(imageName, region, parameters) -> [int, int]/None
 		renderImage(uiDrawManager, imageName, region, parameters) -> [int, int]/None
 
@@ -3943,7 +3943,7 @@ class MPxManipContainer(om.MPxNode):
 
 		Returns None if successful.  Otherwise, returns MStatus.kUnknownParameter
 		to allow Maya to further process the event."""
-	def draw(self,view:M3dView,path:om.MDagPath,style:M3dView.DisplayStyle,status:M3dView.DisplayStatus)->None:
+	def draw(self,view:M3dView,path:om.MDagPath,style:int,status:int)->None:
 		"""draw(view, path, style, status) -> None
 
 		This method can be overloaded to customize the drawing of the
@@ -4218,7 +4218,7 @@ class MPxManipulatorNode(om.MPxNode):
 
 		* drawManager (MUIDrawManager) - The MUIDrawManager used to draw some simple UI
 		* frameContext (MFrameContext) - Frame level context information"""
-	def draw(self,view:M3dView,path:om.MDagPath,style:M3dView.DisplayStyle,status:M3dView.DisplayStatus)->None:
+	def draw(self,view:M3dView,path:om.MDagPath,style:int,status:int)->None:
 		"""draw(view, path, style, status) -> None
 
 		This method is overloaded to draw the manipulators. Selection

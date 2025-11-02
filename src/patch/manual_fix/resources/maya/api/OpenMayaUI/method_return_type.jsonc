@@ -1,0 +1,12 @@
+{
+    "MPxContext": {
+        "releaseMarquee": "tuple[float, float, float, float]"
+    },
+    "MPxHardwareShader": {
+        "getHardwareShader": "MPxHardwareShader | None"
+    },
+    "MPanelCanvas":
+    {
+        "registerDrawUICallback": "int"
+    }
+}
