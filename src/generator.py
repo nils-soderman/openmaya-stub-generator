@@ -63,6 +63,9 @@ def generate_file(module: str, out_path: str, flags: Flags = Flags.NONE) -> None
 def generate_stubs(out_dir: str, flags: Flags = Flags.NONE) -> None:
     for module in MODULES:
 
+        if module != "maya.api.OpenMayaUI":
+            continue
+
         print(f"################################################")
         print(f"Generating stubs for '{module}'")
         print(f"################################################")
@@ -71,5 +74,3 @@ def generate_stubs(out_dir: str, flags: Flags = Flags.NONE) -> None:
         out_filepath_abs = os.path.join(out_dir, relative_path)
         generate_file(module, out_filepath_abs, flags=flags)
 
-        # if module == "api.OpenMaya":  # TEMP DEV
-        #     break

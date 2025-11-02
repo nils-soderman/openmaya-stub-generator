@@ -148,7 +148,7 @@ class M3dView:
 
 		* buffer (bytearray) - OpenGl pick buffer
 		* size (int) - Buffer size"""
-	def beginXorDrawing(self,drawOrthographic:bool=True,disableDepthTesting:bool=True,lineWidth:float=1.0,stipplePattern:int=M3dView.kStippleNone,lineColor:om.MColor=Any)->Self:
+	def beginXorDrawing(self,drawOrthographic:bool=True,disableDepthTesting:bool=True,lineWidth:float=1.0,stipplePattern:int=M3dView.kStippleNone,lineColor:om.MColor=...)->Self:
 		"""beginXorDrawing(drawOrthographic=True, disableDepthTesting=True, lineWidth=1.0, stipplePattern=kStippleNone, lineColor=MColor(1, 1, 1)) -> self
 
 		Setup the context for exclusive-or (XOR) drawing.
@@ -2810,7 +2810,7 @@ class MPxContext:
 
 		This method deletes all the manipulators that belong
 		to the context."""
-	def setImage(self,image:str,index:ImageIndex)->Self:
+	def setImage(self,image:str,index:int)->Self:
 		"""setImage(image, index) -> self
 
 		This method is used to set an XPM icon image that is to be
@@ -2821,7 +2821,7 @@ class MPxContext:
 		* image (string) - the name of an XPM file to be used as the icon.
 		* index (ImageIndex) - the index of the image being set; three image
 		representations are permitted: kImage1, kImage2, kImage3."""
-	def image(self,index:ImageIndex)->str:
+	def image(self,index:int)->str:
 		"""image(index) -> string
 
 		This method is used to retrieve an XPM icon image that has
@@ -4776,7 +4776,7 @@ class MPxSelectionContext(MPxContext):
 		    <b>MSyntax.kAngle</b> for angular units
 
 		* index (int) - the index of the numerical input whose argument type is requested."""
-	def setImage(self,image:str,index:ImageIndex)->Self:
+	def setImage(self,image:str,index:int)->Self:
 		"""setImage(image, index) -> self
 
 		This method is used to set an XPM icon image that is to be
@@ -4787,7 +4787,7 @@ class MPxSelectionContext(MPxContext):
 		* image (string) - the name of an XPM file to be used as the icon.
 		* index (ImageIndex) - the index of the image being set; three image
 		representations are permitted: kImage1, kImage2, kImage3."""
-	def image(self,index:ImageIndex)->str:
+	def image(self,index:int)->str:
 		"""image(index) -> string
 
 		This method is used to retrieve an XPM icon image that has

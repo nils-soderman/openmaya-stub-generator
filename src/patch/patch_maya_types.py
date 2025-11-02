@@ -30,4 +30,7 @@ class Patch_MayaTypes(PatchBase):
         if method.parameters:
             for parameter in method.parameters:
                 if parameter.default:
-                    parameter.default = convert_type.add_maya_module_prefix(parameter.default)
+                    converted_type = convert_type.add_maya_module_prefix(parameter.default)
+                    if converted_type == "Any":
+                        converted_type = "..."
+                    parameter.default = converted_type

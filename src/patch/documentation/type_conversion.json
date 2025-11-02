@@ -36,5 +36,7 @@
     "python callable": "Callable",
     "numeric value": "float",
 
-    "timerange": "MTimeRange"
+    "timerange": "MTimeRange",
+
+    "imageindex": "int"
 }
