@@ -1,0 +1,34 @@
+{
+    "MColorManagementUtilities": {
+        "getColorTransformData": "bytearray",
+        "getColorTransformCacheIdForInputSpace": "int",
+        "getColorTransformCacheIdForOutputTransform": "int"
+    },
+    "MRenderTarget": {
+        "rawData": "list[int]"
+    },
+    "MTexture": {
+        "rawData": "tuple[int, int, int]"
+    },
+    "MTextureManager": {
+        "acquireTiledTexture": "list[MTexture|list[str]|om.MFloatArray]"
+    },
+    "MPxShaderOverride": {
+        "initialize2": "tuple[str, om.MUserData]"
+    },
+    "MRenderItem": {
+        "getDefaultMaterialHandling": "int"
+    },
+    "MGeometryUtilities": {
+        "displayStatus": "int"
+    },
+    "MDrawContext": {
+        "getLightInformation": "list[Any]"
+    },
+    "MFrameContext": {
+        "getViewportDimensions": "list[Any]",
+        "getDOFParameters": "list[Any]",
+        "getBackgroundParameters": "list[Any]",
+        "getHwFogParameters": "list[Any]"
+    }
+}

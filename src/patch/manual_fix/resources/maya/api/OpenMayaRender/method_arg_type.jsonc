@@ -1,0 +1,15 @@
+{
+    "MRenderUtilities": {
+        "blitTargetToGL": {
+            "region": "Sequence[Sequence[float]]"
+        }
+    },
+    "MGeometryExtractor": {
+        "populateIndexBuffer": {
+            "data": "bytearray"
+        },
+        "populateVertexBuffer": {
+            "data": "bytearray"
+        }
+    }
+}

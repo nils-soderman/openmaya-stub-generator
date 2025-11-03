@@ -36,8 +36,5 @@ class Patch_DefaultValueEnum(PatchBase):
             for param in method.parameters:
                 if param.default and re.match(r'^k[A-Z]', param.default):
                     if enum_class := find_enum_class((self.current_module, self.main_module), param.default):
-
-                        if param.type is None or param.type == "Any" or re.match(r'^M[A-Z]', param.type):
-                            param.type = type(getattr(enum_class, param.default)).__name__
-
+                        param.type = type(getattr(enum_class, param.default)).__name__
                         param.default = f"{enum_class.__name__}.{param.default}"

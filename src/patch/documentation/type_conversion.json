@@ -34,9 +34,11 @@
     "dagmessage": "int",
     "numeric": "float",
     "python callable": "Callable",
+    "callable": "Callable",
     "numeric value": "float",
 
     "timerange": "MTimeRange",
 
-    "imageindex": "int"
+    "imageindex": "int",
+    "drawapi": "int"
 }
