@@ -27,6 +27,7 @@ CONVERT_TABLE = {
     "MUint64": "int",
     "MUInt64": "int",
     "MCallbackId": "int",
+    "MString": "str",
 }
 
 

@@ -6,5 +6,49 @@
         "setColor": {
             "components": "Sequence[float]"
         }
+    },
+    "MFloatPoint": {
+        "__init__": {
+            "seq": "Sequence[float]"
+        }
+    },
+    "MPoint": {
+        "__init__": {
+            "seq": "Sequence[float]"
+        }
+    },
+    "MVector": {
+        "__init__": {
+            "seq": "Sequence[float]"
+        }
+    },
+    "MFnAssembly": {
+        "activate": {
+            "arg": "str"
+        },
+        "activateNonRecursive": {
+            "arg": "str"
+        }
+    },
+    "MFnMesh": {
+        "setBoolBlindData": {
+            "data": "bool|int|Sequence[bool|int]"
+        }
+    },
+    "MPolyMessage": {
+        "addPolyComponentIdChangedCallback": {
+            "arg": "tuple[bool,bool,bool]"
+        }
+    },
+    "MImage": {
+        "setPixels": {
+            "pixels": "SupportsBytes"
+        },
+        "writeToFile": {
+            "outputFormat": "str"
+        },
+        "writeToFileWithDepth": {
+            "outputFormat": "str"
+        }
     }
 }

@@ -14,6 +14,20 @@ def is_none_or_any(s: str | None) -> bool:
     return s is None or s == "Any"
 
 
+def sanitize_default_value(default: str | None) -> str | None:
+    """
+    Sanitize default value strings extracted from documentation
+    """
+    if default is None:
+        return None
+
+    default = default.strip()
+    if default.lower() in ("none", "null"):
+        return "None"
+
+    return default
+
+
 class Patch_Documentation(PatchBase):
     ORDER = 5
 
@@ -136,7 +150,7 @@ class Patch_Documentation(PatchBase):
                         Parameter(
                             name=param.name,
                             type=param_type,
-                            default=param.default,
+                            default=sanitize_default_value(param.default),
                         )
                     )
 
@@ -206,7 +220,7 @@ class Patch_Documentation(PatchBase):
                     Parameter(
                         name=param_doc.name,
                         type=convert_type.get_python_type_from_desc(param_doc.type),
-                        default=default,
+                        default=sanitize_default_value(default),
                     )
                 )
 
@@ -260,6 +274,6 @@ class Patch_Documentation(PatchBase):
                     Parameter(
                         name=param.name,
                         type=param_type,
-                        default=default,
+                        default=sanitize_default_value(default),
                     )
                 )

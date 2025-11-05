@@ -100,3 +100,12 @@ def test_parse_signature():
             SignatureParameter("clientData", None, "None"),
         ]
     )
+
+    result = parse_signature("activate([representation])")
+    print(f"{result = }")
+    assert result == ParsedSignature(
+        return_type=None,
+        parameters=[
+            SignatureParameter("representation", None, "..."),
+        ]
+    )

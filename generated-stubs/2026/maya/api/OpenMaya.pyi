@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import collections.abc
 import sys
-from typing import Any, Callable, Literal, Self, Sequence, overload
+from typing import Any, Callable, Literal, Self, Sequence, SupportsBytes, overload
 
 class MAngle:
 	"""Manipulate angular data."""
@@ -2900,13 +2900,13 @@ class MExternalContentInfoTable:
 		* unresolvedLocation (string) - See documentation of MExternalContentInfoTable.addResolvedEntry().
 		* contextNodeFullName (string) - See documentation of MExternalContentInfoTable.addResolvedEntry().
 		* roles (list of strings) - See documentation of MExternalContentInfoTable.addResolvedEntry()."""
-	def getEntry(self,index:int)->list[key|unresolvedLocation|resolvedLocation|str|roles]:
+	def getEntry(self,index:int)->list[str|list[str]]:
 		"""getEntry(index) -> [key, unresolvedLocation, resolvedLocation, contextNodeFullName, roles]
 
 		Retrieves external content entry based on its position in the table.
 
 		* index (unsigned int) - Position of the entry to retrieve information from."""
-	def getInfo(self,key:str)->list[unresolvedLocation|resolvedLocation|str|roles]:
+	def getInfo(self,key:str)->list[str|list[str]]:
 		"""getInfo(key) -> [unresolvedLocation, resolvedLocation, contextNodeFullName, roles]
 
 		Retrieves external content information based on its key.
@@ -2926,7 +2926,7 @@ class MExternalContentLocationTable:
 		Adds an external content location and its key to the table.
 
 		* key (string) - An arbitrary string defined by the node. This will typically be an attribute name for situations where the content location is stored verbatim in a plug's value.* location (string) - Full path to the content referenced by the key."""
-	def getEntry(self,index:int)->list[key|location]:
+	def getEntry(self,index:int)->list[str]:
 		"""getEntry(index) -> [key, location]
 
 		Retrieves external content entry based on its position in the table.
@@ -3309,7 +3309,7 @@ class MFloatPoint(collections.abc.Sequence[float]):
 	def __init__(self,src:MFloatPoint|MPoint|MFloatVector|MVector)->None:
 		"""Copy constructor. Returns a new MFloatPoint object with its x, y, z and w coords set to the same values as src . If src is a vector then the new MFloatPoint 's w coordinate is set to 1.0."""
 	@overload
-	def __init__(self,seq:Sequence[two|three|float])->None:
+	def __init__(self,seq:Sequence[float])->None:
 		"""Returns a new MFloatPoint object whose x, y, z and w coordinates are set to the elements of seq . If the sequence contains fewer than four values w will be set to 1.0. If the sequence contains fewer than three values z will be set to 0.0."""
 	@overload
 	def __init__(self,x:float,y:float,z:float,w:float)->None:
@@ -4837,7 +4837,7 @@ class MFnAssembly(MFnDagNode):
 		Initialize assemblies after their creation.
 		In general, postLoad() does not need to be called explicity by a plugin. Maya will call it automatically on any assembly node created by representation activation, to initialize the assembly node.
 		However, if an existing assembly needs to be re-initialized, because of a parameter change for example, the representation activation code path is obviously not involved. In such a case, the postLoad() re-initialization can be done by calling this method explicitly, so that Maya is made aware that the node is being re-initialized, and that for example, no edits should be recorded during this re-initialization."""
-	def activate(self,arg:list[representation])->Self:
+	def activate(self,arg:str)->Self:
 		"""activate([representation]) -> self
 
 		Activate a representation. The representation to activate is specified as a string name. If no representation is specified then the previously-active representation (if any) will be inactivated and no representation will be active. This method will fail if canActivate() returns False.
@@ -4847,7 +4847,7 @@ class MFnAssembly(MFnDagNode):
 		"""getActive() -> MString
 
 		Get the active representation in the list of representations. If the list of representations is empty, the return string will be empty."""
-	def activateNonRecursive(self,arg:list[representation])->Self:
+	def activateNonRecursive(self,arg:str)->Self:
 		"""activateNonRecursive([representation]) -> self
 
 		Activate a representation, but prevent any nested assemblies created and initialized during this activation from activating any of their representations.
@@ -5755,7 +5755,7 @@ class MFnContainerNode(MFnDependencyNode):
 		"""getRootTransform() -> MObject
 
 		Return the root transform, if there is one. Otherwise return an empty MObject."""
-	def getPublishedNodes(self,publishNodeType:Any=Any)->tuple[Any,Any]:
+	def getPublishedNodes(self,publishNodeType:Any=...)->tuple[Any,Any]:
 		"""getPublishedNodes(publishNodeType=MPublishNodeType) -> ([MString] publishedNames, MObjectArray publishedNodes)
 
 		Return a list of the published nodes of a given type. For any names that have assigned nodes, return the node at the corresponding array index. For any names that do not have assigned nodes, a NULL MObject will be at the corresponding array index."""
@@ -6100,14 +6100,14 @@ class MFnDisplayLayer(MFnDependencyNode):
 	"""
 	def __init__(self)->None:
 		"""Initializes a new, empty MFnDisplayLayer object."""
-	def getMembers(self,members:Any)->status:
+	def getMembers(self,members:Any)->Any:
 		"""getMembers(members) -> status
 		Get the members of the display layer"""
-	def add(self,item:Any)->status:
+	def add(self,item:Any)->Any:
 		"""add(item) -> status
 		Adds the item to the display layer, where item can be a Ufe path string
 		(MString) or a Maya path (MDagPath)."""
-	def remove(self,item:Any)->status:
+	def remove(self,item:Any)->Any:
 		"""remove(item) -> status
 		Removes the item to the display layer, where item can be a Ufe path string
 		(MString) or a Maya path (MDagPath)."""
@@ -6115,7 +6115,7 @@ class MFnDisplayLayer(MFnDependencyNode):
 		"""contains(item) -> bool
 		Returns true if the item is in the display layer, where item can be a Ufe
 		path string (MString) or a Maya path (MDagPath)."""
-	def containsAncestorInclusive(self,item:Any)->status:
+	def containsAncestorInclusive(self,item:Any)->bool:
 		"""containsAncestorInclusive(item) -> status
 		Returns true if the item or one of its ancestors is in the display layer,
 		 where item can be a Ufe path string (MString) or a Maya path (MDagPath)."""
@@ -6132,15 +6132,15 @@ class MFnDisplayLayerManager(MFnDependencyNode):
 	def currentDisplayLayerManager()->MObject:
 		"""currentDisplayLayerManager() -> MObject
 		Get the current display layer manager"""
-	def getAllDisplayLayers(self)->Any:
+	def getAllDisplayLayers(self)->list[MObject]:
 		"""getAllDisplayLayers() -> object array
 		Get all the display layers managed by the display layer manager
 		(MString) or a Maya path (MDagPath)."""
-	def getLayer(self,item:Any)->status:
+	def getLayer(self,item:Any)->Any:
 		"""getLayer(item) -> status
 		Finds the layer the item is in, where item can be a Ufe
 		path string (MString) or a Maya object (MObject)."""
-	def getAncestorLayersInclusive(self,item:Any)->status:
+	def getAncestorLayersInclusive(self,item:Any)->Any:
 		"""getAncestorLayersInclusive(item) -> status
 		Finds the layers the item and it's ancestors are in, where item can be a Ufe
 		path string (MString) or a Maya object (MObject)."""
@@ -6600,9 +6600,9 @@ class MFnMesh(MFnDagNode):
 		to the exterior polygon."""
 	def addPolygon(self,vertices:Sequence[MPoint],mergeVertices:bool=True,pointTolerance:float=MFnMesh.kPointTolerance)->int:
 		"""Adds a new polygon to the mesh, returning the index of the new polygon. If mergeVertices is True and a new vertex is within pointTolerance of an existing one, then they are "merged" by reusing the existing vertex and discarding the new one."""
-	def allIntersections(self,raySource:MFloatPoint,rayDirection:MFloatVector,space:int,maxParam:float,testBothDirections:bool,faceIds:Sequence[int]|None=None,triIds:Sequence[int]|None=None,idsSorted:bool=False,accelParams:MMeshIsectAccelParams|None=None,tolerance:float=MFnMesh.kIntersectTolerance,sortHits:bool=False)->tuple[hitPoints,hitRayParams,hitFaces,hitTriangles,hitBary1s,hitBay2s]:
+	def allIntersections(self,raySource:MFloatPoint,rayDirection:MFloatVector,space:int,maxParam:float,testBothDirections:bool,faceIds:Sequence[int]|None=None,triIds:Sequence[int]|None=None,idsSorted:bool=False,accelParams:MMeshIsectAccelParams|None=None,tolerance:float=MFnMesh.kIntersectTolerance,sortHits:bool=False)->tuple[MFloatPointArray,MFloatArray,MIntArray,MIntArray,MFloatArray,MFloatArray]|None:
 		"""Finds all intersection of a ray starting at raySource and travelling in rayDirection with the mesh. If faceIds is specified, then only those faces will be considered for intersection. If both faceIds and triIds are given, then the triIds will be interpreted as face-relative and each pair of entries will be taken as a (face,triangle) pair to be considered for intersection. Thus, the face-triangle pair (10,0) means the first triangle on face 10. If neither faceIds nor triIds is given, then all face-triangles in the mesh will be considered. The maxParam and testBothDirections flags can be used to control the radius of the search around the raySource point. The search proceeds by testing all applicable face-triangles looking for intersections. If the accelParams parameter is given then the mesh builds an intersection acceleration structure based on it. This acceleration structure is used to speed up the intersection operation, sometimes by a factor of several hundred over the non-accelerated case. Once created, the acceleration structure is cached, and will be reused the next time this method (or anyIntersection() or allIntersections() ) is called with an identically-configured MMeshIsectAccelParams object. If a different MMeshIsectAccelParams object is used, then the acceleration structure will be deleted and re-created according to the new settings. Once created, the acceleration structure will persist until either the object is destroyed (or rebuilt by a construction history operation), or the freeCachedIntersectionAccelerator() method is called. The cachedIntersectionAcceleratorInfo() and globalIntersectionAcceleratorsInfo() methods provide useful information about the resource usage of individual acceleration structures, and of all such structures in the system. If the ray hits the mesh, the details of the intersection points will be returned as a tuple containing the following: hitPoints ( MFloatPointArray ) - coordinates of the points hit, in the space specified by the caller. hitRayParams ( MFloatArray ) - parametric distances along the ray to the points hit. hitFaces ( MIntArray ) - IDs of the faces hit hitTriangles ( MIntArray ) - face-relative IDs of the triangles hit hitBary1s ( MFloatArray ) - first barycentric coordinate of the points hit. If the vertices of the hitTriangle are (v1, v2, v3) then the barycentric coordinates are such that the hitPoint = (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3. hitBary2s ( MFloatArray ) - second barycentric coordinate of the points hit. If no point was hit then the arrays will all be empty."""
-	def anyIntersection(self,raySource:MFloatPoint,rayDirection:MFloatVector,space:int,maxParam:float,testBothDirections:bool,faceIds:Sequence[int]|None=None,triIds:Sequence[int]|None=None,idsSorted:bool=False,accelParams:MMeshIsectAccelParams|None=None,tolerance:float=MFnMesh.kIntersectTolerance)->tuple[hitPoint,hitRayParam,hitFace,hitTriangle,hitBary1,hitBay2]|None:
+	def anyIntersection(self,raySource:MFloatPoint,rayDirection:MFloatVector,space:int,maxParam:float,testBothDirections:bool,faceIds:Sequence[int]|None=None,triIds:Sequence[int]|None=None,idsSorted:bool=False,accelParams:MMeshIsectAccelParams|None=None,tolerance:float=MFnMesh.kIntersectTolerance)->tuple[MFloatPoint,float,int,int,float,float]|None:
 		"""Finds any intersection of a ray starting at raySource and travelling in rayDirection with the mesh. If faceIds is specified, then only those faces will be considered for intersection. If both faceIds and triIds are given, then the triIds will be interpreted as face-relative and each pair of entries will be taken as a (face,triangle) pair to be considered for intersection. Thus, the face-triangle pair (10,0) means the first triangle on face 10. If neither faceIds nor triIds is given, then all face-triangles in the mesh will be considered. The maxParam and testBothDirections flags can be used to control the radius of the search around the raySource point. The search proceeds by testing all applicable face-triangles looking for intersections. If the accelParams parameter is given then the mesh builds an intersection acceleration structure based on it. This acceleration structure is used to speed up the intersection operation, sometimes by a factor of several hundred over the non-accelerated case. Once created, the acceleration structure is cached, and will be reused the next time this method (or anyIntersection() or allIntersections() ) is called with an identically-configured MMeshIsectAccelParams object. If a different MMeshIsectAccelParams object is used, then the acceleration structure will be deleted and re-created according to the new settings. Once created, the acceleration structure will persist until either the object is destroyed (or rebuilt by a construction history operation), or the freeCachedIntersectionAccelerator() method is called. The cachedIntersectionAcceleratorInfo() and globalIntersectionAcceleratorsInfo() methods provide useful information about the resource usage of individual acceleration structures, and of all such structures in the system. If the ray hits the mesh, the details of the intersection point will be returned as a tuple containing the following: hitPoint ( MFloatPoint ) - coordinate of the point hit, in the space specified by the caller. hitRayParam (float) - parametric distance along the ray to the point hit. hitFace (int) - ID of the face hit hitTriangle (int) - face-relative ID of the triangle hit hitBary1 (float) - first barycentric coordinate of the point hit. If the vertices of the hitTriangle are (v1, v2, v3) then the barycentric coordinates are such that hitPoint = (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3. hitBary2 (float) - second barycentric coordinate of the point hit. If no point was hit then None will be returned."""
 	def assignColor(self,faceId:int,vertexIndex:int,colorId:int,colorSet:str='')->Self:
 		"""Assigns a color from a colorSet to a specified vertex of a face."""
@@ -6638,7 +6638,7 @@ class MFnMesh(MFnDagNode):
 		"""Clears out all colors from a colorSet, and leaves behind an empty colorset. This method should be used if it is needed to shrink the actual size of the color set. In this case, the user should call clearColors() , setColors() and then assignColors() to rebuild the mapping info. When called on mesh data, the colors are removed. When called on a shape with no history, the colors are removed and the attributes are set on the shape. When called on a shape with history, the polyColorDel command is invoked and a polyColorDel node is created."""
 	def clearUVs(self,uvSet:str='')->Self:
 		"""Clears out all texture coordinates from the mesh, and leaves behind an empty UVset. This method should be used if it is needed to shrink the actual size of the UV table. In this case, the user should call clearUVs() , setUVs() and then assignUVs() to rebuild the mapping info. When called on mesh data, the UVs are removed. When called on a shape with no history, the UVs are removed and the attributes are set on the shape. When called on a shape with history, the polyMapDel command is invoked and a polyMapDel node is created."""
-	def closestIntersection(self,raySource:MFloatPoint,rayDirection:MFloatVector,space:int,maxParam:float,testBothDirections:bool,faceIds:Sequence[int]|None=None,triIds:Sequence[int]|None=None,idsSorted:bool=False,accelParams:MMeshIsectAccelParams|None=None,tolerance:float=MFnMesh.kIntersectTolerance)->tuple[hitPoint,hitRayParam,hitFace,hitTriangle,hitBary1,hitBay2]|None:
+	def closestIntersection(self,raySource:MFloatPoint,rayDirection:MFloatVector,space:int,maxParam:float,testBothDirections:bool,faceIds:Sequence[int]|None=None,triIds:Sequence[int]|None=None,idsSorted:bool=False,accelParams:MMeshIsectAccelParams|None=None,tolerance:float=MFnMesh.kIntersectTolerance)->tuple[MFloatPoint,float,int,int,float,float]|None:
 		"""Finds the closest intersection of a ray starting at raySource and travelling in rayDirection with the mesh. If faceIds is specified, then only those faces will be considered for intersection. If both faceIds and triIds are given, then the triIds will be interpreted as face-relative and each pair of entries will be taken as a (face,triangle) pair to be considered for intersection. Thus, the face-triangle pair (10,0) means the first triangle on face 10. If neither faceIds nor triIds is given, then all face-triangles in the mesh will be considered. The maxParam and testBothDirections flags can be used to control the radius of the search around the raySource point. The search proceeds by testing all applicable face-triangles looking for intersections. If the accelParams parameter is given then the mesh builds an intersection acceleration structure based on it. This acceleration structure is used to speed up the intersection operation, sometimes by a factor of several hundred over the non-accelerated case. Once created, the acceleration structure is cached, and will be reused the next time this method (or anyIntersection() or allIntersections() ) is called with an identically-configured MMeshIsectAccelParams object. If a different MMeshIsectAccelParams object is used, then the acceleration structure will be deleted and re-created according to the new settings. Once created, the acceleration structure will persist until either the object is destroyed (or rebuilt by a construction history operation), or the freeCachedIntersectionAccelerator() method is called. The cachedIntersectionAcceleratorInfo() and globalIntersectionAcceleratorsInfo() methods provide useful information about the resource usage of individual acceleration structures, and of all such structures in the system. If the ray hits the mesh, the details of the closest intersection point to the raySource will be returned as a tuple containing the following: hitPoint ( MFloatPoint ) - coordinate of the point hit, in the space specified by the caller. hitRayParam (float) - parametric distance along the ray to the point hit. hitFace (int) - ID of the face hit hitTriangle (int) - face-relative ID of the triangle hit hitBary1 (float) - first barycentric coordinate of the point hit. If the vertices of the hitTriangle are (v1, v2, v3) then the barycentric coordinates are such that hitPoint = (*hitBary1)*v1 + (*hitBary2)*v2 + (1-*hitBary1-*hitBary2)*v3. hitBary2 (float) - second barycentric coordinate of the point hit. If no point was hit then None will be returned."""
 	def collapseEdges(self,edges:Sequence[int])->Self:
 		"""Collapses edges into vertices. The two vertices that create each given edge are replaced in turn by one vertex placed at the average of the two initial vertex."""
@@ -6760,7 +6760,7 @@ class MFnMesh(MFnDagNode):
 		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "double" type."""
 	def getEdgeVertices(self,edgeId:int)->tuple[int,int]:
 		"""Returns a tuple containing the mesh-relative/global IDs of the edge's two vertices. The indices can be used to refer to the elements in the array returned by the getPoints() method."""
-	def getFaceAndVertexIndices(self,faceVertexIndex:int,localVertex:bool=True)->tuple[faceId,int]:
+	def getFaceAndVertexIndices(self,faceVertexIndex:int,localVertex:bool=True)->tuple[int,int]:
 		"""Returns a tuple containg the faceId and vertexIndex represented by the given face-vertex index. This is the reverse of the operation performed by getFaceVertexIndex() . If localVertex is True then the returned vertexIndex is the face-relative/local index, otherwise it is the mesh-relative/global index."""
 	def getFaceNormalIds(self,faceId:int)->MIntArray:
 		"""Returns the IDs of the normals for all the vertices of a given face. These IDs can be used to index into the arrays returned by getNormals() ."""
@@ -6790,7 +6790,7 @@ class MFnMesh(MFnDagNode):
 		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "float" type."""
 	def getFloatPoints(self,space:int=MSpace.kObject)->MFloatPointArray:
 		"""Returns a copy of the mesh's vertex positions as an MFloatPointArray ."""
-	def getHoles(self)->tuple[tuple[face,tuple[v1,...]],...]:
+	def getHoles(self)->tuple[tuple[int,tuple[int,...]],...]:
 		"""Returns a tuple describing the holes in the mesh. Each element of the tuple is itself a tuple. The first element of the sub-tuple is the integer ID of the face in which the hole occurs. The second element of the sub-tuple is another tuple containing the mesh-relative/global IDs of the vertices which make up the hole. Take the following return value as an example: ((3, (7, 2, 6)), (5, (11, 10, 3, 4))) This says that the mesh has two holes. The first hole is in face 3 and consists of vertices 7, 2 and 6. The second hole is in face 5 and consists of vertices 11, 10, 3 and 4."""
 	@overload
 	def getIntBlindData(self,compId:int,compType:int,blindDataId:int,attr:str)->int:
@@ -6940,10 +6940,10 @@ class MFnMesh(MFnDagNode):
 	def setBinaryBlindData(self,compIds:Sequence[int],compType:int,blindDataId:int,attr:str,data:str|Sequence[str])->Self:
 		"""Sets the value of a "binary" blind data attribute on multiple components of the mesh. If the data is a sequence of strings then it must provide a value for each component in compIds. If it is a single string then all of the specified components will have their blind data set to that value."""
 	@overload
-	def setBoolBlindData(self,compId:int,compType:int,blindDataId:int,attr:str,data:bool|int)->Self:
+	def setBoolBlindData(self,compId:int,compType:int,blindDataId:int,attr:str,data:bool|int|Sequence[bool|int])->Self:
 		"""Sets the value of a "boolean" blind data attribute on a component of the mesh."""
 	@overload
-	def setBoolBlindData(self,compIds:Sequence[int],compType:int,blindDataId:int,attr:str,data:bool|int|Sequence[bool]|ints)->Self:
+	def setBoolBlindData(self,compIds:Sequence[int],compType:int,blindDataId:int,attr:str,data:bool|int|Sequence[bool|int])->Self:
 		"""Sets the value of a "boolean" blind data attribute on multiple components of the mesh. If the data is a sequence then it must provide a value for each component in compIds. If it is a single value then all of the specified components will have their blind data set to that value."""
 	def setColor(self,colors:Sequence[MColor],color:MColor,colorSet:str='',rep:int=MFnMesh.kRGBA)->Self:
 		"""Sets a color in the specified colorSet. If no colorSet is given the current colorSet will be used. If the colorId is greater than or equal to numColors() then the colorSet will be grown to accommodate the specified color."""
@@ -7030,7 +7030,7 @@ class MFnMesh(MFnDagNode):
 		"""Sets the shared normal at a vertex."""
 	def setVertexNormals(self,normals:Sequence[MVector],vertexIds:Sequence[int],space:int=MSpace.kObject)->Self:
 		"""Sets the shared normals for the given vertices."""
-	def sortIntersectionFaceTriIds(self,faceIds:MIntArray,triIds:MIntArray=none)->Self:
+	def sortIntersectionFaceTriIds(self,faceIds:MIntArray,triIds:MIntArray|None=None)->Self:
 		"""Convenience routine for sorting faceIds or face/triangle ids before passing them into the closestIntersection() , allIntersections() , or anyIntersection() methods. When using an acceleration structure with an intersection operation it is essential that any faceId or faceId/triId arrays be sorted properly to ensure optimal performance."""
 	def split(self,placements:Sequence[tuple])->Self:
 		"""Each tuple in the placements sequence consists of a Split Placement constant followed by one or two parameters. If the Split Placement is kOnEdge then the tuple will contain two more elements giving the int id of the edge to split, and a float value between 0 and 1 indicating how far along the edge to do the split. The same edge cannot be split more than once per call. If the Split Placement is kInternalPoint then the tuple will contain just one more element giving an MFloatPoint within the face. All splits must begin and end on an edge meaning that the first and last tuples in the placements sequence must be kOnEdge placements."""
@@ -8817,7 +8817,7 @@ class MFnSet(MFnDependencyNode):
 		"""hasRestrictions() -> bool
 
 		Returns true if this function set has restrictions on the type of objects that it may contain."""
-	def restriction(self)->MFnSet.Restriction:
+	def restriction(self)->int:
 		"""restriction() -> MFnSet.Restriction
 
 		Returns the type of membership restriction that this set has."""
@@ -8895,15 +8895,15 @@ class MFnSingleIndexedComponent(MFnComponent):
 
 		Marks the component as complete (i.e. contains all possible elements).
 		numElements indicates the number of elements in the complete component."""
-class MFnStringArrayData(MFnData,collections.abc.Sequence[MString]):
+class MFnStringArrayData(MFnData,collections.abc.Sequence[str]):
 	"""Function set for node data consisting of an array of string."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def __len__(self)->int:
 		"""Return len(self)."""
-	def __getitem__(self,index:int)->MString:
+	def __getitem__(self,index:int)->str:
 		"""Return self[key]."""
-	def __setitem__(self,index:int,value:MString)->None:
+	def __setitem__(self,index:int,value:str)->None:
 		"""Set self[key] to value."""
 	def __delitem__(self,index:int)->None:
 		"""Delete self[key]."""
@@ -8994,7 +8994,7 @@ class MFnTransform(MFnDagNode):
 		"""Returns the transform's rotate pivot translation component."""
 	def rotation(self,space:int=MSpace.kTransform,asQuaternion:bool=False)->MEulerRotation|MQuaternion:
 		"""Returns the transform's rotation component as either an Euler rotation or a quaternion."""
-	def rotationComponents(self,space:int=MSpace.kTransform,asQuaternion:bool=False)->list[float|order]|list[float]:
+	def rotationComponents(self,space:int=MSpace.kTransform,asQuaternion:bool=False)->list[float|int]:
 		"""Returns a list containing the four components of the transform's rotate component. If asQuaternion is True then the first three elements are the quaternion's unreal x, y, and z components, and the fourth is its real w component. If asQuaternion is False then the first three components are the x, y and z Euler rotation angles and the fourth is an MTransformationMatrix Rotation Order constant."""
 	def rotationOrder(self)->int:
 		"""Returns the order of rotations when the transform's rotate component is expressed as an euler rotation."""
@@ -9980,7 +9980,7 @@ class MImage:
 		* height (unsigned int) - the desired image's height in pixels.
 		* channels (unsigned int) - the desired number of channels per pixel.
 		* type (int) - the desired pixel format (kByte or kFloat, see MImage.pixelType() description for details.)"""
-	def getSize(self)->list[width|height]:
+	def getSize(self)->list[int]:
 		"""getSize() -> [width, height]
 
 		Get the width and height of the currently opened image."""
@@ -9992,7 +9992,7 @@ class MImage:
 		* height (unsigned int) - the desired image's height in pixels.
 		* preserveAspectRatio (bool) - specifies whether the aspect ratio should be preserved or not.
 		         If this flag is set, the given width and height are interpreted as the maximum dimensions allowable."""
-	def setPixels(self,pixels:char,width:int,height:int)->Self:
+	def setPixels(self,pixels:SupportsBytes,width:int,height:int)->Self:
 		"""setPixels(pixels, width, height) -> self
 
 		Copy the uncompressed pixels array passed in into the MImage.
@@ -10013,11 +10013,11 @@ class MImage:
 		* width (unsigned int) - the variable that will be set to the image's width in pixels.
 		* height (unsigned int) - the variable that will be set to the image's height in pixels.
 		* channels (unsigned int) - the number of channels per pixel."""
-	def getDepthMapSize(self)->list[width|height]:
+	def getDepthMapSize(self)->list[int]:
 		"""getDepthMapSize() -> [width, height]
 
 		Returns the size of the depth map buffer."""
-	def getDepthMapRange(self)->list[minValue|maxValue]:
+	def getDepthMapRange(self)->list[float]:
 		"""getDepthMapRange() -> [minValue, maxValue]
 
 		Compute the minimum and maximum depth values (range) for any stored depth buffer."""
@@ -10072,12 +10072,12 @@ class MImage:
 		"""readDepthMap(pathname) -> self
 
 		Reads the depth map from the specified file and place the result into the depth map array of this MImage instance."""
-	def writeToFile(self,pathname:str,outputFormat:Any=iff)->Self:
+	def writeToFile(self,pathname:str,outputFormat:str="iff")->Self:
 		"""writeToFile(pathname, outputFormat=iff) -> self
 
 		Save the content of this image in a file. By default, the file is saved in IFF format.
 		Optionally, the file can also be converted in a variety of image formats."""
-	def writeToFileWithDepth(self,pathname:str,outputFormat:Any=iff,writeDepth:Any=False)->Self:
+	def writeToFileWithDepth(self,pathname:str,outputFormat:str="iff",writeDepth:Any=False)->Self:
 		"""writeToFileWithDepth(pathname, outputFormat=iff, writeDepth=False) -> self
 
 		Save the content of this image in a file. By default, the file is saved in IFF format.
@@ -11287,7 +11287,7 @@ class MItMeshFaceVertex:
 
 		* mesh (MDagPath) - The mesh to iterate over
 		* component (MObject) - The faces of the mesh to iterate over"""
-	def setIndex(self,faceId:int,faceVertexId:int)->tuple[oldFaceId,oldFaceVertexId]:
+	def setIndex(self,faceId:int,faceVertexId:int)->tuple[int,int]:
 		"""setIndex(faceId, faceVertexId) -> (oldFaceId, oldFaceVertexId)
 
 		Sets the index of the current face vertex to be accessed. The current
@@ -12899,7 +12899,7 @@ class MMessage:
 		outside of a callback, an invalid MCallbackId and failed status will
 		be returned."""
 	@staticmethod
-	def nodeCallbacks(node:MObject)->ids:
+	def nodeCallbacks(node:MObject)->list[MCallbackIdArray]:
 		"""nodeCallbacks(node) -> ids
 
 		Returns a list of callback IDs registered to a given node.
@@ -14025,7 +14025,7 @@ class MPoint(collections.abc.Sequence[float]):
 	def __init__(self,src:MPoint|MFloatPoint|MVector|MFloatVector)->None:
 		"""Copy constructor. Returns a new MPoint object with its x, y, z and w coords set to the same values as src . If src is a vector then the new MPoint 's w coordinate is set to 1.0."""
 	@overload
-	def __init__(self,seq:Sequence[two|three|float])->None:
+	def __init__(self,seq:Sequence[float])->None:
 		"""Returns a new MPoint object whose x, y, z and w coordinates are set to the elements of seq . If the sequence contains fewer than four values w will be set to 1.0. If the sequence contains fewer than three values z will be set to 0.0."""
 	@overload
 	def __init__(self,x:float,y:float,z:float,w:float)->None:
@@ -14159,7 +14159,7 @@ class MPointOnMesh:
 class MPolyMessage(MMessage):
 	"""Class used to register callbacks for poly related messages."""
 	@staticmethod
-	def addPolyComponentIdChangedCallback(node:MObject,arg:tuple[wantVertIds,wantEdgeIds,wantFaceIds],function:Callable,clientData:Any|None=None)->int:
+	def addPolyComponentIdChangedCallback(node:MObject,arg:tuple[bool,bool,bool],function:Callable,clientData:Any|None=None)->int:
 		"""addPolyComponentIdChangedCallback(node, (wantVertIds, wantEdgeIds, wantFaceIds), function, clientData=None) -> id
 
 		This method registers a callback that should be called whenever a poly
@@ -14842,7 +14842,7 @@ class MPxNode:
 
 		* plug (MPlug) - the plug.
 		* plugArray (MPlugArray) - the corresponding plugs."""
-	def passThroughToOne(self,plug:MPlug)->plug:
+	def passThroughToOne(self,plug:MPlug)->MPlug:
 		"""passThroughToOne(plug) -> plug
 
 		This method may be overriden by nodes that have a one-to-one relationship between an input attribute and a corresponding output attribute. This method is used by Maya to perform the following capabilities:
@@ -15647,7 +15647,7 @@ class MRampAttribute:
 		"""Adds entries to the ramp. For a curve ramp values must be a sequence of floats, for color ramps it must be a sequence of MColors. A TypeError will be raised if the wrong type of values are supplied."""
 	def deleteEntries(self,indices:Sequence[int])->Self:
 		"""Removes from the ramp those entries with the specified indices . Raises a ValueError if an attempt is made to remove the last remaining entry from the ramp."""
-	def getEntries(self)->tuple[indices,positions,values,interps]:
+	def getEntries(self)->tuple[MIntArray,MFloatArray,MFloatArray|MColorArray,MIntArray]:
 		"""Returns a tuple containing all of the entries in the ramp. The first element of the tuple is an MIntArray containing the indices . The second element is an MFloatArray containing the positions . The third element is the values , which is an MFloatArray for a curve ramp or an MColorArray for a color ramp. The fourth and final element of the tuple is an MIntArray containing the interps , which are Interpolation Type constants."""
 	def getValueAtPosition(self,position:float)->float|MColor:
 		"""Returns the value of the entry at the given position . The value will be a float for a curve ramp or an MColor for a color ramp."""
@@ -15698,7 +15698,7 @@ class MRichSelection:
 
 
 		Empties the rich selection."""
-	def getRawSymmetryMatrix(self)->tuple[MMatrix,space]:
+	def getRawSymmetryMatrix(self)->tuple[MMatrix,int]:
 		"""getRawSymmetryMatrix() -> (MMatrix, space)
 
 		Returns a tuple containing the raw symmetry matrix to use for the
@@ -16693,7 +16693,7 @@ class MTransformationMatrix:
 		"""Returns the transformation's rotate pivot translation component."""
 	def rotation(self,asQuaternion:bool=False)->MEulerRotation|MQuaternion:
 		"""Returns the transformation's rotation component as either an Euler rotation or a quaternion."""
-	def rotationComponents(self,asQuaternion:bool=False)->list[float|order]|list[float]:
+	def rotationComponents(self,asQuaternion:bool=False)->list[float|int]:
 		"""Returns a list containing the four components of the transformation's rotate component. If asQuaternion is True then the first three elements are the quaternion's unreal x, y, and z components, and the fourth is its real w component. If asQuaternion is False then the first three components are the x, y and z Euler rotation angles and the fourth is a Rotation Order constant."""
 	def rotationOrder(self)->int:
 		"""Returns the order of rotations when the transformation's rotate component is expressed as an euler rotation."""
@@ -16836,7 +16836,7 @@ class MURI:
 		"""getPort() -> int
 
 		Returns the port component of the URI, or -1 if the port is not defined."""
-	def getAllQueryItemKeys(self)->array:
+	def getAllQueryItemKeys(self)->list[str]:
 		"""getAllQueryItemKeys() -> array
 
 		Returns an array containing the keys from all query string pairs."""
@@ -16844,7 +16844,7 @@ class MURI:
 		"""getQueryItemValue(key) -> string
 
 		Returns the value from the first query string pair in the URI which has a given key."""
-	def getAllQueryItemValues(self,key:Any)->array:
+	def getAllQueryItemValues(self,key:Any)->list[str]:
 		"""getAllQueryItemValues(key) -> array
 
 		Returns an array containing the values from all query string pairs which have a given key."""
@@ -17191,7 +17191,7 @@ class MVector(collections.abc.Sequence[float]):
 	def __init__(self,src:MVector|MFloatVector|MPoint|MFloatPoint)->None:
 		"""Copy constructor. Returns a new MVector object whose x, y and z coordinates are set to the x, y and z coordinates of src ."""
 	@overload
-	def __init__(self,seq:Sequence[two|float])->None:
+	def __init__(self,seq:Sequence[float])->None:
 		"""Returns a new MVector object whose x, y and z coordinates are set to the elements of seq . If the sequence only contains two values z will be set to 0.0."""
 	@overload
 	def __init__(self,x:float,y:float,z:float)->None:

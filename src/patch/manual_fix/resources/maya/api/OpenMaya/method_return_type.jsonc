@@ -1,0 +1,60 @@
+{
+    "MExternalContentInfoTable": {
+        "getEntry": "list[str|list[str]]",
+        "getInfo": "list[str|list[str]]"
+    },
+    "MExternalContentLocationTable": {
+        "getEntry": "list[str]"
+    },
+    "MFnSet": {
+        "restriction": "int"
+    },
+    "MRichSelection": {
+        "getRawSymmetryMatrix": "tuple[MMatrix,int]"
+    },
+    "MPxNode": {
+        "passThroughToOne": "MPlug"
+    },
+    "MImage": {
+        "getSize": "list[int]",
+        "getDepthMapSize": "list[int]",
+        "getDepthMapRange": "list[float]"
+    },
+    "MFnDisplayLayer": {
+        "getMembers": "Any",
+        "add": "Any",
+        "remove": "Any",
+        "containsAncestorInclusive": "bool"
+    },
+    "MFnDisplayLayerManager": {
+        "getLayer": "Any",
+        "getAncestorLayersInclusive": "Any",
+        "getAllDisplayLayers": "list[MObject]"
+    },
+    "MFnTransform": {
+        "rotationComponents": "list[float|int]"
+    },
+    "MTransformationMatrix": {
+        "rotationComponents": "list[float|int]"
+    },
+    "MFnMesh": {
+        "allIntersections": "tuple[MFloatPointArray,MFloatArray,MIntArray,MIntArray,MFloatArray,MFloatArray]|None",
+        "anyIntersection": "tuple[MFloatPoint,float,int,int,float,float]|None",
+        "closestIntersection": "tuple[MFloatPoint,float,int,int,float,float]|None",
+        "getHoles": "tuple[tuple[int,tuple[int,...]],...]",
+        "getFaceAndVertexIndices": "tuple[int,int]"
+    },
+    "MItMeshFaceVertex": {
+        "setIndex": "tuple[int,int]"
+    },
+    "MMessage": {
+        "nodeCallbacks": "list[MCallbackIdArray]"
+    },
+    "MRampAttribute": {
+        "getEntries": "tuple[MIntArray,MFloatArray,MFloatArray|MColorArray,MIntArray]"
+    },
+    "MURI": {
+        "getAllQueryItemKeys": "list[str]",
+        "getAllQueryItemValues": "list[str]"
+    }
+}

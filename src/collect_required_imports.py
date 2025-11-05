@@ -14,6 +14,7 @@ MAYA_MODULES = {
 }
 
 TYPING_IMPORTS = {
+    "SupportsBytes",
     "Sequence",
     "Callable",
     "Literal",

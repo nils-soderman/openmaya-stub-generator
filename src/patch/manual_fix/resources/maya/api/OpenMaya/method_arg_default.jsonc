@@ -1,0 +1,10 @@
+{
+    "MImage": {
+        "writeToFile": {
+            "outputFormat": "\"iff\""
+        },
+        "writeToFileWithDepth": {
+            "outputFormat": "\"iff\""
+        }
+    }
+}
