@@ -2753,7 +2753,7 @@ class MPxShadingNodeOverride:
 		* isTexturedShading (optional, bool) - specifies if we are requesting a textured or untextured shading fragment name.
 		Returns the name of the fragment to use"""
 	@overload
-	def fragmentName(self,isTexturedShading:optional|bool)->str:
+	def fragmentName(self,isTexturedShading:bool)->str:
 		"""fragmentName() -> stringfragmentName(isTexturedShading) -> string
 
 		Override this method to return the name of the fragment or fragment graph to use for rendering the shading node associated with this override. This fragment will be automatically connected to the other fragments for the other nodes in the shading network to produce a complete shading effect.
@@ -2847,7 +2847,7 @@ class MPxShadingNodeOverride:
 		* mappings (MAttributeParameterMappingList) - The attribute parameter mappings for this override.
 		* isTexturedShading (optional, bool) - Are we updating textured or untextured shading"""
 	@overload
-	def updateShader(self,shader:MShaderInstance,mappings:MAttributeParameterMappingList,isTexturedShading:optional|bool)->Self:
+	def updateShader(self,shader:MShaderInstance,mappings:MAttributeParameterMappingList,isTexturedShading:bool)->Self:
 		"""updateShader(shader, mappings) -> selfupdateShader(shader, mappings, isTexturedShading) -> self
 
 		This method is called every time Maya needs to update the parameter values on the final shading effect of which the fragment
@@ -6271,7 +6271,7 @@ class MTexture:
 		"""freeRawData(long) -> None
 		Deallocate system memory - retrieved from rawData()."""
 	@overload
-	def update(self,pixelData:void,generateMipMaps:bool,rowPitch:int=0,region:MTextureUpdateRegion|None=None)->Self:
+	def update(self,pixelData:Any,generateMipMaps:bool,rowPitch:int=0,region:MTextureUpdateRegion|None=None)->Self:
 		"""update(pixelData, generateMipMaps, rowPitch=0, region=None) -> self
 		update(image, generateMipMaps) -> selfupdate(textureNode) -> self
 
@@ -6528,7 +6528,7 @@ class MTextureManager:
 		* textureNode (MObject) - Node to acquire texture from
 		* allowBackgroundLoad (bool) - Allow for background texture loading. The default value is false."""
 	@overload
-	def acquireTexture(self,textureName:str,textureDesc:MTextureDescription,pixelData:void,generateMipMaps:bool=True)->MTexture:
+	def acquireTexture(self,textureName:str,textureDesc:MTextureDescription,pixelData:Any,generateMipMaps:bool=True)->MTexture:
 		"""(Deprecated) acquireTexture(filePath, mipmapLevels=0, layerName="", alphaChannelIdx=-1) -> MTexture
 		acquireTexture(filePath, contextNodeFullName, mipmapLevels=0, layerName="", alphaChannelIdx=-1) -> MTexture
 		acquireTexture(textureName, plug, width, height, generateMipMaps=True) -> MTexture

@@ -1,13 +1,11 @@
 """ 
 Patch overlapping overrides to combine them and return using | operator
 """
-import sys
-
 from .base import PatchBase
 
 
 class Patch_OverlappingOverloads(PatchBase):
-    ORDER = sys.maxsize
+    ORDER = 1000
 
     def patch_method(self, class_, method, overload=None):
         if overload is not None:

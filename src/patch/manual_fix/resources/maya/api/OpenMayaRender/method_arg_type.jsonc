@@ -11,5 +11,23 @@
         "populateVertexBuffer": {
             "data": "bytearray"
         }
+    },
+    "MPxShadingNodeOverride": {
+        "fragmentName": {
+            "isTexturedShading": "bool"
+        },
+        "updateShader": {
+            "isTexturedShading": "bool"
+        }
+    },
+    "MTexture": {
+        "update": {
+            "pixelData": "Any"
+        }
+    },
+    "MTextureManager": {
+        "acquireTexture": {
+            "pixelData": "Any"
+        }
     }
 }
