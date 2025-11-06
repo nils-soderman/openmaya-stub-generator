@@ -29,6 +29,9 @@ class Patch_MayaTypes(PatchBase):
         super().patch_method(class_, method, overload)
         if method.parameters:
             for parameter in method.parameters:
+                if parameter.type:
+                    parameter.type = convert_type.add_maya_module_prefix(parameter.type)
+
                 if parameter.default:
                     converted_type = convert_type.add_maya_module_prefix(parameter.default)
                     if converted_type == "Any":

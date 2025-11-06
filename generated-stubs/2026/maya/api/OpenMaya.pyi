@@ -2324,13 +2324,13 @@ class MDataHandle:
 
 		Returns the data represented by this handle in the data block."""
 	@overload
-	def child(self,MPlug:Any)->MDataHandle:
+	def child(self,Plug:MPlug)->MDataHandle:
 		"""child(MPlug) -> MDataHandle
 		child(MObject) -> MDataHandle
 
 		Get a handle to a child of this handle.  This is used if you have a handle to a compound attribute."""
 	@overload
-	def child(self,MObject:Any)->MDataHandle:
+	def child(self,Object:MObject)->MDataHandle:
 		"""child(MPlug) -> MDataHandle
 		child(MObject) -> MDataHandle
 
@@ -2455,41 +2455,41 @@ class MDataHandle:
 		"""setInt(int) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMAngle(self,MAngle:Any)->Self:
+	def setMAngle(self,Angle:MAngle)->Self:
 		"""setMAngle(MAngle) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMDistance(self,MDistance:Any)->Self:
+	def setMDistance(self,Distance:MDistance)->Self:
 		"""setMDistance(MDistance) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMFloatMatrix(self,MFloatMatrix:Any)->Self:
+	def setMFloatMatrix(self,FloatMatrix:MFloatMatrix)->Self:
 		"""setMFloatMatrix(MFloatMatrix) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMFloatVector(self,MFloatVector:Any)->Self:
+	def setMFloatVector(self,FloatVector:MFloatVector)->Self:
 		"""setMFloatVector(MFloatVector) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMMatrix(self,MMatrix:Any)->Self:
+	def setMMatrix(self,Matrix:MMatrix)->Self:
 		"""setMMatrix(MMatrix) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMObject(self,MObject:Any)->Self:
+	def setMObject(self,Object:MObject)->Self:
 		"""setMObject(MObject) -> self
 
 		Set the data that this handle represents in the data block.  This method assumes that the MObject is a dependency graph data object.  These objects can be created using the appropriate MFn..Data function set.
 		Note that this method cannot be used to copy compound or multi attributes from one handle to another via the construct outputHandle.set (inputHandle.data()).
 		To copy these user defined attributes, the method MDataHandle.copy() must be used."""
-	def setMPxData(self,MPxData:Any)->Self:
+	def setMPxData(self,PxData:MPxData)->Self:
 		"""setMPxData(MPxData) -> self
 
 		Set the data that this handle represents in the data block.  This method takes a pointer to a user defined data object.  The data block will become the new owner of the data object that you pass in.  Do not delete it."""
-	def setMTime(self,MTime:Any)->Self:
+	def setMTime(self,Time:MTime)->Self:
 		"""setMTime(MTime) -> self
 
 		Set the data that this handle represents in the data block."""
-	def setMVector(self,MVector:Any)->Self:
+	def setMVector(self,Vector:MVector)->Self:
 		"""setMVector(MVector) -> self
 
 		Set the data that this handle represents in the data block."""
@@ -3306,7 +3306,7 @@ class MFloatPoint(collections.abc.Sequence[float]):
 	def __init__(self)->None:
 		"""Default constructor. Returns a new MFloatPoint object, initialized to the origin."""
 	@overload
-	def __init__(self,src:MFloatPoint|MPoint|MFloatVector|MVector)->None:
+	def __init__(self,src:Any)->None:
 		"""Copy constructor. Returns a new MFloatPoint object with its x, y, z and w coords set to the same values as src . If src is a vector then the new MFloatPoint 's w coordinate is set to 1.0."""
 	@overload
 	def __init__(self,seq:Sequence[float])->None:
@@ -3446,7 +3446,7 @@ class MFloatVector(collections.abc.Sequence[float]):
 	def __init__(self)->None:
 		"""Default constructor. Returns a new MFloatVector object initialized to the zero vector."""
 	@overload
-	def __init__(self,src:MVector|MFloatVector|MPoint|MFloatPoint)->None:
+	def __init__(self,src:Any)->None:
 		"""Copy constructor. Returns a new MFloatVector object whose x, y and z coordinates are set to the x, y and z coordinates of src ."""
 	@overload
 	def __init__(self,seq:Sequence[Any])->None:
@@ -5124,7 +5124,7 @@ class MFnAttribute(MFnBase):
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def acceptsAttribute(self,*args)->Any:
 		"""Returns True if this attribute can accept a connection with the given attribute."""
-	def accepts(self,type:MTypeId|int)->bool:
+	def accepts(self,type:Any)->bool:
 		"""Returns True if this attribute can accept a connection of the given type."""
 	def addToCategory(self,*args)->Any:
 		"""Adds the attribute to a category"""
@@ -6164,10 +6164,10 @@ class MFnDoubleArrayData(MFnData,collections.abc.Sequence[float]):
 	def create(self)->MObject:
 		"""Creates a new, empty double array data object, attaches it to the function set and returns an MObject which references it."""
 	@overload
-	def create(self,array:MDoubleArray|Sequence[float])->MObject:
+	def create(self,array:Any)->MObject:
 		"""Creates a new, double array data object, initializes it with the elements from array , attaches it to the function set and returns an MObject which references it."""
 	@overload
-	def set(self,array:MDoubleArray|Sequence[float])->Self:
+	def set(self,array:Any)->Self:
 		"""Replaces the elements in the encapsulated array with those from the supplied array ."""
 	@overload
 	def set(self,value:float,index:int)->Self:
@@ -6408,10 +6408,10 @@ class MFnIntArrayData(MFnData,collections.abc.Sequence[int]):
 	def create(self)->MObject:
 		"""Creates a new, empty int array data object, attaches it to the function set and returns an MObject which references it."""
 	@overload
-	def create(self,array:MIntArray|Sequence[int])->MObject:
+	def create(self,array:Any)->MObject:
 		"""Creates a new, int array data object, initializes it with the elements from array , attaches it to the function set and returns an MObject which references it."""
 	@overload
-	def set(self,array:MIntArray|Sequence[int])->Self:
+	def set(self,array:Any)->Self:
 		"""Replaces the elements in the encapsulated array with those from the supplied array ."""
 	@overload
 	def set(self,value:int,index:int)->Self:
@@ -6568,10 +6568,10 @@ class MFnMesh(MFnDagNode):
 	def __init__(self)->None:
 		"""Default constructor. Returns a new MFnMesh functionset with no Maya object attached."""
 	@overload
-	def __init__(self,MObject:Any)->None:
+	def __init__(self,Object:MObject)->None:
 		"""Returns a new MFnMesh object attached to the given mesh node or mesh geometry data."""
 	@overload
-	def __init__(self,MDagPath:Any)->None:
+	def __init__(self,DagPath:MDagPath)->None:
 		"""Returns a new MFnMesh object attached to the given mesh node."""
 	@staticmethod
 	def autoUniformGridParams()->MMeshIsectAccelParams:
@@ -6614,12 +6614,12 @@ class MFnMesh(MFnDagNode):
 		"""Assigns UV coordinates to the mesh's face-vertices."""
 	def booleanOp(self,op:int,mesh1:MFnMesh,mesh2:MFnMesh)->Self:
 		"""Replaces this mesh's geometry with the result of a boolean operation on the two specified meshes."""
-	def booleanOps(self,arg:int,MObjectArray:Any,bool:bool)->Self:
+	def booleanOps(self,arg:int,ObjectArray:MObjectArray,bool:bool)->Self:
 		"""booleanOps(Boolean Operation constant, MObjectArray, bool) -> self
 
 		Replaces this mesh's geometry with the result of a boolean operation
 		on the specified meshes."""
-	def booleanOperations(self,arg:int,MObjectArray:Any)->Self:
+	def booleanOperations(self,arg:int,ObjectArray:MObjectArray)->Self:
 		"""booleanOperations(Boolean Operation constant, MObjectArray) -> self
 
 		Replaces this mesh's geometry with the result of a boolean operation
@@ -7326,7 +7326,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               beneath it as a nurbsCurve node. In this last case it
 		               will be the transform node which is returned."""
 	@overload
-	def create(self,cvs:MPointArray|Sequence[MPoint],knots:Any,degree:int,form:int,is2D:Any,rational:bool,parent:MObject=MObject.kNullObj)->Self:
+	def create(self,cvs:Any,knots:Any,degree:int,form:int,is2D:Any,rational:bool,parent:MObject=MObject.kNullObj)->Self:
 		"""create(cvs, knots, degree, form, is2D, rational, parent=kNullObj)
 		    -> self
 		create(subCurves, parent=kNullObj) -> self
@@ -7367,7 +7367,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               the previous curve in the array, and the curves must be
 		               be at least C0 continuous (i.e. tangent breaks are okay)."""
 	@overload
-	def create(self,subCurves:MObjectArray|Sequence[MObject],parent:MObject=MObject.kNullObj)->Self:
+	def create(self,subCurves:Any,parent:MObject=MObject.kNullObj)->Self:
 		"""create(cvs, knots, degree, form, is2D, rational, parent=kNullObj)
 		    -> self
 		create(subCurves, parent=kNullObj) -> self
@@ -7407,7 +7407,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               curve in the array must be coincident with the end of
 		               the previous curve in the array, and the curves must be
 		               be at least C0 continuous (i.e. tangent breaks are okay)."""
-	def createWithEditPoints(self,eps:MPointArray|Sequence[MPoint],degree:int,form:int,is2D:Any,rational:bool,uniform:bool,parent:MObject=MObject.kNullObj)->MObject:
+	def createWithEditPoints(self,eps:Any,degree:int,form:int,is2D:Any,rational:bool,uniform:bool,parent:MObject=MObject.kNullObj)->MObject:
 		"""createWithEditPoints(eps, degree, form, is2D, rational, uniform,
 		    parent=kNullObj) -> MObject
 
@@ -7598,7 +7598,7 @@ class MFnNurbsCurve(MFnDagNode):
 		* point (MPoint) - new position for the cv
 		* space    (int) - an MSpace constant giving the coordinate space
 		                   in which the point is given"""
-	def setCVPositions(self,points:MPointArray|Sequence[MPoint],space:int=MSpace.kObject)->Self:
+	def setCVPositions(self,points:Any,space:int=MSpace.kObject)->Self:
 		"""setCVPositions(points, space=kObject) -> self
 
 		Sets the positions of all of the curve's control vertices.
@@ -7915,7 +7915,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* patchId     (int) - Patch to map to.
 		* cornerIndex (int) - Corner of the patch to map to.
 		* uvId        (int) - Index into the uv list of the UV to map."""
-	def assignUVs(self,uvCounts:MIntArray|Sequence[int],uvIds:MIntArray|Sequence[int])->Self:
+	def assignUVs(self,uvCounts:Any,uvIds:Any)->Self:
 		"""assignUVs(uvCounts, uvIds) -> self
 
 		Maps all texture coordinates for the surface. setUV() and setUVs()
@@ -8037,7 +8037,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                    with the new surface parented beneath it as a
 		                    nurbsSurface node. In this last case it will be
 		                    the transform node which is returned."""
-	def create(self,cvs:MPointArray|Sequence[MPoint],uKnots:MDoubleArray|Sequence[float],vKnots:MDoubleArray|Sequence[float],uDegree:int,vDegree:int,uForm:int,vForm:int,rational:bool,parent:MObject=MObject.kNullObj)->MObject:
+	def create(self,cvs:Any,uKnots:Any,vKnots:Any,uDegree:int,vDegree:int,uForm:int,vForm:int,rational:bool,parent:MObject=MObject.kNullObj)->MObject:
 		"""create(cvs, uKnots, vKnots, uDegree, vDegree, uForm, vForm,
 		    rational, parent=kNullObj) -> MObject
 
@@ -8403,7 +8403,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* param (float) - V parameter value of the knot to remove."""
 	def setCVPosition(self,uIndex:int,vIndex:int,point:Any,space:int=MSpace.kObject)->Self:
 		"""setCVPosition(uIndex, vIndex, point, space=kObject) -> self"""
-	def setCVPositions(self,points:MPointArray|Sequence[MPoint],space:int=MSpace.kObject)->Self:
+	def setCVPositions(self,points:Any,space:int=MSpace.kObject)->Self:
 		"""setCVPositions(points, space=kObject) -> self
 
 		Set the positions of all of the surface's CVs.
@@ -8448,7 +8448,7 @@ class MFnNurbsSurface(MFnDagNode):
 
 		* index   (int) - V index of the knot to set.
 		* param (float) - New parameter value for the knot."""
-	def setKnotsInU(self,params:MDoubleArray|Sequence[float],startIndex:int,endIndex:int)->Self:
+	def setKnotsInU(self,params:Any,startIndex:int,endIndex:int)->Self:
 		"""setKnotsInU(params, startIndex, endIndex) -> self
 
 		Sets the values of a range of U knots.
@@ -8458,7 +8458,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                     per knot in the range.
 		* startIndex (int) - Index of the first U knot to set.
 		* endIndex   (int) - Index of the last U knot to set."""
-	def setKnotsInV(self,params:MDoubleArray|Sequence[float],startIndex:int,endIndex:int)->Self:
+	def setKnotsInV(self,params:Any,startIndex:int,endIndex:int)->Self:
 		"""setKnotsInV(params, startIndex, endIndex) -> self
 
 		Sets the values of a range of V knots.
@@ -8484,7 +8484,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* uvId (int) - Index of the element in the surface's uv list to set.
 		* u  (float) - U value to set the uv to.
 		* v  (float) - V value to set the uv to."""
-	def setUVs(self,uList:MFloatArray|Sequence[float],vList:MFloatArray|Sequence[float])->Self:
+	def setUVs(self,uList:Any,vList:Any)->Self:
 		"""setUVs(uList, vList) -> self
 
 		Sets all of the texture coordinates (uvs) for this surface. The
@@ -8518,7 +8518,7 @@ class MFnNurbsSurface(MFnDagNode):
 		* vParam (float) - V parameter value at which to obtain the tangents.
 		* space    (int) - An MSpace constant giving the coordinate space
 		                   in which to perform the operation"""
-	def trim(self,regionsToKeepU:MDoubleArray|Sequence[float],regionsToKeepV:MDoubleArray|Sequence[float],keepHistory:bool=False)->Self:
+	def trim(self,regionsToKeepU:Any,regionsToKeepV:Any,keepHistory:bool=False)->Self:
 		"""trim(regionsToKeepU, regionsToKeepV, keepHistory=False) -> self
 
 		Trims the surface to its curves on surface. Regions which are kept
@@ -8632,7 +8632,7 @@ class MFnPluginData(MFnData):
 	def __init__(self)->None:
 		"""Initializes a new, empty MFnPluginData object"""
 	@overload
-	def __init__(self,MObject:Any)->None:
+	def __init__(self,Object:MObject)->None:
 		"""Initializes a new MFnPluginData function set, attached
 		to the specified object."""
 	def typeId(self)->MTypeId:
@@ -8669,10 +8669,10 @@ class MFnPointArrayData(MFnData,collections.abc.Sequence[MPoint]):
 	def create(self)->MObject:
 		"""Creates a new empty MPoint array data object, attaches it to the function set and returns an MObject which references it."""
 	@overload
-	def create(self,array:MPointArray|Sequence[MPoint])->MObject:
+	def create(self,array:Any)->MObject:
 		"""Creates a new MPoint array data object, initializes it with the elements from array , attaches it to the function set and returns an MObject which references it."""
 	@overload
-	def set(self,array:MPointArray|Sequence[MPoint])->Self:
+	def set(self,array:Any)->Self:
 		"""Replaces the elements in the encapsulated array with those from the supplied array ."""
 	@overload
 	def set(self,value:MPoint,index:int)->Self:
@@ -8705,11 +8705,11 @@ class MFnReference(MFnDependencyNode):
 		"""parentAssembly() -> MObject
 
 		Returns the parent assembly node that contains this reference. See MFnAssembly documentation for more details."""
-	def containsNode(self,MObject:Any)->bool:
+	def containsNode(self,Object:MObject)->bool:
 		"""containsNode(MObject) -> bool
 
 		Returns true if the specified node is from this reference or one of its child references. The containsNodeExactly method can be used to test membership without including the child references."""
-	def containsNodeExactly(self,MObject:Any)->bool:
+	def containsNodeExactly(self,Object:MObject)->bool:
 		"""containsNodeExactly(MObject) -> bool
 
 		Returns true if the specified node is from this reference. Membership in child references is not checked. The containsNode method may be used to test membership in a reference and its child references."""
@@ -8759,13 +8759,13 @@ class MFnSet(MFnDependencyNode):
 
 		* members (MSelectionList) - list of members for new set
 		* restriction (MFnSet.Restriction) - restriction applied to members"""
-	def getUnion(self,otherSet:MObject|MObjectArray|list[set])->MSelectionList:
+	def getUnion(self,otherSet:Any)->MSelectionList:
 		"""getUnion( otherSet ) -> MSelectionList
 
 		This method calculates the union of two sets.  The result will be the union of this set and the set passed into the method.
 
 		* otherSet (MObject or MObjectArray or list of sets) - set(s) to find union of with this set"""
-	def getIntersection(self,otherSet:MObject|MObjectArray|list[set])->MSelectionList:
+	def getIntersection(self,otherSet:Any)->MSelectionList:
 		"""getIntersection( otherSet ) -> MSelectionList
 
 		This method calculates the intersection of two sets.  The result will be the intersection of this set and the set passed into the method.
@@ -8789,7 +8789,7 @@ class MFnSet(MFnDependencyNode):
 		Add a new object to the set.
 
 		The added object may be an MObject, an (MDagPath, MObject) tuple, or an MPlug."""
-	def addMembers(self,MSelectionList:Any)->Self:
+	def addMembers(self,SelectionList:MSelectionList)->Self:
 		"""addMembers( MSelectionList ) -> self
 
 		Add a list of new objects to the set."""
@@ -8799,7 +8799,7 @@ class MFnSet(MFnDependencyNode):
 		Remove an object from the set.
 
 		The removed object may be an MObject, an (MDagPath, MObject) tuple, or an MPlug."""
-	def removeMembers(self,MSelectionList:Any)->Self:
+	def removeMembers(self,SelectionList:MSelectionList)->Self:
 		"""removeMembers( MSelectionList ) -> self
 
 		Remove items of the selection list from the set."""
@@ -8868,7 +8868,7 @@ class MFnSingleIndexedComponent(MFnComponent):
 
 		Adds the specified elements to the component."""
 	@overload
-	def addElements(self,MIntArray:Any)->Self:
+	def addElements(self,IntArray:MIntArray)->Self:
 		"""addElements([int]) -> self
 		addElements(MIntArray) -> self
 
@@ -8984,7 +8984,7 @@ class MFnTransform(MFnDagNode):
 		"""Resets the transform's attribute values to represent the given transformation matrix in world space."""
 	def restPosition(self)->MTransformationMatrix:
 		"""Returns the transform's rest position matrix, or the identity matrix if no rest position has been set."""
-	def rotateBy(self,rot:MQuaternion|MEulerRotation,space:int)->Self:
+	def rotateBy(self,rot:Any,space:int)->Self:
 		"""Adds rot to the transform's rotation component."""
 	def rotateByComponents(self,seq:Sequence[float|int],space:int,asQuaternion:bool=False)->Self:
 		"""Adds the rotation represented by the four parameter values to the transform's rotate component. If asQuaternion is True then seq must contain four floats representing the x, y, z and w components of a quaternion rotation. If asQuaternion is False then seq must contain three floats representing the x, y and z angles, followed by an MTransformationMatrix Rotation Order constant, which together form an Euler rotation."""
@@ -9016,7 +9016,7 @@ class MFnTransform(MFnDagNode):
 		"""Sets the transform's rotate pivot component."""
 	def setRotatePivotTranslation(self,trans:MVector,space:int)->Self:
 		"""Sets the transform's rotate pivot translation component."""
-	def setRotation(self,rot:MQuaternion|MEulerRotation,space:int)->Self:
+	def setRotation(self,rot:Any,space:int)->Self:
 		"""Sets the transform's rotation component to rot ."""
 	def setRotationComponents(self,seq:Sequence[float|int],space:int=MSpace.kTransform,asQuaternion:bool=False)->Self:
 		"""Sets the transform's rotate component. If asQuaternion is True then seq must contain four floats representing the x, y, z and w components of a quaternion rotation. If asQuaternion is False then seq must contain three floats representing the x, y and z angles, followed by an MTransformationMatrix Rotation Order constant, which together form an Euler rotation."""
@@ -9119,7 +9119,7 @@ class MFnTypedAttribute(MFnAttribute):
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def attrType(self)->int:
 		"""Returns the type of data handled by the attribute."""
-	def create(self,longName:str,shortName:str,type:MTypeId|int,defaultValue:MObject=MObject.kNullObj)->MObject:
+	def create(self,longName:str,shortName:str,type:Any,defaultValue:MObject=MObject.kNullObj)->MObject:
 		"""Creates a new attribute of the given type with the given longName , shortName and defaultValue , attaches it to the function set and returns it in an MObject ."""
 class MFnUInt64ArrayData(MFnData,collections.abc.Sequence[int]):
 	"""Function set for node data consisting of an array of MUint64."""
@@ -9141,10 +9141,10 @@ class MFnUInt64ArrayData(MFnData,collections.abc.Sequence[int]):
 	def create(self)->MObject:
 		"""Creates a new empty unsigned long array data object, attaches it to the function set and returns an MObject which references it."""
 	@overload
-	def create(self,array:MUint64Array|Sequence[int])->MObject:
+	def create(self,array:Any)->MObject:
 		"""Creates a new unsigned long array data object, initializes it with the elements from array , attaches it to the function set and returns an MObject which references it."""
 	@overload
-	def set(self,array:MUint64Array|Sequence[int])->Self:
+	def set(self,array:Any)->Self:
 		"""Replaces the elements in the encapsulated array with those from the supplied array ."""
 	@overload
 	def set(self,value:int|int,index:int)->Self:
@@ -9167,7 +9167,7 @@ class MFnUnitAttribute(MFnAttribute):
 	def create(self,longName:str,shortName:str,type:int,defaultValue:float=0.0)->MObject:
 		"""Creates a new attribute of the given type with the given longName , shortName and defaultValue , attaches it to the function set and returns it in an MObject ."""
 	@overload
-	def create(self,longName:str,shortName:str,defaultValue:MAngle|MDistance|MTime)->MObject:
+	def create(self,longName:str,shortName:str,defaultValue:Any)->MObject:
 		"""Creates a new angle, distance or time attribute, depending upon the type of the defaultValue , with the given longName , shortName , attaches it to the function set and returns it in an MObject ."""
 	def getMax(self)->MAngle|MDistance|MTime:
 		"""Returns the attribute's hard maximum value. Raises a RuntimeError if the attribute does not have a hard maximum."""
@@ -9215,10 +9215,10 @@ class MFnVectorArrayData(MFnData,collections.abc.Sequence[MVector]):
 	def create(self)->MObject:
 		"""Creates a new empty MVector array data object, attaches it to the function set and returns an MObject which references it."""
 	@overload
-	def create(self,array:MVectorArray|Sequence[MVector])->MObject:
+	def create(self,array:Any)->MObject:
 		"""Creates a new MVector array data object, initializes it with the elements from array , attaches it to the function set and returns an MObject which references it."""
 	@overload
-	def set(self,array:MVectorArray|Sequence[MVector])->Self:
+	def set(self,array:Any)->Self:
 		"""Replaces the elements in the encapsulated array with those from the supplied array ."""
 	@overload
 	def set(self,value:MVector,index:int)->Self:
@@ -9302,7 +9302,7 @@ class MGlobal:
 		  kSelectLeafMode       Selecting the child in a hierarchy will result only in that child being selected.
 		  kSelectTemplateMode   Templated objects are selectable in this mode."""
 	@staticmethod
-	def setActiveSelectionList(MSelectionList:Any,listAdjustment:int=MGlobal.kReplaceList)->None:
+	def setActiveSelectionList(SelectionList:MSelectionList,listAdjustment:int=MGlobal.kReplaceList)->None:
 		"""setActiveSelectionList(MSelectionList, listAdjustment=kReplaceList) -> None
 
 		Set the active selection list.
@@ -9387,7 +9387,7 @@ class MGlobal:
 		* mask (MSelectionMask) - The selection mask.
 		* type (int) - The selection type (see MSelectionMask.addMask() for a list of values)."""
 	@staticmethod
-	def setRichSelection(MRichSelection:Any)->None:
+	def setRichSelection(RichSelection:MRichSelection)->None:
 		"""setRichSelection(MRichSelection) -> None
 
 		Set the current rich selection."""
@@ -9454,7 +9454,7 @@ class MGlobal:
 		over a Mesh object and chooses the "vertex" option the Mesh line drawing changes
 		color and the mesh is added to the hiliteList.)"""
 	@staticmethod
-	def setHiliteList(MSelectionList:Any)->None:
+	def setHiliteList(SelectionList:MSelectionList)->None:
 		"""setHiliteList(MSelectionList) -> None
 
 		Sets the current hilite list. The current selection list is unchanged."""
@@ -9465,7 +9465,7 @@ class MGlobal:
 		Gets the objects for which Maya is displaying a preselection
 		highlight in the viewports."""
 	@staticmethod
-	def setPreselectionHiliteList(MSelectionList:Any)->None:
+	def setPreselectionHiliteList(SelectionList:MSelectionList)->None:
 		"""setPreselectionHiliteList(MSelectionList) -> None
 
 		Sets the objects for which Maya will display a preselection
@@ -9478,7 +9478,7 @@ class MGlobal:
 		If preselection highlighting is not enabled, Maya will still
 		store the list."""
 	@staticmethod
-	def selectCommand(MSelectionList:Any,listAdjustment:int=MGlobal.kReplaceList)->None:
+	def selectCommand(SelectionList:MSelectionList,listAdjustment:int=MGlobal.kReplaceList)->None:
 		"""selectCommand(MSelectionList, listAdjustment=kReplaceList) -> None
 
 		Set the active selection list, by calling the built in Maya select
@@ -9498,7 +9498,7 @@ class MGlobal:
 		Removes objects matching the pattern from the active selection list."""
 	@staticmethod
 	@overload
-	def unselect(MObject:Any)->None:
+	def unselect(Object:MObject)->None:
 		"""unselect(MObject) -> None
 		unselect(MDagPath, MObject) -> None
 
@@ -9510,7 +9510,7 @@ class MGlobal:
 		selection rectangle, it is selected according to listAdjustment."""
 	@overload
 	@staticmethod
-	def unselect(MDagPath:Any,MObject:Any)->None:
+	def unselect(DagPath:MDagPath,Object:MObject)->None:
 		"""unselect(MObject) -> None
 		unselect(MDagPath, MObject) -> None
 
@@ -9537,7 +9537,7 @@ class MGlobal:
 		Perform click-pick type selection on the dag. If an object intersects
 		the click point then it is selected according to listAdjustment."""
 	@staticmethod
-	def isSelected(MObject:Any)->bool:
+	def isSelected(Object:MObject)->bool:
 		"""isSelected(MObject) -> bool
 
 		Determines whether the given object is on the active selection list."""
@@ -9564,7 +9564,7 @@ class MGlobal:
 		Set whether Maya should maintain an active selection list which
 		maintains object and component selection order."""
 	@staticmethod
-	def addToModel(MObject:Any,MObject2:Any)->None:
+	def addToModel(Object:MObject,Object2:MObject)->None:
 		"""addToModel(MObject, MObject) -> None
 
 		This method is used to add new dag objects to the model.  If no parent node
@@ -9575,7 +9575,7 @@ class MGlobal:
 		This method is only valid for dag nodes. If the specified
 		object is not of type MFn::kDagNode then MS::kInvalidParameter will be returned."""
 	@staticmethod
-	def addToModelAt(MObject:Any,MVector:Any,arg:Any,arg2:Any,rotateOrder:Any=MTransformationMatrix.kXYZ)->None:
+	def addToModelAt(Object:MObject,Vector:MVector,arg:Any,arg2:Any,rotateOrder:Any=MTransformationMatrix.kXYZ)->None:
 		"""addToModelAt(MObject, MVector, double[3], double[3], rotateOrder=MTransformationMatrix.kXYZ) -> None
 
 		Adds the specified dag object to the DAG and transform the object
@@ -9584,7 +9584,7 @@ class MGlobal:
 		object is not of type MFn::kDagNode then MS::kInvalidParameter
 		will be returned."""
 	@staticmethod
-	def removeFromModel(MObject:Any)->None:
+	def removeFromModel(Object:MObject)->None:
 		"""removeFromModel(MObject) -> None
 
 		Removes the specified dag node from the scene.
@@ -9598,7 +9598,7 @@ class MGlobal:
 		calls, otherwise the dag node is leaked. To delete the dag node,
 		call MGlobal::deleteNode() instead."""
 	@staticmethod
-	def deleteNode(MObject:Any)->None:
+	def deleteNode(Object:MObject)->None:
 		"""deleteNode(MObject) -> None
 
 		Delete the given dag node or dependency graph node."""
@@ -9839,7 +9839,7 @@ class MGlobal:
 		pathname is provided, the directories indicated by the environment
 		variable, MAYA_SCRIPT_PATH, will be searched for a matching filename."""
 	@staticmethod
-	def setDisplayCVs(MSelectionList:Any,bool:bool)->None:
+	def setDisplayCVs(SelectionList:MSelectionList,bool:bool)->None:
 		"""setDisplayCVs(MSelectionList, bool) -> None
 
 		Controls drawing of control points in the specified selection list.
@@ -9848,7 +9848,7 @@ class MGlobal:
 		overrides Maya's current draw list and allow, for example, the drawing
 		of control points without being in vertex selection mode."""
 	@staticmethod
-	def getAssociatedSets(MSelectionList:Any)->list:
+	def getAssociatedSets(SelectionList:MSelectionList)->list:
 		"""getAssociatedSets(MSelectionList) -> list
 
 		This utility method finds all the sets that the items in
@@ -9865,7 +9865,7 @@ class MGlobal:
 		performance hit will be incurred."""
 	@overload
 	@staticmethod
-	def viewFrame(MTime:Any)->None:
+	def viewFrame(Time:MTime)->None:
 		"""viewFrame(double) -> None
 		viewFrame(MTime) -> None
 
@@ -13624,7 +13624,7 @@ class MObjectHandle:
 		"""Return self>=value."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def assign(self,source:MObject|MObjectHandle)->Self:
+	def assign(self,source:Any)->Self:
 		"""assign(source) -> self
 
 		Assigns this MObjectHandle to an instance of another MObjectHandle, or to a MObject instance.
@@ -14022,7 +14022,7 @@ class MPoint(collections.abc.Sequence[float]):
 	def __init__(self)->None:
 		"""Default constructor. Returns a new MPoint object, initialized to the origin."""
 	@overload
-	def __init__(self,src:MPoint|MFloatPoint|MVector|MFloatVector)->None:
+	def __init__(self,src:Any)->None:
 		"""Copy constructor. Returns a new MPoint object with its x, y, z and w coords set to the same values as src . If src is a vector then the new MPoint 's w coordinate is set to 1.0."""
 	@overload
 	def __init__(self,seq:Sequence[float])->None:
@@ -15713,13 +15713,13 @@ class MRichSelection:
 		"""getSymmetry() -> MSelectionList
 
 		Returns a copy of the symmetry component of the rich selection."""
-	def getSymmetryMatrix(self,MDagPath:Any,space:Any)->MMatrix:
+	def getSymmetryMatrix(self,DagPath:MDagPath,space:Any)->MMatrix:
 		"""getSymmetryMatrix(MDagPath, space) -> MMatrix
 
 		Returns the symmetry matrix to use for the symmetric component of
 		the specified DAG object. The matrix will already be converted to
 		use the specified transformation space (see MSpace)."""
-	def getSymmetryPlane(self,MDagPath:Any,space:Any)->MPlane:
+	def getSymmetryPlane(self,DagPath:MDagPath,space:Any)->MPlane:
 		"""getSymmetryPlane(MDagPath, space) -> MPlane
 
 		Returns the plane of symmetry, in the specified transformation space
@@ -15727,7 +15727,7 @@ class MRichSelection:
 		support symmetry. Note that the direction of the plane carries no
 		significance. Specifically, having a positive offset from the plane
 		does not imply a point is part of the non-symmetric selection."""
-	def setSelection(self,MSelectionList:Any)->Self:
+	def setSelection(self,SelectionList:MSelectionList)->Self:
 		"""setSelection(MSelectionList) -> self
 
 		Sets the non-symmetry component of the rich selection."""
@@ -16042,7 +16042,7 @@ class MSelectionList:
 	def add(self,pattern:str,searchChildNamespaces:bool=False)->Self:
 		"""Adds to the list any nodes, DAG paths, components or plugs which match the given pattern ."""
 	@overload
-	def add(self,item:MObject|MDagPath|MPlug|tuple[MDagPath|MObject,...],mergeWithExisting:bool=True)->Self:
+	def add(self,item:Any,mergeWithExisting:bool=True)->Self:
 		"""Adds a node, DAG path, plug or component to the end of the selection list. A component is passed as a tuple containing the MDagPath of the DAG node and an MObject containing the component. If mergeWithExisting is True and the item is already on the list then those existing instances of the item will be removed, leaving just the newly added instance at the end of the list. For components this applies at the component element level, meaning that any overlapping elements will be removed from the existing components. If mergeWithExisting is False then the new item is added to the end of the list without affecting any existing instances of the item already on the list."""
 	def clear(self)->Self:
 		"""Empties the selection list."""
@@ -16058,7 +16058,7 @@ class MSelectionList:
 		"""Returns the index 'th item of the list as a plug. Raises TypeError if the item is not a plug. Raises IndexError if index is out of range."""
 	def getSelectionStrings(self,index:int|None=None)->tuple[str,...]:
 		"""Returns a tuple containing the string representation of the specified item. For nodes, DAG paths, plugs and contiguous components the tuple will only contain a single string, but for non-contiguous components there will be a separate string for each distinct block of contiguous elements. If index is not specified then the string representations of all the items in the selection list are returned. Raises IndexError if index is out of bounds."""
-	def hasItem(self,item:MObject|MDagPath|MPlug|tuple[MDagPath|MObject,...])->bool:
+	def hasItem(self,item:Any)->bool:
 		"""Returns True if the given item is on the selection list. For a component this means that all of the elements of the component must be on the list. A component is passed as a tuple containing the MDagPath of the DAG node and an MObject containing the component."""
 	def hasItemPartly(self,dagPath:MDagPath,component:MObject)->bool:
 		"""Returns True if at least one of the component's elements is on the selection list. Raises TypeError if dagPath is invalid or component does not contain a component."""
@@ -16074,7 +16074,7 @@ class MSelectionList:
 		"""Merges the specified<span> component in with those already on the list, using the given<span> strategy ."""
 	def remove(self,index:int)->Self:
 		"""Removes the index 'th item from the list. Raises IndexError if the index is out of range."""
-	def replace(self,index:int,newItem:MObject|MDagPath|MPlug|tuple[MDagPath|MObject,...])->Self:
+	def replace(self,index:int,newItem:Any)->Self:
 		"""Replaces the index 'th item on the list with newItem . A component is passed as a tuple containing the MDagPath of the DAG node and an MObject containing the component. Raises IndexError if the index is out of range."""
 	def toggle(self,dagPath:MDagPath,component:MObject)->Self:
 		"""Removes from the list those elements of the given component which are already on it and adds those which are not."""
@@ -16598,16 +16598,16 @@ class MTimeRange:
 
 		Checks if this time range is an empty set"""
 	@overload
-	def contains(self,MTime:Any)->bool:
+	def contains(self,Time:MTime)->bool:
 		"""contains(MTime) -> boolcontains(MTime, MTime) -> bool
 
 		Checks if the given time point or interval is contained in this time range."""
 	@overload
-	def contains(self,MTime:Any,MTime2:Any)->bool:
+	def contains(self,Time:MTime,Time2:MTime)->bool:
 		"""contains(MTime) -> boolcontains(MTime, MTime) -> bool
 
 		Checks if the given time point or interval is contained in this time range."""
-	def intersects(self,MTime:Any,MTime2:Any)->bool:
+	def intersects(self,Time:MTime,Time2:MTime)->bool:
 		"""intersects(MTime, MTime) -> bool
 
 		Checks if the given interval intersects with this time range."""
@@ -16669,7 +16669,7 @@ class MTransformationMatrix:
 	def __init__(self)->None:
 		"""Default constructor. Returns a new MTransformationMatrix object, set to the identity transformation."""
 	@overload
-	def __init__(self,src:MTransformationMatrix|MMatrix)->None:
+	def __init__(self,src:Any)->None:
 		"""Returns a new MTransformationMatrix object with the same value as src ."""
 	def asMatrix(self,interp:float=1.0)->MMatrix:
 		"""Interpolates between the identity transformation and that currently in the object, returning the result as an MMatrix . When interp is 0.0 the result will be the identity matrix. When it is 1.0 the result will be the full transformation. If interp is less than 0.0 or greater than 1.0 the result will properly extrapolated."""
@@ -16683,7 +16683,7 @@ class MTransformationMatrix:
 		"""Inexact equality test. Returns true if this transformation's matrix is within tolerance of other 's matrix."""
 	def reorderRotation(self,order:int)->Self:
 		"""Reorders the transformation's rotate component to give the same overall rotation but using the new order or rotations."""
-	def rotateBy(self,rot:MQuaternion|MEulerRotation,space:int)->Self:
+	def rotateBy(self,rot:Any,space:int)->Self:
 		"""Adds rot to the transformation's rotation component."""
 	def rotateByComponents(self,seq:Sequence[float|int],space:int,asQuaternion:bool=False)->Self:
 		"""Adds the rotation represented by the four parameter values to the transformation's rotate component. If asQuaternion is True then seq must contain four floats representing the x, y, z and w components of a quaternion rotation. If asQuaternion is False then seq must contain three floats representing the x, y and z angles, followed by a Rotation Order constant, which together form an Euler rotation."""
@@ -16711,7 +16711,7 @@ class MTransformationMatrix:
 		"""Sets the transformation's rotate pivot component."""
 	def setRotatePivotTranslation(self,trans:MVector,space:int)->Self:
 		"""Sets the transformation's rotate pivot translation component."""
-	def setRotation(self,rot:MQuaternion|MEulerRotation)->Self:
+	def setRotation(self,rot:Any)->Self:
 		"""Sets the transformation's rotation component to rot ."""
 	def setRotationComponents(self,seq:Sequence[float|int],asQuaternion:bool=False)->Self:
 		"""Sets the transformation's rotate component. If asQuaternion is True then seq must contain four floats representing the x, y, z and w components of a quaternion rotation. If asQuaternion is False then seq must contain three floats representing the x, y and z angles, followed by a Rotation Order constant, which together form an Euler rotation."""
@@ -17188,7 +17188,7 @@ class MVector(collections.abc.Sequence[float]):
 	def __init__(self)->None:
 		"""Default constructor. Returns a new MVector object initialized to the zero vector."""
 	@overload
-	def __init__(self,src:MVector|MFloatVector|MPoint|MFloatPoint)->None:
+	def __init__(self,src:Any)->None:
 		"""Copy constructor. Returns a new MVector object whose x, y and z coordinates are set to the x, y and z coordinates of src ."""
 	@overload
 	def __init__(self,seq:Sequence[float])->None:
@@ -17267,7 +17267,7 @@ class MVector(collections.abc.Sequence[float]):
 	def isParallel(self,other:MVector,tolerance:float=MEulerRotation.kTolerance)->bool:
 		"""Returns True if this vector and other are within the given tolerance of being parallel."""
 	@overload
-	def rotateBy(self,rot:MQuaternion|MEulerRotation)->MVector:
+	def rotateBy(self,rot:Any)->MVector:
 		"""Returns a new vector containing the result of rotating this vector by the rotation given by rot ."""
 	@overload
 	def rotateBy(self,axis:int,angle:float)->MVector:

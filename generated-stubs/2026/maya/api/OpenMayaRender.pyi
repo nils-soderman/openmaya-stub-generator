@@ -46,7 +46,7 @@ class MAttributeParameterMappingList:
 		"""Return len(self)."""
 	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def append(self,MAttributeParameterMapping:Any)->Self:
+	def append(self,AttributeParameterMapping:MAttributeParameterMapping)->Self:
 		"""append(MAttributeParameterMapping) -> self
 
 		Add a mapping to the list. The list makes a copy; ownership of the original is left with the caller."""
@@ -343,7 +343,7 @@ class MComponentDataIndexing:
 		"""componentType() -> MComponentType
 
 		Get the component type that the vertex indices represent."""
-	def setComponentType(self,MComponentType:Any)->Self:
+	def setComponentType(self,ComponentType:Any)->Self:
 		"""setComponentType(MComponentType) -> self
 
 		Set the component type that the vertex indices represent."""
@@ -355,7 +355,7 @@ class MComponentDataIndexingList:
 		"""Return len(self)."""
 	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def append(self,MComponentDataIndexing:Any)->bool:
+	def append(self,ComponentDataIndexing:MComponentDataIndexing)->bool:
 		"""append(MComponentDataIndexing) -> bool
 
 		Add a MComponentDataIndexing to the list. Creates and stores a copy which is owned by the list."""
@@ -1235,12 +1235,12 @@ class MGeometry:
 	kAll:int=15
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addIndexBuffer(self,MIndexBuffer:Any)->bool:
+	def addIndexBuffer(self,IndexBuffer:MIndexBuffer)->bool:
 		"""addIndexBuffer(MIndexBuffer) -> bool
 
 		Buffers cannot be added to the same object twice.Adds a index buffer to this MGeometry object.
 		The buffer can only be added to this object once but may be added to others."""
-	def addVertexBuffer(self,MVertexBuffer:Any)->bool:
+	def addVertexBuffer(self,VertexBuffer:MVertexBuffer)->bool:
 		"""addVertexBuffer(MVertexBuffer) -> bool
 
 		Adds a vertex buffer to this MGeometry object.
@@ -1251,7 +1251,7 @@ class MGeometry:
 		Creates a index buffer which is bound to this MGeometry object and cannot be used with any other.
 		The buffer is automatically added to the MGeometry object so there is no need to call addIndexBuffer().
 		See MGeometry.dataTypeString() for a list of valid data types."""
-	def createVertexBuffer(self,MVertexBufferDescriptor:Any)->MVertexBuffer:
+	def createVertexBuffer(self,VertexBufferDescriptor:MVertexBufferDescriptor)->MVertexBuffer:
 		"""createVertexBuffer(MVertexBufferDescriptor) -> MVertexBuffer
 
 		Creates a vertex buffer which is bound to this MGeometry object and cannot be used with any other.
@@ -1356,10 +1356,10 @@ class MGeometryExtractor:
 	kPolyGeom_NotSharing:int=1
 	kPolyGeom_BaseMesh:int=2
 	@overload
-	def __init__(self,MGeometryRequirements:Any,MDagObject:Any,MPolyGeomOptions:Any)->None:
+	def __init__(self,GeometryRequirements:MGeometryRequirements,DagObject:Any,PolyGeomOptions:Any)->None:
 		"""Initializes a new MGeometryExtractor attached to a MDagObject mesh shape."""
 	@overload
-	def __init__(self,MGeometryRequirements:Any,MObject:Any,MPolyGeomOptions:Any)->None:
+	def __init__(self,GeometryRequirements:MGeometryRequirements,Object:om.MObject,PolyGeomOptions:Any)->None:
 		"""Initializes a new MGeometryExtractor attached to a mesh data MObject
 		    of type MFn::kMeshData or MFn::kMeshGeom."""
 	@staticmethod
@@ -1434,11 +1434,11 @@ class MGeometryRequirements:
 	"""Geometry requirements."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def addIndexingRequirement(self,MIndexBufferDescriptor:Any)->Self:
+	def addIndexingRequirement(self,IndexBufferDescriptor:MIndexBufferDescriptor)->Self:
 		"""addIndexingRequirement(MIndexBufferDescriptor) -> self
 
 		Add a new indexing requirement to the list of indexing requirements."""
-	def addVertexRequirement(self,MVertexBufferDescriptor:Any)->Self:
+	def addVertexRequirement(self,VertexBufferDescriptor:MVertexBufferDescriptor)->Self:
 		"""addVertexRequirement(MVertexBufferDescriptor) -> self
 
 		Add a new vertex requirement to the list of vertex requirements."""
@@ -1702,7 +1702,7 @@ class MIndexBufferDescriptorList:
 		"""Return len(self)."""
 	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def append(self,MIndexBufferDescriptor:Any)->bool:
+	def append(self,IndexBufferDescriptor:MIndexBufferDescriptor)->bool:
 		"""append(MIndexBufferDescriptor) -> bool
 
 		Add a descriptor to the list. Creates and stores a copy which is owned by the list."""
@@ -2446,7 +2446,7 @@ class MPxShaderOverride:
 		This method is called during the draw phase before invoking any draw() callback that are sharing a common shader key.
 
 		The default implementation is empty."""
-	def addGeometryRequirement(self,MVertexBufferDescriptor:Any)->Self:
+	def addGeometryRequirement(self,VertexBufferDescriptor:MVertexBufferDescriptor)->Self:
 		"""addGeometryRequirement(MVertexBufferDescriptor) -> self
 
 		During the initialization phase the geometry requirements for the shading effect can be updated. The update is
@@ -2455,7 +2455,7 @@ class MPxShaderOverride:
 		If the geometry has multiple fields of the same type associated with it (e.g. multiple UV sets) the 'name' attribute
 		of the vertex descriptor can be used to select the desired one. If that member is empty or does not match any of the
 		fields then the default field of that type will be used."""
-	def addGeometryRequirements(self,MVertexBufferDescriptorList:Any)->Self:
+	def addGeometryRequirements(self,VertexBufferDescriptorList:MVertexBufferDescriptorList)->Self:
 		"""addGeometryRequirements(MVertexBufferDescriptorList) -> self
 
 
@@ -2468,7 +2468,7 @@ class MPxShaderOverride:
 
 		This method will attempt to add as many requirements as possible from the list, skipping invalid ones.
 		If kInvalidParameter is returned it means at least one requirement failed to be added."""
-	def addIndexingRequirement(self,MIndexBufferDescriptor:Any)->Self:
+	def addIndexingRequirement(self,IndexBufferDescriptor:MIndexBufferDescriptor)->Self:
 		"""addIndexingRequirement(MIndexBufferDescriptor) -> self
 
 		During the initialization phase the indexing requirements for the shading effect can be updated. The update is accomplished by
@@ -2493,7 +2493,7 @@ class MPxShaderOverride:
 		MPxShaderOverride.drawGeometry() in the draw phase in order to perform drawing. If drawing is done manually, adding a shader
 		signature is not necessary."""
 	@overload
-	def addShaderSignature(self,MShaderInstance:Any)->Self:
+	def addShaderSignature(self,ShaderInstance:MShaderInstance)->Self:
 		"""addShaderSignature(signature, signatureSize) -> selfaddShaderSignature(MShaderInstance) -> self
 
 		During the initialization phase, the "signature" for the shader may be set. Certain Draw APIs (like DirectX 11) require a
@@ -2532,7 +2532,7 @@ class MPxShaderOverride:
 		* renderItemList (MRenderItemList) - The list of renderable items to draw
 
 		Returns True if draw was successful, False otherwise."""
-	def drawGeometry(self,MDrawContext:Any)->Self:
+	def drawGeometry(self,DrawContext:MDrawContext)->Self:
 		"""drawGeometry(MDrawContext) -> self
 
 		This method may be called from draw() and will cause Maya to immediately draw the current geometry using the current state of the draw API."""
@@ -2657,7 +2657,7 @@ class MPxShaderOverride:
 		Any change to the required data set means that geometry needs to be rebuilt.
 
 		The default return value is False."""
-	def setGeometryRequirements(self,MShaderInstance:Any)->Self:
+	def setGeometryRequirements(self,ShaderInstance:MShaderInstance)->Self:
 		"""setGeometryRequirements(MShaderInstance) -> self
 
 
@@ -3331,7 +3331,7 @@ class MRenderItem:
 	SkipWhenDefaultMaterialActive:int=2
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def associateWithIndexBuffer(self,MIndexBuffer:Any)->bool:
+	def associateWithIndexBuffer(self,IndexBuffer:MIndexBuffer)->bool:
 		"""associateWithIndexBuffer(MIndexBuffer) -> bool
 
 		Use to indicate that a particular index buffer should be used with this render item.
@@ -3565,7 +3565,7 @@ class MRenderItem:
 		Render items that are already instanced cannot be consolidated.
 
 		For render items added to an MSubSceneContainer, if wantConsolidation is set to true, this will prevent them from being instanced until wantConsolidation is set to false."""
-	def setDefaultMaterialHandling(self,arg:Any)->Self:
+	def setDefaultMaterialHandling(self,arg:int)->Self:
 		"""setDefaultMaterialHandling(MRenderItem.DefaultMaterialFiltering) -> self
 
 		Set whether or not this object should be drawn when default material mode is active.
@@ -3575,7 +3575,7 @@ class MRenderItem:
 		"""setCompatibleWithMayaInstancer(bool) -> self
 
 		Set whether or not this render item can be used as an instance object with Maya Instancer node."""
-	def setCustomData(self,MUserData:Any)->Self:
+	def setCustomData(self,UserData:om.MUserData)->Self:
 		"""setCustomData(MUserData) -> self
 
 		Associate custom user data with this render item.
@@ -3603,7 +3603,7 @@ class MRenderItem:
 
 		Set whether this item should be excluded from the default material mode.
 		Default value is false (included)."""
-	def setMatrix(self,MMatrix:Any)->bool:
+	def setMatrix(self,Matrix:om.MMatrix)->bool:
 		"""setMatrix(MMatrix) -> bool
 
 		Override the object to world transformation matrix to use when drawing this render item.
@@ -3744,7 +3744,7 @@ class MRenderItemList:
 		"""Return len(self)."""
 	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def append(self,MVertexBufferDescriptor:Any)->bool:
+	def append(self,VertexBufferDescriptor:MVertexBufferDescriptor)->bool:
 		"""append(MVertexBufferDescriptor) -> bool
 
 		Add the item to the list. The list assumes ownership of the item."""
@@ -4004,7 +4004,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MFloatVector:Any)->Self:
+	def setParameter(self,parameterName:str,FloatVector:om.MFloatVector)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4018,7 +4018,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MMatrix:Any)->Self:
+	def setParameter(self,parameterName:str,Matrix:om.MMatrix)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4032,7 +4032,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MFloatMatrix:Any)->Self:
+	def setParameter(self,parameterName:str,FloatMatrix:om.MFloatMatrix)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4046,7 +4046,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MTextureAssignment:Any)->Self:
+	def setParameter(self,parameterName:str,TextureAssignment:MTextureAssignment)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4060,7 +4060,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MRenderTargetAssignment:Any)->Self:
+	def setParameter(self,parameterName:str,RenderTargetAssignment:MRenderTargetAssignment)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4074,7 +4074,7 @@ class MRenderParameters:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MSamplerState:Any)->Self:
+	def setParameter(self,parameterName:str,SamplerState:MSamplerState)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -4144,7 +4144,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:str,MFloatVector:Any)->Self:
+	def getParameter(self,parameterName:str,FloatVector:om.MFloatVector)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4158,7 +4158,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:str,MMatrix:Any)->Self:
+	def getParameter(self,parameterName:str,Matrix:om.MMatrix)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4172,7 +4172,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:str,MFloatMatrix:Any)->Self:
+	def getParameter(self,parameterName:str,FloatMatrix:om.MFloatMatrix)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4186,7 +4186,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:str,MTextureAssignment:Any)->Self:
+	def getParameter(self,parameterName:str,TextureAssignment:MTextureAssignment)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4200,7 +4200,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:str,MRenderTargetAssignment:Any)->Self:
+	def getParameter(self,parameterName:str,RenderTargetAssignment:MRenderTargetAssignment)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4214,7 +4214,7 @@ class MRenderParameters:
 
 		Get the value of the named parameter."""
 	@overload
-	def getParameter(self,parameterName:str,MSamplerStateDesc:Any)->Self:
+	def getParameter(self,parameterName:str,SamplerStateDesc:MSamplerStateDesc)->Self:
 		"""getParameter(parameterName, bool) -> self
 		getParameter(parameterName, int) -> self
 		getParameter(parameterName, float) -> self
@@ -4292,7 +4292,7 @@ class MRenderTarget:
 	"""An instance of a render target that may be used with Viewport 2.0."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def updateDescription(self,MRenderTargetDescription:Any)->Self:
+	def updateDescription(self,RenderTargetDescription:MRenderTargetDescription)->Self:
 		"""updateDescription(MRenderTargetDescription) -> self
 
 		Change the description of a render target."""
@@ -4395,7 +4395,7 @@ class MRenderTargetDescription:
 		"""setAllowsUnorderedAccess(bool) -> self
 
 		Set the flag for unordered data access for the target."""
-	def compatibleWithDescription(self,MRenderTargetDescription:Any)->bool:
+	def compatibleWithDescription(self,RenderTargetDescription:MRenderTargetDescription)->bool:
 		"""compatibleWithDescription(MRenderTargetDescription) -> bool
 
 		Determine if another target with a given description is 'compatible' with a target using this description."""
@@ -4403,7 +4403,7 @@ class MRenderTargetManager:
 	"""Provides access to MRenderTarget objects for use in Viewport 2.0."""
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def acquireRenderTarget(self,MRenderTargetDescription:Any)->MRenderTarget:
+	def acquireRenderTarget(self,RenderTargetDescription:MRenderTargetDescription)->MRenderTarget:
 		"""acquireRenderTarget(MRenderTargetDescription) -> MRenderTarget
 		Acquire an instance of a render target.
 		When the object is no longer needed, releaseRenderTarget() should be called
@@ -4417,7 +4417,7 @@ class MRenderTargetManager:
 		"""formatSupportsSRGBWrite(int) -> bool
 		This method will perform a check to determine whether gamma correction can be performed
 		by the GPU when writing pixels to a render target of a given format."""
-	def releaseRenderTarget(self,MRenderTarget:Any)->Self:
+	def releaseRenderTarget(self,RenderTarget:MRenderTarget)->Self:
 		"""releaseRenderTarget(MRenderTarget) -> self
 		Deletes the MRenderTarget and releases the reference to the underlying target which is held by the MRenderTarget object."""
 class MRenderUtilities:
@@ -4684,7 +4684,7 @@ class MRenderer:
 
 		Returns the name of the active override."""
 	@staticmethod
-	def copyTargetToScreen(MRenderTarget:Any)->bool:
+	def copyTargetToScreen(RenderTarget:MRenderTarget)->bool:
 		"""copyTargetToScreen(MRenderTarget) -> bool
 
 		Copy a render target to the screen.
@@ -4698,7 +4698,7 @@ class MRenderer:
 		* sourceName (string) - The name of the source view want to render.
 		* targetList (PyListObject:MRenderTarget) - Render target list want to render into. """
 	@staticmethod
-	def deregisterOverride(MRenderOverride:Any)->None:
+	def deregisterOverride(RenderOverride:MRenderOverride)->None:
 		"""deregisterOverride(MRenderOverride) -> None
 
 		Deregister an existing render override on the renderer.
@@ -4774,7 +4774,7 @@ class MRenderer:
 
 		Get target size in format [width, height]."""
 	@staticmethod
-	def registerOverride(MRenderOverride:Any)->None:
+	def registerOverride(RenderOverride:MRenderOverride)->None:
 		"""registerOverride(MRenderOverride) -> None
 
 		Register the override as being usable by the renderer.
@@ -5346,7 +5346,7 @@ class MShaderInstance:
 	kDisplacementPosShader:int=15
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def activatePass(self,MDrawContext:Any,int:int)->Self:
+	def activatePass(self,DrawContext:MDrawContext,int:int)->Self:
 		"""activatePass(MDrawContext, int) -> self
 		Activates the given pass of the shader.
 		Must be called between calls to bind() and unbind()."""
@@ -5415,7 +5415,7 @@ class MShaderInstance:
 
 		 * parameterName (string) - The name of the parameter.
 		 * annotationName (string) - The name of the annotation."""
-	def bind(self,MDrawContext:Any)->Self:
+	def bind(self,DrawContext:MDrawContext)->Self:
 		"""bind(MDrawContext) -> self
 		Binds the shader instance to the draw context, so that it is the active shader."""
 	def clone(self)->MShaderInstance:
@@ -5446,7 +5446,7 @@ class MShaderInstance:
 
 		Can be called even if no color management textures are required for the current
 		shader instance."""
-	def getPassCount(self,MDrawContext:Any)->int:
+	def getPassCount(self,DrawContext:MDrawContext)->int:
 		"""getPassCount(MDrawContext) -> int
 		Returns the number of draw passes defined by the shader.
 		None if the shader instance or draw context was invalid."""
@@ -5615,7 +5615,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MFloatVector:Any)->Self:
+	def setParameter(self,parameterName:str,FloatVector:om.MFloatVector)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5629,7 +5629,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MMatrix:Any)->Self:
+	def setParameter(self,parameterName:str,Matrix:om.MMatrix)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5643,7 +5643,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MFloatMatrix:Any)->Self:
+	def setParameter(self,parameterName:str,FloatMatrix:om.MFloatMatrix)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5657,7 +5657,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MTexture:Any)->Self:
+	def setParameter(self,parameterName:str,Texture:MTexture)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5671,7 +5671,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MRenderTarget:Any)->Self:
+	def setParameter(self,parameterName:str,RenderTarget:MRenderTarget)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5685,7 +5685,7 @@ class MShaderInstance:
 
 		Set the value of the named parameter."""
 	@overload
-	def setParameter(self,parameterName:str,MSamplerState:Any)->Self:
+	def setParameter(self,parameterName:str,SamplerState:MSamplerState)->Self:
 		"""setParameter(parameterName, bool) -> self
 		setParameter(parameterName, int) -> self
 		setParameter(parameterName, float) -> self
@@ -5719,13 +5719,13 @@ class MShaderInstance:
 
 		Returns the UI widget type associated with a named parameter.
 		The UI widget type can be specified in shader using the 'UIWidget' annotation.The UI widget can be used to specify which widget should be used to control the parameter in the Attribute Editor."""
-	def unbind(self,MDrawContext:Any)->Self:
+	def unbind(self,DrawContext:MDrawContext)->Self:
 		"""unbind(MDrawContext) -> self
 		Unbinds the shader instance from the draw context."""
-	def updateParameters(self,MDrawContext:Any)->Self:
+	def updateParameters(self,DrawContext:MDrawContext)->Self:
 		"""updateParameters(MDrawContext) -> self
 		Updates the bound shader instance with the current parameter data."""
-	def requiredVertexBuffers(self,MVertexBufferDescriptorList:Any)->Self:
+	def requiredVertexBuffers(self,VertexBufferDescriptorList:MVertexBufferDescriptorList)->Self:
 		"""requiredVertexBuffers(MVertexBufferDescriptorList) -> self
 		Get the vertex buffer descriptors that describe the buffers required
 		by a given shader instance."""
@@ -5886,7 +5886,7 @@ class MShaderManager:
 	def isSupportedShaderSemantic(string:str)->bool:
 		"""isSupportedShaderSemantic(string) -> bool
 		Return if a given string is a supported shader semantic."""
-	def releaseShader(self,MShaderInstance:Any)->None:
+	def releaseShader(self,ShaderInstance:MShaderInstance)->None:
 		"""releaseShader(MShaderInstance) -> None
 		Deletes the MShaderInstance and releases its reference to the underlying shader which is held by the MShaderInstance object."""
 	def clearEffectCache(self)->Self:
@@ -5941,16 +5941,16 @@ class MStateManager:
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@staticmethod
-	def acquireBlendState(MBlendStateDesc:Any)->MBlendState:
+	def acquireBlendState(BlendStateDesc:MBlendStateDesc)->MBlendState:
 		"""acquireBlendState(MBlendStateDesc) -> MBlendState
 
 		Acquires an immutable unique blend state matching the blend state descriptor."""
 	@staticmethod
-	def releaseBlendState(MBlendState:Any)->None:
+	def releaseBlendState(BlendState:MBlendState)->None:
 		"""releaseBlendState(MBlendState) -> None
 
 		Deletes the MBlendState and releases the reference to the underlying state object which is held by the MBlendState object."""
-	def setBlendState(self,MBlendState:Any)->Self:
+	def setBlendState(self,BlendState:MBlendState)->Self:
 		"""setBlendState(MBlendState) -> self
 
 		Sets the active blend state on the device."""
@@ -5959,16 +5959,16 @@ class MStateManager:
 
 		Gets the current active blend state from the device."""
 	@staticmethod
-	def acquireRasterizerState(MRasterizerStateDesc:Any)->MRasterizerState:
+	def acquireRasterizerState(RasterizerStateDesc:MRasterizerStateDesc)->MRasterizerState:
 		"""acquireRasterizerState(MRasterizerStateDesc) -> MRasterizerState
 
 		Acquires an immutable unique rasterizer state matching the rasterizer state descriptor."""
 	@staticmethod
-	def releaseRasterizerState(MRasterizerState:Any)->None:
+	def releaseRasterizerState(RasterizerState:MRasterizerState)->None:
 		"""releaseRasterizerState(MRasterizerState) -> None
 
 		Deletes the MRasterizerState and releases the reference to the underlying state object which is held by the MRasterizerState object."""
-	def setRasterizerState(self,MRasterizerState:Any)->Self:
+	def setRasterizerState(self,RasterizerState:MRasterizerState)->Self:
 		"""setRasterizerState(MRasterizerState) -> self
 
 		Sets the active rasterizer state on the device."""
@@ -5977,16 +5977,16 @@ class MStateManager:
 
 		Gets the current active rasterizer state from the device."""
 	@staticmethod
-	def acquireDepthStencilState(MDepthStencilStateDesc:Any)->MDepthStencilState:
+	def acquireDepthStencilState(DepthStencilStateDesc:MDepthStencilStateDesc)->MDepthStencilState:
 		"""acquireDepthStencilState(MDepthStencilStateDesc) -> MDepthStencilState
 
 		Acquires an immutable unique depth-stencil state matching the blend state descriptor."""
 	@staticmethod
-	def releaseDepthStencilState(MDepthStencilState:Any)->None:
+	def releaseDepthStencilState(DepthStencilState:MDepthStencilState)->None:
 		"""releaseDepthStencilState(MDepthStencilState) -> None
 
 		Deletes the MDepthStencilState and releases the reference to the underlying state object which is held by the MDepthStencilState object."""
-	def setDepthStencilState(self,MDepthStencilState:Any)->Self:
+	def setDepthStencilState(self,DepthStencilState:MDepthStencilState)->Self:
 		"""setDepthStencilState(MDepthStencilState) -> self
 
 		Sets the active depth-stencil state on the device."""
@@ -5995,12 +5995,12 @@ class MStateManager:
 
 		Gets the current depth-stencil blend state from the device."""
 	@staticmethod
-	def acquireSamplerState(MSamplerStateDesc:Any)->MSamplerState:
+	def acquireSamplerState(SamplerStateDesc:MSamplerStateDesc)->MSamplerState:
 		"""acquireSamplerState(MSamplerStateDesc) -> MSamplerState
 
 		Acquires an immutable unique sampler state matching the blend state descriptor."""
 	@staticmethod
-	def releaseSamplerState(MSamplerState:Any)->None:
+	def releaseSamplerState(SamplerState:MSamplerState)->None:
 		"""releaseSamplerState(MSamplerState) -> None
 
 		Deletes the MSamplerState and releases the reference to the underlying state object which is held by the MSamplerState object."""
@@ -6654,11 +6654,11 @@ class MTextureManager:
 		* height (unsigned int) - Height of the texture
 		* generateMipMaps (bool) - Generate the mipmap levels
 		* normalizationDesc (MDepthNormalizationDescription) - Optional information to perform normalization on the depth values. Default value is None"""
-	def releaseTexture(self,MTexture:Any)->Self:
+	def releaseTexture(self,Texture:MTexture)->Self:
 		"""releaseTexture(MTexture) -> self
 
 		Deletes the MTexture and releases the reference to the underlying texture which is held by the MTexture object."""
-	def saveTexture(self,MTexture:Any,string:str)->Self:
+	def saveTexture(self,Texture:MTexture,string:str)->Self:
 		"""saveTexture(MTexture, string) -> self
 
 		Ask the renderer to save a hardware texture to disk."""
@@ -7923,7 +7923,7 @@ class MVertexBufferArray(collections.abc.Sequence[MVertexBuffer]):
 		"""Return len(self)."""
 	def __getitem__(self,index:int)->MVertexBuffer:
 		"""Return self[key]."""
-	def append(self,MVertexBuffer:Any,name:str)->Self:
+	def append(self,VertexBuffer:MVertexBuffer,name:str)->Self:
 		"""append(MVertexBuffer, name) -> self
 
 		Add a new vertex buffer to the list."""
@@ -7998,7 +7998,7 @@ class MVertexBufferDescriptorList:
 		"""Return len(self)."""
 	def __getitem__(self,index:int)->Any:
 		"""Return self[key]."""
-	def append(self,MVertexBufferDescriptor:Any)->bool:
+	def append(self,VertexBufferDescriptor:MVertexBufferDescriptor)->bool:
 		"""append(MVertexBufferDescriptor) -> bool
 
 		Add a descriptor to the list. Creates and stores a copy which is owned by the list."""

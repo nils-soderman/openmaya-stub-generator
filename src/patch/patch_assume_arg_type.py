@@ -7,6 +7,7 @@ from src.stub_types import Class, Property
 
 from .base import PatchBase
 
+MAYA_OBJ_PATTERN = re.compile(r"^M[A-Z].*")
 
 PRIMITIVE_TYPES = {"int", "float", "str", "bool", "list", "dict", "set", "tuple"}
 
@@ -72,3 +73,7 @@ class Patch_AssumeParameterType(PatchBase):
                     if param.name == "index":
                         print(f"!!!! Result: ", type_)
                     param.type = type_
+
+                if MAYA_OBJ_PATTERN.match(param.name):
+                    param.type = param.name
+                    param.name = param.name[1:]  # Remove leading 'M'

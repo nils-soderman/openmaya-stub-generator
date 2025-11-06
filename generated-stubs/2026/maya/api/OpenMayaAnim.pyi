@@ -62,17 +62,17 @@ class MAnimControl:
 
 		Return an MTime specifying the last frame of the current playback time range."""
 	@staticmethod
-	def setMinTime(MTime:Any)->None:
+	def setMinTime(Time:om.MTime)->None:
 		"""setMinTime(MTime) -> None
 
 		Set the value of the first frame of the current playback time range."""
 	@staticmethod
-	def setMaxTime(MTime:Any)->None:
+	def setMaxTime(Time:om.MTime)->None:
 		"""setMaxTime(MTime) -> None
 
 		Set the value of the last frame of the current playback time range."""
 	@staticmethod
-	def setMinMaxTime(MTime:Any,MTime2:Any)->None:
+	def setMinMaxTime(Time:om.MTime,Time2:om.MTime)->None:
 		"""setMinMaxTime(MTime, MTime) -> None
 
 		Set the values of the first and last frames of the playback time range."""
@@ -87,17 +87,17 @@ class MAnimControl:
 
 		Return an MTime specifying the last frame of the animation, as specified by the Maya user in the Range Slider UI."""
 	@staticmethod
-	def setAnimationStartTime(MTime:Any)->None:
+	def setAnimationStartTime(Time:om.MTime)->None:
 		"""setAnimationStartTime(MTime) -> None
 
 		Set the value of the first frame in the animation."""
 	@staticmethod
-	def setAnimationEndTime(MTime:Any)->None:
+	def setAnimationEndTime(Time:om.MTime)->None:
 		"""setAnimationEndTime(MTime) -> None
 
 		Set the value of the last frame in the animation."""
 	@staticmethod
-	def setAnimationStartEndTime(MTime:Any,MTime2:Any)->None:
+	def setAnimationStartEndTime(Time:om.MTime,Time2:om.MTime)->None:
 		"""setAnimationStartEndTime(MTime, MTime) -> None
 
 		Set the values of the first and last frames in the animation."""
@@ -479,7 +479,7 @@ class MAnimUtil:
 	"""
 	@staticmethod
 	@overload
-	def isAnimated(MObject:Any,bool:bool)->bool:
+	def isAnimated(Object:om.MObject,bool:bool)->bool:
 		"""isAnimated(MObject, bool) -> bool
 		isAnimated(MDagPath, bool) -> bool
 		isAnimated(MPlug, bool) -> bool
@@ -490,7 +490,7 @@ class MAnimUtil:
 		you may also specify whether or not the input object's parents are examined."""
 	@overload
 	@staticmethod
-	def isAnimated(MDagPath:Any,bool:bool)->bool:
+	def isAnimated(DagPath:om.MDagPath,bool:bool)->bool:
 		"""isAnimated(MObject, bool) -> bool
 		isAnimated(MDagPath, bool) -> bool
 		isAnimated(MPlug, bool) -> bool
@@ -501,7 +501,7 @@ class MAnimUtil:
 		you may also specify whether or not the input object's parents are examined."""
 	@overload
 	@staticmethod
-	def isAnimated(MPlug:Any,bool:bool)->bool:
+	def isAnimated(Plug:om.MPlug,bool:bool)->bool:
 		"""isAnimated(MObject, bool) -> bool
 		isAnimated(MDagPath, bool) -> bool
 		isAnimated(MPlug, bool) -> bool
@@ -523,7 +523,7 @@ class MAnimUtil:
 		you may also specify whether or not the input object's parents are examined."""
 	@staticmethod
 	@overload
-	def findAnimatedPlugs(MObject:Any,bool:bool)->om.MPlugArray:
+	def findAnimatedPlugs(Object:om.MObject,bool:bool)->om.MPlugArray:
 		"""findAnimatedPlugs(MObject, bool) -> MPlugArray
 		findAnimatedPlugs(MDagPath, bool) -> MPlugArray
 		findAnimatedPlugs(MSelectionList selectionList, bool checkParent) -> MPlugArray
@@ -531,7 +531,7 @@ class MAnimUtil:
 		Find the list of attributes (MPlugs) on the input object that is animated."""
 	@overload
 	@staticmethod
-	def findAnimatedPlugs(MDagPath:Any,bool:bool)->om.MPlugArray:
+	def findAnimatedPlugs(DagPath:om.MDagPath,bool:bool)->om.MPlugArray:
 		"""findAnimatedPlugs(MObject, bool) -> MPlugArray
 		findAnimatedPlugs(MDagPath, bool) -> MPlugArray
 		findAnimatedPlugs(MSelectionList selectionList, bool checkParent) -> MPlugArray
@@ -546,7 +546,7 @@ class MAnimUtil:
 
 		Find the list of attributes (MPlugs) on the input object that is animated."""
 	@staticmethod
-	def findAnimation(MPlug:Any)->om.MObjectArray:
+	def findAnimation(Plug:om.MPlug)->om.MObjectArray:
 		"""findAnimation(MPlug) -> MObjectArray
 
 		Find the animCurve(s) that are animating a given attribute (MPlug).
@@ -556,7 +556,7 @@ class MAnimUtil:
 		one animCurve, although Maya does not currently offer a UI to do so.
 		Compound attributes are not expanded to include any child attributes."""
 	@staticmethod
-	def findSetDrivenKeyAnimation(MPlug:Any)->tuple[om.MObjectArray,om.MPlugArray]:
+	def findSetDrivenKeyAnimation(Plug:om.MPlug)->tuple[om.MObjectArray,om.MPlugArray]:
 		"""findSetDrivenKeyAnimation(MPlug) -> (MObjectArray, MPlugArray)
 
 		Find any driven keyframe animCurves, the blendWeighted node and the
@@ -584,7 +584,7 @@ class MAnimUtil:
 
 		Compound attributes are not expanded to include any child attributes."""
 	@staticmethod
-	def findAnimatablePlugs(MSelectionList:Any)->om.MPlugArray:
+	def findAnimatablePlugs(SelectionList:om.MSelectionList)->om.MPlugArray:
 		"""findAnimatablePlugs(MSelectionList) -> MPlugArray
 
 		Find the list of attributes (MPlugs) on any member of an MSelectionList
@@ -964,7 +964,7 @@ class MFnGeometryFilter(om.MFnDependencyNode):
 	def __init__(self)->None:
 		"""Initializes a new, empty MFnGeometryFilter functionset."""
 	@overload
-	def __init__(self,MObject:Any)->None:
+	def __init__(self,Object:om.MObject)->None:
 		"""Initializes a new MFnGeometryFilter functionset and attaches it
 		to a geometryFilter node."""
 	def getInputGeometry(self)->om.MObjectArray:
@@ -1200,7 +1200,7 @@ class MFnSkinCluster(MFnGeometryFilter):
 	def __init__(self)->None:
 		"""Initializes a new, empty MFnSkinCluster functionset."""
 	@overload
-	def __init__(self,MObject:Any)->None:
+	def __init__(self,Object:om.MObject)->None:
 		"""Initializes a new MFnSkinCluster functionset and attaches it to
 		a skinCluster node."""
 	def getBlendWeights(self,shape:om.MDagPath,components:om.MObject)->om.MDoubleArray:
@@ -1434,7 +1434,7 @@ class MFnWeightGeometryFilter(MFnGeometryFilter):
 	def __init__(self)->None:
 		"""Initializes a new, empty MFnWeightGeometryFilter functionset."""
 	@overload
-	def __init__(self,MObject:Any)->None:
+	def __init__(self,Object:om.MObject)->None:
 		"""Initializes a new MFnWeightGeometryFilter functionset and attaches it
 		to a geometryFilter node."""
 	@overload
