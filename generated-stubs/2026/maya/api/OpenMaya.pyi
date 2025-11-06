@@ -948,20 +948,20 @@ class MDAGDrawOverrideInfo:
 	@lod.setter
 	def lod(self,value:Any)->None:...
 	@property
-	def enableShading(self)->Any:
+	def enableShading(self)->bool:
 		"""Whether allow to draw shaded item"""
 	@enableShading.setter
-	def enableShading(self,value:Any)->None:...
+	def enableShading(self,value:bool)->None:...
 	@property
-	def enableTexturing(self)->Any:
+	def enableTexturing(self)->bool:
 		"""Whether allow to draw textured item"""
 	@enableTexturing.setter
-	def enableTexturing(self,value:Any)->None:...
+	def enableTexturing(self,value:bool)->None:...
 	@property
-	def enableVisible(self)->Any:
+	def enableVisible(self)->bool:
 		"""Whether the whole geometry is visible"""
 	@enableVisible.setter
-	def enableVisible(self,value:Any)->None:...
+	def enableVisible(self,value:bool)->None:...
 	@property
 	def playbackVisible(self)->Any:
 		"""Whether the object is visible during playback"""

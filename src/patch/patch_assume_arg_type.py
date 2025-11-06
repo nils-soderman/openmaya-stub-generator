@@ -33,6 +33,7 @@ PATTERNS = (
 PROPERTY_PATTERNS = (
     (re.compile(r"Name$"), "str"),
     (re.compile(r"^is[A-Z0-9]"), "bool"),
+    (re.compile(r"^enable[A-Z0-9]"), "bool"),
 )
 
 
