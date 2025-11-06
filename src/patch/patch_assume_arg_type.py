@@ -48,6 +48,27 @@ def get_type_from_name(name: str) -> str | None:
     return None
 
 
+def get_type_from_default_value(default_value: str | None) -> str | None:
+    if default_value is None:
+        return None
+
+    if default_value.isdigit():
+        return "int"
+    try:
+        float(default_value)
+        return "float"
+    except ValueError:
+        pass
+
+    if default_value.startswith(("'", '"')) and default_value.endswith(("'", '"')):
+        return "str"
+
+    if default_value in ("True", "False"):
+        return "bool"
+
+    return None
+
+
 class Patch_AssumeParameterType(PatchBase):
     ORDER = 50
 
@@ -74,6 +95,9 @@ class Patch_AssumeParameterType(PatchBase):
                         print(f"!!!! Result: ", type_)
                     param.type = type_
 
-                if MAYA_OBJ_PATTERN.match(param.name):
+                elif type_ := get_type_from_default_value(param.default):
+                    param.type = type_
+
+                elif MAYA_OBJ_PATTERN.match(param.name):
                     param.type = param.name
                     param.name = param.name[1:]  # Remove leading 'M'

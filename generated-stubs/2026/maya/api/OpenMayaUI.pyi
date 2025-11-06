@@ -579,7 +579,7 @@ class M3dView:
 		Certain Maya actions will use glPolygonOffset to offset polygons drawing into the depth buffer.  This method controls this behavior. When True, it prevents Maya from altering the polygon offset parameters.
 
 		* v (bool) - enable/disable the polygon offset"""
-	def setDisplayStyle(self,style:int,activeOnly:Any=False)->Self:
+	def setDisplayStyle(self,style:int,activeOnly:bool=False)->Self:
 		"""setDisplayStyle(style, activeOnly=False) -> self
 
 		Sets the display style for this view.

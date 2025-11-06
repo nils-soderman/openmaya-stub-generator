@@ -735,7 +735,7 @@ class MFragmentManager:
 		- includeUpstreamNodes (bool) - Return the XML for the entire fragment graph rooted at the given shading node if True.
 		- objectContext (MDagPath) - Optional path to an instance that is associated with the shading node to provide object context."""
 	@overload
-	def getFragmentXML(self,shadingNode:Any,includeUpstreamNodes:Any=False,objectContext:Any|None=None)->str:
+	def getFragmentXML(self,shadingNode:Any,includeUpstreamNodes:bool=False,objectContext:Any|None=None)->str:
 		"""getFragmentXML(fragmentName) -> string
 		getFragmentXML(shadingNode, includeUpstreamNodes=False, objectContext=None) -> string
 

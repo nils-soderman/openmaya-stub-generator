@@ -3046,7 +3046,7 @@ class MFileObject:
 		"""isSet() -> bool
 
 		Checks to see if both file and path elements of the file object have been set."""
-	def overrideResolvedFullName(self,fullFileName:str,reresolveType:Any=False)->Self:
+	def overrideResolvedFullName(self,fullFileName:str,reresolveType:bool=False)->Self:
 		"""overrideResolvedFullName(fullFileName, reresolveType=False) -> self
 
 		Normally when a raw file name is set, Maya will perform a series of operations on it in an attempt to resolve it to a valid file name. This final resolved file name can be accessed through the resolvedName(), resolvedPath(), and resolvedFullFileName() methods and can be quite different from the originally specified raw file name.
@@ -6585,7 +6585,7 @@ class MFnMesh(MFnDagNode):
 	@staticmethod
 	def uniformGridParams(xDiv:int,yDiv:int,zDiv:int)->MMeshIsectAccelParams:
 		"""Creates an object which specifies a uniform voxel grid structure which can be used by the intersection routines to speed up their operation. This object specifies the number of voxel cells to be used in the x, y, and z dimensions. The grid acceleration structure will be cached with the mesh, so that if the same MMeshIsectAccelParams configuration is used on the next intersect call, the acceleration structure will not need to be rebuilt."""
-	def addHoles(self,faceIndex:int,vertices:Any,loopCounts:Any,mergeVertices:Any=True,pointTolerance:float=MFnMesh.kPointTolerance)->Self:
+	def addHoles(self,faceIndex:int,vertices:Any,loopCounts:Any,mergeVertices:bool=True,pointTolerance:float=MFnMesh.kPointTolerance)->Self:
 		"""addHoles(faceIndex, vertices, loopCounts, mergeVertices=True, pointTolerance=kPointTolerance) -> self
 
 		Adds holes to a mesh polygon.
@@ -6712,13 +6712,13 @@ class MFnMesh(MFnDagNode):
 	@overload
 	def getBoolBlindData(self,compType:int,blindDataId:int,attr:str)->tuple[MIntArray,MIntArray]:
 		"""Returns a tuple containing an array of component IDs and an array of values for the specified blind data attribute for all of the mesh's components of the specified type. Raises RuntimeError if the attribute is not of "bool" type."""
-	def getClosestUVs(self,u:Any,v:Any,uvSet:Any='')->MIntArray:
+	def getClosestUVs(self,u:Any,v:Any,uvSet:str='')->MIntArray:
 		"""getClosestUVs(u, v, uvSet='') -> MIntArray
 
 		Returns the IDs of the UVs which are nearest in uv space to the
 		given texture coordinate in the specified UV set. All these UVs
 		locate at the same distance to the given coordinate."""
-	def intersectFaceAtUV(self,u:Any,v:Any,uvSet:Any='')->int:
+	def intersectFaceAtUV(self,u:Any,v:Any,uvSet:str='')->int:
 		"""intersectFaceAtUV(u, v, uvSet='') -> int
 
 		Returns the IDs of the UVs on this surface which are nearest
@@ -6808,7 +6808,7 @@ class MFnMesh(MFnDagNode):
 		"""Returns the position of specified vertex."""
 	def getPointAtUV(self,faceId:int,u:float,v:float,space:int=MSpace.kObject,uvSet:str='',tolerance:float=0.0)->MPoint:
 		"""Returns the position of the point at the give UV value in the specified face. This method is not threadsafe."""
-	def getPointsAtUV(self,u:Any,v:Any,space:Any=MSpace.kObject,uvSet:Any='',tolerance:Any=0.001)->tuple[MIntArray,MPointArray]:
+	def getPointsAtUV(self,u:Any,v:Any,space:Any=MSpace.kObject,uvSet:str='',tolerance:float=0.001)->tuple[MIntArray,MPointArray]:
 		"""getPointsAtUV(u, v, space=MSpace.kObject, uvSet='', tolerance=0.001) -> (MIntArray, MPointArray)
 
 		Returns the polygon ids and positions of points at the given UV position on the mesh."""
@@ -6887,7 +6887,7 @@ class MFnMesh(MFnDagNode):
 		"""Returns True if the color sets RGBA components are clamped to the range 0 to 1."""
 	def isColorSetPerInstance(self,name:str)->bool:
 		"""Returns True if the color set is per-instance, and False if it is shared across all instances."""
-	def edgeBorderInfo(self,edgeId:Any,setId:Any=0)->Any:
+	def edgeBorderInfo(self,edgeId:Any,setId:int=0)->Any:
 		"""edgeBorderInfo(edgeId, setId=0) -> MFnMesh::BorderInfo
 
 		Returns if the specified edge is on geom/UV shell border or has shared/unshared UVs."""
@@ -6906,7 +6906,7 @@ class MFnMesh(MFnDagNode):
 
 		Returns True if the texture coordinates (uv's) for specified polygon are
 		reversed (clockwise), False if they are not reversed (counter clockwise)."""
-	def isRightHandedTangent(self,tangentId:Any,uvSet:Any='')->bool:
+	def isRightHandedTangent(self,tangentId:Any,uvSet:str='')->bool:
 		"""isRightHandedTangent(tangentId, uvSet='') -> bool
 
 		Returns True if the normal, tangent, and binormal form a right handed
@@ -9271,7 +9271,7 @@ class MGlobal:
 	def getFunctionSetList(object:MObject)->tuple[str,...]:
 		"""Returns a tuple of strings that represent the type of each function set that will accept this object."""
 	@staticmethod
-	def getRichSelection(defaultToActiveSelection:Any=True)->MRichSelection:
+	def getRichSelection(defaultToActiveSelection:bool=True)->MRichSelection:
 		"""getRichSelection(defaultToActiveSelection=True) -> MRichSelection
 
 		Returns the current rich selection (usually the active selection with
@@ -10077,7 +10077,7 @@ class MImage:
 
 		Save the content of this image in a file. By default, the file is saved in IFF format.
 		Optionally, the file can also be converted in a variety of image formats."""
-	def writeToFileWithDepth(self,pathname:str,outputFormat:str="iff",writeDepth:Any=False)->Self:
+	def writeToFileWithDepth(self,pathname:str,outputFormat:str="iff",writeDepth:bool=False)->Self:
 		"""writeToFileWithDepth(pathname, outputFormat=iff, writeDepth=False) -> self
 
 		Save the content of this image in a file. By default, the file is saved in IFF format.
@@ -11177,7 +11177,7 @@ class MItMeshFaceVertex:
 		if this method is not called. A similar approach must be taken for
 		updating upstream vertex tweaks with an MPlug. After the update, call
 		this method."""
-	def getBinormal(self,space:Any=MSpace.kObject,uvSet:Any='')->MVector:
+	def getBinormal(self,space:Any=MSpace.kObject,uvSet:str='')->MVector:
 		"""getBinormal(space=MSpace.kObject, uvSet='') -> MVector
 
 		Returns the face vertex binormal associated with the UV set."""
@@ -11193,17 +11193,17 @@ class MItMeshFaceVertex:
 		"""getNormal(space=MSpace.kObject) -> MVector
 
 		Returns the face vertex normal."""
-	def getTangent(self,space:Any=MSpace.kObject,uvSet:Any='')->MVector:
+	def getTangent(self,space:Any=MSpace.kObject,uvSet:str='')->MVector:
 		"""getTangent(space=MSpace.kObject, uvSet='') -> MVector
 
 		Returns the face vertex tangent associated with the given UV set. The
 		tangent is defined as the surface tangent of the polygon running in
 		the U direction."""
-	def getUV(self,uvSet:Any='')->tuple[float,float]:
+	def getUV(self,uvSet:str='')->tuple[float,float]:
 		"""getUV(uvSet='') -> (float, float)
 
 		Returns the texture coordinate for the current face vertex."""
-	def getUVIndex(self,uvSet:Any='')->int:
+	def getUVIndex(self,uvSet:str='')->int:
 		"""getUVIndex(uvSet='') -> int
 
 		Returns the index of the texture coordinate for the current face
@@ -11213,7 +11213,7 @@ class MItMeshFaceVertex:
 		"""hasColor() -> bool
 
 		Returns whether the current face vertex has a color-per-vertex set."""
-	def hasUVs(self,uvSet:Any='')->bool:
+	def hasUVs(self,uvSet:str='')->bool:
 		"""hasUVs(uvSet='') -> bool
 
 		Returns whether the current face vertex has UVs mapped in the given
@@ -16078,7 +16078,7 @@ class MSelectionList:
 		"""Replaces the index 'th item on the list with newItem . A component is passed as a tuple containing the MDagPath of the DAG node and an MObject containing the component. Raises IndexError if the index is out of range."""
 	def toggle(self,dagPath:MDagPath,component:MObject)->Self:
 		"""Removes from the list those elements of the given component which are already on it and adds those which are not."""
-	def intersect(self,other:Any,expandToLeaves:Any=False)->Self:
+	def intersect(self,other:Any,expandToLeaves:bool=False)->Self:
 		"""intersect(other, expandToLeaves=False) -> self
 
 		Modify this list to contain the intersection of itself and the given list."""
@@ -16389,7 +16389,7 @@ class MSyntax:
 		"""Sets the maximum number of objects which can be passed to the command. If no maximum has been set then the maximum will be unbounded. Raises ValueError if max is negative."""
 	def setMinObjects(self,min:int)->Self:
 		"""Sets the minimum number of objects which can be passed to the command. If no minimum has been set then the minimum will be 0. Raises ValueError if min is negative."""
-	def setObjectType(self,objType:int,min:Any=0,max:Any|None=None)->Self:
+	def setObjectType(self,objType:int,min:int=0,max:Any|None=None)->Self:
 		"""Set the type and number of objects to be passed to the command. Raises ValueError if min or max is negative, or if max is less than min ."""
 	def useSelectionAsDefault(self,useSelection:bool)->Self:
 		"""If set to True then when no objects are provided on the command-line Maya will pass the current selection instead. Defaults to False."""

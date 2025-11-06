@@ -252,7 +252,7 @@ class MAnimCurveClipboard:
 		Sets the content of the clipboard.
 		'items' may be either an MAnimClipboardItemArray or a sequence of MAnimClipboardItems."""
 	@overload
-	def set(self,items:Any,startTime:Any,endTime:Any,startUnitlessInput:Any,endUnitlessInput:Any,strictValidation:Any=True)->Self:
+	def set(self,items:Any,startTime:Any,endTime:Any,startUnitlessInput:Any,endUnitlessInput:Any,strictValidation:bool=True)->Self:
 		"""set( clipboard ) -> self
 		set( items ) -> self
 		set( items, startTime, endTime, startUnitlessInput, endUnitlessInput, strictValidation=True ) -> self
@@ -782,7 +782,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		Adds a new key with the given value at the specified time.
 		at and value can both be either MTime or double,depending on what is appropriate for the animCurve type.
 		change is an optional MAnimCurveChange."""
-	def addKeys(self,times:Any,values:Any,tangentInType:int=MFnAnimCurve.kTangentGlobal,tangentOutType:int=MFnAnimCurve.kTangentGlobal,keepExistingKeys:Any=False,change:Any|None=None)->Self:
+	def addKeys(self,times:Any,values:Any,tangentInType:int=MFnAnimCurve.kTangentGlobal,tangentOutType:int=MFnAnimCurve.kTangentGlobal,keepExistingKeys:bool=False,change:Any|None=None)->Self:
 		"""addKeys(times, values, tangentInType=kTangentGlobal, tangentOutType=kTangentGlobal, keepExistingKeys=False, change=None) -> self
 
 		Add a set of new keys with the given corresponding values and tangent typesat the specified times.  This method only works for animCurves of typekAnimCurveTA, kAnimCurveTL and kAnimCurveTU."""
@@ -795,7 +795,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		breakdown specifies the breakdown state of the newly inserted key.
 		change is an optional MAnimCurveChange.
 		Returns the index of the newly inserted key."""
-	def addKeysWithTangents(self,times:Any,values:Any,tangentInType:int=MFnAnimCurve.kTangentGlobal,tangentOutType:int=MFnAnimCurve.kTangentGlobal,tangentInTypeArray:Any|None=None,tangentOutTypeArray:Any|None=None,tangentInXArray:Any|None=None,tangentInYArray:Any|None=None,tangentOutXArray:Any|None=None,tangentOutYArray:Any|None=None,tangentsLockedArray:Any|None=None,weightsLockedArray:Any|None=None,convertUnits:Any=True,keepExistingKeys:Any=False,change:Any|None=None)->Self:
+	def addKeysWithTangents(self,times:Any,values:Any,tangentInType:int=MFnAnimCurve.kTangentGlobal,tangentOutType:int=MFnAnimCurve.kTangentGlobal,tangentInTypeArray:Any|None=None,tangentOutTypeArray:Any|None=None,tangentInXArray:Any|None=None,tangentInYArray:Any|None=None,tangentOutXArray:Any|None=None,tangentOutYArray:Any|None=None,tangentsLockedArray:Any|None=None,weightsLockedArray:Any|None=None,convertUnits:bool=True,keepExistingKeys:bool=False,change:Any|None=None)->Self:
 		"""addKeysWithTangents(times, values, tangentInType=kTangentGlobal, tangentOutType=kTangentGlobal, tangentInTypeArray=None, tangentOutTypeArray=None, tangentInXArray=None, tangentInYArray=None, tangentOutXArray=None, tangentOutYArray=None, tangentsLockedArray=None, weightsLockedArray=None, convertUnits=True, keepExistingKeys=False, change=None) -> self
 
 		Add a set of new keys with the given corresponding values, tangent types and tangents at the specified times.  This method only works for animCurves of typekAnimCurveTA, kAnimCurveTL and kAnimCurveTU."""
@@ -873,7 +873,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		"""getTangentAngleWeight(index, isInTangent) -> (MAngle,double)
 
 		Determines the angle and weight of the in- or out-tangent to the curvefor the key at the specified index"""
-	def setTangent(self,index:int,xOrAngle:Any,yOrWeight:Any,isInTangent:Any,change:Any|None=None,convertUnits:Any=True)->Self:
+	def setTangent(self,index:int,xOrAngle:Any,yOrWeight:Any,isInTangent:Any,change:Any|None=None,convertUnits:bool=True)->Self:
 		"""setTangent(index, xOrAngle, yOrWeight, isInTangent, change=None, convertUnits=True) -> self
 
 		Sets the tangent for the key at the specified index.
