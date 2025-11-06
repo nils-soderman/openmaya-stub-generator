@@ -4996,10 +4996,10 @@ class MFnAttribute(MFnBase):
 	@affectsAppearance.setter
 	def affectsAppearance(self,value:bool)->None:...
 	@property
-	def isProxyAttribute(self)->Any:
+	def isProxyAttribute(self)->bool:
 		"""Does the attribute is a proxy attribute?"""
 	@isProxyAttribute.setter
-	def isProxyAttribute(self,value:Any)->None:...
+	def isProxyAttribute(self,value:bool)->None:...
 	@property
 	def affectsWorldSpace(self)->bool:
 		"""Does the attribute affect the node's worldSpace matrix?"""
@@ -5165,10 +5165,10 @@ class MFnCamera(MFnDagNode):
 	@verticalFilmAperture.setter
 	def verticalFilmAperture(self,value:Any)->None:...
 	@property
-	def isVerticalLock(self)->Any:
+	def isVerticalLock(self)->bool:
 		"""Determines if vertical lock is turned on for the camera."""
 	@isVerticalLock.setter
-	def isVerticalLock(self,value:Any)->None:...
+	def isVerticalLock(self,value:bool)->None:...
 	@property
 	def horizontalFilmOffset(self)->Any:
 		"""The horizontal offset of the film. Unit used is inches."""
@@ -5308,15 +5308,15 @@ class MFnCamera(MFnDagNode):
 	@filmTranslateV.setter
 	def filmTranslateV(self,value:Any)->None:...
 	@property
-	def isDisplayGateMask(self)->Any:
+	def isDisplayGateMask(self)->bool:
 		"""Whether or not the film gate is displayed shaded."""
 	@isDisplayGateMask.setter
-	def isDisplayGateMask(self,value:Any)->None:...
+	def isDisplayGateMask(self,value:bool)->None:...
 	@property
-	def isDisplayFilmGate(self)->Any:
+	def isDisplayFilmGate(self)->bool:
 		"""Whether or not the film gate icons are displayed when looking through the camera."""
 	@isDisplayFilmGate.setter
-	def isDisplayFilmGate(self,value:Any)->None:...
+	def isDisplayFilmGate(self,value:bool)->None:...
 	@property
 	def focalLength(self)->Any:
 		"""The focal length for the camera.
@@ -5329,10 +5329,10 @@ class MFnCamera(MFnDagNode):
 	@lensSqueezeRatio.setter
 	def lensSqueezeRatio(self,value:Any)->None:...
 	@property
-	def isClippingPlanes(self)->Any:
+	def isClippingPlanes(self)->bool:
 		"""Whether or not manual clipping planes are activated."""
 	@isClippingPlanes.setter
-	def isClippingPlanes(self,value:Any)->None:...
+	def isClippingPlanes(self,value:bool)->None:...
 	@property
 	def nearClippingPlane(self)->Any:
 		"""The distance to the near clipping plane."""
@@ -5344,10 +5344,10 @@ class MFnCamera(MFnDagNode):
 	@farClippingPlane.setter
 	def farClippingPlane(self,value:Any)->None:...
 	@property
-	def isDepthOfField(self)->Any:
+	def isDepthOfField(self)->bool:
 		"""Whether or not the depth of field calculation is performed for the camera."""
 	@isDepthOfField.setter
-	def isDepthOfField(self,value:Any)->None:...
+	def isDepthOfField(self,value:bool)->None:...
 	@property
 	def fStop(self)->Any:
 		"""The f-stop value for the camera."""
@@ -5369,10 +5369,10 @@ class MFnCamera(MFnDagNode):
 	@farFocusDistance.setter
 	def farFocusDistance(self,value:Any)->None:...
 	@property
-	def isMotionBlur(self)->Any:
+	def isMotionBlur(self)->bool:
 		"""Wheter or not motion blur is on/off for the camera."""
 	@isMotionBlur.setter
-	def isMotionBlur(self,value:Any)->None:...
+	def isMotionBlur(self,value:bool)->None:...
 	@property
 	def shutterAngle(self)->Any:
 		"""The shutter angle which is one of the variables used to compute motion blur. The shutter angle is specified in radians."""
@@ -7240,10 +7240,10 @@ class MFnNurbsCurve(MFnDagNode):
 	@hasHistoryOnCreate.setter
 	def hasHistoryOnCreate(self,value:Any)->None:...
 	@property
-	def isPlanar(self)->Any:
+	def isPlanar(self)->bool:
 		"""True if the curve is planar."""
 	@isPlanar.setter
-	def isPlanar(self,value:Any)->None:...
+	def isPlanar(self,value:bool)->None:...
 	@property
 	def knotDomain(self)->Any:
 		"""A tuple containing a pair of floats corresponding to the maximum and
@@ -7776,26 +7776,26 @@ class MFnNurbsSurface(MFnDagNode):
 	@hasHistoryOnCreate.setter
 	def hasHistoryOnCreate(self,value:Any)->None:...
 	@property
-	def isBezier(self)->Any:
+	def isBezier(self)->bool:
 		"""True if the knot spacing gives a Bezier surface."""
 	@isBezier.setter
-	def isBezier(self,value:Any)->None:...
+	def isBezier(self,value:bool)->None:...
 	@property
-	def isFoldedOnBispan(self)->Any:
+	def isFoldedOnBispan(self)->bool:
 		"""True if surface contains are any folds or creases on bispan
 		boundaries, including trimmed regions."""
 	@isFoldedOnBispan.setter
-	def isFoldedOnBispan(self,value:Any)->None:...
+	def isFoldedOnBispan(self,value:bool)->None:...
 	@property
-	def isTrimmedSurface(self)->Any:
+	def isTrimmedSurface(self)->bool:
 		"""True if the surface is a trimmed surface."""
 	@isTrimmedSurface.setter
-	def isTrimmedSurface(self,value:Any)->None:...
+	def isTrimmedSurface(self,value:bool)->None:...
 	@property
-	def isUniform(self)->Any:
+	def isUniform(self)->bool:
 		"""True if the knot spacing is uniform."""
 	@isUniform.setter
-	def isUniform(self,value:Any)->None:...
+	def isUniform(self,value:bool)->None:...
 	@property
 	def knotDomainInU(self)->Any:
 		"""A tuple containing a pair of floats corresponding to the maximum and
@@ -10951,10 +10951,10 @@ class MItGeometry:
 class MItMeshEdge:
 	"""An iterator for traversing a mesh's edges."""
 	@property
-	def isSmooth(self)->Any:
+	def isSmooth(self)->bool:
 		"""True if the edge is smooth, False if it is hard."""
 	@isSmooth.setter
-	def isSmooth(self,value:Any)->None:...
+	def isSmooth(self,value:bool)->None:...
 	def __iter__(self)->Any:
 		"""Implement iter(self)."""
 	def __next__(self)->Any:
@@ -12793,10 +12793,10 @@ class MMeshIntersector:
 	closest point.
 	"""
 	@property
-	def isCreated(self)->Any:
+	def isCreated(self)->bool:
 		"""True if the intersector has been created, False otherwise."""
 	@isCreated.setter
-	def isCreated(self,value:Any)->None:...
+	def isCreated(self,value:bool)->None:...
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def create(self,mesh:Any,matrix:Any)->Self:
@@ -13777,10 +13777,10 @@ class MPlug:
 	def isSource(self)->bool:
 		"""True if plug is the source of a connection."""
 	@property
-	def isProxy(self)->Any:
+	def isProxy(self)->bool:
 		"""True if plug is a proxy plug."""
 	@isProxy.setter
-	def isProxy(self,value:Any)->None:...
+	def isProxy(self,value:bool)->None:...
 	__hash__:None=None
 	kFreeToChange:int=0
 	kNotFreeToChange:int=1
@@ -15051,11 +15051,11 @@ class MPxNode:
 class MPxSurfaceShape(MPxNode):
 	"""Parent class of all user defined shapes."""
 	@property
-	def isRenderable(self)->Any:
+	def isRenderable(self)->bool:
 		"""Specifies whether the shape is a renderable shape.
 		Making a shape renderable allows the shape to have shading group assignments."""
 	@isRenderable.setter
-	def isRenderable(self,value:Any)->None:...
+	def isRenderable(self,value:bool)->None:...
 	kNoPointCaching:int=0
 	kSavePoints:int=1
 	kRestorePoints:int=2

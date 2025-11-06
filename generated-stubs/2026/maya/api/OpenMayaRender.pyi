@@ -5236,16 +5236,16 @@ class MSelectionInfo:
 	@alignmentMatrix.setter
 	def alignmentMatrix(self,value:Any)->None:...
 	@property
-	def isRay(self)->Any:
+	def isRay(self)->bool:
 		"""Whether or not there is a selection ray.
 		This is used to find ray object intersection"""
 	@isRay.setter
-	def isRay(self,value:Any)->None:...
+	def isRay(self,value:bool)->None:...
 	@property
-	def isSingleSelection(self)->Any:
+	def isSingleSelection(self)->bool:
 		"""Whether or not we want to select a single shape or component."""
 	@isSingleSelection.setter
-	def isSingleSelection(self,value:Any)->None:...
+	def isSingleSelection(self,value:bool)->None:...
 	@property
 	def localRay(self)->Any:
 		"""The selection ray (starting point and direction).

@@ -31,6 +31,7 @@ PATTERNS = (
 
 PROPERTY_PATTERNS = (
     (re.compile(r"Name$"), "str"),
+    (re.compile(r"^is[A-Z]"), "bool"),
 )
 
 
@@ -77,7 +78,7 @@ class Patch_AssumeParameterType(PatchBase):
             return
 
         for pattern, type_ in PROPERTY_PATTERNS:
-            if pattern.match(property.name, re.IGNORECASE):
+            if pattern.match(property.name):
                 property.type = type_
                 return
 

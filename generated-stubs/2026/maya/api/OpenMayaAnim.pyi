@@ -200,10 +200,10 @@ class MAnimCurveClipboard:
 	__init__()
 	Initializes a new, empty MAnimCurveClipboard object."""
 	@property
-	def isEmpty(self)->Any:
+	def isEmpty(self)->bool:
 		"""Whether the clipboard is empty."""
 	@isEmpty.setter
-	def isEmpty(self,value:Any)->None:...
+	def isEmpty(self,value:bool)->None:...
 	@property
 	def startTime(self)->Any:
 		"""The start time of the clipboard."""
@@ -612,30 +612,30 @@ class MFnAnimCurve(om.MFnDependencyNode):
 	@animCurveType.setter
 	def animCurveType(self,value:Any)->None:...
 	@property
-	def isStatic(self)->Any:
+	def isStatic(self)->bool:
 		"""Whether the curve is static."""
 	@isStatic.setter
-	def isStatic(self,value:Any)->None:...
+	def isStatic(self,value:bool)->None:...
 	@property
 	def numKeys(self)->Any:
 		"""Number of keys."""
 	@numKeys.setter
 	def numKeys(self,value:Any)->None:...
 	@property
-	def isTimeInput(self)->Any:
+	def isTimeInput(self)->bool:
 		"""Whether the curve has time as an input."""
 	@isTimeInput.setter
-	def isTimeInput(self,value:Any)->None:...
+	def isTimeInput(self,value:bool)->None:...
 	@property
-	def isUnitlessInput(self)->Any:
+	def isUnitlessInput(self)->bool:
 		"""Whether the curve has unitless input."""
 	@isUnitlessInput.setter
-	def isUnitlessInput(self,value:Any)->None:...
+	def isUnitlessInput(self,value:bool)->None:...
 	@property
-	def isWeighted(self)->Any:
+	def isWeighted(self)->bool:
 		"""Whether the curve has weighted tangents."""
 	@isWeighted.setter
-	def isWeighted(self,value:Any)->None:...
+	def isWeighted(self,value:bool)->None:...
 	@property
 	def preInfinityType(self)->Any:
 		"""The curve's pre-infinity type."""

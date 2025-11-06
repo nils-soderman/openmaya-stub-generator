@@ -1052,10 +1052,10 @@ class MDrawRequest:
 	@material.setter
 	def material(self,value:Any)->None:...
 	@property
-	def isTransparent(self)->Any:
+	def isTransparent(self)->bool:
 		"""The transparency state of the object."""
 	@isTransparent.setter
-	def isTransparent(self,value:Any)->None:...
+	def isTransparent(self,value:bool)->None:...
 	@property
 	def drawLast(self)->Any:
 		"""The order in which this object will be drawn."""
@@ -1432,17 +1432,17 @@ class MFnDiscManip(MFnManip3D):
 class MFnDistanceManip(MFnManip3D):
 	"""The DistanceManip allows the user to manipulate a point that is constrained to move along a line. This manipulator generates a single floating point value. Scaling factors can be used to determine how the manipulator appears when it is drawn."""
 	@property
-	def isDrawStartOn(self)->Any:
+	def isDrawStartOn(self)->bool:
 		"""Whether or not the start of the DistanceManip is being drawn.
 		By default the start is not drawn."""
 	@isDrawStartOn.setter
-	def isDrawStartOn(self,value:Any)->None:...
+	def isDrawStartOn(self,value:bool)->None:...
 	@property
-	def isDrawLineOn(self)->Any:
+	def isDrawLineOn(self)->bool:
 		"""Whether or not to draw a line from the start to the end of the DistanceManip.
 		By default the line is drawn."""
 	@isDrawLineOn.setter
-	def isDrawLineOn(self,value:Any)->None:...
+	def isDrawLineOn(self,value:bool)->None:...
 	@property
 	def scalingFactor(self)->Any:
 		"""The scaling factor is used to determine how int the DistanceManip appears when it is drawn.
@@ -1502,20 +1502,20 @@ class MFnFreePointTriadManip(MFnManip3D):
 
 	Note that only the MFnNumericData::k3Double data type is supportedwhen connecting to a pointPlug via connectToPointPlug."""
 	@property
-	def isDrawAxesOn(self)->Any:
+	def isDrawAxesOn(self)->bool:
 		"""Whether or not the axes of the FreePointTriadManip are being drawn. By default the axes are drawn."""
 	@isDrawAxesOn.setter
-	def isDrawAxesOn(self,value:Any)->None:...
+	def isDrawAxesOn(self,value:bool)->None:...
 	@property
-	def isSnapModeOn(self)->Any:
+	def isSnapModeOn(self)->bool:
 		"""Whether or not the FreePointTriadManip is in snap mode."""
 	@isSnapModeOn.setter
-	def isSnapModeOn(self,value:Any)->None:...
+	def isSnapModeOn(self,value:bool)->None:...
 	@property
-	def isKeyframeAllOn(self)->Any:
+	def isKeyframeAllOn(self)->bool:
 		"""Whether or not the FreePointTriadManip is in keyframeAll mode."""
 	@isKeyframeAllOn.setter
-	def isKeyframeAllOn(self,value:Any)->None:...
+	def isKeyframeAllOn(self,value:bool)->None:...
 	kYZPlane:int=0
 	kXZPlane:int=1
 	kXYPlane:int=2
@@ -1577,20 +1577,20 @@ class MFnFreePointTriadManip(MFnManip3D):
 class MFnManip3D(om.MFnTransform):
 	"""MFnManip3D allows the creation and manipulation of 3D manipulators."""
 	@property
-	def isVisible(self)->Any:
+	def isVisible(self)->bool:
 		"""Whether or not the manipulator is visible."""
 	@isVisible.setter
-	def isVisible(self,value:Any)->None:...
+	def isVisible(self,value:bool)->None:...
 	@property
 	def manipScale(self)->Any:
 		"""The manipulator scale."""
 	@manipScale.setter
 	def manipScale(self,value:Any)->None:...
 	@property
-	def isOptimizePlaybackOn(self)->Any:
+	def isOptimizePlaybackOn(self)->bool:
 		"""Whether or not optimize playback is on."""
 	@isOptimizePlaybackOn.setter
-	def isOptimizePlaybackOn(self,value:Any)->None:...
+	def isOptimizePlaybackOn(self,value:bool)->None:...
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	@staticmethod
@@ -1649,10 +1649,10 @@ class MFnManip3D(om.MFnTransform):
 class MFnPointOnCurveManip(MFnManip3D):
 	"""The PointOnCurveManip allows the user to manipulate a point constrained to move along a curve, in order to specify the "u" curve parameter value. This manipulator generates a single floating point value corresponding to the curve parameter.the sweep angle."""
 	@property
-	def isDrawCurveOn(self)->Any:
+	def isDrawCurveOn(self)->bool:
 		"""Whether or not the curve is drawn."""
 	@isDrawCurveOn.setter
-	def isDrawCurveOn(self,value:Any)->None:...
+	def isDrawCurveOn(self,value:bool)->None:...
 	@property
 	def parameter(self)->Any:
 		"""The parameter of the PointOnCurveManip."""
@@ -1709,10 +1709,10 @@ class MFnPointOnSurfaceManip(MFnManip3D):
 	@vParam.setter
 	def vParam(self,value:Any)->None:...
 	@property
-	def isDrawSurfaceOn(self)->Any:
+	def isDrawSurfaceOn(self)->bool:
 		"""Whether or not the surface is drawn."""
 	@isDrawSurfaceOn.setter
-	def isDrawSurfaceOn(self,value:Any)->None:...
+	def isDrawSurfaceOn(self,value:bool)->None:...
 	def __init__(self,*args)->None:
 		"""Initialize self.  See help(type(self)) for accurate signature."""
 	def connectToParamPlug(self,paramPlug:om.MPlug)->Self:
@@ -1756,10 +1756,10 @@ class MFnPointOnSurfaceManip(MFnManip3D):
 class MFnRotateManip(MFnManip3D):
 	"""This class provides access to the built-in Maya rotate manipulator."""
 	@property
-	def isSnapModeOn(self)->Any:
+	def isSnapModeOn(self)->bool:
 		"""Whether or not the snap mode is on. When snap mode is on, rotation manip values will snap to the values within some increment apart."""
 	@isSnapModeOn.setter
-	def isSnapModeOn(self,value:Any)->None:...
+	def isSnapModeOn(self,value:bool)->None:...
 	@property
 	def snapIncrement(self)->Any:
 		"""The snap increment is specified in degrees. Manipulator values will snap to the next rotation at an angle of snapIncrement from the original rotation.  Note that snap rotate does not apply to the trackball rotations (when dragging between the rotate discs)."""
@@ -1843,10 +1843,10 @@ class MFnRotateManip(MFnManip3D):
 class MFnScaleManip(MFnManip3D):
 	"""This class provides access to the built-in Maya scale manipulator."""
 	@property
-	def isSnapModeOn(self)->Any:
+	def isSnapModeOn(self)->bool:
 		"""Whether or not the snap mode is on."""
 	@isSnapModeOn.setter
-	def isSnapModeOn(self,value:Any)->None:...
+	def isSnapModeOn(self,value:bool)->None:...
 	@property
 	def snapIncrement(self)->Any:
 		"""The snap increment is specified in the working	unit, and is the distance between snap points when dragging the scale handles."""
