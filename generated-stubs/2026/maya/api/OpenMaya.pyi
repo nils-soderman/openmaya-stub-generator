@@ -7326,7 +7326,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               beneath it as a nurbsCurve node. In this last case it
 		               will be the transform node which is returned."""
 	@overload
-	def create(self,cvs:Any,knots:Any,degree:int,form:int,is2D:Any,rational:bool,parent:MObject=MObject.kNullObj)->Self:
+	def create(self,cvs:Any,knots:Any,degree:int,form:int,is2D:bool,rational:bool,parent:MObject=MObject.kNullObj)->Self:
 		"""create(cvs, knots, degree, form, is2D, rational, parent=kNullObj)
 		    -> self
 		create(subCurves, parent=kNullObj) -> self
@@ -7407,7 +7407,7 @@ class MFnNurbsCurve(MFnDagNode):
 		               curve in the array must be coincident with the end of
 		               the previous curve in the array, and the curves must be
 		               be at least C0 continuous (i.e. tangent breaks are okay)."""
-	def createWithEditPoints(self,eps:Any,degree:int,form:int,is2D:Any,rational:bool,uniform:bool,parent:MObject=MObject.kNullObj)->MObject:
+	def createWithEditPoints(self,eps:Any,degree:int,form:int,is2D:bool,rational:bool,uniform:bool,parent:MObject=MObject.kNullObj)->MObject:
 		"""createWithEditPoints(eps, degree, form, is2D, rational, uniform,
 		    parent=kNullObj) -> MObject
 

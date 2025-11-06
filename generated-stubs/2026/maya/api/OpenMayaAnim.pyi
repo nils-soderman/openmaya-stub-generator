@@ -865,26 +865,26 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		"""setTangentTypes(indexArray, tangentInType=kTangentGlobal, tangentOutType=kTangentGlobal, change=None) -> self
 
 		Sets the tangent types for multiple keys."""
-	def getTangentXY(self,index:int,isInTangent:Any)->tuple[float,float]:
+	def getTangentXY(self,index:int,isInTangent:bool)->tuple[float,float]:
 		"""getTangentXY(index, isInTangent) -> (x,y)
 
 		Determines the x,y value representing the vector of the in- orout-tangent (depending on the value of the isInTangent parameter) tothe curve for the key at the specified index.  The values returnedwill be in Maya's internal units (seconds for time, centimeters forlinear, radians for angles)."""
-	def getTangentAngleWeight(self,index:int,isInTangent:Any)->tuple[om.MAngle,float]:
+	def getTangentAngleWeight(self,index:int,isInTangent:bool)->tuple[om.MAngle,float]:
 		"""getTangentAngleWeight(index, isInTangent) -> (MAngle,double)
 
 		Determines the angle and weight of the in- or out-tangent to the curvefor the key at the specified index"""
-	def setTangent(self,index:int,xOrAngle:Any,yOrWeight:Any,isInTangent:Any,change:Any|None=None,convertUnits:bool=True)->Self:
+	def setTangent(self,index:int,xOrAngle:Any,yOrWeight:Any,isInTangent:bool,change:Any|None=None,convertUnits:bool=True)->Self:
 		"""setTangent(index, xOrAngle, yOrWeight, isInTangent, change=None, convertUnits=True) -> self
 
 		Sets the tangent for the key at the specified index.
 		The tangent can be specified as an x/y pair, oras an MAngle and a weight.
 		isInTangent is True to modify the inTangent or False to modify the outTangent."""
-	def setAngle(self,index:int,setAngle:Any,isInTangent:Any,change:Any|None=None)->Self:
+	def setAngle(self,index:int,setAngle:Any,isInTangent:bool,change:Any|None=None)->Self:
 		"""setAngle(index, setAngle, isInTangent, change=None) -> self
 
 		Sets the in- or out-angle of the tangent for the key at the given index.
 		isInTangent is True to modify the inTangent or False to modify the outTangent."""
-	def setWeight(self,index:int,weight:Any,isInTangent:Any,change:Any|None=None)->Self:
+	def setWeight(self,index:int,weight:Any,isInTangent:bool,change:Any|None=None)->Self:
 		"""setWeight(index, weight, isInTangent, change=None) -> self
 
 		Sets the in- or out-weight of the tangent for the key at the given index.
@@ -905,7 +905,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		"""setTangentsLocked(index, locked, change=None) -> self
 
 		Lock or unlock the tangents at the given key."""
-	def setIsWeighted(self,isWeighted:Any,change:Any|None=None)->Self:
+	def setIsWeighted(self,isWeighted:bool,change:Any|None=None)->Self:
 		"""setIsWeighted(isWeighted, change=None) -> self
 
 		Sets whether or not the curve has weighted tangents."""
@@ -913,7 +913,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		"""isBreakdown(index) -> bool
 
 		Determines whether or not a key is a breakdown."""
-	def setIsBreakdown(self,index:int,isBreakdown:Any,change:Any|None=None)->Self:
+	def setIsBreakdown(self,index:int,isBreakdown:bool,change:Any|None=None)->Self:
 		"""setIsBreakdown(index, isBreakdown, change=None) -> self
 
 		Sets the breakdown state of a key at a given index."""

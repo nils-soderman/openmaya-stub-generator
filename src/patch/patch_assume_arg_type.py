@@ -27,11 +27,12 @@ PATTERNS = (
     (re.compile(r"[A-z]+Count$"), "int"),
     (re.compile(r"[A-z]+Index$"), "int"),
     (re.compile(r"^num[A-z]"), "int"),
+    (re.compile(r"^is[A-Z0-9]"), "bool"),
 )
 
 PROPERTY_PATTERNS = (
     (re.compile(r"Name$"), "str"),
-    (re.compile(r"^is[A-Z]"), "bool"),
+    (re.compile(r"^is[A-Z0-9]"), "bool"),
 )
 
 
