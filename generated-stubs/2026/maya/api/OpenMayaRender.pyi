@@ -1870,61 +1870,13 @@ class MLightParameterInformation:
 
 		Return the array size of a parameter. If the parameter is not an array then a value of 0 is returned."""
 	@overload
-	def getParameter(self,int:int)->om.MIntArray:
+	def getParameter(self,int:int)->om.MIntArray|om.MFloatArray|om.MMatrix|MSamplerStateDesc|MTexture:
 		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
 
 		Get parameter value by name or by semantic.
 		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
 	@overload
-	def getParameter(self,int:int)->om.MFloatArray:
-		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
-
-		Get parameter value by name or by semantic.
-		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
-	@overload
-	def getParameter(self,int:int)->om.MMatrix:
-		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
-
-		Get parameter value by name or by semantic.
-		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
-	@overload
-	def getParameter(self,int:int)->MSamplerStateDesc:
-		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
-
-		Get parameter value by name or by semantic.
-		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
-	@overload
-	def getParameter(self,int:int)->MTexture:
-		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
-
-		Get parameter value by name or by semantic.
-		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
-	@overload
-	def getParameter(self,string:str)->om.MIntArray:
-		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
-
-		Get parameter value by name or by semantic.
-		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
-	@overload
-	def getParameter(self,string:str)->om.MFloatArray:
-		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
-
-		Get parameter value by name or by semantic.
-		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
-	@overload
-	def getParameter(self,string:str)->om.MMatrix:
-		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
-
-		Get parameter value by name or by semantic.
-		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
-	@overload
-	def getParameter(self,string:str)->MSamplerStateDesc:
-		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
-
-		Get parameter value by name or by semantic.
-		If more than one parameter matches the semantic, the value of the first matching parameter found will be returned."""
-	@overload
-	def getParameter(self,string:str)->MTexture:
+	def getParameter(self,string:str)->om.MIntArray|om.MFloatArray|om.MMatrix|MSamplerStateDesc|MTexture:
 		"""getParameter(int) -> MIntArraygetParameter(int) -> MFloatArraygetParameter(int) -> MMatrixgetParameter(int) -> MSamplerStateDescgetParameter(int) -> MTexturegetParameter(string) -> MIntArraygetParameter(string) -> MFloatArraygetParameter(string) -> MMatrixgetParameter(string) -> MSamplerStateDescgetParameter(string) -> MTexture
 
 		Get parameter value by name or by semantic.
@@ -2652,25 +2604,7 @@ class MPxShaderOverride:
 		This call occurs after updateDevice() which allows for any device evaluation to occur to determine the transparency state.
 
 		The default return value is False."""
-	@overload
-	def nonTexturedShaderInstance(self)->MShaderInstance:
-		"""nonTexturedShaderInstance() -> MShaderInstancenonTexturedShaderInstance() -> (MShaderInstance, bool)
-
-		Returns an override shader instance to be used when drawing in non-textured
-		mode. If None is returned an internally defined non-modifiable shader
-		instance is used.
-
-		A second optional boolean value 'monitorNode' can be returned as well which will indicate
-		that the associated shader node requires monitoring to call back to the override
-		during the update phase.
-
-		Note that if transparency is required at initialization time then
-		the method setIsTransparent() should be called
-		within this method.
-
-		The default implementation returns None indicating that no shader instance will be used."""
-	@overload
-	def nonTexturedShaderInstance(self)->tuple[MShaderInstance,bool]:
+	def nonTexturedShaderInstance(self)->MShaderInstance|tuple[MShaderInstance,bool]:
 		"""nonTexturedShaderInstance() -> MShaderInstancenonTexturedShaderInstance() -> (MShaderInstance, bool)
 
 		Returns an override shader instance to be used when drawing in non-textured

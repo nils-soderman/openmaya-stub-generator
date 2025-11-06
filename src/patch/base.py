@@ -42,7 +42,7 @@ class PatchBase:
     def patch_class(self, class_: stub_types.Class):
         for method in class_.methods:
             self.patch_method(class_, method)
-            for overload in method.overloads:
+            for overload in list(method.overloads):
                 self.patch_method(class_, overload, method)
 
         for property in class_.properties:

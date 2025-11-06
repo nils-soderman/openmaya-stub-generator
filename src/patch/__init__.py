@@ -7,6 +7,7 @@ from .patch_static_self_return import Patch_StaticSelfReturn
 from .patch_default_value_enum import Patch_DefaultValueEnum
 from .patch_maya_types import Patch_MayaTypes
 from .patch_sequences import Patch_Sequences
+from .patch_overlapping_overrides import Patch_OverlappingOverloads
 
 
 ALL_PATCHES = sorted(
@@ -20,6 +21,7 @@ ALL_PATCHES = sorted(
         Patch_DefaultValueEnum,
         Patch_MayaTypes,
         Patch_Sequences,
+        Patch_OverlappingOverloads
     ],
     key=lambda x: x.ORDER
 )
