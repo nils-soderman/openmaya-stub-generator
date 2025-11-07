@@ -933,10 +933,10 @@ class MContainerMessage(MMessage):
 class MDAGDrawOverrideInfo:
 	"""A data structure to store the per path draw override information."""
 	@property
-	def overrideEnabled(self)->Any:
+	def overrideEnabled(self)->bool:
 		"""Draw override enabled or not"""
 	@overrideEnabled.setter
-	def overrideEnabled(self,value:Any)->None:...
+	def overrideEnabled(self,value:bool)->None:...
 	@property
 	def displayType(self)->Any:
 		"""Display type (kDisplayTypeNormal, kDisplayTypeReference or kDisplayTypeTemplate)"""
@@ -5113,10 +5113,10 @@ class MFnAttribute(MFnBase):
 	@writable.setter
 	def writable(self,value:bool)->None:...
 	@property
-	def enforcingUniqueName(self)->Any:
+	def enforcingUniqueName(self)->bool:
 		"""Is the attribute enforcing to have a unique name?"""
 	@enforcingUniqueName.setter
-	def enforcingUniqueName(self,value:Any)->None:...
+	def enforcingUniqueName(self,value:bool)->None:...
 	kDelete:int=0
 	kReset:int=1
 	kNothing:int=2
@@ -5180,11 +5180,11 @@ class MFnCamera(MFnDagNode):
 	@verticalFilmOffset.setter
 	def verticalFilmOffset(self,value:Any)->None:...
 	@property
-	def shakeEnabled(self)->Any:
+	def shakeEnabled(self)->bool:
 		"""The toggle value for the camera shake enabled attribute.
 		If this attribute is False, the horizontalShake and verticalShake values are ignored by the camera."""
 	@shakeEnabled.setter
-	def shakeEnabled(self,value:Any)->None:...
+	def shakeEnabled(self,value:bool)->None:...
 	@property
 	def horizontalShake(self)->Any:
 		"""The horizontal offset of the film due to the shake attribute. Unit used is inches."""
@@ -5196,22 +5196,22 @@ class MFnCamera(MFnDagNode):
 	@verticalShake.setter
 	def verticalShake(self,value:Any)->None:...
 	@property
-	def shakeOverscanEnabled(self)->Any:
+	def shakeOverscanEnabled(self)->bool:
 		"""The toggle value for the camera shake overscan attribute.
 		If this attribute is False, the shakeOverscan value is ignored by the camera."""
 	@shakeOverscanEnabled.setter
-	def shakeOverscanEnabled(self,value:Any)->None:...
+	def shakeOverscanEnabled(self,value:bool)->None:...
 	@property
 	def shakeOverscan(self)->Any:
 		"""The camera shake overscan value. Unit is a multiplier to the film aperture."""
 	@shakeOverscan.setter
 	def shakeOverscan(self,value:Any)->None:...
 	@property
-	def panZoomEnabled(self)->Any:
+	def panZoomEnabled(self)->bool:
 		"""The toggle value for the camera 2D pan/zoom enabled attribute.
 		If this attribute is False, the 2D pan/zoom values are ignored by the camera."""
 	@panZoomEnabled.setter
-	def panZoomEnabled(self,value:Any)->None:...
+	def panZoomEnabled(self,value:bool)->None:...
 	@property
 	def renderPanZoom(self)->Any:
 		"""The toggle value for the camera render 2D pan/zoom attribute.
@@ -5234,11 +5234,11 @@ class MFnCamera(MFnDagNode):
 	@zoom.setter
 	def zoom(self,value:Any)->None:...
 	@property
-	def stereoHITEnabled(self)->Any:
+	def stereoHITEnabled(self)->bool:
 		"""The toggle value for the stereo HIT enabled attribute.
 		If this attribute is False, the stereoHIT value is ignored by the camera."""
 	@stereoHITEnabled.setter
-	def stereoHITEnabled(self,value:Any)->None:...
+	def stereoHITEnabled(self,value:bool)->None:...
 	@property
 	def stereoHIT(self)->Any:
 		"""The camera stereo horizontal image translation (stereo HIT) value.  Unit is inches."""
@@ -12370,10 +12370,10 @@ class MIteratorType:
 	@objectType.setter
 	def objectType(self,value:Any)->None:...
 	@property
-	def filterListEnabled(self)->Any:
+	def filterListEnabled(self)->bool:
 		"""Whether the we are using a single filter on the iterator or a filter list (Boolean)."""
 	@filterListEnabled.setter
-	def filterListEnabled(self,value:Any)->None:...
+	def filterListEnabled(self,value:bool)->None:...
 	kMObject:int=0
 	kMDagPathObject:int=1
 	kMPlugObject:int=2

@@ -1,5 +1,8 @@
 {
     "MFnLightDataAttribute": {
         "default": "tuple[tuple[float, float, float], tuple[int, int, int], bool, bool, bool, float, float, int]"
+    },
+    "MFnAttribute": {
+        "enforcingUniqueName": "bool"
     }
 }

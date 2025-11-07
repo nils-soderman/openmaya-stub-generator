@@ -270,20 +270,20 @@ class MAnimCurveClipboardItem:
 	@animCurve.setter
 	def animCurve(self,value:Any)->None:...
 	@property
-	def fullAttributeName(self)->Any:
+	def fullAttributeName(self)->str:
 		"""The full attribute name."""
 	@fullAttributeName.setter
-	def fullAttributeName(self,value:Any)->None:...
+	def fullAttributeName(self,value:str)->None:...
 	@property
-	def leafAttributeName(self)->Any:
+	def leafAttributeName(self)->str:
 		"""The leaf attribute name."""
 	@leafAttributeName.setter
-	def leafAttributeName(self,value:Any)->None:...
+	def leafAttributeName(self,value:str)->None:...
 	@property
-	def nodeName(self)->Any:
+	def nodeName(self)->str:
 		"""The node name."""
 	@nodeName.setter
-	def nodeName(self,value:Any)->None:...
+	def nodeName(self,value:str)->None:...
 	def __init__(self)->None:
 		"""Initializes a new, empty MAnimCurveClipboardItem object."""
 	def getAddressingInfo(self)->tuple[int,int,int]:

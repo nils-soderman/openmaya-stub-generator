@@ -7348,10 +7348,10 @@ class MUniformParameter:
 	@enumFieldNames.setter
 	def enumFieldNames(self,value:Any)->None:...
 	@property
-	def uiNiceName(self)->Any:
+	def uiNiceName(self)->str:
 		"""The UI Nice Name for the attribute."""
 	@uiNiceName.setter
-	def uiNiceName(self,value:Any)->None:...
+	def uiNiceName(self,value:str)->None:...
 	kTypeUnknown:int=0
 	kTypeBool:int=1
 	kTypeInt:int=2
@@ -7955,12 +7955,12 @@ class MVertexBufferDescriptor:
 	@semantic.setter
 	def semantic(self,value:Any)->None:...
 	@property
-	def semanticName(self)->Any:
+	def semanticName(self)->str:
 		"""The semantic name of the buffer.
 		The semanticName is used to identify a custom vertex stream request in order to fill
 		the stream with the appropriate data requested by a shader override."""
 	@semanticName.setter
-	def semanticName(self,value:Any)->None:...
+	def semanticName(self,value:str)->None:...
 	@property
 	def dataType(self)->Any:
 		"""The data type of the buffer.

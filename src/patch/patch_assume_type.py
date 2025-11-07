@@ -31,9 +31,11 @@ PATTERNS = (
 )
 
 PROPERTY_PATTERNS = (
-    (re.compile(r"Name$"), "str"),
+    (re.compile(r"^enforce"), "bool"),
+    (re.compile(r".*Name$"), "str"),
     (re.compile(r"^is[A-Z0-9]"), "bool"),
     (re.compile(r"^enable[A-Z0-9]"), "bool"),
+    (re.compile(r".*Enabled$"), "bool"),
 )
 
 
@@ -72,7 +74,7 @@ def get_type_from_default_value(default_value: str | None) -> str | None:
     return None
 
 
-class Patch_AssumeParameterType(PatchBase):
+class Patch_AssumeTypes(PatchBase):
     ORDER = 50
 
     def patch_property(self, class_: Class, property: Property):
