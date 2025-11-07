@@ -370,15 +370,15 @@ class MComponentDataIndexingList:
 class MDepthNormalizationDescription:
 	"""Information required to perform normalization of values stored in the depth buffer of an MImage with respect to clipping plane range."""
 	@property
-	def fNearClipDistance(self)->Any:
+	def fNearClipDistance(self)->float:
 		"""Near clip plane of a camera"""
 	@fNearClipDistance.setter
-	def fNearClipDistance(self,value:Any)->None:...
+	def fNearClipDistance(self,value:float)->None:...
 	@property
-	def fFarClipDistance(self)->Any:
+	def fFarClipDistance(self)->float:
 		"""Far clip plane of a camera"""
 	@fFarClipDistance.setter
-	def fFarClipDistance(self,value:Any)->None:...
+	def fFarClipDistance(self,value:float)->None:...
 	@property
 	def fDepthScale(self)->Any:
 		"""Scale to apply to depth values"""

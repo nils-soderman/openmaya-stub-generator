@@ -5318,11 +5318,11 @@ class MFnCamera(MFnDagNode):
 	@isDisplayFilmGate.setter
 	def isDisplayFilmGate(self,value:bool)->None:...
 	@property
-	def focalLength(self)->Any:
+	def focalLength(self)->float:
 		"""The focal length for the camera.
 		This is the distance along the lens axis between the lens and the film plane when "focal distance" is infinitely large. This is an optical property of the lens. Specified in millimeters."""
 	@focalLength.setter
-	def focalLength(self,value:Any)->None:...
+	def focalLength(self,value:float)->None:...
 	@property
 	def lensSqueezeRatio(self)->Any:
 		"""The lens squeeze ratio for the camera"""
@@ -5354,20 +5354,20 @@ class MFnCamera(MFnDagNode):
 	@fStop.setter
 	def fStop(self,value:Any)->None:...
 	@property
-	def focusDistance(self)->Any:
+	def focusDistance(self)->float:
 		"""The focus distance for the camera. This value sets the focus at a certain distance in front of the camera."""
 	@focusDistance.setter
-	def focusDistance(self,value:Any)->None:...
+	def focusDistance(self,value:float)->None:...
 	@property
-	def nearFocusDistance(self)->Any:
+	def nearFocusDistance(self)->float:
 		"""The nearest distance within the well-focus region"""
 	@nearFocusDistance.setter
-	def nearFocusDistance(self,value:Any)->None:...
+	def nearFocusDistance(self,value:float)->None:...
 	@property
-	def farFocusDistance(self)->Any:
+	def farFocusDistance(self)->float:
 		"""The farthest distance within the well-focus region"""
 	@farFocusDistance.setter
-	def farFocusDistance(self,value:Any)->None:...
+	def farFocusDistance(self,value:float)->None:...
 	@property
 	def isMotionBlur(self)->bool:
 		"""Wheter or not motion blur is on/off for the camera."""

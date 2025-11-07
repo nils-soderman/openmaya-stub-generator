@@ -37,6 +37,8 @@ PROPERTY_PATTERNS = (
     (re.compile(r"^enable[A-Z0-9]"), "bool"),
     (re.compile(r".*Enabled$"), "bool"),
     (re.compile(f".*[A-z]Type$"), "int"),
+    (re.compile(f".*Distance$"), "float"),
+    (re.compile(f".*Length$"), "float"),
 )
 
 
