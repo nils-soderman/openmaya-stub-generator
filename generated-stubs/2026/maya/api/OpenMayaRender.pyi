@@ -1635,7 +1635,7 @@ class MIndexBufferDescriptor:
 	@name.setter
 	def name(self,value:Any)->None:...
 	@property
-	def indexType(self)->Any:
+	def indexType(self)->int:
 		"""The indexing type describing what the buffer is used for:
 		  kVertexPoint
 		  kEdgeLine
@@ -1653,7 +1653,7 @@ class MIndexBufferDescriptor:
 		  kTangent
 		  kCustom"""
 	@indexType.setter
-	def indexType(self,value:Any)->None:...
+	def indexType(self,value:int)->None:...
 	@property
 	def primitive(self)->Any:
 		"""The primitive describing the input layout for each drawable.
@@ -1672,11 +1672,11 @@ class MIndexBufferDescriptor:
 	@component.setter
 	def component(self,value:Any)->None:...
 	@property
-	def dataType(self)->Any:
+	def dataType(self)->int:
 		"""The type of data expected to be in the index buffer.
 		See MGeometry.dataTypeString() for a list of valid data types."""
 	@dataType.setter
-	def dataType(self,value:Any)->None:...
+	def dataType(self,value:int)->None:...
 	kVertexPoint:int=0
 	kEdgeLine:int=1
 	kTriangleEdge:int=2
@@ -6373,15 +6373,15 @@ class MTextureDescription:
 	@fFormat.setter
 	def fFormat(self,value:Any)->None:...
 	@property
-	def fTextureType(self)->Any:
+	def fTextureType(self)->int:
 		"""Type of texture"""
 	@fTextureType.setter
-	def fTextureType(self,value:Any)->None:...
+	def fTextureType(self,value:int)->None:...
 	@property
-	def fEnvMapType(self)->Any:
+	def fEnvMapType(self)->int:
 		"""Type of environment mapping"""
 	@fEnvMapType.setter
-	def fEnvMapType(self,value:Any)->None:...
+	def fEnvMapType(self,value:int)->None:...
 	kImage1D:int=0
 	kImage1DArray:int=1
 	kImage2D:int=2
@@ -7962,11 +7962,11 @@ class MVertexBufferDescriptor:
 	@semanticName.setter
 	def semanticName(self,value:str)->None:...
 	@property
-	def dataType(self)->Any:
+	def dataType(self)->int:
 		"""The data type of the buffer.
 		See MGeometry.dataTypeString() for a list of valid data types."""
 	@dataType.setter
-	def dataType(self,value:Any)->None:...
+	def dataType(self,value:int)->None:...
 	@property
 	def dataTypeSize(self)->Any:
 		"""The size in bytes of the data type of the buffer."""

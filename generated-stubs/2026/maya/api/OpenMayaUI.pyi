@@ -5083,7 +5083,7 @@ class MTimeSliderDrawPrimitive:
 	@priority.setter
 	def priority(self,value:Any)->None:...
 	@property
-	def drawType(self)->Any:
+	def drawType(self)->int:
 		"""One of the primitive type.
 		kFilledRect   Draws a filled rectangle with no border.
 		kUpperOutline Draws an outline with no bottom side.
@@ -5093,7 +5093,7 @@ class MTimeSliderDrawPrimitive:
 		kFrameFlag    Draws a flag at a specific frame.
 		"""
 	@drawType.setter
-	def drawType(self,value:Any)->None:...
+	def drawType(self,value:int)->None:...
 	@property
 	def startTime(self)->Any:
 		"""Start time of the primitive.

@@ -607,10 +607,10 @@ class MFnAnimCurve(om.MFnDependencyNode):
 	Initializes a new MFnAnimCurve and attaches it
 	to the single animCurve node connected to the given MPlug."""
 	@property
-	def animCurveType(self)->Any:
+	def animCurveType(self)->int:
 		"""Anim curve type."""
 	@animCurveType.setter
-	def animCurveType(self,value:Any)->None:...
+	def animCurveType(self,value:int)->None:...
 	@property
 	def isStatic(self)->bool:
 		"""Whether the curve is static."""
@@ -637,15 +637,15 @@ class MFnAnimCurve(om.MFnDependencyNode):
 	@isWeighted.setter
 	def isWeighted(self,value:bool)->None:...
 	@property
-	def preInfinityType(self)->Any:
+	def preInfinityType(self)->int:
 		"""The curve's pre-infinity type."""
 	@preInfinityType.setter
-	def preInfinityType(self,value:Any)->None:...
+	def preInfinityType(self,value:int)->None:...
 	@property
-	def postInfinityType(self)->Any:
+	def postInfinityType(self)->int:
 		"""The curve's post-infinity type."""
 	@postInfinityType.setter
-	def postInfinityType(self,value:Any)->None:...
+	def postInfinityType(self,value:int)->None:...
 	kAnimCurveTA:int=0
 	kAnimCurveTL:int=1
 	kAnimCurveTT:int=2

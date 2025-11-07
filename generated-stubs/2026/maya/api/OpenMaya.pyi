@@ -938,10 +938,10 @@ class MDAGDrawOverrideInfo:
 	@overrideEnabled.setter
 	def overrideEnabled(self,value:bool)->None:...
 	@property
-	def displayType(self)->Any:
+	def displayType(self)->int:
 		"""Display type (kDisplayTypeNormal, kDisplayTypeReference or kDisplayTypeTemplate)"""
 	@displayType.setter
-	def displayType(self,value:Any)->None:...
+	def displayType(self,value:int)->None:...
 	@property
 	def lod(self)->Any:
 		"""Level of detail (kLODFull or kLODBoundingBox)"""
@@ -5825,10 +5825,10 @@ class MFnDagNode(MFnDependencyNode):
 	@useObjectColor.setter
 	def useObjectColor(self,value:bool)->None:...
 	@property
-	def objectColorType(self)->Any:
+	def objectColorType(self)->int:
 		"""Determines whether the default color, indexed object color, orRGB object color is used for this object."""
 	@objectColorType.setter
-	def objectColorType(self,value:Any)->None:...
+	def objectColorType(self,value:int)->None:...
 	kNextPos:int=255
 	@overload
 	def __init__(self)->None:
@@ -12355,20 +12355,20 @@ class MIteratorType:
 	Also, the class has functionalities for specifying the type of object the
 	iterator will be reset to. This could be an MObject, an MPlug or an MDagPath."""
 	@property
-	def filterType(self)->Any:
+	def filterType(self)->int:
 		"""Filter type (MFn.Type)."""
 	@filterType.setter
-	def filterType(self,value:Any)->None:...
+	def filterType(self,value:int)->None:...
 	@property
 	def filterList(self)->Any:
 		"""Filter list (MIntArray containing MFn.Type)."""
 	@filterList.setter
 	def filterList(self,value:Any)->None:...
 	@property
-	def objectType(self)->Any:
+	def objectType(self)->int:
 		"""Object type (MIteratorType.objFilterType)."""
 	@objectType.setter
-	def objectType(self,value:Any)->None:...
+	def objectType(self,value:int)->None:...
 	@property
 	def filterListEnabled(self)->bool:
 		"""Whether the we are using a single filter on the iterator or a filter list (Boolean)."""
@@ -12840,10 +12840,10 @@ class MMeshSmoothOptions:
 	@boundaryRule.setter
 	def boundaryRule(self,value:Any)->None:...
 	@property
-	def subdivisionType(self)->Any:
+	def subdivisionType(self)->int:
 		"""Determines subdivision algorithm used for mesh smoothing."""
 	@subdivisionType.setter
-	def subdivisionType(self,value:Any)->None:...
+	def subdivisionType(self,value:int)->None:...
 	@property
 	def divisions(self)->Any:
 		"""Number of subdivisions used in smoothing."""
