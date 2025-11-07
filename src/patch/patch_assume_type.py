@@ -34,6 +34,7 @@ PROPERTY_PATTERNS = (
     (re.compile(r"^enforce"), "bool"),
     (re.compile(r".*Name$"), "str"),
     (re.compile(r"^is[A-Z0-9]"), "bool"),
+    (re.compile(f"^use[A-Z]"), "bool"),
     (re.compile(r"^enable[A-Z0-9]"), "bool"),
     (re.compile(r".*Enabled$"), "bool"),
     (re.compile(f".*[A-z]Type$"), "int"),

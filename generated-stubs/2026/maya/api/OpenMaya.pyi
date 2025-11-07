@@ -5399,10 +5399,10 @@ class MFnCamera(MFnDagNode):
 	@tumblePivot.setter
 	def tumblePivot(self,value:Any)->None:...
 	@property
-	def usePivotAsLocalSpace(self)->Any:
+	def usePivotAsLocalSpace(self)->float:
 		"""The local axis tumble setting for this camera.True if using local space tumbling for this camera, or False if using the current global tumble setting in Maya."""
 	@usePivotAsLocalSpace.setter
-	def usePivotAsLocalSpace(self,value:Any)->None:...
+	def usePivotAsLocalSpace(self,value:float)->None:...
 	kFillFilmFit:int=0
 	kHorizontalFilmFit:int=1
 	kVerticalFilmFit:int=2
