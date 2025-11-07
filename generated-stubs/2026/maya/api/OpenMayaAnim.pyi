@@ -17,95 +17,61 @@ class MAnimControl:
 	kPlaybackViewActive:int=1
 	@staticmethod
 	def playbackMode()->int:
-		"""playbackMode() -> int
-
-		Return the playback mode currently in effect:
+		"""Return the playback mode currently in effect:
 		  MAnimControl.kPlaybackOnce         Play once then stop.
 		  MAnimControl.kPlaybackLoop         Play continuously.
 		  MAnimControl.kPlaybackOscillate    Play forwards, then backwards continuously."""
 	@staticmethod
 	def setPlaybackMode(int:int)->None:
-		"""setPlaybackMode(int) -> None
-
-		Set the current playback mode."""
+		"""Set the current playback mode."""
 	@staticmethod
 	def viewMode()->int:
-		"""viewMode() -> int
-
-		Return the viewing mode currently in effect:
+		"""Return the viewing mode currently in effect:
 		  MAnimControl.kPlaybackViewAll      Playback in all views.
 		  MAnimControl.kPlaybackViewActive   Playback in only the active view."""
 	@staticmethod
 	def setViewMode(int:int)->None:
-		"""setViewMode(int) -> None
-
-		Set the current viewing mode.
+		"""Set the current viewing mode.
 		Controls whether the animation is run in only the active view, or simultaneously in all views."""
 	@staticmethod
 	def playbackBy()->float:
-		"""playbackBy() -> float
-
-		Return a float specifying the increment between times viewed during the playing of the animation."""
+		"""Return a float specifying the increment between times viewed during the playing of the animation."""
 	@staticmethod
 	def setPlaybackBy(float:float)->None:
-		"""setPlaybackBy(float) -> None
-
-		Specify the increment between times viewed during the playing of the animation."""
+		"""Specify the increment between times viewed during the playing of the animation."""
 	@staticmethod
 	def minTime()->om.MTime:
-		"""minTime() -> MTime
-
-		Return an MTime specifying the first frame of the current playback time range."""
+		"""Return an MTime specifying the first frame of the current playback time range."""
 	@staticmethod
 	def maxTime()->om.MTime:
-		"""maxTime() -> MTime
-
-		Return an MTime specifying the last frame of the current playback time range."""
+		"""Return an MTime specifying the last frame of the current playback time range."""
 	@staticmethod
 	def setMinTime(Time:om.MTime)->None:
-		"""setMinTime(MTime) -> None
-
-		Set the value of the first frame of the current playback time range."""
+		"""Set the value of the first frame of the current playback time range."""
 	@staticmethod
 	def setMaxTime(Time:om.MTime)->None:
-		"""setMaxTime(MTime) -> None
-
-		Set the value of the last frame of the current playback time range."""
+		"""Set the value of the last frame of the current playback time range."""
 	@staticmethod
 	def setMinMaxTime(Time:om.MTime,Time2:om.MTime)->None:
-		"""setMinMaxTime(MTime, MTime) -> None
-
-		Set the values of the first and last frames of the playback time range."""
+		"""Set the values of the first and last frames of the playback time range."""
 	@staticmethod
 	def animationStartTime()->om.MTime:
-		"""animationStartTime() -> MTime
-
-		Return an MTime specifying the first frame of the animation, as specified by the Maya user in the Range Slider UI."""
+		"""Return an MTime specifying the first frame of the animation, as specified by the Maya user in the Range Slider UI."""
 	@staticmethod
 	def animationEndTime()->om.MTime:
-		"""animationEndTime() -> MTime
-
-		Return an MTime specifying the last frame of the animation, as specified by the Maya user in the Range Slider UI."""
+		"""Return an MTime specifying the last frame of the animation, as specified by the Maya user in the Range Slider UI."""
 	@staticmethod
 	def setAnimationStartTime(Time:om.MTime)->None:
-		"""setAnimationStartTime(MTime) -> None
-
-		Set the value of the first frame in the animation."""
+		"""Set the value of the first frame in the animation."""
 	@staticmethod
 	def setAnimationEndTime(Time:om.MTime)->None:
-		"""setAnimationEndTime(MTime) -> None
-
-		Set the value of the last frame in the animation."""
+		"""Set the value of the last frame in the animation."""
 	@staticmethod
 	def setAnimationStartEndTime(Time:om.MTime,Time2:om.MTime)->None:
-		"""setAnimationStartEndTime(MTime, MTime) -> None
-
-		Set the values of the first and last frames in the animation."""
+		"""Set the values of the first and last frames in the animation."""
 	@staticmethod
 	def currentTime()->om.MTime:
-		"""currentTime() -> MTime
-
-		Return an MTime instance containing the current animation frame."""
+		"""Return an MTime instance containing the current animation frame."""
 	@staticmethod
 	def setCurrentTime(*args)->Any:
 		"""setMinTime(MTime) -> None
@@ -113,79 +79,49 @@ class MAnimControl:
 		Set the current animation frame."""
 	@staticmethod
 	def playbackSpeed()->float:
-		"""playbackSpeed() -> float
-
-		Return the speed with with to play the animation."""
+		"""Return the speed with with to play the animation."""
 	@staticmethod
 	def setPlaybackSpeed(float:float)->None:
-		"""setPlaybackSpeed(float) -> None
-
-		Set the desired speed factor at which the animation will play back."""
+		"""Set the desired speed factor at which the animation will play back."""
 	@staticmethod
 	def playForward()->None:
-		"""playForward() -> None
-
-		Start playing the current animation forwards."""
+		"""Start playing the current animation forwards."""
 	@staticmethod
 	def playBackward()->None:
-		"""playBackward() -> None
-
-		Start playing the current animation backwards."""
+		"""Start playing the current animation backwards."""
 	@staticmethod
 	def isPlaying()->bool:
-		"""isPlaying() -> bool
-
-		Return a value indicating whether Maya is currently playing the animation"""
+		"""Return a value indicating whether Maya is currently playing the animation"""
 	@staticmethod
 	def isScrubbing()->bool:
-		"""isScrubbing() -> bool
-
-		Return a value indicating whether interactive scrubbing is occuring while Maya is not currently playing an animation."""
+		"""Return a value indicating whether interactive scrubbing is occuring while Maya is not currently playing an animation."""
 	@staticmethod
 	def stop()->None:
-		"""stop() -> None
-
-		Stop playing the current animation."""
+		"""Stop playing the current animation."""
 	@staticmethod
 	def autoKeyMode()->bool:
-		"""autoKeyMode() -> bool
-
-		Return the autoKeyMode."""
+		"""Return the autoKeyMode."""
 	@staticmethod
 	def setAutoKeyMode(bool:bool)->None:
-		"""setAutoKeyMode(bool) -> None
-
-		Set the autoKeyMode."""
+		"""Set the autoKeyMode."""
 	@staticmethod
 	def globalInTangentType()->int:
-		"""globalInTangentType() -> int
-
-		Return the current global in tangent type."""
+		"""Return the current global in tangent type."""
 	@staticmethod
 	def setGlobalInTangentType(int:int)->None:
-		"""setGlobalInTangentType(int) -> None
-
-		Set the current global in tangent type"""
+		"""Set the current global in tangent type"""
 	@staticmethod
 	def globalOutTangentType()->int:
-		"""globalOutTangentType() -> int
-
-		Return the current global out tangent type."""
+		"""Return the current global out tangent type."""
 	@staticmethod
 	def setGlobalOutTangentType(int:int)->None:
-		"""setGlobalOutTangentType(int) -> None
-
-		Set the current global out tangent type."""
+		"""Set the current global out tangent type."""
 	@staticmethod
 	def weightedTangents()->bool:
-		"""weightedTangents() -> bool
-
-		Determine whether or not the tangents on the Anim Curve are weighted."""
+		"""Determine whether or not the tangents on the Anim Curve are weighted."""
 	@staticmethod
 	def setWeightedTangents(bool:bool)->None:
-		"""setWeightedTangents(bool) -> None
-
-		Sets whether or not the tangents on the Anim Curve are weighted."""
+		"""Sets whether or not the tangents on the Anim Curve are weighted."""
 class MAnimCurveChange:
 	"""Anim curve change cache."""
 	def __init__(self,*args)->None:
@@ -228,13 +164,9 @@ class MAnimCurveClipboard:
 	def __init__(self)->None:
 		"""Initializes a new, empty MAnimCurveClipboard object."""
 	def clear(self)->Self:
-		"""clear() -> self
-
-		Clears the clipboard."""
+		"""Clears the clipboard."""
 	def clipboardItems(self)->MAnimCurveClipboardItemArray:
-		"""clipboardItems() -> MAnimCurveClipboardItemArray
-
-		Returns the clipboard items."""
+		"""Returns the clipboard items."""
 	@overload
 	def set(self,clipboard:Any)->Self:
 		"""set( clipboard ) -> self
@@ -287,26 +219,16 @@ class MAnimCurveClipboardItem:
 	def __init__(self)->None:
 		"""Initializes a new, empty MAnimCurveClipboardItem object."""
 	def getAddressingInfo(self)->tuple[int,int,int]:
-		"""getAddressingInfo() -> (unsigned int, unsigned int, unsigned int)
-
-		Returns the addressing information for this clipboard item
+		"""Returns the addressing information for this clipboard item
 		as (rowCount, childCount, attributeCount)."""
 	def setAnimCurve(self,object:Any)->Self:
-		"""setAnimCurve(object) -> self
-
-		Sets the anim curve MObject."""
+		"""Sets the anim curve MObject."""
 	def setAddressingInfo(self,rowCount:int,childCount:int,attributeCount:int)->Self:
-		"""setAddressingInfo(rowCount, childCount, attributeCount) -> self
-
-		Sets the addressing information for this clipboard item."""
+		"""Sets the addressing information for this clipboard item."""
 	def setNameInfo(self,nodeName:str,fullName:str,leafName:str)->Self:
-		"""setNameInfo(nodeName, fullName, leafName) -> self
-
-		Sets the name information for this clipboard item."""
+		"""Sets the name information for this clipboard item."""
 	def animCurveType(self)->int:
-		"""animCurveType() -> MFnAnimCurve.AnimCurveType
-
-		Returns the type of the item's anim curve."""
+		"""Returns the type of the item's anim curve."""
 class MAnimCurveClipboardItemArray(collections.abc.Sequence[MAnimCurveClipboardItem]):
 	"""Array of MAnimCurveClipboardItem values."""
 	@property
@@ -352,9 +274,7 @@ class MAnimMessage(om.MMessage):
 	"""Class used to register callbacks for anim related messages."""
 	@staticmethod
 	def addAnimCurveEditedCallback(function:Callable,clientData:Any|None=None)->int:
-		"""addAnimCurveEditedCallback(function, clientData=None) -> id
-
-		This method registers a callback that is called whenever an
+		"""This method registers a callback that is called whenever an
 		AnimCurve is edited.
 
 		 * function - callable which will be passed a MObjectArray object containing
@@ -364,9 +284,7 @@ class MAnimMessage(om.MMessage):
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
 	def addAnimKeyframeEditedCallback(function:Callable,clientData:Any|None=None)->int:
-		"""addAnimKeyframeEditedCallback(function, clientData=None) -> id
-
-		This method registers a callback that is called whenever an
+		"""This method registers a callback that is called whenever an
 		a group of keys are modified.  The callback is invoked once per
 		atomic change to single or group of keyframes. For example, if
 		a user selects a group 5 of keys and moves them 5 units in the value
@@ -382,9 +300,7 @@ class MAnimMessage(om.MMessage):
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
 	def addAnimKeyframeEditCheckCallback(function:Callable,clientData:Any|None=None)->int:
-		"""addAnimKeyframeEditCheckCallback(function, clientData=None) -> id
-
-		This method registers a callback that is used by the setKeyframe command
+		"""This method registers a callback that is used by the setKeyframe command
 		to allow a user to consider the set keyframe request and cancel it if
 		needed. The callback method should return False to abort the keyframe
 		setting.
@@ -397,9 +313,7 @@ class MAnimMessage(om.MMessage):
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
 	def addNodeAnimKeyframeEditedCallback(animNode:om.MObject,function:Callable,clientData:Any|None=None)->int:
-		"""addNodeAnimKeyframeEditedCallback(animNode, function, clientData=None) -> id
-
-		This method registers a callback that is called whenever an a
+		"""This method registers a callback that is called whenever an a
 		group of keys are modified.  The callback is invoked once per
 		atomic change to single or group of keyframes on the specified
 		animation curve node. For example, if a user selects a group 5
@@ -418,9 +332,7 @@ class MAnimMessage(om.MMessage):
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
 	def addPreBakeResultsCallback(function:Callable,clientData:Any|None=None)->int:
-		"""addPreBakeResultsCallback(function, clientData=None) -> id
-
-		This method registers a callback that is called from bakeResults
+		"""This method registers a callback that is called from bakeResults
 		command before the simulation. One example usage is handle the runup to
 		the first frame in a dynamic system. If plugArray is set to zero
 		length in the callback, the baking will be aborted.
@@ -434,9 +346,7 @@ class MAnimMessage(om.MMessage):
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
 	def addPostBakeResultsCallback(function:Callable,clientData:Any|None=None)->int:
-		"""addPostBakeResultsCallback(function, clientData=None) -> id
-
-		This method registers a callback that is called from bakeResults
+		"""This method registers a callback that is called from bakeResults
 		command after the simulation. If the plugArray is replaced, then
 		the anim curves created from baking will be connected to the new
 		plugs.
@@ -450,9 +360,7 @@ class MAnimMessage(om.MMessage):
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
 	def addDisableImplicitControlCallback(function:Callable,clientData:Any|None=None)->int:
-		"""addDisableImplicitControlCallback(function, clientData=None) -> id
-
-		This method registers a callback that is called from bakeResults
+		"""This method registers a callback that is called from bakeResults
 		command after baking operation is completed, if disableImplicitControl
 		is enabled. One example usage of this callback is to create the anim curve
 		that is used to drive Maya rigidbody's bakeSimulationIndex, which defines
@@ -467,9 +375,7 @@ class MAnimMessage(om.MMessage):
 		 * return: Identifier used for removing the callback."""
 	@staticmethod
 	def flushAnimKeyframeEditedCallbacks()->None:
-		"""flushAnimKeyframeEditedCallbacks() -> None
-
-		Animation keyframe edited callbacks are queued to only be issued on an
+		"""Animation keyframe edited callbacks are queued to only be issued on an
 		idle event. There may be times when it is desired to issue the callback
 		at a specific time. This method provides this functionality. It will
 		flush all animation keyframe edited callbacks and force them to issue
@@ -480,76 +386,42 @@ class MAnimUtil:
 	@staticmethod
 	@overload
 	def isAnimated(Object:om.MObject,bool:bool)->bool:
-		"""isAnimated(MObject, bool) -> bool
-		isAnimated(MDagPath, bool) -> bool
-		isAnimated(MPlug, bool) -> bool
-		isAnimated(MSelectionList selectionList, bool checkParent) -> bool
-
-		Determine whether or not an MObject is animated.
+		"""Determine whether or not an MObject is animated.
 		If the MObject is a hierarchical object (such as a dag node) then
 		you may also specify whether or not the input object's parents are examined."""
 	@overload
 	@staticmethod
 	def isAnimated(DagPath:om.MDagPath,bool:bool)->bool:
-		"""isAnimated(MObject, bool) -> bool
-		isAnimated(MDagPath, bool) -> bool
-		isAnimated(MPlug, bool) -> bool
-		isAnimated(MSelectionList selectionList, bool checkParent) -> bool
-
-		Determine whether or not an MObject is animated.
+		"""Determine whether or not an MObject is animated.
 		If the MObject is a hierarchical object (such as a dag node) then
 		you may also specify whether or not the input object's parents are examined."""
 	@overload
 	@staticmethod
 	def isAnimated(Plug:om.MPlug,bool:bool)->bool:
-		"""isAnimated(MObject, bool) -> bool
-		isAnimated(MDagPath, bool) -> bool
-		isAnimated(MPlug, bool) -> bool
-		isAnimated(MSelectionList selectionList, bool checkParent) -> bool
-
-		Determine whether or not an MObject is animated.
+		"""Determine whether or not an MObject is animated.
 		If the MObject is a hierarchical object (such as a dag node) then
 		you may also specify whether or not the input object's parents are examined."""
 	@overload
 	@staticmethod
 	def isAnimated(selectionList:om.MSelectionList,checkParent:bool)->bool:
-		"""isAnimated(MObject, bool) -> bool
-		isAnimated(MDagPath, bool) -> bool
-		isAnimated(MPlug, bool) -> bool
-		isAnimated(MSelectionList selectionList, bool checkParent) -> bool
-
-		Determine whether or not an MObject is animated.
+		"""Determine whether or not an MObject is animated.
 		If the MObject is a hierarchical object (such as a dag node) then
 		you may also specify whether or not the input object's parents are examined."""
 	@staticmethod
 	@overload
 	def findAnimatedPlugs(Object:om.MObject,bool:bool)->om.MPlugArray:
-		"""findAnimatedPlugs(MObject, bool) -> MPlugArray
-		findAnimatedPlugs(MDagPath, bool) -> MPlugArray
-		findAnimatedPlugs(MSelectionList selectionList, bool checkParent) -> MPlugArray
-
-		Find the list of attributes (MPlugs) on the input object that is animated."""
+		"""Find the list of attributes (MPlugs) on the input object that is animated."""
 	@overload
 	@staticmethod
 	def findAnimatedPlugs(DagPath:om.MDagPath,bool:bool)->om.MPlugArray:
-		"""findAnimatedPlugs(MObject, bool) -> MPlugArray
-		findAnimatedPlugs(MDagPath, bool) -> MPlugArray
-		findAnimatedPlugs(MSelectionList selectionList, bool checkParent) -> MPlugArray
-
-		Find the list of attributes (MPlugs) on the input object that is animated."""
+		"""Find the list of attributes (MPlugs) on the input object that is animated."""
 	@overload
 	@staticmethod
 	def findAnimatedPlugs(selectionList:om.MSelectionList,checkParent:bool)->om.MPlugArray:
-		"""findAnimatedPlugs(MObject, bool) -> MPlugArray
-		findAnimatedPlugs(MDagPath, bool) -> MPlugArray
-		findAnimatedPlugs(MSelectionList selectionList, bool checkParent) -> MPlugArray
-
-		Find the list of attributes (MPlugs) on the input object that is animated."""
+		"""Find the list of attributes (MPlugs) on the input object that is animated."""
 	@staticmethod
 	def findAnimation(Plug:om.MPlug)->om.MObjectArray:
-		"""findAnimation(MPlug) -> MObjectArray
-
-		Find the animCurve(s) that are animating a given attribute (MPlug).
+		"""Find the animCurve(s) that are animating a given attribute (MPlug).
 		In most cases an attribute is animated by a single animCurve and so
 		just that animCurve will be returned.  It is possible to setup a
 		series of connections where an attribute is animated by more than
@@ -557,9 +429,7 @@ class MAnimUtil:
 		Compound attributes are not expanded to include any child attributes."""
 	@staticmethod
 	def findSetDrivenKeyAnimation(Plug:om.MPlug)->tuple[om.MObjectArray,om.MPlugArray]:
-		"""findSetDrivenKeyAnimation(MPlug) -> (MObjectArray, MPlugArray)
-
-		Find any driven keyframe animCurves, the blendWeighted node and the
+		"""Find any driven keyframe animCurves, the blendWeighted node and the
 		driver attribute(s) that are animating a given attribute (MPlug).
 		Or return false if no driven keyframe exists on the attribute.
 
@@ -576,18 +446,14 @@ class MAnimUtil:
 		Compound attributes are not expanded to include any child attributes."""
 	@staticmethod
 	def findConstraint(Mplug:Any)->tuple[om.MObject,om.MObjectArray]:
-		"""findConstraint(Mplug) -> (MObject, MObjectArray)
-
-		Find any constraint that is directly driving the specified attribute.
+		"""Find any constraint that is directly driving the specified attribute.
 		If a constraint is found, this method will also find the constraint
 		targets. Return false if no constraint exists on the attribute.
 
 		Compound attributes are not expanded to include any child attributes."""
 	@staticmethod
 	def findAnimatablePlugs(SelectionList:om.MSelectionList)->om.MPlugArray:
-		"""findAnimatablePlugs(MSelectionList) -> MPlugArray
-
-		Find the list of attributes (MPlugs) on any member of an MSelectionList
+		"""Find the list of attributes (MPlugs) on any member of an MSelectionList
 		that is animatable.
 
 		In addition to normal objects, components such as mesh vertices or
@@ -699,11 +565,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		to the single animCurve node connected to the given MPlug."""
 	@overload
 	def create(self,node:Any,attribute:Any,animCurveType:int=MFnAnimCurve.kAnimCurveUnknown,modifier:Any=...)->om.MObject:
-		"""create(node, attribute, animCurveType=kAnimCurveUnknown [, modifier] ) -> MObject
-		create(plug, animCurveType=kAnimCurveUnknown [, modifier] ) -> MObject
-		create(animCurveType [, modifier] ) -> MObject
-
-		Creates a new animCurve node.
+		"""Creates a new animCurve node.
 		If node and attribute (MObject) are supplied, the animCurvewill be connected to the given attribute on the given node.
 		If plug (MPlug) is supplied, the animCurvewill be connected to the given plug.
 		modifier is an optional MDGModifier which can be used to later undo the operation.
@@ -719,11 +581,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		kAnimCurveUnknown       Unknown type"""
 	@overload
 	def create(self,plug:Any,animCurveType:int=MFnAnimCurve.kAnimCurveUnknown,modifier:Any=...)->om.MObject:
-		"""create(node, attribute, animCurveType=kAnimCurveUnknown [, modifier] ) -> MObject
-		create(plug, animCurveType=kAnimCurveUnknown [, modifier] ) -> MObject
-		create(animCurveType [, modifier] ) -> MObject
-
-		Creates a new animCurve node.
+		"""Creates a new animCurve node.
 		If node and attribute (MObject) are supplied, the animCurvewill be connected to the given attribute on the given node.
 		If plug (MPlug) is supplied, the animCurvewill be connected to the given plug.
 		modifier is an optional MDGModifier which can be used to later undo the operation.
@@ -739,11 +597,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		kAnimCurveUnknown       Unknown type"""
 	@overload
 	def create(self,animCurveType:Any,modifier:Any=...)->om.MObject:
-		"""create(node, attribute, animCurveType=kAnimCurveUnknown [, modifier] ) -> MObject
-		create(plug, animCurveType=kAnimCurveUnknown [, modifier] ) -> MObject
-		create(animCurveType [, modifier] ) -> MObject
-
-		Creates a new animCurve node.
+		"""Creates a new animCurve node.
 		If node and attribute (MObject) are supplied, the animCurvewill be connected to the given attribute on the given node.
 		If plug (MPlug) is supplied, the animCurvewill be connected to the given plug.
 		modifier is an optional MDGModifier which can be used to later undo the operation.
@@ -758,34 +612,22 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		kAnimCurveUU            Unitless to Unitless
 		kAnimCurveUnknown       Unknown type"""
 	def timedAnimCurveTypeForPlug(self,plug:Any)->int:
-		"""timedAnimCurveTypeForPlug(plug) -> AnimCurveType
-
-		Returns the timed animCurve type appropriate for the specified plug."""
+		"""Returns the timed animCurve type appropriate for the specified plug."""
 	def unitlessAnimCurveTypeForPlug(self,plug:Any)->int:
-		"""unitlessAnimCurveTypeForPlug(plug) -> AnimCurveType
-
-		Returns the unitless animCurve type appropriate for the specified plug."""
+		"""Returns the unitless animCurve type appropriate for the specified plug."""
 	def evaluate(self,at:Any)->float:
-		"""evaluate(at) -> value
-
-		Evalutes the curve.
+		"""Evalutes the curve.
 		For curves of type kAnimCurveTA, kAnimCurveTL and kAnimCurveTU,the at parameter is an MTime, otherwise it is a double.
 		For curves of type kAnimCurveTT and kAnimCurveUT,the value is an MTime, otherwise it is a double."""
 	def remove(self,index:int,change:Any|None=None)->Self:
-		"""remove(index, change=None) -> self
-
-		Removes the key at the specified index.
+		"""Removes the key at the specified index.
 		change is an optional MAnimCurveChange."""
 	def addKey(self,at:Any,value:Any,tangentInType:int=MFnAnimCurve.kTangentGlobal,tangentOutType:int=MFnAnimCurve.kTangentGlobal,change:Any|None=None)->int:
-		"""addKey(at, value, tangentInType=kTangentGlobal, tangentOutType=kTangentGlobal, change=None) -> unsigned int
-
-		Adds a new key with the given value at the specified time.
+		"""Adds a new key with the given value at the specified time.
 		at and value can both be either MTime or double,depending on what is appropriate for the animCurve type.
 		change is an optional MAnimCurveChange."""
 	def addKeys(self,times:Any,values:Any,tangentInType:int=MFnAnimCurve.kTangentGlobal,tangentOutType:int=MFnAnimCurve.kTangentGlobal,keepExistingKeys:bool=False,change:Any|None=None)->Self:
-		"""addKeys(times, values, tangentInType=kTangentGlobal, tangentOutType=kTangentGlobal, keepExistingKeys=False, change=None) -> self
-
-		Add a set of new keys with the given corresponding values and tangent typesat the specified times.  This method only works for animCurves of typekAnimCurveTA, kAnimCurveTL and kAnimCurveTU."""
+		"""Add a set of new keys with the given corresponding values and tangent typesat the specified times.  This method only works for animCurves of typekAnimCurveTA, kAnimCurveTL and kAnimCurveTU."""
 	def insertKey(self,*args)->Any:
 		"""addKey(time, breakdown=False, change=None) -> unsigned int
 
@@ -796,54 +638,30 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		change is an optional MAnimCurveChange.
 		Returns the index of the newly inserted key."""
 	def addKeysWithTangents(self,times:Any,values:Any,tangentInType:int=MFnAnimCurve.kTangentGlobal,tangentOutType:int=MFnAnimCurve.kTangentGlobal,tangentInTypeArray:Any|None=None,tangentOutTypeArray:Any|None=None,tangentInXArray:Any|None=None,tangentInYArray:Any|None=None,tangentOutXArray:Any|None=None,tangentOutYArray:Any|None=None,tangentsLockedArray:Any|None=None,weightsLockedArray:Any|None=None,convertUnits:bool=True,keepExistingKeys:bool=False,change:Any|None=None)->Self:
-		"""addKeysWithTangents(times, values, tangentInType=kTangentGlobal, tangentOutType=kTangentGlobal, tangentInTypeArray=None, tangentOutTypeArray=None, tangentInXArray=None, tangentInYArray=None, tangentOutXArray=None, tangentOutYArray=None, tangentsLockedArray=None, weightsLockedArray=None, convertUnits=True, keepExistingKeys=False, change=None) -> self
-
-		Add a set of new keys with the given corresponding values, tangent types and tangents at the specified times.  This method only works for animCurves of typekAnimCurveTA, kAnimCurveTL and kAnimCurveTU."""
+		"""Add a set of new keys with the given corresponding values, tangent types and tangents at the specified times.  This method only works for animCurves of typekAnimCurveTA, kAnimCurveTL and kAnimCurveTU."""
 	def find(self,at:Any)->int:
-		"""find(at) -> unsigned int
-
-		Determines the index of the key which is set at the specifiedMTime (time-input curves) or double (unitless-input curves).
+		"""Determines the index of the key which is set at the specifiedMTime (time-input curves) or double (unitless-input curves).
 		Returns None if the key is not found."""
 	def findClosest(self,at:Any)->int:
-		"""findClosest(at) -> unsigned int
-
-		Determines the index of the key which is set at theMTime (time-input curves) or double (unitless-input curves)closest to the specified time."""
+		"""Determines the index of the key which is set at theMTime (time-input curves) or double (unitless-input curves)closest to the specified time."""
 	def input(self,index:int)->om.MTime|float:
-		"""input(index) -> MTime or double
-
-		Determines the input (MTime for T* curves or double for U* curves) of the key at the specified index."""
+		"""Determines the input (MTime for T* curves or double for U* curves) of the key at the specified index."""
 	def value(self,index:int)->float:
-		"""value(index) -> double
-
-		Determines the value of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurve*A, kAnimCurve*Lor kAnimCurve*U."""
+		"""Determines the value of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurve*A, kAnimCurve*Lor kAnimCurve*U."""
 	def quaternionW(self,index:int)->float:
-		"""quaternionW(index) -> double
-
-		Returns the quaternionW of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurveTA."""
+		"""Returns the quaternionW of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurveTA."""
 	def setValue(self,index:int,value:Any,change:Any|None=None)->Self:
-		"""setValue(index, value, change=None) -> self
-
-		Sets the value of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurve*A, kAnimCurve*Lor kAnimCurve*U."""
+		"""Sets the value of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurve*A, kAnimCurve*Lor kAnimCurve*U."""
 	def setQuaternionW(self,index:int,quaternionW:Any,change:Any|None=None)->Self:
-		"""setQuaternionW(index, quaternionW, change=None) -> self
-
-		Sets the quaternionW of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurve*A."""
+		"""Sets the quaternionW of the key at the specified index.  This methodshould only be used on Anim Curves of type kAnimCurve*A."""
 	def setInput(self,index:int,at:Any,change:Any|None=None)->Self:
-		"""setInput(index, at, change=None) -> self
-
-		Sets the input (MTime for T* curves or double for U* curves) of the key at the specified index.  This will fail ifsetting the input would require re-ordering of the keys."""
+		"""Sets the input (MTime for T* curves or double for U* curves) of the key at the specified index.  This will fail ifsetting the input would require re-ordering of the keys."""
 	def inTangentType(self,index:int)->int:
-		"""inTangentType(index) -> TangentType
-
-		Determines the type of the tangent to the curve entering the current key."""
+		"""Determines the type of the tangent to the curve entering the current key."""
 	def outTangentType(self,index:int)->int:
-		"""outTangentType(index) -> TangentType
-
-		Determines the type of the tangent to the curve leaving the current key."""
+		"""Determines the type of the tangent to the curve leaving the current key."""
 	def setInTangentType(self,index:int,tangentType:Any,change:Any|None=None)->Self:
-		"""setInTangentType(index, tangentType, change=None) -> self
-
-		Sets the type of the tangent to the curve entering the key at thespecified index.
+		"""Sets the type of the tangent to the curve entering the key at thespecified index.
 		Valid values for tangentType are:
 		kTangentGlobal          Global
 		kTangentFixed           Fixed
@@ -858,69 +676,39 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		kTangentStepNext        StepNext
 		kTangentAuto            AutokTangentAutoMix             AutoMixkTangentAutoEase         AutoEasekTangentAutoCustom              AutoCustom"""
 	def setOutTangentType(self,index:int,tangentType:Any,change:Any|None=None)->Self:
-		"""setOutTangentType(index, tangentType, change=None) -> self
-
-		Sets the type of the tangent to the curve leaving the key at thespecified index."""
+		"""Sets the type of the tangent to the curve leaving the key at thespecified index."""
 	def setTangentTypes(self,indexArray:Any,tangentInType:int=MFnAnimCurve.kTangentGlobal,tangentOutType:int=MFnAnimCurve.kTangentGlobal,change:Any|None=None)->Self:
-		"""setTangentTypes(indexArray, tangentInType=kTangentGlobal, tangentOutType=kTangentGlobal, change=None) -> self
-
-		Sets the tangent types for multiple keys."""
+		"""Sets the tangent types for multiple keys."""
 	def getTangentXY(self,index:int,isInTangent:bool)->tuple[float,float]:
-		"""getTangentXY(index, isInTangent) -> (x,y)
-
-		Determines the x,y value representing the vector of the in- orout-tangent (depending on the value of the isInTangent parameter) tothe curve for the key at the specified index.  The values returnedwill be in Maya's internal units (seconds for time, centimeters forlinear, radians for angles)."""
+		"""Determines the x,y value representing the vector of the in- orout-tangent (depending on the value of the isInTangent parameter) tothe curve for the key at the specified index.  The values returnedwill be in Maya's internal units (seconds for time, centimeters forlinear, radians for angles)."""
 	def getTangentAngleWeight(self,index:int,isInTangent:bool)->tuple[om.MAngle,float]:
-		"""getTangentAngleWeight(index, isInTangent) -> (MAngle,double)
-
-		Determines the angle and weight of the in- or out-tangent to the curvefor the key at the specified index"""
+		"""Determines the angle and weight of the in- or out-tangent to the curvefor the key at the specified index"""
 	def setTangent(self,index:int,xOrAngle:Any,yOrWeight:Any,isInTangent:bool,change:Any|None=None,convertUnits:bool=True)->Self:
-		"""setTangent(index, xOrAngle, yOrWeight, isInTangent, change=None, convertUnits=True) -> self
-
-		Sets the tangent for the key at the specified index.
+		"""Sets the tangent for the key at the specified index.
 		The tangent can be specified as an x/y pair, oras an MAngle and a weight.
 		isInTangent is True to modify the inTangent or False to modify the outTangent."""
 	def setAngle(self,index:int,setAngle:Any,isInTangent:bool,change:Any|None=None)->Self:
-		"""setAngle(index, setAngle, isInTangent, change=None) -> self
-
-		Sets the in- or out-angle of the tangent for the key at the given index.
+		"""Sets the in- or out-angle of the tangent for the key at the given index.
 		isInTangent is True to modify the inTangent or False to modify the outTangent."""
 	def setWeight(self,index:int,weight:Any,isInTangent:bool,change:Any|None=None)->Self:
-		"""setWeight(index, weight, isInTangent, change=None) -> self
-
-		Sets the in- or out-weight of the tangent for the key at the given index.
+		"""Sets the in- or out-weight of the tangent for the key at the given index.
 		isInTangent is True to modify the inTangent or False to modify the outTangent."""
 	def weightsLocked(self,index:int)->bool:
-		"""weightsLocked(index) -> bool
-
-		Determines whether the weights are locked at the given key."""
+		"""Determines whether the weights are locked at the given key."""
 	def tangentsLocked(self,index:int)->bool:
-		"""tangentsLocked(index) -> bool
-
-		Determines whether the tangents are locked at the given key."""
+		"""Determines whether the tangents are locked at the given key."""
 	def setWeightsLocked(self,index:int,locked:Any,change:Any|None=None)->Self:
-		"""setWeightsLocked(index, locked, change=None) -> self
-
-		Lock or unlock the weights at the given key."""
+		"""Lock or unlock the weights at the given key."""
 	def setTangentsLocked(self,index:int,locked:Any,change:Any|None=None)->Self:
-		"""setTangentsLocked(index, locked, change=None) -> self
-
-		Lock or unlock the tangents at the given key."""
+		"""Lock or unlock the tangents at the given key."""
 	def setIsWeighted(self,isWeighted:bool,change:Any|None=None)->Self:
-		"""setIsWeighted(isWeighted, change=None) -> self
-
-		Sets whether or not the curve has weighted tangents."""
+		"""Sets whether or not the curve has weighted tangents."""
 	def isBreakdown(self,index:int)->bool:
-		"""isBreakdown(index) -> bool
-
-		Determines whether or not a key is a breakdown."""
+		"""Determines whether or not a key is a breakdown."""
 	def setIsBreakdown(self,index:int,isBreakdown:bool,change:Any|None=None)->Self:
-		"""setIsBreakdown(index, isBreakdown, change=None) -> self
-
-		Sets the breakdown state of a key at a given index."""
+		"""Sets the breakdown state of a key at a given index."""
 	def setPreInfinityType(self,infinityType:Any,change:Any|None=None)->Self:
-		"""setPreInfinityType(infinityType, change=None) -> self
-
-		Sets the behaviour of the curve for the range occurring before the first key.
+		"""Sets the behaviour of the curve for the range occurring before the first key.
 		Valid values for infinityType are:
 		kConstant                       Constant
 		kLinear                 Linear
@@ -928,9 +716,7 @@ class MFnAnimCurve(om.MFnDependencyNode):
 		kCycleRelative          Cycle relative
 		kOscillate                      Oscillate"""
 	def setPostInfinityType(self,infinityType:Any,change:Any|None=None)->Self:
-		"""setPostInfinityType(infinityType, change=None) -> self
-
-		Sets the behaviour of the curve for the range occurring after the last key."""
+		"""Sets the behaviour of the curve for the range occurring after the last key."""
 class MFnGeometryFilter(om.MFnDependencyNode):
 	"""Function set for operating on geometryFilter nodes.
 	geometryFilter is the abstract node type from which all
@@ -968,9 +754,7 @@ class MFnGeometryFilter(om.MFnDependencyNode):
 		"""Initializes a new MFnGeometryFilter functionset and attaches it
 		to a geometryFilter node."""
 	def getInputGeometry(self)->om.MObjectArray:
-		"""getInputGeometry() -> MObjectArray
-
-		Returns the DAG nodes which provide input geometry to the deformer.
+		"""Returns the DAG nodes which provide input geometry to the deformer.
 		These are found by traversing the graph to find upstream shape nodes.
 		It is possible for there to be nodes in between the shape and the
 		deformer so that the returned shape may have a different topology or
@@ -979,52 +763,36 @@ class MFnGeometryFilter(om.MFnDependencyNode):
 		accessed by using MPlug::getValue() to query the inputGeometry
 		attribute on the deformer."""
 	def getOutputGeometry(self)->om.MObjectArray:
-		"""getOutputGeometry() -> MObjectArray
-
-		Returns the DAG nodes which receive output geometry from the deformer."""
+		"""Returns the DAG nodes which receive output geometry from the deformer."""
 	def getPathAtIndex(self,plugIndex:int)->om.MDagPath:
-		"""getPathAtIndex(plugIndex) -> MDagPath
-
-		Returns the DAG path of the specified output geometry.
+		"""Returns the DAG path of the specified output geometry.
 
 		* plugIndex (unsigned int) - Plug index of the desired geometry."""
 	def groupIdAtIndex(self,plugIndex:int)->int:
-		"""groupIdAtIndex(plugIndex) -> long
-
-		Returns the groupId associated with the specified geometry.
+		"""Returns the groupId associated with the specified geometry.
 
 		* plugIndex (unsigned int) - Plug index of the desired geometry."""
 	def indexForGroupId(self,groupId:int)->int:
-		"""indexForGroupId(groupId) -> plugIndex
-
-		Returns the plug index of the geometry associated with the specified groupId.
+		"""Returns the plug index of the geometry associated with the specified groupId.
 
 		* groupId (unsigned int) - groupId of the desired geometry."""
 	def indexForOutputConnection(self,connIndex:int)->int:
-		"""indexForOutputConnection(connIndex) -> plugIndex
-
-		Returns the plug index corresponding to a connection index. The
+		"""Returns the plug index corresponding to a connection index. The
 		connection index is the contiguous (physical) index of the output
 		connection, ranging from 0 to numOutputConnections()-1. The plug
 		index is the sparse (logical) index of the connection.
 
 		* connIndex (unsigned int) - Connection index of the desired geometry."""
 	def indexForOutputShape(self,shape:om.MObject)->int:
-		"""indexForOutputShape(shape) -> plugIndex
-
-		Returns the plug index for the specified output shape.
+		"""Returns the plug index for the specified output shape.
 
 		* shape (MObject) - Shape for which the plug index is requested."""
 	def inputShapeAtIndex(self,plugIndex:int)->om.MObject:
-		"""inputShapeAtIndex(plugIndex) -> MObject
-
-		Returns the input shape corresponding to the plug index.
+		"""Returns the input shape corresponding to the plug index.
 
 		* plugIndex (unsigned int) - Plug index of the desired shape."""
 	def numOutputConnections(self)->int:
-		"""numOutputConnections() -> long
-
-		Returns the number of output geometries connected to this node. This
+		"""Returns the number of output geometries connected to this node. This
 		is typically equal to the number of input geometries unless an input
 		or output geometry has been deleted, or a connection to an input or
 		output geometry has been broken.
@@ -1032,13 +800,9 @@ class MFnGeometryFilter(om.MFnDependencyNode):
 		This method is useful in conjunction with indexForOutputConnection()
 		to iterate through the affected objects."""
 	def outputShapeAtIndex(self,index:int)->om.MObject:
-		"""outputShapeAtIndex(index) -> MObject
-
-		Returns the DAG path to which this function set is attached, or the first path to the node if the function set is attached to an MObject."""
+		"""Returns the DAG path to which this function set is attached, or the first path to the node if the function set is attached to an MObject."""
 	def getComponentAtIndex(self,index:int)->om.MObject:
-		"""getComponentAtIndex(index) -> MObject
-
-		Returns the component which contains the members of the deformer
+		"""Returns the component which contains the members of the deformer
 		at the given index."""
 class MFnIkJoint(om.MFnTransform):
 	"""Function set joints.
@@ -1050,10 +814,7 @@ class MFnIkJoint(om.MFnTransform):
 	def __init__(self)->None:
 		"""Initializes a new, empty MFnIKJoint object."""
 	def create(self,parent:Any=om.MObject.kNullObj)->Any:
-		"""create(parent=MObject.kNullObj) -> new joint node MObject
-
-
-		Create a new joint in a skeleton.  In maya, skeletons are defined
+		"""Create a new joint in a skeleton.  In maya, skeletons are defined
 		entirely by DAG hierarchy.  So, giving the joint you want to attach
 		to as a parent will add this joint to that skeleton.
 
@@ -1204,9 +965,7 @@ class MFnSkinCluster(MFnGeometryFilter):
 		"""Initializes a new MFnSkinCluster functionset and attaches it to
 		a skinCluster node."""
 	def getBlendWeights(self,shape:om.MDagPath,components:om.MObject)->om.MDoubleArray:
-		"""getBlendWeights(shape, components) -> MDoubleArray
-
-		Returns blend weights for the specified components of the deformed
+		"""Returns blend weights for the specified components of the deformed
 		shape. Blend weights are used to determine the blending between
 		classical linear skinning and dual quaternion bases skinning on a
 		per vertex basis. The returned array contains one weight per component
@@ -1215,9 +974,7 @@ class MFnSkinCluster(MFnGeometryFilter):
 		* shape     (MDagPath) - the object being deformed by the skinCluster
 		* components (MObject) - components for which weights should be returned"""
 	def getPointsAffectedByInfluence(self,influence:om.MDagPath)->tuple[om.MSelectionList,om.MDoubleArray]:
-		"""getPointsAffectedByInfluence(influence) -> (MSelectionList, MDoubleArray)
-
-		During deformation, the skinCluster algorithm is applied for a given
+		"""During deformation, the skinCluster algorithm is applied for a given
 		influence object on all points in the deformer's set whose weights
 		are non-zero. This returns the non-zero weights for a particular
 		influence object.
@@ -1231,11 +988,7 @@ class MFnSkinCluster(MFnGeometryFilter):
 		* influence (MDagPath) - the influence object of interest"""
 	@overload
 	def getWeights(self,shape:om.MDagPath,components:om.MObject)->tuple[om.MDoubleArray,int]:
-		"""getWeights(shape, components) -> (MDoubleArray, int)
-		getWeights(shape, components, influence) -> MDoubleArray
-		getWeights(shape, components, influences) -> MDoubleArray
-
-		Returns the skinCluster weights of the given influence objects on
+		"""Returns the skinCluster weights of the given influence objects on
 		the specified components of the deformed shape.
 
 
@@ -1258,11 +1011,7 @@ class MFnSkinCluster(MFnGeometryFilter):
 		* influences (MIntArray) - indices of multiple influences to return weights for"""
 	@overload
 	def getWeights(self,shape:om.MDagPath,components:om.MObject,influence:int)->om.MDoubleArray:
-		"""getWeights(shape, components) -> (MDoubleArray, int)
-		getWeights(shape, components, influence) -> MDoubleArray
-		getWeights(shape, components, influences) -> MDoubleArray
-
-		Returns the skinCluster weights of the given influence objects on
+		"""Returns the skinCluster weights of the given influence objects on
 		the specified components of the deformed shape.
 
 
@@ -1285,11 +1034,7 @@ class MFnSkinCluster(MFnGeometryFilter):
 		* influences (MIntArray) - indices of multiple influences to return weights for"""
 	@overload
 	def getWeights(self,shape:om.MDagPath,components:om.MObject,influences:om.MIntArray)->om.MDoubleArray:
-		"""getWeights(shape, components) -> (MDoubleArray, int)
-		getWeights(shape, components, influence) -> MDoubleArray
-		getWeights(shape, components, influences) -> MDoubleArray
-
-		Returns the skinCluster weights of the given influence objects on
+		"""Returns the skinCluster weights of the given influence objects on
 		the specified components of the deformed shape.
 
 
@@ -1311,20 +1056,14 @@ class MFnSkinCluster(MFnGeometryFilter):
 		* influence        (int) - index of the single influence to return weights for
 		* influences (MIntArray) - indices of multiple influences to return weights for"""
 	def indexForInfluenceObject(self,influenceObj:om.MObject)->int:
-		"""indexForInfluenceObject(influenceObj) -> long
-
-		Returns the logical index of the matrix array attribute where the
+		"""Returns the logical index of the matrix array attribute where the
 		specified influence object is attached.
 
 		* influenceObj (MObject) - influence object for which the index is requested."""
 	def influenceObjects(self)->om.MDagPathArray:
-		"""influenceObjects() -> MDagPathArray
-
-		Returns an array of paths to the influence objects for the skinCluster."""
+		"""Returns an array of paths to the influence objects for the skinCluster."""
 	def setBlendWeights(self,shape:om.MDagPath,components:om.MObject,weights:om.MDoubleArray)->Self:
-		"""setBlendWeights(shape, components, weights) -> self
-
-		Sets blend weights for the specified components of the shape being
+		"""Sets blend weights for the specified components of the shape being
 		deformed by the skinCluster. Blend weights are used to determine the
 		blending between classical linear skinning and dual quaternion bases
 		skinning on a per vertex basis.
@@ -1337,10 +1076,7 @@ class MFnSkinCluster(MFnGeometryFilter):
 		                           the two will be used."""
 	@overload
 	def setWeights(self,shape:om.MDagPath,components:om.MObject,influence:int,weight:float,normalize:bool=True,returnOldWeights:bool=False)->None|om.MDoubleArray:
-		"""setWeights(shape, components, influence, weight, normalize=True, returnOldWeights=False) -> None or MDoubleArray
-		setWeights(shape, components, influences, weights, normalize=True, returnOldWeights=False) -> None or MDoubleArray
-
-		Sets the skinCluster weights for one or more influence objects on
+		"""Sets the skinCluster weights for one or more influence objects on
 		the specified components of the given shape. If 'returnOldWeights'
 		is True then the old weights will be returned, otherwise None will
 		be returned
@@ -1379,10 +1115,7 @@ class MFnSkinCluster(MFnGeometryFilter):
 		* returnOldWeights(bool) - if True, return the old weights, otherwise return None"""
 	@overload
 	def setWeights(self,shape:om.MDagPath,components:om.MObject,influences:om.MIntArray,weights:om.MDoubleArray,normalize:bool=True,returnOldWeights:bool=False)->None|om.MDoubleArray:
-		"""setWeights(shape, components, influence, weight, normalize=True, returnOldWeights=False) -> None or MDoubleArray
-		setWeights(shape, components, influences, weights, normalize=True, returnOldWeights=False) -> None or MDoubleArray
-
-		Sets the skinCluster weights for one or more influence objects on
+		"""Sets the skinCluster weights for one or more influence objects on
 		the specified components of the given shape. If 'returnOldWeights'
 		is True then the old weights will be returned, otherwise None will
 		be returned
@@ -1439,33 +1172,19 @@ class MFnWeightGeometryFilter(MFnGeometryFilter):
 		to a geometryFilter node."""
 	@overload
 	def getWeights(self,index:int,components:om.MObject)->om.MFloatArray:
-		"""getWeights(index, components) -> MFloatArray
-		getWeights(path, components) -> MFloatArray
-
-
-		Returns the weight values of the components.
+		"""Returns the weight values of the components.
 		* plugIndex (unsigned int) - Plug index of the desired geometry.
 		* path (MDagPath) - The path of the DAG object that has the components.
 		* components (MObject) - The components whose weights are requested."""
 	@overload
 	def getWeights(self,path:om.MDagPath,components:om.MObject)->om.MFloatArray:
-		"""getWeights(index, components) -> MFloatArray
-		getWeights(path, components) -> MFloatArray
-
-
-		Returns the weight values of the components.
+		"""Returns the weight values of the components.
 		* plugIndex (unsigned int) - Plug index of the desired geometry.
 		* path (MDagPath) - The path of the DAG object that has the components.
 		* components (MObject) - The components whose weights are requested."""
 	@overload
 	def setWeight(self,path:om.MDagPath,index:int,components:om.MObject,weight:float,oldValues:om.MFloatArray|None=None)->None:
-		"""setWeight(path, index, components, weight, oldValues=None)
-		setWeight(path, index, components, values)
-		setWeight(path, components, weight, oldValues=None)
-		setWeight(path, components, values)
-
-
-		Returns the status of the operation.
+		"""Returns the status of the operation.
 		* path (MDagPath) - The path of the DAG object that has the components.
 		* index (unsigned int) - Plug index of the desired geometry.
 		* components (MObject) - The components of the object.
@@ -1474,13 +1193,7 @@ class MFnWeightGeometryFilter(MFnGeometryFilter):
 		* oldValues (MFloatArray) -  An array of old values for the components."""
 	@overload
 	def setWeight(self,path:om.MDagPath,index:int,components:om.MObject,values:om.MFloatArray)->None:
-		"""setWeight(path, index, components, weight, oldValues=None)
-		setWeight(path, index, components, values)
-		setWeight(path, components, weight, oldValues=None)
-		setWeight(path, components, values)
-
-
-		Returns the status of the operation.
+		"""Returns the status of the operation.
 		* path (MDagPath) - The path of the DAG object that has the components.
 		* index (unsigned int) - Plug index of the desired geometry.
 		* components (MObject) - The components of the object.
@@ -1489,13 +1202,7 @@ class MFnWeightGeometryFilter(MFnGeometryFilter):
 		* oldValues (MFloatArray) -  An array of old values for the components."""
 	@overload
 	def setWeight(self,path:om.MDagPath,components:om.MObject,weight:float,oldValues:om.MFloatArray|None=None)->None:
-		"""setWeight(path, index, components, weight, oldValues=None)
-		setWeight(path, index, components, values)
-		setWeight(path, components, weight, oldValues=None)
-		setWeight(path, components, values)
-
-
-		Returns the status of the operation.
+		"""Returns the status of the operation.
 		* path (MDagPath) - The path of the DAG object that has the components.
 		* index (unsigned int) - Plug index of the desired geometry.
 		* components (MObject) - The components of the object.
@@ -1504,13 +1211,7 @@ class MFnWeightGeometryFilter(MFnGeometryFilter):
 		* oldValues (MFloatArray) -  An array of old values for the components."""
 	@overload
 	def setWeight(self,path:om.MDagPath,components:om.MObject,values:om.MFloatArray)->None:
-		"""setWeight(path, index, components, weight, oldValues=None)
-		setWeight(path, index, components, values)
-		setWeight(path, components, weight, oldValues=None)
-		setWeight(path, components, values)
-
-
-		Returns the status of the operation.
+		"""Returns the status of the operation.
 		* path (MDagPath) - The path of the DAG object that has the components.
 		* index (unsigned int) - Plug index of the desired geometry.
 		* components (MObject) - The components of the object.
@@ -1518,16 +1219,10 @@ class MFnWeightGeometryFilter(MFnGeometryFilter):
 		* values (MFloatArray) -  An array of new values for the components.
 		* oldValues (MFloatArray) -  An array of old values for the components."""
 	def getEnvelopeWeights(self,index:int)->om.MFloatArray:
-		"""getEnvelopeWeights(index) -> MFloatArray
-
-
-		Returns the weights the deformer uses for the geometry at the specified plug index.
+		"""Returns the weights the deformer uses for the geometry at the specified plug index.
 		* index (unsigned int) - Plug index of the desired geometry."""
 	def weightPlugStrings(self,list:om.MSelectionList)->str:
-		"""weightPlugStrings(list) -> MString
-
-
-		Returns a string (separated by spaces) containing the names of the plugs on this node that correspond to the components in the selection list.
+		"""Returns a string (separated by spaces) containing the names of the plugs on this node that correspond to the components in the selection list.
 		* list (MSelectionList) - selection list that contains components."""
 	def getWeightPlugStrings(self,*args)->Any:
 		"""weightPlugStrings(list) -> MStringArray
