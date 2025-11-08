@@ -82,8 +82,7 @@ class M3dView:
 	kDepth_Float:int=1
 	kStippleNone:int=0
 	kStippleDashed:int=1
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def display(self)->int:
 		"""Returns a long containing a C++ 'void' pointer which points to the OpenGL context for this view.
 		On 32-bit OS X this is an AGLContext.
@@ -675,31 +674,22 @@ class MCursor:
 	kEditCursor:MCursor
 	kPencilCursor:MCursor
 	kHandCursor:MCursor
-	def __lt__(self,other)->bool:
-		"""Return self<value."""
-	def __le__(self,other)->bool:
-		"""Return self<=value."""
-	def __eq__(self,other)->bool:
-		"""Return self==value."""
-	def __ne__(self,other)->bool:
-		"""Return self!=value."""
-	def __gt__(self,other)->bool:
-		"""Return self>value."""
-	def __ge__(self,other)->bool:
-		"""Return self>=value."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __lt__(self,other)->bool:...
+	def __le__(self,other)->bool:...
+	def __eq__(self,other)->bool:...
+	def __ne__(self,other)->bool:...
+	def __gt__(self,other)->bool:...
+	def __ge__(self,other)->bool:...
+	def __init__(self,*args)->None:...
 class MDrawData:
 	"""The MDrawData class holds geometry specific information for user defined shapes which maya does not intrinsicly know about."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def geometry(self)->int:
 		"""Returns a long containing a C++ 'void' pointer which points to the geometry associated with this draw data object.
 		The geometry is set using the getDrawData method of MPxSurfaceShapeUI."""
 class MDrawInfo:
 	"""This class is used by the getDrawRequests method of MPxSurfaceShapeUI to specify the current object drawing state for a user defined shape."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def canDrawComponent(self,isDisplayOn:bool,compMask:Any)->bool:
 		"""Convenience method to test if components specified by the given mask can be drawn.
 
@@ -767,8 +757,7 @@ class MDrawProperties:
 		"""point size"""
 	@pointSize.setter
 	def pointSize(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MDrawRequest:
 	"""This class encapsulates all the information needed to fulfill a request to draw an object or part of an object.
 	This class is used by the draw methods of MPxSurfaceShapeUI derived objects."""
@@ -846,8 +835,7 @@ class MDrawRequest:
 		"""The draw matrix."""
 	@matrix.setter
 	def matrix(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def planeColor(self,table:int)->int:
 		"""Get which color is used for the specified color table.
 
@@ -877,8 +865,7 @@ class MEvent:
 	controlKey:int=4
 	kLeftMouse:int=64
 	kMiddleMouse:int=128
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def getWindowPosition(self)->tuple[float,float]:
 		"""This routine is used by responders to query the position of the
 		pointer when the event occurred.  It is given in screen co-ordinates.
@@ -940,8 +927,7 @@ class MFnCircleSweepManip(MFnManip3D):
 		"""The end point of the CircleSweepManip."""
 	@endPoint.setter
 	def endPoint(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def angleIndex(self)->int:
 		"""Returns the index for the angle of CircleSweepManip. The data type corresponding to this index is a double."""
 	def axisIndex(self)->int:
@@ -998,8 +984,7 @@ class MFnCurveSegmentManip(MFnManip3D):
 		"""The end parameter of the CurveSegmentManip."""
 	@endParameter.setter
 	def endParameter(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToCurvePlug(self,curvePlug:om.MPlug)->Self:
 		"""Connect to the curve plug. The data type corresponding to the curvePlug is MFnData.kNurbsCurve.
 
@@ -1031,8 +1016,7 @@ class MFnCurveSegmentManip(MFnManip3D):
 		"""Returns the index of the start parameter of the CurveSegmentManip. The data type corresponding to this index is a double."""
 class MFnDirectionManip(MFnManip3D):
 	"""The DirectionManip allows the user to specify a direction, as defined by the vector from the start point to the manipulator position."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToDirectionPlug(self,directionPlug:om.MPlug)->Self:
 		"""Connect to the direction plug. The data type corresponding to the directionPlug is MFnNumericData.k3Double.
 
@@ -1070,8 +1054,7 @@ class MFnDirectionManip(MFnManip3D):
 		"""Returns the index of the start point of the DirectionManip. The data type corresponding to this index is MFnNumericData.k3Double."""
 class MFnDiscManip(MFnManip3D):
 	"""The DiscManip allows the user to rotate a disc in order to specify a rotation about an axis. This manipulator generates a single floating point value corresponding to the rotation."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def angleIndex(self)->int:
 		"""Returns the index of the angle. The data type corresponding to this index is a double."""
 	def axisIndex(self)->int:
@@ -1128,8 +1111,7 @@ class MFnDistanceManip(MFnManip3D):
 		The default scaling factor is 1.0."""
 	@scalingFactor.setter
 	def scalingFactor(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToDistancePlug(self,directionPlug:Any)->Self:
 		"""Connect to the distance plug. The data type corresponding to the distancePlug is a double. (Note that MFnUnitAttribute.kDistance is used to specify a distance attribute.)
 
@@ -1183,8 +1165,7 @@ class MFnFreePointTriadManip(MFnManip3D):
 	kXZPlane:int=1
 	kXYPlane:int=2
 	kViewPlane:int=3
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToPointPlug(self,pointPlug:om.MPlug)->Self:
 		"""Connect to the point plug. The data type corresponding to the pointPlug is MFnNumericData.k3Double.
 
@@ -1240,8 +1221,7 @@ class MFnManip3D(om.MFnTransform):
 		"""Whether or not optimize playback is on."""
 	@isOptimizePlaybackOn.setter
 	def isOptimizePlaybackOn(self,value:bool)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	@staticmethod
 	def deleteManipulator(manip:om.MObject)->None:
 		"""Delete a manipulator.  This method should be used to delete manipulators that have been created using base manipulator create() methods.
@@ -1287,8 +1267,7 @@ class MFnPointOnCurveManip(MFnManip3D):
 		"""The parameter of the PointOnCurveManip."""
 	@parameter.setter
 	def parameter(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToCurvePlug(self,curvePlug:om.MPlug)->Self:
 		"""Connect to the curve plug. The data type corresponding to the curvePlug is MFnData::kNurbsCurve.
 
@@ -1330,8 +1309,7 @@ class MFnPointOnSurfaceManip(MFnManip3D):
 		"""Whether or not the surface is drawn."""
 	@isDrawSurfaceOn.setter
 	def isDrawSurfaceOn(self,value:bool)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToParamPlug(self,paramPlug:om.MPlug)->Self:
 		"""Connect to the param plug. The data type corresponding to the paramPlug is MFnNumericData.k2Double.
 
@@ -1384,8 +1362,7 @@ class MFnRotateManip(MFnManip3D):
 	kObjectSpace:int=0
 	kWorldSpace:int=1
 	kGimbal:int=2
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToRotationCenterPlug(self,rotationCenterPlug:om.MPlug)->Self:
 		"""Create a 1-1 association of the rotation center on the manipulator and the rotationCenterPlug parameter.  When both the rotation center is attached to a plug and the displayWithNode() method has been called, the manipulator will display with the node regardless of the connection made to the rotation center.
 
@@ -1453,8 +1430,7 @@ class MFnScaleManip(MFnManip3D):
 	def orientationMode(self,value:Any)->None:...
 	kDefaultOrientation:int=0
 	kArbitraryOrientation:int=1
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToScaleCenterPlug(self,scaleCenterPlug:om.MPlug)->Self:
 		"""Create a 1-1 association of the scale center on the manipulator and the scaleCenterPlug parameter.  When both the scale center is attached to a plug and the displayWithNode() method has been called, the manipulator will display with the node regardless of the connection made to the scale center.
 
@@ -1498,8 +1474,7 @@ class MFnStateManip(MFnManip3D):
 		The default number of maximum states is 4."""
 	@maxStates.setter
 	def maxStates(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToStatePlug(self,statePlug:om.MPlug)->Self:
 		"""Connect to the state plug. The data type corresponding to the statePlug is a int integer.
 
@@ -1546,8 +1521,7 @@ class MFnToggleManip(MFnManip3D):
 		"""The toggle of the ToggleManip."""
 	@toggle.setter
 	def toggle(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToTogglePlug(self,togglePlug:om.MPlug)->Self:
 		"""Connect to the toggle plug. The data type corresponding to the togglePlug is a boolean value.
 
@@ -1572,8 +1546,7 @@ class MFnToggleManip(MFnManip3D):
 		"""Returns the index of the toggle of the ToggleManip. The data type corresponding to this index is a boolean."""
 class MHWShaderSwatchGenerator(omr.MSwatchRenderBase):
 	"""Hardware shader swatch generator utility class."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	@staticmethod
 	def createObj(obj:om.MObject,renderObj:om.MObject,res:Any)->omr.MSwatchRenderBase:
 		"""Class constructor.
@@ -1596,8 +1569,7 @@ class MHWShaderSwatchGenerator(omr.MSwatchRenderBase):
 		The string returned from this method can be used for node classification purpose."""
 class MManipData:
 	"""Class that encapsulates manipulator data."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def asBool(self)->bool:
 		"""Returns the manipulator data as a bool"""
 	def asDouble(self)->float:
@@ -1637,8 +1609,7 @@ class MMaterial:
 	kSpecularColor:int=13
 	kReflectivity:int=14
 	kReflectedColor:int=15
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def applyTexture(self,view:M3dView,data:MDrawData)->Self:
 		"""For materials that have texture, this method must be used before the OpenGL drawing to apply the texture to the current view.
 		This method should be called from within your MPxSurfaceShapeUI.draw() method.
@@ -1765,12 +1736,9 @@ class MMaterialArray(collections.abc.Sequence[MMaterial]):
 		"""The size by which the array will be expanded whenever expansion is necessary."""
 	@sizeIncrement.setter
 	def sizeIncrement(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
-	def __getitem__(self,index:int)->MMaterial:
-		"""Return self[key]."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
+	def __getitem__(self,index:int)->MMaterial:...
 	def append(self,element:MMaterial)->Self:
 		"""Adds a new element to the end of the array.
 
@@ -1971,8 +1939,7 @@ class MPxContext:
 	kImage1:int=0
 	kImage2:int=1
 	kImage3:int=2
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def toolOnSetup(self,event:MEvent)->None:
 		"""This method is called when the context is activated, i.e when
 		the toolButton for the context is pressed.
@@ -2342,8 +2309,7 @@ class MPxContext:
 		while the current context is active."""
 class MPxContextCommand:
 	"""Base class for custom context commands."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def doEditFlags(self)->None:
 		"""This method is called when the command is called in edit mode.
 		This method should be overridden by context commands
@@ -2386,8 +2352,7 @@ class MPxContextCommand:
 		"""Returns the context command's MSyntax object, if it has one."""
 class MPxDragAndDropBehavior:
 	"""This is the base class for user defined drag and drop behaviors."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def shouldBeUsedFor(self,sourceNode:om.MObject,destinationNode:om.MObject,sourcePlug:om.MPlug,destinationPlug:om.MPlug)->bool:
 		"""This method must be overridden in order to use a drag and drop behavior.
 
@@ -2438,8 +2403,7 @@ class MPxHardwareShader(om.MPxNode):
 	outColorR:om.MObject
 	outColorG:om.MObject
 	outColorB:om.MObject
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	@staticmethod
 	def findResource(name:str,shaderPath:str)->str:
 		"""This is a static utility to find the full path to a shader resource (typically a texture). This method will search the list of paths in the MAYA_HW_SHADER_RESOURCE_PATH environment variable, resolving relative paths based on the directory containing the shader.
@@ -2581,8 +2545,7 @@ class MPxHwShaderNode(om.MPxNode):
 	outGlowColorR:om.MObject
 	outGlowColorG:om.MObject
 	outGlowColorB:om.MObject
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def bind(self,request:MDrawRequest,view:M3dView)->Self:
 		"""This method is invoked for hardware rendering to Maya's 3D view.
 
@@ -2920,8 +2883,7 @@ class MPxLocatorNode(om.MPxNode):
 	objectGroupColor:om.MObject
 	useObjectColor:om.MObject
 	objectColor:om.MObject
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def boundingBox(self)->om.MBoundingBox:
 		"""This method should be overridden to return a bounding box for the locator.
 		If this method is overridden, then MPxLocatorNode.isBounded should also be overridden to return True."""
@@ -2988,8 +2950,7 @@ class MPxLocatorNode(om.MPxNode):
 		"""This routine can be overridden to provide information aboutthe selection mask of the locator. By default the selection maskfor locators is returned."""
 class MPxManipContainer(om.MPxNode):
 	"""Parent class of all user defined manipulators."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addCircleSweepManip(self,manipName:str,angleName:str)->om.MDagPath:
 		"""This method creates a CircleSweepManip and adds it to
 		the MPxManipContainer container.
@@ -3358,8 +3319,7 @@ class MPxManipContainer(om.MPxNode):
 		* mid (MTypeId) - Id of the user defined node"""
 class MPxManipulatorNode(om.MPxNode):
 	"""Parent class of all user defined manipulators."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def connectToDependNode(self,node:om.MObject)->None:
 		"""This method connects the manipulator to the dependency node. This
 		is a virtual method and needs to be overridden from the plug-in.
@@ -3637,8 +3597,7 @@ class MPxManipulatorNode(om.MPxNode):
 		"""This method returns the color index of a label background."""
 class MPxSelectionContext(MPxContext):
 	"""Base class for interative selection tools."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addManipulator(self,manipulator:om.MObject)->None:
 		"""This method adds a manipulator to the context.
 
@@ -3866,8 +3825,7 @@ class MPxSurfaceShapeUI:
 	kSelectMeshVerts:int=1
 	kSelectMeshFaces:int=2
 	kSelectMeshEdges:int=3
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def canDrawUV(self)->bool:
 		"""Called by Maya to determine if this surface shape supports UV drawing."""
 	def drawUV(self,view:M3dView,info:MTextureEditorDrawInfo)->Self:
@@ -3934,8 +3892,7 @@ class MPxSurfaceShapeUI:
 		* path (MDagPath) - The full path to a surface shape, including the shape."""
 class MPxToolCommand(om.MPxCommand):
 	"""Base class for custom tool commands."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def doIt(self,*args)->Any:
 		"""Called by Maya to execute the command."""
 	def cancel(self)->None:
@@ -3961,8 +3918,7 @@ class MSelectInfo(MDrawInfo):
 		"""The highest selection priority value."""
 	@highestPriority.setter
 	def highestPriority(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addSelection(self,item:om.MSelectionList,point:om.MPoint,list:list,points:Any,mask:om.MSelectionMask,isComponent:bool)->Self:
 		"""Adds components or objects to the active selection list.
 
@@ -4036,15 +3992,13 @@ class MTextureEditorDrawInfo:
 	kDrawFacetForSelect:int=5
 	kDrawUVForSelect:int=6
 	kDrawFunctionLast:int=6
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MTimeSliderCustomDrawManager:
 	"""Manager to add drawing primitive to the time slider."""
 	kAbove:int=0
 	kBelow:int=1
 	kOn:int=2
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def registerCustomDrawOn(self,*args)->Any:...
 	def registerCustomDrawOutside(self,*args)->Any:...
 	def setDrawPrimitives(self,*args)->Any:...
@@ -4134,8 +4088,7 @@ class MTimeSliderDrawPrimitive:
 	kMovePrimitive:int=1
 	kMoveStartTime:int=2
 	kMoveEndTime:int=3
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MUiMessage(om.MMessage):
 	"""Class used to register callbacks for UI related messages."""
 	@staticmethod
@@ -4261,8 +4214,7 @@ class RenderParameters:
 		"""ShowAlphaMask state"""
 	@showAlphaMask.setter
 	def showAlphaMask(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class ShaderContext:
 	"""Provides contextual information about the current invocation of the shader."""
 	@property
@@ -4275,5 +4227,4 @@ class ShaderContext:
 		"""Shading engine node for the given invocation of the shader"""
 	@shadingEngine.setter
 	def shadingEngine(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...

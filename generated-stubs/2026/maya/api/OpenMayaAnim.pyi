@@ -124,8 +124,7 @@ class MAnimControl:
 		"""Sets whether or not the tangents on the Anim Curve are weighted."""
 class MAnimCurveChange:
 	"""Anim curve change cache."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def redoIt(self,*args)->Any:
 		"""Redo all of the Anim Curve changes in this cache."""
 	def undoIt(self,*args)->Any:
@@ -236,28 +235,17 @@ class MAnimCurveClipboardItemArray(collections.abc.Sequence[MAnimCurveClipboardI
 		"""Number of elements by which to grow the array when necessary."""
 	@sizeIncrement.setter
 	def sizeIncrement(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
-	def __getitem__(self,index:int)->MAnimCurveClipboardItem:
-		"""Return self[key]."""
-	def __setitem__(self,index:int,value:MAnimCurveClipboardItem)->None:
-		"""Set self[key] to value."""
-	def __delitem__(self,index:int)->None:
-		"""Delete self[key]."""
-	def __add__(self,other)->Any:
-		"""Return self+value."""
-	def __mul__(self,other)->Any:
-		"""Return self*value."""
-	def __rmul__(self,other)->Any:
-		"""Return value*self."""
-	def __contains__(self,item)->bool:
-		"""Return key in self."""
-	def __iadd__(self,other)->Any:
-		"""Implement self+=value."""
-	def __imul__(self,other)->Any:
-		"""Implement self*=value."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
+	def __getitem__(self,index:int)->MAnimCurveClipboardItem:...
+	def __setitem__(self,index:int,value:MAnimCurveClipboardItem)->None:...
+	def __delitem__(self,index:int)->None:...
+	def __add__(self,other)->Any:...
+	def __mul__(self,other)->Any:...
+	def __rmul__(self,other)->Any:...
+	def __contains__(self,item)->bool:...
+	def __iadd__(self,other)->Any:...
+	def __imul__(self,other)->Any:...
 	def append(self,item)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:

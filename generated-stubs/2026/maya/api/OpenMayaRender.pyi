@@ -10,8 +10,7 @@ from typing import Any, Callable, Self, Sequence, overload
 
 class MAttributeParameterMapping:
 	"""Class for defining relationship between Maya attributes and fragment parameters."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def allowConnection(self)->bool:
 		"""This method returns true if Maya is allowed to connect other shade fragments to the parameter named by this mapping."""
 	def allowRename(self)->bool:
@@ -30,12 +29,9 @@ class MAttributeParameterMapping:
 		If the fragment has not yet been joined with other fragments, this will return the same string as parameterName()."""
 class MAttributeParameterMappingList:
 	"""A list of MAttributeParameterMapping objects."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
-		"""Return self[key]."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
+	def __getitem__(self,index:int)->Any:...
 	def append(self,AttributeParameterMapping:MAttributeParameterMapping)->Self:
 		"""Add a mapping to the list. The list makes a copy; ownership of the original is left with the caller."""
 	def clear(self)->Self:
@@ -76,8 +72,7 @@ class MBlendState:
 	kRGBChannels:int=7
 	kRGBAChannels:int=15
 	kMaxTargets:int=8
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def desc(self)->MBlendStateDesc:
 		"""Get the blend state descriptor that was used to create the state object."""
 	def resourceHandle(self)->int:
@@ -111,8 +106,7 @@ class MBlendStateDesc:
 		"""An array of 8 MTargetBlendDesc, one for each target"""
 	@targetBlends.setter
 	def targetBlends(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def setDefaults(self)->Self:
 		"""Set all values for the blend state to their default values."""
 class MCameraOverride:
@@ -172,8 +166,7 @@ class MCameraOverride:
 		"""Far clipping plane override"""
 	@mFarClippingPlane.setter
 	def mFarClippingPlane(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MClearOperation(MRenderOperation):
 	"""Class which defines the operation of clearing render target channels."""
 	kClearNone:int=0
@@ -181,8 +174,7 @@ class MClearOperation(MRenderOperation):
 	kClearDepth:int=2
 	kClearStencil:int=4
 	kClearAll:int=-1
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def clearColor(self)->list[float]:
 		"""Query the first clear color values."""
 	def clearColor2(self)->list[float]:
@@ -271,8 +263,7 @@ class MColorManagementUtilities:
 class MComponentDataIndexing:
 	"""Class for storing index mapping when vertices are shared."""
 	kFaceVertex:int=0
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def indices(self)->om.MUintArray:
 		"""Get the array of vertex indices for the component."""
 	def componentType(self)->int:
@@ -281,12 +272,9 @@ class MComponentDataIndexing:
 		"""Set the component type that the vertex indices represent."""
 class MComponentDataIndexingList:
 	"""A list of MComponentDataIndexing objects."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
-		"""Return self[key]."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
+	def __getitem__(self,index:int)->Any:...
 	def append(self,ComponentDataIndexing:MComponentDataIndexing)->bool:
 		"""Add a MComponentDataIndexing to the list. Creates and stores a copy which is owned by the list."""
 	def remove(self,index:int)->bool:
@@ -315,8 +303,7 @@ class MDepthNormalizationDescription:
 		"""Bias to apply to depth value"""
 	@fDepthBias.setter
 	def fDepthBias(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MDepthStencilState:
 	"""Container class for an acquired complete GPU depth stencil state."""
 	kKeepStencil:int=1
@@ -327,8 +314,7 @@ class MDepthStencilState:
 	kInvertStencil:int=6
 	kIncrementStencil:int=7
 	kDecrementStencil:int=8
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def desc(self)->MDepthStencilStateDesc:
 		"""Get the depth-stencil state descriptor that was used to create the state object."""
 	def resourceHandle(self)->int:
@@ -382,16 +368,14 @@ class MDepthStencilStateDesc:
 		"""Sets the stencil op for the back facing fragments"""
 	@backFace.setter
 	def backFace(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def setDefaults(self)->Self:
 		"""Set all values for the depth stencil state to their default values."""
 class MDrawContext(MFrameContext):
 	"""Class to allow access to hardware draw context information."""
 	kFilteredToLightLimit:int=0
 	kFilteredIgnoreLightLimit:int=1
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def getFrameStamp(self)->int:
 		"""Returns the current frame stamp."""
 	def getSceneBox(self)->om.MBoundingBox:
@@ -513,8 +497,7 @@ class MFragmentManager:
 	kHullShader:int=3
 	kHullConstantShader:int=4
 	kDomainShader:int=5
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addFragmentGraphFromBuffer(self,buffer:Any)->str:
 		"""Add a new fragment graph to the manager.
 		The fragment graph is defined as XML stored in a string buffer.Returns name of the registered fragment graph, or empty string on failure.
@@ -768,8 +751,7 @@ class MFrameContext:
 	kExcludeGreasePencils:int=34359738368
 	kExcludeControllers:int=68719476736
 	kExcludeAll:int=18446744073709551615
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	@staticmethod
 	def semanticToMatrixType(string:str)->int:
 		"""Given a semantic name return the corresponding matrix enumeration that can be used to retrieve a matrix value via the getMatrix() method.
@@ -981,8 +963,7 @@ class MGeometry:
 	kSelectionOnly:int=16
 	kSelectionHighlighting:int=32
 	kAll:int=15
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addIndexBuffer(self,IndexBuffer:MIndexBuffer)->bool:
 		"""Buffers cannot be added to the same object twice.Adds a index buffer to this MGeometry object.
 		The buffer can only be added to this object once but may be added to others."""
@@ -1116,8 +1097,7 @@ class MGeometryExtractor:
 		Call this method before calling populateVertexBuffer to determine the minimum size the buffer passed into populateVertexBuffer needs to be."""
 class MGeometryIndexMapping:
 	"""A mapping of geometry index."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def component(self,int:int)->om.MObject:
 		"""Get the component of a geometry."""
 	def dagPath(self,int:int)->om.MDagPath:
@@ -1132,8 +1112,7 @@ class MGeometryIndexMapping:
 		The index start represents the offset of the geometry index data in the index buffer of the consolidated render item."""
 class MGeometryRequirements:
 	"""Geometry requirements."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addIndexingRequirement(self,IndexBufferDescriptor:MIndexBufferDescriptor)->Self:
 		"""Add a new indexing requirement to the list of indexing requirements."""
 	def addVertexRequirement(self,VertexBufferDescriptor:MVertexBufferDescriptor)->Self:
@@ -1191,8 +1170,7 @@ class MGeometryUtilities:
 		* path (MDagPath) - The DAG path to get wireframe color."""
 class MHUDRender(MRenderOperation):
 	"""Class which defines rendering the 2D heads-up-display."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addUIDrawables(self,drawManager2D:MUIDrawManager,frameContext:MFrameContext)->Self:
 		"""Provides access to the 2D version of MUIDrawManager, which can be used to queue up operations to draw simple UI shapes like lines, circles, text, etc.
 
@@ -1207,8 +1185,7 @@ class MHUDRender(MRenderOperation):
 		Note that all HUD operations share the same name since they need not be distinguished from one another."""
 class MIndexBuffer:
 	"""Index buffer for use with MGeometry."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def acquire(self,size:int,writeOnly:bool)->int:
 		"""Get a pointer to memory for the buffer.
 
@@ -1345,16 +1322,12 @@ class MIndexBufferDescriptor:
 	kSubDivEdge:int=12
 	kTangent:int=13
 	kCustom:int=14
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MIndexBufferDescriptorList:
 	"""A list of MIndexBufferDescriptor objects."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
-		"""Return self[key]."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
+	def __getitem__(self,index:int)->Any:...
 	def append(self,IndexBufferDescriptor:MIndexBufferDescriptor)->bool:
 		"""Add a descriptor to the list. Creates and stores a copy which is owned by the list."""
 	def clear(self)->Self:
@@ -1373,8 +1346,7 @@ class MInitContext:
 		"""A path to the instance of the Maya DAG object for which the shader is being initialized"""
 	@dagPath.setter
 	def dagPath(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MInitFeedback:
 	"""Data to pass back to Maya after initialization."""
 	@property
@@ -1382,8 +1354,7 @@ class MInitFeedback:
 		"""Optional user data to be associated with the render item for the shader assignment"""
 	@customData.setter
 	def customData(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MIntersection:
 	"""This class gives a description of an intersection when a selection hit occurs."""
 	@property
@@ -1422,8 +1393,7 @@ class MIntersection:
 		See MSelectionContext::selectionLevel for list of valid level values."""
 	@selectionLevel.setter
 	def selectionLevel(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MLightParameterInformation:
 	"""Class for providing lighting information that may be used with Viewport 2.0."""
 	kInvalid:int=0
@@ -1461,8 +1431,7 @@ class MLightParameterInformation:
 	kShadowOn:int=19
 	kShadowDirty:int=20
 	kDepthRange:int=21
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def parameterList(self)->list[str]:
 		"""Get the names of all light parameters that are accessible."""
 	def parameterType(self,string:str)->int:
@@ -1556,8 +1525,7 @@ class MPassContext:
 	kMotionVectorPassSemantic:str='motionVectorPass'
 	kPEPatternPassSemantic:str='PEPatternPass'
 	kNonPEPatternPassSemantic:str='nonPEPatternPass'
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def passIdentifier(self)->str:
 		"""Return the identifier for the pass context."""
 	def passSemantics(self)->list[str]:
@@ -1573,8 +1541,7 @@ class MPresentTarget(MRenderOperation):
 	kCenterBuffer:int=0
 	kLeftBuffer:int=1
 	kRightBuffer:int=2
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def presentDepth(self)->bool:
 		"""Query whether the present operation will display depth values."""
 	def setPresentDepth(self,bool:bool)->Self:
@@ -1590,8 +1557,7 @@ class MPresentTarget(MRenderOperation):
 		  MPresentTarget.kRightBuffer    Right back-buffer"""
 class MPxComponentConverter:
 	"""Base class for user defined component converter."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addIntersection(self,intersection:MIntersection)->Self:
 		"""Maya calls this function for every selection hit on the render item.
 		The intersection gives information on the component that was hit.
@@ -1615,8 +1581,7 @@ class MPxDrawOverride:
 
 	Note the third parameter of the constructor is optional and defaults to true:
 	MPxDrawOverride(obj, callback, isAlwaysDirty = True)"""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addUIDrawables(self,objPath:om.MDagPath,drawManager:MUIDrawManager,frameContext:MFrameContext,data:om.MUserData)->Self:
 		"""Provides access to the MUIDrawManager, which can be used to queue up operations to draw simple UI shapes like lines, circles, text, etc.
 
@@ -1788,8 +1753,7 @@ class MPxDrawOverride:
 		be included as part of the string."""
 class MPxGeometryOverride:
 	"""Base for user-defined classes to prepare geometry for drawing."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addUIDrawables(self,path:om.MDagPath,drawManager:MUIDrawManager,frameContext:MFrameContext)->Self:
 		"""For each instance of the object, besides the render items updated in updateRenderItems() there is also a render item list for rendering simple UI elements.
 		This stage gives the plugin access to MUIDrawManager which aids in drawing simple geometry like line, circle, rectangle, text, etc.
@@ -1916,14 +1880,12 @@ class MPxGeometryOverride:
 		The context should never be deleted by the plug-in as it is owned by the geometry override."""
 class MPxImagePlaneOverride:
 	"""(Deprecated: The class isn't required for MPxImagePlane to be supported in Viewport 2.0.) Base class for user defined Image Plane overrides."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def supportedDrawAPIs(self)->int:
 		"""Returns the draw API supported by this override."""
 class MPxIndexBufferMutator:
 	"""Base class for user defined index buffer mutators."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def mutateIndexing(self,sourceIndexBuffers:MComponentDataIndexingList,vertexBuffers:MVertexBufferArray,indexBuffer:Any)->tuple[int,int]:
 		"""This method gets called to allow the generator to mutate the data for a custom index stream using information stored in the vertex buffers.
 
@@ -1935,8 +1897,7 @@ class MPxIndexBufferMutator:
 		See MGeometry.primitiveString() description for a list of valid primitive types."""
 class MPxPrimitiveGenerator:
 	"""Base class for user defined primitive generators."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def computeIndexCount(self,object:om.MObject,component:om.MObject)->int:
 		"""This function is called to allow the primitive generator to provide the number of vertices it will use.
 
@@ -1955,8 +1916,7 @@ class MPxPrimitiveGenerator:
 		See MGeometry.primitiveString() description for a list of valid primitive types."""
 class MPxShaderOverride:
 	"""Base class for user defined shading effect draw overrides."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def activateKey(self,context:Any,key:Any)->Self:
 		"""This is the activateKey callback.
 
@@ -2181,8 +2141,7 @@ class MPxShaderOverride:
 		device. This is the only place that the graphics device may be safely accessed other than at draw time."""
 class MPxShadingNodeOverride:
 	"""Base class for user defined shading node overrides."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def allowConnections(self)->bool:
 		"""Returns True if connections should be allowed to parameters of the fragment that do not have custom mappings that
 		specifically prevent connections.
@@ -2353,8 +2312,7 @@ class MPxShadingNodeOverride:
 		* plug (MPlug) - The plug that changed, may be None."""
 class MPxSubSceneOverride:
 	"""Base class for Viewport 2.0 drawing of DAG nodes which represent sub-scenes."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def areUIDrawablesDirty(self)->bool:
 		"""Determines whether addUIDrawables() should be called on the next refresh.
 
@@ -2511,8 +2469,7 @@ class MPxSubSceneOverride:
 		 selectionContext [OUT] (MSelectionContext) - The selection context"""
 class MPxSurfaceShadingNodeOverride(MPxShadingNodeOverride):
 	"""Base class for user defined surface shading node overrides."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def bumpAttribute(self)->str:
 		"""Returns the name of the attribute that accepts bump connections from bump nodes.
 
@@ -2550,8 +2507,7 @@ class MPxSurfaceShadingNodeOverride(MPxShadingNodeOverride):
 		or through custom attribute parameter mappings."""
 class MPxVertexBufferGenerator:
 	"""Base class for user defined vertex buffer generators."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def createVertexStream(self,object:om.MObject,vertexBuffer:Any,targetIndexing:MComponentDataIndexing,sharedIndexing:MComponentDataIndexing,sourceStreams:MVertexBufferArray)->Self:
 		"""This method gets called to allow the generator to fill in the data for a custom vertex stream. Use the requirements in the vertexBuffer to get the description of the stream. Use vertexBuffer.acquire() and vertexBuffer.commit() to fill the buffer.
 
@@ -2572,8 +2528,7 @@ class MPxVertexBufferGenerator:
 		* sourceStreams [OUT] (list of strings) - Array of strings."""
 class MPxVertexBufferMutator:
 	"""Base class for user defined vertex buffer generators."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def modifyVertexStream(self,object:om.MObject,vertexBuffer:Any,targetIndexing:MComponentDataIndexing)->Self:
 		"""This method gets called to allow the mutator to alter the data for a custom vertex stream.
 		Use the requirements in the vertexBuffer to get the description of the stream.
@@ -2589,8 +2544,7 @@ class MQuadRender(MRenderOperation):
 		"""Clear operation"""
 	@mClearOperation.setter
 	def mClearOperation(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def blendStateOverride(self)->MBlendState:
 		"""Query if a blend state override is performed by this quad operation."""
 	def clearOperation(self)->MClearOperation:
@@ -2608,8 +2562,7 @@ class MRasterizerState:
 	kCullNone:int=1
 	kCullFront:int=2
 	kCullBack:int=3
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def desc(self)->MRasterizerStateDesc:
 		"""Get the rasterizer state descriptor that was used to create the state object."""
 	def resourceHandle(self)->int:
@@ -2673,8 +2626,7 @@ class MRasterizerStateDesc:
 		"""Enables HW anti-aliased lines, auto disabled by multi-sample AA, default false"""
 	@antialiasedLineEnable.setter
 	def antialiasedLineEnable(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def setDefaults(self)->Self:
 		"""Set all values for the rasterizer state to their default values."""
 class MRenderItem:
@@ -2698,8 +2650,7 @@ class MRenderItem:
 	IgnoreDefaultMaterialMode:int=0
 	DrawOnlyWhenDefaultMaterialActive:int=1
 	SkipWhenDefaultMaterialActive:int=2
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def associateWithIndexBuffer(self,IndexBuffer:MIndexBuffer)->bool:
 		"""Use to indicate that a particular index buffer should be used with this render item.
 		This method must be called from MPxGeometryOverride in order to link index buffers generated in
@@ -2987,12 +2938,9 @@ class MRenderItem:
 		 * val (long) - A "kExclude" bit flag defined in MFrameContext"""
 class MRenderItemList:
 	"""A list of MRenderItem objects."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
-		"""Return self[key]."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
+	def __getitem__(self,index:int)->Any:...
 	def append(self,VertexBufferDescriptor:MVertexBufferDescriptor)->bool:
 		"""Add the item to the list. The list assumes ownership of the item."""
 	def clear(self)->Self:
@@ -3044,8 +2992,7 @@ class MRenderOperation:
 	kDataServer:int=4
 	kHUDRender:int=5
 	kPresentTarget:int=6
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def enableSRGBWrite(self)->bool:
 		"""Return whether to enable GPU based gamma correction during pixel writes."""
 	def name(self)->str:
@@ -3058,8 +3005,7 @@ class MRenderOperation:
 		"""Query for a viewport rectangle override."""
 class MRenderOverride:
 	"""Class which defines a 2d geometry quad render."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def cleanup(self)->Self:
 		"""Perform any cleanup required following the execution of render operations."""
 	def name(self)->str:
@@ -3098,8 +3044,7 @@ class MRenderOverride:
 		* worldSpaceHitPts [OUT] (MPointArray) - List of hit points"""
 class MRenderParameters:
 	"""Base class for render operation functionsets."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def isArrayParameter(self,string:str)->bool:
 		"""Determine whether the named parameter is an array."""
 	def parameterList(self)->list[str]:
@@ -3185,8 +3130,7 @@ class MRenderProfile:
 	kMayaSoftware:int=0
 	kMayaOpenGL:int=1
 	kMayaD3D:int=2
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	@overload
 	def addRenderer(self,renderer:int)->Self:
 		"""Add an internal renderer to this profile:
@@ -3233,8 +3177,7 @@ class MRenderProfile:
 		"""Return the number of renderers in this profile."""
 class MRenderTarget:
 	"""An instance of a render target that may be used with Viewport 2.0."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def updateDescription(self,RenderTargetDescription:MRenderTargetDescription)->Self:
 		"""Change the description of a render target."""
 	def targetDescription(self)->MRenderTargetDescription:
@@ -3259,12 +3202,10 @@ class MRenderTargetAssignment:
 		"""The render target"""
 	@target.setter
 	def target(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MRenderTargetDescription:
 	"""Class which provides a description of a hardware render target."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def name(self)->str:
 		"""Query the name identifier for the target description."""
 	def width(self)->int:
@@ -3301,8 +3242,7 @@ class MRenderTargetDescription:
 		"""Determine if another target with a given description is 'compatible' with a target using this description."""
 class MRenderTargetManager:
 	"""Provides access to MRenderTarget objects for use in Viewport 2.0."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def acquireRenderTarget(self,RenderTargetDescription:MRenderTargetDescription)->MRenderTarget:
 		"""Acquire an instance of a render target.
 		When the object is no longer needed, releaseRenderTarget() should be called
@@ -3643,8 +3583,7 @@ class MSamplerState:
 	kTexMirror:int=2
 	kTexClamp:int=3
 	kTexBorder:int=4
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def desc(self)->MSamplerStateDesc:
 		"""Get the sampler state descriptor that was used to create the state object."""
 	def resourceHandle(self)->int:
@@ -3713,8 +3652,7 @@ class MSamplerStateDesc:
 		"""When using texture arrays, selects array element, default 0"""
 	@elementIndex.setter
 	def elementIndex(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def setDefaults(self)->Self:
 		"""Set all values for the target blend state to their default values."""
 class MSceneRender(MRenderOperation):
@@ -3790,8 +3728,7 @@ class MSceneRender(MRenderOperation):
 	kCullNone:int=1
 	kCullBackFaces:int=2
 	kCullFrontFaces:int=3
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addPostUIDrawables(self,drawManager:MUIDrawManager,frameContext:MFrameContext)->Self:
 		"""Provides access to the MUIDrawManager, which can be used to queue up operations to draw simple UI shapes like lines, circles, text, etc.
 
@@ -3977,8 +3914,7 @@ class MSelectionContext:
 	kFace:int=3
 	kEdge:int=4
 	kVertex:int=5
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MSelectionInfo:
 	"""This class gives informations on the selection."""
 	@property
@@ -4029,8 +3965,7 @@ class MSelectionInfo:
 		"""Whether or not selection is launched to find snap points."""
 	@pointSnapping.setter
 	def pointSnapping(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def selectForHilite(self,mask:om.MSelectionMask)->bool:
 		"""Given the selection mask, determines if this shape can be selected for the hilite list.
 
@@ -4056,8 +3991,7 @@ class MShaderCompileMacro:
 		"""Macro definition"""
 	@definition.setter
 	def definition(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MShaderInstance:
 	"""An instance of a shader that may be used with Viewport 2.0."""
 	kInvalid:int=0
@@ -4090,8 +4024,7 @@ class MShaderInstance:
 	kAnisotropyShader:int=13
 	kAnisotropyShader2:int=14
 	kDisplacementPosShader:int=15
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def activatePass(self,DrawContext:MDrawContext,int:int)->Self:
 		"""Activates the given pass of the shader.
 		Must be called between calls to bind() and unbind()."""
@@ -4322,8 +4255,7 @@ class MShaderManager:
 	k3dOpenPBRSurfaceShader:int=27
 	k3dIsotropicOpenPBRSurfaceShader:int=28
 	k3dCPVShader:int=4
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addShaderIncludePath(self,string:str)->Self:
 		"""Add a path to the list of paths used for searching for shader include files."""
 	def addShaderPath(self,string:str)->Self:
@@ -4463,8 +4395,7 @@ class MStateManager:
 	kPixelShader:int=3
 	kHullShader:int=4
 	kDomainShader:int=5
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	@staticmethod
 	def acquireBlendState(BlendStateDesc:MBlendStateDesc)->MBlendState:
 		"""Acquires an immutable unique blend state matching the blend state descriptor."""
@@ -4535,16 +4466,13 @@ class MStencilOpDesc:
 		"""Sets the stencil buffer comparison function, default kCompareAlways"""
 	@stencilFunc.setter
 	def stencilFunc(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def setDefaults(self)->Self:
 		"""Set all values for the stencil operation state to their default values."""
 class MSubSceneContainer:
 	"""Container for render items generated by MPxSubSceneOverride."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
 	def add(self,item:MRenderItem)->bool:
 		"""Add a render item to the set of render items that will be used to draw the DAG object associated with the override that owns this container. Each item in the container must have a unique name and the same render item may not be used in the container more than once. When Viewport 2.0 draws the associated DAG object, it will process all render items in this container.
 		Any items that have valid geometry and a valid shader will be drawn as long as they pass all filtering tests for the active viewport.
@@ -4570,8 +4498,7 @@ class MSubSceneContainer:
 		* name (string) - The name of the render item to remove."""
 class MSubSceneContainerIterator:
 	"""Iterator over render items of MSubSceneContainer object."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def destroy(self)->Self:
 		"""Call this method to delete the iterator. After calling, the iterator will be invalid.
 		Users of MSubSceneContainer iterators are responsible for deleting the iterators after use."""
@@ -4589,8 +4516,7 @@ class MSwatchRenderBase:
 		"""The quality in which the swatch will be rendered (the larger the number is set, the better quality is applied)."""
 	@renderQuality.setter
 	def renderQuality(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	@staticmethod
 	def cancelCurrentSwatchRender()->None:
 		"""The method cancels the swatch which is being rendered in parallel, and push the swatch render item back to the render queue after.
@@ -4661,14 +4587,12 @@ class MTargetBlendDesc:
 		"""Indicates what color components(red, green, blue, alpha) are writable, the default is RGBA"""
 	@targetWriteMask.setter
 	def targetWriteMask(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def setDefaults(self)->Self:
 		"""Set all values for the target blend state to their default values."""
 class MTexture:
 	"""Class which includes texture data."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def hasAlpha(self)->bool:
 		"""Get whether the texture has an alpha channel."""
 	def setHasAlpha(self,bool:bool)->Self:
@@ -4747,8 +4671,7 @@ class MTextureAssignment:
 		"""The texture"""
 	@texture.setter
 	def texture(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MTextureDescription:
 	"""Texture description. Provides sufficient information to describe how a block of data can be interpreted as a texture."""
 	@property
@@ -4817,14 +4740,12 @@ class MTextureDescription:
 	kEnvCrossHoriz:int=5
 	kEnvCubemap:int=6
 	kNumberOfEnvMapTypes:int=7
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def setToDefault2DTexture(self)->Self:
 		"""Utility to set texture description to describe a 0 size 2-dimensional texture."""
 class MTextureManager:
 	"""Class which manages texture."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addImagePath(self,string:str)->Self:
 		"""Adds an additional search path for looking up images on disk."""
 	def imagePaths(self)->list[str]:
@@ -5095,8 +5016,7 @@ class MTextureUpdateRegion:
 		"""Z max value"""
 	@fZRangeMax.setter
 	def fZRangeMax(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MUIDrawManager:
 	"""Main interface for drawing basic UI drawables in Viewport 2.0 and Hardware Renderer 2.0."""
 	kDefaultFontSize:int=12
@@ -5142,8 +5062,7 @@ class MUIDrawManager:
 	kNonSelectable:int=0
 	kSelectable:int=1
 	kAutomatic:int=2
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def beginDrawable(self,selectability:int=MUIDrawManager.kAutomatic,selectionName:int=0)->Self:
 		"""Resets all draw state, such as color and line style, to defaults and indicates the start of a sequence of drawing operations.
 		All drawing operations must take place between calls to beginDrawable() and endDrawable().
@@ -5716,8 +5635,7 @@ class MUniformParameter:
 	kSemanticHWSFrontCCW:int=57
 	kSemanticHWSInstancedDraw:int=58
 	kSemanticHWSHighlighting:int=59
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def asBool(self,context:MDrawContext)->bool:
 		"""Get the value of this uniform parameter as a boolean value.
 		Because some parameters can be shape-dependent, the method requires access to the current context being rendered.
@@ -5817,12 +5735,9 @@ class MUniformParameter:
 		"""Get the user data for this parameter. User data can be used to store plugin specific information that you want to associate with this parameter. Typically this will be used to store a handle to the effect parameter."""
 class MUniformParameterList:
 	"""MUniformParameterList specify the list of uniform shader parameters used by a hardware shader, allowing Maya to handle setting up the node and user interfaces to the data, the population and access of cached data, etc."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
-		"""Return self[key]."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
+	def __getitem__(self,index:int)->Any:...
 	def append(self,element:MUniformParameter)->bool:
 		"""Append a new parameter to this end of this list.
 
@@ -5842,8 +5757,7 @@ class MUniformParameterList:
 		* length (int) - The number of parameters in this list."""
 class MUserRenderOperation(MRenderOperation):
 	"""Class which defines a user defined rendering operation."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addUIDrawables(self,drawManager:MUIDrawManager,frameContext:MFrameContext)->Self:
 		"""Provides access to the MUIDrawManager, which can be used to queue up operations to draw simple UI shapes like lines, circles, text, etc.
 
@@ -5900,8 +5814,7 @@ class MVaryingParameter:
 	kWeight:int=5
 	kTangent:int=7
 	kBinormal:int=8
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def addElement(self,child:MVaryingParameter)->Self:
 		"""Add a child element to this parameter.
 		This operation is only valid for parameters of type kStructure.
@@ -5978,12 +5891,9 @@ class MVaryingParameter:
 		The update id is increased every time the parameter sources or sourceSet are changed. A plugin can compare the update id value between subsequent calls to this function to know if the source has changed since the last call."""
 class MVaryingParameterList:
 	"""MVaryingParameterList specify the surface component level data used by a hardware shader, allowing Maya to handle setting up the node and user interfaces to the data, the population and access of cached data, etc."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
-		"""Return self[key]."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
+	def __getitem__(self,index:int)->Any:...
 	def append(self,element:MVaryingParameter)->bool:
 		"""Append a new parameter to this end of this list.
 
@@ -6003,8 +5913,7 @@ class MVaryingParameterList:
 		* length (int) - The number of parameters in this list."""
 class MVertexBuffer:
 	"""Vertex buffer for use with MGeometry."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 	def acquire(self,size:int,writeOnly:bool)->int:
 		"""Get a pointer to memory for the buffer.
 
@@ -6078,12 +5987,9 @@ class MVertexBuffer:
 		"""Get the size of the vertex buffer."""
 class MVertexBufferArray(collections.abc.Sequence[MVertexBuffer]):
 	"""Array of Vertex buffers."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
-	def __getitem__(self,index:int)->MVertexBuffer:
-		"""Return self[key]."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
+	def __getitem__(self,index:int)->MVertexBuffer:...
 	def append(self,VertexBuffer:MVertexBuffer,name:str)->Self:
 		"""Add a new vertex buffer to the list."""
 	def clear(self)->Self:
@@ -6141,16 +6047,12 @@ class MVertexBufferDescriptor:
 		"""The number of points per primitive."""
 	@stride.setter
 	def stride(self,value:Any)->None:...
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
+	def __init__(self,*args)->None:...
 class MVertexBufferDescriptorList:
 	"""A list of MVertexBufferDescriptor objects."""
-	def __init__(self,*args)->None:
-		"""Initialize self.  See help(type(self)) for accurate signature."""
-	def __len__(self)->int:
-		"""Return len(self)."""
-	def __getitem__(self,index:int)->Any:
-		"""Return self[key]."""
+	def __init__(self,*args)->None:...
+	def __len__(self)->int:...
+	def __getitem__(self,index:int)->Any:...
 	def append(self,VertexBufferDescriptor:MVertexBufferDescriptor)->bool:
 		"""Add a descriptor to the list. Creates and stores a copy which is owned by the list."""
 	def clear(self)->Self:
