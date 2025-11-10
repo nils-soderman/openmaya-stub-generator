@@ -1,6 +1,8 @@
 """
 Patch stubs based on the Online Documentation
 """
+import contextlib
+
 from ...stub_types import Class, Parameter, Property, PropertyGetSet, Method
 from ...flags import Flags
 
@@ -38,10 +40,12 @@ class Patch_Documentation(PatchBase):
 
         api2 = "api" in module_name
 
-        self.parser = parser.get_parser(api2, self.use_cache)
         self.index = None
-        if namespace := self.parser.get_namespace(module_name.rpartition('.')[-1], version):
-            self.index = self.parser.get_index(namespace)
+        self.parser = None
+        with contextlib.suppress(NotImplementedError):
+            self.parser = parser.get_parser(api2, self.use_cache)
+            if namespace := self.parser.get_namespace(module_name.rpartition('.')[-1], version):
+                self.index = self.parser.get_index(namespace)
 
         convert_type.g_current_module_name = module_name
 
@@ -49,7 +53,7 @@ class Patch_Documentation(PatchBase):
         return self.index is not None
 
     def patch_class(self, class_: Class):
-        if not self.index:
+        if not self.index or self.parser is None:
             return
 
         doc_index_entry = self.index.get_class_by_name(class_.name)
