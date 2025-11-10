@@ -1709,7 +1709,7 @@ class MPxDrawOverride:
 		* data [IN] (MUserData) - The data cached by prepareForDraw()
 		* selectionList [OUT] (MSelectionList) - List of items selected by this method
 		* worldSpaceHitPts [OUT] (MPointArray) - List of hit points"""
-	def updateSelectionGranularity(self,path:Any,selectionContext:Any)->Self:
+	def updateSelectionGranularity(self,path:om.MDagPath,selectionContext:Any)->Self:
 		"""This is method is called during the pre-filtering phase of the viewport 2.0 selection and is used to setup the selection context of the given DAG object.
 
 		This is useful to specify the selection level, which defines what can be selected on the object :
@@ -1844,7 +1844,7 @@ class MPxGeometryOverride:
 		"""This method is called for each MPxGeometryOverride in the scene to determine if the MPxGeometryOverride is eligible for Evaluation Manager Parallel Update."""
 	def supportsVP2CustomCaching(self)->bool:
 		"""This method is called for each MPxGeometryOverride in the scene to determine if the MPxGeometryOverride is eligible for VP2 Evaluation Caching."""
-	def updateSelectionGranularity(self,path:Any,selectionContext:Any)->Self:
+	def updateSelectionGranularity(self,path:om.MDagPath,selectionContext:Any)->Self:
 		"""This is method is called during the pre-filtering phase of the viewport 2.0 selection and is used to setup the selection context of the given DAG object.
 
 		This is useful to specify the selection level, which defines what can be selected on the object :
@@ -2454,7 +2454,7 @@ class MPxSubSceneOverride:
 		* renderItem (MRenderItem) - The render item to operate on.
 		* instanceId (int) - The instance ID of the instance to update. This must be a value returned by addInstanceTransform.
 		* transform (MMatrix) - The new transformation matrix for the instance."""
-	def updateSelectionGranularity(self,path:Any,selectionContext:Any)->Self:
+	def updateSelectionGranularity(self,path:om.MDagPath,selectionContext:Any)->Self:
 		"""This method is called during the pre-filtering phase of the viewport 2.0 selection and is used to allow derived classes to modify the selection context of the given DAG object.
 
 		This is useful to specify the selection level, which defines what can be selected on the object :

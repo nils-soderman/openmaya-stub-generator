@@ -96,12 +96,7 @@ class Patch_AssumeTypes(PatchBase):
                 if param.type and param.type != "Any":
                     continue
 
-                if param.name == "index":
-                    print(f"!!Assuming type 'int' for parameter '{param.name}'")
-
                 if type_ := get_type_from_name(param.name):
-                    if param.name == "index":
-                        print(f"!!!! Result: ", type_)
                     param.type = type_
 
                 elif type_ := get_type_from_default_value(param.default):

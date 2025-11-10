@@ -5892,7 +5892,7 @@ class MFnMesh(MFnDagNode):
 		"""Returns the position of specified vertex."""
 	def getPointAtUV(self,faceId:int,u:float,v:float,space:int=MSpace.kObject,uvSet:str='',tolerance:float=0.0)->MPoint:
 		"""Returns the position of the point at the give UV value in the specified face. This method is not threadsafe."""
-	def getPointsAtUV(self,u:Any,v:Any,space:Any=MSpace.kObject,uvSet:str='',tolerance:float=0.001)->tuple[MIntArray,MPointArray]:
+	def getPointsAtUV(self,u:Any,v:Any,space:int=MSpace.kObject,uvSet:str='',tolerance:float=0.001)->tuple[MIntArray,MPointArray]:
 		"""Returns the polygon ids and positions of points at the given UV position on the mesh."""
 	def getPoints(self,space:int=MSpace.kObject)->MPointArray:
 		"""Returns a copy of the mesh's vertex positions as an MPointArray ."""
@@ -7232,7 +7232,7 @@ class MFnNurbsSurface(MFnDagNode):
 		                      be returned. In this case the point of
 		                      intersection, U and V parameters, and distance
 		                      (if requested) will all be returned as arrays."""
-	def isFlipNorm(self,region:Any)->bool:
+	def isFlipNorm(self,region:int)->bool:
 		"""Checks whether the normal for the specified region is flipped
 		This method is only valid for trimmed surfaces.
 
@@ -8294,7 +8294,7 @@ class MGlobal:
 		This method is only valid for dag nodes. If the specified
 		object is not of type MFn::kDagNode then MS::kInvalidParameter will be returned."""
 	@staticmethod
-	def addToModelAt(Object:MObject,Vector:MVector,arg:Any,arg2:Any,rotateOrder:Any=MTransformationMatrix.kXYZ)->None:
+	def addToModelAt(Object:MObject,Vector:MVector,arg:Any,arg2:Any,rotateOrder:int=MTransformationMatrix.kXYZ)->None:
 		"""Adds the specified dag object to the DAG and transform the object
 		by the specified arguments.
 		This method is only valid for dag nodes. If the specified
@@ -8884,7 +8884,7 @@ class MItDag:
 		   traversalType (MItDag.TraversalType) - Enumerated type that determines the direction of the traversal, defaults to kDepthFirst.
 		   filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid"""
 	@overload
-	def reset(self,rootObject:Any,traversalType:Any=MItDag.kDepthFirst,filterType:Any=MFn.kInvalid)->Self:
+	def reset(self,rootObject:MObject,traversalType:int=MItDag.kDepthFirst,filterType:int=MFn.kInvalid)->Self:
 		"""Resets the iterator.
 		When used without parameters, the iterator is reset to the previous traversal setting.
 		If a dagInfoObject is used, then the type of the provided rootObject or rootPath must
@@ -8896,7 +8896,7 @@ class MItDag:
 		   traversalType (MItDag.TraversalType) - Enumerated type that determines the direction of the traversal, defaults to kDepthFirst.
 		   filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid"""
 	@overload
-	def reset(self,rootPath:Any,traversalType:Any=MItDag.kDepthFirst,filterType:Any=MFn.kInvalid)->Self:
+	def reset(self,rootPath:MDagPath,traversalType:int=MItDag.kDepthFirst,filterType:int=MFn.kInvalid)->Self:
 		"""Resets the iterator.
 		When used without parameters, the iterator is reset to the previous traversal setting.
 		If a dagInfoObject is used, then the type of the provided rootObject or rootPath must
@@ -8908,7 +8908,7 @@ class MItDag:
 		   traversalType (MItDag.TraversalType) - Enumerated type that determines the direction of the traversal, defaults to kDepthFirst.
 		   filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid"""
 	@overload
-	def reset(self,dagInfoObject:Any,rootObject:Any,traversalType:Any=MItDag.kDepthFirst)->Self:
+	def reset(self,dagInfoObject:int,rootObject:MObject,traversalType:int=MItDag.kDepthFirst)->Self:
 		"""Resets the iterator.
 		When used without parameters, the iterator is reset to the previous traversal setting.
 		If a dagInfoObject is used, then the type of the provided rootObject or rootPath must
@@ -9119,7 +9119,7 @@ class MItDependencyGraph:
 		(filter disabled).  Disables pruning on the filter (default).
 		Resets the iterator."""
 	@overload
-	def resetTo(self,rootObject:Any,filter:Any=MFn.kInvalid,direction:Any=MItDependencyGraph.kDownstream,traversal:Any=MItDependencyGraph.kDepthFirst,level:Any=MItDependencyGraph.kNodeLevel,relationship:Any=MItDependencyGraph.kDependsOn)->Self:
+	def resetTo(self,rootObject:MObject,filter:int=MFn.kInvalid,direction:int=MItDependencyGraph.kDownstream,traversal:int=MItDependencyGraph.kDepthFirst,level:int=MItDependencyGraph.kNodeLevel,relationship:int=MItDependencyGraph.kDependsOn)->Self:
 		"""Clears iterator data and re-initializes the iterator.  If a
 		valid filter is provided, the iterator automatically advances
 		to the next node after the root node that matches the filter.
@@ -9135,7 +9135,7 @@ class MItDependencyGraph:
 		   level (MItDependencyGraph.Level) - Level of detail of the iteration, defaults to MItDependencyGraph.kNodeLevel
 		   relationship (MItDependencyGraph.Relationship) - Relationship mode of the iteration, defaults to MItDependencyGraph.kDependsOn"""
 	@overload
-	def resetTo(self,rootPlug:Any,filter:Any=MFn.kInvalid,direction:Any=MItDependencyGraph.kDownstream,traversal:Any=MItDependencyGraph.kDepthFirst,level:Any=MItDependencyGraph.kNodeLevel,relationship:Any=MItDependencyGraph.kDependsOn)->Self:
+	def resetTo(self,rootPlug:MPlug,filter:int=MFn.kInvalid,direction:int=MItDependencyGraph.kDownstream,traversal:int=MItDependencyGraph.kDepthFirst,level:int=MItDependencyGraph.kNodeLevel,relationship:int=MItDependencyGraph.kDependsOn)->Self:
 		"""Clears iterator data and re-initializes the iterator.  If a
 		valid filter is provided, the iterator automatically advances
 		to the next node after the root node that matches the filter.
@@ -9151,7 +9151,7 @@ class MItDependencyGraph:
 		   level (MItDependencyGraph.Level) - Level of detail of the iteration, defaults to MItDependencyGraph.kNodeLevel
 		   relationship (MItDependencyGraph.Relationship) - Relationship mode of the iteration, defaults to MItDependencyGraph.kDependsOn"""
 	@overload
-	def resetTo(self,infoObject:Any,rootObject:Any,direction:Any=MItDependencyGraph.kDownstream,traversal:Any=MItDependencyGraph.kDepthFirst,level:Any=MItDependencyGraph.kNodeLevel,relationship:Any=MItDependencyGraph.kDependsOn)->Self:
+	def resetTo(self,infoObject:int,rootObject:MObject,direction:int=MItDependencyGraph.kDownstream,traversal:int=MItDependencyGraph.kDepthFirst,level:int=MItDependencyGraph.kNodeLevel,relationship:int=MItDependencyGraph.kDependsOn)->Self:
 		"""Clears iterator data and re-initializes the iterator.  If a
 		valid filter is provided, the iterator automatically advances
 		to the next node after the root node that matches the filter.
@@ -9214,14 +9214,14 @@ class MItDependencyNodes:
 		   dagInfoObject (MIteratorType) - Iterator object having info on filter or filterlist.
 		   filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid."""
 	@overload
-	def reset(self,filterType:Any=MFn.kInvalid)->Self:
+	def reset(self,filterType:int=MFn.kInvalid)->Self:
 		"""Resets the iterator.
 
 
 		   dagInfoObject (MIteratorType) - Iterator object having info on filter or filterlist.
 		   filterType (MFn.Type) - Function set type, defaults to MFn.kInvalid."""
 	@overload
-	def reset(self,dagInfoObject:Any)->Self:
+	def reset(self,dagInfoObject:int)->Self:
 		"""Resets the iterator.
 
 
@@ -9448,15 +9448,15 @@ class MItMeshFaceVertex:
 		if this method is not called. A similar approach must be taken for
 		updating upstream vertex tweaks with an MPlug. After the update, call
 		this method."""
-	def getBinormal(self,space:Any=MSpace.kObject,uvSet:str='')->MVector:
+	def getBinormal(self,space:int=MSpace.kObject,uvSet:str='')->MVector:
 		"""Returns the face vertex binormal associated with the UV set."""
 	def getColor(self,colorSetName:str='')->MColor:
 		"""Returns a color of the current face vertex."""
 	def getColorIndex(self,colorSetName:str='')->int:
 		"""Return a color index of the current face vertex."""
-	def getNormal(self,space:Any=MSpace.kObject)->MVector:
+	def getNormal(self,space:int=MSpace.kObject)->MVector:
 		"""Returns the face vertex normal."""
-	def getTangent(self,space:Any=MSpace.kObject,uvSet:str='')->MVector:
+	def getTangent(self,space:int=MSpace.kObject,uvSet:str='')->MVector:
 		"""Returns the face vertex tangent associated with the given UV set. The
 		tangent is defined as the surface tangent of the polygon running in
 		the U direction."""
@@ -9479,7 +9479,7 @@ class MItMeshFaceVertex:
 		"""Returns the normal index for the specified vertex. This index refers
 		to an element in the normal array returned by MFnMesh::getNormals().
 		These normals are per-face per-vertex normals."""
-	def position(self,space:Any=MSpace.kObject)->MPoint:
+	def position(self,space:int=MSpace.kObject)->MPoint:
 		"""Returns the position of the current face vertex."""
 	@overload
 	def reset(self)->Self:
@@ -10679,7 +10679,7 @@ class MMeshIntersector:
 	@isCreated.setter
 	def isCreated(self,value:bool)->None:...
 	def __init__(self,*args)->None:...
-	def create(self,mesh:Any,matrix:Any)->Self:
+	def create(self,mesh:MObject,matrix:Any)->Self:
 		"""Creates the internal data required by the intersector. It is a
 		compute-heavy operation and should only be called when necessary.
 
@@ -12900,7 +12900,7 @@ class MPxSurfaceShape(MPxNode):
 		  kUTangent     Move in u tangent direction.
 		  kVTangent     Move in v tangent direction.
 		  kUVNTriad     Calculate u, v, and normal offsets."""
-	def weightedTransformUsing(self,xform:MTransformationMatrix,space:MMatrix,componentList:MObjectArray,cachingMode:int,pointCache:MPointArray,freezePlane:MPlane)->Self:
+	def weightedTransformUsing(self,xform:MTransformationMatrix,space:MMatrix,componentList:MObjectArray,cachingMode:Any,pointCache:MPointArray,freezePlane:MPlane)->Self:
 		"""Transform the given components with interpolation using the specified transformation matrix.
 
 		If not overridden, then a default implementation will be used to perform the transformation and interpolation.
