@@ -7,7 +7,7 @@ from . import maya_info
 from .patch import ALL_PATCHES
 
 from .flags import Flags
-from . import header, collect_required_imports
+from . import header, collect_required_imports, manual
 
 MODULES = [
     "maya.api.OpenMaya",
@@ -15,6 +15,7 @@ MODULES = [
     "maya.api.OpenMayaRender",
     "maya.api.OpenMayaUI"
 ]
+
 
 def generate_string(module: str, flags: Flags) -> str:
     version = maya_info.get_version()
@@ -70,3 +71,5 @@ def generate_stubs(out_dir: str, flags: Flags = Flags.NONE) -> None:
         out_filepath_abs = os.path.join(out_dir, relative_path)
         generate_file(module, out_filepath_abs, flags=flags)
 
+    print("Copying manual typed stubs...")
+    manual.copy_stubs(out_dir)
