@@ -1,4 +1,4 @@
-'''
+"""
 Helper class that allows scoping of changes to the current evaluation context.
 Normal operation is to use it as a with() scoping object as follows:
 ```
@@ -26,7 +26,7 @@ beyond a single method:
     guard.restore()
     print(plug.asMDistance()) # Gets the value of the plug at the current time
 ```
-'''
+"""
 from typing import Self
 
 import maya.api.OpenMaya as om
@@ -35,36 +35,36 @@ __all__ = ['MDGContextGuard']
 
 
 class MDGContextGuard:
-    '''Scoping object to manage changes to the current evaluation context'''
+    """Scoping object to manage changes to the current evaluation context"""
 
     def __init__(self, context: om.MDGContext) -> None:
-        '''Initialize the object with a specific context'''
+        """Initialize the object with a specific context"""
         self.original_current_context: om.MDGContext = om.MDGContext.current()
         self.new_current_context: om.MDGContext = om.MDGContext.current()
         self.__save_state(context)
 
     def restore(self) -> None:
-        '''Restore the context on entry/construction to be the current evaluation context'''
+        """Restore the context on entry/construction to be the current evaluation context"""
         self.original_current_context.makeCurrent()
 
     def __save_state(self, new_current_context: om.MDGContext) -> None:
-        '''Save the state of the current evaluation context'''
+        """Save the state of the current evaluation context"""
         self.original_current_context = om.MDGContext.current()
         new_current_context.makeCurrent()
         self.new_current_context = new_current_context
 
     def original_context(self) -> om.MDGContext:
-        '''Return the context that was current when this object was entered/constructed'''
+        """Return the context that was current when this object was entered/constructed"""
         return self.original_current_context
 
     def context(self) -> om.MDGContext:
-        '''Return the context that was passed into this object on entry/construction'''
+        """Return the context that was passed into this object on entry/construction"""
         return self.new_current_context
 
     def __enter__(self) -> Self:
-        '''Begin the scope, the work is done in __init__'''
+        """Begin the scope, the work is done in __init__"""
         return self
 
     def __exit__(self, object_type, value, traceback) -> None:
-        '''Ensure the state is restored if this object goes out of scope'''
+        """Ensure the state is restored if this object goes out of scope"""
         self.restore()
