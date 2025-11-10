@@ -10,7 +10,7 @@ if "%~1"=="" (
 echo Generating stubs for Maya %version%...
 
 echo Installing environment...
-@REM "C:/Program Files/Autodesk/Maya%version%/bin/mayapy.exe" -m pip install -r requirements.txt --target=./env
+"C:/Program Files/Autodesk/Maya%version%/bin/mayapy.exe" -m pip install -r requirements.txt --target=./env
 SET PYTHONPATH=%CD%/env;%PYTHONPATH%
 
 "C:/Program Files/Autodesk/Maya%version%/bin/mayapy.exe" -m src --cache "generated-stubs/%version%"
