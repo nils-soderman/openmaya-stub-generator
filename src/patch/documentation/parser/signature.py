@@ -153,14 +153,6 @@ def parse_signature(signature: str) -> ParsedSignature:
 
 def extract_param_type_from_docstring(param_name: str, docstring: str) -> str | None:
     # Look for: "* param_name (Type) "
-    pattern = rf'\*\s*{re.escape(param_name)}\s*\(([^)]+)\)'
-    if match := re.search(pattern, docstring):
-        return match.group(1).strip()
-
-
-def extract_parameter_types_from_docstring(parameter_name: str, docstring: str) -> str | None:
-    # Search for e.g. "* param_name (type) - desc."
-    pattern = rf'\*\s*{re.escape(parameter_name)}\s*\(([^)]+)\)'
-    match = re.search(pattern, docstring, re.IGNORECASE)
-    if match:
+    pattern = rf'^\s*[\*\s]\s*{re.escape(param_name)}\s*\(([^)]+)\)'
+    if match := re.search(pattern, docstring, re.MULTILINE):
         return match.group(1).strip()
