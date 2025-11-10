@@ -1,13 +1,11 @@
 import os
 
+from . import maya_info, header, collect_required_imports, manual
+
 from .native_generator import generate_classes, generate_functions, generate_variables
-
-from . import maya_info
-
 from .patch import ALL_PATCHES
-
 from .flags import Flags
-from . import header, collect_required_imports, manual
+
 
 MODULES = [
     "maya.api.OpenMaya",

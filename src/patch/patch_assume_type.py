@@ -3,8 +3,6 @@ Assume parameter types based on their names
 """
 import re
 
-from src.stub_types import Class, Property
-
 from .base import PatchBase
 
 MAYA_OBJ_PATTERN = re.compile(r"^M[A-Z].*")
@@ -81,7 +79,7 @@ def get_type_from_default_value(default_value: str | None) -> str | None:
 class Patch_AssumeTypes(PatchBase):
     ORDER = 50
 
-    def patch_property(self, class_: Class, property: Property):
+    def patch_property(self, class_, property):
         if property.type and property.type != "Any":
             return
 

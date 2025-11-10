@@ -1,9 +1,8 @@
+import importlib
 import inspect
 import typing
 
 import maya.api.OpenMaya as om
-
-import importlib
 
 
 def get_version() -> int:

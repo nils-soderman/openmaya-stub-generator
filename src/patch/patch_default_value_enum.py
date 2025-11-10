@@ -8,7 +8,6 @@ import typing
 import types
 import re
 
-from src.flags import Flags
 from .base import PatchBase
 
 
@@ -26,7 +25,9 @@ def find_enum_class(modules: typing.Sequence[types.ModuleType], enum_name: str) 
 class Patch_DefaultValueEnum(PatchBase):
     ORDER = 500
 
-    def __init__(self, module_name: str, version: int, flags: Flags) -> None:
+    def __init__(self, module_name, version, flags) -> None:
+        super().__init__(module_name, version, flags)
+
         main_module_name = "maya.api.OpenMaya" if "api" in module_name else "maya.OpenMaya"
         self.main_module = importlib.import_module(main_module_name)
         self.current_module = importlib.import_module(module_name)
@@ -39,7 +40,7 @@ class Patch_DefaultValueEnum(PatchBase):
                         if enum_class := find_enum_class((self.current_module, self.main_module), param.default):
                             param.type = type(getattr(enum_class, param.default)).__name__
                             param.default = f"{enum_class.__name__}.{param.default}"
-                        
+
                         elif "." in param.default:
                             class_name, _, enum_name = param.default.rpartition(".")
                             if hasattr(self.current_module, class_name):

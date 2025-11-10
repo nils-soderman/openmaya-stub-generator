@@ -1,6 +1,7 @@
+import typing
+
 from dataclasses import dataclass, field
 from collections import defaultdict
-import typing
 
 
 def indent(code: str, num: int) -> str:
