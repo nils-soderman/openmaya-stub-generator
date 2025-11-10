@@ -49,6 +49,19 @@
         },
         "writeToFileWithDepth": {
             "outputFormat": "str"
+        },
+        "resize": {
+            "width": "int"
+        }
+    },
+    "MPxData": {
+        "readASCII": {
+            "endOfTheLastParsedElement": "int"
+        }
+    },
+    "MExternalContentLocationTable": {
+        "addEntry": {
+            "location": "str"
         }
     }
 }

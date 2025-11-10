@@ -6,6 +6,9 @@
         },
         "setColor": {
             "components": "Sequence[float]"
+        },
+        "setUniformParameters": {
+            "parameters": "omr.MUniformParameterList"
         }
     },
     "MPxHwShaderNode": {
