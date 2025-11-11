@@ -35,6 +35,8 @@ BANNED_DOCSTRINGS = {
     "Implement self+=value.",
     "Implement self-=value.",
     "Implement self*=value.",
+    "Implement next(self).",
+    "Implement iter(self).",
 }
 
 

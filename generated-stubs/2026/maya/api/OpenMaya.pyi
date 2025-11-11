@@ -8707,10 +8707,8 @@ class MIntArray(collections.abc.Sequence[int]):
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MItCurveCV:
 	"""An iterator for traversing a curve's CVs."""
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def isDone(self)->bool:
 		"""Indicates if all of the edges have been traversed yet."""
@@ -8816,10 +8814,8 @@ class MItDag:
 	kInvalidType:int=0
 	kDepthFirst:int=1
 	kBreadthFirst:int=2
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def iternext(self)->Self:
 		"""Used in pythonic iteration to move the iterator"""
@@ -9049,10 +9045,8 @@ class MItDependencyGraph:
 	kDependsOn:int=0
 	kConnectedTo:int=1
 	kEvaluationGraph:int=2
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def iternext(self)->Self:
 		"""Used in pythonic iteration to move the iterator"""
@@ -9189,10 +9183,8 @@ class MItDependencyNodes:
 	function set (MFnDependencyNode), which is compatible with all
 	dependency nodes, to perform queries on each node as the iterator
 	traverses the Dependency Graph."""
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def iternext(self)->Self:
 		"""Used in pythonic iteration to move the iterator"""
@@ -9233,10 +9225,8 @@ class MItGeometry:
 	This class is the iterator class for geometry data, and can be used to
 	loop over the CVs of NURBS, the points of subds & lattices, and the
 	vertices of polygonal meshes."""
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def iternext(self)->Self:
 		"""Used in pythonic iteration to move the iterator"""
@@ -9296,10 +9286,8 @@ class MItMeshEdge:
 		"""True if the edge is smooth, False if it is hard."""
 	@isSmooth.setter
 	def isSmooth(self,value:bool)->None:...
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def iternext(self)->Self:
 		"""Used in pythonic iteration to move the iterator"""
@@ -9423,10 +9411,8 @@ class MItMeshEdge:
 		* whichVertex (0 or 1) - Which of the edge's 2 vertices to use."""
 class MItMeshFaceVertex:
 	"""An iterator for traversing a mesh's face vertices."""
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def iternext(self)->Self:
 		"""Used in pythonic iteration to move the iterator"""
@@ -9542,10 +9528,8 @@ class MItMeshFaceVertex:
 		current vertex."""
 class MItMeshPolygon:
 	"""This class is the iterator for polygonal surfaces (meshes)."""
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def iternext(self)->Self:
 		"""Used in pythonic iteration to move the iterator"""
@@ -9847,10 +9831,8 @@ class MItMeshPolygon:
 		* uvSet (string) - UV set to work with"""
 class MItMeshVertex:
 	"""This class is the iterator for polygonal surfaces (meshes)."""
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def iternext(self)->Self:
 		"""Used in pythonic iteration to move the iterator"""
@@ -10112,10 +10094,8 @@ class MItSelectionList:
 	kAnimSelectionItem:int=1
 	kDNselectionItem:int=2
 	kPlugSelectionItem:int=3
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def iternext(self)->Self:
 		"""Used in pythonic iteration to move the iterator"""
@@ -10154,10 +10134,8 @@ class MItSelectionList:
 		Selection items not matching the filter type will be excluded from the iteration."""
 class MItSurfaceCV:
 	""" NURBS surface CV iterator."""
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def iternext(self)->Self:
 		"""Used in pythonic iteration to move the iterator"""
@@ -12074,10 +12052,8 @@ class MPxGeometryIterator:
 		This value is used when iterating over all elements of your geometry, i.e. when there are no components specified."""
 	@maxPoints.setter
 	def maxPoints(self,value:Any)->None:...
-	def __iter__(self)->Any:
-		"""Implement iter(self)."""
-	def __next__(self)->Any:
-		"""Implement next(self)."""
+	def __iter__(self)->Any:...
+	def __next__(self)->Any:...
 	def __init__(self,*args)->None:...
 	def component(self)->MObject:
 		"""Returns a component for the current item in the iteration."""
