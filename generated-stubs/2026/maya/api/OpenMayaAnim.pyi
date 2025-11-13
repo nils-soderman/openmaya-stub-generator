@@ -246,17 +246,17 @@ class MAnimCurveClipboardItemArray(collections.abc.Sequence[MAnimCurveClipboardI
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MAnimCurveClipboardItem)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MAnimCurveClipboardItem)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MAnimCurveClipboardItem)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MAnimMessage(om.MMessage):
 	"""Class used to register callbacks for anim related messages."""

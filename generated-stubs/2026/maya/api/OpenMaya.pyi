@@ -392,17 +392,17 @@ class MAttributeSpecArray(collections.abc.Sequence[MAttributeSpec]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MAttributeSpec)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MAttributeSpec)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MAttributeSpec)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MBoundingBox:
 	"""3D axis-aligned bounding box."""
@@ -478,17 +478,17 @@ class MCallbackIdArray(collections.abc.Sequence[int]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:int)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:int)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:int)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MCameraMessage(MMessage):
 	"""Class used to register callbacks for Camera Manipulation Begin and End related messages."""
@@ -611,17 +611,17 @@ class MColorArray(collections.abc.Sequence[MColor]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MColor)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MColor)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MColor)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MCommandMessage(MMessage):
 	"""Class used to register callbacks for command related messages.
@@ -1663,17 +1663,17 @@ class MDagPathArray(collections.abc.Sequence[MDagPath]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MDagPath)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MDagPath)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MDagPath)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MDataBlock:
 	"""Dependency node data block."""
@@ -2074,17 +2074,17 @@ class MDoubleArray(collections.abc.Sequence[float]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:float)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:float)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:float)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MEulerRotation(collections.abc.Sequence[float]):
 	"""X, Y and Z rotations, applied in a specified order."""
@@ -2541,17 +2541,17 @@ class MFloatArray(collections.abc.Sequence[float]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:float)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:float)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:float)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MFloatMatrix(collections.abc.Sequence[float]):
 	"""4x4 matrix with single-precision elements."""
@@ -2731,17 +2731,17 @@ class MFloatPointArray(collections.abc.Sequence[MFloatPoint]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MFloatPoint)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MFloatPoint)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MFloatPoint)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MFloatVector(collections.abc.Sequence[float]):
 	"""3D vector with single-precision coordinates."""
@@ -2871,17 +2871,17 @@ class MFloatVectorArray(collections.abc.Sequence[MFloatVector]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MFloatVector)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MFloatVector)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MFloatVector)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MFn:
 	"""Static class providing constants for all API types."""
@@ -8663,17 +8663,17 @@ class MInt64Array(collections.abc.Sequence[int]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:int)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:int)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:int)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MIntArray(collections.abc.Sequence[int]):
 	"""Array of int values."""
@@ -8693,17 +8693,17 @@ class MIntArray(collections.abc.Sequence[int]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:int)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:int)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:int)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MItCurveCV:
 	"""An iterator for traversing a curve's CVs."""
@@ -10634,17 +10634,17 @@ class MMatrixArray(collections.abc.Sequence[MMatrix]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MMatrix)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MMatrix)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MMatrix)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MMeshIntersector:
 	"""Provides methods for efficiently finding the closest point on
@@ -11337,17 +11337,17 @@ class MObjectArray(collections.abc.Sequence[MObject]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MObject)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MObject)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MObject)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MObjectHandle:
 	"""Generic Class for validating MObjects."""
@@ -11663,17 +11663,17 @@ class MPlugArray(collections.abc.Sequence[MPlug]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MPlug)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MPlug)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MPlug)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MPoint(collections.abc.Sequence[float]):
 	"""3D point with double-precision coordinates."""
@@ -11778,17 +11778,17 @@ class MPointArray(collections.abc.Sequence[MPoint]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MPoint)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MPoint)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MPoint)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MPointOnMesh:
 	"""This class is used to return information about a point on the
@@ -13909,17 +13909,17 @@ class MTimeArray(collections.abc.Sequence[MTime]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MTime)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MTime)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MTime)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MTimeRange:
 	"""Mathematic type that represents a set of pseudo-real numbers (in units of time), such as [-1s, +1s] U [+2, +5s]"""
@@ -14191,17 +14191,17 @@ class MUint64Array(collections.abc.Sequence[int]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:int)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:int)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:int)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MUintArray(collections.abc.Sequence[int]):
 	"""Array of unsigned int values."""
@@ -14221,17 +14221,17 @@ class MUintArray(collections.abc.Sequence[int]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:int)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:int)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:int)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MUserData:
 	"""Virtual base class for user data caching.
@@ -14464,17 +14464,17 @@ class MVectorArray(collections.abc.Sequence[MVector]):
 	def __contains__(self,item)->bool:...
 	def __iadd__(self,other)->Any:...
 	def __imul__(self,other)->Any:...
-	def append(self,item)->None:
+	def append(self,item:MVector)->None:
 		"""Add a value to the end of the array."""
 	def copy(self,*args)->Any:
 		"""Replace the array contents with that of another or of a compatible Python sequence."""
 	def clear(self)->None:
 		"""Remove all elements from the array."""
-	def insert(self,index:int,item)->None:
+	def insert(self,index:int,item:MVector)->None:
 		"""Insert a new value into the array at the given index."""
-	def remove(self,item)->None:
+	def remove(self,item:MVector)->None:
 		"""Remove an element from the array."""
-	def setLength(self,*args)->Any:
+	def setLength(self,length:int)->Self:
 		"""Grow or shrink the array to contain a specific number of elements."""
 class MWeight:
 	"""Methods for accessing component weight data. This class is currently

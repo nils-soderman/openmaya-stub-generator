@@ -2,7 +2,7 @@
 Patch sequence support
 """
 
-from ..stub_types import Class, Method, Property
+from ..stub_types import Class, Method, Parameter, Property
 
 from .base import PatchBase
 
@@ -58,3 +58,22 @@ class Patch_Sequences(PatchBase):
             elif method.name == "__setitem__":
                 if method.parameters and len(method.parameters) >= 2:
                     method.parameters[1].type = seq_type
+
+            elif method.name == "append":
+                if method.parameters and len(method.parameters) == 1 and method.parameters[0].name == "item":
+                    method.parameters[0].type = seq_type
+
+            elif method.name == "insert":
+                if method.parameters and len(method.parameters) == 2 and method.parameters[1].name == "item":
+                    method.parameters[1].type = seq_type
+
+            elif method.name == "remove":
+                if method.parameters and len(method.parameters) == 1 and method.parameters[0].name == "item":
+                    method.parameters[0].type = seq_type
+
+            elif method.name == "setLength":
+                if not method.parameters:
+                    method.parameters = [
+                        Parameter(name="length", type="int")
+                    ]
+                    method.return_type = "Self"
