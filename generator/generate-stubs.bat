@@ -13,6 +13,6 @@ echo Installing environment...
 "C:/Program Files/Autodesk/Maya%version%/bin/mayapy.exe" -m pip install -r requirements.txt --target=./env
 SET PYTHONPATH=%CD%/env;%PYTHONPATH%
 
-"C:/Program Files/Autodesk/Maya%version%/bin/mayapy.exe" -m src --cache "generated-stubs/%version%"
+"C:/Program Files/Autodesk/Maya%version%/bin/mayapy.exe" -m src --cache "../generated-stubs/%version%"
 
 ENDLOCAL
