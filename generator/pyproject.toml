@@ -1,5 +1,5 @@
 [project]
-name = "open-maya-stub-generator"
+name = "openmaya-stub-generator"
 version = "2026.0.0"
 authors = [{ name = "Nils Soderman" }]
 description = "Generate stubs for Autodesk Maya's Python API (OpenMaya)"
