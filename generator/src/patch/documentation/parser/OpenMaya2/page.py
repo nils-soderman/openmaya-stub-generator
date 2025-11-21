@@ -181,7 +181,7 @@ def parse_memitem(memitem: bs4.element.Tag):
 
         tbody = table.find("tbody")
         if not isinstance(tbody, bs4.element.Tag):
-            continue
+            tbody = table  # Fallback to using the table as tbody
 
         for tr in tbody.find_all("tr", recursive=False):
             if not isinstance(tr, bs4.element.Tag):
