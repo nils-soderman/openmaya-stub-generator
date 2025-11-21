@@ -2,9 +2,9 @@
     "files.exclude": {
         ".pytest_cache": true,
         "**/__pycache__": true,
-        "generator/env": true,
         ".vscode": true,
-        "LICENSE": true,
+        "env": true,
+        "**/LICENSE": true,
     },
 
     "search.exclude": {

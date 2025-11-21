@@ -30,4 +30,4 @@ Optional flags that can be included when running the command to generate the stu
 
 If you run into any issues with the generator, Please open a issue on the [GitHub repository](https://github.com/nils-soderman/openmaya-stub-generator/issues).
 
-Contributions are always welcomed!
+Contributions are welcomed!
