@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Generator (debugpy)",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "C:/Program Files/Autodesk/Maya2026/bin/mayapy.exe",
+            "module": "src",
+            "args": [
+                "--cache",
+                "generated-stubs/2026"
+            ],
+            "cwd": "${workspaceFolder}/generator",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/env;${workspaceFolder}/generator"
+            }
+        }
+    ]
+}
