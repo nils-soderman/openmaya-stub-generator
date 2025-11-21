@@ -28,7 +28,7 @@ files = ["requirements.txt"]
 
 [tool.hatch.build.targets.wheel]
 include = ["src/*"]
-sources = { src = "open_maya_stub_generator" }
+sources = { src = "openmaya_stub_generator" }
 
 [tool.hatch.build.targets.sdist]
 exclude = ["test/*"]
