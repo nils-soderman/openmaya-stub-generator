@@ -9,11 +9,11 @@
             "module": "src",
             "args": [
                 "--cache",
-                "generated-stubs/2026"
+                "../generated-stubs/2026"
             ],
             "cwd": "${workspaceFolder}/generator",
             "env": {
-                "PYTHONPATH": "${workspaceFolder}/env;${workspaceFolder}/generator"
+                "PYTHONPATH": "${workspaceFolder}/generator/env;${workspaceFolder}/generator"
             }
         }
     ]
