@@ -554,7 +554,7 @@ class MColor(collections.abc.Sequence[float]):
 	def __init__(self,src:MColor)->None:
 		"""Copy constructor. Returns a new MColor with the same color components as src ."""
 	@overload
-	def __init__(self,components:Sequence[Literal[3]|float],model:int,dataType:int)->None:
+	def __init__(self,components:Sequence[Literal[3]|float],model:int=MColor.kRGB,dataType:int=MAttributeIndex.kFloat)->None:
 		"""Returns a new MColor using the specified color components . The interpretation of the components depends upon the color model specified. For example, if model is kHSV then the values of components are interpreted as hue, saturation, value and alpha, respectively. The normal range of values for each component is determined by the specified component dataType , although values may exceed that range. If only 3 component values are provided then the fourth will be set to the maximum value of the range for dataType . The resulting color is converted to the kRGB model before being stored. If dataType was other than kFloat then the components will be converted to Float by dividing by the maximum value of dataType 's range. For example, if the red component was given as a value of 100 and dataType was kByte then the stored red value will be approximately 0.39215 (100 divided by 255)."""
 	def __add__(self,other:MColor)->MColor:
 		"""Returns a new MColor with the first MColor 's RGB values added to the second MColor 's RGB values. The first MColor 's alpha is passed through unchanged."""
@@ -2021,7 +2021,7 @@ class MDistance:
 	def __init__(self,src:MDistance)->None:
 		"""Copy constructor. Returns a new MDistance with the same value and unit type as src ."""
 	@overload
-	def __init__(self,value:float,unit:int)->None:
+	def __init__(self,value:float,unit:int=MDistance.kCentimeters)->None:
 		"""Returns a new MDistance using the given value and unit ."""
 	@staticmethod
 	def uiUnit()->int:
@@ -2130,13 +2130,13 @@ class MEulerRotation(collections.abc.Sequence[float]):
 	def __init__(self,src:MEulerRotation)->None:
 		"""Copy constructor. Returns a new MEulerRotation object with the same value as src ."""
 	@overload
-	def __init__(self,vec:MVector,order:int)->None:
+	def __init__(self,vec:MVector,order:int=MEulerRotation.kXYZ)->None:
 		"""Returns a new MEulerRotation with the given order and its X, Y and Z rotations set to the corresponding elements of vec ."""
 	@overload
-	def __init__(self,seq:Sequence[float],order:int)->None:
+	def __init__(self,seq:Sequence[float],order:int=MEulerRotation.kXYZ)->None:
 		"""Returns a new MEulerRotation with the given order and its X, Y and Z rotations set to the corresponding elements of seq ."""
 	@overload
-	def __init__(self,x:float,y:float,z:float,order:int)->None:
+	def __init__(self,x:float,y:float,z:float,order:int=MEulerRotation.kXYZ)->None:
 		"""Returns a new MEulerRotation with the specified x , y and z rotations and the given rotation order ."""
 	def __add__(self,other:MEulerRotation)->MEulerRotation:
 		"""Component-by-component addition. Right operand is first reordered to match left, if necessary."""
@@ -2669,7 +2669,7 @@ class MFloatPoint(collections.abc.Sequence[float]):
 	def __init__(self,seq:Sequence[float])->None:
 		"""Returns a new MFloatPoint object whose x, y, z and w coordinates are set to the elements of seq . If the sequence contains fewer than four values w will be set to 1.0. If the sequence contains fewer than three values z will be set to 0.0."""
 	@overload
-	def __init__(self,x:float,y:float,z:float,w:float)->None:
+	def __init__(self,x:float,y:float,z:float=0.0,w:float=1.0)->None:
 		"""Returns a new MFloatPoint object with the specified x , y , z and w coordinates."""
 	def __add__(self,other:MFloatVector)->MFloatPoint:
 		"""Addition of a vector to a point."""
@@ -2786,7 +2786,7 @@ class MFloatVector(collections.abc.Sequence[float]):
 	def __init__(self,seq:Sequence[Any])->None:
 		"""Returns a new MFloatVector object whose x, y and z coordinates are set to the elements of seq . If the sequence only contains two values, z will be set to 0.0."""
 	@overload
-	def __init__(self,x:float,y:float,z:float)->None:
+	def __init__(self,x:float,y:float,z:float=0.0)->None:
 		"""Returns a new MFloatVector object with the specified x , y and z coordinates."""
 	def __add__(self,other:MFloatVector)->MFloatVector:
 		"""Vector addition."""
@@ -7486,7 +7486,7 @@ class MFnPlugin(MFnBase):
 	def __init__(self)->None:
 		"""Default constructor. Returns a new MFnPlugin function set with no Maya object attached."""
 	@overload
-	def __init__(self,plugin:MObject,vendor:str,version:str,apiVersion:str)->None:
+	def __init__(self,plugin:MObject,vendor:str='Unknown',version:str='Unknown',apiVersion:str='Any')->None:
 		"""Attaches the function set to the specified plugin object, which is provided as a parameter to the plugin's initializePlugin() and uninitializePlugin() functions, and specifies an optional vendor name, plugin version string and minimal required Maya apiVersion (which is currently ignored)."""
 	def apiVersion(self)->str:
 		"""Return the API version required by the plug-in."""
@@ -11716,7 +11716,7 @@ class MPoint(collections.abc.Sequence[float]):
 	def __init__(self,seq:Sequence[float])->None:
 		"""Returns a new MPoint object whose x, y, z and w coordinates are set to the elements of seq . If the sequence contains fewer than four values w will be set to 1.0. If the sequence contains fewer than three values z will be set to 0.0."""
 	@overload
-	def __init__(self,x:float,y:float,z:float,w:float)->None:
+	def __init__(self,x:float,y:float,z:float=0.0,w:float=1.0)->None:
 		"""Returns a new MPoint object with the specified x , y , z and w coordinates."""
 	def __add__(self,other:MVector)->MPoint:
 		"""Addition of a vector to a point."""
@@ -12953,7 +12953,7 @@ class MQuaternion(collections.abc.Sequence[float]):
 	def __init__(self,seq:Sequence[float])->None:
 		"""Returns a new MQuaternion object with its x, y, z, and w components set to the elements of seq ."""
 	@overload
-	def __init__(self,a:MVector,b:MVector,factor:float)->None:
+	def __init__(self,a:MVector,b:MVector,factor:float=1.0)->None:
 		"""Returns a new MQuaternion which will rotate vector a into vector b , about their mutually perpendicular axis. If factor is less than 1 then it will rotate only part of the way into b . If factor is greater than 1 then it will overshoot b ."""
 	@overload
 	def __init__(self,angle:float,axis:MVector)->None:
@@ -13849,7 +13849,7 @@ class MTime:
 	def __init__(self,src:MTime)->None:
 		"""Copy constructor. Returns a new MTime object with the same value and unit as src ."""
 	@overload
-	def __init__(self,value:float,unit:int)->None:
+	def __init__(self,value:float,unit:int=MTime.kFilm)->None:
 		"""Returns a new MTime object with the given value and unit ."""
 	@overload
 	def __add__(self,other:MTime)->MTime:
@@ -14371,7 +14371,7 @@ class MVector(collections.abc.Sequence[float]):
 	def __init__(self,seq:Sequence[float])->None:
 		"""Returns a new MVector object whose x, y and z coordinates are set to the elements of seq . If the sequence only contains two values z will be set to 0.0."""
 	@overload
-	def __init__(self,x:float,y:float,z:float)->None:
+	def __init__(self,x:float,y:float,z:float=0.0)->None:
 		"""Returns a new MVector object with the specified x , y and z coordinates."""
 	def __add__(self,other:MVector)->MVector:
 		"""New vector which is the sum of the two vectors."""

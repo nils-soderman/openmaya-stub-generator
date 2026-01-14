@@ -107,6 +107,8 @@ class Patch_Documentation(PatchBase):
                 new_method.return_type = "None"
                 new_method.parameters = []
 
+                signature_info = signature.parse_signature(constructor.signature)
+
                 for param in constructor.parameters:
                     if " - " in param:
                         param_name, _, param_type_desc = param.partition(" - ")
@@ -115,10 +117,16 @@ class Patch_Documentation(PatchBase):
                         param_name = param
                         param_type = "Any"
 
+                    default_value = None
+                    signature_info_param = next((x for x in signature_info.parameters if x.name == param_name), None)
+                    if signature_info_param and signature_info_param.default:
+                        default_value = sanitize_default_value(signature_info_param.default)
+
                     new_method.parameters.append(
                         Parameter(
                             name=param_name,
-                            type=param_type
+                            type=param_type,
+                            default=default_value
                         )
                     )
         elif class_.docstring:
